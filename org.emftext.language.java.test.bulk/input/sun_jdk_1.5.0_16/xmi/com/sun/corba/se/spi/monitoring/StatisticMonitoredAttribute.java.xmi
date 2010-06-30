@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="StatisticMonitoredAttribute.java">
+  <comments>/*&#xA; * @(#)StatisticMonitoredAttribute.java&#x9;1.3 03/12/19&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>spi</namespaces>
+  <namespaces>monitoring</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="StatisticMonitoredAttribute">
+    <members xsi:type="members:Field" name="statisticsAccumulator">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="StatisticsAccumulator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Every StatisticMonitoredAttribute will have a StatisticAccumulator. User</comments>
+        <comments>// will use Statisticsaccumulator to accumulate the samples associated with</comments>
+        <comments>// this Monitored Attribute </comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="mutex">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Mutex is passed from the user class which is providing the sample values.</comments>
+        <comments>// getValue() and clearState() is synchronized on this user provided mutex</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="StatisticMonitoredAttribute">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="f">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="MonitoredAttributeInfoFactory.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="MonitoringFactories.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="MonitoringFactories.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="maInfo">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="MonitoredAttributeInfo.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="MonitoredAttributeInfoFactory.class.xmi#//@classifiers.0/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:ReflectiveClassReference"/>
+                <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </arguments>
+              <arguments xsi:type="literals:BooleanLiteral"/>
+              <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="MonitoredAttributeBase.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.2/@variable"/>
+          </next>
+          <self xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.3"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="desc">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="StatisticsAccumulator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mutex">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>///////////////////////////////////////</comments>
+        <comments>// operations</comments>
+        <comments>/**&#xA; * &lt;p>&#xA; * Constructs the StaisticMonitoredAttribute, builds the required&#xA; * MonitoredAttributeInfo with Long as the class type and is always&#xA; * readonly attribute.&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * &#xA; * @param name Of this attribute&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * @return a StatisticMonitoredAttribute &#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * @param desc should provide a good description on the kind of statistics &#xA; * collected, a good example is &quot;Connection Response Time Stats will Provide the&#xA; * detailed stats based on the samples provided from every request completion&#xA; * time&quot;&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * @param s is the StatisticsAcumulator that user will use to accumulate the &#xA; * samples and this Attribute Object will get the computed statistics values&#xA; * from.&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * @param mutex using which clearState() and getValue() calls need to be locked.&#xA; * &lt;/p>&#xA; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// end StatisticMonitoredAttribute        </comments>
+        <comments>/**&#xA; *  Gets the value from the StatisticsAccumulator, the value will be a formatted&#xA; *  String with the computed statistics based on the samples accumulated in the&#xA; *  Statistics Accumulator.&#xA; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="StatisticsAccumulator.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+          </returnValue>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="clearState">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA; *  Clears the state on Statistics Accumulator, After this call all samples are&#xA; *  treated fresh and the old sample computations are disregarded.&#xA; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="StatisticsAccumulator.class.xmi#//@classifiers.0/@members.12"/>
+            </next>
+          </expression>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getStatisticsAccumulator">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="StatisticsAccumulator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA; *  Gets the statistics accumulator associated with StatisticMonitoredAttribute.&#xA; *  Usually, the user don't need to use this method as they can keep the handle&#xA; *  to Accumulator to collect the samples.&#xA; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>&#xA; * &#xA; * @author Hemanth Puttaswamy&#xA; * &lt;/p>&#xA; * &lt;p>&#xA; * StatisticsMonitoredAttribute is provided as a convenience to collect the&#xA; * Statistics of any entity. The getValue() call will be delegated to the&#xA; * StatisticsAccumulator set by the user.&#xA; * &lt;/p>&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="MonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

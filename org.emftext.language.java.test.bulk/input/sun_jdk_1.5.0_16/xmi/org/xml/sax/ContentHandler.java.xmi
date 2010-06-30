@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ContentHandler.java">
+  <comments>// ContentHandler.java - handle main document content.</comments>
+  <comments>// http://www.saxproject.org</comments>
+  <comments>// Written by David Megginson</comments>
+  <comments>// NO WARRANTY!  This class is in the public domain.</comments>
+  <comments>// $Id: ContentHandler.java,v 1.1.24.1 2004/05/01 08:34:39 jsuttor Exp $</comments>
+  <namespaces>org</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>sax</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="ContentHandler">
+    <members xsi:type="members:InterfaceMethod" name="setDocumentLocator">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Locator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive an object for locating the origin of SAX document events.&#xA;     *&#xA;     * &lt;p>SAX parsers are strongly encouraged (though not absolutely&#xA;     * required) to supply a locator: if it does so, it must supply&#xA;     * the locator to the application by invoking this method before&#xA;     * invoking any of the other methods in the ContentHandler&#xA;     * interface.&lt;/p>&#xA;     *&#xA;     * &lt;p>The locator allows the application to determine the end&#xA;     * position of any document-related event, even if the parser is&#xA;     * not reporting an error.  Typically, the application will&#xA;     * use this information for reporting its own errors (such as&#xA;     * character content that does not match an application's&#xA;     * business rules).  The information returned by the locator&#xA;     * is probably not sufficient for use with a search engine.&lt;/p>&#xA;     *&#xA;     * &lt;p>Note that the locator will return correct information only&#xA;     * during the invocation SAX event callbacks after&#xA;     * {@link #startDocument startDocument} returns and before&#xA;     * {@link #endDocument endDocument} is called.  The&#xA;     * application should not attempt to use it at any other time.&lt;/p>&#xA;     *&#xA;     * @param locator an object that can return the location of&#xA;     *                any SAX document event&#xA;     * @see org.xml.sax.Locator&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="startDocument">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of the beginning of a document.&#xA;     *&#xA;     * &lt;p>The SAX parser will invoke this method only once, before any&#xA;     * other event callbacks (except for {@link #setDocumentLocator &#xA;     * setDocumentLocator}).&lt;/p>&#xA;     *&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     * @see #endDocument&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="endDocument">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of the end of a document.&#xA;     *&#xA;     * &lt;p>&lt;strong>There is an apparent contradiction between the&#xA;     * documentation for this method and the documentation for {@link&#xA;     * org.xml.sax.ErrorHandler#fatalError}.  Until this ambiguity is&#xA;     * resolved in a future major release, clients should make no&#xA;     * assumptions about whether endDocument() will or will not be&#xA;     * invoked when the parser has reported a fatalError() or thrown&#xA;     * an exception.&lt;/strong>&lt;/p>&#xA;     *&#xA;     * &lt;p>The SAX parser will invoke this method only once, and it will&#xA;     * be the last method invoked during the parse.  The parser shall&#xA;     * not invoke this method until it has either abandoned parsing&#xA;     * (because of an unrecoverable error) or reached the end of&#xA;     * input.&lt;/p>&#xA;     *&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     * @see #startDocument&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="startPrefixMapping">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="prefix">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="uri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Begin the scope of a prefix-URI Namespace mapping.&#xA;     *&#xA;     * &lt;p>The information from this event is not necessary for&#xA;     * normal Namespace processing: the SAX XML reader will &#xA;     * automatically replace prefixes for element and attribute&#xA;     * names when the &lt;code>http://xml.org/sax/features/namespaces&lt;/code>&#xA;     * feature is &lt;var>true&lt;/var> (the default).&lt;/p>&#xA;     *&#xA;     * &lt;p>There are cases, however, when applications need to&#xA;     * use prefixes in character data or in attribute values,&#xA;     * where they cannot safely be expanded automatically; the&#xA;     * start/endPrefixMapping event supplies the information&#xA;     * to the application to expand prefixes in those contexts&#xA;     * itself, if necessary.&lt;/p>&#xA;     *&#xA;     * &lt;p>Note that start/endPrefixMapping events are not&#xA;     * guaranteed to be properly nested relative to each other:&#xA;     * all startPrefixMapping events will occur immediately before the&#xA;     * corresponding {@link #startElement startElement} event, &#xA;     * and all {@link #endPrefixMapping endPrefixMapping}&#xA;     * events will occur immediately after the corresponding&#xA;     * {@link #endElement endElement} event,&#xA;     * but their order is not otherwise &#xA;     * guaranteed.&lt;/p>&#xA;     *&#xA;     * &lt;p>There should never be start/endPrefixMapping events for the&#xA;     * &quot;xml&quot; prefix, since it is predeclared and immutable.&lt;/p>&#xA;     *&#xA;     * @param prefix the Namespace prefix being declared.&#xA;     *&#x9;An empty string is used for the default element namespace,&#xA;     *&#x9;which has no prefix.&#xA;     * @param uri the Namespace URI the prefix is mapped to&#xA;     * @throws org.xml.sax.SAXException the client may throw&#xA;     *            an exception during processing&#xA;     * @see #endPrefixMapping&#xA;     * @see #startElement&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="endPrefixMapping">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="prefix">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * End the scope of a prefix-URI mapping.&#xA;     *&#xA;     * &lt;p>See {@link #startPrefixMapping startPrefixMapping} for &#xA;     * details.  These events will always occur immediately after the&#xA;     * corresponding {@link #endElement endElement} event, but the order of &#xA;     * {@link #endPrefixMapping endPrefixMapping} events is not otherwise&#xA;     * guaranteed.&lt;/p>&#xA;     *&#xA;     * @param prefix the prefix that was being mapped.&#xA;     *&#x9;This is the empty string when a default mapping scope ends.&#xA;     * @throws org.xml.sax.SAXException the client may throw&#xA;     *            an exception during processing&#xA;     * @see #startPrefixMapping&#xA;     * @see #endElement&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="startElement">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="uri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="localName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="qName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="atts">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Attributes.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of the beginning of an element.&#xA;     *&#xA;     * &lt;p>The Parser will invoke this method at the beginning of every&#xA;     * element in the XML document; there will be a corresponding&#xA;     * {@link #endElement endElement} event for every startElement event&#xA;     * (even when the element is empty). All of the element's content will be&#xA;     * reported, in order, before the corresponding endElement&#xA;     * event.&lt;/p>&#xA;     *&#xA;     * &lt;p>This event allows up to three name components for each&#xA;     * element:&lt;/p>&#xA;     *&#xA;     * &lt;ol>&#xA;     * &lt;li>the Namespace URI;&lt;/li>&#xA;     * &lt;li>the local name; and&lt;/li>&#xA;     * &lt;li>the qualified (prefixed) name.&lt;/li>&#xA;     * &lt;/ol>&#xA;     *&#xA;     * &lt;p>Any or all of these may be provided, depending on the&#xA;     * values of the &lt;var>http://xml.org/sax/features/namespaces&lt;/var>&#xA;     * and the &lt;var>http://xml.org/sax/features/namespace-prefixes&lt;/var>&#xA;     * properties:&lt;/p>&#xA;     *&#xA;     * &lt;ul>&#xA;     * &lt;li>the Namespace URI and local name are required when &#xA;     * the namespaces property is &lt;var>true&lt;/var> (the default), and are&#xA;     * optional when the namespaces property is &lt;var>false&lt;/var> (if one is&#xA;     * specified, both must be);&lt;/li>&#xA;     * &lt;li>the qualified name is required when the namespace-prefixes property&#xA;     * is &lt;var>true&lt;/var>, and is optional when the namespace-prefixes property&#xA;     * is &lt;var>false&lt;/var> (the default).&lt;/li>&#xA;     * &lt;/ul>&#xA;     *&#xA;     * &lt;p>Note that the attribute list provided will contain only&#xA;     * attributes with explicit values (specified or defaulted):&#xA;     * #IMPLIED attributes will be omitted.  The attribute list&#xA;     * will contain attributes used for Namespace declarations&#xA;     * (xmlns* attributes) only if the&#xA;     * &lt;code>http://xml.org/sax/features/namespace-prefixes&lt;/code>&#xA;     * property is true (it is false by default, and support for a &#xA;     * true value is optional).&lt;/p>&#xA;     *&#xA;     * &lt;p>Like {@link #characters characters()}, attribute values may have&#xA;     * characters that need more than one &lt;code>char&lt;/code> value.  &lt;/p>&#xA;     *&#xA;     * @param uri the Namespace URI, or the empty string if the&#xA;     *        element has no Namespace URI or if Namespace&#xA;     *        processing is not being performed&#xA;     * @param localName the local name (without prefix), or the&#xA;     *        empty string if Namespace processing is not being&#xA;     *        performed&#xA;     * @param qName the qualified name (with prefix), or the&#xA;     *        empty string if qualified names are not available&#xA;     * @param atts the attributes attached to the element.  If&#xA;     *        there are no attributes, it shall be an empty&#xA;     *        Attributes object.  The value of this object after&#xA;     *        startElement returns is undefined&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     * @see #endElement&#xA;     * @see org.xml.sax.Attributes&#xA;     * @see org.xml.sax.helpers.AttributesImpl&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="endElement">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="uri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="localName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="qName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of the end of an element.&#xA;     *&#xA;     * &lt;p>The SAX parser will invoke this method at the end of every&#xA;     * element in the XML document; there will be a corresponding&#xA;     * {@link #startElement startElement} event for every endElement &#xA;     * event (even when the element is empty).&lt;/p>&#xA;     *&#xA;     * &lt;p>For information on the names, see startElement.&lt;/p>&#xA;     *&#xA;     * @param uri the Namespace URI, or the empty string if the&#xA;     *        element has no Namespace URI or if Namespace&#xA;     *        processing is not being performed&#xA;     * @param localName the local name (without prefix), or the&#xA;     *        empty string if Namespace processing is not being&#xA;     *        performed&#xA;     * @param qName the qualified XML name (with prefix), or the&#xA;     *        empty string if qualified names are not available&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="characters">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ch">
+        <typeReference xsi:type="types:Char"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of character data.&#xA;     *&#xA;     * &lt;p>The Parser will call this method to report each chunk of&#xA;     * character data.  SAX parsers may return all contiguous character&#xA;     * data in a single chunk, or they may split it into several&#xA;     * chunks; however, all of the characters in any single event&#xA;     * must come from the same external entity so that the Locator&#xA;     * provides useful information.&lt;/p>&#xA;     *&#xA;     * &lt;p>The application must not attempt to read from the array&#xA;     * outside of the specified range.&lt;/p>&#xA;     *&#xA;     * &lt;p>Individual characters may consist of more than one Java&#xA;     * &lt;code>char&lt;/code> value.  There are two important cases where this&#xA;     * happens, because characters can't be represented in just sixteen bits.&#xA;     * In one case, characters are represented in a &lt;em>Surrogate Pair&lt;/em>,&#xA;     * using two special Unicode values. Such characters are in the so-called&#xA;     * &quot;Astral Planes&quot;, with a code point above U+FFFF.  A second case involves&#xA;     * composite characters, such as a base character combining with one or&#xA;     * more accent characters. &lt;/p>&#xA;     *&#xA;     * &lt;p> Your code should not assume that algorithms using&#xA;     * &lt;code>char&lt;/code>-at-a-time idioms will be working in character&#xA;     * units; in some cases they will split characters.  This is relevant&#xA;     * wherever XML permits arbitrary characters, such as attribute values,&#xA;     * processing instruction data, and comments as well as in data reported&#xA;     * from this method.  It's also generally relevant whenever Java code&#xA;     * manipulates internationalized text; the issue isn't unique to XML.&lt;/p>&#xA;     *&#xA;     * &lt;p>Note that some parsers will report whitespace in element&#xA;     * content using the {@link #ignorableWhitespace ignorableWhitespace}&#xA;     * method rather than this one (validating parsers &lt;em>must&lt;/em> &#xA;     * do so).&lt;/p>&#xA;     *&#xA;     * @param ch the characters from the XML document&#xA;     * @param start the start position in the array&#xA;     * @param length the number of characters to read from the array&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     * @see #ignorableWhitespace &#xA;     * @see org.xml.sax.Locator&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="ignorableWhitespace">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ch">
+        <typeReference xsi:type="types:Char"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of ignorable whitespace in element content.&#xA;     *&#xA;     * &lt;p>Validating Parsers must use this method to report each chunk&#xA;     * of whitespace in element content (see the W3C XML 1.0&#xA;     * recommendation, section 2.10): non-validating parsers may also&#xA;     * use this method if they are capable of parsing and using&#xA;     * content models.&lt;/p>&#xA;     *&#xA;     * &lt;p>SAX parsers may return all contiguous whitespace in a single&#xA;     * chunk, or they may split it into several chunks; however, all of&#xA;     * the characters in any single event must come from the same&#xA;     * external entity, so that the Locator provides useful&#xA;     * information.&lt;/p>&#xA;     *&#xA;     * &lt;p>The application must not attempt to read from the array&#xA;     * outside of the specified range.&lt;/p>&#xA;     *&#xA;     * @param ch the characters from the XML document&#xA;     * @param start the start position in the array&#xA;     * @param length the number of characters to read from the array&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     * @see #characters&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="processingInstruction">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="target">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of a processing instruction.&#xA;     *&#xA;     * &lt;p>The Parser will invoke this method once for each processing&#xA;     * instruction found: note that processing instructions may occur&#xA;     * before or after the main document element.&lt;/p>&#xA;     *&#xA;     * &lt;p>A SAX parser must never report an XML declaration (XML 1.0,&#xA;     * section 2.8) or a text declaration (XML 1.0, section 4.3.1)&#xA;     * using this method.&lt;/p>&#xA;     *&#xA;     * &lt;p>Like {@link #characters characters()}, processing instruction&#xA;     * data may have characters that need more than one &lt;code>char&lt;/code>&#xA;     * value. &lt;/p>&#xA;     *&#xA;     * @param target the processing instruction target&#xA;     * @param data the processing instruction data, or null if&#xA;     *        none was supplied.  The data does not include any&#xA;     *        whitespace separating it from the target&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="skippedEntity">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Receive notification of a skipped entity.&#xA;     * This is not called for entity references within markup constructs&#xA;     * such as element start tags or markup declarations.  (The XML&#xA;     * recommendation requires reporting skipped external entities.&#xA;     * SAX also reports internal entity expansion/non-expansion, except&#xA;     * within markup constructs.)&#xA;     *&#xA;     * &lt;p>The Parser will invoke this method each time the entity is&#xA;     * skipped.  Non-validating processors may skip entities if they&#xA;     * have not seen the declarations (because, for example, the&#xA;     * entity was declared in an external DTD subset).  All processors&#xA;     * may skip external entities, depending on the values of the&#xA;     * &lt;code>http://xml.org/sax/features/external-general-entities&lt;/code>&#xA;     * and the&#xA;     * &lt;code>http://xml.org/sax/features/external-parameter-entities&lt;/code>&#xA;     * properties.&lt;/p>&#xA;     *&#xA;     * @param name the name of the skipped entity.  If it is a &#xA;     *        parameter entity, the name will begin with '%', and if&#xA;     *        it is the external DTD subset, it will be the string&#xA;     *        &quot;[dtd]&quot;&#xA;     * @throws org.xml.sax.SAXException any SAX exception, possibly&#xA;     *            wrapping another exception&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Receive notification of the logical content of a document.&#xA; *&#xA; * &lt;blockquote>&#xA; * &lt;em>This module, both source code and documentation, is in the&#xA; * Public Domain, and comes with &lt;strong>NO WARRANTY&lt;/strong>.&lt;/em>&#xA; * See &lt;a href='http://www.saxproject.org'>http://www.saxproject.org&lt;/a>&#xA; * for further information.&#xA; * &lt;/blockquote>&#xA; *&#xA; * &lt;p>This is the main interface that most SAX applications&#xA; * implement: if the application needs to be informed of basic parsing &#xA; * events, it implements this interface and registers an instance with &#xA; * the SAX parser using the {@link org.xml.sax.XMLReader#setContentHandler &#xA; * setContentHandler} method.  The parser uses the instance to report &#xA; * basic document-related events like the start and end of elements &#xA; * and character data.&lt;/p>&#xA; *&#xA; * &lt;p>The order of events in this interface is very important, and&#xA; * mirrors the order of information in the document itself.  For&#xA; * example, all of an element's content (character data, processing&#xA; * instructions, and/or subelements) will appear, in order, between&#xA; * the startElement event and the corresponding endElement event.&lt;/p>&#xA; *&#xA; * &lt;p>This interface is similar to the now-deprecated SAX 1.0&#xA; * DocumentHandler interface, but it adds support for Namespaces&#xA; * and for reporting skipped entities (in non-validating XML&#xA; * processors).&lt;/p>&#xA; *&#xA; * &lt;p>Implementors should note that there is also a &#xA; * &lt;code>ContentHandler&lt;/code> class in the &lt;code>java.net&lt;/code>&#xA; * package; that means that it's probably a bad idea to do&lt;/p>&#xA; *&#xA; * &lt;pre>import java.net.*;&#xA; * import org.xml.sax.*;&#xA; * &lt;/pre>&#xA; *&#xA; * &lt;p>In fact, &quot;import ...*&quot; is usually a sign of sloppy programming&#xA; * anyway, so the user should consider this a feature rather than a&#xA; * bug.&lt;/p>&#xA; *&#xA; * @since SAX 2.0&#xA; * @author David Megginson&#xA; * @version 2.0.1+ (sax2r3pre1)&#xA; * @see org.xml.sax.XMLReader&#xA; * @see org.xml.sax.DTDHandler&#xA; * @see org.xml.sax.ErrorHandler&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ActivationMonitor.java">
+  <comments>/*&#xA; * @(#)ActivationMonitor.java&#x9;1.15 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>rmi</namespaces>
+  <namespaces>activation</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>activation</namespaces>
+    <classifier xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>activation</namespaces>
+    <classifier xsi:type="classifiers:Class" href="UnknownGroupException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="ActivationMonitor">
+    <members xsi:type="members:InterfaceMethod" name="inactiveObject">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * An activation group calls its monitor's&#xA;     * &lt;code>inactiveObject&lt;/code> method when an object in its group&#xA;     * becomes inactive (deactivates).  An activation group discovers&#xA;     * that an object (that it participated in activating) in its VM&#xA;     * is no longer active, via calls to the activation group's&#xA;     * &lt;code>inactiveObject&lt;/code> method. &lt;p>&#xA;     *&#xA;     * The &lt;code>inactiveObject&lt;/code> call informs the&#xA;     * &lt;code>ActivationMonitor&lt;/code> that the remote object reference&#xA;     * it holds for the object with the activation identifier,&#xA;     * &lt;code>id&lt;/code>, is no longer valid. The monitor considers the&#xA;     * reference associated with &lt;code>id&lt;/code> as a stale reference.&#xA;     * Since the reference is considered stale, a subsequent&#xA;     * &lt;code>activate&lt;/code> call for the same activation identifier&#xA;     * results in re-activating the remote object.&lt;p>&#xA;     *&#xA;     * @param id the object's activation identifier&#xA;     * @exception UnknownObjectException if object is unknown&#xA;     * @exception RemoteException if remote call fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="activeObject">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Informs that an object is now active. An &lt;code>ActivationGroup&lt;/code>&#xA;     * informs its monitor if an object in its group becomes active by&#xA;     * other means than being activated directly (i.e., the object&#xA;     * is registered and &quot;activated&quot; itself).&#xA;     *&#xA;     * @param id the active object's id&#xA;     * @param obj the marshalled form of the object's stub&#xA;     * @exception UnknownObjectException if object is unknown&#xA;     * @exception RemoteException if remote call fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="inactiveGroup">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationGroupID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="incarnation">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownGroupException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Informs that the group is now inactive. The group will be&#xA;     * recreated upon a subsequent request to activate an object&#xA;     * within the group. A group becomes inactive when all objects&#xA;     * in the group report that they are inactive.&#xA;     *&#xA;     * @param id the group's id&#xA;     * @param incarnation the group's incarnation number&#xA;     * @exception UnknownGroupException if group is unknown&#xA;     * @exception RemoteException if remote call fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An &lt;code>ActivationMonitor&lt;/code> is specific to an&#xA; * &lt;code>ActivationGroup&lt;/code> and is obtained when a group is&#xA; * reported active via a call to&#xA; * &lt;code>ActivationSystem.activeGroup&lt;/code> (this is done&#xA; * internally). An activation group is responsible for informing its&#xA; * &lt;code>ActivationMonitor&lt;/code> when either: its objects become active or&#xA; * inactive, or the group as a whole becomes inactive.&#xA; *&#xA; * @author &#x9;Ann Wollrath&#xA; * @version&#x9;1.15, 12/19/03&#xA; * @see&#x9;&#x9;Activator&#xA; * @see&#x9;&#x9;ActivationSystem&#xA; * @see &#x9;ActivationGroup&#xA; * @since&#x9;1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

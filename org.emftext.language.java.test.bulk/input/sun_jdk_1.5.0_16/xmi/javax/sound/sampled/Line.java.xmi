@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Line.java">
+  <comments>/*&#xA; * @(#)Line.java&#x9;1.29 04/07/14&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sound</namespaces>
+  <namespaces>sampled</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="Line">
+    <comments>// class Info</comments>
+    <members xsi:type="members:InterfaceMethod" name="getLineInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>Line</namespaces>
+        <classifierReferences target="//@classifiers.0/@members.9"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the &lt;code>Line.Info&lt;/code> object describing this&#xA;     * line.&#xA;     * @return description of the line&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="open">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="LineUnavailableException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Opens the line, indicating that it should acquire any required&#xA;     * system resources and become operational.&#xA;     * If this operation&#xA;     * succeeds, the line is marked as open, and an &lt;code>OPEN&lt;/code> event is dispatched&#xA;     * to the line's listeners.&#xA;     * &lt;p>&#xA;     * Note that some lines, once closed, cannot be reopened.  Attempts&#xA;     * to reopen such a line will always result in an &lt;code>LineUnavailableException&lt;/code>.&#xA;     * &lt;p>&#xA;     * Some types of lines have configurable properties that may affect&#xA;     * resource allocation.   For example, a &lt;code>DataLine&lt;/code> must&#xA;     * be opened with a particular format and buffer size.  Such lines&#xA;     * should provide a mechanism for configuring these properties, such&#xA;     * as an additional &lt;code>open&lt;/code> method or methods which allow&#xA;     * an application to specify the desired settings.&#xA;     * &lt;p>&#xA;     * This method takes no arguments, and opens the line with the current&#xA;     * settings.  For &lt;code>{@link SourceDataLine}&lt;/code> and&#xA;     * &lt;code>{@link TargetDataLine}&lt;/code> objects, this means that the line is&#xA;     * opened with default settings.  For a &lt;code>{@link Clip}&lt;/code>, however,&#xA;     * the buffer size is determined when data is loaded.  Since this method does not&#xA;     * allow the application to specify any data to load, an IllegalArgumentException&#xA;     * is thrown. Therefore, you should instead use one of the &lt;code>open&lt;/code> methods&#xA;     * provided in the &lt;code>Clip&lt;/code> interface to load data into the &lt;code>Clip&lt;/code>.&#xA;     * &lt;p>&#xA;     * For &lt;code>DataLine&lt;/code>'s, if the &lt;code>DataLine.Info&lt;/code>&#xA;     * object which was used to retrieve the line, specifies at least&#xA;     * one fully qualified audio format, the last one will be used&#xA;     * as the default format.&#xA;     *&#xA;     * @throws IllegalArgumentException if this method is called on a Clip instance.&#xA;     * @throws LineUnavailableException if the line cannot be&#xA;     * opened due to resource restrictions.&#xA;     * @throws SecurityException if the line cannot be&#xA;     * opened due to security restrictions.&#xA;     *&#xA;     * @see #close&#xA;     * @see #isOpen&#xA;     * @see LineEvent&#xA;     * @see DataLine&#xA;     * @see Clip#open(AudioFormat, byte[], int, int)&#xA;     * @see Clip#open(AudioInputStream)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Closes the line, indicating that any system resources&#xA;     * in use by the line can be released.  If this operation&#xA;     * succeeds, the line is marked closed and a &lt;code>CLOSE&lt;/code> event is dispatched&#xA;     * to the line's listeners.&#xA;     * @throws SecurityException if the line cannot be&#xA;     * closed due to security restrictions.&#xA;     *&#xA;     * @see #open&#xA;     * @see #isOpen&#xA;     * @see LineEvent&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isOpen">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates whether the line is open, meaning that it has reserved&#xA;     * system resources and is operational, although it might not currently be&#xA;     * playing or capturing sound.&#xA;     * @return &lt;code>true&lt;/code> if the line is open, otherwise &lt;code>false&lt;/code>&#xA;     *&#xA;     * @see #open()&#xA;     * @see #close()&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getControls">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Control.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the set of controls associated with this line.&#xA;     * Some controls may only be available when the line is open.&#xA;     * If there are no controls, this method returns an array of length 0.&#xA;     * @return the array of controls&#xA;     * @see #getControl&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isControlSupported">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="control">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>Control</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Control$Type.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates whether the line supports a control of the specified type.&#xA;     * Some controls may only be available when the line is open.&#xA;     * @param control the type of the control for which support is queried&#xA;     * @return &lt;code>true&lt;/code> if at least one control of the specified type is&#xA;     * supported, otherwise &lt;code>false&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getControl">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Control.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="control">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>Control</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Control$Type.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains a control of the specified type,&#xA;     * if there is any.&#xA;     * Some controls may only be available when the line is open.&#xA;     * @param control the type of the requested control&#xA;     * @return a control of the specified type&#xA;     * @throws IllegalArgumentException if a control of the specified type&#xA;     * is not supported&#xA;     * @see #getControls&#xA;     * @see #isControlSupported(Control.Type control)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addLineListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="LineListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds a listener to this line.  Whenever the line's status changes, the&#xA;     * listener's &lt;code>update()&lt;/code> method is called with a &lt;code>LineEvent&lt;/code> object&#xA;     * that describes the change.&#xA;     * @param listener the object to add as a listener to this line&#xA;     * @see #removeLineListener&#xA;     * @see LineListener#update&#xA;     * @see LineEvent&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeLineListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="LineListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes the specified listener from this line's list of listeners.&#xA;     * @param listener listener to remove&#xA;     * @see #addLineListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="classifiers:Class" name="Info">
+      <members xsi:type="members:Field" name="lineClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>/**&#xA;&#x9; * The class of the line described by the info object.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </members>
+      <members xsi:type="members:Constructor" name="Info">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:SelfReference">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.0"/>
+                  <self xsi:type="literals:This"/>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                  <next xsi:type="references:ReflectiveClassReference"/>
+                </value>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.1/@parameters.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:SelfReference">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.0"/>
+                  <self xsi:type="literals:This"/>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.1/@parameters.0"/>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="lineClass">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Constructs an info object that describes a line of the specified class.&#xA;&#x9; * This constructor is typically used by an application to&#xA;&#x9; * describe a desired line.&#xA;&#x9; * @param lineClass the class of the line that the new Line.Info object describes&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getLineClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Obtains the class of the line that this Line.Info object describes.&#xA;&#x9; * @return the described line's class&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="matches">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.9"/>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Indicates whether the specified info object matches this one.&#xA;&#x9; * To match, the specified object must be identical to or&#xA;&#x9; * a special case of this one.  The specified info object&#xA;&#x9; * must be either an instance of the same class as this one,&#xA;&#x9; * or an instance of a sub-type of this one.  In addition, the&#xA;&#x9; * attributes of the specified object must be compatible with the&#xA;&#x9; * capabilities of this one.  Specifically, the routing configuration&#xA;&#x9; * for the specified info object must be compatible with that of this&#xA;&#x9; * one.&#xA;&#x9; * Subclasses may add other criteria to determine whether the two objects&#xA;&#x9; * match.&#xA;&#x9; *&#xA;&#x9; * @param info the info object which is being compared to this one&#xA;&#x9; * @return &lt;code>true&lt;/code> if the specified object matches this one,&#xA;&#x9; * &lt;code>false&lt;/code> otherwise&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:Condition">
+          <comments>// $$kk: 08.30.99: is this backwards?</comments>
+          <comments>// dataLine.matches(targetDataLine) == true: targetDataLine is always dataLine</comments>
+          <comments>// targetDataLine.matches(dataLine) == false</comments>
+          <comments>// so if i want to make sure i get a targetDataLine, i need:</comments>
+          <comments>// targetDataLine.matches(prospective_match) == true</comments>
+          <comments>// => prospective_match may be other things as well, but it is at least a targetDataLine</comments>
+          <comments>// targetDataLine defines the requirements which prospective_match must meet.</comments>
+          <comments>// &quot;if this Class object represents a declared class, this method returns</comments>
+          <comments>// true if the specified Object argument is an instance of the represented</comments>
+          <comments>// class (or of any of its subclasses)&quot;</comments>
+          <comments>// GainControlClass.isInstance(MyGainObj) => true</comments>
+          <comments>// GainControlClass.isInstance(MySpecialGainInterfaceObj) => true</comments>
+          <comments>// this_class.isInstance(that_object)&#x9;=> that object can by cast to this class</comments>
+          <comments>//&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=> that_object's class may be a subtype of this_class</comments>
+          <comments>//&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=> that may be more specific (subtype) of this</comments>
+          <comments>// &quot;If this Class object represents an interface, this method returns true</comments>
+          <comments>// if the class or any superclass of the specified Object argument implements</comments>
+          <comments>// this interface&quot;</comments>
+          <comments>// GainControlClass.isInstance(MyGainObj) => true</comments>
+          <comments>// GainControlClass.isInstance(GenericControlObj) => may be false</comments>
+          <comments>// => that may be more specific</comments>
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="literals:BooleanLiteral"/>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="references:SelfReference">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../java/lang/Class.class.xmi#//@classifiers.0/@members.37"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.3/@parameters.0"/>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../java/lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+                </next>
+                <self xsi:type="literals:This"/>
+              </expression>
+            </child>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <comments>// this.isAssignableFrom(that)  =>  this is same or super to that</comments>
+          <comments>//&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=>&#x9;this is at least as general as that</comments>
+          <comments>//&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=>&#x9;that may be subtype of this</comments>
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="literals:BooleanLiteral"/>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.9/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/lang/Class.class.xmi#//@classifiers.0/@members.38"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.3/@parameters.0">
+                    <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.9/@members.2"/>
+                  </arguments>
+                </next>
+              </expression>
+            </child>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="toString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Obtains a textual description of the line info.&#xA;&#x9; * @return a string description&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="fullPackagePath">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:StringReference" value="javax.sound.sampled."/>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="initialString">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.9/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/lang/Class.class.xmi#//@classifiers.0/@members.31"/>
+                </next>
+              </arguments>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="finalString">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="index">
+            <typeReference xsi:type="types:Int"/>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.49"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.0/@variable"/>
+              </next>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.2/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.1/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.56"/>
+                      <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.3/@variable"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.1/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.56"/>
+                      <arguments xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.3/@variable"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.0/@variable">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                            </next>
+                          </children>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                        </expression>
+                      </arguments>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.1/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                        </next>
+                      </arguments>
+                    </next>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </value>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.3/@variable"/>
+            <children xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Subtraction"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </children>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.2/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.1/@variable"/>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@members.4/@statements.2/@variable"/>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A &lt;code>Line.Info&lt;/code> object contains information about a line.&#xA;     * The only information provided by &lt;code>Line.Info&lt;/code> itself&#xA;     * is the Java class of the line.&#xA;     * A subclass of &lt;code>Line.Info&lt;/code> adds other kinds of information&#xA;     * about the line.  This additional information depends on which &lt;code>Line&lt;/code>&#xA;     * subinterface is implemented by the kind of line that the &lt;code>Line.Info&lt;/code>&#xA;     * subclass describes.&#xA;     * &lt;p>&#xA;     * A &lt;code>Line.Info&lt;/code> can be retrieved using various methods of&#xA;     * the &lt;code>Line&lt;/code>, &lt;code>Mixer&lt;/code>, and &lt;code>AudioSystem&lt;/code>&#xA;     * interfaces.  Other such methods let you pass a &lt;code>Line.Info&lt;/code> as&#xA;     * an argument, to learn whether lines matching the specified configuration&#xA;     * are available and to obtain them.&#xA;     *&#xA;     * @author Kara Kytle&#xA;     * @version 1.29, 04/07/14&#xA;     *&#xA;     * @see Line#getLineInfo&#xA;     * @see Mixer#getSourceLineInfo&#xA;     * @see Mixer#getTargetLineInfo&#xA;     * @see Mixer#getLine &lt;code>Mixer.getLine(Line.Info)&lt;/code>&#xA;     * @see Mixer#getSourceLineInfo(Line.Info) &lt;code>Mixer.getSourceLineInfo(Line.Info)&lt;/code>&#xA;     * @see Mixer#getSourceLineInfo(Line.Info) &lt;code>Mixer.getTargetLineInfo(Line.Info)&lt;/code>&#xA;     * @see Mixer#isLineSupported &lt;code>Mixer.isLineSupported(Line.Info)&lt;/code>&#xA;     * @see AudioSystem#getLine &lt;code>AudioSystem.getLine(Line.Info)&lt;/code>&#xA;     * @see AudioSystem#getSourceLineInfo &lt;code>AudioSystem.getSourceLineInfo(Line.Info)&lt;/code>&#xA;     * @see AudioSystem#getTargetLineInfo &lt;code>AudioSystem.getTargetLineInfo(Line.Info)&lt;/code>&#xA;     * @see AudioSystem#isLineSupported &lt;code>AudioSystem.isLineSupported(Line.Info)&lt;/code>&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Line&lt;/code> interface represents a mono or multi-channel&#xA; * audio feed. A line is an element of the digital audio&#xA; * &quot;pipeline,&quot; such as a mixer, an input or output port,&#xA; * or a data path into or out of a mixer.&#xA; * &lt;p>&#xA; * A line can have controls, such as gain, pan, and reverb.&#xA; * The controls themselves are instances of classes that extend the&#xA; * base &lt;code>{@link Control}&lt;/code> class.&#xA; * The &lt;code>Line&lt;/code> interface provides two accessor methods for&#xA; * obtaining the line's controls: &lt;code>{@link #getControls getControls}&lt;/code> returns the&#xA; * entire set, and &lt;code>{@link #getControl getControl}&lt;/code> returns a single control of&#xA; * specified type.&#xA; * &lt;p>&#xA; * Lines exist in various states at different times.  When a line opens, it reserves system&#xA; * resources for itself, and when it closes, these resources are freed for&#xA; * other objects or applications. The &lt;code>{@link #isOpen()}&lt;/code> method lets&#xA; * you discover whether a line is open or closed.&#xA; * An open line need not be processing data, however.  Such processing is&#xA; * typically initiated by subinterface methods such as&#xA; * &lt;code>{@link SourceDataLine#write SourceDataLine.write}&lt;/code> and&#xA; * &lt;code>{@link TargetDataLine#read TargetDataLine.read}&lt;/code>.&#xA; *&lt;p>&#xA; * You can register an object to receive notifications whenever the line's&#xA; * state changes.  The object must implement the &lt;code>{@link LineListener}&lt;/code>&#xA; * interface, which consists of the single method&#xA; * &lt;code>{@link LineListener#update update}&lt;/code>.&#xA; * This method will be invoked when a line opens and closes (and, if it's a&#xA; * {@link DataLine}, when it starts and stops).&#xA; *&lt;p>&#xA; * An object can be registered to listen to multiple lines.  The event it&#xA; * receives in its &lt;code>update&lt;/code> method will specify which line created&#xA; * the event, what type of event it was&#xA; * (&lt;code>OPEN&lt;/code>, &lt;code>CLOSE&lt;/code>, &lt;code>START&lt;/code>, or &lt;code>STOP&lt;/code>),&#xA; * and how many sample frames the line had processed at the time the event occurred.&#xA; * &lt;p>&#xA; * Certain line operations, such as open and close, can generate security&#xA; * exceptions if invoked by unprivileged code when the line is a shared audio&#xA; * resource.&#xA; *&#xA; * @author Kara Kytle&#xA; * @version 1.29, 04/07/14&#xA; *&#xA; * @see LineEvent&#xA; * @since 1.3&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

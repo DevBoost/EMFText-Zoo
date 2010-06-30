@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="DOMInputImpl.java">
+  <comments>/*&#xA; * The Apache Software License, Version 1.1&#xA; *&#xA; *&#xA; * Copyright (c) 2001, 2002 The Apache Software Foundation.&#xA; * All rights reserved.&#xA; *&#xA; * Redistribution and use in source and binary forms, with or without&#xA; * modification, are permitted provided that the following conditions&#xA; * are met:&#xA; *&#xA; * 1. Redistributions of source code must retain the above copyright&#xA; *    notice, this list of conditions and the following disclaimer.&#xA; *&#xA; * 2. Redistributions in binary form must reproduce the above copyright&#xA; *    notice, this list of conditions and the following disclaimer in&#xA; *    the documentation and/or other materials provided with the&#xA; *    distribution.&#xA; *&#xA; * 3. The end-user documentation included with the redistribution,&#xA; *    if any, must include the following acknowledgment:&#xA; *       &quot;This product includes software developed by the&#xA; *        Apache Software Foundation (http://www.apache.org/).&quot;&#xA; *    Alternately, this acknowledgment may appear in the software itself,&#xA; *    if and wherever such third-party acknowledgments normally appear.&#xA; *&#xA; * 4. The names &quot;Xerces&quot; and &quot;Apache Software Foundation&quot; must&#xA; *    not be used to endorse or promote products derived from this&#xA; *    software without prior written permission. For written&#xA; *    permission, please contact apache@apache.org.&#xA; *&#xA; * 5. Products derived from this software may not be called &quot;Apache&quot;,&#xA; *    nor may &quot;Apache&quot; appear in their name, without prior written&#xA; *    permission of the Apache Software Foundation.&#xA; *&#xA; * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED&#xA; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES&#xA; * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE&#xA; * DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR&#xA; * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,&#xA; * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT&#xA; * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF&#xA; * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND&#xA; * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,&#xA; * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT&#xA; * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF&#xA; * SUCH DAMAGE.&#xA; * ====================================================================&#xA; *&#xA; * This software consists of voluntary contributions made by many&#xA; * individuals on behalf of the Apache Software Foundation and was&#xA; * originally based on software copyright (c) 2001, International&#xA; * Business Machines, Inc., http://www.apache.org.  For more&#xA; * information on the Apache Software Foundation, please see&#xA; * &lt;http://www.apache.org/>.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>xerces</namespaces>
+  <namespaces>internal</namespaces>
+  <namespaces>dom</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>w3c</namespaces>
+    <namespaces>dom</namespaces>
+    <namespaces>ls</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/w3c/dom/ls/LSInput.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="DOMInputImpl">
+    <members xsi:type="members:Field" name="fPublicId">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>//</comments>
+        <comments>// Data</comments>
+        <comments>//</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="fSystemId">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="fBaseSystemId">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="fByteStream">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="fCharStream">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="fData">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="fEncoding">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="fCertifiedText">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Constructor" name="DOMInputImpl">
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Default Constructor, constructs an input source&#xA;     *&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DOMInputImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="publicId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="systemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="baseSystemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs an input source from just the public and system&#xA;     * identifiers, leaving resolution of the entity and opening of&#xA;     * the input stream up to the caller.&#xA;     *&#xA;     * @param publicId     The public identifier, if known.&#xA;     * @param systemId     The system identifier. This value should&#xA;     *                     always be set, if possible, and can be&#xA;     *                     relative or absolute. If the system identifier&#xA;     *                     is relative, then the base system identifier&#xA;     *                     should be set.&#xA;     * @param baseSystemId The base system identifier. This value should&#xA;     *                     always be set to the fully expanded URI of the&#xA;     *                     base system identifier, if possible.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DOMInputImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.4"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="publicId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="systemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="baseSystemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="byteStream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="encoding">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// DOMInputImpl(String,String,String)</comments>
+        <comments>/**&#xA;     * Constructs an input source from a byte stream.&#xA;     *&#xA;     * @param publicId     The public identifier, if known.&#xA;     * @param systemId     The system identifier. This value should&#xA;     *                     always be set, if possible, and can be&#xA;     *                     relative or absolute. If the system identifier&#xA;     *                     is relative, then the base system identifier&#xA;     *                     should be set.&#xA;     * @param baseSystemId The base system identifier. This value should&#xA;     *                     always be set to the fully expanded URI of the&#xA;     *                     base system identifier, if possible.&#xA;     * @param byteStream   The byte stream.&#xA;     * @param encoding     The encoding of the byte stream, if known.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DOMInputImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.4"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="publicId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="systemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="baseSystemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="charStream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="encoding">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// DOMInputImpl(String,String,String,InputStream,String)</comments>
+        <comments>/**&#xA;     * Constructs an input source from a character stream.&#xA;     *&#xA;     * @param publicId     The public identifier, if known.&#xA;     * @param systemId     The system identifier. This value should&#xA;     *                     always be set, if possible, and can be&#xA;     *                     relative or absolute. If the system identifier&#xA;     *                     is relative, then the base system identifier&#xA;     *                     should be set.&#xA;     * @param baseSystemId The base system identifier. This value should&#xA;     *                     always be set to the fully expanded URI of the&#xA;     *                     base system identifier, if possible.&#xA;     * @param charStream   The character stream.&#xA;     * @param encoding     The original encoding of the byte stream&#xA;     *                     used by the reader, if known.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DOMInputImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.4"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="publicId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="systemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="baseSystemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="encoding">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// DOMInputImpl(String,String,String,Reader,String)</comments>
+        <comments>/**&#xA;     * Constructs an input source from a String.&#xA;     *&#xA;     * @param publicId     The public identifier, if known.&#xA;     * @param systemId     The system identifier. This value should&#xA;     *                     always be set, if possible, and can be&#xA;     *                     relative or absolute. If the system identifier&#xA;     *                     is relative, then the base system identifier&#xA;     *                     should be set.&#xA;     * @param baseSystemId The base system identifier. This value should&#xA;     *                     always be set to the fully expanded URI of the&#xA;     *                     base system identifier, if possible.&#xA;     * @param data&#x9;&#x9;   The String Data.&#xA;     * @param encoding     The original encoding of the byte stream&#xA;     *                     used by the reader, if known.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getByteStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// DOMInputImpl(String,String,String,String,String)</comments>
+        <comments>/**&#xA;     * An attribute of a language-binding dependent type that represents a&#xA;     * stream of bytes.&#xA;     * &lt;br>The parser will ignore this if there is also a character stream&#xA;     * specified, but it will use a byte stream in preference to opening a&#xA;     * URI connection itself.&#xA;     * &lt;br>If the application knows the character encoding of the byte stream,&#xA;     * it should set the encoding property. Setting the encoding in this way&#xA;     * will override any encoding specified in the XML declaration itself.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setByteStream">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="byteStream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * An attribute of a language-binding dependent type that represents a&#xA;     * stream of bytes.&#xA;     * &lt;br>The parser will ignore this if there is also a character stream&#xA;     * specified, but it will use a byte stream in preference to opening a&#xA;     * URI connection itself.&#xA;     * &lt;br>If the application knows the character encoding of the byte stream,&#xA;     * it should set the encoding property. Setting the encoding in this way&#xA;     * will override any encoding specified in the XML declaration itself.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCharacterStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  An attribute of a language-binding dependent type that represents a&#xA;     * stream of 16-bit units. Application must encode the stream using&#xA;     * UTF-16 (defined in  and Amendment 1 of ).&#xA;     * &lt;br>If a character stream is specified, the parser will ignore any byte&#xA;     * stream and will not attempt to open a URI connection to the system&#xA;     * identifier.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCharacterStream">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="characterStream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  An attribute of a language-binding dependent type that represents a&#xA;     * stream of 16-bit units. Application must encode the stream using&#xA;     * UTF-16 (defined in  and Amendment 1 of ).&#xA;     * &lt;br>If a character stream is specified, the parser will ignore any byte&#xA;     * stream and will not attempt to open a URI connection to the system&#xA;     * identifier.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getStringData">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A string attribute that represents a sequence of 16 bit units (utf-16&#xA;     * encoded characters).&#xA;     * &lt;br>If string data is available in the input source, the parser will&#xA;     * ignore the character stream and the byte stream and will not attempt&#xA;     * to open a URI connection to the system identifier.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setStringData">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="stringData">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A string attribute that represents a sequence of 16 bit units (utf-16&#xA;     * encoded characters).&#xA;     * &lt;br>If string data is available in the input source, the parser will&#xA;     * ignore the character stream and the byte stream and will not attempt&#xA;     * to open a URI connection to the system identifier.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getEncoding">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  The character encoding, if known. The encoding must be a string&#xA;     * acceptable for an XML encoding declaration ( section 4.3.3 &quot;Character&#xA;     * Encoding in Entities&quot;).&#xA;     * &lt;br>This attribute has no effect when the application provides a&#xA;     * character stream. For other sources of input, an encoding specified&#xA;     * by means of this attribute will override any encoding specified in&#xA;     * the XML claration or the Text Declaration, or an encoding obtained&#xA;     * from a higher level protocol, such as HTTP .&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setEncoding">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="encoding">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  The character encoding, if known. The encoding must be a string&#xA;     * acceptable for an XML encoding declaration ( section 4.3.3 &quot;Character&#xA;     * Encoding in Entities&quot;).&#xA;     * &lt;br>This attribute has no effect when the application provides a&#xA;     * character stream. For other sources of input, an encoding specified&#xA;     * by means of this attribute will override any encoding specified in&#xA;     * the XML claration or the Text Declaration, or an encoding obtained&#xA;     * from a higher level protocol, such as HTTP .&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPublicId">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The public identifier for this input source. The public identifier is&#xA;     * always optional: if the application writer includes one, it will be&#xA;     * provided as part of the location information.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPublicId">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="publicId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The public identifier for this input source. The public identifier is&#xA;     * always optional: if the application writer includes one, it will be&#xA;     * provided as part of the location information.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSystemId">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The system identifier, a URI reference , for this input source. The&#xA;     * system identifier is optional if there is a byte stream or a&#xA;     * character stream, but it is still useful to provide one, since the&#xA;     * application can use it to resolve relative URIs and can include it in&#xA;     * error messages and warnings (the parser will attempt to fetch the&#xA;     * ressource identifier by the URI reference only if there is no byte&#xA;     * stream or character stream specified).&#xA;     * &lt;br>If the application knows the character encoding of the object&#xA;     * pointed to by the system identifier, it can register the encoding by&#xA;     * setting the encoding attribute.&#xA;     * &lt;br>If the system ID is a relative URI reference (see section 5 in ),&#xA;     * the behavior is implementation dependent.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSystemId">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="systemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The system identifier, a URI reference , for this input source. The&#xA;     * system identifier is optional if there is a byte stream or a&#xA;     * character stream, but it is still useful to provide one, since the&#xA;     * application can use it to resolve relative URIs and can include it in&#xA;     * error messages and warnings (the parser will attempt to fetch the&#xA;     * ressource identifier by the URI reference only if there is no byte&#xA;     * stream or character stream specified).&#xA;     * &lt;br>If the application knows the character encoding of the object&#xA;     * pointed to by the system identifier, it can register the encoding by&#xA;     * setting the encoding attribute.&#xA;     * &lt;br>If the system ID is a relative URI reference (see section 5 in ),&#xA;     * the behavior is implementation dependent.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBaseURI">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  The base URI to be used (see section 5.1.4 in ) for resolving relative&#xA;     * URIs to absolute URIs. If the baseURI is itself a relative URI, the&#xA;     * behavior is implementation dependent.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBaseURI">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="baseURI">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  The base URI to be used (see section 5.1.4 in ) for resolving relative&#xA;     * URIs to absolute URIs. If the baseURI is itself a relative URI, the&#xA;     * behavior is implementation dependent.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCertifiedText">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      *  If set to true, assume that the input is certified (see section 2.13&#xA;      * in [&lt;a href='http://www.w3.org/TR/2002/CR-xml11-20021015/'>XML 1.1&lt;/a>]) when&#xA;      * parsing [&lt;a href='http://www.w3.org/TR/2002/CR-xml11-20021015/'>XML 1.1&lt;/a>].&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCertifiedText">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="certifiedText">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      *  If set to true, assume that the input is certified (see section 2.13&#xA;      * in [&lt;a href='http://www.w3.org/TR/2002/CR-xml11-20021015/'>XML 1.1&lt;/a>]) when&#xA;      * parsing [&lt;a href='http://www.w3.org/TR/2002/CR-xml11-20021015/'>XML 1.1&lt;/a>].&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This Class &lt;code>DOMInputImpl&lt;/code> represents a single input source for an XML entity.&#xA; * &lt;p> This Class allows an application to encapsulate information about&#xA; * an input source in a single object, which may include a public&#xA; * identifier, a system identifier, a byte stream (possibly with a specified&#xA; * encoding), and/or a character stream.&#xA; * &lt;p> The exact definitions of a byte stream and a character stream are&#xA; * binding dependent.&#xA; * &lt;p> There are two places that the application will deliver this input&#xA; * source to the parser: as the argument to the &lt;code>parse&lt;/code> method,&#xA; * or as the return value of the &lt;code>DOMResourceResolver.resolveEntity&lt;/code>&#xA; *  method.&#xA; * &lt;p> The &lt;code>DOMParser&lt;/code> will use the &lt;code>LSInput&lt;/code>&#xA; * object to determine how to read XML input. If there is a character stream&#xA; * available, the parser will read that stream directly; if not, the parser&#xA; * will use a byte stream, if available; if neither a character stream nor a&#xA; * byte stream is available, the parser will attempt to open a URI&#xA; * connection to the resource identified by the system identifier.&#xA; * &lt;p> An &lt;code>LSInput&lt;/code> object belongs to the application: the&#xA; * parser shall never modify it in any way (it may modify a copy if&#xA; * necessary).  Eventhough all attributes in this interface are writable the&#xA; * DOM implementation is expected to never mutate a LSInput.&#xA; * &lt;p>See also the &lt;a href='http://www.w3.org/TR/2001/WD-DOM-Level-3-ASLS-20011025'>Document Object Model (DOM) Level 3 Abstract Schemas and Load&#xA;and Save Specification&lt;/a>.&#xA; *&#xA; *&#xA; * @author Gopal Sharma, SUN Microsystems Inc.&#xA; * @version $Id: DOMInputImpl.java,v 1.2 2003/11/17 13:48:40 venu Exp $&#xA; */</comments>
+      <comments>// REVISIT:</comments>
+      <comments>// 1. it should be possible to do the following</comments>
+      <comments>// DOMInputImpl extends XMLInputSource implements LSInput</comments>
+      <comments>// 2. we probably need only the default constructor.  -- el</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../../org/w3c/dom/ls/LSInput.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="Driver.java">
+  <comments>/*&#xA; * @(#)Driver.java&#x9;1.23 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>sql</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="Driver">
+    <members xsi:type="members:InterfaceMethod" name="connect">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Attempts to make a database connection to the given URL.&#xA;     * The driver should return &quot;null&quot; if it realizes it is the wrong kind&#xA;     * of driver to connect to the given URL.  This will be common, as when&#xA;     * the JDBC driver manager is asked to connect to a given URL it passes&#xA;     * the URL to each loaded driver in turn.&#xA;     *&#xA;     * &lt;P>The driver should throw an &lt;code>SQLException&lt;/code> if it is the right &#xA;     * driver to connect to the given URL but has trouble connecting to&#xA;     * the database.&#xA;     *&#xA;     * &lt;P>The &lt;code>java.util.Properties&lt;/code> argument can be used to pass&#xA;     * arbitrary string tag/value pairs as connection arguments.&#xA;     * Normally at least &quot;user&quot; and &quot;password&quot; properties should be&#xA;     * included in the &lt;code>Properties&lt;/code> object.&#xA;     *&#xA;     * @param url the URL of the database to which to connect&#xA;     * @param info a list of arbitrary string tag/value pairs as&#xA;     * connection arguments. Normally at least a &quot;user&quot; and&#xA;     * &quot;password&quot; property should be included.&#xA;     * @return a &lt;code>Connection&lt;/code> object that represents a&#xA;     *         connection to the URL&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Connection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="url">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>util</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../util/Properties.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="acceptsURL">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Retrieves whether the driver thinks that it can open a connection&#xA;     * to the given URL.  Typically drivers will return &lt;code>true&lt;/code> if they&#xA;     * understand the subprotocol specified in the URL and &lt;code>false&lt;/code> if&#xA;     * they do not.&#xA;     *&#xA;     * @param url the URL of the database&#xA;     * @return &lt;code>true&lt;/code> if this driver understands the given URL;&#xA;     *         &lt;code>false&lt;/code> otherwise  &#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="url">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getPropertyInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Gets information about the possible properties for this driver.&#xA;     * &lt;P>&#xA;     * The &lt;code>getPropertyInfo&lt;/code> method is intended to allow a generic &#xA;     * GUI tool to discover what properties it should prompt &#xA;     * a human for in order to get &#xA;     * enough information to connect to a database.  Note that depending on&#xA;     * the values the human has supplied so far, additional values may become&#xA;     * necessary, so it may be necessary to iterate though several calls&#xA;     * to the &lt;code>getPropertyInfo&lt;/code> method.&#xA;     *&#xA;     * @param url the URL of the database to which to connect&#xA;     * @param info a proposed list of tag/value pairs that will be sent on&#xA;     *          connect open&#xA;     * @return an array of &lt;code>DriverPropertyInfo&lt;/code> objects describing &#xA;     *          possible properties.  This array may be an empty array if &#xA;     *          no properties are required.&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="DriverPropertyInfo.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="url">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>util</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../util/Properties.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMajorVersion">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the driver's major version number. Initially this should be 1.&#xA;     *&#xA;     * @return this driver's major version number&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMinorVersion">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Gets the driver's minor version number. Initially this should be 0.&#xA;     * @return this driver's minor version number&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="jdbcCompliant">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Reports whether this driver is a genuine JDBC&#xA;     * Compliant&lt;sup>&lt;font size=-2>TM&lt;/font>&lt;/sup> driver.&#xA;     * A driver may only report &lt;code>true&lt;/code> here if it passes the JDBC&#xA;     * compliance tests; otherwise it is required to return &lt;code>false&lt;/code>.&#xA;     * &lt;P>&#xA;     * JDBC compliance requires full support for the JDBC API and full support&#xA;     * for SQL 92 Entry Level.  It is expected that JDBC compliant drivers will&#xA;     * be available for all the major commercial databases.&#xA;     * &lt;P>&#xA;     * This method is not intended to encourage the development of non-JDBC&#xA;     * compliant drivers, but is a recognition of the fact that some vendors&#xA;     * are interested in using the JDBC API and framework for lightweight&#xA;     * databases that do not support full database functionality, or for&#xA;     * special databases such as document information retrieval where a SQL&#xA;     * implementation may not be feasible.&#xA;     * @return &lt;code>true&lt;/code> if this driver is JDBC Compliant; &lt;code>false&lt;/code>&#xA;     *         otherwise&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The interface that every driver class must implement.&#xA; * &lt;P>The Java SQL framework allows for multiple database drivers.&#xA; *&#xA; * &lt;P>Each driver should supply a class that implements&#xA; * the Driver interface.&#xA; *&#xA; * &lt;P>The DriverManager will try to load as many drivers as it can&#xA; * find and then for any given connection request, it will ask each&#xA; * driver in turn to try to connect to the target URL.&#xA; *&#xA; * &lt;P>It is strongly recommended that each Driver class should be&#xA; * small and standalone so that the Driver class can be loaded and&#xA; * queried without bringing in vast quantities of supporting code.&#xA; *&#xA; * &lt;P>When a Driver class is loaded, it should create an instance of&#xA; * itself and register it with the DriverManager. This means that a&#xA; * user can load and register a driver by calling&#xA; * &lt;pre>&#xA; *   &lt;code>Class.forName(&quot;foo.bah.Driver&quot;)&lt;/code>&#xA; * &lt;/pre>&#xA; *&#xA; * @see DriverManager&#xA; * @see Connection &#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="AbstractInterruptibleChannel.java">
+  <comments>/*&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <comments>/*&#xA; * @(#)AbstractInterruptibleChannel.java&#x9;1.16 06/03/22&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>nio</namespaces>
+  <namespaces>channels</namespaces>
+  <namespaces>spi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>lang</namespaces>
+    <namespaces>reflect</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../lang/reflect/Method.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>lang</namespaces>
+    <namespaces>reflect</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../lang/reflect/InvocationTargetException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>channels</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../security/AccessController.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>sun</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>ch</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../sun/nio/ch/Interruptible.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="AbstractInterruptibleChannel">
+    <members xsi:type="members:Field" name="closeLock">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="open">
+      <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:Constructor" name="AbstractInterruptibleChannel">
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Initializes a new instance of this class.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Closes this channel.&#xA;     *&#xA;     * &lt;p> If the channel has already been closed then this method returns&#xA;     * immediately.  Otherwise it marks the channel as closed and then invokes&#xA;     * the {@link #implCloseChannel implCloseChannel} method in order to&#xA;     * complete the close operation.  &lt;/p>&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Return"/>
+          <condition xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="literals:BooleanLiteral"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="implCloseChannel">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Closes this channel.&#xA;     *&#xA;     * &lt;p> This method is invoked by the {@link #close close} method in order&#xA;     * to perform the actual work of closing the channel.  This method is only&#xA;     * invoked if the channel has not yet been closed, and it is never invoked&#xA;     * more than once.&#xA;     *&#xA;     * &lt;p> An implementation of this method must arrange for any other thread&#xA;     * that is blocked in an I/O operation upon this channel to return&#xA;     * immediately, either by throwing an exception or by returning normally.&#xA;     * &lt;/p>&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs while closing the channel&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isOpen">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="interruptor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../sun/nio/ch/Interruptible.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// -- Interruption machinery --</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="interrupted">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="begin">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Marks the beginning of an I/O operation that might block indefinitely.&#xA;     *&#xA;     * &lt;p> This method should be invoked in tandem with the {@link #end end}&#xA;     * method, using a &lt;tt>try&lt;/tt>&amp;nbsp;...&amp;nbsp;&lt;tt>finally&lt;/tt> block as&#xA;     * shown &lt;a href=&quot;#be&quot;>above&lt;/a>, in order to implement asynchronous&#xA;     * closing and interruption for this channel.  &lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="../../../../sun/nio/ch/Interruptible.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <anonymousClass>
+                  <members xsi:type="members:ClassMethod" name="interrupt">
+                    <typeReference xsi:type="types:Void"/>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:SynchronizedBlock">
+                      <statements xsi:type="statements:Condition">
+                        <statement xsi:type="statements:Return"/>
+                        <condition xsi:type="expressions:UnaryExpression">
+                          <operators xsi:type="operators:Negate"/>
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                        </condition>
+                      </statements>
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="literals:BooleanLiteral" value="true"/>
+                        </expression>
+                      </statements>
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="literals:BooleanLiteral"/>
+                        </expression>
+                      </statements>
+                      <statements xsi:type="statements:TryBlock">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                            <next xsi:type="references:SelfReference">
+                              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.4"/>
+                              <self xsi:type="literals:This"/>
+                            </next>
+                          </expression>
+                        </statements>
+                        <catcheBlocks>
+                          <parameter name="x">
+                            <typeReference xsi:type="types:NamespaceClassifierReference">
+                              <classifierReferences>
+                                <target xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+                              </classifierReferences>
+                            </typeReference>
+                          </parameter>
+                        </catcheBlocks>
+                      </statements>
+                      <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                    </statements>
+                  </members>
+                </anonymousClass>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../sun/nio/ch/Interruptible.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../lang/Thread.class.xmi#//@classifiers.0/@members.54"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../lang/Thread.class.xmi#//@classifiers.0"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="end">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="completed">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AsynchronousCloseException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Marks the end of an I/O operation that might block indefinitely.&#xA;     *&#xA;     * &lt;p> This method should be invoked in tandem with the {@link #begin&#xA;     * begin} method, using a &lt;tt>try&lt;/tt>&amp;nbsp;...&amp;nbsp;&lt;tt>finally&lt;/tt> block&#xA;     * as shown &lt;a href=&quot;#be&quot;>above&lt;/a>, in order to implement asynchronous&#xA;     * closing and interruption for this channel.  &lt;/p>&#xA;     *&#xA;     * @param  completed&#xA;     *         &lt;tt>true&lt;/tt> if, and only if, the I/O operation completed&#xA;     *         successfully, that is, had some effect that would be visible to&#xA;     *         the operation's invoker&#xA;     *&#xA;     * @throws  AsynchronousCloseException&#xA;     *          If the channel was asynchronously closed&#xA;     *&#xA;     * @throws  ClosedByInterruptException&#xA;     *          If the thread blocked in the I/O operation was interrupted&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../ClosedByInterruptException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../AsynchronousCloseException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="blockedOn">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="intr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../sun/nio/ch/Interruptible.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>// -- sun.misc.SharedSecrets --</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <comments>// package-private</comments>
+          <next xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../sun/misc/JavaLangAccess.class.xmi#//@classifiers.0/@members.3"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../lang/Thread.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+                </next>
+                <target xsi:type="members:ClassMethod" href="../../../../sun/misc/SharedSecrets.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../sun/misc/SharedSecrets.class.xmi#//@classifiers.0"/>
+            </next>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Base implementation class for interruptible channels.&#xA; *&#xA; * &lt;p> This class encapsulates the low-level machinery required to implement&#xA; * the asynchronous closing and interruption of channels.  A concrete channel&#xA; * class must invoke the {@link #begin begin} and {@link #end end} methods&#xA; * before and after, respectively, invoking an I/O operation that might block&#xA; * indefinitely.  In order to ensure that the {@link #end end} method is always&#xA; * invoked, these methods should be used within a&#xA; * &lt;tt>try&lt;/tt>&amp;nbsp;...&amp;nbsp;&lt;tt>finally&lt;/tt> block: &lt;a name=&quot;be&quot;>&#xA; *&#xA; * &lt;blockquote>&lt;pre>&#xA; * boolean completed = false;&#xA; * try {&#xA; *     begin();&#xA; *     completed = ...;    // Perform blocking I/O operation&#xA; *     return ...;         // Return result&#xA; * } finally {&#xA; *     end(completed);&#xA; * }&lt;/pre>&lt;/blockquote>&#xA; *&#xA; * &lt;p> The &lt;tt>completed&lt;/tt> argument to the {@link #end end} method tells&#xA; * whether or not the I/O operation actually completed, that is, whether it had&#xA; * any effect that would be visible to the invoker.  In the case of an&#xA; * operation that reads bytes, for example, this argument should be&#xA; * &lt;tt>true&lt;/tt> if, and only if, some bytes were actually transferred into the&#xA; * invoker's target buffer.&#xA; *&#xA; * &lt;p> A concrete channel class must also implement the {@link&#xA; * #implCloseChannel implCloseChannel} method in such a way that if it is&#xA; * invoked while another thread is blocked in a native I/O operation upon the&#xA; * channel then that operation will immediately return, either by throwing an&#xA; * exception or by returning normally.  If a thread is interrupted or the&#xA; * channel upon which it is blocked is asynchronously closed then the channel's&#xA; * {@link #end end} method will throw the appropriate exception.&#xA; *&#xA; * &lt;p> This class performs the synchronization required to implement the {@link&#xA; * java.nio.channels.Channel} specification.  Implementations of the {@link&#xA; * #implCloseChannel implCloseChannel} method need not synchronize against&#xA; * other threads that might be attempting to close the channel.  &lt;/p>&#xA; *&#xA; *&#xA; * @author Mark Reinhold&#xA; * @author JSR-51 Expert Group&#xA; * @version 1.16, 06/03/22&#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../Channel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../InterruptibleChannel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

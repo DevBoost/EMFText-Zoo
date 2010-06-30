@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../../../java.ecore#/17" name="SourceTreeManager.java">
+  <comments>/*&#xA; * Copyright 1999-2004 The Apache Software Foundation.&#xA; *&#xA; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA; * you may not use this file except in compliance with the License.&#xA; * You may obtain a copy of the License at&#xA; *&#xA; *     http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <comments>/*&#xA; * $Id: SourceTreeManager.java,v 1.34 2004/02/17 04:30:02 minchau Exp $&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>xpath</namespaces>
+  <namespaces>internal</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/URIResolver.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/sax/SAXSource.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <namespaces>stream</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/stream/StreamSource.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>dtm</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>utils</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../xml/internal/utils/SystemIDResolver.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/xml/sax/XMLReader.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <namespaces>helpers</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/xml/sax/helpers/XMLReaderFactory.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SourceTreeManager">
+    <members xsi:type="members:Field" name="m_sourceTree">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Vector of SourceTree objects that this manager manages. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Reset the list of SourceTree objects that this manager manages.&#xA;   *&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="m_uriResolver">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/** The TrAX URI resolver used to obtain source trees. */</comments>
+          <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/URIResolver.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setURIResolver">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resolver">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/URIResolver.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Set an object that will be used to resolve URIs used in&#xA;   * document(), etc.&#xA;   * @param resolver An object that implements the URIResolver interface,&#xA;   * or null.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getURIResolver">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/URIResolver.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get the object that will be used to resolve URIs used in&#xA;   * document(), etc.&#xA;   * @return An object that implements the URIResolver interface,&#xA;   * or null.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="findURIFromDoc">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="owner">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Given a document, find the URL associated with that document.&#xA;   * @param owner Document that was previously processed by this liaison.&#xA;   *&#xA;   * @return The base URI of the owner argument.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="n">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.14"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="sTree">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.22"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@init"/>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Return">
+              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@statement/@statements.0/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="SourceTree.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </returnValue>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@statement/@statements.0/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="SourceTree.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="resolveURI">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="base">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="urlString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * This will be called by the processor when it encounters&#xA;   * an xsl:include, xsl:import, or document() function.&#xA;   *&#xA;   * @param base The base URI that should be used.&#xA;   * @param urlString Value from an xsl:import or xsl:include's href attribute,&#xA;   * or a URI specified in the document() function.&#xA;   * &#xA;   * @return a Source that can be used to process the resource.&#xA;   *&#xA;   * @throws IOException&#xA;   * @throws TransformerException&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="source">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/xml/transform/URIResolver.class.xmi#//@classifiers.0/@members.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="uri">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../xml/internal/utils/SystemIDResolver.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../xml/internal/utils/SystemIDResolver.class.xmi#//@classifiers.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/stream/StreamSource.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statement/@statements.0/@variable"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeDocumentFromCache">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** JJK: Support  &lt;?xalan:doc_cache_off?> kluge in ElemForEach.&#xA;   * TODO: This function is highly dangerous. Cache management must be improved.&#xA;   *&#xA;   * @param n The node to remove.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return"/>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="st">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.22"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.26"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+                  </next>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Return"/>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@statement/@statements.0/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@statement/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SourceTree.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </initialValue>
+        </init>
+        <updates xsi:type="expressions:PrefixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+          <operator xsi:type="operators:MinusMinus"/>
+        </updates>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="putDocumentInCache">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Put the source tree root node in the document cache.&#xA;   * TODO: This function needs to be a LOT more sophisticated.&#xA;   *&#xA;   * @param n The node to cache.&#xA;   * @param source The Source object to cache.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cachedNode">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../java/lang/RuntimeException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Programmer's Error!  "/>
+                  <children xsi:type="references:StringReference" value="putDocumentInCache found reparse of doc: "/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </throwable>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                </expression>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.28"/>
+                <arguments xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </arguments>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+          </children>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getNode">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Given a Source object, find the node associated with it.&#xA;   *&#xA;   * @param source The Source object to act as the key.&#xA;   *&#xA;   * @return The node that is associated with the Source, or null if not found.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="url">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//    if (source instanceof DOMSource)</comments>
+              <comments>//      return ((DOMSource) source).getNode();</comments>
+              <comments>// TODO: Not sure if the BaseID is really the same thing as the ID.</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="n">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.14"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>// System.out.println(&quot;getNode: &quot;+n);</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="sTree">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SourceTree.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../java/util/Vector.class.xmi#//@classifiers.0/@members.22"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@init"/>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>// System.out.println(&quot;getNode -         url: &quot;+url);</comments>
+            <comments>// System.out.println(&quot;getNode - sTree.m_url: &quot;+sTree.m_url);</comments>
+            <statement xsi:type="statements:Return">
+              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@statement/@statements.0/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="SourceTree.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </returnValue>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@statement/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SourceTree.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </arguments>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>// System.out.println(&quot;getNode - returning: &quot;+node);</comments>
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+          <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSourceTree">
+      <comments>/* catch (TransformerException te)&#xA;     {&#xA;       throw new TransformerException(te.getMessage(), locator, te);&#xA;     }*/</comments>
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="base">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="urlString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="xctxt">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="XPathContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get the source tree from the a base URL and a URL string.&#xA;   *&#xA;   * @param base The base URI to use if the urlString is relative.&#xA;   * @param urlString An absolute or relative URL string.&#xA;   * @param locator The location of the caller, for diagnostic purposes.&#xA;   *&#xA;   * @return should be a non-null reference to the node identified by the &#xA;   * base and urlString.&#xA;   *&#xA;   * @throws TransformerException If the URL can not resolve to a node.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:TryBlock">
+        <comments>// System.out.println(&quot;getSourceTree&quot;);</comments>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="source">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+              </next>
+              <self xsi:type="literals:This"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <comments>// System.out.println(&quot;getSourceTree - base: &quot;+base+&quot;, urlString: &quot;+urlString+&quot;, source: &quot;+source.getSystemId());</comments>
+          <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@statements.0/@variable"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.3"/>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@catcheBlocks.0/@parameter">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@catcheBlocks.0/@parameter"/>
+            </throwable>
+          </statements>
+          <parameter name="ioe">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSourceTree">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="xctxt">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="XPathContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get the source tree from the input source.&#xA;   *&#xA;   * @param source The Source object that should identify the desired node.&#xA;   * @param locator The location of the caller, for diagnostic purposes.&#xA;   *&#xA;   * @return non-null reference to a node.&#xA;   *&#xA;   * @throws TransformerException if the Source argument can't be resolved to &#xA;   *         a node.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="n">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="parseToNode">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="xctxt">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="XPathContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Try to create a DOM source tree from the input source.&#xA;   *&#xA;   * @param source The Source object that identifies the source node.&#xA;   * @param locator The location of the caller, for diagnostic purposes.&#xA;   *&#xA;   * @return non-null reference to node identified by the source argument.&#xA;   *&#xA;   * @throws TransformerException if the source argument can not be resolved &#xA;   *         to a source node.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="xowner">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="XPathContext.class.xmi#//@classifiers.0/@members.43"/>
+              </next>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="dtm">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.1/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="XPathContext.class.xmi#//@classifiers.0/@members.25"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+                    <arguments xsi:type="literals:BooleanLiteral"/>
+                    <arguments xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <namespaces>com</namespaces>
+                        <namespaces>sun</namespaces>
+                        <namespaces>org</namespaces>
+                        <namespaces>apache</namespaces>
+                        <namespaces>xml</namespaces>
+                        <namespaces>internal</namespaces>
+                        <namespaces>dtm</namespaces>
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTMWSFilter.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.0/@variable"/>
+                    </arguments>
+                    <arguments xsi:type="literals:BooleanLiteral"/>
+                    <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:ConditionalAndExpression">
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="literals:NullLiteral"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.0/@variable"/>
+            </children>
+            <children xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>com</namespaces>
+                <namespaces>sun</namespaces>
+                <namespaces>org</namespaces>
+                <namespaces>apache</namespaces>
+                <namespaces>xml</namespaces>
+                <namespaces>internal</namespaces>
+                <namespaces>dtm</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="../../xml/internal/dtm/DTMWSFilter.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.0/@variable"/>
+            </children>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.1/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="XPathContext.class.xmi#//@classifiers.0/@members.25"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+                    <arguments xsi:type="literals:BooleanLiteral"/>
+                    <arguments xsi:type="literals:NullLiteral"/>
+                    <arguments xsi:type="literals:BooleanLiteral"/>
+                    <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../xml/internal/dtm/DTM.class.xmi#//@classifiers.0/@members.32"/>
+            </next>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <comments>//e.printStackTrace();</comments>
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@catcheBlocks.0/@parameter">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@catcheBlocks.0/@parameter"/>
+            </throwable>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Exception.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getXMLReader">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/xml/sax/XMLReader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="inputSource">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/Source.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * This method returns the SAX2 parser to use with the InputSource&#xA;   * obtained from this URI.&#xA;   * It may return null if any SAX2-conformant XML parser can be used,&#xA;   * or if getInputSource() will also return null. The parser must&#xA;   * be free for use (i.e.&#xA;   * not currently in use for another parse().&#xA;   *&#xA;   * @param inputSource The value returned from the URIResolver.&#xA;   * @returns a SAX2 XMLReader to use to resolve the inputSource argument.&#xA;   * @param locator The location of the original caller, for diagnostic purposes.&#xA;   *&#xA;   * @return non-null XMLReader reference ready to parse.&#xA;   *&#xA;   * @throws TransformerException if the reader can not be created.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="reader">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../../../../../../org/xml/sax/XMLReader.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="expressions:ConditionalExpression">
+              <child xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:InstanceOfExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/sax/SAXSource.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+                </expression>
+              </child>
+              <expressionIf xsi:type="expressions:NestedExpression">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/xml/transform/sax/SAXSource.class.xmi#//@classifiers.0/@members.7"/>
+                </next>
+                <expression xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/sax/SAXSource.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+                </expression>
+              </expressionIf>
+              <expressionElse xsi:type="literals:NullLiteral"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:TryBlock">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="factory">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <namespaces>javax</namespaces>
+                    <namespaces>xml</namespaces>
+                    <namespaces>parsers</namespaces>
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/parsers/SAXParserFactory.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../../../javax/xml/parsers/SAXParserFactory.class.xmi#//@classifiers.0/@members.4"/>
+                          </next>
+                          <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/parsers/SAXParserFactory.class.xmi#//@classifiers.0"/>
+                        </next>
+                      </next>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.1/@statement/@statements.0/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../javax/xml/parsers/SAXParserFactory.class.xmi#//@classifiers.0/@members.6"/>
+                    <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                  </next>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="jaxpParser">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <namespaces>javax</namespaces>
+                    <namespaces>xml</namespaces>
+                    <namespaces>parsers</namespaces>
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/parsers/SAXParser.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.1/@statement/@statements.0/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/xml/parsers/SAXParserFactory.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.1/@statement/@statements.0/@statements.2/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/xml/parsers/SAXParser.class.xmi#//@classifiers.0/@members.13"/>
+                    </next>
+                  </value>
+                </expression>
+              </statements>
+              <catcheBlocks>
+                <statements xsi:type="statements:Throw">
+                  <throwable xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <namespaces>org</namespaces>
+                      <namespaces>xml</namespaces>
+                      <namespaces>sax</namespaces>
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.1/@statement/@statements.0/@catcheBlocks.0/@parameter"/>
+                  </throwable>
+                </statements>
+                <parameter name="ex">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <namespaces>javax</namespaces>
+                    <namespaces>xml</namespaces>
+                    <namespaces>parsers</namespaces>
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/parsers/ParserConfigurationException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+              <catcheBlocks>
+                <statements xsi:type="statements:Throw">
+                  <throwable xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <namespaces>org</namespaces>
+                      <namespaces>xml</namespaces>
+                      <namespaces>sax</namespaces>
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.1/@statement/@statements.0/@catcheBlocks.1/@parameter">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.13"/>
+                      </next>
+                    </arguments>
+                  </throwable>
+                </statements>
+                <parameter name="ex1">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <namespaces>javax</namespaces>
+                    <namespaces>xml</namespaces>
+                    <namespaces>parsers</namespaces>
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/parsers/FactoryConfigurationError.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+              <catcheBlocks>
+                <parameter name="ex2">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../java/lang/NoSuchMethodError.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+              <catcheBlocks>
+                <parameter name="ame">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../java/lang/AbstractMethodError.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../org/xml/sax/helpers/XMLReaderFactory.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../org/xml/sax/helpers/XMLReaderFactory.class.xmi#//@classifiers.0"/>
+                  </value>
+                </expression>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="literals:NullLiteral"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.0/@variable"/>
+              </condition>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="literals:NullLiteral"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.0/@variable"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:TryBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/xml/sax/XMLReader.class.xmi#//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:StringReference" value="http://xml.org/sax/features/namespace-prefixes"/>
+                <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+              </next>
+            </expression>
+          </statements>
+          <catcheBlocks>
+            <comments>// What can we do?</comments>
+            <comments>// TODO: User diagnostics.</comments>
+            <parameter name="se">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>org</namespaces>
+                <namespaces>xml</namespaces>
+                <namespaces>sax</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </parameter>
+          </catcheBlocks>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.0/@variable"/>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@catcheBlocks.0/@parameter">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@catcheBlocks.0/@parameter"/>
+            </throwable>
+          </statements>
+          <parameter name="se">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>org</namespaces>
+              <namespaces>xml</namespaces>
+              <namespaces>sax</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This class bottlenecks all management of source trees.  The methods&#xA; * in this class should allow easy garbage collection of source&#xA; * trees (not yet!), and should centralize parsing for those source trees.&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

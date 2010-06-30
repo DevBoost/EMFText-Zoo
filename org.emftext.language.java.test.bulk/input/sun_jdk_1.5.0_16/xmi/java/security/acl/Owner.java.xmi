@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Owner.java">
+  <comments>/*&#xA; * @(#)Owner.java&#x9;1.16 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>security</namespaces>
+  <namespaces>acl</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Principal.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Owner">
+    <members xsi:type="members:InterfaceMethod" name="addOwner">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="caller">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Principal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="owner">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Principal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotOwnerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds an owner. Only owners can modify ACL contents. The caller &#xA;     * principal must be an owner of the ACL in order to invoke this method.&#xA;     * That is, only an owner can add another owner. The initial owner is &#xA;     * configured at ACL construction time. &#xA;     * &#xA;     * @param caller the principal invoking this method. It must be an owner &#xA;     * of the ACL.&#xA;     * &#xA;     * @param owner the owner that should be added to the list of owners.&#xA;     * &#xA;     * @return true if successful, false if owner is already an owner.&#xA;     * @exception NotOwnerException if the caller principal is not an owner &#xA;     * of the ACL.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="deleteOwner">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="caller">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Principal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="owner">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Principal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotOwnerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="LastOwnerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Deletes an owner. If this is the last owner in the ACL, an exception is &#xA;     * raised.&lt;p>&#xA;     * &#xA;     * The caller principal must be an owner of the ACL in order to invoke &#xA;     * this method. &#xA;     * &#xA;     * @param caller the principal invoking this method. It must be an owner &#xA;     * of the ACL.&#xA;     * &#xA;     * @param owner the owner to be removed from the list of owners.&#xA;     * &#xA;     * @return true if the owner is removed, false if the owner is not part &#xA;     * of the list of owners.&#xA;     * &#xA;     * @exception NotOwnerException if the caller principal is not an owner &#xA;     * of the ACL.&#xA;     * &#xA;     * @exception LastOwnerException if there is only one owner left, so that&#xA;     * deleteOwner would leave the ACL owner-less.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isOwner">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="owner">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Principal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns true if the given principal is an owner of the ACL.&#xA;     * &#xA;     * @param owner the principal to be checked to determine whether or not &#xA;     * it is an owner.&#xA;     * &#xA;     * @return true if the passed principal is in the list of owners, false &#xA;     * if not.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Interface for managing owners of Access Control Lists (ACLs) or ACL &#xA; * configurations. (Note that the Acl interface in the &#xA; * &lt;code> java.security.acl &lt;/code> package extends this Owner&#xA; * interface.) The initial owner Principal should be specified as an &#xA; * argument to the constructor of the class implementing this interface.   &#xA; *   &#xA; * @see java.security.acl.Acl    &#xA; *&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

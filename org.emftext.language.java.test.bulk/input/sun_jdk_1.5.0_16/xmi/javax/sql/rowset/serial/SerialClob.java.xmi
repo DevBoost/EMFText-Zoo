@@ -1,0 +1,1449 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../java.ecore#/17" name="SerialClob.java">
+  <comments>/*&#xA; * @(#)SerialClob.java&#x9;1.11 04/08/10&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sql</namespaces>
+  <namespaces>rowset</namespaces>
+  <namespaces>serial</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>sql</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SerialClob">
+    <members xsi:type="members:Field" name="buf">
+      <typeReference xsi:type="types:Char"/>
+      <arrayDimensionsAfter/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * A serialized array of characters containing the data of the SQL&#xA;     * &lt;code>CLOB&lt;/code> value that this &lt;code>SerialClob&lt;/code> object&#xA;     * represents.&#xA;     *&#xA;     * @serial&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="clob">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Internal Clob representation if SerialClob is intialized with a&#xA;     * Clob&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="len">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The length in characters of this &lt;code>SerialClob&lt;/code> object's&#xA;     * internal array of characters.&#xA;     *&#xA;     * @serial&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="origLen">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The original length in characters of tgus &lt;code>SerialClob&lt;/code> &#xA;     * objects internal array of characters.&#xA;     * &#xA;     * @serial&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="SerialClob">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <comments>// %%% JMB. Agreed. Add code here to throw a SQLException if no </comments>
+            <comments>// support is available for locatorsUpdateCopy=false</comments>
+            <comments>// Serializing locators is not supported.</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0">
+            <next xsi:type="references:IdentifierReference"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Char"/>
+            <sizes xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:Int"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            </sizes>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.2/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.2/@init"/>
+                </arraySelectors>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.2/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.2/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ch">
+        <typeReference xsi:type="types:Char"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs a &lt;code>SerialClob&lt;/code> object that is a serialized version of&#xA;     * the given &lt;code>char&lt;/code> array.&#xA;     * &lt;p>&#xA;     * The new &lt;code>SerialClob&lt;/code> object is initialized with the data from the&#xA;     * &lt;code>char&lt;/code> array, thus allowing disconnected &lt;code>RowSet&lt;/code>&#xA;     * objects to establish a serialized &lt;code>Clob&lt;/code> object without touching&#xA;     * the data source.&#xA;     *&#xA;     * @param ch the char array representing the &lt;code>Clob&lt;/code> object to be&#xA;     *         serialized&#xA;     * @throws SerialException if an error occurs during serialization&#xA;     * @throws SQLException if a SQL error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="SerialClob">
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Cannot instantiate a SerialClob "/>
+                <children xsi:type="references:StringReference" value="object with a null Clob object"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Char"/>
+            <sizes xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:Int"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            </sizes>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="read">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="offset">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="reader">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../java/io/BufferedReader.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Invalid Clob object. Calls to getCharacterStream "/>
+                <children xsi:type="references:StringReference" value="or getAsciiStream return null which cannot be serialized."/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </children>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+            </children>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.6/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../java/io/BufferedReader.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.2"/>
+                </next>
+              </arguments>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:DoWhileLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.6/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../java/io/BufferedReader.class.xmi#//@classifiers.0/@members.18"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.5/@variable"/>
+                    <arguments xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:Int"/>
+                      <child xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.5/@variable"/>
+                          <additiveOperators xsi:type="operators:Subtraction"/>
+                        </expression>
+                      </child>
+                    </arguments>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.5/@variable"/>
+                <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable"/>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </condition>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="SerialClob: "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.8/@catcheBlocks.0/@parameter">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+                  </next>
+                </children>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+          <parameter name="ex">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>java</namespaces>
+              <namespaces>io</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clob">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs a &lt;code>SerialClob&lt;/code> object that is a serialized&#xA;     * version of the given &lt;code>Clob&lt;/code> object.&#xA;     * &lt;P>&#xA;     * The new &lt;code>SerialClob&lt;/code> object is initialized with the&#xA;     * data from the &lt;code>Clob&lt;/code> object; therefore, the&#xA;     * &lt;code>Clob&lt;/code> object should have previously brought the&#xA;     * SQL &lt;code>CLOB&lt;/code> value's data over to the client from&#xA;     * the database. Otherwise, the new &lt;code>SerialClob&lt;/code> object&#xA;     * object will contain no data.&#xA;     * &lt;p>&#xA;     * Note: The &lt;code>Clob&lt;/code> object supplied to this constructor cannot&#xA;     * return &lt;code>null&lt;/code> for the &lt;code>Clob.getCharacterStream()&lt;/code> &#xA;     * and &lt;code>Clob.getAsciiStream&lt;/code> methods. This &lt;code>SerialClob&lt;/code> &#xA;     * constructor cannot  serialize a &lt;code>Clob&lt;/code> object in this instance&#xA;     * and will throw an &lt;code>SQLException&lt;/code> object.&#xA;     *&#xA;     * @param  clob the &lt;code>Clob&lt;/code> object from which this&#xA;     *     &lt;code>SerialClob&lt;/code> object is to be constructed; cannot be null&#xA;     * @throws SerialException if an error occurs during serialization&#xA;     * @throws SQLException if a SQL error occurs in capturing the CLOB;&#xA;     *     if the &lt;code>Clob&lt;/code> object is a null; or if at least one of the &#xA;     *     &lt;code>Clob.getCharacterStream()&lt;/code> and &lt;code>Clob.getAsciiStream()&lt;/code>&#xA;     *     methods on the &lt;code>Clob&lt;/code> return a null&#xA;     * @see java.sql.Clob&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="length">
+      <typeReference xsi:type="types:Long"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Retrieves the number of characters in this &lt;code>SerialClob&lt;/code>&#xA;     * object's array of characters. &#xA;     *&#xA;     * @return a &lt;code>long&lt;/code> indicating the length in characters of this&#xA;     *         &lt;code>SerialClob&lt;/code> object's array of character&#xA;     * @throws SerialException if an error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCharacterStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>java</namespaces>
+        <namespaces>io</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns this &lt;code>SerialClob&lt;/code> object's data as a stream&#xA;     * of Unicode characters. Unlike the related method, &lt;code>getAsciiStream&lt;/code>,&#xA;     * a stream is produced regardless of whether the &lt;code>SerialClob&lt;/code> object&#xA;     * was created with a &lt;code>Clob&lt;/code> object or a &lt;code>char&lt;/code> array.&#xA;     *&#xA;     * @return a &lt;code>java.io.Reader&lt;/code> object containing this&#xA;     *         &lt;code>SerialClob&lt;/code> object's data&#xA;     * @throws SerialException if an error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:CastExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <namespaces>java</namespaces>
+            <namespaces>io</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/io/CharArrayReader.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAsciiStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>java</namespaces>
+        <namespaces>io</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Retrieves the &lt;code>CLOB&lt;/code> value designated by this &lt;code>SerialClob&lt;/code>&#xA;     * object as an ascii stream. This method forwards the &lt;code>getAsciiStream&lt;/code>&#xA;     * call to the underlying &lt;code>Clob&lt;/code> object in the event that this &#xA;     * &lt;code>SerialClob&lt;/code> object is instantiated with a &lt;code>Clob&lt;/code>&#xA;     * object. If this &lt;code>SerialClob&lt;/code> object is instantiated with&#xA;     * a &lt;code>char&lt;/code> array, a &lt;code>SerialException&lt;/code> object is thrown.&#xA;     *&#xA;     * @return a &lt;code>java.io.InputStream&lt;/code> object containing&#xA;     *     this &lt;code>SerialClob&lt;/code> object's data&#xA;     * @throws SerialException if this &lt;code>SerialClob&lt;code> object was not instantiated&#xA;     *     with a &lt;code>Clob&lt;/code> object&#xA;     * @throws SQLException if there is an error accessing the &#xA;     *     &lt;code>CLOB&lt;/code> value represented by the &lt;code>Clob&lt;/code> object that was&#xA;     *     used to create this &lt;code>SerialClob&lt;/code> object&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.3"/>
+                </next>
+              </next>
+              <self xsi:type="literals:This"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Unsupported operation. SerialClob cannot "/>
+                <children xsi:type="references:StringReference" value="return a the CLOB value as an ascii stream, unless instantiated "/>
+                <children xsi:type="references:StringReference" value="with a fully implemented Clob object."/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSubString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a copy of the substring contained in this&#xA;     * &lt;code>SerialClob&lt;/code> object, starting at the given position&#xA;     * and continuing for the specified number or characters.&#xA;     *&#xA;     * @param pos the position of the first character in the substring&#xA;     *            to be copied; the first character of the&#xA;     *            &lt;code>SerialClob&lt;/code> object is at position&#xA;     *            &lt;code>1&lt;/code>; must not be less than &lt;code>1&lt;/code>,&#xA;     *            and the sum of the starting position and the length&#xA;     *            of the substring must be less than the length of this&#xA;     *            &lt;code>SerialClob&lt;/code> object&#xA;     * @param length the number of characters in the substring to be&#xA;     *               returned; must not be greater than the length of&#xA;     *               this &lt;code>SerialClob&lt;/code> object, and the&#xA;     *               sum of the starting position and the length&#xA;     *               of the substring must be less than the length of this&#xA;     *               &lt;code>SerialClob&lt;/code> object&#xA;     * @return a &lt;code>String&lt;/code> object containing a substring of&#xA;     *         this &lt;code>SerialClob&lt;/code> object beginning at the&#xA;     *         given position and containing the specified number of&#xA;     *         consecutive characters&#xA;     * @throws SerialException if either of the arguments is out of bounds       &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid position in BLOB object set"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+            <children xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.6"/>
+              <self xsi:type="literals:This"/>
+            </children>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid position and substring length"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </expression>
+            </children>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </children>
+          <children xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.6"/>
+            <self xsi:type="literals:This"/>
+          </children>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Int"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+              </children>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              <additiveOperators xsi:type="operators:Subtraction"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="StringIndexOutOfBoundsException: "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@catcheBlocks.0/@parameter">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+                  </next>
+                </children>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/StringIndexOutOfBoundsException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="position">
+      <comments>// not found            </comments>
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="searchStr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the position in this &lt;code>SerialClob&lt;/code> object&#xA;     * where the given &lt;code>String&lt;/code> object begins, starting&#xA;     * the search at the specified position. This method returns&#xA;     * &lt;code>-1&lt;/code> if the pattern is not found.&#xA;     *&#xA;     * @param searchStr the &lt;code>String&lt;/code> object for which to&#xA;     *                  search&#xA;     * @param start the position in this &lt;code>SerialClob&lt;/code> object&#xA;     *         at which to start the search; the first position is&#xA;     *         &lt;code>1&lt;/code>; must not be less than &lt;code>1&lt;/code> nor&#xA;     *         greater than the length of this &lt;code>SerialClob&lt;/code> object     &#xA;     * @return the position at which the given &lt;code>String&lt;/code> object&#xA;     *         begins, starting the search at the specified position;&#xA;     *         &lt;code>-1&lt;/code> if the given &lt;code>String&lt;/code> object is&#xA;     *         not found or the starting position is out of bounds; position&#xA;     *         numbering for the return value starts at &lt;code>1&lt;/code>&#x9;&#xA;     * @throws SerialException if an error occurs locating the String signature&#xA;     * @throws SQLException if there is an error accessing the Blob value &#x9;&#xA;     *         from the database.          &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Subtraction"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="pattern">
+          <typeReference xsi:type="types:Char"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.73"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="pos">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:Int"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="patlen">
+          <typeReference xsi:type="types:Long"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+            <next xsi:type="references:IdentifierReference"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <comments>// increment pos, and i</comments>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:Return">
+                    <returnValue xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                        </expression>
+                      </children>
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.4/@variable"/>
+                          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                          <additiveOperators xsi:type="operators:Subtraction"/>
+                        </expression>
+                      </children>
+                      <additiveOperators xsi:type="operators:Subtraction"/>
+                    </returnValue>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.4/@variable"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                </arraySelectors>
+              </children>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                </arraySelectors>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <comments>// increment pos only</comments>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                  </arraySelectors>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                  </arraySelectors>
+                </children>
+              </condition>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Subtraction"/>
+          <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="position">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="searchStr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the position in this &lt;code>SerialClob&lt;/code> object&#xA;     * where the given &lt;code>Clob&lt;/code> signature begins, starting&#xA;     * the search at the specified position. This method returns&#xA;     * &lt;code>-1&lt;/code> if the pattern is not found.&#xA;     *&#xA;     * @param searchStr the &lt;code>Clob&lt;/code> object for which to search&#xA;     * @param start the position in this &lt;code>SerialClob&lt;/code> object&#xA;     *        at which to begin the search; the first position is&#xA;     *         &lt;code>1&lt;/code>; must not be less than &lt;code>1&lt;/code> nor&#xA;     *         greater than the length of this &lt;code>SerialClob&lt;/code> object &#xA;     * @return the position at which the given &lt;code>Clob&lt;/code> &#xA;     *         object begins in this &lt;code>SerialClob&lt;/code> object,&#xA;     *         at or after the specified starting position&#xA;     * @throws SerialException if an error occurs locating the Clob signature&#xA;     * @throws SQLException if there is an error accessing the Blob value &#x9;&#xA;     *         from the database        &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cPattern">
+          <typeReference xsi:type="types:Char"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="r">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>java</namespaces>
+              <namespaces>io</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="arrays:ArrayInstantiationBySize">
+              <typeReference xsi:type="types:Char"/>
+              <sizes xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Int"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </child>
+              </sizes>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/io/Reader.class.xmi#//@classifiers.0/@members.7"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+            </next>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Error streaming Clob search data"/>
+            </throwable>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setString">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="str">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes the given Java &lt;code>String&lt;/code> to the &lt;code>CLOB&lt;/code>&#xA;     * value that this &lt;code>SerialClob&lt;/code> object represents, at the position &#xA;     * &lt;code>pos&lt;/code>.&#xA;     *&#xA;     * @param pos the position at which to start writing to the &lt;code>CLOB&lt;/code>&#xA;     *         value that this &lt;code>SerialClob&lt;/code> object represents; the first &#xA;     *         position is &lt;code>1&lt;/code>; must not be less than &lt;code>1&lt;/code> nor&#xA;     *         greater than the length of this &lt;code>SerialClob&lt;/code> object &#xA;     * @param str the string to be written to the &lt;code>CLOB&lt;/code>&#xA;     *        value that this &lt;code>SerialClob&lt;/code> object represents&#xA;     * @return the number of characters written&#xA;     * @throws SerialException if there is an error accessing the &#xA;     *     &lt;code>CLOB&lt;/code> value; if an invalid position is set; if an &#xA;     *     invalid offset value is set; if number of bytes to be written&#xA;     *     is greater than the &lt;code>SerialClob&lt;/code> length; or the combined&#xA;     *     values of the length and offset is greater than the Clob buffer             &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </arguments>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setString">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="str">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes &lt;code>len&lt;/code> characters of &lt;code>str&lt;/code>, starting &#xA;     * at character &lt;code>offset&lt;/code>, to the &lt;code>CLOB&lt;/code> value&#xA;     * that this &lt;code>Clob&lt;/code> represents.&#xA;     *&#xA;     * @param pos the position at which to start writing to the &lt;code>CLOB&lt;/code>&#xA;     *         value that this &lt;code>SerialClob&lt;/code> object represents; the first &#xA;     *         position is &lt;code>1&lt;/code>; must not be less than &lt;code>1&lt;/code> nor&#xA;     *         greater than the length of this &lt;code>SerialClob&lt;/code> object&#xA;     * @param str the string to be written to the &lt;code>CLOB&lt;/code> &#xA;     *        value that this &lt;code>Clob&lt;/code> object represents&#xA;     * @param offset the offset into &lt;code>str&lt;/code> to start reading&#xA;     *        the characters to be written&#xA;     * @param length the number of characters to be written&#xA;     * @return the number of characters written&#xA;     * @throws SerialException if there is an error accessing the &#xA;     *     &lt;code>CLOB&lt;/code> value; if an invalid position is set; if an &#xA;     *     invalid offset value is set; if number of bytes to be written&#xA;     *     is greater than the &lt;code>SerialClob&lt;/code> length; or the combined&#xA;     *     values of the length and offset is greater than the Clob buffer     &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="temp">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.55"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cPattern">
+          <typeReference xsi:type="types:Char"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.73"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid offset in byte array set"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </children>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid position in BLOB object set"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <children xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.6"/>
+              <self xsi:type="literals:This"/>
+            </children>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Buffer is not sufficient to hold the value"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Long"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.3"/>
+            </child>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <comments>// need check to ensure length + offset !> bytes.length</comments>
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Invalid OffSet. Cannot have combined offset "/>
+                <children xsi:type="references:StringReference" value=" and length that is greater that the Blob buffer"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.3"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </expression>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+          </children>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <operator xsi:type="operators:MinusMinus"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <comments>//values in the array are at position one less</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:SelfReference">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <arraySelectors>
+                    <position xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:Int"/>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@variable"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </position>
+                  </arraySelectors>
+                </next>
+                <self xsi:type="literals:This"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable">
+                <arraySelectors>
+                  <position xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@variable"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </position>
+                </arraySelectors>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@variable"/>
+              <operator xsi:type="operators:PlusPlus"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.3"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@variable"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </expression>
+            </children>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                  </next>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </expression>
+            </children>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAsciiStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>java</namespaces>
+        <namespaces>io</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/io/OutputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Retrieves a stream to be used to write Ascii characters to the&#xA;     * &lt;code>CLOB&lt;/code> value that this &lt;code>SerialClob&lt;/code> object represents, &#xA;     * starting at position &lt;code>pos&lt;/code>. This method forwards the &#xA;     * &lt;code>setAsciiStream()&lt;/code> call to the underlying &lt;code>Clob&lt;/code> object in &#xA;     * the event that this &lt;code>SerialClob&lt;/code> object is instantiated with a &#xA;     * &lt;code>Clob&lt;/code> object. If this &lt;code>SerialClob&lt;/code> object is instantiated&#xA;     *  with a &lt;code>char&lt;/code> array, a &lt;code>SerialException&lt;/code> object is thrown.&#xA;     *&#xA;     * @param pos the position at which to start writing to the&#xA;     *        &lt;code>CLOB&lt;/code> object&#xA;     * @return the stream to which ASCII encoded characters can be written&#xA;     * @throws SerialException if SerialClob is not instantiated with a&#xA;     *     Clob object that supports &lt;code>setAsciiStream&lt;/code>&#xA;     * @throws SQLException if there is an error accessing the &#xA;     *     &lt;code>CLOB&lt;/code> value     &#xA;     * @see #getAsciiStream&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+                </next>
+              </next>
+              <self xsi:type="literals:This"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.8"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+              </next>
+            </next>
+            <self xsi:type="literals:This"/>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Unsupported operation. SerialClob cannot "/>
+                <children xsi:type="references:StringReference" value="return a writable ascii stream&#xA; unless instantiated with a Clob object "/>
+                <children xsi:type="references:StringReference" value="that has a setAsciiStream() implementation"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCharacterStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>java</namespaces>
+        <namespaces>io</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/io/Writer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Retrieves a stream to be used to write a stream of Unicode characters &#xA;     * to the &lt;code>CLOB&lt;/code> value that this &lt;code>SerialClob&lt;/code> object&#xA;     * represents, at position &lt;code>pos&lt;/code>. This method forwards the &#xA;     * &lt;code>setCharacterStream()&lt;/code> call to the underlying &lt;code>Clob&lt;/code> &#xA;     * object in the event that this &lt;code>SerialClob&lt;/code> object is instantiated with a &#xA;     * &lt;code>Clob&lt;/code> object. If this &lt;code>SerialClob&lt;/code> object is instantiated with&#xA;     * a &lt;code>char&lt;/code> array, a &lt;code>SerialException&lt;/code> is thrown.&#xA;     *&#xA;     * @param  pos the position at which to start writing to the&#xA;     *        &lt;code>CLOB&lt;/code> value&#xA;     *&#xA;     * @return a stream to which Unicode encoded characters can be written&#xA;     * @throws SerialException if the SerialClob is not instantiated with&#xA;     *     a Clob object that supports &lt;code>setCharacterStream&lt;/code>&#xA;     * @throws SQLException if there is an error accessing the &#xA;     *            &lt;code>CLOB&lt;/code> value&#xA;     * @see #getCharacterStream&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.9"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+                </next>
+              </next>
+              <self xsi:type="literals:This"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0/@members.9"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+              </next>
+            </next>
+            <self xsi:type="literals:This"/>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Unsupported operation. SerialClob cannot "/>
+                <children xsi:type="references:StringReference" value="return a writable character stream&#xA; unless instantiated with a Clob object "/>
+                <children xsi:type="references:StringReference" value="that has a setCharacterStream implementation"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="truncate">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Truncates the &lt;code>CLOB&lt;/code> value that this &lt;code>SerialClob&lt;/code> &#xA;     * object represents so that it has a length of &lt;code>len&lt;/code>&#xA;     * characters. &#xA;     * &lt;p>&#xA;     * Truncating a &lt;code>SerialClob&lt;/code> object to length 0 has the effect of &#xA;     * clearing its contents.&#xA;     *&#xA;     * @param length the length, in bytes, to which the &lt;code>CLOB&lt;/code>&#xA;     *        value should be truncated&#xA;     * @throws SQLException if there is an error accessing the &#xA;     *        &lt;code>CLOB&lt;/code> value&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SerialException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Length more than what can be truncated"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>// re-size the buffer </comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="arrays:ArrayInstantiationByValues">
+                    <typeReference xsi:type="types:Char"/>
+                    <arrayDimensionsBefore/>
+                    <arrayInitializer/>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:NestedExpression">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.73"/>
+                    </next>
+                    <expression xsi:type="references:SelfReference">
+                      <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                        <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                        <arguments xsi:type="expressions:CastExpression">
+                          <typeReference xsi:type="types:Int"/>
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                        </arguments>
+                      </next>
+                      <self xsi:type="literals:This"/>
+                    </expression>
+                  </value>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalLongLiteral" decimalValue="1662519690087375313"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;&#x9; * The identifier that assists in the serialization of this &lt;code>SerialClob&lt;/code>&#xA;     * object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A serialized mapping in the Java programming language of an SQL&#xA; * &lt;code>CLOB&lt;/code> value.&#xA; * &lt;P>&#xA; * The &lt;code>SerialClob&lt;/code> class provides a constructor for creating&#xA; * an instance from a &lt;code>Clob&lt;/code> object.  Note that the &lt;code>Clob&lt;/code>&#xA; * object should have brought the SQL &lt;code>CLOB&lt;/code> value's data over&#xA; * to the client before a &lt;code>SerialClob&lt;/code> object&#xA; * is constructed from it.  The data of an SQL &lt;code>CLOB&lt;/code> value can&#xA; * be materialized on the client as a stream of Unicode characters.&#xA; * &lt;P>&#xA; * &lt;code>SerialClob&lt;/code> methods make it possible to get a substring&#xA; * from a &lt;code>SerialClob&lt;/code> object or to locate the start of&#xA; * a pattern of characters.&#xA; *&#xA; * @author Jonathan Bruce&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../java/sql/Clob.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../java/lang/Cloneable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

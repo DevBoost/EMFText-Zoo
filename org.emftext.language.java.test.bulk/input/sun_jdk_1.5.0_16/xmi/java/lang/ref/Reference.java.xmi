@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../java.ecore#/17" name="Reference.java">
+  <comments>/*&#xA; * @(#)Reference.java&#x9;1.41 04/04/20&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>lang</namespaces>
+  <namespaces>ref</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>sun</namespaces>
+    <namespaces>misc</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../sun/misc/Cleaner.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Reference">
+    <typeParameters name="T"/>
+    <members xsi:type="members:Field" name="referent">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* A Reference instance is in one of four possible internal states:&#xA;     *&#xA;     *&#x9;   Active: Subject to special treatment by the garbage collector.  Some&#xA;     *&#x9;   time after the collector detects that the reachability of the&#xA;     *&#x9;   referent has changed to the appropriate state, it changes the&#xA;     *&#x9;   instance's state to either Pending or Inactive, depending upon&#xA;     *&#x9;   whether or not the instance was registered with a queue when it was&#xA;     *&#x9;   created.  In the former case it also adds the instance to the&#xA;     *&#x9;   pending-Reference list.  Newly-created instances are Active.&#xA;     *&#xA;     *&#x9;   Pending: An element of the pending-Reference list, waiting to be&#xA;     *&#x9;   enqueued by the Reference-handler thread.  Unregistered instances&#xA;     *&#x9;   are never in this state.&#xA;     *&#xA;     *&#x9;   Enqueued: An element of the queue with which the instance was&#xA;     *&#x9;   registered when it was created.  When an instance is removed from&#xA;     *&#x9;   its ReferenceQueue, it is made Inactive.  Unregistered instances are&#xA;     *&#x9;   never in this state.&#xA;     *&#xA;     *&#x9;   Inactive: Nothing more to do.  Once an instance becomes Inactive its&#xA;     *&#x9;   state will never change again.&#xA;     *&#xA;     * The state is encoded in the queue and next fields as follows:&#xA;     *&#xA;     *&#x9;   Active: queue = ReferenceQueue with which instance is registered, or&#xA;     *&#x9;   ReferenceQueue.NULL if it was not registered with a queue; next =&#xA;     *&#x9;   null.&#xA;     *&#xA;     *&#x9;   Pending: queue = ReferenceQueue with which instance is registered;&#xA;     *&#x9;   next = Following instance in queue, or this if at end of list.&#xA;     *&#xA;     *&#x9;   Enqueued: queue = ReferenceQueue.ENQUEUED; next = Following instance&#xA;     *&#x9;   in queue, or this if at end of list.&#xA;     *&#xA;     *&#x9;   Inactive: queue = ReferenceQueue.NULL; next = this.&#xA;     *&#xA;     * With this scheme the collector need only examine the next field in order&#xA;     * to determine whether a Reference instance requires special treatment: If&#xA;     * the next field is null then the instance is active; if it is non-null,&#xA;     * then the collector should treat the instance normally.&#xA;     * &#xA;     * To ensure that concurrent collector can discover active Reference &#xA;     * objects without interfering with application threads that may apply &#xA;     * the enqueue() method to those objects, collectors should link &#xA;     * discovered objects through the discovered field.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="queue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/* Treated specially by GC */</comments>
+          <typeArguments xsi:type="generics:SuperTypeArgument">
+            <superType xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </superType>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="ReferenceQueue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="next">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="discovered">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="classifiers:Class" name="Lock">
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* used by VM */</comments>
+        <comments>/* Object used to synchronize with the garbage collector.  The collector&#xA;     * must acquire this lock at the beginning of each collection cycle.  It is&#xA;     * therefore critical that any code holding this lock complete as quickly&#xA;     * as possible, allocate no new objects, and avoid calling user code.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:EmptyMember"/>
+    <members xsi:type="members:Field" name="lock">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.4"/>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.4"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="pending">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* List of References waiting to be enqueued.  The collector adds&#xA;     * References to this list, while the Reference-handler thread removes&#xA;     * them.  This list is protected by the above lock object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="classifiers:Class" name="ReferenceHandler">
+      <members xsi:type="members:Constructor" name="ReferenceHandler">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="instantiations:ExplicitConstructorCall">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.0/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.0/@parameters.1"/>
+            <callTarget xsi:type="literals:Super"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="g">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../ThreadGroup.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="run">
+        <typeReference xsi:type="types:Void"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:ForLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="r">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:SynchronizedBlock">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:LocalVariableStatement">
+                    <variable name="rn">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0"/>
+                      </typeReference>
+                      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable">
+                        <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      </initialValue>
+                    </variable>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="expressions:ConditionalExpression">
+                        <child xsi:type="expressions:NestedExpression">
+                          <expression xsi:type="expressions:EqualityExpression">
+                            <equalityOperators xsi:type="operators:Equal"/>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.1/@statements.0/@statement/@statements.1/@variable"/>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable"/>
+                          </expression>
+                        </child>
+                        <expressionIf xsi:type="literals:NullLiteral"/>
+                        <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.1/@statements.0/@statement/@statements.1/@variable"/>
+                      </value>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable">
+                        <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      </child>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+                <elseStatement xsi:type="statements:Block">
+                  <statements xsi:type="statements:TryBlock">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../Object.class.xmi#//@classifiers.0/@members.11"/>
+                        </next>
+                      </expression>
+                    </statements>
+                    <catcheBlocks>
+                      <parameter name="x">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../InterruptedException.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                      </parameter>
+                    </catcheBlocks>
+                  </statements>
+                  <statements xsi:type="statements:Continue"/>
+                </elseStatement>
+              </statements>
+              <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <comments>// Fast path for cleaners</comments>
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:NestedExpression">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../sun/misc/Cleaner.class.xmi#//@classifiers.0/@members.9"/>
+                    </next>
+                    <expression xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="../../../sun/misc/Cleaner.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable"/>
+                    </expression>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Continue"/>
+              </statement>
+              <condition xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/misc/Cleaner.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable"/>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="q">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="ReferenceQueue.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.3/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ReferenceQueue.class.xmi#//@classifiers.0/@members.7"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.0/@variable"/>
+                  </next>
+                </expression>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@members.1/@statements.0/@statement/@statements.3/@variable"/>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="ReferenceQueue.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ReferenceQueue.class.xmi#//@classifiers.0"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* High-priority thread to enqueue pending References&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../Thread.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </extends>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tg">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../ThreadGroup.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../Thread.class.xmi#//@classifiers.0/@members.64"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../Thread.class.xmi#//@classifiers.0/@members.33"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../Thread.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:EmptyStatement"/>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="tgn">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../ThreadGroup.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+        </init>
+        <updates xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init"/>
+        </updates>
+        <updates xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../ThreadGroup.class.xmi#//@classifiers.0/@members.15"/>
+            </next>
+          </value>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="handler">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../Thread.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.8"/>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+            <arguments xsi:type="references:StringReference" value="Reference Handler"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@variable">
+          <comments>/* If there were a special system-only priority greater than&#xA;&#x9; * MAX_PRIORITY, it would be used here&#xA;&#x9; */</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../Thread.class.xmi#//@classifiers.0/@members.60"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../Thread.class.xmi#//@classifiers.0/@members.23"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../Thread.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../Thread.class.xmi#//@classifiers.0/@members.72"/>
+            <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../Thread.class.xmi#//@classifiers.0/@members.46"/>
+          </next>
+        </expression>
+      </statements>
+      <modifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="get">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/* -- Referent accessor and setters -- */</comments>
+        <comments>/**&#xA;     * Returns this reference object's referent.  If this reference object has&#xA;     * been cleared, either by the program or by the garbage collector, then&#xA;     * this method returns &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @return&#x9; The object to which this reference refers, or&#xA;     *&#x9;&#x9; &lt;code>null&lt;/code> if this reference object has been cleared&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:SelfReference">
+          <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <self xsi:type="literals:This"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="clear">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Clears this reference object.  Invoking this method will not cause this&#xA;     * object to be enqueued.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isEnqueued">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/* -- Queue operations -- */</comments>
+        <comments>/**&#xA;     * Tells whether or not this reference object has been enqueued, either by&#xA;     * the program or by the garbage collector.&#x9; If this reference object was&#xA;     * not registered with a queue when it was created, then this method will&#xA;     * always return &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @return&#x9; &lt;code>true&lt;/code> if and only if this reference object has&#xA;     *&#x9;&#x9; been enqueued&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <comments>/* In terms of the internal states, this predicate actually tests&#xA;&#x9;   whether the instance is either Pending or Enqueued */</comments>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:ConditionalAndExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:SelfReference">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                  <self xsi:type="literals:This"/>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="ReferenceQueue.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ReferenceQueue.class.xmi#//@classifiers.0"/>
+                </children>
+              </expression>
+            </children>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:SelfReference">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                  <self xsi:type="literals:This"/>
+                </children>
+                <children xsi:type="literals:NullLiteral"/>
+              </expression>
+            </children>
+          </returnValue>
+        </statements>
+        <lockProvider xsi:type="references:SelfReference">
+          <self xsi:type="literals:This"/>
+        </lockProvider>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="enqueue">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds this reference object to the queue with which it is registered,&#xA;     * if any.&#xA;     *&#xA;     * @return&#x9; &lt;code>true&lt;/code> if this reference object was successfully&#xA;     *&#x9;&#x9; enqueued; &lt;code>false&lt;/code> if it was already enqueued or if&#xA;     *&#x9;&#x9; it was not registered with a queue when it was created&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:SelfReference">
+          <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ReferenceQueue.class.xmi#//@classifiers.0/@members.7"/>
+              <arguments xsi:type="references:SelfReference">
+                <self xsi:type="literals:This"/>
+              </arguments>
+            </next>
+          </next>
+          <self xsi:type="literals:This"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:Constructor" name="Reference">
+      <comments>/* -- Constructors -- */</comments>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="referent">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:Constructor" name="Reference">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </expression>
+            </child>
+            <expressionIf xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="ReferenceQueue.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="ReferenceQueue.class.xmi#//@classifiers.0"/>
+            </expressionIf>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="referent">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="queue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:SuperTypeArgument">
+              <superType xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+              </superType>
+            </typeArguments>
+            <target xsi:type="classifiers:Class" href="ReferenceQueue.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Abstract base class for reference objects.  This class defines the&#xA; * operations common to all reference objects.&#x9;Because reference objects are&#xA; * implemented in close cooperation with the garbage collector, this class may&#xA; * not be subclassed directly.&#xA; *&#xA; * @version  1.41, 04/20/04&#xA; * @author   Mark Reinhold&#xA; * @since    1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

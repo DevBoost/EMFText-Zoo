@@ -1,0 +1,2060 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="POAManagerImpl.java">
+  <comments>/*&#xA; * @(#)POAManagerImpl.java&#x9;1.22 04/06/21&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>impl</namespaces>
+  <namespaces>oa</namespaces>
+  <namespaces>poa</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../java/util/Iterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/util/Collections.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../java/util/Set.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/util/HashSet.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/omg/CORBA/LocalObject.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableServer</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableServer/POAManager.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableServer</namespaces>
+    <namespaces>POAManagerPackage</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableServer</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableServer/POA.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/DISCARDING.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/ACTIVE.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/HOLDING.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/INACTIVE.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/NON_EXISTENT.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>protocol</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>logging</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../logging/POASystemException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>orbutil</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="POAManagerImpl">
+    <members xsi:type="members:Field" name="factory">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="POAFactory.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="pihandler">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// factory which contains global state </comments>
+        <comments>// for all POAManagers </comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="state">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// for adapterManagerStateChanged</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="poas">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/util/HashSet.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../../java/util/Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// current state of this POAManager</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="nInvocations">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// all poas controlled by this POAManager</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="nWaiters">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Number of invocations in progress</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="myId">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Number of threads waiting for </comments>
+        <comments>// invocations to complete</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="debug">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// This POAManager's ID</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="explicitStateChange">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="stateToString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="state">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// initially false, set true as soon as </comments>
+        <comments>// one of activate, hold_request, </comments>
+        <comments>// discard_request, or deactivate is called.</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:StringReference" value="State[HOLDING]"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:StringReference" value="State[ACTIVE]"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:StringReference" value="State[DISCARDING]"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:StringReference" value="State[INACTIVE]"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+          </next>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:StringReference" value="State[UNKNOWN]"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="references:StringReference" value="POAManagerImpl[myId="/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <children xsi:type="references:StringReference" value=" state="/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </children>
+          <children xsi:type="references:StringReference" value=" nInvocations="/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <children xsi:type="references:StringReference" value=" nWaiters="/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <children xsi:type="references:StringReference" value="]"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getFactory">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="POAFactory.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPIHandler">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="countedWait">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Calling countedWait on POAManager "/>
+                    <children xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </children>
+                    <children xsi:type="references:StringReference" value=" nWaiters="/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <operator xsi:type="operators:PlusPlus"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.11"/>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <comments>// NOP</comments>
+          <parameter name="ex">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>java</namespaces>
+              <namespaces>lang</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+        <finallyBlock>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <operator xsi:type="operators:MinusMinus"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting countedWait on POAManager "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <children xsi:type="references:StringReference" value=" nWaiters="/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="notifyWaiters">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Calling notifyWaiters on POAManager "/>
+                  <children xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </children>
+                  <children xsi:type="references:StringReference" value=" nWaiters="/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.8"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getManagerId">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:Constructor" name="POAManagerImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.18"/>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.19"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/orb/ORB.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Creating POAManagerImpl "/>
+                  <children xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="factory">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="POAFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pihandler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addPOA">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="poa">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableServer/POA.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// XXX This is probably not the correct error</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="wrapper">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../logging/POASystemException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@statement/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../logging/POASystemException.class.xmi#//@classifiers.0/@members.196"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0/@members.4"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+            </next>
+          </children>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../../java/util/Set.class.xmi#//@classifiers.0/@members.6"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removePOA">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="poa">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableServer/POA.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../../java/util/Set.class.xmi#//@classifiers.0/@members.7"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.17"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../../java/util/Set.class.xmi#//@classifiers.0/@members.1"/>
+          </next>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getORTState">
+      <typeReference xsi:type="types:Short"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableInterceptor/HOLDING.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/HOLDING.class.xmi#//@classifiers.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableInterceptor/ACTIVE.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/ACTIVE.class.xmi#//@classifiers.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableInterceptor/INACTIVE.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/INACTIVE.class.xmi#//@classifiers.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableInterceptor/DISCARDING.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/DISCARDING.class.xmi#//@classifiers.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:DefaultSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableInterceptor/NON_EXISTENT.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableInterceptor/NON_EXISTENT.class.xmi#//@classifiers.0"/>
+            </returnValue>
+          </statements>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+          </next>
+        </variable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="activate">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableServer</namespaces>
+        <namespaces>POAManagerPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/****************************************************************************&#xA; * The following four public methods are used to change the POAManager's state.&#xA; *&#xA; * A note on the design of synchronization code:&#xA; * There are 4 places where a thread would need to wait for a condition:&#xA; *      - in hold_requests, discard_requests, deactivate, enter &#xA; * There are 5 places where a thread notifies a condition:&#xA; *      - in activate, hold_requests, discard_requests, deactivate, exit &#xA; *&#xA; * Since each notify needs to awaken waiters in several of the 4 places,&#xA; * and since wait() in Java has the nice property of releasing the lock&#xA; * on its monitor before sleeping, it seemed simplest to have just one&#xA; * monitor object: &quot;this&quot;. Thus all notifies will awaken all waiters.&#xA; * On waking up, each waiter verifies that the condition it was waiting &#xA; * for is satisfied, otherwise it goes back into a wait().&#xA; * &#xA; ****************************************************************************/</comments>
+        <comments>/**&#xA;     * &lt;code>activate&lt;/code>&#xA;     * &lt;b>Spec: pages 3-14 thru 3-18&lt;/b>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Calling activate on POAManager "/>
+                  <children xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>org</namespaces>
+                <namespaces>omg</namespaces>
+                <namespaces>PortableServer</namespaces>
+                <namespaces>POAManagerPackage</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+            </children>
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+            </children>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <comments>// set the state to ACTIVE</comments>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.6"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0/@members.3"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <comments>// Notify any invocations that were waiting because the previous</comments>
+            <comments>// state was HOLDING, as well as notify any threads that were waiting</comments>
+            <comments>// inside hold_requests() or discard_requests(). </comments>
+          </expression>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting activate on POAManager "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="hold_requests">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wait_for_completion">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableServer</namespaces>
+        <namespaces>POAManagerPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;code>hold_requests&lt;/code>&#xA;     * &lt;b>Spec: pages 3-14 thru 3-18&lt;/b>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Calling hold_requests on POAManager "/>
+                  <children xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>org</namespaces>
+                <namespaces>omg</namespaces>
+                <namespaces>PortableServer</namespaces>
+                <namespaces>POAManagerPackage</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+            </children>
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+            </children>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <comments>// set the state to HOLDING</comments>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0/@members.3"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <comments>// Notify any threads that were waiting in the wait() inside</comments>
+            <comments>// discard_requests. This will cause discard_requests to return</comments>
+            <comments>// (which is in conformance with the spec).</comments>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:WhileLoop">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:GreaterThan"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting hold_requests on POAManager "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="discard_requests">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wait_for_completion">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableServer</namespaces>
+        <namespaces>POAManagerPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;code>discard_requests&lt;/code>&#xA;     * &lt;b>Spec: pages 3-14 thru 3-18&lt;/b>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Calling hold_requests on POAManager "/>
+                  <children xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>org</namespaces>
+                <namespaces>omg</namespaces>
+                <namespaces>PortableServer</namespaces>
+                <namespaces>POAManagerPackage</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+            </children>
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+            </children>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <comments>// set the state to DISCARDING</comments>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0/@members.3"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <comments>// Notify any invocations that were waiting because the previous</comments>
+            <comments>// state was HOLDING. Those invocations will henceforth be rejected with</comments>
+            <comments>// a TRANSIENT exception. Also notify any threads that were waiting</comments>
+            <comments>// inside hold_requests().</comments>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:WhileLoop">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.7"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:GreaterThan"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting hold_requests on POAManager "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="deactivate">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="etherealize_objects">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wait_for_completion">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableServer</namespaces>
+        <namespaces>POAManagerPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;code>deactivate&lt;/code>&#xA;     * &lt;b>Spec: pages 3-14 thru 3-18&lt;/b>&#xA;     * Note: INACTIVE is a permanent state.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Calling deactivate on POAManager "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <namespaces>org</namespaces>
+                  <namespaces>omg</namespaces>
+                  <namespaces>PortableServer</namespaces>
+                  <namespaces>POAManagerPackage</namespaces>
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </throwable>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+                </next>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+              </children>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.10"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../spi/protocol/PIHandler.class.xmi#//@classifiers.0/@members.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+              <comments>// Notify any invocations that were waiting because the previous</comments>
+              <comments>// state was HOLDING. Those invocations will then be rejected with</comments>
+              <comments>// an OBJ_ADAPTER exception. Also notify any threads that were waiting</comments>
+              <comments>// inside hold_requests() or discard_requests().</comments>
+            </expression>
+          </statements>
+          <lockProvider xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </lockProvider>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="deactivator">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.24"/>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.24"/>
+              </typeReference>
+              <arguments xsi:type="references:SelfReference">
+                <self xsi:type="literals:This"/>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.1/@statements.1/@variable">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.24/@members.4"/>
+            </expression>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.1"/>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="thr">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.1/@statements.1/@variable"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.1/@statements.2/@elseStatement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.46"/>
+                </next>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:SynchronizedBlock">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                      <arguments xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </arguments>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:StringReference" value="Exiting deactivate on POAManager "/>
+                        <children xsi:type="references:SelfReference">
+                          <self xsi:type="literals:This"/>
+                        </children>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            </statements>
+            <lockProvider xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </lockProvider>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="classifiers:Class" name="POAManagerDeactivator">
+      <members xsi:type="members:Field" name="etherealize_objects">
+        <typeReference xsi:type="types:Boolean"/>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      </members>
+      <members xsi:type="members:Field" name="pmi">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      </members>
+      <members xsi:type="members:Field" name="debug">
+        <typeReference xsi:type="types:Boolean"/>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      </members>
+      <members xsi:type="members:Constructor" name="POAManagerDeactivator">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.0"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.3/@parameters.1"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.3/@parameters.0"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.2"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.3/@parameters.2"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="pmi">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="etherealize_objects">
+          <typeReference xsi:type="types:Boolean"/>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="debug">
+          <typeReference xsi:type="types:Boolean"/>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="run">
+        <typeReference xsi:type="types:Void"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:TryBlock">
+          <statements xsi:type="statements:SynchronizedBlock">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                      <arguments xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </arguments>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:StringReference" value="Calling run with etherealize_objects="/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.0"/>
+                        <children xsi:type="references:StringReference" value=" pmi="/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.2"/>
+            </statements>
+            <statements xsi:type="statements:WhileLoop">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <relationOperators xsi:type="operators:GreaterThan"/>
+              </condition>
+            </statements>
+            <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="iterator">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="../../../../../../../java/util/Iterator.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="literals:NullLiteral"/>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:SynchronizedBlock">
+                <comments>// Make sure that poas cannot change while we copy it!</comments>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                          <arguments xsi:type="references:SelfReference">
+                            <self xsi:type="literals:This"/>
+                          </arguments>
+                          <arguments xsi:type="expressions:AdditiveExpression">
+                            <children xsi:type="references:StringReference" value="run: Preparing to etherealize with pmi="/>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                          </arguments>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                      </expression>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.2"/>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.4/@statements.0/@statements.1/@statement/@statements.0/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../java/util/HashSet.class.xmi#//@classifiers.0/@members.8"/>
+                      </next>
+                      <expression xsi:type="instantiations:NewConstructorCall">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../../../../java/util/HashSet.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1">
+                          <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                        </arguments>
+                      </expression>
+                    </value>
+                  </expression>
+                </statements>
+                <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+              </statements>
+              <statements xsi:type="statements:WhileLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:NestedExpression">
+                      <comments>// Each RETAIN+USE_SERVANT_MGR poa</comments>
+                      <comments>// must call etherealize for all its objects</comments>
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="POAImpl.class.xmi#//@classifiers.0/@members.37"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="POAImpl.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.4/@statements.0/@statements.1/@statement/@statements.0/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="../../../../../../../java/util/Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                          </next>
+                        </child>
+                      </expression>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.4/@statements.0/@statements.1/@statement/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../../java/util/Iterator.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:SynchronizedBlock">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                          <arguments xsi:type="references:SelfReference">
+                            <self xsi:type="literals:This"/>
+                          </arguments>
+                          <arguments xsi:type="expressions:AdditiveExpression">
+                            <children xsi:type="references:StringReference" value="run: removing POAManager and clearing poas "/>
+                            <children xsi:type="references:StringReference" value="with pmi="/>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                          </arguments>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                      </expression>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.2"/>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.17"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+                    </next>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../../java/util/Set.class.xmi#//@classifiers.0/@members.12"/>
+                    </next>
+                  </expression>
+                </statements>
+                <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.0"/>
+          </statements>
+          <finallyBlock>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:SynchronizedBlock">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                        <arguments xsi:type="references:SelfReference">
+                          <self xsi:type="literals:This"/>
+                        </arguments>
+                        <arguments xsi:type="references:StringReference" value="Exiting run"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                    </expression>
+                  </statements>
+                  <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.1"/>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@members.2"/>
+            </statements>
+          </finallyBlock>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <implements xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../../java/lang/Runnable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </implements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="get_state">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableServer</namespaces>
+        <namespaces>POAManagerPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Added according to the spec CORBA V2.3; this returns the&#xA;     * state of the POAManager&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkIfActive">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized">
+        <comments>/****************************************************************************&#xA; * The following methods are used on the invocation path.&#xA; ****************************************************************************/</comments>
+        <comments>// called from POA.find_POA before calling </comments>
+        <comments>// AdapterActivator.unknown_adapter.</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Calling checkIfActive for POAManagerImpl "/>
+                    <children xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.27"/>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting checkIfActive for POAManagerImpl "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkState">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Switch">
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:WhileLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13"/>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Break"/>
+              <condition xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.3"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../logging/POASystemException.class.xmi#//@classifiers.0/@members.322"/>
+                    </next>
+                    <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.9"/>
+                  </next>
+                </throwable>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.7"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../logging/POASystemException.class.xmi#//@classifiers.0/@members.222"/>
+                    </next>
+                    <target xsi:type="members:ClassMethod" href="POAFactory.class.xmi#//@classifiers.0/@members.9"/>
+                  </next>
+                </throwable>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+              </condition>
+            </cases>
+            <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+            </variable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.11"/>
+            </next>
+          </children>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/State.class.xmi#//@classifiers.0"/>
+          </children>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="enter">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Calling enter for POAManagerImpl "/>
+                    <children xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.27"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <operator xsi:type="operators:PlusPlus"/>
+          </expression>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting enter for POAManagerImpl "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exit">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Calling exit for POAManagerImpl "/>
+                    <children xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <operator xsi:type="operators:MinusMinus"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+                <comments>// This notifies any threads that were in the </comments>
+                <comments>// wait_for_completion loop in hold/discard/deactivate().</comments>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </condition>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0/@members.30"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Exiting exit for POAManagerImpl "/>
+                      <children xsi:type="references:SelfReference">
+                        <self xsi:type="literals:This"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../orbutil/ORBUtility.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="implicitActivation">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Activate the POAManager if no explicit state change has ever been&#xA;     * previously invoked.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:TryBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+          </statements>
+          <catcheBlocks>
+            <comments>// ignore the exception.</comments>
+            <parameter name="ai">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>org</namespaces>
+                <namespaces>omg</namespaces>
+                <namespaces>PortableServer</namespaces>
+                <namespaces>POAManagerPackage</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/PortableServer/POAManagerPackage/AdapterInactive.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </parameter>
+          </catcheBlocks>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** POAManagerImpl is the implementation of the POAManager interface.&#xA; *  Its public methods are activate(), hold_requests(), discard_requests()&#xA; *  and deactivate().&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../../org/omg/PortableServer/POAManager.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <namespaces>org</namespaces>
+      <namespaces>omg</namespaces>
+      <namespaces>CORBA</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../../../org/omg/CORBA/LocalObject.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

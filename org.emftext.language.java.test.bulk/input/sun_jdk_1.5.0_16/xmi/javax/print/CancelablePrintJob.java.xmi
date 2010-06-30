@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/types ../../java.ecore#/16" name="CancelablePrintJob.java">
+  <comments>/*&#xA; * @(#)CancelablePrintJob.java&#x9;1.6 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>print</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="CancelablePrintJob">
+    <members xsi:type="members:InterfaceMethod" name="cancel">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="PrintException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Stops further processing of a print job.&#xA;     * &lt;p>&#xA;     * If a service supports this method it cannot be concluded that&#xA;     * job cancellation will always suceeed. A job may not be able to be&#xA;     * cancelled once it has reached and passed some point in its processing.&#xA;     * A successful cancellation means only that the entire job was not&#xA;     * printed, some portion may already have printed when cancel returns.&#xA;     * &lt;p>&#xA;     * The service will throw a PrintException if the cancellation did not&#xA;     * succeed. A job which has not yet been submitted for printing should&#xA;     * throw this exception.&#xA;     * Cancelling an already successfully cancelled Print Job is not&#xA;     * considered an error and will always succeed.&#xA;     * &lt;p>&#xA;     * Cancellation in some services may be a lengthy process, involving&#xA;     * requests to a server and processing of its print queue. Clients&#xA;     * may wish to execute cancel in a thread which does not affect&#xA;     * application execution.&#xA;     * @throws PrintException if the job could not be successfully cancelled.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This interface is used by a printing application to cancel a&#xA; * print job.  This interface extends {@link DocPrintJob}.  A &#xA; * &lt;code>DocPrintJob&lt;/code> implementation returned from a print&#xA; * service implements this interface if the print job can be&#xA; * cancelled.  Before trying to cancel&#xA; * a print job, the client needs to test if the &#xA; * &lt;code>DocPrintJob&lt;/code> object returned from the print service&#xA; * actually implements this interface.  Clients should never assume&#xA; * that a &lt;code>DocPrintJob&lt;/code> implements this interface.  A &#xA; * print service might support cancellation only for certain types&#xA; * of print data and representation class names.  This means that&#xA; * only some of the &lt;code>DocPrintJob&lt;/code> objects returned from&#xA; * a service will implement this interface.&#xA; * &lt;p>&#xA; * Service implementors are encouraged to implement this optional interface&#xA; * and to deliver a javax.print.event.PrintJobEvent.JOB_CANCELLED event&#xA; * to any listeners if a job is successfully cancelled with an&#xA; * implementation of this interface. Services should also note that an&#xA; * implementation of this method may be made from a separate client thread&#xA; * than that which made the print request.  Thus the implementation of&#xA; * this interface must be made thread safe.&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="DocPrintJob.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

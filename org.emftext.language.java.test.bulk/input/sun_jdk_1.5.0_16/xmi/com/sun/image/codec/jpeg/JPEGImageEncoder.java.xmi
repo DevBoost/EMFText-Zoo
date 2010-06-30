@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="JPEGImageEncoder.java">
+  <comments>/*&#xA; * @(#)JPEGImageEncoder.java&#x9;1.7 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <comments>/**********************************************************************&#xA; **********************************************************************&#xA; **********************************************************************&#xA; *** COPYRIGHT (c) 1997-1998 Eastman Kodak Company.                 ***&#xA; *** As  an unpublished  work pursuant to Title 17 of the United    ***&#xA; *** States Code.  All rights reserved.                             ***&#xA; **********************************************************************&#xA; **********************************************************************&#xA; **********************************************************************/</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>image</namespaces>
+  <namespaces>codec</namespaces>
+  <namespaces>jpeg</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>/**&#xA; * JPEGImageEncoder Interface&#xA; * &#xA; * JPEGImageEncoder compresses images into JPEG data streams and&#xA; * writes the JPEG stream to an OutputStream.  Image data that is to&#xA; * be encoded can be passed in as a Raster of image data or as a&#xA; * BufferedImage.  Encoding or the image data into the output JPEG&#xA; * stream is controlled by the parameters setting found in the&#xA; * JPEGEncodeParam object.&lt;P>&#xA; * &#xA; * ColorSpace comments: First off JPEG by specification is color&#xA; * blind!  That said, this interface will perform some color space&#xA; * conversion in the name of better compression ratios.  There is no&#xA; * explicit mechanism in the JPEGEncodeParam interface for controlling&#xA; * the Encoded ColorSpace of the data when it is written to the JPEG&#xA; * data stream.  If an approriate colorspace setting is not already&#xA; * defined it is recommended that colorspace unknown is used.  Some&#xA; * updates to the standard color space designations have been made to&#xA; * allow this decoder to handle alpha channels.  See the&#xA; * JPEGEncodeParam description for more details on additional color&#xA; * space designations ( @see JPEGEncodeParam ).&lt;P>&#xA; * &#xA; * This encoder will process interchange, and abbreviated JPEG&#xA; * streams.&#xA; */</comments>
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/io/OutputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/Raster.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="JPEGImageEncoder">
+    <members xsi:type="members:InterfaceMethod" name="getOutputStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/OutputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * Return the stream the Encoder is currenlt associated with.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setJPEGEncodeParam">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="jep">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * Set the JPEGEncodeParam object that is to be used for future&#xA;&#x9; * encoding operations. 'jep' is copied so changes will not be&#xA;&#x9; * tracked, unless you call this method again.&#xA;&#x9; * @param jep The JPEGEncodeParam object to use for future encodings.&#xA;&#x9; *        &#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getJPEGEncodeParam">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * This returns a copy of the current JPEGEncodeParam object, if&#xA;&#x9; * you want changes to affect the encoding process you must 'set'&#xA;&#x9; * it back into the encoder (either through setJPEGEncodeParam or&#xA;&#x9; * by providing the modified param object in the call to encode.&#xA;&#x9; * @return A copy of the current JPEGEncodeParam object&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDefaultJPEGEncodeParam">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bi">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * This is a factory method for creating JPEGEncodeParam objects.&#xA;&#x9; * The returned object will do a credible job of encoding the&#xA;&#x9; * given BufferedImage.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="encode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bi">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Encode a BufferedImage as a JPEG data stream.  Note, some color&#xA;&#x9; * conversions may takes place.  The current JPEGEncodeParam's&#xA;&#x9; * encoded COLOR_ID should match the value returned by&#xA;&#x9; * getDefaultColorID when given the BufferedImage's ColorModel.&lt;P>&#xA;&#xA;&#x9; * If no JPEGEncodeParam object has been provided yet a default&#xA;&#x9; * one will be created by calling getDefaultJPEGEncodeParam with&#xA;&#x9; * bi.&#xA;&#xA;&#x9; * @param bi The BufferedImage to encode.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="encode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bi">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="jep">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Encode a BufferedImage as a JPEG data stream.  Note, some color&#xA;&#x9; * conversions may takes place.  The jep's encoded COLOR_ID should&#xA;&#x9; * match the value returned by getDefaultColorID when given the&#xA;&#x9; * BufferedImage's ColorModel.&lt;P>&#xA;&#xA;&#x9; * This call also sets the current JPEGEncodeParam object.  The&#xA;&#x9; * given JPEGEncodeParam object will be used for this and future&#xA;&#x9; * encodings.  If jep is null then a new JPEGEncodeParam object&#xA;&#x9; * will be created by calling getDefaultJPEGEncodeParam with bi.&#xA;&#xA;&#x9; * @param bi  The BufferedImage to encode.&#xA;&#x9; * @param jep The JPEGEncodeParam object used to control the encoding.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDefaultColorId">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cm">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Returns the 'default' encoded COLOR_ID for a given ColorModel.&#xA;&#x9; * This method is not needed in the simple case of encoding&#xA;&#x9; * Buffered Images (the library will figure things out for you).&#xA;&#x9; * It can be useful for encoding Rasters.  To determine what needs&#xA;&#x9; * to be done to the image prior to encoding.&#xA;&#xA;&#x9; * @param cm The ColorModel to map to an jpeg encoded COLOR_ID.&#xA;&#x9; * @return The default mapping of cm to a jpeg Color_ID note that&#xA;&#x9; * in a few cases color conversion is required.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDefaultJPEGEncodeParam">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ras">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/Raster.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="colorID">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * This is a factory method for creating JPEGEncodeParam objects.&#xA;&#x9; * It is the users responsiblity to match the colorID with the&#xA;&#x9; * data contained in the Raster.  Failure to do so may lead to&#xA;&#x9; * either poor compression or poor image quality.  If you don't&#xA;&#x9; * understand much about JPEG it is strongly reccomended that you&#xA;&#x9; * stick to the BufferedImage interfaces.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDefaultJPEGEncodeParam">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="numBands">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="colorID">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9;  * This is a factory method for creating JPEGEncodeParam objects.  It&#xA;&#x9;  * is the users responsiblity to match the colorID with the given&#xA;&#x9;  * number of bands, which should match the data being encoded.&#xA;&#x9;  * Failure to do so may lead to poor compression and/or poor image&#xA;&#x9;  * quality.  If you don't understand much about JPEG it is strongly&#xA;&#x9;  * recommended that you stick to the BufferedImage interface.&#xA;&#x9;  *&#xA;&#x9;  * @param numBands the number of bands that will be encoded (max of&#xA;&#x9;  * four).&#xA;&#x9;  * @param colorID the COLOR_ID for the encoded data.  This is used to&#xA;&#x9;  * set reasonable defaults in the parameter object.  This must match&#xA;&#x9;  * the number of bands given.&#xA;&#x9;  */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDefaultJPEGEncodeParam">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="jdp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="JPEGDecodeParam.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * This is a factory method for creating a JPEGEncodeParam from a&#xA;&#x9; * JPEGDecodeParam.  This will return a new JPEGEncodeParam object&#xA;&#x9; * that is initialized from the JPEGDecodeParam object.  All major&#xA;&#x9; * pieces of information will be initialized from the DecodeParam&#xA;&#x9; * (Markers, Tables, mappings).&#xA;&#x9; * @param jdp The JPEGDecodeParam object to copy.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="encode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ras">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/Raster.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Encode a Raster as a JPEG data stream.  Note that no color&#xA;&#x9; * conversion takes place.  It is required that you match the&#xA;&#x9; * Raster to the encoded COLOR_ID contained in the current&#xA;&#x9; * JPEGEncodeParam object.&lt;P>&#xA;&#xA;&#x9; * If no JPEGEncodeParam object has been provided yet a&#xA;&#x9; * new JPEGEncodeParam object will be created by calling&#xA;&#x9; * getDefaultJPEGEncodeParam with ras and COLOR_ID_UNKNOWN.&#xA;&#xA;&#x9; * @param ras The Raster to encode.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="encode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ras">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/Raster.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="jep">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="JPEGEncodeParam.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Encode a Raster as a JPEG data stream.  Note that no color&#xA;&#x9; * conversion takes place.  It is required that you match the&#xA;&#x9; * Raster to the encoded COLOR_ID contained in the JPEGEncodeParam&#xA;&#x9; * object.&#xA;&#xA;&#x9; * If jep is null a new JPEGEncodeParam object will be created by&#xA;&#x9; * calling getDefaultJPEGEncodeParam with ras and&#xA;&#x9; * COLOR_ID_UNKNOWN.&#xA;&#xA;&#x9; * @param ras The Raster to encode.&#xA;&#x9; * @param jep The JPEGEncodeParam object used to control the encoding.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * JPEGImageEncoder encodes buffers of image data into JPEG data&#xA; * streams.  Users of this interface are required to provide image data in&#xA; * a Raster or a BufferedImage, set the necessary parameters in the&#xA; * JPEGEncodeParams object and successfully open the&#xA; * &lt;code>OutputStream&lt;/code> that is the destination of the encoded&#xA; * JPEG stream.&#xA; *&#xA; * The JPEGImageEncoder interface can encode image data into interchange,&#xA; * and abbreviated JPEG data streams that are written to the&#xA; * OutputStream provided to the encoder.&#xA; * &lt;p>&#xA; * Note that the classes in the com.sun.image.codec.jpeg package are not&#xA; * part of the core Java APIs.  They are a part of Sun's JDK and JRE&#xA; * distributions.  Although other licensees may choose to distribute these&#xA; * classes, developers cannot depend on their availability in non-Sun&#xA; * implementations.  We expect that equivalent functionality will eventually&#xA; * be available in a core API or standard extension.&#xA; * &lt;p>&#xA; * &#xA; * @see&#x9;&#x9;JPEGCodec&#xA; * @see&#x9;&#x9;JPEGEncodeParam&#xA; * @see&#x9;&#x9;Raster&#xA; * @see&#x9;&#x9;BufferedImage&#xA; * @see&#x9;&#x9;OutputStream&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

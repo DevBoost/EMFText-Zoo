@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="SnmpPeer.java">
+  <comments>/*&#xA; * @(#)file      SnmpPeer.java&#xA; * @(#)author    Sun Microsystems, Inc.&#xA; * @(#)version   3.42&#xA; * @(#)date      08/05/28&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; *&#xA; */</comments>
+  <comments>// Copyright (c) 1995-96 by Cisco Systems, Inc.</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>jmx</namespaces>
+  <namespaces>snmp</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// java imports</comments>
+    <comments>//</comments>
+    <namespaces>java</namespaces>
+    <namespaces>net</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>net</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/net/UnknownHostException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// JMX imports</comments>
+    <comments>//</comments>
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>snmp</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="SnmpPduFactory.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// SNMP Runtime imports</comments>
+    <comments>//</comments>
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>snmp</namespaces>
+    <classifier xsi:type="classifiers:Class" href="SnmpPduFactoryBER.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SnmpPeer">
+    <members xsi:type="members:Field" name="defaultSnmpRequestPktSize">
+      <initialValue xsi:type="expressions:MultiplicativeExpression">
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1024"/>
+        <multiplicativeOperators xsi:type="operators:Multiplication"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// PUBLIC VARIABLES</comments>
+        <comments>//-----------------</comments>
+        <comments>/**&#xA;     * The default SNMP packet size of an SNMP request (2 * 1024).&#xA;     * &lt;BR>The maximum size is initially set to Ethernet maximum transfer unit (MTU).   &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="defaultSnmpResponsePktSize">
+      <initialValue xsi:type="expressions:MultiplicativeExpression">
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1024"/>
+        <multiplicativeOperators xsi:type="operators:Multiplication"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The default SNMP packet size of an SNMP response (8 * 1024).&#xA;     * &lt;BR>This will be the default size that the session socket uses when receiving a packet.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="maxVarBindLimit">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="25"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// PRIVATE VARIABLES</comments>
+        <comments>//------------------</comments>
+        <comments>/**&#xA;     * The maximum number of variable bindings that can be packed into a request.&#xA;     * The default value is 25.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="portNum">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="161"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Port number of the destination host.&#xA;     * The default port is 161.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="maxTries">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Number of times to try before giving up.&#xA;     * The default number is 3.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="timeout">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3000"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The amount of time to wait for a response from the peer.&#xA;     * The default amount of time is 3000 millisec.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="pduFactory">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="SnmpPduFactoryBER.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="SnmpPduFactory.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The PDU factory. The default factory is an instance of &lt;CODE>SnmpPduFactoryBER&lt;/CODE>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="_maxrtt">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The maximum round trip time for a packet with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="_minrtt">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The minimum round trip time for a packet with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="_avgrtt">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The average round trip time for a packet with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="_snmpParameter">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="SnmpParameters.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpParams.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * SNMP parameters for this peer are valid for all requests using this peer.&#xA;     * @see com.sun.jmx.snmp.SnmpParameters&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="_devAddr">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Internet address of the peer to be used when communicating with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="maxSnmpPacketSize">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Maximum packet size of the request PDU.  This can be set by the user.&#xA;     * If the request crosses this limit while encoding, the request is automatically split &#xA;     * into multiple small request. Each of these requests will again be within this limit.&#xA;     * The default value is (2 * 1024).&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="_devAddrList">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * List of alternate addresses.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsAfter/>
+    </members>
+    <members xsi:type="members:Field" name="_addrIndex">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The index of address currently being used.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="customPduFactory">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Constructor" name="SnmpPeer">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          <arguments xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="161"/>
+          </arguments>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="host">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/UnknownHostException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// CONSTRUCTORS</comments>
+        <comments>//-------------</comments>
+        <comments>/**&#xA;     * Creates an SNMP peer object for a device. The default port is 161.&#xA;     * @param host The peer name.&#xA;     * @exception UnknownHostException If the host name cannot be resolved.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="SnmpPeer">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.1"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="netaddr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates an SNMP peer object for a device. The default port is 161.&#xA;     * @param netaddr The peer &lt;CODE>InetAddress&lt;/CODE>.&#xA;     * @param port The port number.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="SnmpPeer">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="netaddr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates an SNMP peer object for a device. The default port is 161.&#xA;     * @param netaddr The peer &lt;CODE>InetAddress&lt;/CODE>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="SnmpPeer">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.1"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="host">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/UnknownHostException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates an SNMP peer object for a device with the specified port.&#xA;     * @param host The peer name.&#xA;     * @param port The port number.&#xA;     * @exception UnknownHostException If the host name cannot be resolved.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="useIPAddress">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ipaddr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/UnknownHostException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>// PUBLIC METHODS</comments>
+        <comments>//---------------</comments>
+        <comments>/**&#xA;     * Sets a specific IP address to which the peer will communicate.&#xA;     * Typically used to set an alternate IP address or a specific address which is known to respond to requests.&#xA;     * The IP address &lt;CODE>String&lt;/CODE> can either be a machine name, such as &lt;CODE>ibiza&lt;/CODE>, &#xA;     * or a &lt;CODE>String&lt;/CODE> representing its IP address, such as &quot;206.26.48.100&quot;.&#xA;     * @param ipaddr Dot formatted IP address or logical host name.&#xA;     * @exception UnknownHostException If the host name cannot be resolved.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0/@members.43"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="ipAddressInUse">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Returns the dot-formatted IP address string (for example 171.69.220.224).&#xA;     * Useful when you want to know which IP address is used&#xA;     * when the address was resolved using a DNS name.&#xA;     * @return The dot-formatted IP address being used.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="adr">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0/@members.34"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AndExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </children>
+              <children xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+            </expression>
+          </children>
+          <children xsi:type="references:StringReference" value="."/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AndExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </children>
+              <children xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+            </expression>
+          </children>
+          <children xsi:type="references:StringReference" value="."/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AndExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                </arraySelectors>
+              </children>
+              <children xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+            </expression>
+          </children>
+          <children xsi:type="references:StringReference" value="."/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AndExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+                </arraySelectors>
+              </children>
+              <children xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+            </expression>
+          </children>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="useAddressList">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="adrList">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Specifies the list of addresses to be used.  When a host is not responding&#xA;     * the user can switch to the next address by calling &lt;CODE>useNextAddress&lt;/CODE>.&#xA;     * @param adrList The list of &lt;CODE>InetAddresses&lt;/CODE>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.23"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="useNextAddress">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Causes all subsequent requests to go to the new address&#xA;     * obtained from the specified list of alternate addresses.&#xA;     * If it reaches the end of list, it starts again at the first address.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return"/>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>/* NPCTE fix for bug 4486059, esc 0 MR 03-August-2001 */</comments>
+        <comments>/*      if (_addrIndex > _devAddrList.length) */</comments>
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14">
+              <comments>/* end of NPCTE fix for bugid 4486059 */</comments>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14"/>
+          <children xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13">
+              <next xsi:type="references:IdentifierReference"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </children>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13">
+            <arraySelectors>
+              <position xsi:type="expressions:SuffixUnaryModificationExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14"/>
+                <operator xsi:type="operators:PlusPlus"/>
+              </position>
+            </arraySelectors>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="allowSnmpSets">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Determines whether an SNMP &lt;CODE>set&lt;/CODE> operation is allowed with this&#xA;     * peer object. For now it just makes sure a parameter is configured for a write operation.&#xA;     * @return &lt;CODE>true&lt;/CODE> if SNMP &lt;CODE>set&lt;/CODE> is allowed and the parameter is configured,&#xA;     * &lt;CODE>false&lt;/CODE> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="SnmpParams.class.xmi#//@classifiers.0/@members.3"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="equals">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Compares the two peer objects to determine whether they are the same. This is used&#xA;     * to determine whether requests can be multiplexed.&#xA;     * @param obj The object to compare &lt;CODE>this&lt;/CODE> with.&#xA;     * @return &lt;CODE>true&lt;/CODE> if they are referring to same peer and using same address;&#xA;     * &lt;CODE>false&lt;/CODE> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>/*&#xA;          if (obj instanceof SnmpPeer) {&#xA;          SnmpPeer peer = (SnmpPeer) obj ;&#xA;          if (_devAddr.equals(peer.getDestAddr()) &amp;&amp; &#xA;          portNum == peer.getDestPort())&#xA;          return true ;&#xA;          }&#xA;        */</comments>
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDestAddrList">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the list of alternate &lt;CODE>InetAddress&lt;/CODE> configured for this peer.&#xA;     * @return The &lt;CODE>InetAddress&lt;/CODE> of the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDestAddr">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the &lt;CODE>InetAddress&lt;/CODE> object for this peer.&#xA;     * @return The &lt;CODE>InetAddress&lt;/CODE> of the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDestPort">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the destination port number of the peer to which SNMP requests are to be sent.&#xA;     * @return The destination port number.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setDestPort">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newPort">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Changes the port address of the destination for the request.&#xA;     * @param newPort The destination port.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTimeout">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the timeout to wait for a response from the peer.&#xA;     * @return The value of the timeout property.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTimeout">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newTimeout">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Changes the timeout to wait for a response from the peer.&#xA;     * @param newTimeout The timeout (in milliseconds).&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxTries">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the number of times to try before giving up.&#xA;     * @return The maximun number of tries.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMaxTries">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newMaxTries">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Changes the maximun number of times to try before giving up.&#xA;     * @param newMaxTries The maximun number of tries.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.33/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.33/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDevName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the name specified in the constructor while creating this object.&#xA;     * @return The name of the host as specified while creating this object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.27">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0/@members.30"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the &lt;CODE>String&lt;/CODE> representation for this &lt;CODE>SnmpPeer&lt;/CODE>.&#xA;     * @return The &lt;CODE>String&lt;/CODE> representation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="references:StringReference" value="Peer/Port : "/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.34"/>
+          <children xsi:type="references:StringReference" value="/"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.28"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getVarBindLimit">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the maximum number of variable bindings that can be sent to a peer.&#xA;     * @return The maximum variable bindings that can be encoded into a request packet.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setVarBindLimit">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="limit">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Configures the maximum number of variable bindings that can be sent to a peer.&#xA;     * @param limit The desired limit.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.37/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setParams">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="SnmpParams.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the &lt;CODE>SnmpParams&lt;/CODE> object associated with the peer.&#xA;     * @param params The desired parameters.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getParams">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpParams.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the &lt;CODE>SnmpParams&lt;/CODE> object associated with the peer.&#xA;     * @return The associated parameters.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxSnmpPktSize">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Gets the maximum request packet size that is currently used.&#xA;     * @return The maximum request packet size.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMaxSnmpPktSize">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newsize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Configures the maximum packet size that can be used when generating an SNMP request.&#xA;     * @param newsize The desired packet size.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isCustomPduFactory">
+      <typeReference xsi:type="types:Boolean"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="finalize">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Finalizer of the &lt;CODE>SnmpPeer&lt;/CODE> objects.&#xA;     * This method is called by the garbage collector on an object &#xA;     * when garbage collection determines that there are no more references to the object.&#xA;     * &lt;P>Sets all the references to this SNMP peer object to &lt;CODE>null&lt;/CODE>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMinRtt">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the minimum round trip time for a packet with the peer.&#xA;     * @return The minimum round trip time for a packet with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxRtt">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the maximum round trip time for a packet with the peer.&#xA;     * @return The maximum round trip time for a packet with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAvgRtt">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the average round trip time for a packet with the peer.&#xA;     * @return The average round trip time for a packet with the peer.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="updateRttStats">
+      <comments>// to do later.</comments>
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tm">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// PRIVATE METHODS</comments>
+        <comments>//----------------</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.47/@parameters.0"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.47/@parameters.0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+        <elseStatement xsi:type="statements:Condition">
+          <statement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.47/@parameters.0"/>
+            </expression>
+          </statement>
+          <condition xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.47/@parameters.0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </condition>
+          <elseStatement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.47/@parameters.0"/>
+            </expression>
+          </elseStatement>
+        </elseStatement>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Holds information about an SNMP agent. This information is used to communicate with the agent.  &#xA; * These are the IP address, port number, SNMP parameters, and peer channel parameters &#xA; * (such as the maximum request packet size, maximum number of variable bindings in a packet, retries, and timeouts). &#xA; * Changing these would affect all active requests.&#xA; * &lt;P>&#xA; * The class contains the following properties:&#xA; * &lt;UL>&#xA; * &lt;LI>&lt;B>destPort&lt;/B>: port number of the destination host.&#xA; * &lt;BR>The default port is &lt;B>161&lt;/B>.&#xA; *&#xA; * &lt;LI>&lt;B>maxVarBindLimit&lt;/B>: maximum number of OIDs which can be encoded in a single request packet. &#xA; * This is set by the user.  &#xA; * &lt;BR>A request which contains more than this limit will be automatically split into multiple requests. &#xA; * Typically used when multiplexing requests.&#xA; * &lt;BR>The default value is 25.&#xA; *&#xA; * &lt;LI>&lt;B>maxSnmpPacketSize&lt;/B>: maximum packet size of the request PDU. &#xA; * This can be set by the user.&#xA; * &lt;BR> If the request crosses this limit while encoding, the request is automatically split into &#xA; * multiple small requests. Each of these requests will again be within this limit.&#xA; * &lt;BR>The default value is (2 * 1024).&#xA; *&#xA; * &lt;LI>&lt;B>maxTries&lt;/B>: number of times to try before giving up.&#xA; * &lt;BR>The default number is &lt;B>3&lt;/B>.&#xA; *&#xA; * &lt;LI>&lt;B>timeout&lt;/B>: amount of time to wait for a response from the&#xA; * peer.  If this amount of time passes without a response, and if the&#xA; * &lt;B>maxTries&lt;/B> value has not been exceeded, the request will be&#xA; * resent.  &lt;BR>The default amount of time is &lt;B>3000&#xA; * milliseconds&lt;/B>.&#xA; *&#xA; * &lt;LI>&lt;B>snmpParameters&lt;/B>: SNMP parameters to be used when communicating with the agent.&#xA; * The parameters contain the protocol version and security information (the parameters can be shared amongst several peers).&#xA; *&#xA; *&lt;/UL>&#xA; * JavaBean compliant getters and setters allow the properties listed above to be modified.&#xA; *&#xA; * &lt;p>&lt;b>This API is a Sun Microsystems internal API  and is subject &#xA; * to change without notice.&lt;/b>&lt;/p>&#xA; * @see com.sun.jmx.snmp.SnmpParameters&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="MidiDevice.java">
+  <comments>/*&#xA; * @(#)MidiDevice.java&#x9;1.38 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sound</namespaces>
+  <namespaces>midi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/util/List.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="MidiDevice">
+    <comments>// class Info</comments>
+    <members xsi:type="members:InterfaceMethod" name="getDeviceInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.11"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains information about the device, including its Java class and&#xA;     * &lt;code>Strings&lt;/code> containing its name, vendor, and description.&#xA;     *&#xA;     * @return device info&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="open">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MidiUnavailableException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Opens the device, indicating that it should now acquire any&#xA;     * system resources it requires and become operational.&#xA;     *&#xA;     * &lt;p>An application opening a device explicitly with this call&#xA;     * has to close the device by calling {@link #close}. This is&#xA;     * necessary to release system resources and allow applications to&#xA;     * exit cleanly.&#xA;     *&#xA;     * &lt;p>&#xA;     * Note that some devices, once closed, cannot be reopened.  Attempts&#xA;     * to reopen such a device will always result in a MidiUnavailableException.&#xA;     *&#xA;     * @throws MidiUnavailableException thrown if the device cannot be&#xA;     * opened due to resource restrictions.&#xA;     * @throws SecurityException thrown if the device cannot be&#xA;     * opened due to security restrictions.&#xA;     *&#xA;     * @see #close&#xA;     * @see #isOpen&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Closes the device, indicating that the device should now release&#xA;     * any system resources it is using.&#xA;     *&#xA;     * &lt;p>All &lt;code>Receiver&lt;/code> and &lt;code>Transmitter&lt;/code> instances&#xA;     * open from this device are closed. This includes instances retrieved&#xA;     * via &lt;code>MidiSystem&lt;/code>.&#xA;     * &#xA;     * @see #open&#xA;     * @see #isOpen&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isOpen">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Reports whether the device is open.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the device is open, otherwise&#xA;     * &lt;code>false&lt;/code>&#xA;     * @see #open&#xA;     * @see #close&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMicrosecondPosition">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current time-stamp of the device, in microseconds.&#xA;     * If a device supports time-stamps, it should start counting at&#xA;     * 0 when the device is opened and continue incrementing its&#xA;     * time-stamp in microseconds until the device is closed.&#xA;     * If it does not support time-stamps, it should always return&#xA;     * -1.&#xA;     * @return the current time-stamp of the device in microseconds,&#xA;     * or -1 if time-stamping is not supported by the device.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxReceivers">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the maximum number of MIDI IN connections available on this&#xA;     * MIDI device for receiving MIDI data.&#xA;     * @return maximum number of MIDI IN connections, &#xA;     * or -1 if an unlimited number of connections is available.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxTransmitters">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the maximum number of MIDI OUT connections available on this&#xA;     * MIDI device for transmitting MIDI data.&#xA;     * @return maximum number of MIDI OUT connections,&#xA;     * or -1 if an unlimited number of connections is available.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getReceiver">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Receiver.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MidiUnavailableException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains a MIDI IN receiver through which the MIDI device may receive&#xA;     * MIDI data.  The returned receiver must be closed when the application&#xA;     * has finished using it.&#xA;     *&#xA;     * &lt;p>Obtaining a &lt;code>Receiver&lt;/code> with this method does not&#xA;     * open the device. To be able to use the device, it has to be&#xA;     * opened explicitly by calling {@link #open}. Also, closing the&#xA;     * &lt;code>Receiver&lt;/code> does not close the device. It has to be&#xA;     * closed explicitly by calling {@link #close}.&#xA;     *&#xA;     * @return a receiver for the device.&#xA;     * @throws MidiUnavailableException thrown if a receiver is not available&#xA;     * due to resource restrictions&#xA;     * @see Receiver#close()&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getReceivers">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns all currently active, non-closed receivers&#xA;     * connected with this MidiDevice.&#xA;     * A receiver can be removed&#xA;     * from the device by closing it.&#xA;     * @return an unmodifiable list of the open receivers&#xA;     * @since 1.5&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="Receiver.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../../java/util/List.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTransmitter">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Transmitter.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MidiUnavailableException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains a MIDI OUT connection from which the MIDI device will transmit&#xA;     * MIDI data  The returned transmitter must be closed when the application&#xA;     * has finished using it.&#xA;     *&#xA;     * &lt;p>Obtaining a &lt;code>Transmitter&lt;/code> with this method does not&#xA;     * open the device. To be able to use the device, it has to be&#xA;     * opened explicitly by calling {@link #open}. Also, closing the&#xA;     * &lt;code>Transmitter&lt;/code> does not close the device. It has to be&#xA;     * closed explicitly by calling {@link #close}.&#xA;     *&#xA;     * @return a MIDI OUT transmitter for the device.&#xA;     * @throws MidiUnavailableException thrown if a transmitter is not available&#xA;     * due to resource restrictions&#xA;     * @see Transmitter#close()&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTransmitters">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns all currently active, non-closed transmitters&#xA;     * connected with this MidiDevice.&#xA;     * A transmitter can be removed&#xA;     * from the device by closing it.&#xA;     * @return an unmodifiable list of the open transmitters&#xA;     * @since 1.5&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="Transmitter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../../java/util/List.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="classifiers:Class" name="Info">
+      <members xsi:type="members:Field" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>/**&#xA;&#x9; * The device's name.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Field" name="vendor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>/**&#xA;&#x9; * The name of the company who provides the device.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Field" name="description">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>/**&#xA;&#x9; * A description of the device.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Field" name="version">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>/**&#xA;&#x9; * Device version.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Constructor" name="Info">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.0"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.4/@parameters.0"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.4/@parameters.1"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.2"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.4/@parameters.2"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.3"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.4/@parameters.3"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="vendor">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="description">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="version">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Protected">
+          <comments>/**&#xA;&#x9; * Constructs a device info object.&#xA;&#x9; *&#xA;&#x9; * @param name the name of the device&#xA;&#x9; * @param vendor the name of the company who provides the device&#xA;&#x9; * @param description a description of the device&#xA;&#x9; * @param version version information for the device&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:ClassMethod" name="equals">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Reports whether two objects are equal.&#xA;&#x9; * Returns &lt;code>true&lt;/code> if the objects are identical.&#xA;&#x9; * @param obj the reference object with which to compare this&#xA;&#x9; * object&#xA;&#x9; * @return &lt;code>true&lt;/code> if this object is the same as the&#xA;&#x9; * &lt;code>obj&lt;/code> argument; &lt;code>false&lt;/code> otherwise&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.5/@parameters.0"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="hashCode">
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Finalizes the hashcode method.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/Object.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Obtains the name of the device.&#xA;&#x9; *&#xA;&#x9; * @return a string containing the device's name&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getVendor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Obtains the name of the company who supplies the device.&#xA;&#x9; * @return device the vendor's name&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.1"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getDescription">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Obtains the description of the device.&#xA;&#x9; * @return a description of the device&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.2"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getVersion">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Obtains the version of the device.&#xA;&#x9; * @return textual version information for the device.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.3"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="toString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Provides a string representation of the device information.&#xA;&#xA;&#x9; * @return a description of the info object&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@members.0"/>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A &lt;code>MidiDevice.Info&lt;/code> object contains assorted&#xA;     * data about a &lt;code>{@link MidiDevice}&lt;/code>, including its&#xA;     * name, the company who created it, and descriptive text.&#xA;     *&#xA;     * @see MidiDevice#getDeviceInfo&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;code>MidiDevice&lt;/code> is the base interface for all MIDI devices.&#xA; * Common devices include synthesizers, sequencers, MIDI input ports, and MIDI&#xA; * output ports.  &#xA; *&#xA; * &lt;p>A &lt;code>MidiDevice&lt;/code> can be a transmitter or a receiver of&#xA; * MIDI events, or both. Therefore, it can provide {@link Transmitter}&#xA; * or {@link Receiver} instances (or both). Typically, MIDI IN ports&#xA; * provide transmitters, MIDI OUT ports and synthesizers provide&#xA; * receivers. A Sequencer typically provides transmitters for playback&#xA; * and receivers for recording.&#xA; *&#xA; * &lt;p>A &lt;code>MidiDevice&lt;/code> can be opened and closed explicitly as&#xA; * well as implicitly. Explicit opening is accomplished by calling&#xA; * {@link #open}, explicit closing is done by calling {@link&#xA; * #close} on the &lt;code>MidiDevice&lt;/code> instance.&#xA; * If an application opens a &lt;code>MidiDevice&lt;/code>&#xA; * explicitly, it has to close it explicitly to free system resources&#xA; * and enable the application to exit cleanly. Implicit opening is&#xA; * done by calling {@link javax.sound.midi.MidiSystem#getReceiver&#xA; * MidiSystem.getReceiver} and {@link&#xA; * javax.sound.midi.MidiSystem#getTransmitter&#xA; * MidiSystem.getTransmitter}. The &lt;code>MidiDevice&lt;/code> used by&#xA; * &lt;code>MidiSystem.getReceiver&lt;/code> and&#xA; * &lt;code>MidiSystem.getTransmitter&lt;/code> is implementation-dependant&#xA; * unless the properties &lt;code>javax.sound.midi.Receiver&lt;/code>&#xA; * and &lt;code>javax.sound.midi.Transmitter&lt;/code> are used (see the&#xA; * description of properties to select default providers in&#xA; * {@link javax.sound.midi.MidiSystem}). A &lt;code>MidiDevice&lt;/code>&#xA; * that was opened implicitly, is closed implicitly by closing the&#xA; * &lt;code>Receiver&lt;/code> or &lt;code>Transmitter&lt;/code> that resulted in&#xA; * opening it. If more than one implicitly opening&#xA; * &lt;code>Receiver&lt;/code> or &lt;code>Transmitter&lt;/code> were obtained by&#xA; * the application, the decive is closed after the last&#xA; * &lt;code>Receiver&lt;/code> or &lt;code>Transmitter&lt;/code> has been&#xA; * closed. On the other hand, calling &lt;code>getReceiver&lt;/code> or&#xA; * &lt;code>getTransmitter&lt;/code> on the device instance directly does&#xA; * not open the device implicitly. Closing these&#xA; * &lt;code>Transmitter&lt;/code>s and &lt;code>Receiver&lt;/code>s does not close&#xA; * the device implicitly. To use a device with &lt;code>Receiver&lt;/code>s&#xA; * or &lt;code>Transmitter&lt;/code>s obtained this way, the device has to&#xA; * be opened and closed explicitly.&#xA; *&#xA; * &lt;p>If implicit and explicit opening and closing are mixed on the&#xA; * same &lt;code>MidiDevice&lt;/code> instance, the following rules apply:&#xA; *&#xA; * &lt;ul>&#xA; * &lt;li>After an explicit open (either before or after implicit&#xA; * opens), the device will not be closed by implicit closing. The only&#xA; * way to close an explicitly opened device is an explicit close.&lt;/li>&#xA; *&#xA; * &lt;li>An explicit close always closes the device, even if it also has&#xA; * been opened implicitly. A subsequent implicit close has no further&#xA; * effect.&lt;/li>&#xA; * &lt;/ul>&#xA; *&#xA; * To detect if a MidiDevice represents a hardware MIDI port, the&#xA; * following programming technique can be used:&#xA; *&#xA; * &lt;pre>&#xA; * MidiDevice device = ...;&#xA; * if ( ! (device instanceof Sequencer) &amp;&amp; ! (device instanceof Synthesizer)) {&#xA; *   // we're now sure that device represents a MIDI port&#xA; *   // ...&#xA; * }&#xA; * &lt;/pre>&#xA; *&#xA; * &lt;p>&#xA; * A &lt;code>MidiDevice&lt;/code> includes a &lt;code>{@link MidiDevice.Info}&lt;/code> object&#xA; * to provide manufacturer information and so on.&#xA; *&#xA; * @see Synthesizer&#xA; * @see Sequencer&#xA; * @see Receiver&#xA; * @see Transmitter&#xA; *&#xA; * @version 1.38, 03/12/19&#xA; * @author Kara Kytle&#xA; * @author Florian Bomers&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

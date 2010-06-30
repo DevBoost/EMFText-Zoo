@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Context.java">
+  <comments>/*&#xA; * @(#)Context.java&#x9;1.24 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>omg</namespaces>
+  <namespaces>CORBA</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="Context">
+    <members xsi:type="members:InterfaceMethod" name="context_name">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Retrieves the name of this &lt;code>Context&lt;/code> object.&#xA;     *&#xA;     * @return&#x9;&#x9;&#x9;the name of this &lt;code>Context&lt;/code> object&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="parent">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Retrieves the parent of this &lt;code>Context&lt;/code> object.&#xA;     *&#xA;     * @return&#x9;&#x9;&#x9;the &lt;code>Context&lt;/code> object that is the&#xA;     *                    parent of this &lt;code>Context&lt;/code> object&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="create_child">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="child_ctx_name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a &lt;code>Context&lt;/code> object with the given string as its&#xA;     * name and with this &lt;code>Context&lt;/code> object set as its parent.&#xA;     * &lt;P>&#xA;     * The new &lt;code>Context&lt;/code> object is chained into its parent&#xA;     * &lt;code>Context&lt;/code> object.  This means that in a search for&#xA;     * matching property names, if a match is not found in this context,&#xA;     * the search will continue in the parent.  If that is not successful,&#xA;     * the search will continue in the grandparent, if there is one, and&#xA;     * so on.&#xA;     *&#xA;     *&#xA;     * @param child_ctx_name&#x9;the &lt;code>String&lt;/code> object to be set as&#xA;     *                        the name of the new &lt;code>Context&lt;/code> object&#xA;     * @return &#x9;&#x9;&#x9;the newly-created child &lt;code>Context&lt;/code> object&#xA;     *                    initialized with the specified name&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_one_value">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propname">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propvalue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Any.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a &lt;code>NamedValue&lt;/code> object and adds it to this&#xA;     * &lt;code>Context&lt;/code> object.  The &lt;code>name&lt;/code> field of the&#xA;     * new &lt;code>NamedValue&lt;/code> object is set to the given string,&#xA;     * the &lt;code>value&lt;/code> field is set to the given &lt;code>Any&lt;/code>&#xA;     * object, and the &lt;code>flags&lt;/code> field is set to zero.&#xA;     *&#xA;     * @param propname&#x9;&#x9;the name of the property to be set&#xA;     * @param propvalue&#x9;&#x9;the &lt;code>Any&lt;/code> object to which the&#xA;     *                        value of the property will be set.  The&#xA;     *                        &lt;code>Any&lt;/code> object's &lt;code>value&lt;/code>&#xA;     *                        field contains the value to be associated&#xA;     *                        with the given propname; the&#xA;     *                        &lt;code>kind&lt;/code> field must be set to&#xA;     *                        &lt;code>TCKind.tk_string&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_values">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="values">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="NVList.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;       I Sets one or more property values in this &lt;code>Context&lt;/code>&#xA;       * object. The &lt;code>NVList&lt;/code> supplied to this method&#xA;       * contains one or more &lt;code>NamedValue&lt;/code> objects.&#xA;       * In each &lt;code>NamedValue&lt;/code> object,&#xA;       * the &lt;code>name&lt;/code> field holds the name of the property, and&#xA;       * the &lt;code>flags&lt;/code> field must be set to zero.&#xA;       * The &lt;code>NamedValue&lt;/code> object's &lt;code>value&lt;/code> field&#xA;       * contains an &lt;code>Any&lt;/code> object, which, in turn, contains the value&#xA;       * for the property.  Since the value is always a string,&#xA;       * the &lt;code>Any&lt;/code> object must have the &lt;code>kind&lt;/code>&#xA;       * field of its &lt;code>TypeCode&lt;/code> set to &lt;code>TCKind.tk_string&lt;/code>.&#xA;       *&#xA;       * @param values&#x9;&#x9;an NVList containing the property&#xA;       * &#x9;&#x9;&#x9;&#x9;    names and associated values to be set&#xA;       *&#xA;       * @see #get_values&#xA;       * @see org.omg.CORBA.NamedValue&#xA;       * @see org.omg.CORBA.Any&#xA;       */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="delete_values">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propname">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Deletes from this &lt;code>Context&lt;/code> object the&#xA;     * &lt;code>NamedValue&lt;/code> object(s) whose&#xA;     * &lt;code>name&lt;/code> field matches the given property name.&#xA;     * If the &lt;code>String&lt;/code> object supplied for&#xA;     * &lt;code>propname&lt;/code> has a&#xA;     * trailing wildcard character (&quot;*&quot;), then&#xA;     * all &lt;code>NamedValue&lt;/code> objects whose &lt;code>name&lt;/code>&#xA;     * fields match will be deleted. The search scope is always&#xA;     * limited to this &lt;code>Context&lt;/code> object.&#xA;     * &lt;P>&#xA;     * If no matching property is found, an exception is returned.&#xA;     *&#xA;     * @param propname&#x9;&#x9;name of the property to be deleted&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="get_values">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NVList.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start_scope">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="op_flags">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pattern">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract">
+        <comments>/**&#xA;     * Retrieves the &lt;code>NamedValue&lt;/code> objects whose&#xA;     * &lt;code>name&lt;/code> field matches the given name or name&#xA;     * pattern.   This method allows for wildcard searches,&#xA;     * which means that there can be multiple matches and&#xA;     * therefore multiple values returned. If the&#xA;     * property is not found at the indicated level, the search&#xA;     * continues up the context object tree until a match is found or&#xA;     * all &lt;code>Context&lt;/code> objects in the chain have been exhausted.&#xA;     * &lt;P>&#xA;     * If no match is found, an error is returned and no property list&#xA;     * is returned.&#xA;     *&#xA;     * @param start_scope&#x9;&#x9;a &lt;code>String&lt;/code> object indicating the&#xA;     *                context object level at which to initiate the&#xA;     *&#x9;&#x9;&#x9;&#x9;search for the specified properties&#xA;     *&#x9;&#x9;&#x9;&#x9;(for example, &quot;_USER&quot;, &quot;_GROUP&quot;, &quot;_SYSTEM&quot;). Valid scope&#xA;     *&#x9;&#x9;&#x9;&#x9;names are implementation-specific. If a&#xA;     *&#x9;&#x9;&#x9;&#x9;scope name is omitted, the search&#xA;     *&#x9;&#x9;&#x9;&#x9;begins with the specified context&#xA;     *&#x9;&#x9;&#x9;&#x9;object. If the specified scope name is&#xA;     *&#x9;&#x9;&#x9;&#x9;not found, an exception is returned.&#xA;     * @param op_flags       an operation flag.  The one flag&#xA;     *                that may be specified is &lt;code>CTX_RESTRICT_SCOPE&lt;/code>.&#xA;     *                If this flag is specified, searching is limited to the&#xA;     *&#x9;&#x9;&#x9;&#x9;specified &lt;code>start_scope&lt;/code> or this&#xA;     *                &lt;code>Context&lt;/code> object.&#xA;     * @param pattern&#x9;&#x9;the property name whose values are to&#xA;     *&#x9;&#x9;&#x9;&#x9;be retrieved. &lt;code>pattern&lt;/code> may be a&#xA;     *                name or a name with a&#xA;     *&#x9;&#x9;&#x9;&#x9;trailing wildcard character (&quot;*&quot;).&#xA;     *&#xA;     * @return&#x9;&#x9;an &lt;code>NVList&lt;/code> containing all the property values&#xA;     *                (in the form of &lt;code>NamedValue&lt;/code> objects)&#xA;     *                whose associated property name matches the given name or&#xA;     *                name pattern&#xA;     * @see #set_values&#xA;     * @see org.omg.CORBA.NamedValue&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An object used in &lt;code>Request&lt;/code> operations&#xA; * to specify the context object in which context strings&#xA; * must be resolved before being sent along with the request invocation.&#xA; * A &lt;code>Context&lt;/code> object&#xA; * contains a list of properties in the form of &lt;code>NamedValue&lt;/code>&#xA; * objects. These properties represent information&#xA; * about the client, the environment, or the circumstances of a request&#xA; * and generally are properties that might be inconvenient&#xA; * to pass as parameters.&#xA; * &lt;P>&#xA; * A &lt;code>Context&lt;/code> object is created by first calling the&#xA; * &lt;code>ORB&lt;/code> method &lt;code>get_default_context&lt;/code>&#xA; * and then calling the method &lt;code>create_child&lt;/code> on the&#xA; * default context.&#xA; * &lt;P>&#xA; * Each property in a &lt;code>Context&lt;/code> object is represented by&#xA; * a &lt;code>NamedValue&lt;/code> object.  The property name is contained&#xA; * in the &lt;code>NamedValue&lt;/code> object's &lt;code>name&lt;/code> field, and&#xA; * the value associated with the name is contained in the &lt;code>Any&lt;/code>&#xA; * object that was assigned to the &lt;code>NamedValue&lt;/code> object's&#xA; * &lt;code>value&lt;/code> field.&#xA; * &lt;P>&#xA; * &lt;code>Context&lt;/code> properties can represent a portion of a client's&#xA; * or application's environment that is meant to be propagated to&#xA; * (and made implicitly part of) a server's environment.&#xA; * (Examples might be a window identifier or user preference information).&#xA; * Once a server has been invoked (that is, after the properties are&#xA; * propagated), the server may query its &lt;code>Context&lt;/code> object&#xA; * for these properties using the method &lt;code>get_values&lt;/code>.&#xA; *&#xA; *&lt;P>&#xA; * When an operation declaration includes a context clause,&#xA; * the stubs and skeletons will have an additional argument&#xA; * added for the context.  When an operation invocation occurs,&#xA; * the ORB causes the properties that were named in the operation&#xA; * definition in IDL and&#xA; * that are present in the client's &lt;code>Context&lt;/code> object&#xA; * to be provided in the &lt;code>Context&lt;/code> object parameter to&#xA; * the invoked method.&#xA; * &lt;P>&#xA; * &lt;code>Context&lt;/code> property names (which are strings)&#xA; * typically have the form of an OMG IDL identifier or&#xA; * a series of OMG IDL identifiers separated by periods.&#xA; * A context property name pattern is either a property name&#xA; * or a property name followed by a single &quot;*&quot;.  A property&#xA; * name pattern without a trailing &quot;*&quot; is said to match only&#xA; * itself.  A property name pattern of the form &quot;&amp;lt;name&amp;gt;*&quot; matches any&#xA; * property name that starts with &amp;lt;name&amp;gt; and continues with zero&#xA; * or more additional characters.&#xA; * &lt;P>&#xA; * Property name patterns are used in the context clause of&#xA; * an operation definition and as a parameter for the&#xA; * method &lt;code>Context.get_values&lt;/code>.&#xA; * &lt;P>&#xA; * &lt;code>Context&lt;/code> objects may be &quot;chained&quot; together to achieve a&#xA; * particular defaulting behavior.  A &lt;code>Context&lt;/code>&#xA; * object created with the method &lt;code>create_child&lt;/code> will&#xA; * be chained to its parent (the &lt;code>Context&lt;/code> object&#xA; * that created it), and that means that the parent will be searched&#xA; * after the child in a search for property names.&#xA; *&lt;P>&#xA; * Properties defined in a particular &lt;code>Context&lt;/code> object&#xA; * effectively override those properties in the next higher level.&#xA; * The scope used in a search for properties may be restricted by specifying a&#xA; * starting scope and by using the flag &lt;code>CTX_RESTRICT_SCOPE&lt;/code>&#xA; * when invoking the method &lt;code>get_values&lt;/code>.&#xA; * &lt;P>&#xA; * A &lt;code>Context&lt;/code> object may be named for purposes of specifying&#xA; * a starting search scope.&#xA; *&#xA; * @version 1.11, 09/09/97&#xA; * @since   JDK1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

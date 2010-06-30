@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ActivationInstantiator.java">
+  <comments>/*&#xA; * @(#)ActivationInstantiator.java&#x9;1.15 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>rmi</namespaces>
+  <namespaces>activation</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="ActivationInstantiator">
+    <members xsi:type="members:InterfaceMethod" name="newInstance">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="desc">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationDesc.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * The activator calls an instantiator's &lt;code>newInstance&lt;/code>&#xA;    * method in order to recreate in that group an object with the&#xA;    * activation identifier, &lt;code>id&lt;/code>, and descriptor,&#xA;    * &lt;code>desc&lt;/code>. The instantiator is responsible for: &lt;ul>&#xA;    *&#xA;    * &lt;li> determining the class for the object using the descriptor's&#xA;    * &lt;code>getClassName&lt;/code> method,&#xA;    *&#xA;    * &lt;li> loading the class from the code location obtained from the&#xA;    * descriptor (using the &lt;code>getLocation&lt;/code> method),&#xA;    *&#xA;    * &lt;li> creating an instance of the class by invoking the special&#xA;    * &quot;activation&quot; constructor of the object's class that takes two&#xA;    * arguments: the object's &lt;code>ActivationID&lt;/code>, and the&#xA;    * &lt;code>MarshalledObject&lt;/code> containing object specific&#xA;    * initialization data, and&#xA;    *&#xA;    * &lt;li> returning a MarshalledObject containing the stub for the&#xA;    * remote object it created &lt;/ul>&#xA;    *&#xA;    * @param id the object's activation identifier&#xA;    * @param desc the object's descriptor&#xA;    * @return a marshalled object containing the serialized&#xA;    * representation of remote object's stub&#xA;    * @exception ActivationException if object activation fails&#xA;    * @exception RemoteException if remote call fails&#xA;    * @since 1.2&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An &lt;code>ActivationInstantiator&lt;/code> is responsible for creating&#xA; * instances of &quot;activatable&quot; objects. A concrete subclass of&#xA; * &lt;code>ActivationGroup&lt;/code> implements the &lt;code>newInstance&lt;/code>&#xA; * method to handle creating objects within the group.&#xA; *&#xA; * @author &#x9;Ann Wollrath&#xA; * @version&#x9;1.15, 12/19/03&#xA; * @see &#x9;ActivationGroup&#xA; * @since&#x9;1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

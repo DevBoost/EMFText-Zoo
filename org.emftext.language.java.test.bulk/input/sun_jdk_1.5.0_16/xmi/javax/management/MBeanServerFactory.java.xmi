@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16 http://www.emftext.org/java/variables ../../java.ecore#/17" name="MBeanServerFactory.java">
+  <comments>/*&#xA; * @(#)MBeanServerFactory.java&#x9;1.55 04/02/23&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>management</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// java import</comments>
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/security/AccessController.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/security/Permission.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../java/security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../java/util/Iterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// RI import</comments>
+    <namespaces>javax</namespaces>
+    <namespaces>management</namespaces>
+    <namespaces>loading</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="loading/ClassLoaderRepository.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>defaults</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../com/sun/jmx/defaults/ServiceName.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>defaults</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../com/sun/jmx/defaults/JmxProperties.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>mbeanserver</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../com/sun/jmx/mbeanserver/GetPropertyAction.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>trace</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="MBeanServerFactory">
+    <members xsi:type="members:Constructor" name="MBeanServerFactory">
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/*&#xA;     * There are no instances of this class so don't generate the&#xA;     * default public constructor.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="builder">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanServerBuilder.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The builder that will be used to construct MBeanServers.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="releaseMBeanServer">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mbeanServer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Provide a new {@link javax.management.MBeanServerBuilder}.&#xA;     * @param builder The new MBeanServerBuilder that will be used to&#xA;     *        create {@link javax.management.MBeanServer}s. &#xA;     * @exception IllegalArgumentException if the given builder is null.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and &#xA;     * the caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;setMBeanServerBuilder&quot;)&lt;/code>.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     **/</comments>
+        <comments>// public static synchronized void </comments>
+        <comments>//    setMBeanServerBuilder(MBeanServerBuilder builder) {</comments>
+        <comments>//    checkPermission(&quot;setMBeanServerBuilder&quot;);</comments>
+        <comments>//    MBeanServerFactory.builder = builder;</comments>
+        <comments>// }</comments>
+        <comments>/**&#xA;     * Get the current {@link javax.management.MBeanServerBuilder}.&#xA;     *&#xA;     * @return the current {@link javax.management.MBeanServerBuilder}.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and &#xA;     * the caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;getMBeanServerBuilder&quot;)&lt;/code>.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     **/</comments>
+        <comments>// public static synchronized MBeanServerBuilder getMBeanServerBuilder() {</comments>
+        <comments>//     checkPermission(&quot;getMBeanServerBuilder&quot;);</comments>
+        <comments>//     return builder;</comments>
+        <comments>// }</comments>
+        <comments>/**&#xA;     * Remove internal MBeanServerFactory references to a created&#xA;     * MBeanServer. This allows the garbage collector to remove the&#xA;     * MBeanServer object.&#xA;     *&#xA;     * @param mbeanServer the MBeanServer object to remove.&#xA;     *&#xA;     * @exception java.lang.IllegalArgumentException if&#xA;     * &lt;code>mbeanServer&lt;/code> was not generated by one of the&#xA;     * &lt;code>createMBeanServer&lt;/code> methods, or if&#xA;     * &lt;code>releaseMBeanServer&lt;/code> was already called on it.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and &#xA;     * the caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;releaseMBeanServer&quot;)&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:StringReference" value="releaseMBeanServer"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createMBeanServer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return a new object implementing the MBeanServer interface&#xA;     * with a standard default domain name.  The default domain name&#xA;     * is used as the domain part in the ObjectName of MBeans when the&#xA;     * domain is specified by the user is null.&lt;/p>&#xA;     *&#xA;     * &lt;p>The standard default domain name is&#xA;     * &lt;code>DefaultDomain&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>The MBeanServer reference is internally kept. This will&#xA;     * allow &lt;CODE>findMBeanServer&lt;/CODE> to return a reference to&#xA;     * this MBeanServer object.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method is equivalent to &lt;code>createMBeanServer(null)&lt;/code>.&#xA;     *&#xA;     * @return the newly created MBeanServer.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and the &#xA;     * caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;createMBeanServer&quot;)&lt;/code>.&#xA;     *&#xA;     * @exception JMRuntimeException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists but the&#xA;     * class it names cannot be instantiated through a public&#xA;     * no-argument constructor; or if the instantiated builder returns&#xA;     * null from its {@link MBeanServerBuilder#newMBeanServerDelegate&#xA;     * newMBeanServerDelegate} or {@link&#xA;     * MBeanServerBuilder#newMBeanServer newMBeanServer} methods.&#xA;     *&#xA;     * @exception ClassCastException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists and can be&#xA;     * instantiated but is not assignment compatible with {@link&#xA;     * MBeanServerBuilder}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+          <arguments xsi:type="literals:NullLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createMBeanServer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="domain">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return a new object implementing the {@link MBeanServer}&#xA;     * interface with the specified default domain name.  The given&#xA;     * domain name is used as the domain part in the ObjectName of&#xA;     * MBeans when the domain is specified by the user is null.&lt;/p>&#xA;     *&#xA;     * &lt;p>The MBeanServer reference is internally kept. This will&#xA;     * allow &lt;CODE>findMBeanServer&lt;/CODE> to return a reference to&#xA;     * this MBeanServer object.&lt;/p>&#xA;     *&#xA;     * @param domain the default domain name for the created&#xA;     * MBeanServer.  This is the value that will be returned by {@link&#xA;     * MBeanServer#getDefaultDomain}.&#xA;     *&#xA;     * @return the newly created MBeanServer.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and &#xA;     * the caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;createMBeanServer&quot;)&lt;/code>.&#xA;     *&#xA;     * @exception JMRuntimeException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists but the&#xA;     * class it names cannot be instantiated through a public&#xA;     * no-argument constructor; or if the instantiated builder returns&#xA;     * null from its {@link MBeanServerBuilder#newMBeanServerDelegate&#xA;     * newMBeanServerDelegate} or {@link&#xA;     * MBeanServerBuilder#newMBeanServer newMBeanServer} methods.&#xA;     *&#xA;     * @exception ClassCastException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists and can be&#xA;     * instantiated but is not assignment compatible with {@link&#xA;     * MBeanServerBuilder}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:StringReference" value="createMBeanServer"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="mBeanServer">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.1/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newMBeanServer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return a new object implementing the MBeanServer interface&#xA;     * with a standard default domain name, without keeping an&#xA;     * internal reference to this new object.  The default domain name&#xA;     * is used as the domain part in the ObjectName of MBeans when the&#xA;     * domain is specified by the user is null.&lt;/p>&#xA;     *&#xA;     * &lt;p>The standard default domain name is&#xA;     * &lt;code>DefaultDomain&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>No reference is kept. &lt;CODE>findMBeanServer&lt;/CODE> will not&#xA;     * be able to return a reference to this MBeanServer object, but&#xA;     * the garbage collector will be able to remove the MBeanServer&#xA;     * object when it is no longer referenced.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method is equivalent to &lt;code>newMBeanServer(null)&lt;/code>.&lt;/p>&#xA;     *&#xA;     * @return the newly created MBeanServer.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and the &#xA;     * caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;newMBeanServer&quot;)&lt;/code>.&#xA;     *&#xA;     * @exception JMRuntimeException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists but the&#xA;     * class it names cannot be instantiated through a public&#xA;     * no-argument constructor; or if the instantiated builder returns&#xA;     * null from its {@link MBeanServerBuilder#newMBeanServerDelegate&#xA;     * newMBeanServerDelegate} or {@link&#xA;     * MBeanServerBuilder#newMBeanServer newMBeanServer} methods.&#xA;     *&#xA;     * @exception ClassCastException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists and can be&#xA;     * instantiated but is not assignment compatible with {@link&#xA;     * MBeanServerBuilder}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+          <arguments xsi:type="literals:NullLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newMBeanServer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="domain">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return a new object implementing the MBeanServer interface&#xA;     * with the specified default domain name, without keeping an&#xA;     * internal reference to this new object.  The given domain name&#xA;     * is used as the domain part in the ObjectName of MBeans when the&#xA;     * domain is specified by the user is null.&lt;/p>&#xA;     *&#xA;     * &lt;p>No reference is kept. &lt;CODE>findMBeanServer&lt;/CODE> will not&#xA;     * be able to return a reference to this MBeanServer object, but&#xA;     * the garbage collector will be able to remove the MBeanServer&#xA;     * object when it is no longer referenced.&lt;/p>&#xA;     *&#xA;     * @param domain the default domain name for the created&#xA;     * MBeanServer.  This is the value that will be returned by {@link&#xA;     * MBeanServer#getDefaultDomain}.&#xA;     *&#xA;     * @return the newly created MBeanServer.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and the &#xA;     * caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;newMBeanServer&quot;)&lt;/code>.&#xA;     *&#xA;     * @exception JMRuntimeException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists but the&#xA;     * class it names cannot be instantiated through a public&#xA;     * no-argument constructor; or if the instantiated builder returns&#xA;     * null from its {@link MBeanServerBuilder#newMBeanServerDelegate&#xA;     * newMBeanServerDelegate} or {@link&#xA;     * MBeanServerBuilder#newMBeanServer newMBeanServer} methods.&#xA;     *&#xA;     * @exception ClassCastException if the property&#xA;     * &lt;code>javax.management.builder.initial&lt;/code> exists and can be&#xA;     * instantiated but is not assignment compatible with {@link&#xA;     * MBeanServerBuilder}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:StringReference" value="newMBeanServer"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="mbsBuilder">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="MBeanServerBuilder.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+          <annotationsAndModifiers xsi:type="modifiers:Final">
+            <comments>// Get the builder. Creates a new one if necessary.</comments>
+            <comments>//</comments>
+          </annotationsAndModifiers>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <comments>// Returned value cannot be null.  NullPointerException if violated.</comments>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="delegate">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="MBeanServerDelegate.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="MBeanServerBuilder.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+            </initialValue>
+            <annotationsAndModifiers xsi:type="modifiers:Final"/>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="msg">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="MBeanServerBuilder.newMBeanServerDelegate() "/>
+                  <children xsi:type="references:StringReference" value="returned null"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </initialValue>
+                <annotationsAndModifiers xsi:type="modifiers:Final"/>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="JMRuntimeException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statements.1/@statement/@statements.0/@variable"/>
+              </throwable>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="mbeanServer">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="MBeanServerBuilder.class.xmi#//@classifiers.0/@members.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+                <arguments xsi:type="literals:NullLiteral"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statements.0/@variable"/>
+              </next>
+            </initialValue>
+            <annotationsAndModifiers xsi:type="modifiers:Final"/>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="msg">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="references:StringReference" value="MBeanServerBuilder.newMBeanServer() returned null"/>
+                <annotationsAndModifiers xsi:type="modifiers:Final"/>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="JMRuntimeException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statements.3/@statement/@statements.0/@variable"/>
+              </throwable>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statements.2/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.2/@statements.2/@variable"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="findMBeanServer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="agentId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return a list of registered MBeanServer objects.  A&#xA;     * registered MBeanServer object is one that was created by one of&#xA;     * the &lt;code>createMBeanServer&lt;/code> methods and not subsequently&#xA;     * released with &lt;code>releaseMBeanServer&lt;/code>.&lt;/p>&#xA;     *&#xA;     * @param agentId The agent identifier of the MBeanServer to&#xA;     * retrieve.  If this parameter is null, all registered&#xA;     * MBeanServers in this JVM are returned.  Otherwise, only&#xA;     * MBeanServers whose id is equal to &lt;code>agentId&lt;/code> are&#xA;     * returned.  The id of an MBeanServer is the&#xA;     * &lt;code>MBeanServerId&lt;/code> attribute of its delegate MBean.&#xA;     *&#xA;     * @return A list of MBeanServer objects.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and the &#xA;     * caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanServerPermission}(&quot;findMBeanServer&quot;)&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:StringReference" value="findMBeanServer"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/util/ArrayList.class.xmi#//@classifiers.0/@members.13"/>
+              </next>
+            </child>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="mbs">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@init">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../java/util/Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="name">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@statement/@statements.0/@variable"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../java/util/ArrayList.class.xmi#//@classifiers.0/@members.18"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@statement/@statements.0/@variable"/>
+                </next>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@statement/@statements.1/@variable"/>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@init">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../java/util/Iterator.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../java/util/Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../java/util/AbstractList.class.xmi#//@classifiers.0/@members.11"/>
+            </next>
+          </initialValue>
+        </init>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getClassLoaderRepository">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="loading/ClassLoaderRepository.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="server">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Return the ClassLoaderRepository used by the given MBeanServer.&#xA;     * This method is equivalent to {@link MBeanServer#getClassLoaderRepository() server.getClassLoaderRepository()}.&#xA;     * @param server The MBeanServer under examination. Since JMX 1.2,&#xA;     * if &lt;code>server&lt;/code> is &lt;code>null&lt;/code>, the result is a&#xA;     * {@link NullPointerException}.  This behavior differs from what&#xA;     * was implemented in JMX 1.1 - where the possibility to use&#xA;     * &lt;code>null&lt;/code> was deprecated.&#xA;     * @return The Class Loader Repository used by the given MBeanServer.&#xA;     * @exception SecurityException if there is a SecurityManager and &#xA;     * the caller's permissions do not include or imply &lt;code>{@link&#xA;     * MBeanPermission}(&quot;getClassLoaderRepository&quot;)&lt;/code>.&#xA;     *&#xA;     * @exception NullPointerException if &lt;code>server&lt;/code> is null.&#xA;     *&#xA;     * @since.unbundled JMX 1.1&#xA;     **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="MBeanServer.class.xmi#//@classifiers.0/@members.35"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="delegateName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="name">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../com/sun/jmx/defaults/ServiceName.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../com/sun/jmx/defaults/ServiceName.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable">
+                <comments>/* This can only happen if ServiceName.DELEGATE is an invalid&#xA;&#x9;       ObjectName, which means serious brokenness!  */</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:NullLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20">
+              <arguments xsi:type="references:StringReference" value="&lt;clinit>"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="internal error creating delegate ObjectName: "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@catcheBlocks.0/@parameter"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </expression>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="JMException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+        </expression>
+      </statements>
+      <modifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="mBeanServerName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mbs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="MBeanServer.class.xmi#//@classifiers.0/@members.11"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+                <arguments xsi:type="references:StringReference" value="MBeanServerId"/>
+              </next>
+            </child>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:NullLiteral"/>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="JMException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkPermission">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="action">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/SecurityException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sm">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/lang/SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../java/lang/System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../java/lang/System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="perm">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/security/Permission.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="MBeanServerPermission.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/lang/SecurityManager.class.xmi#//@classifiers.0/@members.22"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@statement/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addMBeanServer">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mbs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../java/util/ArrayList.class.xmi#//@classifiers.0/@members.18"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeMBeanServer">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mbs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MBeanServer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="removed">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../java/util/ArrayList.class.xmi#//@classifiers.0/@members.21"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20">
+              <arguments xsi:type="references:StringReference" value="removeMBeanServer"/>
+              <arguments xsi:type="references:StringReference" value="MBeanServer was not in list!"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="MBeanServer was not in list!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="mBeanServerList">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/util/ArrayList.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="loadBuilderClass">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="builderClassName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/ClassNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Load the builder class through the context class loader.&#xA;     * @param builderClassName The name of the builder class.&#xA;     **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="loader">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/lang/ClassLoader.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/lang/Thread.class.xmi#//@classifiers.0/@members.76"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../java/lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <comments>// Try with context class loader</comments>
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/lang/ClassLoader.class.xmi#//@classifiers.0/@members.24"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+              </next>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>// No context class loader? Try with Class.forName()</comments>
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../java/lang/Class.class.xmi#//@classifiers.0/@members.32"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newBuilder">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanServerBuilder.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="builderClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Creates the initial builder according to the &#xA;     * javax.management.builder.initial System property - if specified.&#xA;     * If any checked exception needs to be thrown, it is embedded in&#xA;     * a JMRuntimeException.&#xA;     **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="builder">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/lang/Class.class.xmi#//@classifiers.0/@members.35"/>
+              </next>
+            </initialValue>
+            <annotationsAndModifiers xsi:type="modifiers:Final"/>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="MBeanServerBuilder.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@statements.0/@variable"/>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@catcheBlocks.0/@parameter"/>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/RuntimeException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+        <catcheBlocks>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="msg">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Failed to instantiate a MBeanServerBuilder from "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+                <children xsi:type="references:StringReference" value=": "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@catcheBlocks.1/@parameter"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </initialValue>
+              <annotationsAndModifiers xsi:type="modifiers:Final"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="JMRuntimeException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@catcheBlocks.1/@statements.0/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@catcheBlocks.1/@parameter"/>
+            </throwable>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/Exception.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkMBeanServerBuilder">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Instantiate a new builder according to the &#xA;     * javax.management.builder.initial System property - if needed.&#xA;     **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="act">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../../java/security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/mbeanserver/GetPropertyAction.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../com/sun/jmx/defaults/JmxProperties.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../com/sun/jmx/defaults/JmxProperties.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="builderClassName">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../java/security/AccessController.class.xmi#//@classifiers.0/@members.1"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.0/@variable"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../java/security/AccessController.class.xmi#//@classifiers.0"/>
+              </child>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:TryBlock">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="newBuilderClass">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <annotationsAndModifiers xsi:type="modifiers:Final"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:ReflectiveClassReference"/>
+                  <target xsi:type="classifiers:Class" href="MBeanServerBuilder.class.xmi#//@classifiers.0"/>
+                </value>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.1/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                  </next>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.16">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.1/@variable"/>
+                </value>
+              </expression>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>// Check whether a new builder needs to be created</comments>
+            <statement xsi:type="statements:Block">
+              <comments>// no need to create a new builder...</comments>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="builderClass">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../java/lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </initialValue>
+                  <annotationsAndModifiers xsi:type="modifiers:Final"/>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return"/>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@statements.2/@statement/@statements.0/@variable"/>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <comments>// Create a new builder </comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.17">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@statements.0/@variable"/>
+              </value>
+            </expression>
+          </statements>
+          <catcheBlocks>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="msg">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Failed to load MBeanServerBuilder class "/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.1/@variable"/>
+                  <children xsi:type="references:StringReference" value=": "/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@catcheBlocks.0/@parameter"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </initialValue>
+                <annotationsAndModifiers xsi:type="modifiers:Final"/>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="JMRuntimeException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@catcheBlocks.0/@statements.0/@variable"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@statements.2/@catcheBlocks.0/@parameter"/>
+              </throwable>
+            </statements>
+            <parameter name="x">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/ClassNotFoundException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </parameter>
+          </catcheBlocks>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.21">
+              <arguments xsi:type="references:StringReference" value="checkMBeanServerBuilder"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Failed to instantiate MBeanServerBuilder: "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@catcheBlocks.0/@parameter"/>
+                <children xsi:type="references:StringReference" value="&#xA;&#x9;&#x9;Check the value of the "/>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/defaults/JmxProperties.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/defaults/JmxProperties.class.xmi#//@classifiers.0"/>
+                </children>
+                <children xsi:type="references:StringReference" value=" property."/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@catcheBlocks.0/@parameter"/>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/RuntimeException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getNewMBeanServerBuilder">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanServerBuilder.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Get the current {@link javax.management.MBeanServerBuilder},&#xA;     * as specified by the current value of the &#xA;     * javax.management.builder.initial property.&#xA;     *&#xA;     * This method consults the property and instantiates a new builder&#xA;     * if needed.&#xA;     *&#xA;     * @return the new current {@link javax.management.MBeanServerBuilder}.&#xA;     *&#xA;     * @exception SecurityException if there is a SecurityManager and &#xA;     * the caller's permissions do not make it possible to instantiate&#xA;     * a new builder.&#xA;     * @exception JMRuntimeException if the builder instantiation&#xA;     *   fails with a checked exception - &#xA;     *   {@link java.lang.ClassNotFoundException} etc...&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="trace">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="method">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="message">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Private Stuff **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                  <next xsi:type="references:ReflectiveClassReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../java/lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                    </next>
+                  </next>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="debug">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="method">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="message">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Private Stuff **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                  <next xsi:type="references:ReflectiveClassReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../java/lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                    </next>
+                  </next>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="error">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="method">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="message">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Private Stuff **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                  <next xsi:type="references:ReflectiveClassReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../java/lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                    </next>
+                  </next>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../com/sun/jmx/trace/TraceTags.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../com/sun/jmx/trace/Trace.class.xmi#//@classifiers.0"/>
+        </condition>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>Provides MBean server references.  There are no instances of&#xA; * this class.&lt;/p>&#xA; *&#xA; * &lt;p>Since JMX 1.2 this class makes it possible to replace the default&#xA; * MBeanServer implementation. This is done using the &#xA; * {@link javax.management.MBeanServerBuilder} class.&#xA; * The class of the initial MBeanServerBuilder to be&#xA; * instantiated can be specified through the &#xA; * &lt;b>javax.management.builder.initial&lt;/b> system property. &#xA; * The specified class must be a public subclass of &#xA; * {@link javax.management.MBeanServerBuilder}, and must have a public&#xA; * empty constructor.&#xA; * &lt;p>By default, if no value for that property is specified, an instance of&#xA; * {@link &#xA; * javax.management.MBeanServerBuilder javax.management.MBeanServerBuilder} &#xA; * is created. Otherwise, the MBeanServerFactory attempts to load the &#xA; * specified class using &#xA; * {@link java.lang.Thread#getContextClassLoader() &#xA; *   Thread.currentThread().getContextClassLoader()}, or if that is null, &#xA; * {@link java.lang.Class#forName(java.lang.String) Class.forName()}. Then&#xA; * it creates an initial instance of that Class using &#xA; * {@link java.lang.Class#newInstance()}. If any checked exception&#xA; * is raised during this process (e.g. &#xA; * {@link java.lang.ClassNotFoundException}, &#xA; * {@link java.lang.InstantiationException}) the MBeanServerFactory &#xA; * will propagate this exception from within a RuntimeException.&lt;/p>&#xA; *&#xA; * &lt;p>The &lt;b>javax.management.builder.initial&lt;/b> system property is &#xA; * consulted every time a new MBeanServer needs to be created, and the&#xA; * class pointed to by that property is loaded. If that class is different&#xA; * from that of the current MBeanServerBuilder, then a new MBeanServerBuilder&#xA; * is created. Otherwise, the MBeanServerFactory may create a new &#xA; * MBeanServerBuilder or reuse the current one.&lt;/p>&#xA; *&#xA; * &lt;p>If the class pointed to by the property cannot be &#xA; * loaded, or does not correspond to a valid subclass of MBeanServerBuilder&#xA; * then an exception is propagated, and no MBeanServer can be created until&#xA; * the &lt;b>javax.management.builder.initial&lt;/b> system property is reset to&#xA; * valid value.&lt;/p>&#xA; * &#xA; * &lt;p>The MBeanServerBuilder makes it possible to wrap the MBeanServers &#xA; * returned by the default MBeanServerBuilder implementation, for the purpose&#xA; * of e.g. adding an additional security layer.&lt;/p>&#xA; *&#xA; * @since 1.5&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

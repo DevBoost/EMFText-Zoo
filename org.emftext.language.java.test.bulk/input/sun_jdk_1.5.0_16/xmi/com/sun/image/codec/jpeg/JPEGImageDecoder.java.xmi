@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="JPEGImageDecoder.java">
+  <comments>/*&#xA; * @(#)JPEGImageDecoder.java&#x9;1.8 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <comments>/**********************************************************************&#xA; **********************************************************************&#xA; **********************************************************************&#xA; *** COPYRIGHT (c) 1997-1998 Eastman Kodak Company.                 ***&#xA; *** As  an unpublished  work pursuant to Title 17 of the United    ***&#xA; *** States Code.  All rights reserved.                             ***&#xA; **********************************************************************&#xA; **********************************************************************&#xA; **********************************************************************/</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>image</namespaces>
+  <namespaces>codec</namespaces>
+  <namespaces>jpeg</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>/**&#xA; * JPEGImageDecoder Interface&#xA; * &#xA; * JPEGImageDecoder decompresses an JPEG InputStream into a Raster or&#xA; * a BufferedImage depending upon the method invoked. Decoding the&#xA; * JPEG input stream is controlled by the parameters in the&#xA; * JPEGDecodeParam object.  If no JPEGDecodeParam object has been&#xA; * specified then one is created to contain information about a&#xA; * decompressed JPEG stream.&lt;P>&#xA; * &#xA; * The JPEGDecodeParam object is updated with information from the&#xA; * file header during decompression. If the input stream contains&#xA; * tables only information (no image data), the JPEGDecodeParam object&#xA; * will be updated and NULL returned for the output image. If the&#xA; * input stream contains only image data, the parameters and tables in&#xA; * the current JPEGDecodeParam object will be used to decode in&#xA; * decoding the JPEG stream. If no tables are set in the&#xA; * JPEGDecodeParam object, an exception will be thrown.&lt;P>&#xA; *&#xA; * ColorSpace comments: First off JPEG by specification is color&#xA; * blind!  That said, some color space conversion is done in the name&#xA; * of better compression ratios.  If a BufferedImage is requested&#xA; * common color conversions will be applied. Some updates to the&#xA; * standard color space designations have been made to allow this&#xA; * decoder to handle alpha channels.  See the JPEGDecodeParam&#xA; * description for more details on additional color space&#xA; * designations ( @see JPEGDecodeParam ).&lt;P>&#xA; *&#xA; * This decoder can process interchange, abbreviated and progressive&#xA; * jpeg streams.  However, progressive jpeg streams are treated as&#xA; * interchange streams.  They return once with the entire image in the&#xA; * image buffer.&#xA; */</comments>
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/Point.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>color</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/DirectColorModel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/DataBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/DataBufferByte.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/DataBufferInt.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/Raster.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/SampleModel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/WritableRaster.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="JPEGImageDecoder">
+    <members xsi:type="members:InterfaceMethod" name="getJPEGDecodeParam">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="JPEGDecodeParam.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the JPEGDecodeParam object that resulted from the most&#xA;     * recent decoding event.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setJPEGDecodeParam">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="jdp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="JPEGDecodeParam.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the JPEGDecodeParam object used to determine the features&#xA;     * of the decompression performed on the JPEG encoded data.  This&#xA;     * is ussually only needed for decoding abbreviated JPEG data&#xA;     * streams.&#xA;     * @param jdp JPEGDecodeParam object&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getInputStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * Get the input stream that decoding will occur from.&#xA;&#x9; * @return The stream that the decoder is currently assciated with.&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="decodeAsRaster">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/Raster.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Decode the JPEG stream that was passed as part of&#xA;     * construction.  The JPEG decompression will be performed&#xA;     * according to the current settings of the JPEGDecodeParam&#xA;     * object.  For a tables only stream this will return null.&#xA;     * @return Raster containg the image data.  Colorspace and other&#xA;     *         pertinent information can be obtained from the&#xA;     *         JPEGDecodeParam object.&#xA;     * @exception ImageFormatException if irregularities in the JPEG&#xA;     *            stream or an unknown condition is encountered.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="decodeAsBufferedImage">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ImageFormatException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Decodes the current JPEG data stream.  The result of decoding&#xA;     * this InputStream is a BufferedImage the ColorModel associated&#xA;     * with this BufferedImage is determined based on the encoded&#xA;     * COLOR_ID of the JPEGDecodeParam object.  For a tables only&#xA;     * stream this will return null.&#xA;     * @return BufferedImage containing the image data.&#xA;     * @exception ImageFormatException if irregularities in the JPEG&#xA;     *            stream or an unknown condition is encountered.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This interface describes a JPEG data stream decoder.  This decoder&#xA; * takes an InputStream that contains JPEG encoded image data.  The&#xA; * JPEGImageDecoder will decode the JPEG image data according to the&#xA; * parameters set in a JPEGDecodeParam object.  The resulting image&#xA; * data is returned in either a Raster or a BufferedImage.&#xA; * &lt;p>&#xA; * Note that the classes in the com.sun.image.codec.jpeg package are not&#xA; * part of the core Java APIs.  They are a part of Sun's JDK and JRE&#xA; * distributions.  Although other licensees may choose to distribute these&#xA; * classes, developers cannot depend on their availability in non-Sun&#xA; * implementations.  We expect that equivalent functionality will eventually&#xA; * be available in a core API or standard extension.&#xA; * &lt;p>&#xA; * &#xA; * @see JPEGCodec&#xA; * @see JPEGDecodeParam&#xA; * @see Raster&#xA; * @see BufferedImage&#xA; * @version 4 December 1997&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

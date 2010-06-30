@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ClientRequestInterceptorOperations.java">
+  <namespaces>org</namespaces>
+  <namespaces>omg</namespaces>
+  <namespaces>PortableInterceptor</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="ClientRequestInterceptorOperations">
+    <members xsi:type="members:InterfaceMethod" name="send_request">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Allows an Interceptor to query request information and modify the &#xA;     * service context before the request is sent to the server.&#xA;     * &lt;p>&#xA;     * This interception point may throw a system exception. If it does, &#xA;     * no other Interceptors' &lt;code>send_request&lt;/code> operations are called. &#xA;     * Those Interceptors on the Flow Stack are popped and their &#xA;     * &lt;code>receive_exception&lt;/code> interception points are called. This &#xA;     * interception point may also throw a &lt;code>ForwardRequest&lt;/code> &#xA;     * exception. If an Interceptor throws this exception, no other &#xA;     * Interceptors' &lt;code>send_request&lt;/code> operations are &#xA;     * called. Those Interceptors on the Flow Stack are popped and their &#xA;     * &lt;code>receive_other&lt;/code> interception points are called. &#xA;     * &lt;p>&#xA;     * Compliant Interceptors shall properly follow completion_status &#xA;     * semantics if they throw a system exception from this interception &#xA;     * point. The &lt;code>completion_status&lt;/code> shall be &#xA;     * &lt;code>COMPLETED_NO&lt;/code>.&#xA;     *&#xA;     * @param ri Information about the current request being intercepted.&#xA;     * @exception ForwardRequest If thrown, indicates to the ORB that a&#xA;     *     retry of the request should occur with the new object given in&#xA;     *     the exception.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>PortableInterceptor</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClientRequestInfo.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableInterceptor</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ForwardRequest.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="send_poll">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Allows an Interceptor to query information during a Time-Independent &#xA;     * Invocation (TII) polling get reply sequence. &#xA;     * &lt;p>&#xA;     * With TII, an application may poll for a response to a request sent &#xA;     * previously by the polling client or some other client. This poll is &#xA;     * reported to Interceptors through the &lt;code>send_poll&lt;/code> &#xA;     * interception point and the response is returned through the &#xA;     * &lt;code>receive_reply&lt;/code> or &lt;code>receive_exception&lt;/code> &#xA;     * interception points.  If the response is not available before the&#xA;     * poll time-out expires, the system exception &lt;code>TIMEOUT&lt;/code> is&#xA;     * thrown and &lt;code>receive_exception&lt;/code> is called with this &#xA;     * exception. &#xA;     * &lt;p>&#xA;     * This interception point may throw a system exception. If it does, &#xA;     * no other Interceptors' &lt;code>send_poll&lt;/code> operations are &#xA;     * called. Those Interceptors on the Flow Stack are popped and their &#xA;     * &lt;code>receive_exception&lt;/code> interception points are called. &#xA;     * &lt;p>&#xA;     * Compliant Interceptors shall properly follow &#xA;     * &lt;code>completion_status&lt;/code> semantics if they throw a system &#xA;     * exception from this interception point. The completion_status shall be &#xA;     * &lt;code>COMPLETED_NO&lt;/code>.&#xA;     * &#xA;     * @param ri Information about the current request being intercepted.&#xA;     * @exception TIMEOUT thrown if the response is not available before &#xA;     *     the poll time-out expires&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>PortableInterceptor</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClientRequestInfo.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="receive_reply">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Allows an Interceptor to query the information on a reply after it &#xA;     * is returned from the server and before control is returned to the &#xA;     * client. &#xA;     * &lt;p>&#xA;     * This interception point may throw a system exception. If it does, &#xA;     * no other Interceptors' &lt;code>receive_reply&lt;/code> operations are &#xA;     * called. The remaining Interceptors in the Flow Stack shall have &#xA;     * their &lt;code>receive_exception&lt;/code> interception point called. &#xA;     * &lt;p>&#xA;     * Compliant Interceptors shall properly follow &#xA;     * &lt;code>completion_status&lt;/code> semantics if they throw a system &#xA;     * exception from this interception point. The &#xA;     * &lt;code>completion_status&lt;/code> shall be &lt;code>COMPLETED_YES&lt;/code>.&#xA;     *&#xA;     * @param ri Information about the current request being intercepted.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>PortableInterceptor</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClientRequestInfo.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="receive_exception">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Indicates to the interceptor that an exception occurred.  Allows&#xA;     * an Interceptor to query the exception's information before it is &#xA;     * thrown to the client.&#xA;     * &lt;p>&#xA;     * This interception point may throw a system exception. This has the &#xA;     * effect of changing the exception which successive Interceptors &#xA;     * popped from the Flow Stack receive on their calls to &#xA;     * &lt;code>receive_exception&lt;/code>. The exception thrown to the client &#xA;     * will be the last exception thrown by an Interceptor, or the original &#xA;     * exception if no Interceptor changes the exception. &#xA;     * &lt;p>&#xA;     * This interception point may also throw a &lt;code>ForwardRequest&lt;/code> &#xA;     * exception.  If an Interceptor throws this exception, no other &#xA;     * Interceptors' &lt;code>receive_exception&lt;/code> operations are called. &#xA;     * The remaining Interceptors in the Flow Stack are popped and have their &#xA;     * &lt;code>receive_other&lt;/code> interception point called. &#xA;     * &lt;p>&#xA;     * If the &lt;code>completion_status&lt;/code> of the exception is not &#xA;     * &lt;code>COMPLETED_NO&lt;/code>, then it is inappropriate for this &#xA;     * interception point to throw a &lt;code>ForwardRequest&lt;/code> exception. &#xA;     * The request s at-most-once semantics would be lost. &#xA;     * &lt;p>&#xA;     * Compliant Interceptors shall properly follow &#xA;     * &lt;code>completion_status&lt;/code> semantics if they throw a system &#xA;     * exception from this interception point. If the original exception is &#xA;     * a system exception, the &lt;code>completion_status&lt;/code> of the new &#xA;     * exception shall be the same as on the original. If the original &#xA;     * exception is a user exception, then the &lt;code>completion_status&lt;/code> &#xA;     * of the new exception shall be &lt;code>COMPLETED_YES&lt;/code>. &#xA;     * &lt;p>&#xA;     * Under some conditions, depending on what policies are in effect, an &#xA;     * exception (such as &lt;code>COMM_FAILURE&lt;/code>) may result in a retry &#xA;     * of the request. While this retry is a new request with respect to &#xA;     * Interceptors, there is one point of correlation between the original &#xA;     * request and the retry: because control has not returned to the &#xA;     * client, the &lt;code>PortableInterceptor.Current&lt;/code> for both the &#xA;     * original request and the retrying request is the same.&#xA;     *&#xA;     * @param ri Information about the current request being intercepted.&#xA;     * @exception ForwardRequest If thrown, indicates to the ORB that a&#xA;     *     retry of the request should occur with the new object given in&#xA;     *     the exception.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>PortableInterceptor</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClientRequestInfo.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableInterceptor</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ForwardRequest.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="receive_other">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Allows an Interceptor to query the information available when a &#xA;     * request results in something other than a normal reply or an &#xA;     * exception. For example, a request could result in a retry &#xA;     * (e.g., a GIOP Reply with a &lt;code>LOCATION_FORWARD&lt;/code> status was &#xA;     * received); or on asynchronous calls, the reply does not immediately &#xA;     * follow the request, but control shall return to the client and an &#xA;     * ending interception point shall be called. &#xA;     * &lt;p>&#xA;     * For retries, depending on the policies in effect, a new request may or &#xA;     * may not follow when a retry has been indicated. If a new request does &#xA;     * follow, while this request is a new request, with respect to &#xA;     * Interceptors, there is one point of correlation between the original &#xA;     * request and the retry: because control has not returned to the client, &#xA;     * the request scoped &lt;code>PortableInterceptor.Current&lt;/code> for both &#xA;     * the original request and the retrying request is the same.  &#xA;     * &lt;p>&#xA;     * This interception point may throw a system exception. If it does, no &#xA;     * other Interceptors' &lt;code>receive_other&lt;/code> operations are called. &#xA;     * The remaining Interceptors in the Flow Stack are popped and have &#xA;     * their &lt;code>receive_exception&lt;/code> interception point called.&#xA;     * &lt;p>&#xA;     * This interception point may also throw a &lt;code>ForwardRequest&lt;/code> &#xA;     * exception.  If an Interceptor throws this exception, successive &#xA;     * Interceptors' &lt;code>receive_other&lt;/code> operations are called with &#xA;     * the new information provided by the &lt;code>ForwardRequest&lt;/code> &#xA;     * exception. &#xA;     * &lt;p>&#xA;     * Compliant Interceptors shall properly follow &#xA;     * &lt;code>completion_status&lt;/code> semantics if they throw a system &#xA;     * exception from this interception point. The &#xA;     * &lt;code>completion_status&lt;/code> shall be &lt;code>COMPLETED_NO&lt;/code>. &#xA;     * If the target invocation had completed, this interception point &#xA;     * would not be called.&#xA;     * &#xA;     * @param ri Information about the current request being intercepted.&#xA;     * @exception ForwardRequest If thrown, indicates to the ORB that a&#xA;     *     retry of the request should occur with the new object given in&#xA;     *     the exception.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ri">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>PortableInterceptor</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClientRequestInfo.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>PortableInterceptor</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ForwardRequest.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xD;&#xA;* org/omg/PortableInterceptor/ClientRequestInterceptorOperations.java .&#xD;&#xA;* Generated by the IDL-to-Java compiler (portable), version &quot;3.2&quot;&#xD;&#xA;* from ../../../../src/share/classes/org/omg/PortableInterceptor/Interceptors.idl&#xD;&#xA;* Wednesday, May 28, 2008 8:37:40 AM GMT&#xD;&#xA;*/</comments>
+      <comments>/**&#xA;   * Client-side request interceptor.&#xA;   * &lt;p>&#xA;   * A request Interceptor is designed to intercept the flow of a &#xA;   * request/reply sequence through the ORB at specific points so that &#xA;   * services can query the request information and manipulate the service &#xA;   * contexts which are propagated between clients and servers. The primary &#xA;   * use of request Interceptors is to enable ORB services to transfer &#xA;   * context information between clients and servers. There are two types &#xA;   * of request Interceptors: client-side and server-side. &#xA;   * &lt;p>&#xA;   * To write a client-side Interceptor, implement the &#xA;   * &lt;code>ClientRequestInterceptor&lt;/code> interface. &#xA;   *&#xA;   * @see ClientRequestInfo&#xA;   */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <namespaces>org</namespaces>
+      <namespaces>omg</namespaces>
+      <namespaces>PortableInterceptor</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="InterceptorOperations.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

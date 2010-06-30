@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../java.ecore#/17" name="Clipboard.java">
+  <comments>/*&#xA; * @(#)Clipboard.java&#x9;1.22 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>datatransfer</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../EventQueue.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../util/Set.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../util/HashSet.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../util/Arrays.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>sun</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Clipboard">
+    <members xsi:type="members:Field" name="name">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="owner">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="ClipboardOwner.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="contents">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="flavorListeners">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** &#xA;     * An aggregate of flavor listeners registered on this local clipboard.&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="currentDataFlavors">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../util/Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** &#xA;     * A set of &lt;code>DataFlavor&lt;/code>s that is available on&#xA;     * this local clipboard. It is used for tracking changes&#xA;     * of &lt;code>DataFlavor/code>s available on this clipboard.&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="Clipboard">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a clipboard object.&#xA;     *&#xA;     * @see java.awt.Toolkit#getSystemClipboard&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the name of this clipboard object.&#xA;     *&#xA;     * @see java.awt.Toolkit#getSystemClipboard&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setContents">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="contents">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="owner">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClipboardOwner.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the current contents of the clipboard to the specified&#xA;     * transferable object and registers the specified clipboard owner&#xA;     * as the owner of the new contents.&#xA;     * &lt;p>&#xA;     * If there is an existing owner different from the argument&#xA;     * &lt;code>owner&lt;/code>, that owner is notified that it no longer&#xA;     * holds ownership of the clipboard contents via an invocation&#xA;     * of &lt;code>ClipboardOwner.lostOwnership()&lt;/code> on that owner.&#xA;     * An implementation of &lt;code>setContents()&lt;/code> is free not&#xA;     * to invoke &lt;code>lostOwnership()&lt;/code> directly from this method.&#xA;     * For example, &lt;code>lostOwnership()&lt;/code> may be invoked later on&#xA;     * a different thread. The same applies to &lt;code>FlavorListener&lt;/code>s&#xA;     * registered on this clipboard.&#xA;     * &lt;p>&#xA;     * The method throws &lt;code>IllegalStateException&lt;/code> if the clipboard&#xA;     * is currently unavailable. For example, on some platforms, the system&#xA;     * clipboard is unavailable while it is accessed by another application.&#xA;     *&#xA;     * @param contents the transferable object representing the&#xA;     *                 clipboard content&#xA;     * @param owner the object which owns the clipboard content&#xA;     * @throws IllegalStateException if the clipboard is currently unavailable&#xA;     * @see java.awt.Toolkit#getSystemClipboard&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldOwner">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="ClipboardOwner.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldContents">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../EventQueue.class.xmi#//@classifiers.0/@members.43"/>
+                <arguments xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <anonymousClass>
+                    <members xsi:type="members:ClassMethod" name="run">
+                      <typeReference xsi:type="types:Void"/>
+                      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="ClipboardOwner.class.xmi#//@classifiers.0/@members.0"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                              <next xsi:type="references:SelfReference">
+                                <self xsi:type="literals:This"/>
+                              </next>
+                            </arguments>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+                          </next>
+                        </expression>
+                      </statements>
+                    </members>
+                  </anonymousClass>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../EventQueue.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getContents">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requestor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a transferable object representing the current contents&#xA;     * of the clipboard.  If the clipboard currently has no contents,&#xA;     * it returns &lt;code>null&lt;/code>. The parameter Object requestor is&#xA;     * not currently used.  The method throws &#xA;     * &lt;code>IllegalStateException&lt;/code> if the clipboard is currently &#xA;     * unavailable.  For example, on some platforms, the system clipboard is &#xA;     * unavailable while it is accessed by another application.&#xA;     *&#xA;     * @param requestor the object requesting the clip data  (not used)&#xA;     * @return the current transferable object on the clipboard&#xA;     * @throws IllegalStateException if the clipboard is currently unavailable&#xA;     * @see java.awt.Toolkit#getSystemClipboard&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAvailableDataFlavors">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DataFlavor.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of &lt;code>DataFlavor&lt;/code>s in which the current&#xA;     * contents of this clipboard can be provided. If there are no&#xA;     * &lt;code>DataFlavor&lt;/code>s available, this method returns a zero-length&#xA;     * array.&#xA;     *&#xA;     * @return an array of &lt;code>DataFlavor&lt;/code>s in which the current&#xA;     *         contents of this clipboard can be provided&#xA;     *&#xA;     * @throws IllegalStateException if this clipboard is currently unavailable&#xA;     * &#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cntnts">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="literals:NullLiteral"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="arrays:ArrayInstantiationBySize">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DataFlavor.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Transferable.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isDataFlavorAvailable">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="flavor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="DataFlavor.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns whether or not the current contents of this clipboard can be&#xA;     * provided in the specified &lt;code>DataFlavor&lt;/code>.&#xA;     *&#xA;     * @param flavor the requested &lt;code>DataFlavor&lt;/code> for the contents&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the current contents of this clipboard&#xA;     *         can be provided in the specified &lt;code>DataFlavor&lt;/code>;&#xA;     *         &lt;code>false&lt;/code> otherwise&#xA;     *&#xA;     * @throws NullPointerException if &lt;code>flavor&lt;/code> is &lt;code>null&lt;/code>&#xA;     * @throws IllegalStateException if this clipboard is currently unavailable&#xA;     * &#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="flavor"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cntnts">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="literals:NullLiteral"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Transferable.class.xmi#//@classifiers.0/@members.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getData">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="flavor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="DataFlavor.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnsupportedFlavorException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an object representing the current contents of this clipboard&#xA;     * in the specified &lt;code>DataFlavor&lt;/code>.&#xA;     * The class of the object returned is defined by the representation&#xA;     * class of &lt;code>flavor&lt;/code>.&#xA;     *&#xA;     * @param flavor the requested &lt;code>DataFlavor&lt;/code> for the contents&#xA;     *&#xA;     * @return an object representing the current contents of this clipboard&#xA;     *         in the specified &lt;code>DataFlavor&lt;/code>&#xA;     *&#xA;     * @throws NullPointerException if &lt;code>flavor&lt;/code> is &lt;code>null&lt;/code>&#xA;     * @throws IllegalStateException if this clipboard is currently unavailable&#xA;     * @throws UnsupportedFlavorException if the requested &lt;code>DataFlavor&lt;/code>&#xA;     *         is not available&#xA;     * @throws IOException if the data in the requested &lt;code>DataFlavor&lt;/code>&#xA;     *         can not be retrieved&#xA;     *&#xA;     * @see DataFlavor#getRepresentationClass&#xA;     * &#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="flavor"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cntnts">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="literals:NullLiteral"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="UnsupportedFlavorException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Transferable.class.xmi#//@classifiers.0/@members.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addFlavorListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Registers the specified &lt;code>FlavorListener&lt;/code> to receive&#xA;     * &lt;code>FlavorEvent&lt;/code>s from this clipboard.&#xA;     * If &lt;code>listener&lt;/code> is &lt;code>null&lt;/code>, no exception&#xA;     * is thrown and no action is performed.&#xA;     *&#xA;     * @param listener the listener to be added&#xA;     *&#xA;     * @see #removeFlavorListener&#xA;     * @see #getFlavorListeners&#xA;     * @see FlavorListener&#xA;     * @see FlavorEvent&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.16"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:ReflectiveClassReference"/>
+                  <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0/@members.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeFlavorListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes the specified &lt;code>FlavorListener&lt;/code> so that it no longer&#xA;     * receives &lt;code>FlavorEvent&lt;/code>s from this &lt;code>Clipboard&lt;/code>.&#xA;     * This method performs no function, nor does it throw an exception, if&#xA;     * the listener specified by the argument was not previously added to this&#xA;     * &lt;code>Clipboard&lt;/code>.&#xA;     * If &lt;code>listener&lt;/code> is &lt;code>null&lt;/code>, no exception&#xA;     * is thrown and no action is performed.&#xA;     *&#xA;     * @param listener the listener to be removed&#xA;     *&#xA;     * @see #addFlavorListener&#xA;     * @see #getFlavorListeners&#xA;     * @see FlavorListener&#xA;     * @see FlavorEvent&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getFlavorListeners">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of all the &lt;code>FlavorListener&lt;/code>s currently&#xA;     * registered on this &lt;code>Clipboard&lt;/code>.&#xA;     *&#xA;     * @return all of this clipboard's &lt;code>FlavorListener&lt;/code>s or an empty&#xA;     *         array if no listeners are currently registered&#xA;     * @see #addFlavorListener&#xA;     * @see #removeFlavorListener&#xA;     * @see FlavorListener&#xA;     * @see FlavorEvent&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:ConditionalExpression">
+          <child xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </child>
+          <expressionIf xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </expressionIf>
+          <expressionElse xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arrayDimensionsBefore/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0/@members.6"/>
+              </next>
+            </child>
+          </expressionElse>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireFlavorsChanged">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Checks change of the &lt;code>DataFlavor&lt;/code>s and, if necessary,&#xA;     * notifies all listeners that have registered interest for notification&#xA;     * on &lt;code>FlavorEvent&lt;/code>s.&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="prevDataFlavors">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../util/Set.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.16"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../util/Set.class.xmi#//@classifiers.0/@members.13"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="flavorListenerArray">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arrayDimensionsBefore/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../sun/awt/EventListenerAggregate.class.xmi#//@classifiers.0/@members.5"/>
+              </next>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="listener">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="FlavorListener.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@init"/>
+                </arraySelectors>
+              </initialValue>
+              <annotationsAndModifiers xsi:type="modifiers:Final"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../EventQueue.class.xmi#//@classifiers.0/@members.43"/>
+                <arguments xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <anonymousClass>
+                    <members xsi:type="members:ClassMethod" name="run">
+                      <typeReference xsi:type="types:Void"/>
+                      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@statement/@statements.0/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="FlavorListener.class.xmi#//@classifiers.0/@members.0"/>
+                            <arguments xsi:type="instantiations:NewConstructorCall">
+                              <typeReference xsi:type="types:NamespaceClassifierReference">
+                                <classifierReferences>
+                                  <target xsi:type="classifiers:Class" href="FlavorEvent.class.xmi#//@classifiers.0"/>
+                                </classifierReferences>
+                              </typeReference>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                                <next xsi:type="references:SelfReference">
+                                  <self xsi:type="literals:This"/>
+                                </next>
+                              </arguments>
+                            </arguments>
+                          </next>
+                        </expression>
+                      </statements>
+                    </members>
+                  </anonymousClass>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../EventQueue.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@variable">
+            <next xsi:type="references:IdentifierReference"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAvailableDataFlavorSet">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../util/Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Returns a set of &lt;code>DataFlavor&lt;/code>s currently available&#xA;     * on this clipboard.&#xA;     *&#xA;     * @return a set of &lt;code>DataFlavor&lt;/code>s currently available&#xA;     *         on this clipboard&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="set">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../util/Set.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../util/HashSet.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="contents">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="Transferable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="literals:NullLiteral"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="flavors">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DataFlavor.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arrayDimensionsBefore/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Transferable.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../util/Set.class.xmi#//@classifiers.0/@members.9"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../util/Arrays.class.xmi#//@classifiers.0/@members.93"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@statement/@statements.0/@variable"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../util/Arrays.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@statement/@statements.0/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A class that implements a mechanism to transfer data using&#xA; * cut/copy/paste operations.&#xA; * &lt;p>&#xA; * {@link FlavorListener}s may be registered on an instance of the&#xA; * Clipboard class to be notified about changes to the set of&#xA; * {@link DataFlavor}s available on this clipboard (see&#xA; * {@link #addFlavorListener}).&#xA; *&#xA; * @see java.awt.Toolkit#getSystemClipboard&#xA; * @see java.awt.Toolkit#getSystemSelection&#xA; *&#xA; * @version &#x9;1.22, 12/19/03&#xA; * @author&#x9;Amy Fowler&#xA; * @author      Alexander Gerasimov&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

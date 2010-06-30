@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="DynSequenceOperations.java">
+  <namespaces>org</namespaces>
+  <namespaces>omg</namespaces>
+  <namespaces>DynamicAny</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="DynSequenceOperations">
+    <members xsi:type="members:InterfaceMethod" name="get_length">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;        * Returns the current length of the sequence.&#xA;        */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_length">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;        * Sets the length of the sequence.&#xA;        * Increasing the length of a sequence adds new elements at the tail without affecting the values&#xA;        * of already existing elements. Newly added elements are default-initialized.&#xA;        * Increasing the length of a sequence sets the current position to the first newly-added element&#xA;        * if the previous current position was -1. Otherwise, if the previous current position was not -1,&#xA;        * the current position is not affected.&#xA;        * Decreasing the length of a sequence removes elements from the tail without affecting the value&#xA;        * of those elements that remain. The new current position after decreasing the length of a sequence&#xA;        * is determined as follows:&#xA;        * &lt;UL>&#xA;        * &lt;LI>If the length of the sequence is set to zero, the current position is set to -1.&#xA;        * &lt;LI>If the current position is -1 before decreasing the length, it remains at -1.&#xA;        * &lt;LI>If the current position indicates a valid element and that element is not removed when the length&#xA;        *     is decreased, the current position remains unaffected.&#xA;        * &lt;LI>If the current position indicates a valid element and that element is removed,&#xA;        *     the current position is set to -1.&#xA;        * &lt;/UL>&#xA;        *&#xA;        * @exception InvalidValue if this is a bounded sequence and len is larger than the bound&#xA;        */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="len">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/InvalidValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="get_elements">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;        * Returns the elements of the sequence.&#xA;        */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>CORBA</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../CORBA/Any.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_elements">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;        * Sets the elements of a sequence.&#xA;        * The length of the DynSequence is set to the length of value. The current position is set to zero&#xA;        * if value has non-zero length and to -1 if value is a zero-length sequence.&#xA;        *&#xA;        * @exception TypeMismatch if value contains one or more elements whose TypeCode is not equivalent&#xA;        *            to the element TypeCode of the DynSequence&#xA;        * @exception InvalidValue if the length of value exceeds the bound of a bounded sequence&#xA;        */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>CORBA</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../CORBA/Any.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/InvalidValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="get_elements_as_dyn_any">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;        * Returns the DynAnys representing the elements of the sequence.&#xA;        */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="DynAny.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_elements_as_dyn_any">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;        * Sets the elements of a sequence using DynAnys.&#xA;        * The length of the DynSequence is set to the length of value. The current position is set to zero&#xA;        * if value has non-zero length and to -1 if value is a zero-length sequence.&#xA;        *&#xA;        * @exception TypeMismatch if value contains one or more elements whose TypeCode is not equivalent&#xA;        *            to the element TypeCode of the DynSequence&#xA;        * @exception InvalidValue if the length of value exceeds the bound of a bounded sequence&#xA;        */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>DynamicAny</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="DynAny.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/InvalidValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xD;&#xA;* org/omg/DynamicAny/DynSequenceOperations.java .&#xD;&#xA;* Generated by the IDL-to-Java compiler (portable), version &quot;3.2&quot;&#xD;&#xA;* from ../../../../src/share/classes/org/omg/DynamicAny/DynamicAny.idl&#xD;&#xA;* Wednesday, May 28, 2008 8:37:44 AM GMT&#xD;&#xA;*/</comments>
+      <comments>/**&#xA;    * DynSequence objects support the manipulation of IDL sequences.&#xA;    */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <namespaces>org</namespaces>
+      <namespaces>omg</namespaces>
+      <namespaces>DynamicAny</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="DynAnyOperations.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

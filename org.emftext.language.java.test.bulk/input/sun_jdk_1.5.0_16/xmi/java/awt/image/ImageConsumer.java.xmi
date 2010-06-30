@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ImageConsumer.java">
+  <comments>/*&#xA; * @(#)ImageConsumer.java&#x9;1.23 04/07/16&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>image</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../util/Hashtable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="ImageConsumer">
+    <members xsi:type="members:InterfaceMethod" name="setDimensions">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * The dimensions of the source image are reported using the&#xA;     * setDimensions method call.&#xA;     * @param width the width of the source image&#xA;     * @param height the height of the source image&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="width">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="height">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setProperties">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the extensible list of properties associated with this image.&#xA;     * @param props the list of properties to be associated with this&#xA;     *        image&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="props">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+            <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+            <target xsi:type="classifiers:Class" href="../../util/Hashtable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setColorModel">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the ColorModel object used for the majority of&#xA;     * the pixels reported using the setPixels method&#xA;     * calls.  Note that each set of pixels delivered using setPixels&#xA;     * contains its own ColorModel object, so no assumption should&#xA;     * be made that this model will be the only one used in delivering&#xA;     * pixel values.  A notable case where multiple ColorModel objects&#xA;     * may be seen is a filtered image when for each set of pixels&#xA;     * that it filters, the filter&#xA;     * determines  whether the&#xA;     * pixels can be sent on untouched, using the original ColorModel,&#xA;     * or whether the pixels should be modified (filtered) and passed&#xA;     * on using a ColorModel more convenient for the filtering process.&#xA;     * @param model the specified &lt;code>ColorModel&lt;/code> &#xA;     * @see ColorModel&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="model">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setHints">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the hints that the ImageConsumer uses to process the&#xA;     * pixels delivered by the ImageProducer.&#xA;     * The ImageProducer can deliver the pixels in any order, but&#xA;     * the ImageConsumer may be able to scale or convert the pixels&#xA;     * to the destination ColorModel more efficiently or with higher&#xA;     * quality if it knows some information about how the pixels will&#xA;     * be delivered up front.  The setHints method should be called&#xA;     * before any calls to any of the setPixels methods with a bit mask&#xA;     * of hints about the manner in which the pixels will be delivered.&#xA;     * If the ImageProducer does not follow the guidelines for the&#xA;     * indicated hint, the results are undefined.&#xA;     * @param hintflags a set of hints that the ImageConsumer uses to&#xA;     *        process the pixels&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hintflags">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:Field" name="RANDOMPIXELORDER">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The pixels will be delivered in a random order.  This tells the&#xA;     * ImageConsumer not to use any optimizations that depend on the&#xA;     * order of pixel delivery, which should be the default assumption&#xA;     * in the absence of any call to the setHints method.&#xA;     * @see #setHints&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="TOPDOWNLEFTRIGHT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The pixels will be delivered in top-down, left-to-right order.&#xA;     * @see #setHints&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="COMPLETESCANLINES">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The pixels will be delivered in (multiples of) complete scanlines&#xA;     * at a time.&#xA;     * @see #setHints&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="SINGLEPASS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The pixels will be delivered in a single pass.  Each pixel will&#xA;     * appear in only one call to any of the setPixels methods.  An&#xA;     * example of an image format which does not meet this criterion&#xA;     * is a progressive JPEG image which defines pixels in multiple&#xA;     * passes, each more refined than the previous.&#xA;     * @see #setHints&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="SINGLEFRAME">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="16"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The image contain a single static image.  The pixels will be defined&#xA;     * in calls to the setPixels methods and then the imageComplete method&#xA;     * will be called with the STATICIMAGEDONE flag after which no more&#xA;     * image data will be delivered.  An example of an image type which&#xA;     * would not meet these criteria would be the output of a video feed,&#xA;     * or the representation of a 3D rendering being manipulated&#xA;     * by the user.  The end of each frame in those types of images will&#xA;     * be indicated by calling imageComplete with the SINGLEFRAMEDONE flag.&#xA;     * @see #setHints&#xA;     * @see #imageComplete&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setPixels">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Delivers the pixels of the image with one or more calls&#xA;     * to this method.  Each call specifies the location and&#xA;     * size of the rectangle of source pixels that are contained in&#xA;     * the array of pixels.  The specified ColorModel object should&#xA;     * be used to convert the pixels into their corresponding color&#xA;     * and alpha components.  Pixel (m,n) is stored in the pixels array&#xA;     * at index (n * scansize + m + off).  The pixels delivered using&#xA;     * this method are all stored as bytes.&#xA;     * @param x,&amp;nbsp;y the coordinates of the upper-left corner of the &#xA;     *        area of pixels to be set&#xA;     * @param w the width of the area of pixels&#xA;     * @param h the height of the area of pixels&#xA;     * @param model the specified &lt;code>ColorModel&lt;/code>&#xA;     * @param pixels the array of pixels&#xA;     * @param off the offset into the &lt;code>pixels&lt;/code> array&#xA;     * @param scansize the distance from one row of pixels to the next in&#xA;     * the &lt;code>pixels&lt;/code> array&#xA;     * @see ColorModel&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="model">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pixels">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="scansize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setPixels">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * The pixels of the image are delivered using one or more calls&#xA;     * to the setPixels method.  Each call specifies the location and&#xA;     * size of the rectangle of source pixels that are contained in&#xA;     * the array of pixels.  The specified ColorModel object should&#xA;     * be used to convert the pixels into their corresponding color&#xA;     * and alpha components.  Pixel (m,n) is stored in the pixels array&#xA;     * at index (n * scansize + m + off).  The pixels delivered using&#xA;     * this method are all stored as ints.&#xA;     * this method are all stored as ints.&#xA;     * @param x,&amp;nbsp;y the coordinates of the upper-left corner of the &#xA;     *        area of pixels to be set&#xA;     * @param w the width of the area of pixels&#xA;     * @param h the height of the area of pixels&#xA;     * @param model the specified &lt;code>ColorModel&lt;/code>&#xA;     * @param pixels the array of pixels&#xA;     * @param off the offset into the &lt;code>pixels&lt;/code> array&#xA;     * @param scansize the distance from one row of pixels to the next in&#xA;     * the &lt;code>pixels&lt;/code> array&#xA;     * @see ColorModel&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="model">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pixels">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="scansize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="imageComplete">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * The imageComplete method is called when the ImageProducer is&#xA;     * finished delivering all of the pixels that the source image&#xA;     * contains, or when a single frame of a multi-frame animation has&#xA;     * been completed, or when an error in loading or producing the&#xA;     * image has occured.  The ImageConsumer should remove itself from the&#xA;     * list of consumers registered with the ImageProducer at this time,&#xA;     * unless it is interested in successive frames.&#xA;     * @param status the status of image loading&#xA;     * @see ImageProducer#removeConsumer&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="status">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:Field" name="IMAGEERROR">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * An error was encountered while producing the image.&#xA;     * @see #imageComplete&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="SINGLEFRAMEDONE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * One frame of the image is complete but there are more frames&#xA;     * to be delivered.&#xA;     * @see #imageComplete&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="STATICIMAGEDONE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The image is complete and there are no more pixels or frames&#xA;     * to be delivered.&#xA;     * @see #imageComplete&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="IMAGEABORTED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The image creation process was deliberately aborted.&#xA;     * @see #imageComplete&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The interface for objects expressing interest in image data through&#xA; * the ImageProducer interfaces.  When a consumer is added to an image&#xA; * producer, the producer delivers all of the data about the image&#xA; * using the method calls defined in this interface.&#xA; *&#xA; * @see ImageProducer&#xA; *&#xA; * @version&#x9;1.23 07/16/04&#xA; * @author &#x9;Jim Graham&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

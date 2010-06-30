@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:annotations="http://www.emftext.org/java/annotations" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/annotations ../../java.ecore#/0 http://www.emftext.org/java/arrays ../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16 http://www.emftext.org/java/variables ../../java.ecore#/17" name="Runtime.java">
+  <comments>/*&#xA; * @(#)Runtime.java&#x9;1.74 04/05/18&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>lang</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/StringTokenizer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Runtime">
+    <members xsi:type="members:Field" name="currentRuntime">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getRuntime">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the runtime object associated with the current Java application.&#xA;     * Most of the methods of class &lt;code>Runtime&lt;/code> are instance &#xA;     * methods and must be invoked with respect to the current runtime object. &#xA;     * &#xA;     * @return  the &lt;code>Runtime&lt;/code> object associated with the current&#xA;     *          Java application.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:Constructor" name="Runtime">
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Don't let anyone else instantiate this class */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exit">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="status">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Terminates the currently running Java virtual machine by initiating its&#xA;     * shutdown sequence.  This method never returns normally.  The argument&#xA;     * serves as a status code; by convention, a nonzero status code indicates&#xA;     * abnormal termination.&#xA;     *&#xA;     * &lt;p> The virtual machine's shutdown sequence consists of two phases.  In&#xA;     * the first phase all registered {@link #addShutdownHook shutdown hooks},&#xA;     * if any, are started in some unspecified order and allowed to run&#xA;     * concurrently until they finish.  In the second phase all uninvoked&#xA;     * finalizers are run if {@link #runFinalizersOnExit finalization-on-exit}&#xA;     * has been enabled.  Once this is done the virtual machine {@link #halt&#xA;     * halts}.&#xA;     *&#xA;     * &lt;p> If this method is invoked after the virtual machine has begun its&#xA;     * shutdown sequence then if shutdown hooks are being run this method will&#xA;     * block indefinitely.  If shutdown hooks have already been run and on-exit&#xA;     * finalization has been enabled then this method halts the virtual machine&#xA;     * with the given status code if the status is nonzero; otherwise, it&#xA;     * blocks indefinitely.&#xA;     *&#xA;     * &lt;p> The &lt;tt>{@link System#exit(int) System.exit}&lt;/tt> method is the&#xA;     * conventional and convenient means of invoking this method. &lt;p>&#xA;     *&#xA;     * @param  status&#xA;     *         Termination status.  By convention, a nonzero status code&#xA;     *         indicates abnormal termination.&#xA;     *&#xA;     * @throws SecurityException&#xA;     *         If a security manager is present and its &lt;tt>{@link&#xA;     *         SecurityManager#checkExit checkExit}&lt;/tt> method does not permit&#xA;     *         exiting with the specified status&#xA;     *&#xA;     * @see java.lang.SecurityException&#xA;     * @see java.lang.SecurityManager#checkExit(int)&#xA;     * @see #addShutdownHook&#xA;     * @see #removeShutdownHook&#xA;     * @see #runFinalizersOnExit&#xA;     * @see #halt(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="security">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.28"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="Shutdown.class.xmi#//@classifiers.0/@members.17"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="Shutdown.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addShutdownHook">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hook">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Thread.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Registers a new virtual-machine shutdown hook.&#xA;     *&#xA;     * &lt;p> The Java virtual machine &lt;i>shuts down&lt;/i> in response to two kinds&#xA;     * of events:&#xA;     *&#xA;     *   &lt;ul>&#xA;     *&#xA;     *   &lt;p> &lt;li> The program &lt;i>exits&lt;/i> normally, when the last non-daemon&#xA;     *   thread exits or when the &lt;tt>{@link #exit exit}&lt;/tt> (equivalently,&#xA;     *   &lt;tt>{@link System#exit(int) System.exit}&lt;/tt>) method is invoked, or&#xA;     *&#xA;     *   &lt;p> &lt;li> The virtual machine is &lt;i>terminated&lt;/i> in response to a&#xA;     *   user interrupt, such as typing &lt;tt>^C&lt;/tt>, or a system-wide event,&#xA;     *   such as user logoff or system shutdown.&#xA;     *&#xA;     *   &lt;/ul>&#xA;     *&#xA;     * &lt;p> A &lt;i>shutdown hook&lt;/i> is simply an initialized but unstarted&#xA;     * thread.  When the virtual machine begins its shutdown sequence it will&#xA;     * start all registered shutdown hooks in some unspecified order and let&#xA;     * them run concurrently.  When all the hooks have finished it will then&#xA;     * run all uninvoked finalizers if finalization-on-exit has been enabled.&#xA;     * Finally, the virtual machine will halt.  Note that daemon threads will&#xA;     * continue to run during the shutdown sequence, as will non-daemon threads&#xA;     * if shutdown was initiated by invoking the &lt;tt>{@link #exit exit}&lt;/tt>&#xA;     * method.&#xA;     *&#xA;     * &lt;p> Once the shutdown sequence has begun it can be stopped only by&#xA;     * invoking the &lt;tt>{@link #halt halt}&lt;/tt> method, which forcibly&#xA;     * terminates the virtual machine.&#xA;     *&#xA;     * &lt;p> Once the shutdown sequence has begun it is impossible to register a&#xA;     * new shutdown hook or de-register a previously-registered hook.&#xA;     * Attempting either of these operations will cause an&#xA;     * &lt;tt>{@link IllegalStateException}&lt;/tt> to be thrown.&#xA;     *&#xA;     * &lt;p> Shutdown hooks run at a delicate time in the life cycle of a virtual&#xA;     * machine and should therefore be coded defensively.  They should, in&#xA;     * particular, be written to be thread-safe and to avoid deadlocks insofar&#xA;     * as possible.  They should also not rely blindly upon services that may&#xA;     * have registered their own shutdown hooks and therefore may themselves in&#xA;     * the process of shutting down.&#xA;     *&#xA;     * &lt;p> Shutdown hooks should also finish their work quickly.  When a&#xA;     * program invokes &lt;tt>{@link #exit exit}&lt;/tt> the expectation is&#xA;     * that the virtual machine will promptly shut down and exit.  When the&#xA;     * virtual machine is terminated due to user logoff or system shutdown the&#xA;     * underlying operating system may only allow a fixed amount of time in&#xA;     * which to shut down and exit.  It is therefore inadvisable to attempt any&#xA;     * user interaction or to perform a long-running computation in a shutdown&#xA;     * hook.&#xA;     *&#xA;     * &lt;p> Uncaught exceptions are handled in shutdown hooks just as in any&#xA;     * other thread, by invoking the &lt;tt>{@link ThreadGroup#uncaughtException&#xA;     * uncaughtException}&lt;/tt> method of the thread's &lt;tt>{@link&#xA;     * ThreadGroup}&lt;/tt> object.  The default implementation of this method&#xA;     * prints the exception's stack trace to &lt;tt>{@link System#err}&lt;/tt> and&#xA;     * terminates the thread; it does not cause the virtual machine to exit or&#xA;     * halt.&#xA;     *&#xA;     * &lt;p> In rare circumstances the virtual machine may &lt;i>abort&lt;/i>, that is,&#xA;     * stop running without shutting down cleanly.  This occurs when the&#xA;     * virtual machine is terminated externally, for example with the&#xA;     * &lt;tt>SIGKILL&lt;/tt> signal on Unix or the &lt;tt>TerminateProcess&lt;/tt> call on&#xA;     * Microsoft Windows.  The virtual machine may also abort if a native method goes awry&#xA;     * by, for example, corrupting internal data structures or attempting to&#xA;     * access nonexistent memory.  If the virtual machine aborts then no&#xA;     * guarantee can be made about whether or not any shutdown hooks will be&#xA;     * run. &lt;p>&#xA;     *&#xA;     * @param   hook&#xA;     *          An initialized but unstarted &lt;tt>{@link Thread}&lt;/tt> object&#xA;     *&#xA;     * @throws  IllegalArgumentException&#xA;     *          If the specified hook has already been registered,&#xA;     *          or if it can be determined that the hook is already running or&#xA;     *          has already been run&#xA;     *&#xA;     * @throws  IllegalStateException&#xA;     *          If the virtual machine is already in the process&#xA;     *          of shutting down&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager is present and it denies&#xA;     *          &lt;tt>{@link RuntimePermission}(&quot;shutdownHooks&quot;)&lt;/tt>&#xA;     *&#xA;     * @see #removeShutdownHook&#xA;     * @see #halt(int)&#xA;     * @see #exit(int)&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sm">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.22"/>
+                <arguments xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="RuntimePermission.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="shutdownHooks"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="Shutdown.class.xmi#//@classifiers.0/@members.10"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="Shutdown.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeShutdownHook">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hook">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Thread.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * De-registers a previously-registered virtual-machine shutdown hook. &lt;p>&#xA;     *&#xA;     * @param hook the hook to remove&#xA;     * @return &lt;tt>true&lt;/tt> if the specified hook had previously been&#xA;     * registered and was successfully de-registered, &lt;tt>false&lt;/tt>&#xA;     * otherwise.&#xA;     *&#xA;     * @throws  IllegalStateException&#xA;     *          If the virtual machine is already in the process of shutting&#xA;     *          down&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager is present and it denies&#xA;     *          &lt;tt>{@link RuntimePermission}(&quot;shutdownHooks&quot;)&lt;/tt>&#xA;     *&#xA;     * @see #addShutdownHook&#xA;     * @see #exit(int)&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sm">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.22"/>
+                <arguments xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="RuntimePermission.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="shutdownHooks"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="Shutdown.class.xmi#//@classifiers.0/@members.11"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="Shutdown.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="halt">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="status">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Forcibly terminates the currently running Java virtual machine.  This&#xA;     * method never returns normally.&#xA;     *&#xA;     * &lt;p> This method should be used with extreme caution.  Unlike the&#xA;     * &lt;tt>{@link #exit exit}&lt;/tt> method, this method does not cause shutdown&#xA;     * hooks to be started and does not run uninvoked finalizers if&#xA;     * finalization-on-exit has been enabled.  If the shutdown sequence has&#xA;     * already been initiated then this method does not wait for any running&#xA;     * shutdown hooks or finalizers to finish their work. &lt;p>&#xA;     *&#xA;     * @param  status&#xA;     *         Termination status.  By convention, a nonzero status code&#xA;     *         indicates abnormal termination.  If the &lt;tt>{@link Runtime#exit&#xA;     *         exit}&lt;/tt> (equivalently, &lt;tt>{@link System#exit(int)&#xA;     *         System.exit}&lt;/tt>) method has already been invoked then this&#xA;     *         status code will override the status code passed to that method.&#xA;     *&#xA;     * @throws SecurityException&#xA;     *         If a security manager is present and its &lt;tt>{@link&#xA;     *         SecurityManager#checkExit checkExit}&lt;/tt> method does not permit&#xA;     *         an exit with the specified status&#xA;     *&#xA;     * @see #exit&#xA;     * @see #addShutdownHook&#xA;     * @see #removeShutdownHook&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sm">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.28"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="Shutdown.class.xmi#//@classifiers.0/@members.13"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="Shutdown.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="runFinalizersOnExit">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/**&#xA;     * Enable or disable finalization on exit; doing so specifies that the&#xA;     * finalizers of all objects that have finalizers that have not yet been&#xA;     * automatically invoked are to be run before the Java runtime exits.&#xA;     * By default, finalization on exit is disabled.&#xA;     * &#xA;     * &lt;p>If there is a security manager, &#xA;     * its &lt;code>checkExit&lt;/code> method is first called&#xA;     * with 0 as its argument to ensure the exit is allowed. &#xA;     * This could result in a SecurityException.&#xA;     *&#xA;     * @param value true to enable finalization on exit, false to disable&#xA;     * @deprecated  This method is inherently unsafe.  It may result in&#xA;     * &#x9;    finalizers being called on live objects while other threads are&#xA;     *      concurrently manipulating those objects, resulting in erratic&#xA;     *&#x9;    behavior or deadlock.&#xA;     * &#xA;     * @throws  SecurityException&#xA;     *        if a security manager exists and its &lt;code>checkExit&lt;/code> &#xA;     *        method doesn't allow the exit.&#xA;     *&#xA;     * @see     java.lang.Runtime#exit(int)&#xA;     * @see     java.lang.Runtime#gc()&#xA;     * @see     java.lang.SecurityManager#checkExit(int)&#xA;     * @since   JDK1.1&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="security">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.28"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </next>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SecurityException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="runFinalizersOnExit"/>
+                </throwable>
+              </statements>
+              <parameter name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SecurityException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="Shutdown.class.xmi#//@classifiers.0/@members.9"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="Shutdown.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exec">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Process.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Executes the specified string command in a separate process.&#xA;     *&#xA;     * &lt;p>This is a convenience method.  An invocation of the form&#xA;     * &lt;tt>exec(command)&lt;/tt>&#xA;     * behaves in exactly the same way as the invocation&#xA;     * &lt;tt>{@link #exec(String, String[], File) exec}(command, null, null)&lt;/tt>.&#xA;     *&#xA;     * @param   command   a specified system command.&#xA;     *&#xA;     * @return  A new {@link Process} object for managing the subprocess&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager exists and its&#xA;     *          {@link SecurityManager#checkExec checkExec}&#xA;     *          method doesn't allow creation of the subprocess&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     *&#xA;     * @throws  NullPointerException&#xA;     *          If &lt;code>command&lt;/code> is &lt;code>null&lt;/code>&#xA;     *&#xA;     * @throws  IllegalArgumentException&#xA;     *          If &lt;code>command&lt;/code> is empty&#xA;     *&#xA;     * @see     #exec(String[], String[], File)&#xA;     * @see     ProcessBuilder&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exec">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Process.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="envp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Executes the specified string command in a separate process with the&#xA;     * specified environment.&#xA;     *&#xA;     * &lt;p>This is a convenience method.  An invocation of the form&#xA;     * &lt;tt>exec(command, envp)&lt;/tt>&#xA;     * behaves in exactly the same way as the invocation&#xA;     * &lt;tt>{@link #exec(String, String[], File) exec}(command, envp, null)&lt;/tt>.&#xA;     *&#xA;     * @param   command   a specified system command.&#xA;     *&#xA;     * @param   envp      array of strings, each element of which&#xA;     *                    has environment variable settings in the format&#xA;     *                    &lt;i>name&lt;/i>=&lt;i>value&lt;/i>, or&#xA;     *                    &lt;tt>null&lt;/tt> if the subprocess should inherit&#xA;     *                    the environment of the current process.&#xA;     *&#xA;     * @return  A new {@link Process} object for managing the subprocess&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager exists and its&#xA;     *          {@link SecurityManager#checkExec checkExec}&#xA;     *          method doesn't allow creation of the subprocess&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     *&#xA;     * @throws  NullPointerException&#xA;     *          If &lt;code>command&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>envp&lt;/code> is &lt;code>null&lt;/code>&#xA;     *&#xA;     * @throws  IllegalArgumentException&#xA;     *          If &lt;code>command&lt;/code> is empty&#xA;     *&#xA;     * @see     #exec(String[], String[], File)&#xA;     * @see     ProcessBuilder&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exec">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Process.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="envp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dir">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../io/File.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Executes the specified string command in a separate process with the&#xA;     * specified environment and working directory.&#xA;     *&#xA;     * &lt;p>This is a convenience method.  An invocation of the form&#xA;     * &lt;tt>exec(command, envp, dir)&lt;/tt>&#xA;     * behaves in exactly the same way as the invocation&#xA;     * &lt;tt>{@link #exec(String[], String[], File) exec}(cmdarray, envp, dir)&lt;/tt>,&#xA;     * where &lt;code>cmdarray&lt;/code> is an array of all the tokens in&#xA;     * &lt;code>command&lt;/code>.&#xA;     *&#xA;     * &lt;p>More precisely, the &lt;code>command&lt;/code> string is broken&#xA;     * into tokens using a {@link StringTokenizer} created by the call&#xA;     * &lt;code>new {@link StringTokenizer}(command)&lt;/code> with no&#xA;     * further modification of the character categories.  The tokens&#xA;     * produced by the tokenizer are then placed in the new string&#xA;     * array &lt;code>cmdarray&lt;/code>, in the same order.&#xA;     *&#xA;     * @param   command   a specified system command.&#xA;     *&#xA;     * @param   envp      array of strings, each element of which&#xA;     *                    has environment variable settings in the format&#xA;     *                    &lt;i>name&lt;/i>=&lt;i>value&lt;/i>, or&#xA;     *                    &lt;tt>null&lt;/tt> if the subprocess should inherit&#xA;     *                    the environment of the current process.&#xA;     *&#xA;     * @param   dir       the working directory of the subprocess, or&#xA;     *                    &lt;tt>null&lt;/tt> if the subprocess should inherit&#xA;     *                    the working directory of the current process.&#xA;     *&#xA;     * @return  A new {@link Process} object for managing the subprocess&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager exists and its&#xA;     *          {@link SecurityManager#checkExec checkExec}&#xA;     *          method doesn't allow creation of the subprocess&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     *&#xA;     * @throws  NullPointerException&#xA;     *          If &lt;code>command&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>envp&lt;/code> is &lt;code>null&lt;/code>&#xA;     *&#xA;     * @throws  IllegalArgumentException&#xA;     *          If &lt;code>command&lt;/code> is empty&#xA;     *&#xA;     * @see     ProcessBuilder&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="Empty command"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="String.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="st">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../util/StringTokenizer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../util/StringTokenizer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cmdarray">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../util/StringTokenizer.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </sizes>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable">
+              <arraySelectors>
+                <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@init"/>
+              </arraySelectors>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../util/StringTokenizer.class.xmi#//@classifiers.0/@members.18"/>
+              </next>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../util/StringTokenizer.class.xmi#//@classifiers.0/@members.17"/>
+          </next>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exec">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Process.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmdarray">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Executes the specified command and arguments in a separate process.&#xA;     *&#xA;     * &lt;p>This is a convenience method.  An invocation of the form&#xA;     * &lt;tt>exec(cmdarray)&lt;/tt>&#xA;     * behaves in exactly the same way as the invocation&#xA;     * &lt;tt>{@link #exec(String[], String[], File) exec}(cmdarray, null, null)&lt;/tt>.&#xA;     *&#xA;     * @param   cmdarray  array containing the command to call and&#xA;     *                    its arguments.&#xA;     *&#xA;     * @return  A new {@link Process} object for managing the subprocess&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager exists and its&#xA;     *          {@link SecurityManager#checkExec checkExec}&#xA;     *          method doesn't allow creation of the subprocess&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     *&#xA;     * @throws  NullPointerException&#xA;     *          If &lt;code>cmdarray&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>cmdarray&lt;/code> is &lt;code>null&lt;/code>&#xA;     *&#xA;     * @throws  IndexOutOfBoundsException&#xA;     *          If &lt;code>cmdarray&lt;/code> is an empty array&#xA;     *          (has length &lt;code>0&lt;/code>)&#xA;     *&#xA;     * @see     ProcessBuilder&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exec">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Process.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmdarray">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="envp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Executes the specified command and arguments in a separate process&#xA;     * with the specified environment.&#xA;     *&#xA;     * &lt;p>This is a convenience method.  An invocation of the form&#xA;     * &lt;tt>exec(cmdarray, envp)&lt;/tt>&#xA;     * behaves in exactly the same way as the invocation&#xA;     * &lt;tt>{@link #exec(String[], String[], File) exec}(cmdarray, envp, null)&lt;/tt>.&#xA;     *&#xA;     * @param   cmdarray  array containing the command to call and&#xA;     *                    its arguments.&#xA;     *&#xA;     * @param   envp      array of strings, each element of which&#xA;     *                    has environment variable settings in the format&#xA;     *                    &lt;i>name&lt;/i>=&lt;i>value&lt;/i>, or&#xA;     *                    &lt;tt>null&lt;/tt> if the subprocess should inherit&#xA;     *                    the environment of the current process.&#xA;     *&#xA;     * @return  A new {@link Process} object for managing the subprocess&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager exists and its&#xA;     *          {@link SecurityManager#checkExec checkExec}&#xA;     *          method doesn't allow creation of the subprocess&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     *&#xA;     * @throws  NullPointerException&#xA;     *          If &lt;code>cmdarray&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>cmdarray&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>envp&lt;/code> is &lt;code>null&lt;/code>&#xA;     *&#xA;     * @throws  IndexOutOfBoundsException&#xA;     *          If &lt;code>cmdarray&lt;/code> is an empty array&#xA;     *          (has length &lt;code>0&lt;/code>)&#xA;     *&#xA;     * @see     ProcessBuilder&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exec">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Process.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmdarray">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="envp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dir">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../io/File.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Executes the specified command and arguments in a separate process with&#xA;     * the specified environment and working directory.&#xA;     *&#xA;     * &lt;p>Given an array of strings &lt;code>cmdarray&lt;/code>, representing the&#xA;     * tokens of a command line, and an array of strings &lt;code>envp&lt;/code>,&#xA;     * representing &quot;environment&quot; variable settings, this method creates&#xA;     * a new process in which to execute the specified command.&#xA;     *&#xA;     * &lt;p>This method checks that &lt;code>cmdarray&lt;/code> is a valid operating&#xA;     * system command.  Which commands are valid is system-dependent,&#xA;     * but at the very least the command must be a non-empty list of&#xA;     * non-null strings.&#xA;     *&#xA;     * &lt;p>If &lt;tt>envp&lt;/tt> is &lt;tt>null&lt;/tt>, the subprocess inherits the&#xA;     * environment settings of the current process.&#xA;     *&#xA;     * &lt;p>{@link ProcessBuilder#start()} is now the preferred way to&#xA;     * start a process with a modified environment.&#xA;     *&#xA;     * &lt;p>The working directory of the new subprocess is specified by &lt;tt>dir&lt;/tt>.&#xA;     * If &lt;tt>dir&lt;/tt> is &lt;tt>null&lt;/tt>, the subprocess inherits the&#xA;     * current working directory of the current process.&#xA;     *&#xA;     * &lt;p>If a security manager exists, its&#xA;     * {@link SecurityManager#checkExec checkExec}&#xA;     * method is invoked with the first component of the array&#xA;     * &lt;code>cmdarray&lt;/code> as its argument. This may result in a&#xA;     * {@link SecurityException} being thrown.&#xA;     *&#xA;     * &lt;p>Starting an operating system process is highly system-dependent.&#xA;     * Among the many things that can go wrong are:&#xA;     * &lt;ul>&#xA;     * &lt;li>The operating system program file was not found.&#xA;     * &lt;li>Access to the program file was denied.&#xA;     * &lt;li>The working directory does not exist.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * &lt;p>In such cases an exception will be thrown.  The exact nature&#xA;     * of the exception is system-dependent, but it will always be a&#xA;     * subclass of {@link IOException}.&#xA;     *&#xA;     *&#xA;     * @param   cmdarray  array containing the command to call and&#xA;     *                    its arguments.&#xA;     *&#xA;     * @param   envp      array of strings, each element of which&#xA;     *                    has environment variable settings in the format&#xA;     *                    &lt;i>name&lt;/i>=&lt;i>value&lt;/i>, or&#xA;     *                    &lt;tt>null&lt;/tt> if the subprocess should inherit&#xA;     *                    the environment of the current process.&#xA;     *&#xA;     * @param   dir       the working directory of the subprocess, or&#xA;     *                    &lt;tt>null&lt;/tt> if the subprocess should inherit&#xA;     *                    the working directory of the current process.&#xA;     *&#xA;     * @return  A new {@link Process} object for managing the subprocess&#xA;     *&#xA;     * @throws  SecurityException&#xA;     *          If a security manager exists and its&#xA;     *          {@link SecurityManager#checkExec checkExec}&#xA;     *          method doesn't allow creation of the subprocess&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If an I/O error occurs&#xA;     *&#xA;     * @throws  NullPointerException&#xA;     *          If &lt;code>cmdarray&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>cmdarray&lt;/code> is &lt;code>null&lt;/code>,&#xA;     *          or one of the elements of &lt;code>envp&lt;/code> is &lt;code>null&lt;/code>&#xA;     *&#xA;     * @throws  IndexOutOfBoundsException&#xA;     *          If &lt;code>cmdarray&lt;/code> is an empty array&#xA;     *          (has length &lt;code>0&lt;/code>)&#xA;     *&#xA;     * @see     ProcessBuilder&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ProcessBuilder.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ProcessBuilder.class.xmi#//@classifiers.0/@members.16"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="ProcessBuilder.class.xmi#//@classifiers.0/@members.13"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="ProcessBuilder.class.xmi#//@classifiers.0/@members.11"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+          </next>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="availableProcessors">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of processors available to the Java virtual machine.&#xA;     *&#xA;     * &lt;p> This value may change during a particular invocation of the virtual&#xA;     * machine.  Applications that are sensitive to the number of available&#xA;     * processors should therefore occasionally poll this property and adjust&#xA;     * their resource usage appropriately. &lt;/p>&#xA;     *&#xA;     * @return  the maximum number of processors available to the virtual&#xA;     *          machine; never smaller than one&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="freeMemory">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the amount of free memory in the Java Virtual Machine.&#xA;     * Calling the &#xA;     * &lt;code>gc&lt;/code> method may result in increasing the value returned &#xA;     * by &lt;code>freeMemory.&lt;/code>&#xA;     *&#xA;     * @return  an approximation to the total amount of memory currently&#xA;     *          available for future allocated objects, measured in bytes.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="totalMemory">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the total amount of memory in the Java virtual machine.&#xA;     * The value returned by this method may vary over time, depending on &#xA;     * the host environment.&#xA;     * &lt;p>&#xA;     * Note that the amount of memory required to hold an object of any &#xA;     * given type may be implementation-dependent.&#xA;     * &#xA;     * @return  the total amount of memory currently available for current &#xA;     *          and future objects, measured in bytes.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="maxMemory">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the maximum amount of memory that the Java virtual machine will&#xA;     * attempt to use.  If there is no inherent limit then the value {@link&#xA;     * java.lang.Long#MAX_VALUE} will be returned. &lt;/p>&#xA;     *&#xA;     * @return  the maximum amount of memory that the virtual machine will&#xA;     *          attempt to use, measured in bytes&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="gc">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Runs the garbage collector.&#xA;     * Calling this method suggests that the Java virtual machine expend &#xA;     * effort toward recycling unused objects in order to make the memory &#xA;     * they currently occupy available for quick reuse. When control &#xA;     * returns from the method call, the virtual machine has made &#xA;     * its best effort to recycle all discarded objects. &#xA;     * &lt;p>&#xA;     * The name &lt;code>gc&lt;/code> stands for &quot;garbage &#xA;     * collector&quot;. The virtual machine performs this recycling &#xA;     * process automatically as needed, in a separate thread, even if the &#xA;     * &lt;code>gc&lt;/code> method is not invoked explicitly.&#xA;     * &lt;p>&#xA;     * The method {@link System#gc()} is the conventional and convenient &#xA;     * means of invoking this method. &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="runFinalization0">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Wormhole for calling java.lang.ref.Finalizer.runFinalization */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="runFinalization">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Runs the finalization methods of any objects pending finalization.&#xA;     * Calling this method suggests that the Java virtual machine expend &#xA;     * effort toward running the &lt;code>finalize&lt;/code> methods of objects &#xA;     * that have been found to be discarded but whose &lt;code>finalize&lt;/code> &#xA;     * methods have not yet been run. When control returns from the &#xA;     * method call, the virtual machine has made a best effort to &#xA;     * complete all outstanding finalizations. &#xA;     * &lt;p>&#xA;     * The virtual machine performs the finalization process &#xA;     * automatically as needed, in a separate thread, if the &#xA;     * &lt;code>runFinalization&lt;/code> method is not invoked explicitly. &#xA;     * &lt;p>&#xA;     * The method {@link System#runFinalization()} is the conventional &#xA;     * and convenient means of invoking this method.&#xA;     *&#xA;     * @see     java.lang.Object#finalize()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="traceInstructions">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="on">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Enables/Disables tracing of instructions.&#xA;     * If the &lt;code>boolean&lt;/code> argument is &lt;code>true&lt;/code>, this &#xA;     * method suggests that the Java virtual machine emit debugging &#xA;     * information for each instruction in the virtual machine as it &#xA;     * is executed. The format of this information, and the file or other &#xA;     * output stream to which it is emitted, depends on the host environment. &#xA;     * The virtual machine may ignore this request if it does not support &#xA;     * this feature. The destination of the trace output is system &#xA;     * dependent. &#xA;     * &lt;p>&#xA;     * If the &lt;code>boolean&lt;/code> argument is &lt;code>false&lt;/code>, this &#xA;     * method causes the virtual machine to stop performing the &#xA;     * detailed instruction trace it is performing.&#xA;     *&#xA;     * @param   on   &lt;code>true&lt;/code> to enable instruction tracing;&#xA;     *               &lt;code>false&lt;/code> to disable this feature.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="traceMethodCalls">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="on">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Enables/Disables tracing of method calls.&#xA;     * If the &lt;code>boolean&lt;/code> argument is &lt;code>true&lt;/code>, this &#xA;     * method suggests that the Java virtual machine emit debugging &#xA;     * information for each method in the virtual machine as it is &#xA;     * called. The format of this information, and the file or other output &#xA;     * stream to which it is emitted, depends on the host environment. The &#xA;     * virtual machine may ignore this request if it does not support &#xA;     * this feature.  &#xA;     * &lt;p>&#xA;     * Calling this method with argument false suggests that the&#xA;     * virtual machine cease emitting per-call debugging information.&#xA;     *&#xA;     * @param   on   &lt;code>true&lt;/code> to enable instruction tracing;&#xA;     *               &lt;code>false&lt;/code> to disable this feature.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="load">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filename">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Loads the specified filename as a dynamic library. The filename &#xA;     * argument must be a complete path name. &#xA;     * From &lt;code>java_g&lt;/code> it will automagically insert &quot;_g&quot; before the&#xA;     * &quot;.so&quot; (for example&#xA;     * &lt;code>Runtime.getRuntime().load(&quot;/home/avh/lib/libX11.so&quot;);&lt;/code>).&#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkLink&lt;/code> &#xA;     * method is called with the &lt;code>filename&lt;/code> as its argument. &#xA;     * This may result in a security exception. &#xA;     * &lt;p>&#xA;     * This is similar to the method {@link #loadLibrary(String)}, but it &#xA;     * accepts a general file name as an argument rather than just a library &#xA;     * name, allowing any file of native code to be loaded.&#xA;     * &lt;p>&#xA;     * The method {@link System#load(String)} is the conventional and &#xA;     * convenient means of invoking this method.&#xA;     *&#xA;     * @param      filename   the file to load.&#xA;     * @exception  SecurityException  if a security manager exists and its  &#xA;     *             &lt;code>checkLink&lt;/code> method doesn't allow &#xA;     *             loading of the specified dynamic library&#xA;     * @exception  UnsatisfiedLinkError  if the file does not exist.&#xA;     * @exception  NullPointerException if &lt;code>filename&lt;/code> is&#xA;     *             &lt;code>null&lt;/code>&#xA;     * @see        java.lang.Runtime#getRuntime()&#xA;     * @see        java.lang.SecurityException&#xA;     * @see        java.lang.SecurityManager#checkLink(java.lang.String)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.24">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.42"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="load0">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fromClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filename">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="security">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="UnsatisfiedLinkError.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Expecting an absolute path of the library: "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="expressions:NestedExpression">
+            <expression xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../io/File.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../io/File.class.xmi#//@classifiers.0/@members.23"/>
+              </next>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1"/>
+            </expression>
+          </child>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="ClassLoader.class.xmi#//@classifiers.0/@members.74"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1"/>
+            <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="ClassLoader.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="loadLibrary">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="libname">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Loads the dynamic library with the specified library name. &#xA;     * A file containing native code is loaded from the local file system &#xA;     * from a place where library files are conventionally obtained. The &#xA;     * details of this process are implementation-dependent. The &#xA;     * mapping from a library name to a specific filename is done in a &#xA;     * system-specific manner. &#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkLink&lt;/code> &#xA;     * method is called with the &lt;code>libname&lt;/code> as its argument. &#xA;     * This may result in a security exception. &#xA;     * &lt;p>&#xA;     * The method {@link System#loadLibrary(String)} is the conventional &#xA;     * and convenient means of invoking this method. If native&#xA;     * methods are to be used in the implementation of a class, a standard &#xA;     * strategy is to put the native code in a library file (call it &#xA;     * &lt;code>LibFile&lt;/code>) and then to put a static initializer:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * static { System.loadLibrary(&quot;LibFile&quot;); }&#xA;     * &lt;/pre>&lt;/blockquote>&#xA;     * within the class declaration. When the class is loaded and &#xA;     * initialized, the necessary native code implementation for the native &#xA;     * methods will then be loaded as well. &#xA;     * &lt;p>&#xA;     * If this method is called more than once with the same library &#xA;     * name, the second and subsequent calls are ignored. &#xA;     *&#xA;     * @param      libname   the name of the library.&#xA;     * @exception  SecurityException  if a security manager exists and its  &#xA;     *             &lt;code>checkLink&lt;/code> method doesn't allow &#xA;     *             loading of the specified dynamic library&#xA;     * @exception  UnsatisfiedLinkError  if the library does not exist.&#xA;     * @exception  NullPointerException if &lt;code>libname&lt;/code> is&#xA;     *             &lt;code>null&lt;/code>&#xA;     * @see        java.lang.SecurityException&#xA;     * @see        java.lang.SecurityManager#checkLink(java.lang.String)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.26">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.42"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="loadLibrary0">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fromClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="libname">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="security">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SecurityManager.class.xmi#//@classifiers.0/@members.30"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@parameters.1"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="UnsatisfiedLinkError.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Directory separator should not appear in library name: "/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@parameters.1"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="String.class.xmi#//@classifiers.0/@members.45"/>
+              <arguments xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Int"/>
+                <child xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../io/File.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../io/File.class.xmi#//@classifiers.0"/>
+                </child>
+              </arguments>
+            </next>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="ClassLoader.class.xmi#//@classifiers.0/@members.74"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26/@parameters.1"/>
+            <arguments xsi:type="literals:BooleanLiteral"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="ClassLoader.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLocalizedInputStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="in">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/**&#xA;     * Creates a localized version of an input stream. This method takes &#xA;     * an &lt;code>InputStream&lt;/code> and returns an &lt;code>InputStream&lt;/code> &#xA;     * equivalent to the argument in all respects except that it is &#xA;     * localized: as characters in the local character set are read from &#xA;     * the stream, they are automatically converted from the local &#xA;     * character set to Unicode. &#xA;     * &lt;p>&#xA;     * If the argument is already a localized stream, it may be returned &#xA;     * as the result. &#xA;     *&#xA;     * @param      in InputStream to localize&#xA;     * @return     a localized input stream&#xA;     * @see        java.io.InputStream&#xA;     * @see        java.io.BufferedReader#BufferedReader(java.io.Reader)&#xA;     * @see        java.io.InputStreamReader#InputStreamReader(java.io.InputStream)&#xA;     * @deprecated As of JDK&amp;nbsp;1.1, the preferred way to translate a byte&#xA;     * stream in the local encoding into a character stream in Unicode is via&#xA;     * the &lt;code>InputStreamReader&lt;/code> and &lt;code>BufferedReader&lt;/code>&#xA;     * classes.&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLocalizedOutputStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/OutputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="out">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../io/OutputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/**&#xA;     * Creates a localized version of an output stream. This method &#xA;     * takes an &lt;code>OutputStream&lt;/code> and returns an &#xA;     * &lt;code>OutputStream&lt;/code> equivalent to the argument in all respects &#xA;     * except that it is localized: as Unicode characters are written to &#xA;     * the stream, they are automatically converted to the local &#xA;     * character set. &#xA;     * &lt;p>&#xA;     * If the argument is already a localized stream, it may be returned &#xA;     * as the result. &#xA;     *&#xA;     * @deprecated As of JDK&amp;nbsp;1.1, the preferred way to translate a&#xA;     * Unicode character stream into a byte stream in the local encoding is via&#xA;     * the &lt;code>OutputStreamWriter&lt;/code>, &lt;code>BufferedWriter&lt;/code>, and&#xA;     * &lt;code>PrintWriter&lt;/code> classes.&#xA;     *&#xA;     * @param      out OutputStream to localize&#xA;     * @return     a localized output stream&#xA;     * @see        java.io.OutputStream&#xA;     * @see        java.io.BufferedWriter#BufferedWriter(java.io.Writer)&#xA;     * @see        java.io.OutputStreamWriter#OutputStreamWriter(java.io.OutputStream)&#xA;     * @see        java.io.PrintWriter#PrintWriter(java.io.OutputStream)&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Every Java application has a single instance of class &#xA; * &lt;code>Runtime&lt;/code> that allows the application to interface with &#xA; * the environment in which the application is running. The current &#xA; * runtime can be obtained from the &lt;code>getRuntime&lt;/code> method. &#xA; * &lt;p>&#xA; * An application cannot create its own instance of this class. &#xA; *&#xA; * @author  unascribed&#xA; * @version 1.74, 05/18/04&#xA; * @see     java.lang.Runtime#getRuntime()&#xA; * @since   JDK1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="CachingParserPool.java">
+  <comments>/*&#xA; * The Apache Software License, Version 1.1&#xA; *&#xA; *&#xA; * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights &#xA; * reserved.&#xA; *&#xA; * Redistribution and use in source and binary forms, with or without&#xA; * modification, are permitted provided that the following conditions&#xA; * are met:&#xA; *&#xA; * 1. Redistributions of source code must retain the above copyright&#xA; *    notice, this list of conditions and the following disclaimer. &#xA; *&#xA; * 2. Redistributions in binary form must reproduce the above copyright&#xA; *    notice, this list of conditions and the following disclaimer in&#xA; *    the documentation and/or other materials provided with the&#xA; *    distribution.&#xA; *&#xA; * 3. The end-user documentation included with the redistribution,&#xA; *    if any, must include the following acknowledgment:  &#xA; *       &quot;This product includes software developed by the&#xA; *        Apache Software Foundation (http://www.apache.org/).&quot;&#xA; *    Alternately, this acknowledgment may appear in the software itself,&#xA; *    if and wherever such third-party acknowledgments normally appear.&#xA; *&#xA; * 4. The names &quot;Xerces&quot; and &quot;Apache Software Foundation&quot; must&#xA; *    not be used to endorse or promote products derived from this&#xA; *    software without prior written permission. For written &#xA; *    permission, please contact apache@apache.org.&#xA; *&#xA; * 5. Products derived from this software may not be called &quot;Apache&quot;,&#xA; *    nor may &quot;Apache&quot; appear in their name, without prior written&#xA; *    permission of the Apache Software Foundation.&#xA; *&#xA; * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED&#xA; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES&#xA; * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE&#xA; * DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR&#xA; * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,&#xA; * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT&#xA; * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF&#xA; * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND&#xA; * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,&#xA; * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT&#xA; * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF&#xA; * SUCH DAMAGE.&#xA; * ====================================================================&#xA; *&#xA; * This software consists of voluntary contributions made by many&#xA; * individuals on behalf of the Apache Software Foundation and was&#xA; * originally based on software copyright (c) 1999, International&#xA; * Business Machines, Inc., http://www.apache.org.  For more&#xA; * information on the Apache Software Foundation, please see&#xA; * &lt;http://www.apache.org/>.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>xerces</namespaces>
+  <namespaces>internal</namespaces>
+  <namespaces>parsers</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>xni</namespaces>
+    <namespaces>grammars</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>xni</namespaces>
+    <namespaces>grammars</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>xni</namespaces>
+    <namespaces>grammars</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarDescription.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/ShadowedSymbolTable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xerces</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/SynchronizedSymbolTable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="CachingParserPool">
+    <comments>// class ShadowedGrammarPool</comments>
+    <members xsi:type="members:Field" name="DEFAULT_SHADOW_SYMBOL_TABLE">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>// Constants</comments>
+        <comments>//</comments>
+        <comments>/** Default shadow symbol table (false). */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DEFAULT_SHADOW_GRAMMAR_POOL">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Default shadow grammar pool (false). */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="fSynchronizedSymbolTable">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>//</comments>
+        <comments>// Data</comments>
+        <comments>//</comments>
+        <comments>/** &#xA;     * Symbol table. The symbol table that the caching parser pool is&#xA;     * constructed with is automatically wrapped in a synchronized&#xA;     * version for thread-safety.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="fSynchronizedGrammarPool">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** &#xA;     * Grammar pool. The grammar pool that the caching parser pool is&#xA;     * constructed with is automatically wrapped in a synchronized&#xA;     * version for thread-safety.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="fShadowSymbolTable">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** &#xA;     * Shadow the symbol table for new parser instances. If true,&#xA;     * new parser instances use shadow copies of the main symbol&#xA;     * table and are not allowed to add new symbols to the main&#xA;     * symbol table. New symbols are added to the shadow symbol&#xA;     * table and are local to the parser instance.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="fShadowGrammarPool">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** &#xA;     * Shadow the grammar pool for new parser instances. If true,&#xA;     * new parser instances use shadow copies of the main grammar&#xA;     * pool and are not allowed to add new grammars to the main&#xA;     * grammar pool. New grammars are added to the shadow grammar&#xA;     * pool and are local to the parser instance.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="CachingParserPool">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>// Constructors</comments>
+        <comments>//</comments>
+        <comments>/** Default constructor. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="CachingParserPool">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../util/SynchronizedSymbolTable.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.13"/>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="symbolTable">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="grammarPool">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// &lt;init>()</comments>
+        <comments>/**&#xA;     * Constructs a caching parser pool with the specified symbol table&#xA;     * and grammar pool.&#xA;     * &#xA;     * @param symbolTable The symbol table.&#xA;     * @param grammarPool The grammar pool.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSymbolTable">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// &lt;init>(SymbolTable,XMLGrammarPool)</comments>
+        <comments>//</comments>
+        <comments>// Public methods</comments>
+        <comments>//</comments>
+        <comments>/** Returns the symbol table. */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getXMLGrammarPool">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// getSymbolTable():SymbolTable</comments>
+        <comments>/** Returns the grammar pool. */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setShadowSymbolTable">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="shadow">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// getXMLGrammarPool():XMLGrammarPool</comments>
+        <comments>// setters and getters</comments>
+        <comments>/** &#xA;     * Sets whether new parser instance receive shadow copies of the&#xA;     * main symbol table.&#xA;     *&#xA;     * @param shadow If true, new parser instances use shadow copies &#xA;     *               of the main symbol table and are not allowed to&#xA;     *               add new symbols to the main symbol table. New&#xA;     *               symbols are added to the shadow symbol table and&#xA;     *               are local to the parser instance. If false, new&#xA;     *               parser instances are allowed to add new symbols&#xA;     *               to the main symbol table.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createDOMParser">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DOMParser.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// setShadowSymbolTable(boolean)</comments>
+        <comments>// factory methods</comments>
+        <comments>/** Creates a new DOM parser. */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="symbolTable">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../util/ShadowedSymbolTable.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            </expressionIf>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="grammarPool">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.14"/>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            </expressionIf>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="DOMParser.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createSAXParser">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXParser.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// createDOMParser():DOMParser</comments>
+        <comments>/** Creates a new SAX parser. */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="symbolTable">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../util/SymbolTable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../util/ShadowedSymbolTable.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            </expressionIf>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="grammarPool">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.14"/>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            </expressionIf>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="SAXParser.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="classifiers:Class" name="SynchronizedGrammarPool">
+      <comments>// unlockPool()</comments>
+      <comments>/***&#xA;         * Methods corresponding to original (pre Xerces2.0.0final)&#xA;         * grammarPool have been commented out.&#xA;         */</comments>
+      <comments>/**&#xA;         * Puts the specified grammar into the grammar pool.&#xA;         * &#xA;         * @param key Key to associate with grammar.&#xA;         * @param grammar Grammar object.&#xA;         */</comments>
+      <comments>/******&#xA;        public void putGrammar(String key, Grammar grammar) {&#xA;            synchronized (fGrammarPool) {&#xA;                fGrammarPool.putGrammar(key, grammar);&#xA;            }&#xA;        } // putGrammar(String,Grammar)&#xA;        *******/</comments>
+      <comments>/**&#xA;         * Returns the grammar associated to the specified key.&#xA;         * &#xA;         * @param key The key of the grammar.&#xA;         */</comments>
+      <comments>/**********&#xA;        public Grammar getGrammar(String key) {&#xA;            synchronized (fGrammarPool) {&#xA;                return fGrammarPool.getGrammar(key);&#xA;            }&#xA;        } // getGrammar(String):Grammar&#xA;        ***********/</comments>
+      <comments>/**&#xA;         * Removes the grammar associated to the specified key from the&#xA;         * grammar pool and returns the removed grammar.&#xA;         * &#xA;         * @param key The key of the grammar.&#xA;         */</comments>
+      <comments>/**********&#xA;        public Grammar removeGrammar(String key) {&#xA;            synchronized (fGrammarPool) {&#xA;                return fGrammarPool.removeGrammar(key);&#xA;            }&#xA;        } // removeGrammar(String):Grammar&#xA;        ******/</comments>
+      <comments>/**&#xA;         * Returns true if the grammar pool contains a grammar associated&#xA;         * to the specified key.&#xA;         *&#xA;         * @param key The key of the grammar.&#xA;         */</comments>
+      <comments>/**********&#xA;        public boolean containsGrammar(String key) {&#xA;            synchronized (fGrammarPool) {&#xA;                return fGrammarPool.containsGrammar(key);&#xA;            }&#xA;        } // containsGrammar(String):boolean&#xA;        ********/</comments>
+      <members xsi:type="members:Field" name="fGrammarPool">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>//</comments>
+          <comments>// Data</comments>
+          <comments>//</comments>
+          <comments>/** Main grammar pool. */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Constructor" name="SynchronizedGrammarPool">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.1/@parameters.0"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammarPool">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>//</comments>
+          <comments>// Constructors</comments>
+          <comments>//</comments>
+          <comments>/** Constructs a synchronized grammar pool. */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:ClassMethod" name="retrieveInitialGrammarSet">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammarType">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// &lt;init>(XMLGrammarPool)</comments>
+          <comments>//</comments>
+          <comments>// GrammarPool methods</comments>
+          <comments>//</comments>
+          <comments>// retrieve the initial set of grammars for the validator</comments>
+          <comments>// to work with.</comments>
+          <comments>// REVISIT:  does this need to be synchronized since it's just reading?</comments>
+          <comments>// @param grammarType type of the grammars to be retrieved.</comments>
+          <comments>// @return the initial grammar set the validator may place in its &quot;bucket&quot;</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.2/@parameters.0"/>
+              </next>
+            </returnValue>
+          </statements>
+          <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="retrieveGrammar">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="gDesc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarDescription.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// retrieveInitialGrammarSet(String):  Grammar[]</comments>
+          <comments>// retrieve a particular grammar.</comments>
+          <comments>// REVISIT:  does this need to be synchronized since it's just reading?</comments>
+          <comments>// @param gDesc description of the grammar to be retrieved</comments>
+          <comments>// @return Grammar corresponding to gDesc, or null if none exists.</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.3/@parameters.0"/>
+              </next>
+            </returnValue>
+          </statements>
+          <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="cacheGrammars">
+        <typeReference xsi:type="types:Void"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammarType">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammars">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// retrieveGrammar(XMLGrammarDesc):  Grammar</comments>
+          <comments>// give the grammarPool the option of caching these grammars.</comments>
+          <comments>// This certainly must be synchronized.</comments>
+          <comments>// @param grammarType The type of the grammars to be cached.</comments>
+          <comments>// @param grammars the Grammars that may be cached (unordered, Grammars previously</comments>
+          <comments>//  given to the validator may be included).</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.4/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.4/@parameters.1"/>
+              </next>
+            </expression>
+          </statements>
+          <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="lockPool">
+        <typeReference xsi:type="types:Void"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// cacheGrammars(String, Grammar[]);</comments>
+          <comments>/** lock the grammar pool */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+            </expression>
+          </statements>
+          <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="clear">
+        <typeReference xsi:type="types:Void"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// lockPool()</comments>
+          <comments>/** clear the grammar pool */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.5"/>
+              </next>
+            </expression>
+          </statements>
+          <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="unlockPool">
+        <typeReference xsi:type="types:Void"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// lockPool()</comments>
+          <comments>/** unlock the grammar pool */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+            </expression>
+          </statements>
+          <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@members.0"/>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// createSAXParser():SAXParser</comments>
+        <comments>//</comments>
+        <comments>// Classes</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     * Synchronized grammar pool.&#xA;     *&#xA;     * @author Andy Clark, IBM&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <implements xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </implements>
+    </members>
+    <members xsi:type="classifiers:Class" name="ShadowedGrammarPool">
+      <comments>// containsGrammar(XMLGrammarDescription):boolean</comments>
+      <members xsi:type="members:Field" name="fGrammarPool">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>//</comments>
+          <comments>// Data</comments>
+          <comments>//</comments>
+          <comments>/** Main grammar pool. */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Constructor" name="ShadowedGrammarPool">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.1/@parameters.0"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammarPool">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>//</comments>
+          <comments>// Constructors</comments>
+          <comments>//</comments>
+          <comments>/** Constructs a shadowed grammar pool. */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:ClassMethod" name="retrieveInitialGrammarSet">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammarType">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// &lt;init>(GrammarPool)</comments>
+          <comments>//</comments>
+          <comments>// GrammarPool methods</comments>
+          <comments>//</comments>
+          <comments>/**&#xA;         * Retrieve the initial set of grammars for the validator to work with.&#xA;         * REVISIT:  does this need to be synchronized since it's just reading?&#xA;         * &#xA;         * @param grammarType Type of the grammars to be retrieved.&#xA;         * @return            The initial grammar set the validator may place in its &quot;bucket&quot;&#xA;         */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="grammars">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arrayDimensionsBefore/>
+            <initialValue xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0/@members.7"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.2/@parameters.0"/>
+              </next>
+              <self xsi:type="literals:Super"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.2/@statements.0/@variable"/>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.2/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.2/@parameters.0"/>
+            </next>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="retrieveGrammar">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="gDesc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarDescription.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// retrieveInitialGrammarSet(String):  Grammar[]</comments>
+          <comments>/**&#xA;         * Retrieve a particular grammar.&#xA;         * REVISIT:  does this need to be synchronized since it's just reading?&#xA;         *&#xA;         * @param gDesc Description of the grammar to be retrieved&#xA;         * @return      Grammar corresponding to gDesc, or null if none exists.&#xA;         */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="g">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0/@members.9"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.3/@parameters.0"/>
+              </next>
+              <self xsi:type="literals:Super"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.3/@statements.0/@variable"/>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.3/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.2"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.3/@parameters.0"/>
+            </next>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="cacheGrammars">
+        <typeReference xsi:type="types:Void"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammarType">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="grammars">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// retrieveGrammar(XMLGrammarDesc):  Grammar</comments>
+          <comments>/** &#xA;         * Give the grammarPool the option of caching these grammars.&#xA;         * This certainly must be synchronized.&#xA;         * &#xA;         * @param grammarType The type of the grammars to be cached.&#xA;         * @param grammars    The Grammars that may be cached (unordered, Grammars previously&#xA;         *  &#x9;&#x9;      given to the validator may be included).&#xA;         */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0/@members.8"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.4/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.4/@parameters.1"/>
+            </next>
+            <self xsi:type="literals:Super">
+              <comments>// better give both grammars a shot...</comments>
+            </self>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../xni/grammars/XMLGrammarPool.class.xmi#//@classifiers.0/@members.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.4/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.4/@parameters.1"/>
+            </next>
+          </expression>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getGrammar">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../xni/grammars/Grammar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="desc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarDescription.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// cacheGrammars(grammarType, Grammar[]);</comments>
+          <comments>/**&#xA;         * Returns the grammar associated to the specified description.&#xA;         * &#xA;         * @param desc The description of the grammar.&#xA;         */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="references:SelfReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0/@members.11"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.5/@parameters.0"/>
+                </next>
+                <self xsi:type="literals:Super"/>
+              </returnValue>
+            </statements>
+          </statement>
+          <condition xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0/@members.13"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.5/@parameters.0"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="literals:NullLiteral"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="containsGrammar">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="desc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../xni/grammars/XMLGrammarDescription.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>// getGrammar(XMLGrammarDescription):Grammar</comments>
+          <comments>/**&#xA;         * Returns true if the grammar pool contains a grammar associated&#xA;         * to the specified description.&#xA;         *&#xA;         * @param desc The description of the grammar.&#xA;         */</comments>
+        </annotationsAndModifiers>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0/@members.13"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@members.6/@parameters.0"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </returnValue>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// class SynchronizedGrammarPool</comments>
+        <comments>/**&#xA;     * Shadowed grammar pool.&#xA;     * This class is predicated on the existence of a concrete implementation;&#xA;     * so using our own doesn't seem to bad an idea.&#xA;     *&#xA;     * @author Andy Clark, IBM&#xA;     * @author Neil Graham, IBM&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../util/XMLGrammarPoolImpl.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </extends>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A parser pool that enables caching of grammars. The caching parser&#xA; * pool is constructed with a specific symbol table and grammar pool&#xA; * that has already been populated with the grammars used by the&#xA; * application.&#xA; * &lt;p>&#xA; * Once the caching parser pool is constructed, specific parser&#xA; * instances are created by calling the appropriate factory method&#xA; * on the parser pool.&#xA; * &lt;p>&#xA; * &lt;strong>Note:&lt;/strong> There is a performance penalty for using&#xA; * a caching parser pool due to thread safety. Access to the symbol &#xA; * table and grammar pool must be synchronized to ensure the safe&#xA; * operation of the symbol table and grammar pool.&#xA; * &lt;p>&#xA; * &lt;strong>Note:&lt;/strong> If performance is critical, then another&#xA; * mechanism needs to be used instead of the caching parser pool.&#xA; * One approach would be to create parser instances that do not&#xA; * share these structures. Instead, each instance would get its&#xA; * own copy to use while parsing. This avoids the synchronization&#xA; * overhead at the expense of more memory and the time required&#xA; * to copy the structures for each new parser instance. And even&#xA; * when a parser instance is re-used, there is a potential for a&#xA; * memory leak due to new symbols being added to the symbol table&#xA; * over time. In other words, always take caution to make sure&#xA; * that your application is thread-safe and avoids leaking memory.&#xA; *&#xA; * @author Andy Clark, IBM&#xA; *&#xA; * @version $Id: CachingParserPool.java,v 1.11 2002/06/01 16:36:36 elena Exp $&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

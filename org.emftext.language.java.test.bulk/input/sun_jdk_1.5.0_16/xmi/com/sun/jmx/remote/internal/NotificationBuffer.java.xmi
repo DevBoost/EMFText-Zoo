@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="NotificationBuffer.java">
+  <comments>/*&#xA; * @(#)NotificationBuffer.java&#x9;1.5 05/08/31&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>jmx</namespaces>
+  <namespaces>remote</namespaces>
+  <namespaces>internal</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../java/util/Set.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>management</namespaces>
+    <namespaces>remote</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/management/remote/NotificationResult.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>management</namespaces>
+    <namespaces>remote</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/management/remote/TargetedNotification.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="NotificationBuffer">
+    <members xsi:type="members:InterfaceMethod" name="fetchNotifications">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../javax/management/remote/NotificationResult.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listeners">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="ListenerInfo.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </typeArguments>
+            <target xsi:type="classifiers:Interface" href="../../../../../java/util/Set.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="startSequenceNumber">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="maxNotifications">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Fetch notifications that match the given listeners.&lt;/p>&#xA;     *&#xA;     * &lt;p>The operation only considers notifications with a sequence&#xA;     * number at least &lt;code>startSequenceNumber&lt;/code>.  It will take&#xA;     * no longer than &lt;code>timeout&lt;/code>, and will return no more&#xA;     * than &lt;code>maxNotifications&lt;/code> different notifications.&lt;/p>&#xA;     *&#xA;     * &lt;p>If there are no notifications matching the criteria, the&#xA;     * operation will block until one arrives, subject to the&#xA;     * timeout.&lt;/p>&#xA;     *&#xA;     * @param listeners a Set of {@link ListenerInfo} that reflects&#xA;     * the filters to be applied to notifications.  Accesses to this&#xA;     * Set are synchronized on the Set object.  The Set is consulted&#xA;     * for selected notifications that are present when the method&#xA;     * starts, and for selected notifications that arrive while it is&#xA;     * executing.  The contents of the Set can be modified, with&#xA;     * appropriate synchronization, while the method is running.&#xA;     * @param startSequenceNumber the first sequence number to&#xA;     * consider.&#xA;     * @param timeout the maximum time to wait.  May be 0 to indicate&#xA;     * not to wait if there are no notifications.&#xA;     * @param maxNotifications the maximum number of notifications to&#xA;     * return.  May be 0 to indicate a wait for eligible notifications&#xA;     * that will return a usable &lt;code>nextSequenceNumber&lt;/code>.  The&#xA;     * {@link TargetedNotification} array in the returned {@link&#xA;     * NotificationResult} may contain more than this number of&#xA;     * elements but will not contain more than this number of&#xA;     * different notifications.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="dispose">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Discard this buffer.&lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** A buffer of notifications received from an MBean server. */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

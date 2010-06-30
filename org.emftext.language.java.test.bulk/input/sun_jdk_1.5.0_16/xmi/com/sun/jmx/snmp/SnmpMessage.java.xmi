@@ -1,0 +1,1963 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="SnmpMessage.java">
+  <comments>/*&#xA; * @(#)file      SnmpMessage.java&#xA; * @(#)author    Sun Microsystems, Inc.&#xA; * @(#)version   4.31&#xA; * @(#)date      08/05/28&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; *&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>jmx</namespaces>
+  <namespaces>snmp</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// &quot;@(#)SnmpMessage.java 1.1 98/07/23 SMI&quot;</comments>
+    <comments>// java imports</comments>
+    <comments>//</comments>
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/util/Vector.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>net</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// import debug stuff</comments>
+    <comments>//</comments>
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>trace</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SnmpMessage">
+    <members xsi:type="members:Field" name="community">
+      <typeReference xsi:type="types:Byte"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Community name.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="encodeMessage">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="outputBytes">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpTooBigException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Encodes this message and puts the result in the specified byte array.&#xA;     * For internal use only.&#xA;     * &#xA;     * @param outputBytes An array to receive the resulting encoding.&#xA;     *&#xA;     * @exception ArrayIndexOutOfBoundsException If the result does not fit&#xA;     *                                           into the specified array.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="encodingLength">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="Data field is null"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <comments>//</comments>
+        <comments>// Reminder: BerEncoder does backward encoding !</comments>
+        <comments>//</comments>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="benc">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerEncoder.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="BerEncoder.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.23"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.2"/>
+              </arguments>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.16"/>
+              <arguments xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </child>
+                <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                <expressionElse xsi:type="arrays:ArrayInstantiationBySize">
+                  <typeReference xsi:type="types:Byte"/>
+                  <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </expressionElse>
+              </arguments>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.0"/>
+              </arguments>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.25"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SnmpTooBigException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/ArrayIndexOutOfBoundsException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getRequestId">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="inputBytes">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the associated request ID.&#xA;     * @param inputBytes The flat message.&#xA;     * @return The request ID.&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="requestId">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bdec">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bdec2">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="any">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.2/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="type">
+            <typeReference xsi:type="types:Int"/>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.2/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.28"/>
+              </next>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.25"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.4/@statements.6/@variable"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.2/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid encoding"/>
+            </throwable>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.26"/>
+            </next>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.26"/>
+            </next>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="decodeMessage">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="inputBytes">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="byteCount">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Decodes the specified bytes and initializes this message.&#xA;     * For internal use only.&#xA;     * &#xA;     * @param inputBytes The bytes to be decoded.&#xA;     *&#xA;     * @exception SnmpStatusException If the specified bytes are not a valid encoding.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="bdec">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <comments>/*, byteCount */</comments>
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statements.0/@variable">
+            <comments>// FIXME</comments>
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.0"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.16"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.2"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference"/>
+              <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.26"/>
+            </next>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid encoding"/>
+            </throwable>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="encodeSnmpPdu">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pdu">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="SnmpPdu.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="maxDataLength">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpTooBigException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Initializes this message with the specified &lt;CODE>pdu&lt;/CODE>.&#xA;     * &lt;P>&#xA;     * This method initializes the data field with an array of &#xA;     * &lt;CODE>maxDataLength&lt;/CODE> bytes. It encodes the &lt;CODE>pdu&lt;/CODE>. &#xA;     * The resulting encoding is stored in the data field&#xA;     * and the length of the encoding is stored in &lt;CODE>dataLength&lt;/CODE>.&#xA;     * &lt;p>&#xA;     * If the encoding length exceeds &lt;CODE>maxDataLength&lt;/CODE>, &#xA;     * the method throws an exception.&#xA;     * &#xA;     * @param pdu The PDU to be encoded.&#xA;     * @param maxDataLength The maximum length permitted for the data field.&#xA;     *&#xA;     * @exception SnmpStatusException If the specified &lt;CODE>pdu&lt;/CODE> is not valid.&#xA;     * @exception SnmpTooBigException If the resulting encoding does not fit&#xA;     * into &lt;CODE>maxDataLength&lt;/CODE> bytes.&#xA;     * @exception ArrayIndexOutOfBoundsException If the encoding exceeds &lt;CODE>maxDataLength&lt;/CODE>.&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="pdupacket">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//</comments>
+              <comments>// The easy work</comments>
+              <comments>//</comments>
+              <target xsi:type="classifiers:Class" href="SnmpPduPacket.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="SnmpPduPacket.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.0"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPduPacket.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.3"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.4"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <comments>//</comments>
+            <comments>// Allocate the array to receive the encoding.</comments>
+            <comments>//</comments>
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.1"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <comments>//</comments>
+        <comments>// Encode the pdupacket</comments>
+        <comments>// Reminder: BerEncoder does backward encoding !</comments>
+        <comments>//</comments>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="benc">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerEncoder.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="BerEncoder.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+              </arguments>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="SnmpMsg.class.xmi#//@classifiers.0/@members.15"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </arguments>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Switch">
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.11"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.12"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.19"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.13"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.14"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.18"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="reqPdu">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpPduRequest.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpPduRequest.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.6/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduRequest.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.6/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduRequest.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.6/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.20"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="bulkPdu">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpPduBulk.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpPduBulk.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.7/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduBulk.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.7/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduBulk.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.7/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.15"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="trapPdu">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpPduTrap.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpPduTrap.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.15"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.8/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.4"/>
+                    </next>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpDataTypeEnums.class.xmi#//@classifiers.0/@members.14"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="SnmpValue.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.8/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.8/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.17"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.8/@statements.0/@variable">
+                      <next xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="SnmpIpAddress.class.xmi#//@classifiers.0/@members.5"/>
+                        </next>
+                        <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="SnmpDataTypeEnums.class.xmi#//@classifiers.0/@members.11"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="SnmpValue.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.8/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </children>
+                <children xsi:type="literals:NullLiteral"/>
+              </condition>
+              <elseStatement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.17"/>
+                    <arguments xsi:type="arrays:ArrayInstantiationBySize">
+                      <typeReference xsi:type="types:Byte"/>
+                      <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="SnmpDataTypeEnums.class.xmi#//@classifiers.0/@members.11"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="SnmpValue.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </elseStatement>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.18"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.3/@cases.8/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="SnmpOid.class.xmi#//@classifiers.0/@members.11"/>
+                      </next>
+                      <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.17"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:DefaultSwitchCase">
+            <statements xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:StringReference" value="Invalid pdu type "/>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.83"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.0"/>
+                        </next>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </throwable>
+            </statements>
+          </cases>
+          <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.26"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </arguments>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.2"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.6/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerEncoder.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SnmpTooBigException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/ArrayIndexOutOfBoundsException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="decodeSnmpPdu">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpPdu.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the PDU encoded in this message.&#xA;     * &lt;P>&#xA;     * This method decodes the data field and returns the resulting PDU.&#xA;     * &#xA;     * @return The resulting PDU.&#xA;     * @exception SnmpStatusException If the encoding is not valid.&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="pdu">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//</comments>
+              <comments>// Decode the pdu</comments>
+              <comments>//</comments>
+              <target xsi:type="classifiers:Class" href="SnmpPduPacket.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bdec">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerDecoder.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.1"/>
+            </arguments>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="type">
+            <typeReference xsi:type="types:Int"/>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.28"/>
+              </next>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.25"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.0/@variable"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Switch">
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.11"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.12"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.19"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.13"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.14"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.18"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="reqPdu">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpPduRequest.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpPduRequest.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.6/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.6/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduRequest.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.6/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduRequest.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.6/@statements.0/@variable"/>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.20"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="bulkPdu">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpPduBulk.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpPduBulk.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.7/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.7/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduBulk.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.7/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduBulk.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.7/@statements.0/@variable"/>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.15"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="trapPdu">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpPduTrap.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpPduTrap.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="SnmpOid.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.18"/>
+                    </next>
+                  </arguments>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="b">
+                <typeReference xsi:type="types:Byte"/>
+                <arrayDimensionsBefore/>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.17"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="SnmpDataTypeEnums.class.xmi#//@classifiers.0/@members.11"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="SnmpValue.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="SnmpIpAddress.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.2/@variable"/>
+                  </value>
+                </expression>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.2/@variable">
+                  <next xsi:type="references:IdentifierReference"/>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </condition>
+              <elseStatement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:NullLiteral"/>
+                </expression>
+              </elseStatement>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.12"/>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="SnmpPduTrap.class.xmi#//@classifiers.0/@members.4"/>
+                  </next>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.13"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="SnmpDataTypeEnums.class.xmi#//@classifiers.0/@members.14"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="SnmpValue.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.2/@cases.8/@statements.0/@variable"/>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.17"/>
+            </condition>
+          </cases>
+          <cases xsi:type="statements:DefaultSwitchCase">
+            <statements xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.37"/>
+                </arguments>
+              </throwable>
+            </statements>
+          </cases>
+          <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.0/@variable"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@statements.0/@variable"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="SnmpMsg.class.xmi#//@classifiers.0/@members.17"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="BerDecoder.class.xmi#//@classifiers.0/@members.26"/>
+            </next>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+                  <arguments xsi:type="references:StringReference" value="decodeSnmpPdu"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@catcheBlocks.0/@parameter"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:MethodCall" target="//@classifiers.0/@members.10"/>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.37"/>
+              </arguments>
+            </throwable>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="BerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+        <catcheBlocks>
+          <statements xsi:type="statements:Condition">
+            <comments>// bug id 4654066</comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+                  <arguments xsi:type="references:StringReference" value="decodeSnmpPdu"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@catcheBlocks.1/@parameter"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:MethodCall" target="//@classifiers.0/@members.10"/>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="SnmpStatusException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="SnmpDefinitions.class.xmi#//@classifiers.0/@members.37"/>
+              </arguments>
+            </throwable>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+            <comments>//</comments>
+            <comments>// The easy work</comments>
+            <comments>//</comments>
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPduPacket.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.3"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="SnmpPdu.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="SnmpMsg.class.xmi#//@classifiers.0/@members.4"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="printMessage">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Dumps this message in a string.&#xA;     *&#xA;     * @return The string containing the dump.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sb">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:StringReference" value="Community: null"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:StringReference" value="Community: {&#xA;"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="SnmpMsg.class.xmi#//@classifiers.0/@members.13"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                    <next xsi:type="references:IdentifierReference"/>
+                  </arguments>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:StringReference" value="&#xA;}&#xA;"/>
+              </next>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.55"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="SnmpMsg.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+              <self xsi:type="literals:Super"/>
+            </arguments>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isTraceOn">
+      <typeReference xsi:type="types:Boolean">
+        <comments>// TRACES &amp; DEBUG</comments>
+        <comments>//---------------</comments>
+      </typeReference>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../trace/Trace.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="trace">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="func">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../trace/Trace.class.xmi#//@classifiers.0/@members.5"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="trace">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="func">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isDebugOn">
+      <typeReference xsi:type="types:Boolean"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../trace/Trace.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="debug">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="func">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../trace/Trace.class.xmi#//@classifiers.0/@members.5"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="debug">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="func">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../trace/Trace.class.xmi#//@classifiers.0/@members.6"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../trace/TraceTags.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../trace/Trace.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="debug">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="func">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="debug">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="func">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="dbgTag">
+      <initialValue xsi:type="references:StringReference" value="SnmpMessage"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Is a partially decoded representation of an SNMP packet.&#xA; * &lt;P>&#xA; * You will not normally need to use this class unless you decide to&#xA; * implement your own {@link com.sun.jmx.snmp.SnmpPduFactory SnmpPduFactory} object.&#xA; * &lt;P>&#xA; * The &lt;CODE>SnmpMessage&lt;/CODE> class is directly mapped onto the &#xA; * &lt;CODE>Message&lt;/CODE> syntax defined in RFC1157 and RFC1902.&#xA; * &lt;BLOCKQUOTE>&#xA; * &lt;PRE>&#xA; * Message ::= SEQUENCE {&#xA; *    version       INTEGER { version(1) }, -- for SNMPv2&#xA; *    community     OCTET STRING,           -- community name&#xA; *    data          ANY                     -- an SNMPv2 PDU&#xA; * }&#xA; * &lt;/PRE>&#xA; * &lt;/BLOCKQUOTE>&#xA; *&#xA; * &lt;p>&lt;b>This API is a Sun Microsystems internal API  and is subject &#xA; * to change without notice.&lt;/b>&lt;/p>&#xA; * @see SnmpPduFactory&#xA; * @see SnmpPduPacket&#xA; *&#xA; * @version     1.1     07/23/98&#xA; * @author      Sun Microsystems, Inc&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="SnmpDefinitions.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="SnmpMsg.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

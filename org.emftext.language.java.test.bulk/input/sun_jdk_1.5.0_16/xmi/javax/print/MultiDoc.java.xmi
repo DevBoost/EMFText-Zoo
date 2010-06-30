@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/types ../../java.ecore#/16" name="MultiDoc.java">
+  <comments>/*&#xA; * @(#)MultiDoc.java&#x9;1.4 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>print</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="MultiDoc">
+    <members xsi:type="members:InterfaceMethod" name="getDoc">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Doc.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtain the current doc object.&#xA;     *&#xA;     * @return  Current doc object.&#xA;     *&#xA;     * @exception  IOException&#xA;     *     Thrown if a error ocurred reading the document.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="next">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Go to the multidoc object that contains the next doc object in the&#xA;     * sequence of doc objects.&#xA;     *&#xA;     * @return  Multidoc object containing the next doc object, or null if&#xA;     * there are no further doc objects.&#xA;     *&#xA;     * @exception  IOException&#xA;     *     Thrown if an error occurred locating the next document&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Interface MultiDoc specifies the interface for an object that supplies more &#xA; * than one piece of print data for a Print Job. &quot;Doc&quot; is a short, &#xA; * easy-to-pronounce term that means &quot;a piece of print data,&quot; and a &quot;multidoc&quot; &#xA; * is a group of several docs. The client passes to the Print Job an object&#xA; * that implements interface MultiDoc, and the Print Job calls methods on&#xA; *  that object to obtain the print data.&#xA; * &lt;P>&#xA; * Interface MultiDoc provides an abstraction similar to a &quot;linked list&quot; of &#xA; * docs. A multidoc object is like a node in the linked list, containing the &#xA; * current doc in the list and a pointer to the next node (multidoc) in the &#xA; * list. The Print Job can call the multidoc's {@link #getDoc() &#xA; * &lt;CODE>getDoc()&lt;/CODE>} method to get the current doc. When it's ready to go &#xA; * on to the next doc, the Print Job can call the multidoc's {@link #next() &#xA; * &lt;CODE>next()&lt;/CODE>} method to get the next multidoc, which contains the  &#xA; * next doc. So Print Job code for accessing a multidoc might look like this:&#xA; * &lt;PRE>&#xA; *      void processMultiDoc(MultiDoc theMultiDoc) {&#xA; *          &#xA; *          MultiDoc current = theMultiDoc;&#xA;&#xA; *          while (current != null) {&#xA; *              processDoc (current.getDoc());&#xA; *              current = current.next();&#xA; *          }&#xA; *      }&#xA; * &lt;/PRE>&#xA; * &lt;P>&#xA; * Of course, interface MultiDoc can be implemented in any way that fulfills  &#xA; * the contract; it doesn't have to use a linked list in the implementation. &#xA; * &lt;P>&#xA; * To get all the print data for a multidoc print job, a Print Service &#xA; * proxy could use either of two patterns: &#xA; * &lt;OL TYPE=1>&#xA; * &lt;LI>&#xA; * The &lt;B>interleaved&lt;/B> pattern: Get the doc from the current multidoc. Get &#xA; * the print data representation object from the current doc. Get all the print &#xA; * data from the print data representation object. Get the next multidoc from &#xA; * the current multidoc, and repeat until there are no more. (The code example &#xA; * above uses the interleaved pattern.) &#xA; * &lt;P>&#xA; * &lt;LI>&#xA; * The &lt;B>all-at-once&lt;/B> pattern: Get the doc from the current multidoc, and &#xA; * save the doc in a list. Get the next multidoc from the current multidoc, and &#xA; * repeat until there are no more. Then iterate over the list of saved docs. Get &#xA; * the print data representation object from the current doc. Get all the print &#xA; * data from the print data representation object. Go to the next doc in the &#xA; * list, and repeat until there are no more. &#xA; * &lt;/OL>&#xA; * Now, consider a printing client that is generating print data on the fly and &#xA; * does not have the resources to store more than one piece of print data at a &#xA; * time. If the print service proxy used the all-at-once pattern to get the &#xA; * print data, it would pose a problem for such a client; the client would have &#xA; * to keep all the docs' print data around until the print service proxy comes &#xA; * back and asks for them, which the client is not able to do. To work with such &#xA; * a client, the print service proxy must use the interleaved pattern. &#xA; * &lt;P>&#xA; * To address this problem, and to simplify the design of clients providing &#xA;* multiple docs to a Print Job, every Print Service proxy that supports &#xA; * multidoc print jobs is required to access a MultiDoc object using the &#xA; * interleaved pattern. That is, given a MultiDoc object, the print service &#xA; * proxy will call {@link #getDoc() &lt;CODE>getDoc()&lt;/CODE>} one or more times &#xA; * until it successfully obtains the current Doc object. The print service proxy &#xA; * will then obtain the current doc's print data, not proceeding until all the &#xA; * print data is obtained or an unrecoverable error occurs. If it is able to &#xA; * continue, the print service proxy will then call {@link #next() &#xA; * &lt;CODE>next()&lt;/CODE>} one or more times until it successfully obtains either &#xA; * the next MultiDoc object or an indication that there are no more. An &#xA; * implementation of interface MultiDoc can assume the print service proxy will &#xA; * follow this interleaved pattern; for any other pattern of usage, the MultiDoc &#xA; * implementation's behavior is unspecified. &#xA; * &lt;P>&#xA; * There is no restriction on the number of client threads that may be &#xA; * simultaneously accessing the same multidoc. Therefore, all implementations of &#xA; * interface MultiDoc must be designed to be multiple thread safe. In fact, a &#xA; * client thread could be adding docs to the end of the (conceptual) list while &#xA; * a Print Job thread is simultaneously obtaining docs from the beginning of the &#xA; * list; provided the multidoc object synchronizes the threads properly, the two &#xA; * threads will not interfere with each other&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

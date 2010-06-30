@@ -1,0 +1,1876 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="DefaultTreeCellRenderer.java">
+  <comments>/*&#xA; * @(#)DefaultTreeCellRenderer.java&#x9;1.51 04/01/23&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>swing</namespaces>
+  <namespaces>tree</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>plaf</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../plaf/ColorUIResource.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>plaf</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../plaf/FontUIResource.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>plaf</namespaces>
+    <namespaces>basic</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../plaf/basic/BasicGraphicsUtils.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>event</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="DefaultTreeCellRenderer">
+    <members xsi:type="members:Field" name="tree">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../JTree.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Last tree the renderer was painted in. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="selected">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** Is the value currently selected. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="hasFocus">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** True if has focus. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="drawsFocusBorderAroundIcon">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** True if draws focus border around icon as well. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="drawDashedFocusIndicator">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** If true, a dashed line is drawn as the focus indicator. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="treeBGColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// If drawDashedFocusIndicator is true, the following are used.</comments>
+        <comments>/**&#xA;     * Background color of the tree.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="focusBGColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Color to draw the focus indicator in, determined from the background.&#xA;     * color.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="closedIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Transient">
+        <comments>// Icons</comments>
+        <comments>/** Icon used to show non-leaf nodes that aren't expanded. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="leafIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Transient">
+        <comments>/** Icon used to show leaf nodes. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="openIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Transient">
+        <comments>/** Icon used to show non-leaf nodes that are expanded. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="textSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// Colors</comments>
+        <comments>/** Color to use for the foreground for selected nodes. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="textNonSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** Color to use for the foreground for non-selected nodes. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="backgroundSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** Color to use for the background when a node is selected. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="backgroundNonSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** Color to use for the background when the node isn't selected. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="borderSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** Color to use for the focus indicator when the node has focus. */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DefaultTreeCellRenderer">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.42"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../SwingConstants.class.xmi#//@classifiers.0/@members.2"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../JLabel.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.23">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.28"/>
+              <arguments xsi:type="references:StringReference" value="Tree.leafIcon"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.21">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.28"/>
+              <arguments xsi:type="references:StringReference" value="Tree.closedIcon"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.19">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.28"/>
+              <arguments xsi:type="references:StringReference" value="Tree.openIcon"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.25">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.26"/>
+              <arguments xsi:type="references:StringReference" value="Tree.selectionForeground"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.27">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.26"/>
+              <arguments xsi:type="references:StringReference" value="Tree.textForeground"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.29">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.26"/>
+              <arguments xsi:type="references:StringReference" value="Tree.selectionBackground"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.31">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.26"/>
+              <arguments xsi:type="references:StringReference" value="Tree.textBackground"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.33">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.26"/>
+              <arguments xsi:type="references:StringReference" value="Tree.selectionBorderColor"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="value">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.44"/>
+              <arguments xsi:type="references:StringReference" value="Tree.drawsFocusBorderAroundIcon"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.9/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="expressions:NestedExpression">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/lang/Boolean.class.xmi#//@classifiers.0/@members.8"/>
+                </next>
+                <expression xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../java/lang/Boolean.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.9/@variable"/>
+                </expression>
+              </children>
+            </expression>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.9/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.44"/>
+              <arguments xsi:type="references:StringReference" value="Tree.drawDashedFocusIndicator"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.9/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="expressions:NestedExpression">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/lang/Boolean.class.xmi#//@classifiers.0/@members.8"/>
+                </next>
+                <expression xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../java/lang/Boolean.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.9/@variable"/>
+                </expression>
+              </children>
+            </expression>
+          </value>
+        </expression>
+      </statements>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns a new instance of DefaultTreeCellRenderer.  Alignment is&#xA;      * set to left aligned. Icons and text color are determined from the&#xA;      * UIManager.&#xA;      */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDefaultOpenIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the default icon, for the current laf, that is used to&#xA;      * represent non-leaf nodes that are expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.28"/>
+            <arguments xsi:type="references:StringReference" value="Tree.openIcon"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDefaultClosedIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the default icon, for the current laf, that is used to&#xA;      * represent non-leaf nodes that are not expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.28"/>
+            <arguments xsi:type="references:StringReference" value="Tree.closedIcon"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDefaultLeafIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the default icon, for the current laf, that is used to&#xA;      * represent leaf nodes.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../UIManager.class.xmi#//@classifiers.0/@members.28"/>
+            <arguments xsi:type="references:StringReference" value="Tree.leafIcon"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../UIManager.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setOpenIcon">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newIcon">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the icon used to represent non-leaf nodes that are expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getOpenIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the icon used to represent non-leaf nodes that are expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setClosedIcon">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newIcon">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the icon used to represent non-leaf nodes that are not expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getClosedIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the icon used to represent non-leaf nodes that are not&#xA;      * expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setLeafIcon">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newIcon">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the icon used to represent leaf nodes.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLeafIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the icon used to represent leaf nodes.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTextSelectionColor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newColor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the color the text is drawn with when the node is selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTextSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the color the text is drawn with when the node is selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTextNonSelectionColor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newColor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the color the text is drawn with when the node isn't selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTextNonSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the color the text is drawn with when the node isn't selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBackgroundSelectionColor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newColor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the color to use for the background if node is selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBackgroundSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the color to use for the background if node is selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBackgroundNonSelectionColor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newColor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the background color to be used for non selected nodes.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBackgroundNonSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the background color to be used for non selected nodes.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBorderSelectionColor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newColor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Sets the color to use for the border.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.33/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBorderSelectionColor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Returns the color the border is drawn.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setFont">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="font">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Font.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Subclassed to map &lt;code>FontUIResource&lt;/code>s to null. If &#xA;     * &lt;code>font&lt;/code> is null, or a &lt;code>FontUIResource&lt;/code>, this&#xA;     * has the effect of letting the font of the JTree show&#xA;     * through. On the other hand, if &lt;code>font&lt;/code> is non-null, and not&#xA;     * a &lt;code>FontUIResource&lt;/code>, the font becomes &lt;code>font&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.35/@parameters.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="literals:NullLiteral"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../plaf/FontUIResource.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.35/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.162"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.35/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getFont">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Font.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the font of this component.&#xA;     * @return this component's font; if a font has not been set&#xA;     * for this component, the font of its parent is returned&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="font">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/awt/Font.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.138"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.36/@statements.0/@variable">
+                <comments>// Strive to return a non-null value, otherwise the html support</comments>
+                <comments>// will typically pick up the wrong font in certain situations.</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.138"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.36/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.36/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBackground">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="color">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Subclassed to map &lt;code>ColorUIResource&lt;/code>s to null. If &#xA;     * &lt;code>color&lt;/code> is null, or a &lt;code>ColorUIResource&lt;/code>, this&#xA;     * has the effect of letting the background color of the JTree show&#xA;     * through. On the other hand, if &lt;code>color&lt;/code> is non-null, and not&#xA;     * a &lt;code>ColorUIResource&lt;/code>, the background becomes&#xA;     * &lt;code>color&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.37/@parameters.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="literals:NullLiteral"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../plaf/ColorUIResource.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.37/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.161"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.37/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTreeCellRendererComponent">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Component.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tree">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../JTree.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sel">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="expanded">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="leaf">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="row">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hasFocus">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Configures the renderer based on the passed in components.&#xA;      * The value is set from messaging the tree with&#xA;      * &lt;code>convertValueToText&lt;/code>, which ultimately invokes&#xA;      * &lt;code>toString&lt;/code> on &lt;code>value&lt;/code>.&#xA;      * The foreground color is set based on the selection and the icon&#xA;      * is set based on on leaf and expanded.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="stringValue">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../JTree.class.xmi#//@classifiers.0/@members.86"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.2"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.3"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.4"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.5"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.6"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.6"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.25"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@statements.0/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.160"/>
+            <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.2"/>
+        <elseStatement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.160"/>
+            <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.28"/>
+          </expression>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// There needs to be a way to specify disabled icons.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.159"/>
+              <arguments xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.29"/>
+                  <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.24"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.4"/>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.29"/>
+                    <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.3"/>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.29"/>
+                    <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.22"/>
+                  </expression>
+                </statements>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.117"/>
+            </next>
+          </child>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.159"/>
+              <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.27"/>
+                  <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.24"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.4"/>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.27"/>
+                    <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.3"/>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.27"/>
+                    <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.22"/>
+                  </expression>
+                </statements>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.359"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.360"/>
+            </next>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:SelfReference">
+          <self xsi:type="literals:This"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="paint">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="g">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;      * Paints the value.  The background is filled based on selected.&#xA;      */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bColor">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.30"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.32"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.135"/>
+                </value>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.0/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="imageOffset">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="currentI">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.26"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.41"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0/@members.19"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                    <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.201"/>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                      <additiveOperators xsi:type="operators:Subtraction"/>
+                    </arguments>
+                    <arguments xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.202"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/awt/ComponentOrientation.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.360"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0/@members.19"/>
+                    <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.201"/>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                      <additiveOperators xsi:type="operators:Subtraction"/>
+                    </arguments>
+                    <arguments xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.202"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.41"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                <children xsi:type="expressions:UnaryExpression">
+                  <operators xsi:type="operators:Subtraction"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </children>
+              </condition>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.40">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.201"/>
+                    </children>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </arguments>
+                  <arguments xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.202"/>
+                  </arguments>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/awt/ComponentOrientation.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.360"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.40">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.201"/>
+                    </children>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@statements.2/@variable"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </arguments>
+                  <arguments xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.202"/>
+                  </arguments>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.91"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="paintFocus">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="g">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bsColor">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.34"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.2"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.3"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.4"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Negate"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              </children>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="color">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.30"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.32"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.135"/>
+                      </value>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable"/>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../java/awt/Color.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="expressions:UnaryExpression">
+                      <operators xsi:type="operators:Complement"/>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../java/awt/Color.class.xmi#//@classifiers.0/@members.49"/>
+                        </next>
+                      </child>
+                    </arguments>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@statements.2/@statement/@statements.0/@variable"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/awt/Graphics.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../plaf/basic/BasicGraphicsUtils.class.xmi#//@classifiers.0/@members.11"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.4"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../plaf/basic/BasicGraphicsUtils.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLabelStart">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="currentI">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../Icon.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.26"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../Icon.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/lang/Math.class.xmi#//@classifiers.0/@members.33"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.37"/>
+                    </children>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../java/lang/Math.class.xmi#//@classifiers.0"/>
+              </children>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../JLabel.class.xmi#//@classifiers.0/@members.24"/>
+            </children>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPreferredSize">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Overrides &lt;code>JComponent.getPreferredSize&lt;/code> to&#xA;     * return slightly wider preferred size value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="retDimension">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../JComponent.class.xmi#//@classifiers.0/@members.118"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.42/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.42/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../java/awt/Dimension.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.42/@statements.0/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../java/awt/Dimension.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </arguments>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.42/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.42/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="validate">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="invalidate">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    *&#xA;    * @since 1.5&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="revalidate">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="repaint">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tm">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="width">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="height">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="repaint">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="r">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/awt/Rectangle.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="repaint">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    *&#xA;    * @since 1.5&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// Strings get interned...</comments>
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/awt/Component.class.xmi#//@classifiers.0/@members.347"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.2"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.0"/>
+          <children xsi:type="references:StringReference" value="text"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Char"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Char"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Short"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Short"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Overridden for performance reasons.&#xA;    * See the &lt;a href=&quot;#override&quot;>Implementation Note&lt;/a>&#xA;    * for more information.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Displays an entry in a tree.&#xA; * &lt;code>DefaultTreeCellRenderer&lt;/code> is not opaque and&#xA; * unless you subclass paint you should not change this.&#xA; * See &lt;a&#xA; href=&quot;http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html&quot;>How to Use Trees&lt;/a> &#xA; * in &lt;em>The Java Tutorial&lt;/em>&#xA; * for examples of customizing node display using this class.&#xA; * &lt;p>                                                                        &#xA; * &#xA; * &lt;strong>&lt;a name=&quot;override&quot;>Implementation Note:&lt;/a>&lt;/strong>&#xA; * This class overrides&#xA; * &lt;code>invalidate&lt;/code>,&#xA; * &lt;code>validate&lt;/code>,&#xA; * &lt;code>revalidate&lt;/code>,&#xA; * &lt;code>repaint&lt;/code>,&#xA; * and&#xA; * &lt;code>firePropertyChange&lt;/code>&#xA; * solely to improve performance.&#xA; * If not overridden, these frequently called methods would execute code paths&#xA; * that are unnecessary for the default tree cell renderer.&#xA; * If you write your own renderer,&#xA; * take care to weigh the benefits and&#xA; * drawbacks of overriding these methods.&#xA; *&#xA; * &lt;p>&#xA; * &lt;strong>Warning:&lt;/strong>&#xA; * Serialized objects of this class will not be compatible with&#xA; * future Swing releases. The current serialization support is&#xA; * appropriate for short term storage or RMI between applications running&#xA; * the same version of Swing.  As of 1.4, support for long term storage&#xA; * of all JavaBeans&lt;sup>&lt;font size=&quot;-2&quot;>TM&lt;/font>&lt;/sup>&#xA; * has been added to the &lt;code>java.beans&lt;/code> package.&#xA; * Please see {@link java.beans.XMLEncoder}.&#xA; * &#xA; * @version 1.51 01/23/04&#xA; * @author Rob Davis&#xA; * @author Ray Ryan&#xA; * @author Scott Violet&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="TreeCellRenderer.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../JLabel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

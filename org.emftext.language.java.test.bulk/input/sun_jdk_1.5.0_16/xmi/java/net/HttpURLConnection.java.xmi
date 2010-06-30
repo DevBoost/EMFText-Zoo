@@ -1,0 +1,1340 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:annotations="http://www.emftext.org/java/annotations" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/annotations ../../java.ecore#/0 http://www.emftext.org/java/arrays ../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16 http://www.emftext.org/java/variables ../../java.ecore#/17" name="HttpURLConnection.java">
+  <comments>/*&#xA; * @(#)HttpURLConnection.java&#x9;1.42 04/06/07&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>net</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../io/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../security/Permission.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/Date.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="HttpURLConnection">
+    <members xsi:type="members:Field" name="method">
+      <initialValue xsi:type="references:StringReference" value="GET"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/* instance variables */</comments>
+        <comments>/**&#xA;     * The HTTP method (GET,POST,PUT,etc.). &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="chunkLength">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** &#xA;     * The chunk-length when using chunked encoding streaming mode for output.&#xA;     * A value of &lt;code>-1&lt;/code> means chunked encoding is disabled for output.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="fixedContentLength">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The fixed content-length when using fixed-length streaming mode.&#xA;     * A value of &lt;code>-1&lt;/code> means fixed-length streaming mode is disabled&#xA;     * for output.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getHeaderFieldKey">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the key for the &lt;code>n&lt;/code>&lt;sup>th&lt;/sup> header field.&#xA;     * Some implementations may treat the &lt;code>0&lt;/code>&lt;sup>th&lt;/sup> &#xA;     * header field as special, i.e. as the status line returned by the HTTP&#xA;     * server. In this case, {@link #getHeaderField(int) getHeaderField(0)} returns the status &#xA;     * line, but &lt;code>getHeaderFieldKey(0)&lt;/code> returns null.&#xA;     *&#xA;     * @param   n   an index, where n >=0.&#xA;     * @return  the key for the &lt;code>n&lt;/code>&lt;sup>th&lt;/sup> header field,&#xA;     *          or &lt;code>null&lt;/code> if the key does not exist.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setFixedLengthStreamingMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="contentLength">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method is used to enable streaming of a HTTP request body&#xA;     * without internal buffering, when the content length is known in&#xA;     * advance. &#xA;     * &lt;p>&#xA;     * An exception will be thrown if the application&#xA;     * attempts to write more data than the indicated&#xA;     * content-length, or if the application closes the OutputStream&#xA;     * before writing the indicated amount.&#xA;     * &lt;p>&#xA;     * When output streaming is enabled, authentication&#xA;     * and redirection cannot be handled automatically.&#xA;     * A HttpRetryException will be thrown when reading&#xA;     * the response if authentication or redirection are required.&#xA;     * This exception can be queried for the details of the error.&#xA;     * &lt;p>&#xA;     * This method must be called before the URLConnection is connected.&#xA;     *&#xA;     * @param   contentLength The number of bytes which will be written&#xA;     *&#x9;&#x9;to the OutputStream.&#xA;     *&#xA;     * @throws  IllegalStateException if URLConnection is already connected &#xA;     *&#x9;&#x9;or if a different streaming mode is already enabled.&#xA;     *&#xA;     * @throws  IllegalArgumentException if a content length less than &#xA;     *&#x9;&#x9;zero is specified.&#xA;     *&#xA;     * @see     #setChunkedStreamingMode(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Already connected"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="URLConnection.class.xmi#//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Chunked encoding streaming mode set"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="invalid content length"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="DEFAULT_CHUNK_SIZE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4096"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Default chunk size (including chunk header) if not specified;&#xA;     * we want to keep this in sync with the one defined in&#xA;     * sun.net.www.http.ChunkedOutputStream&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setChunkedStreamingMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="chunklen">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method is used to enable streaming of a HTTP request body&#xA;     * without internal buffering, when the content length is &lt;b>not&lt;/b>&#xA;     * known in advance. In this mode, chunked transfer encoding &#xA;     * is used to send the request body. Note, not all HTTP servers&#xA;     * support this mode.&#xA;     * &lt;p>&#xA;     * When output streaming is enabled, authentication&#xA;     * and redirection cannot be handled automatically.&#xA;     * A HttpRetryException will be thrown when reading&#xA;     * the response if authentication or redirection are required.&#xA;     * This exception can be queried for the details of the error.&#xA;     * &lt;p>&#xA;     * This method must be called before the URLConnection is connected.&#xA;     *&#xA;     * @param   chunklen The number of bytes to write in each chunk.&#xA;     *&#x9;&#x9;If chunklen is less than or equal to zero, a default &#xA;     *&#x9;&#x9;value will be used.&#xA;     *&#xA;     * @throws  IllegalStateException if URLConnection is already connected &#xA;     *&#x9;&#x9;or if a different streaming mode is already enabled.&#xA;     *&#xA;     * @see     #setFixedLengthStreamingMode(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Can't set streaming mode: already connected"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="URLConnection.class.xmi#//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Fixed length streaming mode set"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <relationOperators xsi:type="operators:LessThanOrEqual"/>
+            </child>
+            <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getHeaderField">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the value for the &lt;code>n&lt;/code>&lt;sup>th&lt;/sup> header field. &#xA;     * Some implementations may treat the &lt;code>0&lt;/code>&lt;sup>th&lt;/sup> &#xA;     * header field as special, i.e. as the status line returned by the HTTP&#xA;     * server. &#xA;     * &lt;p>&#xA;     * This method can be used in conjunction with the &#xA;     * {@link #getHeaderFieldKey getHeaderFieldKey} method to iterate through all &#xA;     * the headers in the message. &#xA;     *&#xA;     * @param   n   an index, where n>=0.&#xA;     * @return  the value of the &lt;code>n&lt;/code>&lt;sup>th&lt;/sup> header field,&#xA;     *&#x9;&#x9;or &lt;code>null&lt;/code> if the value does not exist.&#xA;     * @see     java.net.HttpURLConnection#getHeaderFieldKey(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="responseCode">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * An &lt;code>int&lt;/code> representing the three digit HTTP Status-Code.&#xA;     * &lt;ul>&#xA;     * &lt;li> 1xx: Informational&#xA;     * &lt;li> 2xx: Success&#xA;     * &lt;li> 3xx: Redirection&#xA;     * &lt;li> 4xx: Client Error&#xA;     * &lt;li> 5xx: Server Error&#xA;     * &lt;/ul>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="responseMessage">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The HTTP response message.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="followRedirects">
+      <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* static variables */</comments>
+        <comments>/* do we automatically follow redirects? The default is true. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="instanceFollowRedirects">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * If &lt;code>true&lt;/code>, the protocol will automatically follow redirects.&#xA;     * If &lt;code>false&lt;/code>, the protocol will not automatically follow &#xA;     * redirects.&#xA;     * &lt;p>&#xA;     * This field is set by the &lt;code>setInstanceFollowRedirects&lt;/code> &#xA;     * method. Its value is returned by the &lt;code>getInstanceFollowRedirects&lt;/code> &#xA;     * method.&#xA;     * &lt;p>&#xA;     * Its default value is based on the value of the static followRedirects &#xA;     * at HttpURLConnection construction time.&#xA;     *&#xA;     * @see     java.net.HttpURLConnection#setInstanceFollowRedirects(boolean)&#xA;     * @see     java.net.HttpURLConnection#getInstanceFollowRedirects()&#xA;     * @see     java.net.HttpURLConnection#setFollowRedirects(boolean)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="methods">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="references:StringReference" value="GET"/>
+          <initialValues xsi:type="references:StringReference" value="POST"/>
+          <initialValues xsi:type="references:StringReference" value="HEAD"/>
+          <initialValues xsi:type="references:StringReference" value="OPTIONS"/>
+          <initialValues xsi:type="references:StringReference" value="PUT"/>
+          <initialValues xsi:type="references:StringReference" value="DELETE"/>
+          <initialValues xsi:type="references:StringReference" value="TRACE"/>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* valid HTTP methods */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Constructor" name="HttpURLConnection">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="u">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="URL.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Constructor for the HttpURLConnection.&#xA;     * @param u the URL&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setFollowRedirects">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="set">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets whether HTTP redirects  (requests with response code 3xx) should &#xA;     * be automatically followed by this class.  True by default.  Applets&#xA;     * cannot change this variable.&#xA;     * &lt;p>&#xA;     * If there is a security manager, this method first calls&#xA;     * the security manager's &lt;code>checkSetFactory&lt;/code> method &#xA;     * to ensure the operation is allowed. &#xA;     * This could result in a SecurityException.&#xA;     * &#xA;     * @param set a &lt;code>boolean&lt;/code> indicating whether or not&#xA;     * to follow HTTP redirects.&#xA;     * @exception  SecurityException  if a security manager exists and its  &#xA;     *             &lt;code>checkSetFactory&lt;/code> method doesn't &#xA;     *             allow the operation.&#xA;     * @see        SecurityManager#checkSetFactory&#xA;     * @see #getFollowRedirects()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sec">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable">
+              <comments>// seems to be the best check here...</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/SecurityManager.class.xmi#//@classifiers.0/@members.52"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getFollowRedirects">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>boolean&lt;/code> indicating&#xA;     * whether or not HTTP redirects (3xx) should&#xA;     * be automatically followed.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if HTTP redirects should&#xA;     * be automatically followed, &lt;tt>false&lt;/tt> if not.&#xA;     * @see #setFollowRedirects(boolean)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setInstanceFollowRedirects">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="followRedirects">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets whether HTTP redirects (requests with response code 3xx) should&#xA;     * be automatically followed by this &lt;code>HttpURLConnection&lt;/code> &#xA;     * instance.&#xA;     * &lt;p>&#xA;     * The default value comes from followRedirects, which defaults to&#xA;     * true.&#xA;     *&#xA;     * @param followRedirects a &lt;code>boolean&lt;/code> indicating &#xA;     * whether or not to follow HTTP redirects.&#xA;     *&#xA;     * @see    java.net.HttpURLConnection#instanceFollowRedirects&#xA;     * @see #getInstanceFollowRedirects&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getInstanceFollowRedirects">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the value of this &lt;code>HttpURLConnection&lt;/code>'s&#xA;     * &lt;code>instanceFollowRedirects&lt;/code> field.&#xA;     *&#xA;     * @return  the value of this &lt;code>HttpURLConnection&lt;/code>'s&#xA;     *          &lt;code>instanceFollowRedirects&lt;/code> field.&#xA;     * @see     java.net.HttpURLConnection#instanceFollowRedirects&#xA;     * @see #setInstanceFollowRedirects(boolean)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setRequestMethod">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="method">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ProtocolException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Set the method for the URL request, one of:&#xA;     * &lt;UL>&#xA;     *  &lt;LI>GET&#xA;     *  &lt;LI>POST&#xA;     *  &lt;LI>HEAD&#xA;     *  &lt;LI>OPTIONS&#xA;     *  &lt;LI>PUT&#xA;     *  &lt;LI>DELETE&#xA;     *  &lt;LI>TRACE&#xA;     * &lt;/UL> are legal, subject to protocol restrictions.  The default&#xA;     * method is GET.&#xA;     * &#xA;     * @param method the HTTP method&#xA;     * @exception ProtocolException if the method cannot be reset or if&#xA;     *              the requested method isn't valid for HTTP.&#xA;     * @see #getRequestMethod()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="ProtocolException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Can't reset method: already connected"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="URLConnection.class.xmi#//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>// This restriction will prevent people from using this class to </comments>
+        <comments>// experiment w/ new HTTP methods using java.  But it should </comments>
+        <comments>// be placed for security - the request String could be</comments>
+        <comments>// arbitrarily long.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:SelfReference">
+                    <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                    <self xsi:type="literals:This"/>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Return"/>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+              </next>
+              <arraySelectors>
+                <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.1/@init"/>
+              </arraySelectors>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.1/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+            <next xsi:type="references:IdentifierReference"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.1/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Throw">
+        <throwable xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ProtocolException.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:StringReference" value="Invalid HTTP method: "/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </arguments>
+        </throwable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getRequestMethod">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Get the request method.&#xA;     * @return the HTTP request method&#xA;     * @see #setRequestMethod(java.lang.String)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getResponseCode">
+      <typeReference xsi:type="types:Int"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the status code from an HTTP response message.&#xA;     * For example, in the case of the following status lines:&#xA;     * &lt;PRE>&#xA;     * HTTP/1.0 200 OK&#xA;     * HTTP/1.0 401 Unauthorized&#xA;     * &lt;/PRE>&#xA;     * It will return 200 and 401 respectively.&#xA;     * Returns -1 if no code can be discerned&#xA;     * from the response (i.e., the response is not valid HTTP).&#xA;     * @throws IOException if an error occurred connecting to the server.&#xA;     * @return the HTTP Status-Code, or -1&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>/*&#xA;&#x9; * We're got the response code already&#xA;&#x9; */</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="exc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>/*&#xA;&#x9; * Ensure that we have connected to the server. Record&#xA;&#x9; * exception as we need to re-throw it if there isn't&#xA;&#x9; * a status line.&#xA;&#x9; */</comments>
+              <target xsi:type="classifiers:Class" href="../lang/Exception.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="URLConnection.class.xmi#//@classifiers.0/@members.42"/>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.1/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.2/@catcheBlocks.0/@parameter"/>
+            </expression>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/Exception.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="statusLine">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>/*&#xA; &#x9; * If we can't a status-line then re-throw any exception&#xA;&#x9; * that getInputStream threw.&#xA;&#x9; */</comments>
+              <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.7">
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Throw">
+                  <throwable xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../lang/RuntimeException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.1/@variable"/>
+                  </throwable>
+                </statement>
+                <condition xsi:type="expressions:InstanceOfExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../lang/RuntimeException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.1/@variable"/>
+                </condition>
+                <elseStatement xsi:type="statements:Throw">
+                  <throwable xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.1/@variable"/>
+                  </throwable>
+                </elseStatement>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.1/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Subtraction"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>/*&#xA;&#x9; * Examine the status-line - should be formatted as per&#xA; &#x9; * section 6.1 of RFC 2616 :-&#xA;&#x9; *&#xA;&#x9; * Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase&#xA; &#x9; *&#xA;&#x9; * If status line can't be parsed return -1.&#xA;&#x9; */</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="codePos">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.45"/>
+                  <arguments xsi:type="literals:CharacterLiteral" value="32"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="phrasePos">
+                  <typeReference xsi:type="types:Int"/>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.46"/>
+                      <arguments xsi:type="literals:CharacterLiteral" value="32"/>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.0/@variable"/>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.55"/>
+                          <arguments xsi:type="expressions:AdditiveExpression">
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                          </arguments>
+                        </next>
+                      </value>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <relationOperators xsi:type="operators:GreaterThan"/>
+                  </children>
+                  <children xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                      </next>
+                    </children>
+                    <relationOperators xsi:type="operators:LessThan"/>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <comments>// deviation from RFC 2616 - don't reject status line</comments>
+                <comments>// if SP Reason-Phrase is not included.</comments>
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                      </next>
+                    </value>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../lang/Integer.class.xmi#//@classifiers.0/@members.19"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.56"/>
+                            <arguments xsi:type="expressions:AdditiveExpression">
+                              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.0/@variable"/>
+                              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                              <additiveOperators xsi:type="operators:Addition"/>
+                            </arguments>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                          </next>
+                        </arguments>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../lang/Integer.class.xmi#//@classifiers.0"/>
+                    </value>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+                </statements>
+                <catcheBlocks>
+                  <parameter name="e">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../lang/NumberFormatException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@statement/@statements.0/@variable"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <relationOperators xsi:type="operators:GreaterThan"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.42"/>
+            <arguments xsi:type="references:StringReference" value="HTTP/1."/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Subtraction"/>
+          <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getResponseMessage">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the HTTP response message, if any, returned along with the&#xA;     * response code from a server.  From responses like:&#xA;     * &lt;PRE>&#xA;     * HTTP/1.0 200 OK&#xA;     * HTTP/1.0 404 Not Found&#xA;     * &lt;/PRE>&#xA;     * Extracts the Strings &quot;OK&quot; and &quot;Not Found&quot; respectively.&#xA;     * Returns null if none could be discerned from the responses &#xA;     * (the result was not valid HTTP).&#xA;     * @throws IOException if an error occurred connecting to the server.&#xA;     * @return the HTTP response message, or &lt;code>null&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getHeaderFieldDate">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="Default">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="dateString">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="URLConnection.class.xmi#//@classifiers.0/@members.33"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.71"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@variable"/>
+                  <children xsi:type="references:StringReference" value=" GMT"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </value>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/String.class.xmi#//@classifiers.0/@members.49"/>
+                <arguments xsi:type="references:StringReference" value="GMT"/>
+              </next>
+            </children>
+            <children xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Subtraction"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </children>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../util/Date.class.xmi#//@classifiers.0/@members.16"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@variable"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../util/Date.class.xmi#//@classifiers.0"/>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/Exception.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="disconnect">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that other requests to the server&#xA;     * are unlikely in the near future. Calling disconnect() &#xA;     * should not imply that this HttpURLConnection &#xA;     * instance can be reused for other requests.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="usingProxy">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates if the connection is going through a proxy.&#xA;     * @return a boolean indicating if the connection is&#xA;     * using a proxy.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPermission">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../security/Permission.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="port">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="URL.class.xmi#//@classifiers.0/@members.31"/>
+            </next>
+            <target xsi:type="members:Field" href="URLConnection.class.xmi#//@classifiers.0/@members.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@statements.0/@variable"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </child>
+            <expressionIf xsi:type="literals:DecimalIntegerLiteral" decimalValue="80"/>
+            <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@statements.0/@variable"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="host">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="URL.class.xmi#//@classifiers.0/@members.34"/>
+              </next>
+              <target xsi:type="members:Field" href="URLConnection.class.xmi#//@classifiers.0/@members.0"/>
+            </children>
+            <children xsi:type="references:StringReference" value=":"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@statements.0/@variable"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="permission">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../security/Permission.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="SocketPermission.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@statements.2/@variable"/>
+            <arguments xsi:type="references:StringReference" value="connect"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@statements.3/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getErrorStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Returns the error stream if the connection failed&#xA;    * but the server sent useful data nonetheless. The&#xA;    * typical example is when an HTTP server responds&#xA;    * with a 404, which will cause a FileNotFoundException &#xA;    * to be thrown in connect, but the server sent an HTML&#xA;    * help page with suggestions as to what to do.&#xA;    *&#xA;    * &lt;p>This method will not cause a connection to be initiated.  If&#xA;    * the connection was not connected, or if the server did not have&#xA;    * an error while connecting or if the server had an error but&#xA;    * no error data was sent, this method will return null. This is&#xA;    * the default.&#xA;    *&#xA;    * @return an error stream if any, null if there have been no&#xA;    * errors, the connection is not connected or the server sent no&#xA;    * useful data.&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_OK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="200"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The response codes for HTTP, as of version 1.1.&#xA;     */</comments>
+        <comments>// REMIND: do we want all these??</comments>
+        <comments>// Others not here that we do want??</comments>
+        <comments>/* 2XX: generally &quot;OK&quot; */</comments>
+        <comments>/**&#xA;     * HTTP Status-Code 200: OK.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_CREATED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="201"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 201: Created.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_ACCEPTED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="202"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 202: Accepted.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_NOT_AUTHORITATIVE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="203"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 203: Non-Authoritative Information.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_NO_CONTENT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="204"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 204: No Content.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_RESET">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="205"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 205: Reset Content.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_PARTIAL">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="206"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 206: Partial Content.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_MULT_CHOICE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="300"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/* 3XX: relocation/redirect */</comments>
+        <comments>/**&#xA;     * HTTP Status-Code 300: Multiple Choices.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_MOVED_PERM">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="301"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 301: Moved Permanently.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_MOVED_TEMP">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="302"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 302: Temporary Redirect.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_SEE_OTHER">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="303"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 303: See Other.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_NOT_MODIFIED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="304"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 304: Not Modified.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_USE_PROXY">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="305"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 305: Use Proxy.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_BAD_REQUEST">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="400"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/* 4XX: client error */</comments>
+        <comments>/**&#xA;     * HTTP Status-Code 400: Bad Request.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_UNAUTHORIZED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="401"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 401: Unauthorized.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_PAYMENT_REQUIRED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="402"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 402: Payment Required.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_FORBIDDEN">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="403"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 403: Forbidden.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_NOT_FOUND">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="404"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 404: Not Found.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_BAD_METHOD">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="405"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 405: Method Not Allowed.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_NOT_ACCEPTABLE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="406"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 406: Not Acceptable.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_PROXY_AUTH">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="407"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 407: Proxy Authentication Required.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_CLIENT_TIMEOUT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="408"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 408: Request Time-Out.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_CONFLICT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="409"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 409: Conflict.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_GONE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="410"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 410: Gone.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_LENGTH_REQUIRED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="411"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 411: Length Required.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_PRECON_FAILED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="412"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 412: Precondition Failed.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_ENTITY_TOO_LARGE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="413"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 413: Request Entity Too Large.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_REQ_TOO_LONG">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="414"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 414: Request-URI Too Large.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_UNSUPPORTED_TYPE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="415"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 415: Unsupported Media Type.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_SERVER_ERROR">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="500"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/* 5XX: server error */</comments>
+        <comments>/**&#xA;     * HTTP Status-Code 500: Internal Server Error. &#xA;     * @deprecated   it is misplaced and shouldn't have existed.&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="../lang/Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_INTERNAL_ERROR">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="500"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * HTTP Status-Code 500: Internal Server Error. &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_NOT_IMPLEMENTED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="501"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * HTTP Status-Code 501: Not Implemented.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_BAD_GATEWAY">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="502"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 502: Bad Gateway.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_UNAVAILABLE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="503"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 503: Service Unavailable.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_GATEWAY_TIMEOUT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="504"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 504: Gateway Timeout.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HTTP_VERSION">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="505"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * HTTP Status-Code 505: HTTP Version Not Supported.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract">
+      <comments>/**&#xA; * A URLConnection with support for HTTP-specific features. See&#xA; * &lt;A HREF=&quot;http://www.w3.org/pub/WWW/Protocols/&quot;> the spec &lt;/A> for&#xA; * details.&#xA; * &lt;p>&#xA; * &#xA; * Each HttpURLConnection instance is used to make a single request  &#xA; * but the underlying network connection to the HTTP server may be&#xA; * transparently shared by other instances. Calling the close() methods&#xA; * on the InputStream or OutputStream of an HttpURLConnection&#xA; * after a request may free network resources associated with this&#xA; * instance but has no effect on any shared persistent connection.&#xA; * Calling the disconnect() method may close the underlying socket&#xA; * if a persistent connection is otherwise idle at that time.&#xA; * &#xA; * @see     java.net.HttpURLConnection#disconnect()&#xA; * @since JDK1.1&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="URLConnection.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

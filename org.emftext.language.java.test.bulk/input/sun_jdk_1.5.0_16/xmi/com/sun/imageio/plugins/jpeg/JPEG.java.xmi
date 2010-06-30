@@ -1,0 +1,1578 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="JPEG.java">
+  <comments>/*&#xA; * @(#)JPEG.java&#x9;1.15 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>imageio</namespaces>
+  <namespaces>plugins</namespaces>
+  <namespaces>jpeg</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>imageio</namespaces>
+    <namespaces>metadata</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/imageio/metadata/IIOMetadataFormatImpl.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>imageio</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/imageio/ImageTypeSpecifier.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>imageio</namespaces>
+    <namespaces>plugins</namespaces>
+    <namespaces>jpeg</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>imageio</namespaces>
+    <namespaces>plugins</namespaces>
+    <namespaces>jpeg</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/BufferedImage.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/image/DataBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>color</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>color</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../java/awt/color/ICC_ColorSpace.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="JPEG">
+    <members xsi:type="members:Field" name="TEM">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// List of all the JPEG markers (pre-JPEG2000)</comments>
+        <comments>/** For temporary use in arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF0">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="192"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Codes 0x02 - 0xBF are reserved</comments>
+        <comments>// SOF markers for Nondifferential Huffman coding</comments>
+        <comments>/** Baseline DCT */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF1">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="193"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Extended Sequential DCT */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF2">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="194"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Progressive DCT */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF3">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="195"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Lossless Sequential */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DHT">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="196"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Define Huffman Tables */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF5">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="197"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// SOF markers for Differential Huffman coding</comments>
+        <comments>/** Differential Sequential DCT */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF6">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="198"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Differential Progressive DCT */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF7">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="199"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Differential Lossless */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JPG">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="200"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Reserved for JPEG extensions */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF9">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="201"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// SOF markers for Nondifferential arithmetic coding</comments>
+        <comments>/** Extended Sequential DCT, Arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF10">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="202"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Progressive DCT, Arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF11">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="203"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Lossless Sequential, Arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DAC">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="204"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Define Arithmetic conditioning tables */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF13">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="205"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// SOF markers for Differential arithmetic coding</comments>
+        <comments>/** Differential Sequential DCT, Arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF14">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="206"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Differential Progressive DCT, Arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOF15">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="207"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Differential Lossless, Arithmetic coding */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST0">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="208"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Restart Markers</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST1">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="209"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST2">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="210"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST3">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="211"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST4">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="212"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST5">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="213"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST6">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="214"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RST7">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="215"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="RESTART_RANGE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Number of restart markers */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOI">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="216"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Start of Image */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="EOI">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="217"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** End of Image */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SOS">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="218"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Start of Scan */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DQT">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="219"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Define Quantisation Tables */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DNL">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="220"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Define Number of lines */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DRI">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="221"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Define Restart Interval */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DHP">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="222"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Define Heirarchical progression */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="EXP">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="223"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Expand reference image(s) */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP0">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="224"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Application markers</comments>
+        <comments>/** APP0 used by JFIF */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP1">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="225"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP2">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="226"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP3">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="227"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP4">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="228"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP5">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="229"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP6">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="230"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP7">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="231"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP8">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="232"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP9">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="233"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP10">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="234"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP11">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="235"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP12">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="236"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP13">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="237"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP14">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="238"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** APP14 used by Adobe */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="APP15">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="239"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="COM">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="254"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// codes 0xF0 to 0xFD are reserved</comments>
+        <comments>/** Comment marker */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DENSITY_UNIT_ASPECT_RATIO">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// JFIF Resolution units</comments>
+        <comments>/** The X and Y units simply indicate the aspect ratio of the pixels. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DENSITY_UNIT_DOTS_INCH">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Pixel density is in pixels per inch. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DENSITY_UNIT_DOTS_CM">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Pixel density is in pixels per centemeter. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="NUM_DENSITY_UNIT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** The max known value for DENSITY_UNIT */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ADOBE_IMPOSSIBLE">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Adobe transform values</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ADOBE_UNKNOWN">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ADOBE_YCC">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ADOBE_YCCK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="vendor">
+      <initialValue xsi:type="references:StringReference" value="Sun Microsystems, Inc."/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Spi initialization stuff</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="version">
+      <initialValue xsi:type="references:StringReference" value="0.5"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="names">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="references:StringReference" value="JPEG"/>
+          <initialValues xsi:type="references:StringReference" value="jpeg"/>
+          <initialValues xsi:type="references:StringReference" value="JPG"/>
+          <initialValues xsi:type="references:StringReference" value="jpg"/>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Names of the formats we can read or write</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="suffixes">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="references:StringReference" value="jpg"/>
+          <initialValues xsi:type="references:StringReference" value="jpeg"/>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MIMETypes">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="references:StringReference" value="image/jpeg"/>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="nativeImageMetadataFormatName">
+      <initialValue xsi:type="references:StringReference" value="javax_imageio_jpeg_image_1.0"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="nativeImageMetadataFormatClassName">
+      <initialValue xsi:type="references:StringReference" value="com.sun.imageio.plugins.jpeg.JPEGImageMetadataFormat"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="nativeStreamMetadataFormatName">
+      <initialValue xsi:type="references:StringReference" value="javax_imageio_jpeg_stream_1.0"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="nativeStreamMetadataFormatClassName">
+      <initialValue xsi:type="references:StringReference" value="com.sun.imageio.plugins.jpeg.JPEGStreamMetadataFormat"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_UNKNOWN">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// IJG Color codes.</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_GRAYSCALE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// error/unspecified</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_RGB">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// monochrome</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_YCbCr">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// red/green/blue</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_CMYK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Y/Cb/Cr (also known as YUV)</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_YCC">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="5"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// C/M/Y/K</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_RGBA">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="6"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// PhotoYCC</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_YCbCrA">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="7"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// RGB-Alpha</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_YCCA">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="10"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Y/Cb/Cr/Alpha</comments>
+        <comments>// 8 and 9 were old &quot;Legacy&quot; codes which the old code never identified</comments>
+        <comments>// on reading anyway.  Support for writing them is being dropped, too.</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="JCS_YCCK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="11"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// PhotoYCC-Alpha</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="NUM_JCS_CODES">
+      <initialValue xsi:type="expressions:AdditiveExpression">
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.77"/>
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        <additiveOperators xsi:type="operators:Addition"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Y/Cb/Cr/K </comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="bandOffsets">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="arrays:ArrayInstantiationByValues">
+            <arrayInitializer>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </arrayInitializer>
+          </initialValues>
+          <initialValues xsi:type="arrays:ArrayInstantiationByValues">
+            <arrayInitializer>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </arrayInitializer>
+          </initialValues>
+          <initialValues xsi:type="arrays:ArrayInstantiationByValues">
+            <arrayInitializer>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+            </arrayInitializer>
+          </initialValues>
+          <initialValues xsi:type="arrays:ArrayInstantiationByValues">
+            <arrayInitializer>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+              <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+            </arrayInitializer>
+          </initialValues>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <arrayDimensionsBefore/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** IJG can handle up to 4-channel JPEGs */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="bOffsRGB">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+          <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          <initialValues xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="sRGB">
+      <initialValue xsi:type="references:IdentifierReference">
+        <next xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.33"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </next>
+        <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="YCC">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.82"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.36"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <comments>// PYCC.pf may not always be installed</comments>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <modifiers xsi:type="modifiers:Static">
+        <comments>// Can't be final</comments>
+      </modifiers>
+    </members>
+    <members xsi:type="members:Field" name="DEFAULT_QUALITY">
+      <initialValue xsi:type="literals:DecimalFloatLiteral" decimalValue="0.75"/>
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Default value for ImageWriteParam</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isNonStandardICC">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the given &lt;code>ColorSpace&lt;/code>&#xA;     * object is an instance of ICC_ColorSpace but is not one of the&#xA;     * standard &lt;code>ColorSpaces&lt;/code> returned by &#xA;     * &lt;code>ColorSpace.getInstance()&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="retval">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral" value="true"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ICC_ColorSpace.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@parameters.0"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.40"/>
+                </next>
+              </child>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                      <arguments xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.35"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </next>
+              </child>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                      <arguments xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.37"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </next>
+              </child>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                      <arguments xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.34"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </next>
+              </child>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                      <arguments xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.36"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </next>
+              </child>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.85/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isJFIFcompliant">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="imageType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/ImageTypeSpecifier.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="input">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the given imageType can be used&#xA;     * in a JFIF file.  If &lt;code>input&lt;/code> is true, then the&#xA;     * image type is considered before colorspace conversion.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cm">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../javax/imageio/ImageTypeSpecifier.class.xmi#//@classifiers.0/@members.21"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// Can't have alpha</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0/@members.28"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="numComponents">
+          <typeReference xsi:type="types:Int">
+            <comments>// Gray is OK, always</comments>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../javax/imageio/ImageTypeSpecifier.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@statements.2/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// If it isn't gray, it must have 3 channels</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@statements.2/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <comments>// Must be RGB</comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.45"/>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0/@members.59"/>
+                </next>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.13"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@parameters.1"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <comments>// Must be YCbCr</comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.86/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.45"/>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0/@members.59"/>
+                </next>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.11"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+              </children>
+            </condition>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="transformForType">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="imageType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/ImageTypeSpecifier.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="input">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * Given an image type, return the Adobe transform corresponding to &#xA;     * that type, or ADOBE_IMPOSSIBLE if the image type is incompatible&#xA;     * with an Adobe marker segment.  If &lt;code>input&lt;/code> is true, then&#xA;     * the image type is considered before colorspace conversion.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="retval">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.55"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cm">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../javax/imageio/ImageTypeSpecifier.class.xmi#//@classifiers.0/@members.21"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.56"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.14"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@parameters.1"/>
+                <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.57"/>
+                <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.56"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.13"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.57"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.11"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@parameters.1"/>
+                <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.58"/>
+                <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.55"/>
+              </value>
+            </expression>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../java/awt/color/ColorSpace.class.xmi#//@classifiers.0/@members.45"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../java/awt/image/ColorModel.class.xmi#//@classifiers.0/@members.59"/>
+          </next>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.87/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="convertToLinearQuality">
+      <typeReference xsi:type="types:Float"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="quality">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * Converts an ImageWriteParam (i.e. IJG) non-linear quality value&#xA;     * to a float suitable for passing to JPEGQTable.getScaledInstance().&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// The following is converted from the IJG code.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalFloatLiteral" decimalValue="0.01"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+          <children xsi:type="literals:DecimalFloatLiteral"/>
+          <relationOperators xsi:type="operators:LessThanOrEqual"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+          <children xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="0.5"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+                <multiplicativeOperators xsi:type="operators:Division"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+          <children xsi:type="literals:DecimalFloatLiteral" decimalValue="0.5"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="2.0"/>
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:MultiplicativeExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+                    <children xsi:type="literals:DecimalFloatLiteral" decimalValue="2.0"/>
+                    <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                  </expression>
+                </children>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </value>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.88/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDefaultQTables">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * Return an array of default, visually lossless quantization tables.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="qTables">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.89/@statements.0/@variable">
+            <arraySelectors>
+              <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </arraySelectors>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.89/@statements.0/@variable">
+            <arraySelectors>
+              <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </arraySelectors>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGQTable.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.89/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDefaultHuffmanTables">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wantDC">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * Return an array of default Huffman tables.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tables">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.90/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0/@members.4"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.90/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0/@members.5"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.90/@parameters.0"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.90/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.90/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0/@members.7"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../javax/imageio/plugins/jpeg/JPEGHuffmanTable.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.90/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A class containing JPEG-related constants, definitions, and &#xA; * static methods.  This class and its constants must be public so that&#xA; * &lt;code>JPEGImageWriteParam&lt;/code> can see it.&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

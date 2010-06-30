@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="CertStoreSpi.java">
+  <comments>/*&#xA; * @(#)CertStoreSpi.java&#x9;1.7 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>security</namespaces>
+  <namespaces>cert</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../InvalidAlgorithmParameterException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../util/Collection.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="CertStoreSpi">
+    <members xsi:type="members:Constructor" name="CertStoreSpi">
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="CertStoreParameters.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../InvalidAlgorithmParameterException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The sole constructor.&#xA;     *&#xA;     * @param params the initialization parameters (may be &lt;code>null&lt;/code>)&#xA;     * @throws InvalidAlgorithmParameterException if the initialization&#xA;     * parameters are inappropriate for this &lt;code>CertStoreSpi&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="engineGetCertificates">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:ExtendsTypeArgument">
+            <extendTypes xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="Certificate.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </extendTypes>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../util/Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="selector">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="CertSelector.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="CertStoreException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>Collection&lt;/code> of &lt;code>Certificate&lt;/code>s that&#xA;     * match the specified selector. If no &lt;code>Certificate&lt;/code>s&#xA;     * match the selector, an empty &lt;code>Collection&lt;/code> will be returned.&#xA;     * &lt;p>&#xA;     * For some &lt;code>CertStore&lt;/code> types, the resulting&#xA;     * &lt;code>Collection&lt;/code> may not contain &lt;b>all&lt;/b> of the&#xA;     * &lt;code>Certificate&lt;/code>s that match the selector. For instance,&#xA;     * an LDAP &lt;code>CertStore&lt;/code> may not search all entries in the&#xA;     * directory. Instead, it may just search entries that are likely to&#xA;     * contain the &lt;code>Certificate&lt;/code>s it is looking for. &#xA;     * &lt;p>&#xA;     * Some &lt;code>CertStore&lt;/code> implementations (especially LDAP&#xA;     * &lt;code>CertStore&lt;/code>s) may throw a &lt;code>CertStoreException&lt;/code>&#xA;     * unless a non-null &lt;code>CertSelector&lt;/code> is provided that includes&#xA;     * specific criteria that can be used to find the certificates. Issuer&#xA;     * and/or subject names are especially useful criteria.&#xA;     *&#xA;     * @param selector A &lt;code>CertSelector&lt;/code> used to select which&#xA;     *  &lt;code>Certificate&lt;/code>s should be returned. Specify &lt;code>null&lt;/code>&#xA;     *  to return all &lt;code>Certificate&lt;/code>s (if supported).&#xA;     * @return A &lt;code>Collection&lt;/code> of &lt;code>Certificate&lt;/code>s that&#xA;     *         match the specified selector (never &lt;code>null&lt;/code>)&#xA;     * @throws CertStoreException if an exception occurs &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="engineGetCRLs">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:ExtendsTypeArgument">
+            <extendTypes xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="CRL.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </extendTypes>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../util/Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="selector">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="CRLSelector.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="CertStoreException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>Collection&lt;/code> of &lt;code>CRL&lt;/code>s that&#xA;     * match the specified selector. If no &lt;code>CRL&lt;/code>s&#xA;     * match the selector, an empty &lt;code>Collection&lt;/code> will be returned.&#xA;     * &lt;p>&#xA;     * For some &lt;code>CertStore&lt;/code> types, the resulting&#xA;     * &lt;code>Collection&lt;/code> may not contain &lt;b>all&lt;/b> of the&#xA;     * &lt;code>CRL&lt;/code>s that match the selector. For instance,&#xA;     * an LDAP &lt;code>CertStore&lt;/code> may not search all entries in the&#xA;     * directory. Instead, it may just search entries that are likely to&#xA;     * contain the &lt;code>CRL&lt;/code>s it is looking for. &#xA;     * &lt;p>&#xA;     * Some &lt;code>CertStore&lt;/code> implementations (especially LDAP &#xA;     * &lt;code>CertStore&lt;/code>s) may throw a &lt;code>CertStoreException&lt;/code> &#xA;     * unless a non-null &lt;code>CRLSelector&lt;/code> is provided that includes &#xA;     * specific criteria that can be used to find the CRLs. Issuer names &#xA;     * and/or the certificate to be checked are especially useful.&#xA;     *&#xA;     * @param selector A &lt;code>CRLSelector&lt;/code> used to select which&#xA;     *  &lt;code>CRL&lt;/code>s should be returned. Specify &lt;code>null&lt;/code>&#xA;     *  to return all &lt;code>CRL&lt;/code>s (if supported).&#xA;     * @return A &lt;code>Collection&lt;/code> of &lt;code>CRL&lt;/code>s that&#xA;     *         match the specified selector (never &lt;code>null&lt;/code>)&#xA;     * @throws CertStoreException if an exception occurs &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;i>Service Provider Interface&lt;/i> (&lt;b>SPI&lt;/b>)&#xA; * for the {@link CertStore CertStore} class. All &lt;code>CertStore&lt;/code>&#xA; * implementations must include a class (the SPI class) that extends&#xA; * this class (&lt;code>CertStoreSpi&lt;/code>), provides a constructor with&#xA; * a single argument of type &lt;code>CertStoreParameters&lt;/code>, and implements &#xA; * all of its methods. In general, instances of this class should only be&#xA; * accessed through the &lt;code>CertStore&lt;/code> class. &#xA; * For details, see the Java Cryptography Architecture.&#xA; * &lt;p>&#xA; * &lt;b>Concurrent Access&lt;/b>&#xA; * &lt;p>&#xA; * The public methods of all &lt;code>CertStoreSpi&lt;/code> objects must be &#xA; * thread-safe. That is, multiple threads may concurrently invoke these &#xA; * methods on a single &lt;code>CertStoreSpi&lt;/code> object (or more than one) &#xA; * with no ill effects. This allows a &lt;code>CertPathBuilder&lt;/code> to search &#xA; * for a CRL while simultaneously searching for further certificates, for &#xA; * instance.&#xA; * &lt;p>&#xA; * Simple &lt;code>CertStoreSpi&lt;/code> implementations will probably ensure&#xA; * thread safety by adding a &lt;code>synchronized&lt;/code> keyword to their&#xA; * &lt;code>engineGetCertificates&lt;/code> and &lt;code>engineGetCRLs&lt;/code> methods.&#xA; * More sophisticated ones may allow truly concurrent access.&#xA; *&#xA; * @version &#x9;1.7 12/19/03&#xA; * @since&#x9;1.4&#xA; * @author&#x9;Steve Hanna&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

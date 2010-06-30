@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="FileCacheImageInputStream.java">
+  <comments>/*&#xA; * @(#)FileCacheImageInputStream.java&#x9;1.29 05/08/17&#xA; *&#xA; * Copyright 2005 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>imageio</namespaces>
+  <namespaces>stream</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/io/DataInput.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/File.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>imageio</namespaces>
+    <namespaces>stream</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../com/sun/imageio/stream/StreamCloser.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="FileCacheImageInputStream">
+    <members xsi:type="members:Field" name="stream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="cacheFile">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/File.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="cache">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="BUFFER_LENGTH">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1024"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="buf">
+      <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+        <typeReference xsi:type="types:Byte"/>
+        <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </initialValue>
+      <typeReference xsi:type="types:Byte"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="length">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="foundEOF">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Constructor" name="FileCacheImageInputStream">
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="stream == null!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Not a directory!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/io/File.class.xmi#//@classifiers.0/@members.34"/>
+                </next>
+              </expression>
+            </child>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/io/File.class.xmi#//@classifiers.0/@members.56"/>
+              <arguments xsi:type="references:StringReference" value="imageio"/>
+              <arguments xsi:type="references:StringReference" value=".tmp"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../java/io/File.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <arguments xsi:type="references:StringReference" value="rw"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../com/sun/imageio/stream/StreamCloser.class.xmi#//@classifiers.0/@members.3"/>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../com/sun/imageio/stream/StreamCloser.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="stream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cacheDir">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/io/File.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs a &lt;code>FileCacheImageInputStream&lt;/code> that will read&#xA;     * from a given &lt;code>InputStream&lt;/code>.&#xA;     *&#xA;     * &lt;p> A temporary file is used as a cache.  If&#xA;     * &lt;code>cacheDir&lt;/code>is non-&lt;code>null&lt;/code> and is a&#xA;     * directory, the file will be created there.  If it is&#xA;     * &lt;code>null&lt;/code>, the system-dependent default temporary-file&#xA;     * directory will be used (see the documentation for&#xA;     * &lt;code>File.createTempFile&lt;/code> for details).&#xA;     *&#xA;     * @param stream an &lt;code>InputStream&lt;/code> to read from.&#xA;     * @param cacheDir a &lt;code>File&lt;/code> indicating where the &#xA;     * cache file should be created, or &lt;code>null&lt;/code> to use the&#xA;     * system directory.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>stream&lt;/code> is&#xA;     * &lt;code>null&lt;/code>.&#xA;     * @exception IllegalArgumentException if &lt;code>cacheDir&lt;/code> is&#xA;     * non-&lt;code>null&lt;/code> but is not a directory.&#xA;     * @exception IOException if a cache file cannot be created.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="readUntil">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Ensures that at least &lt;code>pos&lt;/code> bytes are cached,&#xA;     * or the end of the source is reached.  The return value&#xA;     * is equal to the smaller of &lt;code>pos&lt;/code> and the&#xA;     * length of the source file.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// We've already got enough data cached</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// pos >= length but length isn't getting any bigger, so return it</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="len">
+          <typeReference xsi:type="types:Long"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.24"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="nbytes">
+              <typeReference xsi:type="types:Int">
+                <comments>// Copy a buffer's worth of data from the source to the cache</comments>
+                <comments>// BUFFER_LENGTH will always fit into an int so this is safe</comments>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/io/InputStream.class.xmi#//@classifiers.0/@members.5"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:Int"/>
+                    <child xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../java/lang/Math.class.xmi#//@classifiers.0/@members.38"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+                        <arguments xsi:type="expressions:CastExpression">
+                          <typeReference xsi:type="types:Long"/>
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                        </arguments>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../java/lang/Math.class.xmi#//@classifiers.0"/>
+                    </child>
+                  </arguments>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.4/@statement/@statements.0/@variable"/>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              </children>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.22"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.4/@statement/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:AssignmentMinus"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.4/@statement/@statements.0/@variable"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.4/@statement/@statements.0/@variable"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="read">
+      <typeReference xsi:type="types:Int"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.7"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="next">
+          <typeReference xsi:type="types:Long"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.6"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="pos">
+          <typeReference xsi:type="types:Long"/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.24"/>
+                <arguments xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.6"/>
+                  </child>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.12"/>
+              </next>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@variable"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable"/>
+          <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Subtraction"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </returnValue>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="read">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="len">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// Fix 4430357 - if off + len &lt; 0, overflow occurred</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IndexOutOfBoundsException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </children>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+              <next xsi:type="references:IdentifierReference"/>
+            </children>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.10"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.7"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="pos">
+          <typeReference xsi:type="types:Long"/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.6"/>
+              </children>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </arguments>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2">
+            <comments>// len will always fit into an int so this is safe</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/lang/Math.class.xmi#//@classifiers.0/@members.38"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Long"/>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+                </arguments>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@variable"/>
+                  <children xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.6"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.24"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.6"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.17"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.6"/>
+              </child>
+              <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Subtraction"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </returnValue>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isCached">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> since this&#xA;     * &lt;code>ImageInputStream&lt;/code> caches data in order to allow&#xA;     * seeking backwards.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code>.&#xA;     *&#xA;     * @see #isCachedMemory&#xA;     * @see #isCachedFile&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isCachedFile">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> since this&#xA;     * &lt;code>ImageInputStream&lt;/code> maintains a file cache.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code>.&#xA;     *&#xA;     * @see #isCached&#xA;     * @see #isCachedMemory&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isCachedMemory">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>false&lt;/code> since this&#xA;     * &lt;code>ImageInputStream&lt;/code> does not maintain a main memory&#xA;     * cache.&#xA;     *&#xA;     * @return &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @see #isCached&#xA;     * @see #isCachedFile&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Closes this &lt;code>FileCacheImageInputStream&lt;/code>, closing&#xA;     * and removing the cache file.  The source &lt;code>InputStream&lt;/code>&#xA;     * is not closed.&#xA;     *&#xA;     * @exception IOException if an error occurs.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="ImageInputStreamImpl.class.xmi#//@classifiers.0/@members.61"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../java/io/RandomAccessFile.class.xmi#//@classifiers.0/@members.27"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../java/io/File.class.xmi#//@classifiers.0/@members.40"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../com/sun/imageio/stream/StreamCloser.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../com/sun/imageio/stream/StreamCloser.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An implementation of &lt;code>ImageInputStream&lt;/code> that gets its&#xA; * input from a regular &lt;code>InputStream&lt;/code>.  A file is used to&#xA; * cache previously read data.&#xA; *&#xA; * @version 0.5&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="ImageInputStreamImpl.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

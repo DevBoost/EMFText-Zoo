@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../java.ecore#/17" name="GlyphVector.java">
+  <comments>/*&#xA; * @(#)GlyphVector.java&#x9;1.32 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <comments>/*&#xA; * @author Charlton Innovations, Inc.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>font</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Graphics2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Font.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Polygon.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// remind - need a floating point version</comments>
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Rectangle.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../geom/Point2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../geom/AffineTransform.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>font</namespaces>
+    <classifier xsi:type="classifiers:Class" href="GlyphMetrics.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>font</namespaces>
+    <classifier xsi:type="classifiers:Class" href="GlyphJustificationInfo.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="GlyphVector">
+    <members xsi:type="members:InterfaceMethod" name="getFont">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../Font.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>// methods associated with creation-time state</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     * Returns the &lt;code>Font&lt;/code> associated with this&#xA;     * &lt;code>GlyphVector&lt;/code>.  &#xA;     * @return &lt;code>Font&lt;/code> used to create this &#xA;     * &lt;code>GlyphVector&lt;/code>.  &#xA;     * @see Font&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFontRenderContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FontRenderContext.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the {@link FontRenderContext} associated with this&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     * @return &lt;code>FontRenderContext&lt;/code> used to create this&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     * @see FontRenderContext&#xA;     * @see Font&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="performDefaultLayout">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>// methods associated with the GlyphVector as a whole</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     * Assigns default positions to each glyph in this &#xA;     * &lt;code>GlyphVector&lt;/code>. This can destroy information&#xA;     * generated during initial layout of this &lt;code>GlyphVector&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getNumGlyphs">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of glyphs in this &lt;code>GlyphVector&lt;/code>.&#xA;     * @return number of glyphs in this &lt;code>GlyphVector&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphCode">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the glyphcode of the specified glyph.&#xA;     * This return value is meaningless to anything other&#xA;     * than the &lt;code>Font&lt;/code> object that created this &#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * that corresponds to the glyph from which to retrieve the &#xA;     * glyphcode.&#xA;     * @return the glyphcode of the glyph at the specified&#xA;     * &lt;code>glyphIndex&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     * is less than 0 or greater than or equal to the &#xA;     * number of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphCodes">
+      <typeReference xsi:type="types:Int"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="beginGlyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="numEntries">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="codeReturn">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of glyphcodes for the specified glyphs.&#xA;     * The contents of this return value are meaningless to anything other&#xA;     * than the &lt;code>Font&lt;/code> used to create this &#xA;     * &lt;code>GlyphVector&lt;/code>.  This method is used&#xA;     * for convenience and performance when processing glyphcodes.&#xA;     * If no array is passed in, a new array is created.&#xA;     * @param beginGlyphIndex the index into this&#xA;     *   &lt;code>GlyphVector&lt;/code> at which to start retrieving glyphcodes&#xA;     * @param numEntries the number of glyphcodes to retrieve&#xA;     * @param codeReturn the array that receives the glyphcodes and is&#xA;     *   then returned&#xA;     * @return an array of glyphcodes for the specified glyphs.&#xA;     * @throws IllegalArgumentException if &lt;code>numEntries&lt;/code> is &#xA;     *   less than 0&#xA;     * @throws IndexOutOfBoundsException if &lt;code>beginGlyphIndex&lt;/code> &#xA;     *   is less than 0&#xA;     * @throws IndexOutOfBoundsException if the sum of &#xA;     *   &lt;code>beginGlyphIndex&lt;/code> and &lt;code>numEntries&lt;/code> is &#xA;     *   greater than the number of glyphs in this&#xA;     *   &lt;code>GlyphVector&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getGlyphCharIndex">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the character index of the specified glyph.&#xA;     * The character index is the index of the first logical &#xA;     * character represented by the glyph.  The default &#xA;     * implementation assumes a one-to-one, left-to-right mapping&#xA;     * of glyphs to characters.&#xA;     * @param glyphIndex the index of the glyph&#xA;     * @return the index of the first character represented by the glyph&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getGlyphCharIndices">
+      <typeReference xsi:type="types:Int"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="beginGlyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="numEntries">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="codeReturn">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the character indices of the specified glyphs.&#xA;     * The character index is the index of the first logical&#xA;     * character represented by the glyph.  Indices are returned&#xA;     * in glyph order.  The default implementation invokes&#xA;     * getGlyphCharIndex for each glyph, and subclassers will probably&#xA;     * want to override this implementation for performance reasons.&#xA;     * Use this method for convenience and performance&#xA;     * in processing of glyphcodes. If no array is passed in,&#xA;     * a new array is created.&#xA;     * @param beginGlyphIndex the index of the first glyph &#xA;     * @param numEntries the number of glyph indices&#xA;     * @param codeReturn the array into which to return the character indices&#xA;     * @return an array of character indices, one per glyph.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:Int"/>
+                <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init/@additionalLocalVariables.0"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <additionalLocalVariables name="j">
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          </additionalLocalVariables>
+        </init>
+        <updates xsi:type="expressions:PrefixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+        <updates xsi:type="expressions:PrefixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@init/@additionalLocalVariables.0"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLogicalBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the logical bounds of this &lt;code>GlyphVector&lt;/code>.&#xA;     * This method is used when positioning this &lt;code>GlyphVector&lt;/code> &#xA;     * in relation to visually adjacent &lt;code>GlyphVector&lt;/code> objects.&#xA;     * @return a {@link Rectangle2D} that is the logical bounds of this&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getVisualBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the visual bounds of this &lt;code>GlyphVector&lt;/code>&#xA;     * The visual bounds is the bounding box of the outline of this&#xA;     * &lt;code>GlyphVector&lt;/code>.  Because of rasterization and &#xA;     * alignment of pixels, it is possible that this box does not&#xA;     * enclose all pixels affected by rendering this &lt;code>GlyphVector&lt;/code>.&#xA;     * @return a &lt;code>Rectangle2D&lt;/code> that is the bounding box&#xA;     * of this &lt;code>GlyphVector&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPixelBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../Rectangle.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="renderFRC">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="FontRenderContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the pixel bounds of this &lt;code>GlyphVector&lt;/code> when&#xA;     * rendered in a graphics with the given&#xA;     * &lt;code>FontRenderContext&lt;/code> at the given location.  The&#xA;     * renderFRC need not be the same as the&#xA;     * &lt;code>FontRenderContext&lt;/code> of this&#xA;     * &lt;code>GlyphVector&lt;/code>, and can be null.  If it is null, the&#xA;     * &lt;code>FontRenderContext&lt;/code> of this &lt;code>GlyphVector&lt;/code>&#xA;     * is used.  The default implementation returns the visual bounds, &#xA;     * offset to x, y and rounded out to the next integer value (i.e. returns an&#xA;     * integer rectangle which encloses the visual bounds) and&#xA;     * ignores the FRC.  Subclassers should override this method.&#xA;     * @param renderFRC the &lt;code>FontRenderContext&lt;/code> of the &lt;code>Graphics&lt;/code>.&#xA;     * @param x the x-coordinate at which to render this &lt;code>GlyphVector&lt;/code>.&#xA;     * @param y the y-coordinate at which to render this &lt;code>GlyphVector&lt;/code>.&#xA;     * @return a &lt;code>Rectangle&lt;/code> bounding the pixels that would be affected.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="rect">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="l">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.21"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="t">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.21"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="r">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.7"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.8"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../Rectangle.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </arguments>
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.4/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </arguments>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getOutline">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>Shape&lt;/code> whose interior corresponds to the&#xA;     * visual representation of this &lt;code>GlyphVector&lt;/code>.&#xA;     * @return a &lt;code>Shape&lt;/code> that is the outline of this&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getOutline">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>Shape&lt;/code> whose interior corresponds to the&#xA;     * visual representation of this &lt;code>GlyphVector&lt;/code> when&#xA;     * rendered at x,&amp;nbsp;y.&#xA;     * @param x,&amp;nbsp;y the coordinates of this &lt;code>GlyphVector&lt;/code>.&#xA;     * @return a &lt;code>Shape&lt;/code> that is the outline of this&#xA;     *   &lt;code>GlyphVector&lt;/code> when rendered at the specified&#xA;     *   coordinates.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphOutline">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>Shape&lt;/code> whose interior corresponds to the&#xA;     * visual representation of the specified glyph&#xA;     * within this &lt;code>GlyphVector&lt;/code>.&#xA;     * The outline returned by this method is positioned around the&#xA;     * origin of each individual glyph.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * @return a &lt;code>Shape&lt;/code> that is the outline of the glyph&#xA;     *   at the specified &lt;code>glyphIndex&lt;/code> of this&#xA;     *&#x9; &lt;code>GlyphVector&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number&#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getGlyphOutline">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>Shape&lt;/code> whose interior corresponds to the&#xA;     * visual representation of the specified glyph&#xA;     * within this &lt;code>GlyphVector&lt;/code>, offset to x,&amp;nbsp;y.&#xA;     * The outline returned by this method is positioned around the&#xA;     * origin of each individual glyph.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * @param x,&amp;nbsp;y the coordinates of the location of this &#xA;     *   &lt;code>GlyphVector&lt;/code>.&#xA;     * @return a &lt;code>Shape&lt;/code> that is the outline of the glyph&#xA;     *   at the specified &lt;code>glyphIndex&lt;/code> of this&#xA;     *&#x9; &lt;code>GlyphVector&lt;/code> when rendered at the specified&#xA;     *   coordinates.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number&#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="s">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="at">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../geom/AffineTransform.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../geom/AffineTransform.class.xmi#//@classifiers.0/@members.36"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.2"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../geom/AffineTransform.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../geom/AffineTransform.class.xmi#//@classifiers.0/@members.79"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphPosition">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../geom/Point2D.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the position of the specified glyph relative to the&#xA;     * origin of this &lt;code>GlyphVector&lt;/code>.&#xA;     * If &lt;code>glyphIndex&lt;/code> equals the number of of glyphs in &#xA;     * this &lt;code>GlyphVector&lt;/code>, this method returns the position after&#xA;     * the last glyph. This position is used to define the advance of &#xA;     * the entire &lt;code>GlyphVector&lt;/code>.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * @return a {@link Point2D} object that is the position of the glyph&#xA;     *&#x9; at the specified &lt;code>glyphIndex&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than the number of glyphs&#xA;     *   in this &lt;code>GlyphVector&lt;/code>&#xA;     * @see #setGlyphPosition &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setGlyphPosition">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newPos">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../geom/Point2D.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the position of the specified glyph within this&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     * If &lt;code>glyphIndex&lt;/code> equals the number of of glyphs in &#xA;     * this &lt;code>GlyphVector&lt;/code>, this method sets the position after&#xA;     * the last glyph. This position is used to define the advance of &#xA;     * the entire &lt;code>GlyphVector&lt;/code>.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * @param newPos the &lt;code>Point2D&lt;/code> at which to position the&#xA;     *&#x9; glyph at the specified &lt;code>glyphIndex&lt;/code>&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than the number of glyphs&#xA;     *   in this &lt;code>GlyphVector&lt;/code>&#xA;     * @see #getGlyphPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphTransform">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../geom/AffineTransform.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the transform of the specified glyph within this&#xA;     * &lt;code>GlyphVector&lt;/code>.  The transform is relative to the&#xA;     * glyph position.  If no special transform has been applied, &#xA;     * &lt;code>null&lt;/code> can be returned.  A null return indicates&#xA;     * an identity transform.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * @return an {@link AffineTransform} that is the transform of&#xA;     *&#x9; the glyph at the specified &lt;code>glyphIndex&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number &#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     * @see #setGlyphTransform&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setGlyphTransform">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newTX">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../geom/AffineTransform.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the transform of the specified glyph within this&#xA;     * &lt;code>GlyphVector&lt;/code>.  The transform is relative to the glyph&#xA;     * position.  A &lt;code>null&lt;/code> argument for &lt;code>newTX&lt;/code>&#xA;     * indicates that no special transform is applied for the specified&#xA;     * glyph.&#xA;     * This method can be used to rotate, mirror, translate and scale the&#xA;     * glyph.  Adding a transform can result in signifant performance changes.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     * @param newTX the new transform of the glyph at &lt;code>glyphIndex&lt;/code>&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number &#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     * @see #getGlyphTransform&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLayoutFlags">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns flags describing the global state of the GlyphVector.&#xA;     * Flags not described below are reserved.  The default &#xA;     * implementation returns 0 (meaning false) for the position adjustments,&#xA;     * transforms, rtl, and complex flags.&#xA;     * Subclassers should override this method, and make sure&#xA;     * it correctly describes the GlyphVector and corresponds&#xA;     * to the results of related calls.&#xA;     * @return an int containing the flags describing the state&#xA;     * @see #FLAG_HAS_POSITION_ADJUSTMENTS&#xA;     * @see #FLAG_HAS_TRANSFORMS&#xA;     * @see #FLAG_RUN_RTL&#xA;     * @see #FLAG_COMPLEX_GLYPHS&#xA;     * @see #FLAG_MASK&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="FLAG_HAS_TRANSFORMS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A flag used with getLayoutFlags that indicates that this &lt;code>GlyphVector&lt;/code> has&#xA;     * per-glyph transforms.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FLAG_HAS_POSITION_ADJUSTMENTS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A flag used with getLayoutFlags that indicates that this &lt;code>GlyphVector&lt;/code> has&#xA;     * position adjustments.  When this is true, the glyph positions don't match the&#xA;     * accumulated default advances of the glyphs (for example, if kerning has been done).&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FLAG_RUN_RTL">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A flag used with getLayoutFlags that indicates that this &lt;code>GlyphVector&lt;/code> has&#xA;     * a right-to-left run direction.  This refers to the glyph-to-char mapping and does&#xA;     * not imply that the visual locations of the glyphs are necessarily in this order,&#xA;     * although generally they will be.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FLAG_COMPLEX_GLYPHS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A flag used with getLayoutFlags that indicates that this &lt;code>GlyphVector&lt;/code> has&#xA;     * a complex glyph-to-char mapping (one that does not map glyphs to chars one-to-one in&#xA;     * strictly ascending or descending order matching the run direction).&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FLAG_MASK">
+      <initialValue xsi:type="expressions:InclusiveOrExpression">
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A mask for supported flags from getLayoutFlags.  Only bits covered by the mask&#xA;     * should be tested.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphPositions">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="beginGlyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="numEntries">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="positionReturn">
+        <typeReference xsi:type="types:Float"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of glyph positions for the specified glyphs.&#xA;     * This method is used for convenience and performance when&#xA;     * processing glyph positions.&#xA;     * If no array is passed in, a new array is created.&#xA;     * Even numbered array entries beginning with position zero are the X&#xA;     * coordinates of the glyph numbered &lt;code>beginGlyphIndex + position/2&lt;/code>.  &#xA;     * Odd numbered array entries beginning with position one are the Y&#xA;     * coordinates of the glyph numbered &lt;code>beginGlyphIndex + (position-1)/2&lt;/code>.&#xA;     * If &lt;code>beginGlyphIndex&lt;/code> equals the number of of glyphs in &#xA;     * this &lt;code>GlyphVector&lt;/code>, this method gets the position after&#xA;     * the last glyph and this position is used to define the advance of &#xA;     * the entire &lt;code>GlyphVector&lt;/code>.&#xA;     * @param beginGlyphIndex the index at which to begin retrieving&#xA;     *   glyph positions&#xA;     * @param numEntries the number of glyphs to retrieve&#xA;     * @param positionReturn the array that receives the glyph positions&#xA;     *   and is then returned.&#xA;     * @return an array of glyph positions specified by&#xA;     *&#x9;&lt;code>beginGlyphIndex&lt;/code> and &lt;code>numEntries&lt;/code>.&#xA;     * @throws IllegalArgumentException if &lt;code>numEntries&lt;/code> is&#xA;     *   less than 0&#xA;     * @throws IndexOutOfBoundsException if &lt;code>beginGlyphIndex&lt;/code>&#xA;     *   is less than 0&#xA;     * @throws IndexOutOfBoundsException if the sum of &#xA;     *   &lt;code>beginGlyphIndex&lt;/code> and &lt;code>numEntries&lt;/code> &#xA;     *   is greater than the number of glyphs in this &#xA;     *   &lt;code>GlyphVector&lt;/code> plus one&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphLogicalBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the logical bounds of the specified glyph within this&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     * These logical bounds have a total of four edges, with two edges&#xA;     * parallel to the baseline under the glyph's transform and the other two&#xA;     * edges are shared with adjacent glyphs if they are present.  This&#xA;     * method is useful for hit-testing of the specified glyph,&#xA;     * positioning of a caret at the leading or trailing edge of a glyph,&#xA;     * and for drawing a highlight region around the specified glyph.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     *   that corresponds to the glyph from which to retrieve its logical&#xA;     *   bounds&#xA;     * @return  a &lt;code>Shape&lt;/code> that is the logical bounds of the&#xA;     *&#x9; glyph at the specified &lt;code>glyphIndex&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number &#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     * @see #getGlyphVisualBounds&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphVisualBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Shape.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the visual bounds of the specified glyph within the&#xA;     * &lt;code>GlyphVector&lt;/code>.&#xA;     * The bounds returned by this method is positioned around the&#xA;     * origin of each individual glyph.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     *   that corresponds to the glyph from which to retrieve its visual&#xA;     *   bounds&#xA;     * @return a &lt;code>Shape&lt;/code> that is the visual bounds of the&#xA;     *   glyph at the specified &lt;code>glyphIndex&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number &#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     * @see #getGlyphLogicalBounds&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getGlyphPixelBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../Rectangle.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="index">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="renderFRC">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="FontRenderContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the pixel bounds of the glyph at index when this&#xA;     * &lt;code>GlyphVector&lt;/code> is rendered in a &lt;code>Graphics&lt;/code> with the&#xA;     * given &lt;code>FontRenderContext&lt;/code> at the given location. The&#xA;     * renderFRC need not be the same as the&#xA;     * &lt;code>FontRenderContext&lt;/code> of this&#xA;     * &lt;code>GlyphVector&lt;/code>, and can be null.  If it is null, the&#xA;     * &lt;code>FontRenderContext&lt;/code> of this &lt;code>GlyphVector&lt;/code>&#xA;     * is used.  The default implementation returns the visual bounds of the glyph, &#xA;     * offset to x, y and rounded out to the next integer value, and&#xA;     * ignores the FRC.  Subclassers should override this method.&#xA;     * @param index the index of the glyph.&#xA;     * @param renderFRC the &lt;code>FontRenderContext&lt;/code> of the &lt;code>Graphics&lt;/code>.&#xA;     * @param x,&amp;nbsp;y the position at which to render this &lt;code>GlyphVector&lt;/code>.&#xA;     * @return a &lt;code>Rectangle&lt;/code> bounding the pixels that would be affected.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="rect">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.27">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../Shape.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="l">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.21"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.2"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="t">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.21"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.3"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="r">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.7"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.2"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.8"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.3"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../Rectangle.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.1/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.2/@variable"/>
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.1/@variable"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </arguments>
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.4/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.2/@variable"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </arguments>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphMetrics">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GlyphMetrics.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the metrics of the glyph at the specified index into&#xA;     * this &lt;code>GlyphVector&lt;/code>.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     *   that corresponds to the glyph from which to retrieve its metrics&#xA;     * @return a {@link GlyphMetrics} object that represents the&#xA;     *&#x9; metrics of the glyph at the specified &lt;code>glyphIndex&lt;/code> &#xA;     *&#x9; into this &lt;code>GlyphVector&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number &#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGlyphJustificationInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GlyphJustificationInfo.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="glyphIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the justification information for the glyph at&#xA;     * the specified index into this &lt;code>GlyphVector&lt;/code>.&#xA;     * @param glyphIndex the index into this &lt;code>GlyphVector&lt;/code>&#xA;     *&#x9; that corresponds to the glyph from which to retrieve its &#xA;     *&#x9; justification properties&#xA;     * @return a {@link GlyphJustificationInfo} object that&#xA;     *&#x9; represents the justification properties of the glyph at the&#xA;     *&#x9; specified &lt;code>glyphIndex&lt;/code> into this&#xA;     *&#x9; &lt;code>GlyphVector&lt;/code>.&#xA;     * @throws IndexOutOfBoundsException if &lt;code>glyphIndex&lt;/code>&#xA;     *   is less than 0 or greater than or equal to the number &#xA;     *   of glyphs in this &lt;code>GlyphVector&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="equals">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="set">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>// general utility methods</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     * Tests if the specified &lt;code>GlyphVector&lt;/code> exactly&#xA;     * equals this &lt;code>GlyphVector&lt;/code>.&#xA;     * @param set the specified &lt;code>GlyphVector&lt;/code> to test&#xA;     * @return &lt;code>true&lt;/code> if the specified&#xA;     *&#x9; &lt;code>GlyphVector&lt;/code> equals this &lt;code>GlyphVector&lt;/code>;&#xA;     *&#x9; &lt;code>false&lt;/code> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A &lt;code>GlyphVector&lt;/code> object is a collection of glyphs&#xA; * containing geometric information for the placement of each glyph &#xA; * in a transformed coordinate space which corresponds to the&#xA; * device on which the &lt;code>GlyphVector&lt;/code> is ultimately &#xA; * displayed. &#xA; * &lt;p>&#xA; * The &lt;code>GlyphVector&lt;/code> does not attempt any interpretation of&#xA; * the sequence of glyphs it contains.  Relationships between adjacent&#xA; * glyphs in sequence are solely used to determine the placement of&#xA; * the glyphs in the visual coordinate space.&#xA; * &lt;p>&#xA; * Instances of &lt;code>GlyphVector&lt;/code> are created by a {@link Font}.&#xA; * &lt;p>&#xA; * In a text processing application that can cache intermediate&#xA; * representations of text, creation and subsequent caching of a &#xA; * &lt;code>GlyphVector&lt;/code> for use during rendering is the fastest&#xA; * method to present the visual representation of characters to a user.&#xA; * &lt;p>&#xA; * A &lt;code>GlyphVector&lt;/code> is associated with exactly one &#xA; * &lt;code>Font&lt;/code>, and can provide data useful only in relation to&#xA; * this &lt;code>Font&lt;/code>.  In addition, metrics obtained from a&#xA; * &lt;code>GlyphVector&lt;/code> are not generally geometrically scaleable&#xA; * since the pixelization and spacing are dependent on grid-fitting&#xA; * algorithms within a &lt;code>Font&lt;/code>.  To facilitate accurate&#xA; * measurement of a &lt;code>GlyphVector&lt;/code> and its component&#xA; * glyphs, you must specify a scaling transform, anti-alias mode, and&#xA; * fractional metrics mode when creating the &lt;code>GlyphVector&lt;/code>.&#xA; * These characteristics can be derived from the destination device.&#xA; * &lt;p>&#xA; * For each glyph in the &lt;code>GlyphVector&lt;/code>, you can obtain:&#xA; * &lt;ul>&#xA; * &lt;li>the position of the glyph&#xA; * &lt;li>the transform associated with the glyph&#xA; * &lt;li>the metrics of the glyph in the context of the &#xA; *   &lt;code>GlyphVector&lt;/code>.  The metrics of the glyph may be&#xA; *   different under different transforms, application specified&#xA; *   rendering hints, and the specific instance of the glyph within&#xA; *   the &lt;code>GlyphVector&lt;/code>.&#xA; * &lt;/ul>&#xA; * &lt;p>&#xA; * Altering the data used to create the &lt;code>GlyphVector&lt;/code> does not&#xA; * alter the state of the &lt;code>GlyphVector&lt;/code>.&#xA; * &lt;p>&#xA; * Methods are provided to adjust the positions of the glyphs&#xA; * within the &lt;code>GlyphVector&lt;/code>.  These methods are most&#xA; * appropriate for applications that are performing justification&#xA; * operations for the presentation of the glyphs.&#xA; * &lt;p>&#xA; * Methods are provided to transform individual glyphs within the&#xA; * &lt;code>GlyphVector&lt;/code>.  These methods are primarily useful for&#xA; * special effects.&#xA; * &lt;p>&#xA; * Methods are provided to return both the visual, logical, and pixel bounds&#xA; * of the entire &lt;code>GlyphVector&lt;/code> or of individual glyphs within&#xA; * the &lt;code>GlyphVector&lt;/code>.&#xA; * &lt;p>&#xA; * Methods are provided to return a {@link Shape} for the &#xA; * &lt;code>GlyphVector&lt;/code>, and for individual glyphs within the&#xA; * &lt;code>GlyphVector&lt;/code>.&#xA; * @see Font&#xA; * @see GlyphMetrics&#xA; * @see TextLayout&#xA; * @version 19 Mar 1998&#xA; * @author Charlton Innovations, Inc.&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../lang/Cloneable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

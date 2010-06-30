@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ScheduledExecutorService.java">
+  <comments>/*&#xA; * @(#)ScheduledExecutorService.java&#x9;1.2 04/04/14&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>concurrent</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>concurrent</namespaces>
+    <namespaces>atomic</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="ScheduledExecutorService">
+    <members xsi:type="members:InterfaceMethod" name="schedule">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Interface" href="ScheduledFuture.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="delay">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates and executes a one-shot action that becomes enabled&#xA;     * after the given delay.&#xA;     * @param command the task to execute.&#xA;     * @param delay the time from now to delay execution.&#xA;     * @param unit the time unit of the delay parameter.&#xA;     * @return a Future representing pending completion of the task,&#xA;     * and whose &lt;tt>get()&lt;/tt> method will return &lt;tt>null&lt;/tt>&#xA;     * upon completion.&#xA;     * @throws RejectedExecutionException if task cannot be scheduled&#xA;     * for execution.&#xA;     * @throws NullPointerException if command is null&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="schedule">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.1/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="ScheduledFuture.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <typeParameters name="V"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="callable">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.1/@typeParameters.0"/>
+              </typeReference>
+            </typeArguments>
+            <target xsi:type="classifiers:Interface" href="Callable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="delay">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates and executes a ScheduledFuture that becomes enabled after the&#xA;     * given delay.&#xA;     * @param callable the function to execute.&#xA;     * @param delay the time from now to delay execution.&#xA;     * @param unit the time unit of the delay parameter.&#xA;     * @return a ScheduledFuture that can be used to extract result or cancel.&#xA;     * @throws RejectedExecutionException if task cannot be scheduled&#xA;     * for execution.&#xA;     * @throws NullPointerException if callable is null&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="scheduleAtFixedRate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Interface" href="ScheduledFuture.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="initialDelay">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="period">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates and executes a periodic action that becomes enabled first&#xA;     * after the given initial delay, and subsequently with the given&#xA;     * period; that is executions will commence after&#xA;     * &lt;tt>initialDelay&lt;/tt> then &lt;tt>initialDelay+period&lt;/tt>, then&#xA;     * &lt;tt>initialDelay + 2 * period&lt;/tt>, and so on.  &#xA;     * If any execution of the task&#xA;     * encounters an exception, subsequent executions are suppressed.&#xA;     * Otherwise, the task will only terminate via cancellation or&#xA;     * termination of the executor.&#xA;     * @param command the task to execute.&#xA;     * @param initialDelay the time to delay first execution.&#xA;     * @param period the period between successive executions.&#xA;     * @param unit the time unit of the initialDelay and period parameters&#xA;     * @return a Future representing pending completion of the task,&#xA;     * and whose &lt;tt>get()&lt;/tt> method will throw an exception upon&#xA;     * cancellation.&#xA;     * @throws RejectedExecutionException if task cannot be scheduled&#xA;     * for execution.&#xA;     * @throws NullPointerException if command is null&#xA;     * @throws IllegalArgumentException if period less than or equal to zero.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="scheduleWithFixedDelay">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Interface" href="ScheduledFuture.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="initialDelay">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="delay">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates and executes a periodic action that becomes enabled first&#xA;     * after the given initial delay, and subsequently with the&#xA;     * given delay between the termination of one execution and the&#xA;     * commencement of the next. If any execution of the task&#xA;     * encounters an exception, subsequent executions are suppressed.&#xA;     * Otherwise, the task will only terminate via cancellation or&#xA;     * termination of the executor.&#xA;     * @param command the task to execute.&#xA;     * @param initialDelay the time to delay first execution.&#xA;     * @param delay the delay between the termination of one&#xA;     * execution and the commencement of the next.&#xA;     * @param unit the time unit of the initialDelay and delay parameters&#xA;     * @return a Future representing pending completion of the task,&#xA;     * and whose &lt;tt>get()&lt;/tt> method will throw an exception upon&#xA;     * cancellation.&#xA;     * @throws RejectedExecutionException if task cannot be scheduled&#xA;     * for execution.&#xA;     * @throws NullPointerException if command is null&#xA;     * @throws IllegalArgumentException if delay less than or equal to zero.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An {@link ExecutorService} that can schedule commands to run after a given&#xA; * delay, or to execute periodically. &#xA; *&#xA; * &lt;p> The &lt;tt>schedule&lt;/tt> methods create tasks with various delays&#xA; * and return a task object that can be used to cancel or check&#xA; * execution. The &lt;tt>scheduleAtFixedRate&lt;/tt> and&#xA; * &lt;tt>scheduleWithFixedDelay&lt;/tt> methods create and execute tasks&#xA; * that run periodically until cancelled.  &#xA; *&#xA; * &lt;p> Commands submitted using the {@link Executor#execute} and&#xA; * {@link ExecutorService} &lt;tt>submit&lt;/tt> methods are scheduled with&#xA; * a requested delay of zero. Zero and negative delays (but not&#xA; * periods) are also allowed in &lt;tt>schedule&lt;/tt> methods, and are&#xA; * treated as requests for immediate execution.&#xA; *&#xA; * &lt;p>All &lt;tt>schedule&lt;/tt> methods accept &lt;em>relative&lt;/em> delays and&#xA; * periods as arguments, not absolute times or dates. It is a simple&#xA; * matter to transform an absolute time represented as a {@link&#xA; * java.util.Date} to the required form. For example, to schedule at&#xA; * a certain future &lt;tt>date&lt;/tt>, you can use: &lt;tt>schedule(task,&#xA; * date.getTime() - System.currentTimeMillis(),&#xA; * TimeUnit.MILLISECONDS)&lt;/tt>. Beware however that expiration of a&#xA; * relative delay need not coincide with the current &lt;tt>Date&lt;/tt> at&#xA; * which the task is enabled due to network time synchronization&#xA; * protocols, clock drift, or other factors. &#xA; *&#xA; * The {@link Executors} class provides convenient factory methods for&#xA; * the ScheduledExecutorService implementations provided in this package.&#xA; *&#xA; * &lt;h3>Usage Example&lt;/h3>&#xA; * &#xA; * Here is a class with a method that sets up a ScheduledExecutorService&#xA; * to beep every ten seconds for an hour:&#xA; *&#xA; * &lt;pre>&#xA; * import static java.util.concurrent.TimeUnit.*;&#xA; * class BeeperControl {&#xA; *    private final ScheduledExecutorService scheduler = &#xA; *       Executors.newScheduledThreadPool(1);&#xA; *&#xA; *    public void beepForAnHour() {&#xA; *        final Runnable beeper = new Runnable() {&#xA; *                public void run() { System.out.println(&quot;beep&quot;); }&#xA; *            };&#xA; *        final ScheduledFuture&amp;lt;?&amp;gt; beeperHandle = &#xA; *            scheduler.scheduleAtFixedRate(beeper, 10, 10, SECONDS);&#xA; *        scheduler.schedule(new Runnable() {&#xA; *                public void run() { beeperHandle.cancel(true); }&#xA; *            }, 60 * 60, SECONDS);&#xA; *    }&#xA; * }&#xA; * &lt;/pre>&#xA; *&#xA; * @since 1.5&#xA; * @author Doug Lea&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="ExecutorService.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

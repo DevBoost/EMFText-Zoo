@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16" name="ScrollPaneAdjustable.java">
+  <comments>/*&#xA; * @(#)ScrollPaneAdjustable.java&#x9;1.9 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>event</namespaces>
+    <classifier xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>event</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>peer</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="peer/ScrollPanePeer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../io/Serializable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="ScrollPaneAdjustable">
+    <members xsi:type="members:Field" name="sp">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ScrollPane.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The &lt;code>ScrollPane&lt;/code> this object is a scrollbar of.&#xA;     * @serial&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="orientation">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Orientation of this scrollbar.&#xA;     * &#xA;     * @serial&#xA;     * @see #getOrientation&#xA;     * @see java.awt.Adjustable#HORIZONTAL&#xA;     * @see java.awt.Adjustable#VERTICAL&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="value">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The value of this scrollbar.&#xA;     * &lt;code>value&lt;/code> should be greater than &lt;code>minimum&lt;/code>&#xA;     * and less than &lt;code>maximum&lt;/code>&#xA;     * &#xA;     * @serial&#xA;     * @see #getValue&#xA;     * @see #setValue&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="minimum">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The minimum value of this scrollbar.&#xA;     * This value can only be set by the &lt;code>ScrollPane&lt;/code>.&#xA;     * &lt;p>&#xA;     * &lt;strong>ATTN:&lt;/strong> In current implementation&#xA;     * &lt;code>minimum&lt;/code> is always &lt;code>0&lt;/code>.  This field can&#xA;     * only be altered via &lt;code>setSpan&lt;/code> method and&#xA;     * &lt;code>ScrollPane&lt;/code> always calls that method with&#xA;     * &lt;code>0&lt;/code> for the minimum.  &lt;code>getMinimum&lt;/code> method&#xA;     * always returns &lt;code>0&lt;/code> without checking this field.&#xA;     * &#xA;     * @serial&#xA;     * @see #getMinimum&#xA;     * @see #setSpan(int, int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="maximum">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The maximum value of this scrollbar.&#xA;     * This value can only be set by the &lt;code>ScrollPane&lt;/code>.&#xA;     * &#xA;     * @serial&#xA;     * @see #getMaximum&#xA;     * @see #setSpan(int, int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="visibleAmount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The size of the visible portion of this scrollbar.&#xA;     * This value can only be set by the &lt;code>ScrollPane&lt;/code>.&#xA;     * &#xA;     * @serial&#xA;     * @see #getVisibleAmount&#xA;     * @see #setSpan(int, int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="isAdjusting">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The adjusting status of the &lt;code>Scrollbar&lt;/code>.&#xA;     * True if the value is in the process of changing as a result of&#xA;     * actions being taken by the user.&#xA;     *&#xA;     * @see #getValueIsAdjusting&#xA;     * @see #setValueIsAdjusting&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+    </members>
+    <members xsi:type="members:Field" name="unitIncrement">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The amount by which the scrollbar value will change when going&#xA;     * up or down by a line.&#xA;     * This value should be a non negative integer.&#xA;     *&#xA;     * @serial&#xA;     * @see #getUnitIncrement&#xA;     * @see #setUnitIncrement&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="blockIncrement">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The amount by which the scrollbar value will change when going&#xA;     * up or down by a page.&#xA;     * This value should be a non negative integer.&#xA;     *&#xA;     * @serial&#xA;     * @see #getBlockIncrement&#xA;     * @see #setBlockIncrement&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="adjustmentListener">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="SCROLLPANE_ONLY">
+      <initialValue xsi:type="references:StringReference" value="Can be set by scrollpane only"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Error message for &lt;code>AWTError&lt;/code> reported when one of&#xA;     * the public but unsupported methods is called.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="initIDs">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Initialize JNI field and method ids.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="Toolkit.class.xmi#//@classifiers.0/@members.75"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="Toolkit.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.11"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="GraphicsEnvironment.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="GraphicsEnvironment.class.xmi#//@classifiers.0"/>
+          </child>
+        </condition>
+      </statements>
+      <modifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalLongLiteral" decimalValue="3359745691033257079"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * JDK 1.1 serialVersionUID.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ScrollPaneAdjustable">
+      <comments>/**&#xA;     * Constructs a new object to represent specified scrollabar&#xA;     * of the specified &lt;code>ScrollPane&lt;/code>.&#xA;     * Only ScrollPane creates instances of this class.&#xA;     * @param sp           &lt;code>ScrollPane&lt;/code>&#xA;     * @param l            &lt;code>AdjustmentListener&lt;/code> to add upon creation.&#xA;     * @param orientation  specifies which scrollbar this object represents,&#xA;     *                     can be either  &lt;code>Adjustable.HORIZONTAL&lt;/code>&#xA;     *                     or &lt;code>Adjustable.VERTICAL&lt;/code>.&#xA;     */</comments>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.32">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sp">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ScrollPane.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orientation">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSpan">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * This is called by the scrollpane itself to update the&#xA;     * &lt;code>minimum&lt;/code>, &lt;code>maximum&lt;/code> and&#xA;     * &lt;code>visible&lt;/code> values.  The scrollpane is the only one&#xA;     * that should be changing these since it is the source of these&#xA;     * values.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="min">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="max">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="visible">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+            <comments>// adjust the values to be reasonable</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.33"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.37"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </arguments>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.33"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.33"/>
+              <arguments xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Int"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:MultiplicativeExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2"/>
+                    <children xsi:type="literals:DecimalDoubleLiteral" decimalValue="0.9"/>
+                    <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                  </expression>
+                </child>
+              </arguments>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.29">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getOrientation">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the orientation of this scrollbar.&#xA;     * @return    the orientation of this scrollbar, either&#xA;     *            &lt;code>Adjustable.HORIZONTAL&lt;/code> or&#xA;     *            &lt;code>Adjustable.VERTICAL&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMinimum">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="min">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method should &lt;strong>NOT&lt;/strong> be called by user code.&#xA;     * This method is public for this class to properly implement&#xA;     * &lt;code>Adjustable&lt;/code> interface.&#xA;     *&#xA;     * @throws &lt;code>AWTError&lt;/code>  Always throws an error when called.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <throwable xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="AWTError.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+        </throwable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMinimum">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <comments>// XXX: This relies on setSpan always being called with 0 for</comments>
+        <comments>// the minimum (which is currently true).</comments>
+        <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMaximum">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="max">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method should &lt;strong>NOT&lt;/strong> be called by user code.&#xA;     * This method is public for this class to properly implement&#xA;     * &lt;code>Adjustable&lt;/code> interface.&#xA;     *&#xA;     * @throws &lt;code>AWTError&lt;/code>  Always throws an error when called.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <throwable xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="AWTError.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+        </throwable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaximum">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setUnitIncrement">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="u">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="peer">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="peer/ScrollPanePeer.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="peer/ScrollPanePeer.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="Component.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                    </child>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="peer/ScrollPanePeer.class.xmi#//@classifiers.0/@members.4"/>
+                    <arguments xsi:type="references:SelfReference">
+                      <self xsi:type="literals:This"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="Component.class.xmi#//@classifiers.0/@members.2"/>
+                </next>
+              </children>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getUnitIncrement">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBlockIncrement">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBlockIncrement">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setVisibleAmount">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="v">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method should &lt;strong>NOT&lt;/strong> be called by user code.&#xA;     * This method is public for this class to properly implement&#xA;     * &lt;code>Adjustable&lt;/code> interface.&#xA;     *&#xA;     * @throws &lt;code>AWTError&lt;/code>  Always throws an error when called.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <throwable xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="AWTError.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+        </throwable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getVisibleAmount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setValueIsAdjusting">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the &lt;code>valueIsAdjusting&lt;/code> property.&#xA;     * &#xA;     * @param b new adjustment-in-progress status&#xA;     * @see #getValueIsAdjusting&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@parameters.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="e">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="event/AdjustmentEvent.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="event/AdjustmentEvent.class.xmi#//@classifiers.0/@members.7"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@parameters.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="event/AdjustmentListener.class.xmi#//@classifiers.0/@members.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@statements.0/@statement/@statements.1/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@parameters.0"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getValueIsAdjusting">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns true if the value is in the process of changing as a&#xA;     * result of actions being taken by the user.&#xA;     *&#xA;     * @return the value of the &lt;code>valueIsAdjusting&lt;/code> property&#xA;     * @see #setValueIsAdjusting&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setValue">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="v">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the value of this scrollbar to the specified value.&#xA;     * &lt;p>&#xA;     * If the value supplied is less than the current minimum or&#xA;     * greater than the current maximum, then one of those values is&#xA;     * substituted, as appropriate.&#xA;     *&#xA;     * @param v the new value of the scrollbar&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.30">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="event/AdjustmentEvent.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTypedValue">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="v">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="type">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Sets the value of this scrollbar to the specified value.&#xA;     * &lt;p>&#xA;     * If the value supplied is less than the current minimum or&#xA;     * greater than the current maximum, then one of those values is&#xA;     * substituted, as appropriate. Also, creates and dispatches&#xA;     * the AdjustementEvent with specified type and value.&#xA;     *&#xA;     * @param v the new value of the scrollbar&#xA;     * @param type the type of the scrolling operation occured&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.33"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.37"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </arguments>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="e">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <comments>// Synchronously notify the listeners so that they are</comments>
+                  <comments>// guaranteed to be up-to-date with the Adjustable before</comments>
+                  <comments>// it is mutated again.</comments>
+                  <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="event/AdjustmentEvent.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="event/AdjustmentEvent.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="event/AdjustmentListener.class.xmi#//@classifiers.0/@members.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@statements.2/@statement/@statements.1/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getValue">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addAdjustmentListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds the specified adjustment listener to receive adjustment&#xA;     * events from this &lt;code>ScrollPaneAdjustable&lt;/code>.&#xA;     * If &lt;code>l&lt;/code> is &lt;code>null&lt;/code>, no exception is thrown&#xA;     * and no action is performed.&#xA;     *&#xA;     * @param    l   the adjustment listener.&#xA;     * @see      #removeAdjustmentListener&#xA;     * @see      #getAdjustmentListeners&#xA;     * @see      java.awt.event.AdjustmentListener&#xA;     * @see      java.awt.event.AdjustmentEvent&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.32/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="AWTEventMulticaster.class.xmi#//@classifiers.0/@members.53"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.32/@parameters.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="AWTEventMulticaster.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeAdjustmentListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes the specified adjustment listener so that it no longer&#xA;     * receives adjustment events from this &lt;code>ScrollPaneAdjustable&lt;/code>.&#xA;     * If &lt;code>l&lt;/code> is &lt;code>null&lt;/code>, no exception is thrown&#xA;     * and no action is performed.&#xA;     *&#xA;     * @param         l     the adjustment listener.&#xA;     * @see           #addAdjustmentListener&#xA;     * @see           #getAdjustmentListeners&#xA;     * @see           java.awt.event.AdjustmentListener&#xA;     * @see           java.awt.event.AdjustmentEvent&#xA;     * @since         JDK1.1&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.33/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="AWTEventMulticaster.class.xmi#//@classifiers.0/@members.70"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.33/@parameters.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="AWTEventMulticaster.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAdjustmentListeners">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of all the adjustment listeners&#xA;     * registered on this &lt;code>ScrollPaneAdjustable&lt;/code>.&#xA;     *&#xA;     * @return all of this &lt;code>ScrollPaneAdjustable&lt;/code>'s&#xA;     *         &lt;code>AdjustmentListener&lt;/code>s&#xA;     *         or an empty array if no adjustment&#xA;     *         listeners are currently registered&#xA;     *&#xA;     * @see           #addAdjustmentListener&#xA;     * @see           #removeAdjustmentListener&#xA;     * @see           java.awt.event.AdjustmentListener&#xA;     * @see           java.awt.event.AdjustmentEvent&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:CastExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <child xsi:type="expressions:NestedExpression">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="AWTEventMulticaster.class.xmi#//@classifiers.0/@members.82"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:ReflectiveClassReference"/>
+                  <target xsi:type="classifiers:Interface" href="event/AdjustmentListener.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="AWTEventMulticaster.class.xmi#//@classifiers.0"/>
+            </expression>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a string representation of this scrollbar and its values.&#xA;     * @return    a string representation of this scrollbar.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+          </children>
+          <children xsi:type="references:StringReference" value="["/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.36"/>
+          <children xsi:type="references:StringReference" value="]"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="paramString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a string representing the state of this scrollbar.&#xA;     * This method is intended to be used only for debugging purposes,&#xA;     * and the content and format of the returned string may vary&#xA;     * between implementations.  The returned string may be empty but&#xA;     * may not be &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @return      the parameter string of this scrollbar.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="Adjustable.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                    <target xsi:type="classifiers:Interface" href="Adjustable.class.xmi#//@classifiers.0"/>
+                  </children>
+                </child>
+                <expressionIf xsi:type="references:StringReference" value="vertical,"/>
+                <expressionElse xsi:type="references:StringReference" value="horizontal,"/>
+              </expression>
+            </children>
+            <children xsi:type="references:StringReference" value="[0.."/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <children xsi:type="references:StringReference" value="]"/>
+            <children xsi:type="references:StringReference" value=",val="/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <children xsi:type="references:StringReference" value=",vis="/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <children xsi:type="references:StringReference" value=",unit="/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            <children xsi:type="references:StringReference" value=",block="/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            <children xsi:type="references:StringReference" value=",isAdjusting="/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This class represents the state of a horizontal or vertical&#xA; * scrollbar of a &lt;code>ScrollPane&lt;/code>.  Objects of this class are&#xA; * returned by &lt;code>ScrollPane&lt;/code> methods.&#xA; *&#xA; * @version     1.9 12/19/03&#xA; * @since&#x9;1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="Adjustable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

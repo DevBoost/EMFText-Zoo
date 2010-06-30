@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../java.ecore#/17" name="RGBImageFilter.java">
+  <comments>/*&#xA; * @(#)RGBImageFilter.java&#x9;1.24 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>image</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="ImageConsumer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="RGBImageFilter">
+    <members xsi:type="members:Field" name="origmodel">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The &lt;code>ColorModel&lt;/code> to be replaced by&#xA;     * &lt;code>newmodel&lt;/code> when the user calls &#xA;     * {@link #substituteColorModel(ColorModel, ColorModel) substituteColorModel}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="newmodel">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The &lt;code>ColorModel&lt;/code> with which to&#xA;     * replace &lt;code>origmodel&lt;/code> when the user calls &#xA;     * &lt;code>substituteColorModel&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="canFilterIndexColorModel">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * This boolean indicates whether or not it is acceptable to apply&#xA;     * the color filtering of the filterRGB method to the color table&#xA;     * entries of an IndexColorModel object in lieu of pixel by pixel&#xA;     * filtering.  Subclasses should set this variable to true in their&#xA;     * constructor if their filterRGB method does not depend on the&#xA;     * coordinate of the pixel being filtered.&#xA;     * @see #substituteColorModel&#xA;     * @see #filterRGB&#xA;     * @see IndexColorModel&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setColorModel">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="model">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * If the ColorModel is an IndexColorModel and the subclass has&#xA;     * set the canFilterIndexColorModel flag to true, we substitute&#xA;     * a filtered version of the color model here and wherever&#xA;     * that original ColorModel object appears in the setPixels methods. &#xA;     * If the ColorModel is not an IndexColorModel or is null, this method&#xA;     * overrides the default ColorModel used by the ImageProducer and&#xA;     * specifies the default RGB ColorModel instead.&#xA;     * &lt;p>&#xA;     * Note: This method is intended to be called by the &#xA;     * &lt;code>ImageProducer&lt;/code> of the &lt;code>Image&lt;/code> whose pixels &#xA;     * are being filtered. Developers using&#xA;     * this class to filter pixels from an image should avoid calling&#xA;     * this method directly since that operation could interfere&#xA;     * with the filtering operation.&#xA;     * @see ImageConsumer&#xA;     * @see ColorModel#getRGBdefault&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="newcm">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.5">
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="IndexColorModel.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+                </arguments>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statement/@statements.0/@variable"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ImageConsumer.class.xmi#//@classifiers.0/@members.11"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statement/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="members:Field" href="ImageFilter.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="IndexColorModel.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </expression>
+          </children>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ImageConsumer.class.xmi#//@classifiers.0/@members.11"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorModel.class.xmi#//@classifiers.0/@members.25"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:Field" href="ImageFilter.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="substituteColorModel">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldcm">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newcm">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Registers two ColorModel objects for substitution.  If the oldcm&#xA;     * is encountered during any of the setPixels methods, the newcm&#xA;     * is substituted and the pixels passed through&#xA;     * untouched (but with the new ColorModel object).&#xA;     * @param oldcm the ColorModel object to be replaced on the fly&#xA;     * @param newcm the ColorModel object to replace oldcm on the fly&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="filterIndexColorModel">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IndexColorModel.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="icm">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="IndexColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Filters an IndexColorModel object by running each entry in its&#xA;     * color tables through the filterRGB function that RGBImageFilter&#xA;     * subclasses must provide.  Uses coordinates of -1 to indicate that&#xA;     * a color table entry is being filtered rather than an actual&#xA;     * pixel value.&#xA;     * @param icm the IndexColorModel object to be filtered&#xA;     * @exception NullPointerException if &lt;code>icm&lt;/code> is null&#xA;     * @return a new IndexColorModel representing the filtered colors&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="mapsize">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.23"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="r">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="g">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="a">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.25"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.26"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.27"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.3/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.28"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="trans">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="needalpha">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="rgb">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                <arguments xsi:type="expressions:UnaryExpression">
+                  <operators xsi:type="operators:Subtraction"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arguments>
+                <arguments xsi:type="expressions:UnaryExpression">
+                  <operators xsi:type="operators:Subtraction"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="IndexColorModel.class.xmi#//@classifiers.0/@members.36"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                  </next>
+                </arguments>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Byte"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:ShiftExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@statement/@statements.0/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="24"/>
+                    <shiftOperators xsi:type="operators:RightShift"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.10/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                  </arraySelectors>
+                </children>
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:Byte"/>
+                    <child xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+                  </expression>
+                </children>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.9/@variable"/>
+              </children>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Byte"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:ShiftExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@statement/@statements.0/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="16"/>
+                    <shiftOperators xsi:type="operators:RightShift"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Byte"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:ShiftExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@statement/@statements.0/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+                    <shiftOperators xsi:type="operators:RightShift"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.3/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Byte"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:ShiftExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@statement/@statements.0/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <shiftOperators xsi:type="operators:RightShift"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.11/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="IndexColorModel.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="ColorModel.class.xmi#//@classifiers.0/@members.31"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.3/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.4/@variable"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.10/@variable"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="IndexColorModel.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="ColorModel.class.xmi#//@classifiers.0/@members.31"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.3/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.9/@variable"/>
+            </returnValue>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="filterRGBPixels">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pixels">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="scansize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Filters a buffer of pixels in the default RGB ColorModel by passing&#xA;     * them one by one through the filterRGB method.&#xA;     * @param x,&amp;nbsp;y the coordinates of the upper-left corner of the &#xA;     *        region of pixels&#xA;     * @param w the width of the region of pixels&#xA;     * @param h the height of the region of pixels&#xA;     * @param pixels the array of pixels&#xA;     * @param off the offset into the &lt;code>pixels&lt;/code> array&#xA;     * @param scansize the distance from one row of pixels to the next&#xA;     *        in the array&#xA;     * @see ColorModel#getRGBdefault&#xA;     * @see #filterRGB&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="index">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.5"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.4">
+                    <arraySelectors>
+                      <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@statement/@statements.0/@init"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.4">
+                      <arraySelectors>
+                        <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+                      </arraySelectors>
+                    </arguments>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@statement/@statements.0/@init"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.2"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </condition>
+            <init xsi:type="variables:LocalVariable" name="cx">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </init>
+            <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@statement/@statements.0/@init"/>
+              <operator xsi:type="operators:PlusPlus"/>
+            </updates>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+              <value xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.6"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.2"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="cy">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="ImageConsumer.class.xmi#//@classifiers.0/@members.14"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.3"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ColorModel.class.xmi#//@classifiers.0/@members.25"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.5"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.6"/>
+          </next>
+          <target xsi:type="members:Field" href="ImageFilter.class.xmi#//@classifiers.0/@members.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPixels">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="model">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pixels">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="scansize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * If the ColorModel object is the same one that has already&#xA;     * been converted, then simply passes the pixels through with the&#xA;     * converted ColorModel. Otherwise converts the buffer of byte&#xA;     * pixels to the default RGB ColorModel and passes the converted&#xA;     * buffer to the filterRGBPixels method to be converted one by one.&#xA;     * &lt;p>&#xA;     * Note: This method is intended to be called by the &#xA;     * &lt;code>ImageProducer&lt;/code> of the &lt;code>Image&lt;/code> whose pixels &#xA;     * are being filtered. Developers using&#xA;     * this class to filter pixels from an image should avoid calling&#xA;     * this method directly since that operation could interfere&#xA;     * with the filtering operation.&#xA;     * @see ColorModel#getRGBdefault&#xA;     * @see #filterRGBPixels&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ImageConsumer.class.xmi#//@classifiers.0/@members.13"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.5"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.6"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.7"/>
+              </next>
+              <target xsi:type="members:Field" href="ImageFilter.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.4"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="filteredpixels">
+              <typeReference xsi:type="types:Int"/>
+              <arrayDimensionsAfter/>
+              <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:Int"/>
+                <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="index">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.6"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ForLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.0/@variable">
+                        <arraySelectors>
+                          <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.2/@statement/@statements.0/@init"/>
+                        </arraySelectors>
+                      </child>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.4">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="ColorModel.class.xmi#//@classifiers.0/@members.41"/>
+                          <arguments xsi:type="expressions:NestedExpression">
+                            <expression xsi:type="expressions:AndExpression">
+                              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.5">
+                                <arraySelectors>
+                                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.1/@variable"/>
+                                </arraySelectors>
+                              </children>
+                              <children xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+                            </expression>
+                          </arguments>
+                        </next>
+                      </value>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.1/@variable"/>
+                      <operator xsi:type="operators:PlusPlus"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.2/@statement/@statements.0/@init"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </condition>
+                <init xsi:type="variables:LocalVariable" name="cx">
+                  <typeReference xsi:type="types:Int"/>
+                  <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </init>
+                <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.2/@statement/@statements.0/@init"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </updates>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                  <value xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.7"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.2/@init"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.0/@variable"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.2/@init"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.3"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </condition>
+            <init xsi:type="variables:LocalVariable" name="cy">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </init>
+            <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@elseStatement/@statements.2/@init"/>
+              <operator xsi:type="operators:PlusPlus"/>
+            </updates>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPixels">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="model">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ColorModel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pixels">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="scansize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * If the ColorModel object is the same one that has already&#xA;     * been converted, then simply passes the pixels through with the&#xA;     * converted ColorModel, otherwise converts the buffer of integer&#xA;     * pixels to the default RGB ColorModel and passes the converted&#xA;     * buffer to the filterRGBPixels method to be converted one by one.&#xA;     * Converts a buffer of integer pixels to the default RGB ColorModel&#xA;     * and passes the converted buffer to the filterRGBPixels method.&#xA;     * &lt;p>&#xA;     * Note: This method is intended to be called by the &#xA;     * &lt;code>ImageProducer&lt;/code> of the &lt;code>Image&lt;/code> whose pixels &#xA;     * are being filtered. Developers using&#xA;     * this class to filter pixels from an image should avoid calling&#xA;     * this method directly since that operation could interfere&#xA;     * with the filtering operation.&#xA;     * @see ColorModel#getRGBdefault&#xA;     * @see #filterRGBPixels&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ImageConsumer.class.xmi#//@classifiers.0/@members.14"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.5"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.6"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.7"/>
+              </next>
+              <target xsi:type="members:Field" href="ImageFilter.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.4"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="filteredpixels">
+              <typeReference xsi:type="types:Int"/>
+              <arrayDimensionsAfter/>
+              <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:Int"/>
+                <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="index">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.6"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ForLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.0/@variable">
+                        <arraySelectors>
+                          <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.2/@statement/@statements.0/@init"/>
+                        </arraySelectors>
+                      </child>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.4">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="ColorModel.class.xmi#//@classifiers.0/@members.41"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.5">
+                            <arraySelectors>
+                              <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.1/@variable"/>
+                            </arraySelectors>
+                          </arguments>
+                        </next>
+                      </value>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.1/@variable"/>
+                      <operator xsi:type="operators:PlusPlus"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.2/@statement/@statements.0/@init"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </condition>
+                <init xsi:type="variables:LocalVariable" name="cx">
+                  <typeReference xsi:type="types:Int"/>
+                  <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </init>
+                <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.2/@statement/@statements.0/@init"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </updates>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                  <value xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.7"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.2/@init"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.0/@variable"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.2/@init"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.3"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </condition>
+            <init xsi:type="variables:LocalVariable" name="cy">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </init>
+            <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@elseStatement/@statements.2/@init"/>
+              <operator xsi:type="operators:PlusPlus"/>
+            </updates>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="filterRGB">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rgb">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Subclasses must specify a method to convert a single input pixel&#xA;     * in the default RGB ColorModel to a single output pixel.&#xA;     * @param x,&amp;nbsp;y the coordinates of the pixel&#xA;     * @param rgb the integer pixel representation in the default RGB&#xA;     *            color model&#xA;     * @return a filtered pixel in the default RGB color model.&#xA;     * @see ColorModel#getRGBdefault&#xA;     * @see #filterRGBPixels&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This class provides an easy way to create an ImageFilter which modifies&#xA; * the pixels of an image in the default RGB ColorModel.  It is meant to&#xA; * be used in conjunction with a FilteredImageSource object to produce&#xA; * filtered versions of existing images.  It is an abstract class that&#xA; * provides the calls needed to channel all of the pixel data through a&#xA; * single method which converts pixels one at a time in the default RGB&#xA; * ColorModel regardless of the ColorModel being used by the ImageProducer.&#xA; * The only method which needs to be defined to create a useable image&#xA; * filter is the filterRGB method.  Here is an example of a definition&#xA; * of a filter which swaps the red and blue components of an image:&#xA; * &lt;pre>&#xA; *&#xA; *&#x9;class RedBlueSwapFilter extends RGBImageFilter {&#xA; *&#x9;    public RedBlueSwapFilter() {&#xA; *&#x9;&#x9;// The filter's operation does not depend on the&#xA; *&#x9;&#x9;// pixel's location, so IndexColorModels can be&#xA; *&#x9;&#x9;// filtered directly.&#xA; *&#x9;&#x9;canFilterIndexColorModel = true;&#xA; *&#x9;    }&#xA; *&#xA; *&#x9;    public int filterRGB(int x, int y, int rgb) {&#xA; *&#x9;&#x9;return ((rgb &amp; 0xff00ff00)&#xA; *&#x9;&#x9;&#x9;| ((rgb &amp; 0xff0000) >> 16)&#xA; *&#x9;&#x9;&#x9;| ((rgb &amp; 0xff) &lt;&lt; 16));&#xA; *&#x9;    }&#xA; *&#x9;}&#xA; *&#xA; * &lt;/pre>&#xA; *&#xA; * @see FilteredImageSource&#xA; * @see ImageFilter&#xA; * @see ColorModel#getRGBdefault&#xA; *&#xA; * @version&#x9;1.24 12/19/03&#xA; * @author &#x9;Jim Graham&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="ImageFilter.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16 http://www.emftext.org/java/variables ../../java.ecore#/17" name="Shutdown.java">
+  <comments>/*&#xA; * @(#)Shutdown.java&#x9;1.11 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>lang</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../util/HashSet.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../util/Iterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Shutdown">
+    <comments>/**&#xA; * Package-private utility class containing data structures and logic&#xA; * governing the virtual-machine shutdown sequence.&#xA; *&#xA; * @author   Mark Reinhold&#xA; * @version  1.11, 03/12/19&#xA; * @since    1.3&#xA; */</comments>
+    <members xsi:type="classifiers:Class" name="WrappedHook">
+      <members xsi:type="members:Field" name="hook">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Thread.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      </members>
+      <members xsi:type="members:Constructor" name="WrappedHook">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.1/@parameters.0"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="t">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="Thread.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="hashCode">
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="System.class.xmi#//@classifiers.0/@members.21"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="System.class.xmi#//@classifiers.0"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="equals">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="o">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statement>
+          <condition xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@members.0"/>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.3/@parameters.0"/>
+              </expression>
+            </child>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="expressions:NestedExpression">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+                <expression xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@members.0"/>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.3/@parameters.0"/>
+                </expression>
+              </children>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+            </expression>
+          </returnValue>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Wrapper class for registered hooks, to ensure that hook identity is&#xA;     * object identity rather than .equals identity&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="RUNNING">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Shutdown state */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="HOOKS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FINALIZERS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="state">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="runFinalizersOnExit">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Should we run all finalizers upon exit? */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="hooks">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../util/HashSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* The set of registered, wrapped hooks, or null if there aren't any */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="classifiers:Class" name="Lock">
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* The preceding static fields are protected by this lock */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:EmptyMember"/>
+    <members xsi:type="members:Field" name="lock">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.7"/>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="haltLock">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.7"/>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Lock object for the native halt method */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setRunFinalizersOnExit">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="run">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* Invoked by Runtime.runFinalizersOnExit */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          </expression>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="add">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hook">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Thread.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* Add a new shutdown hook.  Checks the shutdown state and the hook itself,&#xA;     * but does not do any security checks.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Shutdown in progress"/>
+            </throwable>
+          </statement>
+          <condition xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Hook already running"/>
+            </throwable>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="Thread.class.xmi#//@classifiers.0/@members.57"/>
+            </next>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../util/HashSet.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="11"/>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences target="//@classifiers.0/@members.0"/>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="Terminator.class.xmi#//@classifiers.0/@members.2"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="Terminator.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="wh">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@members.0"/>
+                </typeReference>
+                <initialValue xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@members.0"/>
+                  </typeReference>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="Hook previously registered"/>
+                </throwable>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.11"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.2/@elseStatement/@statements.0/@variable"/>
+                </next>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statements.2/@elseStatement/@statements.0/@variable"/>
+                </next>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="remove">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hook">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Thread.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* Remove a previously-registered hook.  Like the add method, this method&#xA;     * does not do any security checks.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Shutdown in progress"/>
+            </throwable>
+          </statement>
+          <condition xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="literals:BooleanLiteral"/>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="rv">
+                <typeReference xsi:type="types:Boolean"/>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.13"/>
+                    <arguments xsi:type="instantiations:NewConstructorCall">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@members.0"/>
+                      </typeReference>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+                    </arguments>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="Terminator.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="Terminator.class.xmi#//@classifiers.0"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.2/@elseStatement/@statements.0/@variable"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.10"/>
+                  </next>
+                </children>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statements.2/@elseStatement/@statements.0/@variable"/>
+            </statements>
+          </elseStatement>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="runHooks">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Run all registered shutdown hooks&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <comments>/* We needn't bother acquiring the lock just to read the hooks field,&#xA;&#x9; * since the hooks can't be modified once shutdown is in progress&#xA;&#x9; */</comments>
+        <statement xsi:type="statements:Return"/>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:NestedExpression">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="Thread.class.xmi#//@classifiers.0/@members.46"/>
+                </next>
+              </next>
+              <expression xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@members.0"/>
+                </typeReference>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@init">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../util/Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </expression>
+                </child>
+              </expression>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@init">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../util/Iterator.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../util/Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+          </initialValue>
+        </init>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:NestedExpression">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="Thread.class.xmi#//@classifiers.0/@members.70"/>
+                  </next>
+                </next>
+                <expression xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@members.0"/>
+                  </typeReference>
+                  <child xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@init">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../util/Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                    </expression>
+                  </child>
+                </expression>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:Continue"/>
+              <parameter name="x">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="InterruptedException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@init">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../util/Iterator.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../util/Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../util/HashSet.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+          </initialValue>
+        </init>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="halt">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="status">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* The halt method is synchronized on the halt lock&#xA;     * to avoid corruption of the delete-on-shutdown file list.&#xA;     * It invokes the true native halt method.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.16">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+          </expression>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="halt0">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="status">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="runAllFinalizers">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Wormhole for invoking java.lang.ref.Finalizer.runAllFinalizers */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="sequence">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* The actual shutdown sequence is defined here.&#xA;     *&#xA;     * If it weren't for runFinalizersOnExit, this would be simple -- we'd just&#xA;     * run the hooks and then halt.  Instead we need to keep track of whether&#xA;     * we're running hooks or finalizers.  In the latter case a finalizer could&#xA;     * invoke exit(1) to cause immediate termination, while in the former case&#xA;     * any further invocations of exit(n), for any n, simply stall.  Note that&#xA;     * if on-exit finalizers are enabled they're run iff the shutdown is&#xA;     * initiated by an exit(0); they're never run on exit(n) for n != 0 or in&#xA;     * response to SIGINT, SIGTERM, etc.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <comments>/* Guard against the possibility of a daemon thread invoking exit&#xA;&#x9;     * after DestroyJavaVM initiates the shutdown sequence&#xA;&#x9;     */</comments>
+          <statement xsi:type="statements:Return"/>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </condition>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14"/>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="rfoe">
+          <typeReference xsi:type="types:Boolean"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.2/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          </expression>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.17"/>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.2/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exit">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="status">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* Invoked by Runtime.exit, which does all the security checks.&#xA;     * Also invoked by handlers for system-provided termination events,&#xA;     * which should pass a nonzero status code.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="runMoreFinalizers">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Switch">
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                  <comments>/* Initiate shutdown */</comments>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:Break">
+              <comments>/* Stall and halt */</comments>
+            </statements>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+                    <comments>/* Halt immediately on nonzero status */</comments>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.0/@variable">
+                      <comments>/* Compatibility with old behavior:&#xA;&#x9;&#x9;     * Run more finalizers and then halt&#xA;&#x9;&#x9;     */</comments>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                  </expression>
+                </statements>
+              </elseStatement>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          </cases>
+          <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.17"/>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.0/@variable"/>
+      </statements>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.18">
+            <comments>/* Synchronize on the class object, causing any other thread&#xA;             * that attempts to initiate shutdown to stall indefinitely&#xA;&#x9;     */</comments>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+          </expression>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0">
+          <next xsi:type="references:ReflectiveClassReference"/>
+        </lockProvider>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="shutdown">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/* Invoked by the JNI DestroyJavaVM procedure when the last non-daemon&#xA;     * thread has finished.  Unlike the exit method, this method does not&#xA;     * actually halt the VM.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Switch">
+          <cases xsi:type="statements:NormalSwitchCase">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                  <comments>/* Initiate shutdown */</comments>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </cases>
+          <cases xsi:type="statements:NormalSwitchCase">
+            <comments>/* Stall and then return */</comments>
+            <statements xsi:type="statements:Break"/>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          </cases>
+          <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0">
+          <next xsi:type="references:ReflectiveClassReference"/>
+        </lockProvider>
+      </statements>
+    </members>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="CondVar.java">
+  <comments>/*&#xA;  File: ConditionVariable.java&#xA;&#xA;  Originally written by Doug Lea and released into the public domain.&#xA;  This may be used for any purposes whatsoever without acknowledgment.&#xA;  Thanks for the assistance and support of Sun Microsystems Labs,&#xA;  and everyone contributing, testing, and using this code.&#xA;&#xA;  History:&#xA;  Date       Who                What&#xA;  11Jun1998  dl               Create public version&#xA;  08dec2001  kmc&#x9;      Added support for Reentrant Mutexes&#xA;*/</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>impl</namespaces>
+  <namespaces>orbutil</namespaces>
+  <namespaces>concurrent</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>orbutil</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ORBUtility.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="CondVar">
+    <members xsi:type="members:Field" name="debug_">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="mutex_">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Sync.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** The mutex **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="remutex_">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReentrantMutex.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="releaseMutex">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="count">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ReentrantMutex.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Sync.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+          </expression>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="acquireMutex">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="count">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ReentrantMutex.class.xmi#//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+            </next>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Sync.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+          </expression>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:Constructor" name="CondVar">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="ReentrantMutex.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ReentrantMutex.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+        </condition>
+        <elseStatement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="literals:NullLiteral"/>
+          </expression>
+        </elseStatement>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mutex">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Sync.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="debug">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;   * Create a new CondVar that relies on the given mutual&#xA;   * exclusion lock. &#xA;   * @param mutex A mutual exclusion lock which must either be non-reentrant,&#xA;   * or else be ReentrantMutex.&#xA;   * Standard usage is to supply an instance of &lt;code>Mutex&lt;/code>,&#xA;   * but, for example, a Semaphore initialized to 1 also works.&#xA;   * On the other hand, many other Sync implementations would not&#xA;   * work here, so some care is required to supply a sensible &#xA;   * synchronization object.&#xA;   * In normal use, the mutex should be one that is used for &lt;em>all&lt;/em>&#xA;   * synchronization of the object using the CondVar. Generally, &#xA;   * to prevent nested monitor lockouts, this&#xA;   * object should not use any native Java synchronized blocks.&#xA;   **/</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="CondVar">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mutex">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Sync.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="await">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;   * Wait for notification. This operation at least momentarily&#xA;   * releases the mutex. The mutex is always held upon return, &#xA;   * even if interrupted.&#xA;   * @exception InterruptedException if the thread was interrupted&#xA;   * before or during the wait. However, if the thread is interrupted&#xA;   * after the wait but during mutex re-acquisition, the interruption &#xA;   * is ignored, while still ensuring&#xA;   * that the currentThread's interruption state stays true, so can&#xA;   * be probed by callers.&#xA;   **/</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="count">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.53"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../ORBUtility.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="references:StringReference" value="await enter"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </statements>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.3"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.11"/>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.7"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@statements.1/@statements.1/@catcheBlocks.0/@parameter"/>
+              </statements>
+              <parameter name="ex">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+          <lockProvider xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </lockProvider>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="interrupted">
+              <typeReference xsi:type="types:Boolean">
+                <comments>// Must ignore interrupt on re-acquire</comments>
+              </typeReference>
+              <initialValue xsi:type="literals:BooleanLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Break"/>
+                <catcheBlocks>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@finallyBlock/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="literals:BooleanLiteral" value="true"/>
+                    </expression>
+                  </statements>
+                  <parameter name="ex">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+            </statement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.52"/>
+                    </next>
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@finallyBlock/@statements.0/@variable"/>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../ORBUtility.class.xmi#//@classifiers.0/@members.33"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="references:StringReference" value="await exit"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../ORBUtility.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="timedwait">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="msecs">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Wait for at most msecs for notification. &#xA;    * This operation at least momentarily&#xA;    * releases the mutex. The mutex is always held upon return, &#xA;    * even if interrupted.&#xA;    * @param msecs The time to wait. A value less than or equal to zero &#xA;    * causes a momentarily release&#xA;    * and re-acquire of the mutex, and always returns false.&#xA;    * @return false if at least msecs have elapsed&#xA;    * upon resumption; else true. A &#xA;    * false return does NOT necessarily imply that the thread was&#xA;    * not notified. For example, it might have been notified &#xA;    * after the time elapsed but just before resuming.&#xA;    * @exception InterruptedException if the thread was interrupted&#xA;    * before or during the wait.&#xA;    **/</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.53"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="success">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="count">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../ORBUtility.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="references:StringReference" value="timedwait enter"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../ORBUtility.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </statements>
+        <statements xsi:type="statements:SynchronizedBlock">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.3"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:LocalVariableStatement">
+                  <variable name="start">
+                    <typeReference xsi:type="types:Long"/>
+                    <initialValue xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0/@members.18"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0"/>
+                    </initialValue>
+                  </variable>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.9"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.1/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:RelationExpression">
+                      <children xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0/@members.18"/>
+                          </next>
+                          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0"/>
+                        </children>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.3/@statements.1/@statements.1/@statements.0/@statement/@statements.0/@variable"/>
+                        <additiveOperators xsi:type="operators:Subtraction"/>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                      <relationOperators xsi:type="operators:LessThanOrEqual"/>
+                    </value>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <relationOperators xsi:type="operators:GreaterThan"/>
+              </condition>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.7"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.3/@statements.1/@statements.1/@catcheBlocks.0/@parameter"/>
+              </statements>
+              <parameter name="ex">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+          <lockProvider xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </lockProvider>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="interrupted">
+              <typeReference xsi:type="types:Boolean">
+                <comments>// Must ignore interrupt on re-acquire</comments>
+              </typeReference>
+              <initialValue xsi:type="literals:BooleanLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Break"/>
+                <catcheBlocks>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.3/@finallyBlock/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="literals:BooleanLiteral" value="true"/>
+                    </expression>
+                  </statements>
+                  <parameter name="ex">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+            </statement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.52"/>
+                    </next>
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.3/@finallyBlock/@statements.0/@variable"/>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../ORBUtility.class.xmi#//@classifiers.0/@members.33"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="references:StringReference" value="timedwait exit"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../ORBUtility.class.xmi#//@classifiers.0"/>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </statements>
+        </finallyBlock>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="signal">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * Notify a waiting thread.&#xA;    * If one exists, a non-interrupted thread will return&#xA;    * normally (i.e., not via InterruptedException) from await or timedwait.&#xA;    **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.7"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="broadcast">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Notify all waiting threads **/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.8"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This class is designed for fans of POSIX pthreads programming.&#xA; * If you restrict yourself to Mutexes and CondVars, you can&#xA; * use most of your favorite constructions. Don't randomly mix them&#xA; * with synchronized methods or blocks though.&#xA; * &lt;p>&#xA; * Method names and behavior are as close as is reasonable to&#xA; * those in POSIX.&#xA; * &lt;p>&#xA; * &lt;b>Sample Usage.&lt;/b> Here is a full version of a bounded buffer&#xA; * that implements the BoundedChannel interface, written in&#xA; * a style reminscent of that in POSIX programming books.&#xA; * &lt;pre>&#xA; * class CVBuffer implements BoundedChannel {&#xA; *   private final Mutex mutex;&#xA; *   private final CondVar notFull;&#xA; *   private final CondVar notEmpty;&#xA; *   private int count = 0;&#xA; *   private int takePtr = 0;     &#xA; *   private int putPtr = 0;&#xA; *   private final Object[] array;&#xA; * &#xA; *   public CVBuffer(int capacity) { &#xA; *     array = new Object[capacity];&#xA; *     mutex = new Mutex();&#xA; *     notFull = new CondVar(mutex);&#xA; *     notEmpty = new CondVar(mutex);&#xA; *   }&#xA; * &#xA; *   public int capacity() { return array.length; }&#xA; * &#xA; *   public void put(Object x) throws InterruptedException {&#xA; *     mutex.acquire();&#xA; *     try {&#xA; *       while (count == array.length) {&#xA; *         notFull.await();&#xA; *       }&#xA; *       array[putPtr] = x;&#xA; *       putPtr = (putPtr + 1) % array.length;&#xA; *       ++count;&#xA; *       notEmpty.signal();&#xA; *     }&#xA; *     finally {&#xA; *       mutex.release();&#xA; *     }&#xA; *   }&#xA; * &#xA; *   public Object take() throws InterruptedException {&#xA; *     Object x = null;&#xA; *     mutex.acquire();&#xA; *     try {&#xA; *       while (count == 0) {&#xA; *         notEmpty.await();&#xA; *       }&#xA; *       x = array[takePtr];&#xA; *       array[takePtr] = null;&#xA; *       takePtr = (takePtr + 1) % array.length;&#xA; *       --count;&#xA; *       notFull.signal();&#xA; *     }&#xA; *     finally {&#xA; *       mutex.release();&#xA; *     }&#xA; *     return x;&#xA; *   }&#xA; * &#xA; *   public boolean offer(Object x, long msecs) throws InterruptedException {&#xA; *     mutex.acquire();&#xA; *     try {&#xA; *       if (count == array.length) {&#xA; *         notFull.timedwait(msecs);&#xA; *         if (count == array.length)&#xA; *           return false;&#xA; *       }&#xA; *       array[putPtr] = x;&#xA; *       putPtr = (putPtr + 1) % array.length;&#xA; *       ++count;&#xA; *       notEmpty.signal();&#xA; *       return true;&#xA; *     }&#xA; *     finally {&#xA; *       mutex.release();&#xA; *     }&#xA; *   }&#xA; *   &#xA; *   public Object poll(long msecs) throws InterruptedException {&#xA; *     Object x = null;&#xA; *     mutex.acquire();&#xA; *     try {&#xA; *       if (count == 0) {&#xA; *         notEmpty.timedwait(msecs);&#xA; *         if (count == 0)&#xA; *           return null;&#xA; *       }&#xA; *       x = array[takePtr];&#xA; *       array[takePtr] = null;&#xA; *       takePtr = (takePtr + 1) % array.length;&#xA; *       --count;&#xA; *       notFull.signal();&#xA; *     }&#xA; *     finally {&#xA; *       mutex.release();&#xA; *     }&#xA; *     return x;&#xA; *   }&#xA; * }&#xA; *&#xA; * &lt;/pre>&#xA; * @see Mutex&#xA; * &lt;p>[&lt;a href=&quot;http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html&quot;> Introduction to this package. &lt;/a>]&#xA;&#xA; **/</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

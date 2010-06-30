@@ -1,0 +1,1716 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../../../../java.ecore#/17" name="ThreadPoolImpl.java">
+  <comments>/*&#xA; * Copyright 2005 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>impl</namespaces>
+  <namespaces>orbutil</namespaces>
+  <namespaces>threadpool</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/security/AccessController.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../java/security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>orbutil</namespaces>
+    <namespaces>threadpool</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../spi/orbutil/threadpool/NoSuchWorkQueueException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>orbutil</namespaces>
+    <namespaces>threadpool</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/ThreadPool.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>orbutil</namespaces>
+    <namespaces>threadpool</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/Work.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>orbutil</namespaces>
+    <namespaces>threadpool</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/WorkQueue.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>orbutil</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ORBConstants.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>orbutil</namespaces>
+    <namespaces>threadpool</namespaces>
+    <classifier xsi:type="classifiers:Class" href="WorkQueueImpl.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>monitoring</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>monitoring</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>monitoring</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>monitoring</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="ThreadPoolImpl">
+    <comments>// End of WorkerThread class</comments>
+    <members xsi:type="members:Field" name="threadCounter">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="workQueue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/WorkQueue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// serial counter useful for debugging</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="availableWorkerThreads">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Stores the number of available worker threads</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="currentThreadCount">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Stores the number of threads in the threadpool currently</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="minWorkerThreads">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Minimum number of worker threads created at instantiation of the threadpool</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="maxWorkerThreads">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Maximum number of worker threads in the threadpool</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="inactivityTimeout">
+      <initialValue xsi:type="references:IdentifierReference">
+        <next xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="../ORBConstants.class.xmi#//@classifiers.0/@members.137"/>
+        </next>
+        <target xsi:type="classifiers:Class" href="../ORBConstants.class.xmi#//@classifiers.0"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Inactivity timeout value for worker threads to exit and stop running</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="boundedThreadPool">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Indicates if the threadpool is bounded or unbounded</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="processedCount">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Running count of the work items processed</comments>
+        <comments>// Set the value to 1 so that divide by zero is avoided in </comments>
+        <comments>// averageWorkCompletionTime()</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="totalTimeTaken">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Running aggregate of the time taken in millis to execute work items</comments>
+        <comments>// processed by the threads in the threadpool</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="lock">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Lock for protecting state when required</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="name">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Name of the ThreadPool</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="threadpoolMonitoredObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// MonitoredObject for ThreadPool</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="threadGroup">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/ThreadGroup.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// ThreadGroup in which threads should be created</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ThreadPoolImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../../java/lang/Integer.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Integer.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="WorkQueueImpl.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.17"/>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tg">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/ThreadGroup.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="threadpoolName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This constructor is used to create an unbounded threadpool&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="ThreadPoolImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.64"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="threadpoolName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This constructor is used to create an unbounded threadpool&#xA;     * in the ThreadGroup of the current thread&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="ThreadPoolImpl">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="WorkQueueImpl.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.64"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.22"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.7/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.7/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.17"/>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="minSize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="maxSize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="threadpoolName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This constructor is used to create bounded threadpool&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="initializeMonitoring">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Setup monitoring for this threadpool</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="root">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Get root monitored object</comments>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoringManager.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoringManagerFactory.class.xmi#//@classifiers.0/@members.0"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="literals:NullLiteral"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="threadPoolMonitoringObjectRoot">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Create the threadpool monitoring root</comments>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.4"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.15"/>
+                </next>
+                <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.1/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObjectFactory.class.xmi#//@classifiers.0/@members.0"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.15"/>
+                      </next>
+                      <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.16"/>
+                      </next>
+                      <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0/@members.4"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.1/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObjectFactory.class.xmi#//@classifiers.0/@members.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.17"/>
+                  </next>
+                  <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../spi/monitoring/MonitoringFactories.class.xmi#//@classifiers.0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b1">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.18"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.19"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <anonymousClass>
+              <members xsi:type="members:ClassMethod" name="getValue">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Long.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                      <next xsi:type="references:SelfReference">
+                        <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+                        <self xsi:type="literals:This"/>
+                      </next>
+                    </arguments>
+                  </returnValue>
+                </statements>
+              </members>
+            </anonymousClass>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.5/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b2">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.20"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.19"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <anonymousClass>
+              <members xsi:type="members:ClassMethod" name="getValue">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Long.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                      <next xsi:type="references:SelfReference">
+                        <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.27"/>
+                        <self xsi:type="literals:This"/>
+                      </next>
+                    </arguments>
+                  </returnValue>
+                </statements>
+              </members>
+            </anonymousClass>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.7/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b3">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.23"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <anonymousClass>
+              <members xsi:type="members:ClassMethod" name="getValue">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Long.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                      <next xsi:type="references:SelfReference">
+                        <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.28"/>
+                        <self xsi:type="literals:This"/>
+                      </next>
+                    </arguments>
+                  </returnValue>
+                </statements>
+              </members>
+            </anonymousClass>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.9/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b4">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.24"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.25"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <anonymousClass>
+              <members xsi:type="members:ClassMethod" name="getValue">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Long.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                      <next xsi:type="references:SelfReference">
+                        <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+                        <self xsi:type="literals:This"/>
+                      </next>
+                    </arguments>
+                  </returnValue>
+                </statements>
+              </members>
+            </anonymousClass>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.11/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="b5">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../spi/monitoring/LongMonitoredAttributeBase.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.26"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0/@members.27"/>
+              </next>
+              <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoringConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <anonymousClass>
+              <members xsi:type="members:ClassMethod" name="getValue">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Long.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                      <next xsi:type="references:SelfReference">
+                        <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.30"/>
+                        <self xsi:type="literals:This"/>
+                      </next>
+                    </arguments>
+                  </returnValue>
+                </statements>
+              </members>
+            </anonymousClass>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.13/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12">
+          <comments>// Add the monitored object for the WorkQueue</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0/@members.2"/>
+            <arguments xsi:type="expressions:NestedExpression">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="WorkQueueImpl.class.xmi#//@classifiers.0/@members.11"/>
+              </next>
+              <expression xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="WorkQueueImpl.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              </expression>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMonitoredObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>// Package private method to get the monitored object for this</comments>
+          <comments>// class</comments>
+          <target xsi:type="classifiers:Interface" href="../../../spi/monitoring/MonitoredObject.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAnyWorkQueue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/WorkQueue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getWorkQueue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/WorkQueue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="queueId">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../spi/orbutil/threadpool/NoSuchWorkQueueException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../spi/orbutil/threadpool/NoSuchWorkQueueException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="notifyForAvailableWork">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * To be called from the workqueue when work is added to the&#xA;     * workQueue. This method would create new threads if required&#xA;     * or notify waiting threads on the queue for available work&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="aWorkQueue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/WorkQueue.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.22"/>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0/@members.7"/>
+                </next>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createWorkerThread">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * To be called from the workqueue to create worker threads when none&#xA;     * available.&#xA;     */</comments>
+      </typeReference>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="name">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.31"/>
+            <annotationsAndModifiers xsi:type="modifiers:Final"/>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                <relationOperators xsi:type="operators:LessThan"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:Return">
+                  <comments>// REVIST - Need to create a thread to monitor the</comments>
+                  <comments>// the state for deadlock i.e. all threads waiting for</comments>
+                  <comments>// something which can be got from the item in the </comments>
+                  <comments>// workqueue, but there is no thread available to</comments>
+                  <comments>// process that work item - DEADLOCK !!</comments>
+                </statements>
+              </elseStatement>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                <operator xsi:type="operators:PlusPlus"/>
+              </expression>
+            </statements>
+          </elseStatement>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference">
+            <comments>// If we get here, we need to create a thread.</comments>
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/security/AccessController.class.xmi#//@classifiers.0/@members.1"/>
+              <arguments xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="../../../../../../../java/security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <anonymousClass>
+                  <members xsi:type="members:ClassMethod" name="run">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="thread">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@members.34">
+                            <comments>// Thread creation needs to be in a doPrivileged block</comments>
+                            <comments>// for two reasons:</comments>
+                            <comments>// 1. The creation of a thread in a specific ThreadGroup</comments>
+                            <comments>//    is a privileged operation.  Lack of a doPrivileged</comments>
+                            <comments>//    block here causes an AccessControlException </comments>
+                            <comments>//    (see bug 6268145).</comments>
+                            <comments>// 2. We want to make sure that the permissions associated </comments>
+                            <comments>//    with this thread do NOT include the permissions of</comments>
+                            <comments>//    the current thread that is calling this method.</comments>
+                            <comments>//    This leads to problems in the app server where</comments>
+                            <comments>//    some threads in the ThreadPool randomly get </comments>
+                            <comments>//    bad permissions, leading to unpredictable </comments>
+                            <comments>//    permission errors.</comments>
+                          </classifierReferences>
+                        </typeReference>
+                        <initialValue xsi:type="instantiations:NewConstructorCall">
+                          <typeReference xsi:type="types:NamespaceClassifierReference">
+                            <classifierReferences target="//@classifiers.0/@members.34"/>
+                          </typeReference>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@statements.0/@variable"/>
+                        </initialValue>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@statements.2/@expression/@next/@arguments.0/@anonymousClass/@members.0/@statements.0/@variable">
+                        <comments>// The thread must be set to a daemon thread so the</comments>
+                        <comments>// VM can exit if the only threads left are PooledThreads</comments>
+                        <comments>// or other daemons.  We don't want to rely on the</comments>
+                        <comments>// calling thread always being a daemon.</comments>
+                        <comments>// Note that no exception is possible here since we</comments>
+                        <comments>// are inside the doPrivileged block.</comments>
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.72"/>
+                          <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                        </next>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.0/@statements.2/@expression/@next/@arguments.0/@anonymousClass/@members.0/@statements.0/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.46"/>
+                        </next>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="literals:NullLiteral"/>
+                    </statements>
+                  </members>
+                </anonymousClass>
+              </arguments>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/security/AccessController.class.xmi#//@classifiers.0"/>
+          </expression>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="minimumNumberOfThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the minimum number of threads maintained &#xA;    * by the threadpool. &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="maximumNumberOfThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the maximum number of threads in the &#xA;    * threadpool at any point in time, for the life of the threadpool &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="idleTimeoutForThreads">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the time in milliseconds when idle &#xA;    * threads in the threadpool are removed. &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="currentNumberOfThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the total number of threads currently in the &#xA;    * threadpool. This method returns a value which is not synchronized. &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="numberOfAvailableThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the number of available threads in the &#xA;    * threadpool which are waiting for work. This method returns a &#xA;    * value which is not synchronized. &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="numberOfBusyThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the number of busy threads in the threadpool &#xA;    * This method returns a value which is not synchronized. &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <additiveOperators xsi:type="operators:Subtraction"/>
+            </expression>
+          </returnValue>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="averageWorkCompletionTime">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method returns the average elapsed time taken to complete a Work&#xA;     * item in milliseconds.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:MultiplicativeExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+              <multiplicativeOperators xsi:type="operators:Division"/>
+            </expression>
+          </returnValue>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="currentProcessedCount">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method returns the number of Work items processed by the threadpool&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+        </statements>
+        <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="numberOfWorkQueues">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;    * This method will return the number of WorkQueues serviced by the threadpool. &#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getUniqueThreadId">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </child>
+          <operator xsi:type="operators:PlusPlus"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="classifiers:Class" name="WorkerThread">
+      <members xsi:type="members:Field" name="currentWork">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/Work.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      </members>
+      <members xsi:type="members:Field" name="threadId">
+        <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      </members>
+      <members xsi:type="members:Field" name="threadPoolName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>// unique id for the thread</comments>
+          <comments>// thread pool this WorkerThread belongs too</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Field" name="workerThreadName">
+        <initialValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </initialValue>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>// name seen by Thread.getName()</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Constructor" name="WorkerThread">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="instantiations:ExplicitConstructorCall">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.4/@parameters.0"/>
+            <arguments xsi:type="references:StringReference" value="Idle"/>
+            <callTarget xsi:type="literals:Super"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.33"/>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.2"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.4/@parameters.1"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.62"/>
+            <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.34/@members.6">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.4/@parameters.1"/>
+              <arguments xsi:type="references:StringReference" value="Idle"/>
+            </arguments>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="tg">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/ThreadGroup.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="threadPoolName">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="run">
+        <typeReference xsi:type="types:Void"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:WhileLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:TryBlock">
+              <statements xsi:type="statements:SynchronizedBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </expression>
+                </statements>
+                <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.0">
+                    <comments>// Get some work to do</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:NestedExpression">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="WorkQueueImpl.class.xmi#//@classifiers.0/@members.13"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                    </next>
+                    <expression xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="WorkQueueImpl.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                    </expression>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:SynchronizedBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                    <operator xsi:type="operators:MinusMinus"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <comments>// It is possible in notifyForAvailableWork that the</comments>
+                  <comments>// check for availableWorkerThreads = 0 may return</comments>
+                  <comments>// false, because the availableWorkerThreads has not been</comments>
+                  <comments>// decremented to zero before the producer thread added </comments>
+                  <comments>// work to the queue. This may create a deadlock, if the</comments>
+                  <comments>// executing thread needs information which is in the work</comments>
+                  <comments>// item queued in the workqueue, but has no thread to work</comments>
+                  <comments>// on it since none was created because availableWorkerThreads = 0</comments>
+                  <comments>// returned false.</comments>
+                  <comments>// The following code will ensure that a thread is always available</comments>
+                  <comments>// in those situations</comments>
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.22"/>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:ConditionalAndExpression">
+                    <children xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                      </expression>
+                    </children>
+                    <children xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:RelationExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="../../../spi/orbutil/threadpool/WorkQueue.class.xmi#//@classifiers.0/@members.3"/>
+                          </next>
+                        </children>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                        <relationOperators xsi:type="operators:GreaterThan"/>
+                      </expression>
+                    </children>
+                  </condition>
+                </statements>
+                <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <comments>// Set the thread name for debugging.</comments>
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.62"/>
+                  <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.34/@members.6">
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.2"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Integer.class.xmi#//@classifiers.0/@members.15"/>
+                        <arguments xsi:type="references:SelfReference">
+                          <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.1"/>
+                          <self xsi:type="literals:This"/>
+                        </arguments>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Integer.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </arguments>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="start">
+                  <typeReference xsi:type="types:Long"/>
+                  <initialValue xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0/@members.18"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0"/>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.0">
+                    <comments>// Do the work</comments>
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../spi/orbutil/threadpool/Work.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </expression>
+                </statements>
+                <catcheBlocks>
+                  <statements xsi:type="statements:EmptyStatement">
+                    <comments>// Ignore all errors.</comments>
+                  </statements>
+                  <parameter name="t">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="end">
+                  <typeReference xsi:type="types:Long"/>
+                  <initialValue xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0/@members.18"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0"/>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:SynchronizedBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+                    <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                    <value xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.5/@statements.0/@statement/@statements.0/@statements.6/@variable"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.5/@statements.0/@statement/@statements.0/@statements.4/@variable"/>
+                        <additiveOperators xsi:type="operators:Subtraction"/>
+                      </expression>
+                    </value>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </expression>
+                </statements>
+                <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.0">
+                    <comments>// set currentWork to null so that the work item can be </comments>
+                    <comments>// garbage collected</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:NullLiteral"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0/@members.62"/>
+                  <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.34/@members.6">
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.2"/>
+                    <arguments xsi:type="references:StringReference" value="Idle"/>
+                  </arguments>
+                </expression>
+              </statements>
+              <catcheBlocks>
+                <statements xsi:type="statements:SynchronizedBlock">
+                  <comments>// This thread timed out waiting for something to do.</comments>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      <operator xsi:type="operators:MinusMinus"/>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <comments>// This should for both bounded and unbounded case</comments>
+                    <statement xsi:type="statements:Block">
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                          <operator xsi:type="operators:MinusMinus"/>
+                        </expression>
+                      </statements>
+                      <statements xsi:type="statements:Return">
+                        <comments>// This thread can exit.</comments>
+                      </statements>
+                    </statement>
+                    <condition xsi:type="expressions:RelationExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                      <relationOperators xsi:type="operators:GreaterThan"/>
+                    </condition>
+                    <elseStatement xsi:type="statements:Block">
+                      <statements xsi:type="statements:Continue">
+                        <comments>// Go back to waiting on workQueue</comments>
+                      </statements>
+                    </elseStatement>
+                  </statements>
+                  <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+                </statements>
+                <parameter name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="TimeoutException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+              <catcheBlocks>
+                <statements xsi:type="statements:SynchronizedBlock">
+                  <comments>// InterruptedExceptions are</comments>
+                  <comments>// caught here.  Thus, threads can be forced out of</comments>
+                  <comments>// requestWork and so they have to reacquire the lock.</comments>
+                  <comments>// Other options include ignoring or</comments>
+                  <comments>// letting this thread die.</comments>
+                  <comments>// Ignoring for now. REVISIT</comments>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      <operator xsi:type="operators:MinusMinus"/>
+                    </expression>
+                  </statements>
+                  <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+                </statements>
+                <parameter name="ie">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+              <catcheBlocks>
+                <statements xsi:type="statements:SynchronizedBlock">
+                  <comments>// Ignore any exceptions that currentWork.process</comments>
+                  <comments>// accidently lets through, but let Errors pass.</comments>
+                  <comments>// Add debugging output?  REVISIT</comments>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      <operator xsi:type="operators:MinusMinus"/>
+                    </expression>
+                  </statements>
+                  <lockProvider xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+                </statements>
+                <parameter name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+            </statements>
+          </statement>
+          <condition xsi:type="literals:BooleanLiteral" value="true"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="composeWorkerThreadName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="poolName">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="workerName">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.3">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.10"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.3">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.6/@parameters.0"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+              <arguments xsi:type="references:StringReference" value="p: "/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.3">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.6/@parameters.1"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+              <arguments xsi:type="references:StringReference" value="; w: "/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@members.3">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/StringBuffer.class.xmi#//@classifiers.0/@members.55"/>
+            </next>
+          </returnValue>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </extends>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../spi/orbutil/threadpool/ThreadPool.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

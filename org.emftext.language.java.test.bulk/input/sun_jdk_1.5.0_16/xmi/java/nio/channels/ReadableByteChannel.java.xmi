@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="ReadableByteChannel.java">
+  <comments>/*&#xA; * @(#)ReadableByteChannel.java&#x9;1.16 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>nio</namespaces>
+  <namespaces>channels</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="ReadableByteChannel">
+    <members xsi:type="members:InterfaceMethod" name="read">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dst">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Reads a sequence of bytes from this channel into the given buffer.&#xA;     *&#xA;     * &lt;p> An attempt is made to read up to &lt;i>r&lt;/i> bytes from the channel,&#xA;     * where &lt;i>r&lt;/i> is the number of bytes remaining in the buffer, that is,&#xA;     * &lt;tt>dst.remaining()&lt;/tt>, at the moment this method is invoked.&#xA;     *&#xA;     * &lt;p> Suppose that a byte sequence of length &lt;i>n&lt;/i> is read, where&#xA;     * &lt;tt>0&lt;/tt>&amp;nbsp;&lt;tt>&amp;lt;=&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>&amp;nbsp;&lt;tt>&amp;lt;=&lt;/tt>&amp;nbsp;&lt;i>r&lt;/i>.&#xA;     * This byte sequence will be transferred into the buffer so that the first&#xA;     * byte in the sequence is at index &lt;i>p&lt;/i> and the last byte is at index&#xA;     * &lt;i>p&lt;/i>&amp;nbsp;&lt;tt>+&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>&amp;nbsp;&lt;tt>-&lt;/tt>&amp;nbsp;&lt;tt>1&lt;/tt>,&#xA;     * where &lt;i>p&lt;/i> is the buffer's position at the moment this method is&#xA;     * invoked.  Upon return the buffer's position will be equal to&#xA;     * &lt;i>p&lt;/i>&amp;nbsp;&lt;tt>+&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>; its limit will not have changed.&#xA;     *&#xA;     * &lt;p> A read operation might not fill the buffer, and in fact it might not&#xA;     * read any bytes at all.  Whether or not it does so depends upon the&#xA;     * nature and state of the channel.  A socket channel in non-blocking mode,&#xA;     * for example, cannot read any more bytes than are immediately available&#xA;     * from the socket's input buffer; similarly, a file channel cannot read&#xA;     * any more bytes than remain in the file.  It is guaranteed, however, that&#xA;     * if a channel is in blocking mode and there is at least one byte&#xA;     * remaining in the buffer then this method will block until at least one&#xA;     * byte is read.&#xA;     *&#xA;     * &lt;p> This method may be invoked at any time.  If another thread has&#xA;     * already initiated a read operation upon this channel, however, then an&#xA;     * invocation of this method will block until the first operation is&#xA;     * complete. &lt;/p>&#xA;     *&#xA;     * @param  dst&#xA;     *         The buffer into which bytes are to be transferred&#xA;     *&#xA;     * @return  The number of bytes read, possibly zero, or &lt;tt>-1&lt;/tt> if the&#xA;     *          channel has reached end-of-stream&#xA;     *&#xA;     * @throws  NonReadableChannelException&#xA;     *          If this channel was not opened for reading&#xA;     *&#xA;     * @throws  ClosedChannelException&#xA;     *          If this channel is closed&#xA;     *&#xA;     * @throws  AsynchronousCloseException&#xA;     *          If another thread closes this channel&#xA;     *          while the read operation is in progress&#xA;     *&#xA;     * @throws  ClosedByInterruptException&#xA;     *          If another thread interrupts the current thread&#xA;     *          while the read operation is in progress, thereby&#xA;     *          closing the channel and setting the current thread's&#xA;     *          interrupt status&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If some other I/O error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A channel that can read bytes.&#xA; *&#xA; * &lt;p> Only one read operation upon a readable channel may be in progress at&#xA; * any given time.  If one thread initiates a read operation upon a channel&#xA; * then any other thread that attempts to initiate another read operation will&#xA; * block until the first operation is complete.  Whether or not other kinds of&#xA; * I/O operations may proceed concurrently with a read operation depends upon&#xA; * the type of the channel. &lt;/p>&#xA; *&#xA; *&#xA; * @author Mark Reinhold&#xA; * @author JSR-51 Expert Group&#xA; * @version 1.16, 03/12/19&#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="Channel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

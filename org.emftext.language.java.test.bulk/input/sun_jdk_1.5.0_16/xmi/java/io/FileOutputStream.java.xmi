@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16" name="FileOutputStream.java">
+  <comments>/*&#xA; * @(#)FileOutputStream.java&#x9;1.57 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>io</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>channels</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../nio/channels/FileChannel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>sun</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>ch</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../sun/nio/ch/FileChannelImpl.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="FileOutputStream">
+    <members xsi:type="members:Field" name="fd">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileDescriptor.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The system dependent file descriptor. The value is&#xA;     * 1 more than actual file descriptor. This means that&#xA;     * the default value 0 indicates that the file is not open.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="channel">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../nio/channels/FileChannel.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="append">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Constructor" name="FileOutputStream">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </child>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="File.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </expressionIf>
+            <expressionElse xsi:type="literals:NullLiteral"/>
+          </arguments>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates an output file stream to write to the file with the &#xA;     * specified name. A new &lt;code>FileDescriptor&lt;/code> object is &#xA;     * created to represent this file connection.&#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkWrite&lt;/code> &#xA;     * method is called with &lt;code>name&lt;/code> as its argument.&#xA;     * &lt;p>&#xA;     * If the file exists but is a directory rather than a regular file, does&#xA;     * not exist but cannot be created, or cannot be opened for any other&#xA;     * reason then a &lt;code>FileNotFoundException&lt;/code> is thrown.&#xA;     *&#xA;     * @param      name   the system-dependent filename&#xA;     * @exception  FileNotFoundException  if the file exists but is a directory&#xA;     *                   rather than a regular file, does not exist but cannot&#xA;     *                   be created, or cannot be opened for any other reason&#xA;     * @exception  SecurityException  if a security manager exists and its&#xA;     *               &lt;code>checkWrite&lt;/code> method denies write access&#xA;     *               to the file.&#xA;     * @see        java.lang.SecurityManager#checkWrite(java.lang.String)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FileOutputStream">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </child>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="File.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+            </expressionIf>
+            <expressionElse xsi:type="literals:NullLiteral"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="append">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates an output file stream to write to the file with the specified&#xA;     * &lt;code>name&lt;/code>.  If the second argument is &lt;code>true&lt;/code>, then&#xA;     * bytes will be written to the end of the file rather than the beginning.&#xA;     * A new &lt;code>FileDescriptor&lt;/code> object is created to represent this&#xA;     * file connection.&#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkWrite&lt;/code> &#xA;     * method is called with &lt;code>name&lt;/code> as its argument.&#xA;     * &lt;p>&#xA;     * If the file exists but is a directory rather than a regular file, does&#xA;     * not exist but cannot be created, or cannot be opened for any other&#xA;     * reason then a &lt;code>FileNotFoundException&lt;/code> is thrown.&#xA;     * &#xA;     * @param     name        the system-dependent file name&#xA;     * @param     append      if &lt;code>true&lt;/code>, then bytes will be written&#xA;     *                   to the end of the file rather than the beginning&#xA;     * @exception  FileNotFoundException  if the file exists but is a directory&#xA;     *                   rather than a regular file, does not exist but cannot&#xA;     *                   be created, or cannot be opened for any other reason.&#xA;     * @exception  SecurityException  if a security manager exists and its&#xA;     *               &lt;code>checkWrite&lt;/code> method denies write access&#xA;     *               to the file.&#xA;     * @see        java.lang.SecurityManager#checkWrite(java.lang.String)&#xA;     * @since     JDK1.1&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FileOutputStream">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="file">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="File.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a file output stream to write to the file represented by &#xA;     * the specified &lt;code>File&lt;/code> object. A new &#xA;     * &lt;code>FileDescriptor&lt;/code> object is created to represent this &#xA;     * file connection.&#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkWrite&lt;/code> &#xA;     * method is called with the path represented by the &lt;code>file&lt;/code> &#xA;     * argument as its argument.&#xA;     * &lt;p>&#xA;     * If the file exists but is a directory rather than a regular file, does&#xA;     * not exist but cannot be created, or cannot be opened for any other&#xA;     * reason then a &lt;code>FileNotFoundException&lt;/code> is thrown.&#xA;     *&#xA;     * @param      file               the file to be opened for writing.&#xA;     * @exception  FileNotFoundException  if the file exists but is a directory&#xA;     *                   rather than a regular file, does not exist but cannot&#xA;     *                   be created, or cannot be opened for any other reason&#xA;     * @exception  SecurityException  if a security manager exists and its&#xA;     *               &lt;code>checkWrite&lt;/code> method denies write access&#xA;     *               to the file.&#xA;     * @see        java.io.File#getPath()&#xA;     * @see        java.lang.SecurityException&#xA;     * @see        java.lang.SecurityManager#checkWrite(java.lang.String)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FileOutputStream">
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="name">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalExpression">
+              <child xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </child>
+              <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="File.class.xmi#//@classifiers.0/@members.22"/>
+                </next>
+              </expressionIf>
+              <expressionElse xsi:type="literals:NullLiteral"/>
+            </expression>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="security">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/SecurityManager.class.xmi#//@classifiers.0/@members.35"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="FileDescriptor.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.0/@variable"/>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="file">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="File.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="append">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a file output stream to write to the file represented by &#xA;     * the specified &lt;code>File&lt;/code> object. If the second argument is&#xA;     * &lt;code>true&lt;/code>, then bytes will be written to the end of the file&#xA;     * rather than the beginning. A new &lt;code>FileDescriptor&lt;/code> object is&#xA;     * created to represent this file connection.&#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkWrite&lt;/code> &#xA;     * method is called with the path represented by the &lt;code>file&lt;/code> &#xA;     * argument as its argument.&#xA;     * &lt;p>&#xA;     * If the file exists but is a directory rather than a regular file, does&#xA;     * not exist but cannot be created, or cannot be opened for any other&#xA;     * reason then a &lt;code>FileNotFoundException&lt;/code> is thrown.&#xA;     *&#xA;     * @param      file               the file to be opened for writing.&#xA;     * @param     append      if &lt;code>true&lt;/code>, then bytes will be written&#xA;     *                   to the end of the file rather than the beginning&#xA;     * @exception  FileNotFoundException  if the file exists but is a directory&#xA;     *                   rather than a regular file, does not exist but cannot&#xA;     *                   be created, or cannot be opened for any other reason&#xA;     * @exception  SecurityException  if a security manager exists and its&#xA;     *               &lt;code>checkWrite&lt;/code> method denies write access&#xA;     *               to the file.&#xA;     * @see        java.io.File#getPath()&#xA;     * @see        java.lang.SecurityException&#xA;     * @see        java.lang.SecurityManager#checkWrite(java.lang.String)&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FileOutputStream">
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="security">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/SecurityManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../lang/System.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../lang/System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/SecurityManager.class.xmi#//@classifiers.0/@members.34"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fdObj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="FileDescriptor.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates an output file stream to write to the specified file &#xA;     * descriptor, which represents an existing connection to an actual &#xA;     * file in the file system.&#xA;     * &lt;p>&#xA;     * First, if there is a security manager, its &lt;code>checkWrite&lt;/code> &#xA;     * method is called with the file descriptor &lt;code>fdObj&lt;/code> &#xA;     * argument as its argument.&#xA;     *&#xA;     * @param      fdObj   the file descriptor to be opened for writing&#xA;     * @exception  SecurityException  if a security manager exists and its&#xA;     *               &lt;code>checkWrite&lt;/code> method denies&#xA;     *               write access to the file descriptor&#xA;     * @see        java.lang.SecurityManager#checkWrite(java.io.FileDescriptor)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="open">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Opens a file, with the specified name, for writing.&#xA;     * @param name name of file to be opened&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="openAppend">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Opens a file, with the specified name, for appending.&#xA;     * @param name name of file to be opened&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="write">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes the specified byte to this file output stream. Implements &#xA;     * the &lt;code>write&lt;/code> method of &lt;code>OutputStream&lt;/code>.&#xA;     *&#xA;     * @param      b   the byte to be written.&#xA;     * @exception  IOException  if an I/O error occurs.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="writeBytes">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="len">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Writes a sub array as a sequence of bytes.&#xA;     * @param b the data to be written&#xA;     * @param off the start offset in the data&#xA;     * @param len the number of bytes that are written&#xA;     * @exception IOException If an I/O error has occurred.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes &lt;code>b.length&lt;/code> bytes from the specified byte array &#xA;     * to this file output stream. &#xA;     *&#xA;     * @param      b   the data.&#xA;     * @exception  IOException  if an I/O error occurs.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+            <next xsi:type="references:IdentifierReference"/>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="len">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes &lt;code>len&lt;/code> bytes from the specified byte array &#xA;     * starting at offset &lt;code>off&lt;/code> to this file output stream. &#xA;     *&#xA;     * @param      b     the data.&#xA;     * @param      off   the start offset in the data.&#xA;     * @param      len   the number of bytes to write.&#xA;     * @exception  IOException  if an I/O error occurs.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Closes this file output stream and releases any system resources &#xA;     * associated with this stream. This file output stream may no longer &#xA;     * be used for writing bytes. &#xA;     *&#xA;     * &lt;p> If this stream has an associated channel then the channel is closed&#xA;     * as well.&#xA;     *&#xA;     * @exception  IOException  if an I/O error occurs.&#xA;     *&#xA;     * @revised 1.4&#xA;     * @spec JSR-51&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../nio/channels/spi/AbstractInterruptibleChannel.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getFD">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="FileDescriptor.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the file descriptor associated with this stream.&#xA;     *&#xA;     * @return  the &lt;code>FileDescriptor&lt;/code> object that represents &#xA;     *          the connection to the file in the file system being used &#xA;     *          by this &lt;code>FileOutputStream&lt;/code> object. &#xA;     * &#xA;     * @exception  IOException  if an I/O error occurs.&#xA;     * @see        java.io.FileDescriptor&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Throw">
+        <throwable xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </throwable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getChannel">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../nio/channels/FileChannel.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the unique {@link java.nio.channels.FileChannel FileChannel}&#xA;     * object associated with this file output stream. &lt;/p>&#xA;     *&#xA;     * &lt;p> The initial {@link java.nio.channels.FileChannel#position()&#xA;     * &lt;/code>position&lt;code>} of the returned channel will be equal to the&#xA;     * number of bytes written to the file so far unless this stream is in&#xA;     * append mode, in which case it will be equal to the size of the file.&#xA;     * Writing bytes to this stream will increment the channel's position&#xA;     * accordingly.  Changing the channel's position, either explicitly or by&#xA;     * writing, will change this stream's file position.&#xA;     *&#xA;     * @return  the file channel associated with this file output stream&#xA;     *&#xA;     * @since 1.4&#xA;     * @spec JSR-51&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:SynchronizedBlock">
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../sun/nio/ch/FileChannelImpl.class.xmi#//@classifiers.0/@members.25"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                  <arguments xsi:type="literals:BooleanLiteral"/>
+                  <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                  <arguments xsi:type="references:SelfReference">
+                    <self xsi:type="literals:This"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../sun/nio/ch/FileChannelImpl.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </statements>
+        <lockProvider xsi:type="references:SelfReference">
+          <self xsi:type="literals:This"/>
+        </lockProvider>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="finalize">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Cleans up the connection to the file, and ensures that the &#xA;     * &lt;code>close&lt;/code> method of this file output stream is&#xA;     * called when there are no more references to this stream. &#xA;     *&#xA;     * @exception  IOException  if an I/O error occurs.&#xA;     * @see        java.io.FileInputStream#close()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="OutputStream.class.xmi#//@classifiers.0/@members.4"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="FileDescriptor.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </children>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="FileDescriptor.class.xmi#//@classifiers.0/@members.4"/>
+                  </next>
+                </children>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14"/>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="close0">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="initIDs">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Native"/>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+      </statements>
+      <modifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A file output stream is an output stream for writing data to a &#xA; * &lt;code>File&lt;/code> or to a &lt;code>FileDescriptor&lt;/code>. Whether or not&#xA; * a file is available or may be created depends upon the underlying&#xA; * platform.  Some platforms, in particular, allow a file to be opened&#xA; * for writing by only one &lt;tt>FileOutputStream&lt;/tt> (or other&#xA; * file-writing object) at a time.  In such situations the constructors in&#xA; * this class will fail if the file involved is already open.&#xA; *&#xA; * &lt;p>&lt;code>FileOutputStream&lt;/code> is meant for writing streams of raw bytes&#xA; * such as image data. For writing streams of characters, consider using&#xA; * &lt;code>FileWriter&lt;/code>.&#xA; *&#xA; * @author  Arthur van Hoff&#xA; * @version 1.57, 12/19/03&#xA; * @see     java.io.File&#xA; * @see     java.io.FileDescriptor&#xA; * @see     java.io.FileInputStream&#xA; * @since   JDK1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="OutputStream.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

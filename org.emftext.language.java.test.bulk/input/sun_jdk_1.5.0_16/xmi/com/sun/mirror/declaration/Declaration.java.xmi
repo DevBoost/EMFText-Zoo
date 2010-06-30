@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="Declaration.java">
+  <comments>/*&#xA; * @(#)Declaration.java&#x9;1.6 04/07/16&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL.  Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>mirror</namespaces>
+  <namespaces>declaration</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>lang</namespaces>
+    <namespaces>annotation</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../java/lang/annotation/Annotation.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../java/util/Collection.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>mirror</namespaces>
+    <namespaces>type</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>mirror</namespaces>
+    <namespaces>util</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Declaration">
+    <members xsi:type="members:InterfaceMethod" name="equals">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Tests whether an object represents the same declaration as this.&#xA;     *&#xA;     * @param obj  the object to be compared with this declaration&#xA;     * @return &lt;tt>true&lt;/tt> if the specified object represents the same&#xA;     *&#x9;&#x9;declaration as this&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDocComment">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the text of the documentation (&quot;javadoc&quot;) comment of&#xA;     * this declaration.&#xA;     *&#xA;     * @return the documentation comment of this declaration, or &lt;tt>null&lt;/tt>&#xA;     *&#x9;&#x9;if there is none&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAnnotationMirrors">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the annotations that are directly present on this declaration.&#xA;     *&#xA;     * @return the annotations directly present on this declaration;&#xA;     *&#x9;&#x9;an empty collection if there are none&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="AnnotationMirror.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../../../java/util/Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAnnotation">
+      <comments>/**&#xA;     * Returns the annotation of this declaration having the specified&#xA;     * type.  The annotation may be either inherited or directly&#xA;     * present on this declaration.&#xA;     *&#xA;     * &lt;p> The annotation returned by this method could contain an element&#xA;     * whose value is of type &lt;tt>Class&lt;/tt>.&#xA;     * This value cannot be returned directly:  information necessary to&#xA;     * locate and load a class (such as the class loader to use) is&#xA;     * not available, and the class might not be loadable at all.&#xA;     * Attempting to read a &lt;tt>Class&lt;/tt> object by invoking the relevant&#xA;     * method on the returned annotation&#xA;     * will result in a {@link MirroredTypeException},&#xA;     * from which the corresponding {@link TypeMirror} may be extracted.&#xA;     * Similarly, attempting to read a &lt;tt>Class[]&lt;/tt>-valued element&#xA;     * will result in a {@link MirroredTypesException}.&#xA;     *&#xA;     * &lt;blockquote>&#xA;     * &lt;i>Note:&lt;/i> This method is unlike&#xA;     * others in this and related interfaces.  It operates on run-time&#xA;     * reflective information -- representations of annotation types&#xA;     * currently loaded into the VM -- rather than on the mirrored&#xA;     * representations defined by and used throughout these&#xA;     * interfaces.  It is intended for callers that are written to&#xA;     * operate on a known, fixed set of annotation types.&#xA;     * &lt;/blockquote>&#xA;     *&#xA;     * @param &lt;A>  the annotation type&#xA;     * @param annotationType  the &lt;tt>Class&lt;/tt> object corresponding to&#xA;     *&#x9;&#x9;the annotation type&#xA;     * @return the annotation of this declaration having the specified type&#xA;     *&#xA;     * @see #getAnnotationMirrors()&#xA;     */</comments>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.3/@typeParameters.0"/>
+      </typeReference>
+      <typeParameters name="A">
+        <extendTypes xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../java/lang/annotation/Annotation.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </extendTypes>
+      </typeParameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="annotationType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.3/@typeParameters.0"/>
+              </typeReference>
+            </typeArguments>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getModifiers">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the modifiers of this declaration, excluding annotations.&#xA;     * Implicit modifiers, such as the &lt;tt>public&lt;/tt> and &lt;tt>static&lt;/tt>&#xA;     * modifiers of interface members, are included.&#xA;     *&#xA;     * @return the modifiers of this declaration in undefined order;&#xA;     *&#x9;&#x9;an empty collection if there are none&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Enumeration" href="Modifier.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../../../java/util/Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSimpleName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the simple (unqualified) name of this declaration.&#xA;     * The name of a generic type does not include any reference&#xA;     * to its formal type parameters.&#xA;     * For example, the simple name of the interface declaration&#xA;     * {@code java.util.Set&lt;E>} is &lt;tt>&quot;Set&quot;&lt;/tt>.&#xA;     * If this declaration represents the empty package, an empty&#xA;     * string is returned.&#xA;     * If it represents a constructor, the simple name of its&#xA;     * declaring class is returned.&#xA;     *&#xA;     * @return the simple name of this declaration&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getPosition">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the source position of the beginning of this declaration.&#xA;     * Returns &lt;tt>null&lt;/tt> if the position is unknown or not applicable.&#xA;     *&#xA;     * &lt;p> This source position is intended for use in providing&#xA;     * diagnostics, and indicates only approximately where a declaration&#xA;     * begins.&#xA;     *&#xA;     * @return the source position of the beginning of this declaration,&#xA;     *&#x9;&#x9;or null if the position is unknown or not applicable&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="../util/SourcePosition.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="accept">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Applies a visitor to this declaration.&#xA;     *&#xA;     * @param v the visitor operating on this declaration&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="v">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../util/DeclarationVisitor.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Represents the declaration of a program element such as a package,&#xA; * class, or method.  Each declaration represents a static, language-level&#xA; * construct (and not, for example, a runtime construct of the virtual&#xA; * machine), and typically corresponds one-to-one with a particular&#xA; * fragment of source code.&#xA; *&#xA; * &lt;p> Declarations should be compared using the {@link #equals(Object)}&#xA; * method.  There is no guarantee that any particular declaration will&#xA; * always be represented by the same object.&#xA; *&#xA; * @author Joseph D. Darcy&#xA; * @author Scott Seligman&#xA; * @version 1.6 04/07/16&#xA; *&#xA; * @see Declarations&#xA; * @see TypeMirror&#xA; * @since 1.5&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

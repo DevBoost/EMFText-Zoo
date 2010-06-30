@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="GSSManager.java">
+  <comments>/*&#xA; * @(#)GSSManager.java&#x9;1.9 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>ietf</namespaces>
+  <namespaces>jgss</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/security/Provider.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="GSSManager">
+    <members xsi:type="members:ClassMethod" name="getInstance">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Returns the default GSSManager implementation.&#xA;     * &#xA;     * @return a GSSManager implementation&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <namespaces>sun</namespaces>
+            <namespaces>security</namespaces>
+            <namespaces>jgss</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../sun/security/jgss/GSSManagerImpl.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMechs">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a list of mechanisms that are available to GSS-API callers&#xA;     * through this GSSManager. The default GSSManager obtained from the&#xA;     * {@link #getInstance() getInstance()} method includes the Oid&#xA;     * &quot;1.2.840.113554.1.2.2&quot; in its list. This Oid identifies the Kerberos&#xA;     * v5 GSS-API mechanism that is defined in RFC 1964.&#xA;     *&#xA;     * @return an array of Oid objects corresponding to the mechanisms that&#xA;     * are available. A &lt;code>null&lt;/code> value is returned when no&#xA;     * mechanism are available (an example of this would be when mechanism&#xA;     * are dynamically configured, and currently no mechanisms are&#xA;     * installed).&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getNamesForMech">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns then name types supported by the indicated mechanism.&lt;p>&#xA;     *&#xA;     * The default GSSManager instance includes support for the Kerberos v5&#xA;     * mechanism. When this mechanism (&quot;1.2.840.113554.1.2.2&quot;) is indicated,&#xA;     * the returned list will contain at least the following nametypes:&#xA;     * {@link GSSName#NT_HOSTBASED_SERVICE GSSName.NT_HOSTBASED_SERVICE},&#xA;     * {@link GSSName#NT_EXPORT_NAME GSSName.NT_EXPORT_NAME}, and the&#xA;     * Kerberos v5 specific Oid &quot;1.2.840.113554.1.2.2.1&quot;. The namespace for &#xA;     * the Oid &quot;1.2.840.113554.1.2.2.1&quot; is defined in RFC 1964.&#xA;     *&#xA;     * @return an array of Oid objects corresponding to the name types that&#xA;     * the mechanism supports.&#xA;     * @param mech the Oid of the mechanism to query&#xA;     *&#xA;     * @see #getMechsForName(Oid)&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH}&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMechsForName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**    &#xA;     * Returns a list of mechanisms that support the indicated name type.&lt;p>&#xA;     *&#xA;     * The Kerberos v5 mechanism (&quot;1.2.840.113554.1.2.2&quot;) will always be&#xA;     * returned in this list when the indicated nametype is one of &#xA;     * {@link GSSName#NT_HOSTBASED_SERVICE GSSName.NT_HOSTBASED_SERVICE},&#xA;     * {@link GSSName#NT_EXPORT_NAME GSSName.NT_EXPORT_NAME}, or&#xA;     * &quot;1.2.840.113554.1.2.2.1&quot;.&#xA;     * &#xA;     * @return an array of Oid objects corresponding to the mechanisms that&#xA;     * support the specified name type.  &lt;code>null&lt;/code> is returned when no&#xA;     * mechanisms are found to support the specified name type.&#xA;     * @param nameType the Oid of the name type to look for&#xA;     *&#xA;     * @see #getNamesForMech(Oid)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameStr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9; &#xA;     * Factory method to convert a string name from the&#xA;     * specified namespace to a GSSName object. In general, the&#xA;     * &lt;code>GSSName&lt;/code> object created  will contain multiple&#xA;     * representations of the name, one for each mechanism that is&#xA;     * supported; two examples that are exceptions to this are when&#xA;     * the namespace type parameter indicates NT_EXPORT_NAME or when the&#xA;     * GSS-API implementation is not multi-mechanism. It is&#xA;     * not recommended to use this method with a NT_EXPORT_NAME type because&#xA;     * representing a previously exported name consisting of abitrary bytes&#xA;     * as a String might cause problems with character encoding schemes. In&#xA;     * such cases it is recommended that the bytes be passed in directly to&#xA;     * the overloaded form of this method {@link #createName(byte[],&#xA;     * Oid) createName}.&#xA;     *&#xA;     * @param nameStr the string representing a printable form of the name to&#xA;     * create.&#xA;     * @param nameType the Oid specifying the namespace of the printable name&#xA;     * supplied. &lt;code>null&lt;/code> can be used to specify&#xA;     * that a mechanism specific default printable syntax should &#xA;     * be assumed by each mechanism that examines nameStr. &#xA;     * It is not advisable to use the nametype NT_EXPORT_NAME with this&#xA;     * method.&#xA;     * @return a GSSName representing the indicated principal&#xA;     *&#xA;     * @see GSSName&#xA;     * @see GSSName#NT_EXPORT_NAME&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Factory method to convert a byte array containing a&#xA;     * name from the specified namespace to a GSSName object. In general,&#xA;     * the &lt;code>GSSName&lt;/code> object created  will contain multiple&#xA;     * representations of the name, one for each mechanism that is&#xA;     * supported; two examples that are exceptions to this are when the&#xA;     * namespace type parameter indicates NT_EXPORT_NAME or when the&#xA;     * GSS-API implementation is not multi-mechanism. The bytes that are&#xA;     * passed in are interpreted by each underlying mechanism according to&#xA;     * some encoding scheme of its choice for the given nametype.&#xA;     *&#xA;     * @param name the byte array containing the name to create&#xA;     * @param nameType the Oid specifying the namespace of the name supplied&#xA;     * in the byte array. &lt;code>null&lt;/code> can be used to specify that a&#xA;     * mechanism specific default syntax should be assumed by each mechanism&#xA;     * that examines the byte array.&#xA;     * @return a GSSName representing the indicated principal&#xA;     *&#xA;     * @see GSSName&#xA;     * @see GSSName#NT_EXPORT_NAME&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameStr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     *  Factory method to convert a string name from the&#xA;     * specified namespace to a GSSName object and canonicalize it at the&#xA;     * same time for a mechanism. In other words, this method is &#xA;     * a utility that does the equivalent of two steps: the {@link&#xA;     * #createName(String, Oid) createName} and then also the {@link&#xA;     * GSSName#canonicalize(Oid) GSSName.canonicalize}.&#xA;     *&#xA;     * @param nameStr the string representing a printable form of the name to&#xA;     * create.&#xA;     * @param nameType the Oid specifying the namespace of the printable name&#xA;     * supplied. &lt;code>null&lt;/code> can be used to specify&#xA;     * that a mechanism specific default printable syntax should &#xA;     * be assumed by each mechanism that examines nameStr. &#xA;     * It is not advisable to use the nametype NT_EXPORT_NAME with this&#xA;     * method.&#xA;     * @param mech Oid specifying the mechanism for which the name should be&#xA;     * canonicalized&#xA;     * @return a GSSName representing the indicated principal&#xA;     *&#xA;     * @see GSSName#canonicalize(Oid)&#xA;     * @see GSSName#NT_EXPORT_NAME&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9; &#xA;     *  Factory method to convert a byte array containing a&#xA;     * name from the specified namespace to a GSSName object and canonicalize &#xA;     * it at the same time for a mechanism. In other words, this method is a&#xA;     * utility that does the equivalent of two steps: the {@link&#xA;     * #createName(byte[], Oid) createName} and then also {@link&#xA;     * GSSName#canonicalize(Oid) GSSName.canonicalize}.&#xA;     *&#xA;     * @param name the byte array containing the name to create&#xA;     * @param nameType the Oid specifying the namespace of the name supplied&#xA;     * in the byte array. &lt;code>null&lt;/code> can be used to specify that a&#xA;     * mechanism specific default syntax should be assumed by each mechanism&#xA;     * that examines the byte array.&#xA;     * @param mech Oid specifying the mechanism for which the name should be&#xA;     * canonicalized&#xA;     * @return a GSSName representing the indicated principal&#xA;     *&#xA;     * @see GSSName#canonicalize(Oid)&#xA;     * @see GSSName#NT_EXPORT_NAME&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createCredential">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSCredential.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="usage">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;   &#xA;     * Factory method for acquiring default credentials.  This will cause&#xA;     * the GSS-API to use system specific defaults for the set of mechanisms,&#xA;     * name, and lifetime.&lt;p>&#xA;     *&#xA;     * GSS-API mechanism providers must impose a local access-control&#xA;     * policy on callers to prevent unauthorized callers from acquiring&#xA;     * credentials to which they are not entitled. The kinds of permissions&#xA;     * needed by different mechanism providers will be documented on a&#xA;     * per-mechanism basis. A failed permission check might cause a {@link&#xA;     * java.lang.SecurityException SecurityException} to be thrown from&#xA;     * this method.&#xA;     *&#xA;     * @param usage The intended usage for this credential object. The value&#xA;     * of this parameter must be one of: &#xA;     * {@link GSSCredential#INITIATE_AND_ACCEPT&#xA;     * GSSCredential.INITIATE_AND_ACCEPT},&#xA;     * {@link GSSCredential#ACCEPT_ONLY GSSCredential.ACCEPT_ONLY}, and&#xA;     * {@link GSSCredential#INITIATE_ONLY GSSCredential.INITIATE_ONLY}.&#xA;     * @return a GSSCredential of the requested type.&#xA;     *&#xA;     * @see GSSCredential&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#CREDENTIALS_EXPIRED&#xA;     *                                   GSSException.CREDENTIALS_EXPIRED},&#xA;     *    {@link GSSException#NO_CRED GSSException.NO_CRED},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createCredential">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSCredential.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lifetime">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="usage">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;    &#xA;     * Factory method for acquiring a single mechanism credential.&lt;p>&#xA;     *&#xA;     * GSS-API mechanism providers must impose a local access-control &#xA;     * policy on callers to prevent unauthorized callers from acquiring &#xA;     * credentials to which they are not entitled. The kinds of permissions &#xA;     * needed by different mechanism providers will be documented on a &#xA;     * per-mechanism basis. A failed permission check might cause a {@link &#xA;     * java.lang.SecurityException SecurityException} to be thrown from &#xA;     * this method. &lt;p>&#xA;     *&#xA;     * Non-default values for lifetime cannot always be honored by the&#xA;     * underlying mechanisms, thus applications should be prepared to call&#xA;     * {@link GSSCredential#getRemainingLifetime() getRemainingLifetime}&#xA;     * on the returned credential.&lt;p>&#xA;     *&#xA;     * @param name the name of the principal for whom this credential is to be&#xA;     * acquired.  Use &lt;code>null&lt;/code> to specify the default principal.&#xA;     * @param lifetime The number of seconds that credentials should remain&#xA;     * valid.  Use {@link GSSCredential#INDEFINITE_LIFETIME&#xA;     * GSSCredential.INDEFINITE_LIFETIME} to request that the credentials&#xA;     * have the maximum permitted lifetime.  Use {@link&#xA;     * GSSCredential#DEFAULT_LIFETIME GSSCredential.DEFAULT_LIFETIME} to&#xA;     * request default credential lifetime.&#xA;     * @param mech the Oid of the desired mechanism.  Use &lt;code>(Oid) null&#xA;     * &lt;/code> to request the default mechanism.&#xA;     * @param usage The intended usage for this credential object. The value&#xA;     * of this parameter must be one of: &#xA;     * {@link GSSCredential#INITIATE_AND_ACCEPT&#xA;     * GSSCredential.INITIATE_AND_ACCEPT},&#xA;     * {@link GSSCredential#ACCEPT_ONLY GSSCredential.ACCEPT_ONLY}, and&#xA;     * {@link GSSCredential#INITIATE_ONLY GSSCredential.INITIATE_ONLY}.&#xA;     * @return a GSSCredential of the requested type.&#xA;     *&#xA;     * @see GSSCredential&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#CREDENTIALS_EXPIRED&#xA;     *                                   GSSException.CREDENTIALS_EXPIRED},&#xA;     *    {@link GSSException#NO_CRED GSSException.NO_CRED},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createCredential">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSCredential.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lifetime">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mechs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="usage">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;   &#xA;     * Factory method for acquiring credentials over a set of&#xA;     * mechanisms. This method attempts to acquire credentials for&#xA;     * each of the mechanisms specified in the array called mechs.  To&#xA;     * determine the list of mechanisms for which the acquisition of&#xA;     * credentials succeeded, the caller should use the {@link&#xA;     * GSSCredential#getMechs() GSSCredential.getMechs} method.&lt;p>&#xA;     *&#xA;     * GSS-API mechanism providers must impose a local access-control &#xA;     * policy on callers to prevent unauthorized callers from acquiring &#xA;     * credentials to which they are not entitled. The kinds of permissions &#xA;     * needed by different mechanism providers will be documented on a &#xA;     * per-mechanism basis. A failed permission check might cause a {@link &#xA;     * java.lang.SecurityException SecurityException} to be thrown from &#xA;     * this method.&lt;p>&#xA;     *&#xA;     * Non-default values for lifetime cannot always be honored by the&#xA;     * underlying mechanisms, thus applications should be prepared to call&#xA;     * {@link GSSCredential#getRemainingLifetime() getRemainingLifetime}&#xA;     * on the returned credential.&lt;p>&#xA;     *&#xA;     * @param name the name of the principal for whom this credential is to&#xA;     * be acquired.  Use &lt;code>null&lt;/code> to specify the default&#xA;     * principal.&#xA;     * @param lifetime The number of seconds that credentials should remain&#xA;     * valid.  Use {@link GSSCredential#INDEFINITE_LIFETIME&#xA;     * GSSCredential.INDEFINITE_LIFETIME} to request that the credentials&#xA;     * have the maximum permitted lifetime.  Use {@link&#xA;     * GSSCredential#DEFAULT_LIFETIME GSSCredential.DEFAULT_LIFETIME} to&#xA;     * request default credential lifetime.&#xA;     * @param mechs an array of Oid's indicating the mechanisms over which&#xA;     * the credential is to be acquired.  Use &lt;code>(Oid[]) null&lt;/code> for&#xA;     * requesting a system specific default set of mechanisms.&#xA;     * @param usage The intended usage for this credential object. The value&#xA;     * of this parameter must be one of: &#xA;     * {@link GSSCredential#INITIATE_AND_ACCEPT&#xA;     * GSSCredential.INITIATE_AND_ACCEPT},&#xA;     * {@link GSSCredential#ACCEPT_ONLY GSSCredential.ACCEPT_ONLY}, and&#xA;     * {@link GSSCredential#INITIATE_ONLY GSSCredential.INITIATE_ONLY}.&#xA;     * @return a GSSCredential of the requested type.&#xA;     *&#xA;     * @see GSSCredential&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH},&#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE},&#xA;     *    {@link GSSException#BAD_NAME GSSException.BAD_NAME},&#xA;     *    {@link GSSException#CREDENTIALS_EXPIRED&#xA;     *                                   GSSException.CREDENTIALS_EXPIRED},&#xA;     *    {@link GSSException#NO_CRED GSSException.NO_CRED},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSContext.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="peer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="GSSName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="myCred">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="GSSCredential.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lifetime">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;&#xA;     * Factory method for creating a context on the initiator's&#xA;     * side.&#xA;     *&#xA;     * Some mechanism providers might require that the caller be granted&#xA;     * permission to initiate a security context. A failed permission check &#xA;     * might cause a {@link java.lang.SecurityException SecurityException}&#xA;     * to be thrown from this method.&lt;p>&#xA;     *&#xA;     * Non-default values for lifetime cannot always be honored by the&#xA;     * underlying mechanism, thus applications should be prepared to call&#xA;     * {@link GSSContext#getLifetime() getLifetime} on the returned&#xA;     * context.&lt;p>&#xA;     *&#xA;     * @param peer the name of the target peer.&#xA;     * @param mech the Oid of the desired mechanism.  Use &lt;code>null&lt;/code>&#xA;     * to request the default mechanism.&#xA;     * @param myCred the credentials of the initiator.  Use&#xA;     * &lt;code>null&lt;/code> to act as the default initiator principal.&#xA;     * @param lifetime the lifetime, in seconds, requested for the&#xA;     * context. Use {@link GSSContext#INDEFINITE_LIFETIME&#xA;     * GSSContext.INDEFINITE_LIFETIME} to request that the context have the &#xA;     * maximum permitted lifetime. Use {@link GSSContext#DEFAULT_LIFETIME&#xA;     * GSSContext.DEFAULT_LIFETIME} to request a default lifetime for the&#xA;     * context.&#xA;     * @return an unestablished GSSContext&#xA;     *&#xA;     * @see GSSContext&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#NO_CRED GSSException.NO_CRED}&#xA;     *    {@link GSSException#CREDENTIALS_EXPIRED &#xA;     *                      GSSException.CREDENTIALS_EXPIRED}&#xA;     *    {@link GSSException#BAD_NAMETYPE GSSException.BAD_NAMETYPE}&#xA;     *    {@link GSSException#BAD_MECH GSSException.BAD_MECH}&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSContext.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="myCred">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="GSSCredential.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;   &#xA;    * Factory method for creating a context on the acceptor' side.  The&#xA;    * context's properties will be determined from the input token supplied&#xA;    * to the accept method.&#xA;    *&#xA;    * Some mechanism providers might require that the caller be granted&#xA;    * permission to accept a security context. A failed permission check &#xA;    * might cause a {@link java.lang.SecurityException SecurityException}&#xA;    * to be thrown from this method.&#xA;    *&#xA;    * @param myCred the credentials for the acceptor.  Use&#xA;    * &lt;code>null&lt;/code> to act as a default acceptor principal.&#xA;    * @return an unestablished GSSContext&#xA;    *&#xA;    * @see GSSContext&#xA;    *&#xA;    * @throws GSSException containing the following &#xA;    * major error codes: &#xA;    *    {@link GSSException#NO_CRED GSSException.NO_CRED}&#xA;    *    {@link GSSException#CREDENTIALS_EXPIRED &#xA;    *                        GSSException.CREDENTIALS_EXPIRED}&#xA;    *    {@link GSSException#BAD_MECH GSSException.BAD_MECH}&#xA;    *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="GSSContext.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="interProcessToken">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;   &#xA;     * Factory method for creating a previously exported context.  The&#xA;     * context properties will be determined from the input token and&#xA;     * cannot be modified through the set methods.&lt;p>&#xA;     *&#xA;     * Implementations are not required to support the inter-process&#xA;     * transfer of security contexts.  Before exporting a context, calling&#xA;     * the {@link GSSContext#isTransferable() GSSContext.isTransferable}&#xA;     * will indicate if the context is transferable. Calling this method in&#xA;     * an implementation that does not support it will result in a&#xA;     * &lt;code>GSSException&lt;/code> with the error&#xA;     * code {@link GSSException#UNAVAILABLE GSSException.UNAVAILABLE}.&#xA;     *&#xA;     * Some mechanism providers might require that the caller be granted&#xA;     * permission to initiate or accept a security context. A failed&#xA;     * permission check might cause a {@link java.lang.SecurityException&#xA;     * SecurityException} to be thrown from this method.&#xA;     *&#xA;     * @param interProcessToken the token previously emitted from the&#xA;     * export method.&#xA;     * @return the previously established GSSContext&#xA;     *&#xA;     * @see GSSContext&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#NO_CONTEXT GSSException.NO_CONTEXT},&#xA;     *    {@link GSSException#DEFECTIVE_TOKEN GSSException.DEFECTIVE_TOKEN},&#xA;     *    {@link GSSException#UNAVAILABLE GSSException.UNAVAILABLE},&#xA;     *    {@link GSSException#UNAUTHORIZED GSSException.UNAUTHORIZED},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addProviderAtFront">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="p">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/security/Provider.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9;   &#xA;     * This method is used to indicate to the GSSManager that the&#xA;     * application would like a particular provider to be used ahead of all&#xA;     * others when support is desired for the given mechanism. When a value&#xA;     * of null is used instead of an &lt;code>Oid&lt;/code> for the mechanism,&#xA;     * the GSSManager must use the indicated provider ahead of all others&#xA;     * no matter what the mechanism is. Only when the indicated provider&#xA;     * does not support the needed mechanism should the GSSManager move on&#xA;     * to a different provider.&lt;p>&#xA;     *&#xA;     * Calling this method repeatedly preserves the older settings but&#xA;     * lowers them in preference thus forming an ordered list of provider&#xA;     * and &lt;code>Oid&lt;/code> pairs that grows at the top.&lt;p>&#xA;     *&#xA;     * Calling addProviderAtFront with a null &lt;code>Oid&lt;/code> will remove&#xA;     * all previous preferences that were set for this provider in the&#xA;     * GSSManager instance. Calling addProviderAtFront with a non-null&#xA;     * &lt;code>Oid&lt;/code> will remove any previous preference that was set&#xA;     * using this mechanism and this provider together.&lt;p> &#xA;     *&#xA;     * If the GSSManager implementation does not support an SPI with a&#xA;     * pluggable provider architecture it should throw a GSSException with&#xA;     * the status code GSSException.UNAVAILABLE to indicate that the&#xA;     * operation is unavailable.&lt;p>&#xA;     *&#xA;     * Suppose an application desired that the provider A always be checked&#xA;     * first when any mechanism is needed, it would call:&lt;p>&#xA;     * &lt;pre>&#xA;     *         GSSManager mgr = GSSManager.getInstance();&#xA;     *         // mgr may at this point have its own pre-configured list&#xA;     *         // of provider preferences. The following will prepend to&#xA;     *         // any such list:&#xA;     *&#xA;     *         mgr.addProviderAtFront(A, null);&#xA;     * &lt;/pre>&#xA;     * Now if it also desired that the mechanism of Oid m1 always be&#xA;     * obtained from the provider B before the previously set A was checked,&#xA;     * it would call:&lt;p>&#xA;     * &lt;pre>&#xA;     *         mgr.addProviderAtFront(B, m1);&#xA;     * &lt;/pre>&#xA;     * The GSSManager would then first check with B if m1 was needed. In&#xA;     * case B did not provide support for m1, the GSSManager would continue&#xA;     * on to check with A.  If any mechanism m2 is needed where m2 is&#xA;     * different from m1 then the GSSManager would skip B and check with A&#xA;     * directly.&lt;p>&#xA;     *&#xA;     * Suppose at a later time the following call is made to the same&#xA;     * GSSManager instance:&lt;p>&#xA;     * &lt;pre>&#xA;     *         mgr.addProviderAtFront(B, null)&#xA;     * &lt;/pre>&#xA;     * then the previous setting with the pair (B, m1) is subsumed by this&#xA;     * and should be removed. Effectively the list of preferences now&#xA;     * becomes {(B, null), (A, null),&#xA;     *         ... //followed by the pre-configured list.&lt;p>&#xA;     *&#xA;     * Please note, however, that the following call:&#xA;     * &lt;pre>&#xA;     *         mgr.addProviderAtFront(A, m3)&#xA;     * &lt;/pre>&#xA;     * does not subsume the previous setting of (A, null) and the list will&#xA;     * effectively become {(A, m3), (B, null), (A, null), ...}&#xA;     *&#xA;     * @param p the provider instance that should be used whenever support&#xA;     * is needed for mech.&#xA;     * @param mech the mechanism for which the provider is being set&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#UNAVAILABLE GSSException.UNAVAILABLE},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addProviderAtEnd">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="p">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/security/Provider.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mech">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Oid.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="GSSException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#x9; &#xA;     * This method is used to indicate to the GSSManager that the&#xA;     * application would like a particular provider to be used if no other&#xA;     * provider can be found that supports the given mechanism. When a value&#xA;     * of null is used instead of an Oid for the mechanism, the GSSManager&#xA;     * must use the indicated provider for any mechanism.&lt;p>&#xA;     *&#xA;     * Calling this method repeatedly preserves the older settings but&#xA;     * raises them above newer ones in preference thus forming an ordered&#xA;     * list of providers and Oid pairs that grows at the bottom. Thus the&#xA;     * older provider settings will be utilized first before this one is.&lt;p>&#xA;     *&#xA;     * If there are any previously existing preferences that conflict with&#xA;     * the preference being set here, then the GSSManager should ignore this&#xA;     * request.&lt;p>&#xA;     *&#xA;     * If the GSSManager implementation does not support an SPI with a&#xA;     * pluggable provider architecture it should throw a GSSException with&#xA;     * the status code GSSException.UNAVAILABLE to indicate that the&#xA;     * operation is unavailable.&lt;p>&#xA;     *&#xA;     * Suppose an application desired that when a mechanism of Oid m1 is&#xA;     * needed the system default providers always be checked first, and only&#xA;     * when they do not support m1 should a provider A be checked. It would&#xA;     * then make the call:&lt;p>&#xA;     * &lt;pre>&#xA;     *         GSSManager mgr = GSSManager.getInstance();&#xA;     *         mgr.addProviderAtEnd(A, m1);&#xA;     * &lt;/pre>&#xA;     * Now, if it also desired that for all mechanisms the provider B be&#xA;     * checked after all configured providers have been checked, it would&#xA;     * then call:&lt;p>&#xA;     * &lt;pre>&#xA;     *         mgr.addProviderAtEnd(B, null);&#xA;     * &lt;/pre>&#xA;     * Effectively the list of preferences now becomes {..., (A, m1), (B,&#xA;     * null)}.&lt;p>&#xA;     *&#xA;     * Suppose at a later time the following call is made to the same&#xA;     * GSSManager instance:&lt;p>&#xA;     * &lt;pre>&#xA;     *         mgr.addProviderAtEnd(B, m2)&#xA;     * &lt;/pre>&#xA;     * then the previous setting with the pair (B, null) subsumes this and&#xA;     * therefore this request should be ignored. The same would happen if a&#xA;     * request is made for the already existing pairs of (A, m1) or (B,&#xA;     * null).&lt;p>&#xA;     *&#xA;     * Please note, however, that the following call:&lt;p>&#xA;     * &lt;pre>&#xA;     *         mgr.addProviderAtEnd(A, null)&#xA;     * &lt;/pre>&#xA;     * is not subsumed by the previous setting of (A, m1) and the list will&#xA;     * effectively become {..., (A, m1), (B, null), (A, null)}&#xA;     *&#xA;     * @param p the provider instance that should be used whenever support&#xA;     * is needed for mech.&#xA;     * @param mech the mechanism for which the provider is being set&#xA;     *&#xA;     * @throws GSSException containing the following &#xA;     * major error codes: &#xA;     *    {@link GSSException#UNAVAILABLE GSSException.UNAVAILABLE},&#xA;     *    {@link GSSException#FAILURE GSSException.FAILURE}&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** &#xA; * This class serves as a factory for other important&#xA; * GSS-API classes and also provides information about the mechanisms that&#xA; * are supported. It can create instances of classes&#xA; * implementing the following three GSS-API interfaces: {@link&#xA; * GSSName GSSName}, {@link GSSCredential GSSCredential}, and {@link&#xA; * GSSContext GSSContext}. It also has methods to query for the list&#xA; * of available mechanisms and the nametypes that each mechanism&#xA; * supports.&lt;p>&#xA; *&#xA; * An instance of the default &lt;code>GSSManager&lt;/code> subclass&#xA; * may be obtained through the static method {@link #getInstance()&#xA; * getInstance}, but applications are free to instantiate other subclasses&#xA; * of &lt;code>GSSManager&lt;/code>. The default &lt;code>GSSManager&lt;/code> instance &#xA; * will support the Kerberos v5 GSS-API mechanism in addition to any&#xA; * others. This mechanism is identified by the Oid &quot;1.2.840.113554.1.2.2&quot;&#xA; * and is defined in RFC 1964.&lt;p>&#xA; *&#xA; * A subclass extending the &lt;code>GSSManager&lt;/code> abstract class may be&#xA; * implemented  as a modular provider based layer that utilizes some well&#xA; * known  service provider specification. The &lt;code>GSSManager&lt;/code> API&#xA; * allows the application to set provider preferences on&#xA; * such an implementation. These methods also allow the implementation to&#xA; * throw a well-defined exception in case provider based configuration is&#xA; * not supported. Applications that expect to be portable should be aware&#xA; * of this and recover cleanly by catching the exception.&lt;p>&#xA; *&#xA; * It is envisioned that there will be three most common ways in which&#xA; * providers will be used:&lt;p>&#xA; * &lt;ol>&#xA; * &lt;li> The application does not care about what provider is used (the&#xA; * default case).&#xA; * &lt;li> The application wants a particular provider to be used&#xA; * preferentially, either for a particular mechanism or all the&#xA; * time, irrespective of mechanism.&#xA; * &lt;li> The application wants to use the locally configured providers&#xA; * as far as possible but if support is missing for one or more&#xA; * mechanisms then it wants to fall back on its own provider.&#xA; *&lt;/ol>&lt;p>&#xA; *&#xA; * The &lt;code>GSSManager&lt;/code> class has two methods that enable these modes of&#xA; * usage:  {@link #addProviderAtFront(Provider, Oid) addProviderAtFront} and&#xA; * {@link #addProviderAtEnd(Provider, Oid) addProviderAtEnd}. These methods&#xA; * have the effect of creating an ordered list of &lt;i>&amp;lt;provider,&#xA; * oid&amp;gt;&lt;/i> pairs  where each pair indicates a preference of provider&#xA; * for a given oid.&lt;p>&#xA; *&#xA; * It is important to note that there are certain interactions&#xA; * between the different GSS-API objects that are created by a&#xA; * GSSManager, where the provider that is used for a particular mechanism&#xA; * might need to be consistent across all objects. For instance, if a&#xA; * GSSCredential contains elements from a provider &lt;i>p&lt;/i> for a mechanism&#xA; * &lt;i>m&lt;/i>, it should generally be passed in to a GSSContext that will use&#xA; * provider &lt;i>p&lt;/i> for the mechanism &lt;i>m&lt;/i>. A simple rule of thumb&#xA; * that will maximize portability is that objects created from different&#xA; * GSSManager's should not be mixed, and if possible, a different&#xA; * GSSManager instance should be created if the application wants to invoke&#xA; * the &lt;code>addProviderAtFront&lt;/code> method on a GSSManager that has&#xA; * already created an object.&lt;p>&#xA; *&#xA; *  Here is some sample code showing how the GSSManager might be used: &lt;p>&#xA; * &lt;pre>&#xA; *     GSSManager manager = GSSManager.getInstance();&#xA; *&#xA; *     Oid krb5Mechanism = new Oid(&quot;1.2.840.113554.1.2.2&quot;);&#xA; *     Oid krb5PrincipalNameType = new Oid(&quot;1.2.840.113554.1.2.2.1&quot;);&#xA; *&#xA; *     // Identify who the client wishes to be&#xA; *     GSSName userName = manager.createName(&quot;duke&quot;, GSSName.NT_USER_NAME);&#xA; *&#xA; *     // Identify the name of the server. This uses a Kerberos specific&#xA; *     // name format.&#xA; *     GSSName serverName = manager.createName(&quot;nfs/foo.sun.com&quot;, &#xA; *                                             krb5PrincipalNameType);&#xA; *&#xA; *     // Acquire credentials for the user&#xA; *     GSSCredential userCreds = manager.createCredential(userName,&#xA; *                                             GSSCredential.DEFAULT_LIFETIME,&#xA; *                                             krb5Mechanism,&#xA; *                                             GSSCredential.INITIATE_ONLY);&#xA; *&#xA; *     // Instantiate and initialize a security context that will be&#xA; *     // established with the server&#xA; *     GSSContext context = manager.createContext(serverName,&#xA; *                                                krb5Mechanism,&#xA; *                                                userCreds,&#xA; *                                                GSSContext.DEFAULT_LIFETIME);&#xA; * &lt;/pre>&lt;p>&#xA; *&#xA; * The server side might use the following variation of this source:&lt;p>&#xA; *&#xA; * &lt;pre>&#xA; *     // Acquire credentials for the server&#xA; *     GSSCredential serverCreds = manager.createCredential(serverName, &#xA; *                                             GSSCredential.DEFAULT_LIFETIME, &#xA; *                                             krb5Mechanism, &#xA; *                                             GSSCredential.ACCEPT_ONLY); &#xA; * &#xA; *     // Instantiate and initialize a security context that will&#xA; *     // wait for an establishment request token from the client&#xA; *     GSSContext context = manager.createContext(serverCreds);&#xA; * &lt;/pre> &#xA; *&#xA; * @author Mayank Upadhyay&#xA; * @version 1.9, 12/19/03&#xA; * @see GSSName&#xA; * @see GSSCredential&#xA; * @see GSSContext&#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

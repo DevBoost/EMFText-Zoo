@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="SnmpUserDataFactory.java">
+  <comments>/*&#xA; * @(#)file      SnmpUserDataFactory.java&#xA; * @(#)author    Sun Microsystems, Inc.&#xA; * @(#)version   1.16&#xA; * @(#)date      08/05/28&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>jmx</namespaces>
+  <namespaces>snmp</namespaces>
+  <namespaces>agent</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>snmp</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../SnmpPduPacket.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>snmp</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../SnmpPdu.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>jmx</namespaces>
+    <namespaces>snmp</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../SnmpStatusException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="SnmpUserDataFactory">
+    <members xsi:type="members:InterfaceMethod" name="allocateUserData">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requestPdu">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../SnmpPdu.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../SnmpStatusException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Called by the &lt;CODE>SnmpAdaptorServer&lt;/CODE> adaptor.&#xA;     * Allocate a contextual object containing some user data. This method&#xA;     * is called once for each incoming SNMP request. The scope&#xA;     * of this object will be the whole request. Since the request can be &#xA;     * handled in several threads, the user should make sure that this&#xA;     * object can be accessed in a thread-safe manner. The SNMP framework&#xA;     * will never access this object directly - it will simply pass&#xA;     * it to the &lt;code>SnmpMibAgent&lt;/code> within &#xA;     * &lt;code>SnmpMibRequest&lt;/code> objects - from where it can be retrieved&#xA;     * through the {@link com.sun.jmx.snmp.agent.SnmpMibRequest#getUserData() getUserData()} accessor.&#xA;     * &lt;code>null&lt;/code> is considered to be a valid return value.&#xA;     *&#xA;     * This method is called just after the SnmpPduPacket has been&#xA;     * decoded.&#xA;     *&#xA;     * @param requestPdu The SnmpPduPacket received from the SNMP manager.&#xA;     *        &lt;b>This parameter is owned by the SNMP framework and must be &#xA;     *        considered as transient.&lt;/b> If you wish to keep some of its &#xA;     *        content after this method returns (by storing it in the &#xA;     *        returned object for instance) you should clone that &#xA;     *        information. &#xA;     *&#xA;     * @return A newly allocated user-data contextual object, or &#xA;     *         &lt;code>null&lt;/code>&#xA;     * @exception SnmpStatusException If an SnmpStatusException is thrown,&#xA;     *            the request will be aborted.&#xA;     *&#xA;     * @since 1.5&#xA;     **/</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="releaseUserData">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="userData">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="responsePdu">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../SnmpPdu.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../SnmpStatusException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Called by the &lt;CODE>SnmpAdaptorServer&lt;/CODE> adaptor.&#xA;     * Release a previously allocated contextual object containing user-data.&#xA;     * This method is called just before the responsePdu is sent back to the&#xA;     * manager. It gives the user a chance to alter the responsePdu packet&#xA;     * before it is encoded, and to free any resources that might have&#xA;     * been allocated when creating the contextual object.&#xA;     *&#xA;     * @param userData The contextual object being released. &#xA;     * @param responsePdu The SnmpPduPacket that will be sent back to the &#xA;     *        SNMP manager.&#xA;     *        &lt;b>This parameter is owned by the SNMP framework and must be &#xA;     *        considered as transient.&lt;/b> If you wish to keep some of its &#xA;     *        content after this method returns you should clone that&#xA;     *        information. &#xA;     *&#xA;     * @exception SnmpStatusException If an SnmpStatusException is thrown,&#xA;     *            the responsePdu is dropped and nothing is returned to&#xA;     *            to the manager.&#xA;     *&#xA;     * @since 1.5&#xA;     **/</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This interface is provided to enable fine customization of the SNMP&#xA; * agent behaviour. &#xA; * &#xA; * &lt;p>You will not need to implement this interface except if your agent&#xA; * needs extra customization requiring some contextual information.&lt;/p>&#xA; *&#xA; * &lt;p>If an SnmpUserDataFactory is set on the SnmpAdaptorServer, then a new&#xA; * object containing user-data will be allocated through this factory&#xA; * for each incoming request. This object will be passed along to &#xA; * the SnmpMibAgent within SnmpMibRequest objects. By default, no &#xA; * SnmpUserDataFactory is set on the SnmpAdaptorServer, and the contextual&#xA; * object passed to SnmpMibAgent is null.&lt;/p>&#xA; * &#xA; * &lt;p>You can use this feature to obtain on contextual information&#xA; * (such as community string etc...) or to implement a caching&#xA; * mechanism, or for whatever purpose might be required by your specific&#xA; * agent implementation.&lt;/p>&#xA; *&#xA; * &lt;p>The sequence &lt;code>allocateUserData() / releaseUserData()&lt;/code> can &#xA; * also be used to implement a caching mechanism: &#xA; * &lt;ul>&#xA; * &lt;li>&lt;code>allocateUserData()&lt;/code> could be used to allocate &#xA; *         some cache space,&lt;/li>&#xA; * &lt;li>and &lt;code>releaseUserData()&lt;/code> could be used to flush it.&lt;/li>&#xA; * &lt;/ul>&lt;/p>&#xA; *&#xA; * &lt;p>&lt;b>This API is a Sun Microsystems internal API  and is subject &#xA; * to change without notice.&lt;/b>&lt;/p>&#xA; * @see com.sun.jmx.snmp.agent.SnmpMibRequest&#xA; * @see com.sun.jmx.snmp.agent.SnmpMibAgent&#xA; * @see com.sun.jmx.snmp.daemon.SnmpAdaptorServer&#xA; *&#xA; **/</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

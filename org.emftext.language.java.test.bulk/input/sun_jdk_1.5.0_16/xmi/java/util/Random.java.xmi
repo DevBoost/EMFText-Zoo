@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16 http://www.emftext.org/java/variables ../../java.ecore#/17" name="Random.java">
+  <comments>/*&#xA; * @(#)Random.java&#x9;1.43 04/01/12&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>util</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>concurrent</namespaces>
+    <namespaces>atomic</namespaces>
+    <classifier xsi:type="classifiers:Class" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Random">
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="3905348978240129619"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/** use serialVersionUID from JDK 1.1 for interoperability */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="seed">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The internal state associated with this pseudorandom number generator.&#xA;     * (The specs for the methods in this class describe the ongoing&#xA;     * computation of this value.)&#xA;     *&#xA;     * @serial&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="multiplier">
+      <initialValue xsi:type="literals:HexLongLiteral" hexValue="25214903917"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="addend">
+      <initialValue xsi:type="literals:HexLongLiteral" hexValue="11"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="mask">
+      <initialValue xsi:type="expressions:AdditiveExpression">
+        <children xsi:type="expressions:NestedExpression">
+          <expression xsi:type="expressions:ShiftExpression">
+            <children xsi:type="literals:DecimalLongLiteral" decimalValue="1"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="48"/>
+            <shiftOperators xsi:type="operators:LeftShift"/>
+          </expression>
+        </children>
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        <additiveOperators xsi:type="operators:Subtraction"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Constructor" name="Random">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="expressions:PrefixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <operator xsi:type="operators:PlusPlus"/>
+            </children>
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/System.class.xmi#//@classifiers.0/@members.19"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../lang/System.class.xmi#//@classifiers.0"/>
+            </children>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </arguments>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a new random number generator. This constructor sets&#xA;     * the seed of the random number generator to a value very likely&#xA;     * to be distinct from any other invocation of this constructor.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="seedUniquifier">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="8682522807148012"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:Constructor" name="Random">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="literals:DecimalLongLiteral" decimalValue="0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="seed">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Creates a new random number generator using a single &#xA;     * &lt;code>long&lt;/code> seed:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public Random(long seed) { setSeed(seed); }&lt;/pre>&lt;/blockquote>&#xA;     * Used by method &lt;tt>next&lt;/tt> to hold &#xA;     * the state of the pseudorandom number generator.&#xA;     *&#xA;     * @param   seed   the initial seed.&#xA;     * @see     java.util.Random#setSeed(long)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSeed">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="seed">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized">
+        <comments>/**&#xA;     * Sets the seed of this random number generator using a single &#xA;     * &lt;code>long&lt;/code> seed. The general contract of &lt;tt>setSeed&lt;/tt> &#xA;     * is that it alters the state of this random number generator&#xA;     * object so as to be in exactly the same state as if it had just &#xA;     * been created with the argument &lt;tt>seed&lt;/tt> as a seed. The method &#xA;     * &lt;tt>setSeed&lt;/tt> is implemented by class Random as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * synchronized public void setSeed(long seed) {&#xA;     *       this.seed = (seed ^ 0x5DEECE66DL) &amp; ((1L &lt;&lt; 48) - 1);&#xA;     *       haveNextNextGaussian = false;&#xA;     * }&lt;/pre>&lt;/blockquote>&#xA;     * The implementation of &lt;tt>setSeed&lt;/tt> by class &lt;tt>Random&lt;/tt> &#xA;     * happens to use only 48 bits of the given seed. In general, however, &#xA;     * an overriding method may use all 64 bits of the long argument&#xA;     * as a seed value. &#xA;     *&#xA;     * Note: Although the seed value is an AtomicLong, this method&#xA;     *       must still be synchronized to ensure correct semantics&#xA;     *       of haveNextNextGaussian.&#xA;     *&#xA;     * @param   seed   the initial seed.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:AndExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ExclusiveOrExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              </expression>
+            </children>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0/@members.9"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+            </next>
+          </next>
+          <self xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="next">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Generates the next pseudorandom number. Subclass should&#xA;     * override this, as this is used by all other methods.&lt;p>&#xA;     * The general contract of &lt;tt>next&lt;/tt> is that it returns an &#xA;     * &lt;tt>int&lt;/tt> value and if the argument bits is between &lt;tt>1&lt;/tt> &#xA;     * and &lt;tt>32&lt;/tt> (inclusive), then that many low-order bits of the &#xA;     * returned value will be (approximately) independently chosen bit &#xA;     * values, each of which is (approximately) equally likely to be &#xA;     * &lt;tt>0&lt;/tt> or &lt;tt>1&lt;/tt>. The method &lt;tt>next&lt;/tt> is implemented &#xA;     * by class &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * synchronized protected int next(int bits) {&#xA;     *       seed = (seed * 0x5DEECE66DL + 0xBL) &amp; ((1L &lt;&lt; 48) - 1);&#xA;     *       return (int)(seed >>> (48 - bits));&#xA;     * }&lt;/pre>&lt;/blockquote>&#xA;     * This is a linear congruential pseudorandom number generator, as &#xA;     * defined by D. H. Lehmer and described by Donald E. Knuth in &lt;i>The &#xA;     * Art of Computer Programming,&lt;/i> Volume 2: &lt;i>Seminumerical &#xA;     * Algorithms&lt;/i>, section 3.2.1.&#xA;     *&#xA;     * @param   bits random bits&#xA;     * @return  the next pseudorandom value from this random number generator's sequence.&#xA;     * @since   JDK1.1&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldseed">
+          <typeReference xsi:type="types:Long"/>
+          <additionalLocalVariables name="nextseed"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="seed">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:DoWhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0/@members.8"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable/@additionalLocalVariables.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:AndExpression">
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </expression>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0/@members.11"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable/@additionalLocalVariables.0"/>
+            </next>
+          </child>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:CastExpression">
+          <typeReference xsi:type="types:Int"/>
+          <child xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ShiftExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable/@additionalLocalVariables.0"/>
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="48"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </expression>
+              </children>
+              <shiftOperators xsi:type="operators:UnsignedRightShift"/>
+            </expression>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="BITS_PER_BYTE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="BYTES_PER_INT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextBytes">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bytes">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Generates random bytes and places them into a user-supplied &#xA;     * byte array.  The number of random bytes produced is equal to &#xA;     * the length of the byte array.&#xA;     * &#xA;     * @param bytes  the non-null byte array in which to put the &#xA;     *               random bytes.&#xA;     * @since   JDK1.1&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="numRequested">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+            <next xsi:type="references:IdentifierReference"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="numGot">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <additionalLocalVariables name="rnd">
+            <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </additionalLocalVariables>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return"/>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable/@additionalLocalVariables.0"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:ConditionalExpression">
+                      <child xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@init"/>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                      </child>
+                      <expressionIf xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                        <arguments xsi:type="expressions:MultiplicativeExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+                          <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                        </arguments>
+                      </expressionIf>
+                      <expressionElse xsi:type="expressions:ShiftExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable/@additionalLocalVariables.0"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+                        <shiftOperators xsi:type="operators:RightShift"/>
+                      </expressionElse>
+                    </expression>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+                    <arraySelectors>
+                      <position xsi:type="expressions:SuffixUnaryModificationExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+                        <operator xsi:type="operators:PlusPlus"/>
+                      </position>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:Byte"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable/@additionalLocalVariables.0"/>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@init"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </condition>
+            <init xsi:type="variables:LocalVariable" name="i">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </init>
+            <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@init"/>
+              <operator xsi:type="operators:PlusPlus"/>
+            </updates>
+          </statements>
+        </statement>
+        <condition xsi:type="literals:BooleanLiteral" value="true"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextInt">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next pseudorandom, uniformly distributed &lt;code>int&lt;/code>&#xA;     * value from this random number generator's sequence. The general &#xA;     * contract of &lt;tt>nextInt&lt;/tt> is that one &lt;tt>int&lt;/tt> value is &#xA;     * pseudorandomly generated and returned. All 2&lt;font size=&quot;-1&quot;>&lt;sup>32&#xA;     * &lt;/sup>&lt;/font> possible &lt;tt>int&lt;/tt> values are produced with &#xA;     * (approximately) equal probability. The method &lt;tt>nextInt&lt;/tt> is &#xA;     * implemented by class &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public int nextInt() {  return next(32); }&lt;/pre>&lt;/blockquote>&#xA;     *&#xA;     * @return  the next pseudorandom, uniformly distributed &lt;code>int&lt;/code>&#xA;     *          value from this random number generator's sequence.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="32"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextInt">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a pseudorandom, uniformly distributed &lt;tt>int&lt;/tt> value&#xA;     * between 0 (inclusive) and the specified value (exclusive), drawn from&#xA;     * this random number generator's sequence.  The general contract of&#xA;     * &lt;tt>nextInt&lt;/tt> is that one &lt;tt>int&lt;/tt> value in the specified range&#xA;     * is pseudorandomly generated and returned.  All &lt;tt>n&lt;/tt> possible&#xA;     * &lt;tt>int&lt;/tt> values are produced with (approximately) equal&#xA;     * probability.  The method &lt;tt>nextInt(int n)&lt;/tt> is implemented by&#xA;     * class &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public int nextInt(int n) {&#xA;     *     if (n&lt;=0)&#xA;     *&#x9;&#x9;throw new IllegalArgumentException(&quot;n must be positive&quot;);&#xA;     *&#xA;     *     if ((n &amp; -n) == n)  // i.e., n is a power of 2&#xA;     *         return (int)((n * (long)next(31)) >> 31);&#xA;     *&#xA;     *     int bits, val;&#xA;     *     do {&#xA;     *         bits = next(31);&#xA;     *         val = bits % n;&#xA;     *     } while(bits - val + (n-1) &lt; 0);&#xA;     *     return val;&#xA;     * }&#xA;     * &lt;/pre>&lt;/blockquote>&#xA;     * &lt;p>&#xA;     * The hedge &quot;approximately&quot; is used in the foregoing description only &#xA;     * because the next method is only approximately an unbiased source of&#xA;     * independently chosen bits.  If it were a perfect source of randomly &#xA;     * chosen bits, then the algorithm shown would choose &lt;tt>int&lt;/tt> &#xA;     * values from the stated range with perfect uniformity.&#xA;     * &lt;p>&#xA;     * The algorithm is slightly tricky.  It rejects values that would result&#xA;     * in an uneven distribution (due to the fact that 2^31 is not divisible&#xA;     * by n). The probability of a value being rejected depends on n.  The&#xA;     * worst case is n=2^30+1, for which the probability of a reject is 1/2,&#xA;     * and the expected number of iterations before the loop terminates is 2.&#xA;     * &lt;p>&#xA;     * The algorithm treats the case where n is a power of two specially: it&#xA;     * returns the correct number of high-order bits from the underlying&#xA;     * pseudo-random number generator.  In the absence of special treatment,&#xA;     * the correct number of &lt;i>low-order&lt;/i> bits would be returned.  Linear&#xA;     * congruential pseudo-random number generators such as the one&#xA;     * implemented by this class are known to have short periods in the&#xA;     * sequence of values of their low-order bits.  Thus, this special case&#xA;     * greatly increases the length of the sequence of values returned by&#xA;     * successive calls to this method if n is a small power of two.&#xA;     *&#xA;     * @param n the bound on the random number to be returned.  Must be&#xA;     *&#x9;      positive.&#xA;     * @return  a pseudorandom, uniformly distributed &lt;tt>int&lt;/tt>&#xA;     *          value between 0 (inclusive) and n (exclusive).&#xA;     * @exception IllegalArgumentException n is not positive.&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="n must be positive"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThanOrEqual"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <comments>// i.e., n is a power of 2</comments>
+          <returnValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ShiftExpression">
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:MultiplicativeExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+                    <children xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:Long"/>
+                      <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                        <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="31"/>
+                      </child>
+                    </children>
+                    <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                  </expression>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="31"/>
+                <shiftOperators xsi:type="operators:RightShift"/>
+              </expression>
+            </child>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AndExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+              </children>
+            </expression>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bits">
+          <typeReference xsi:type="types:Int"/>
+          <additionalLocalVariables name="val"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:DoWhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="31"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable/@additionalLocalVariables.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+                <multiplicativeOperators xsi:type="operators:Remainder"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable/@additionalLocalVariables.0"/>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </expression>
+            </children>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable/@additionalLocalVariables.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextLong">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next pseudorandom, uniformly distributed &lt;code>long&lt;/code>&#xA;     * value from this random number generator's sequence. The general &#xA;     * contract of &lt;tt>nextLong&lt;/tt> is that one long value is pseudorandomly &#xA;     * generated and returned. All 2&lt;font size=&quot;-1&quot;>&lt;sup>64&lt;/sup>&lt;/font> &#xA;     * possible &lt;tt>long&lt;/tt> values are produced with (approximately) equal &#xA;     * probability. The method &lt;tt>nextLong&lt;/tt> is implemented by class &#xA;     * &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public long nextLong() {&#xA;     *       return ((long)next(32) &lt;&lt; 32) + next(32);&#xA;     * }&lt;/pre>&lt;/blockquote>&#xA;     *&#xA;     * @return  the next pseudorandom, uniformly distributed &lt;code>long&lt;/code>&#xA;     *          value from this random number generator's sequence.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <comments>// it's okay that the bottom word remains signed.</comments>
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ShiftExpression">
+              <children xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Long"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                    <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="32"/>
+                  </expression>
+                </child>
+              </children>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="32"/>
+              <shiftOperators xsi:type="operators:LeftShift"/>
+            </expression>
+          </children>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="32"/>
+          </children>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextBoolean">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next pseudorandom, uniformly distributed&#xA;     * &lt;code>boolean&lt;/code> value from this random number generator's&#xA;     * sequence. The general contract of &lt;tt>nextBoolean&lt;/tt> is that one&#xA;     * &lt;tt>boolean&lt;/tt> value is pseudorandomly generated and returned.  The&#xA;     * values &lt;code>true&lt;/code> and &lt;code>false&lt;/code> are produced with&#xA;     * (approximately) equal probability. The method &lt;tt>nextBoolean&lt;/tt> is&#xA;     * implemented by class &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public boolean nextBoolean() {return next(1) != 0;}&#xA;     * &lt;/pre>&lt;/blockquote>&#xA;     * @return  the next pseudorandom, uniformly distributed&#xA;     *          &lt;code>boolean&lt;/code> value from this random number generator's&#xA;     *&#x9;&#x9;sequence.&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextFloat">
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next pseudorandom, uniformly distributed &lt;code>float&lt;/code>&#xA;     * value between &lt;code>0.0&lt;/code> and &lt;code>1.0&lt;/code> from this random&#xA;     * number generator's sequence. &lt;p>&#xA;     * The general contract of &lt;tt>nextFloat&lt;/tt> is that one &lt;tt>float&lt;/tt> &#xA;     * value, chosen (approximately) uniformly from the range &lt;tt>0.0f&lt;/tt> &#xA;     * (inclusive) to &lt;tt>1.0f&lt;/tt> (exclusive), is pseudorandomly&#xA;     * generated and returned. All 2&lt;font size=&quot;-1&quot;>&lt;sup>24&lt;/sup>&lt;/font> &#xA;     * possible &lt;tt>float&lt;/tt> values of the form &#xA;     * &lt;i>m&amp;nbsp;x&amp;nbsp&lt;/i>2&lt;font size=&quot;-1&quot;>&lt;sup>-24&lt;/sup>&lt;/font>, where &#xA;     * &lt;i>m&lt;/i> is a positive integer less than 2&lt;font size=&quot;-1&quot;>&lt;sup>24&lt;/sup>&#xA;     * &lt;/font>, are produced with (approximately) equal probability. The &#xA;     * method &lt;tt>nextFloat&lt;/tt> is implemented by class &lt;tt>Random&lt;/tt> as &#xA;     * follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public float nextFloat() {&#xA;     *      return next(24) / ((float)(1 &lt;&lt; 24));&#xA;     * }&lt;/pre>&lt;/blockquote>&#xA;     * The hedge &quot;approximately&quot; is used in the foregoing description only &#xA;     * because the next method is only approximately an unbiased source of &#xA;     * independently chosen bits. If it were a perfect source or randomly &#xA;     * chosen bits, then the algorithm shown would choose &lt;tt>float&lt;/tt> &#xA;     * values from the stated range with perfect uniformity.&lt;p>&#xA;     * [In early versions of Java, the result was incorrectly calculated as:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * return next(30) / ((float)(1 &lt;&lt; 30));&lt;/pre>&lt;/blockquote>&#xA;     * This might seem to be equivalent, if not better, but in fact it &#xA;     * introduced a slight nonuniformity because of the bias in the rounding &#xA;     * of floating-point numbers: it was slightly more likely that the &#xA;     * low-order bit of the significand would be 0 than that it would be 1.] &#xA;     *&#xA;     * @return  the next pseudorandom, uniformly distributed &lt;code>float&lt;/code>&#xA;     *          value between &lt;code>0.0&lt;/code> and &lt;code>1.0&lt;/code> from this&#xA;     *          random number generator's sequence.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="24"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:MultiplicativeExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable"/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:Float"/>
+              <child xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:ShiftExpression">
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="24"/>
+                  <shiftOperators xsi:type="operators:LeftShift"/>
+                </expression>
+              </child>
+            </expression>
+          </children>
+          <multiplicativeOperators xsi:type="operators:Division"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextDouble">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next pseudorandom, uniformly distributed &#xA;     * &lt;code>double&lt;/code> value between &lt;code>0.0&lt;/code> and&#xA;     * &lt;code>1.0&lt;/code> from this random number generator's sequence. &lt;p>&#xA;     * The general contract of &lt;tt>nextDouble&lt;/tt> is that one &#xA;     * &lt;tt>double&lt;/tt> value, chosen (approximately) uniformly from the &#xA;     * range &lt;tt>0.0d&lt;/tt> (inclusive) to &lt;tt>1.0d&lt;/tt> (exclusive), is &#xA;     * pseudorandomly generated and returned. All &#xA;     * 2&lt;font size=&quot;-1&quot;>&lt;sup>53&lt;/sup>&lt;/font> possible &lt;tt>float&lt;/tt> &#xA;     * values of the form &lt;i>m&amp;nbsp;x&amp;nbsp;&lt;/i>2&lt;font size=&quot;-1&quot;>&lt;sup>-53&lt;/sup>&#xA;     * &lt;/font>, where &lt;i>m&lt;/i> is a positive integer less than &#xA;     * 2&lt;font size=&quot;-1&quot;>&lt;sup>53&lt;/sup>&lt;/font>, are produced with &#xA;     * (approximately) equal probability. The method &lt;tt>nextDouble&lt;/tt> is &#xA;     * implemented by class &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * public double nextDouble() {&#xA;     *       return (((long)next(26) &lt;&lt; 27) + next(27))&#xA;     *           / (double)(1L &lt;&lt; 53);&#xA;     * }&lt;/pre>&lt;/blockquote>&lt;p>&#xA;     * The hedge &quot;approximately&quot; is used in the foregoing description only &#xA;     * because the &lt;tt>next&lt;/tt> method is only approximately an unbiased &#xA;     * source of independently chosen bits. If it were a perfect source or &#xA;     * randomly chosen bits, then the algorithm shown would choose &#xA;     * &lt;tt>double&lt;/tt> values from the stated range with perfect uniformity. &#xA;     * &lt;p>[In early versions of Java, the result was incorrectly calculated as:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     *  return (((long)next(27) &lt;&lt; 27) + next(27))&#xA;     *      / (double)(1L &lt;&lt; 54);&lt;/pre>&lt;/blockquote>&#xA;     * This might seem to be equivalent, if not better, but in fact it &#xA;     * introduced a large nonuniformity because of the bias in the rounding &#xA;     * of floating-point numbers: it was three times as likely that the &#xA;     * low-order bit of the significand would be 0 than that it would be&#xA;     * 1! This nonuniformity probably doesn't matter much in practice, but &#xA;     * we strive for perfection.] &#xA;     *&#xA;     * @return  the next pseudorandom, uniformly distributed &#xA;     *          &lt;code>double&lt;/code> value between &lt;code>0.0&lt;/code> and&#xA;     *          &lt;code>1.0&lt;/code> from this random number generator's sequence.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="l">
+          <typeReference xsi:type="types:Long"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ShiftExpression">
+                <children xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Long"/>
+                  <child xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                      <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="26"/>
+                    </expression>
+                  </child>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="27"/>
+                <shiftOperators xsi:type="operators:LeftShift"/>
+              </expression>
+            </children>
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="27"/>
+            </children>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:MultiplicativeExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable"/>
+          <children xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Double"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ShiftExpression">
+                <children xsi:type="literals:DecimalLongLiteral" decimalValue="1"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="53"/>
+                <shiftOperators xsi:type="operators:LeftShift"/>
+              </expression>
+            </child>
+          </children>
+          <multiplicativeOperators xsi:type="operators:Division"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="nextNextGaussian">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="haveNextNextGaussian">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextGaussian">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized">
+        <comments>/**&#xA;     * Returns the next pseudorandom, Gaussian (&quot;normally&quot;) distributed&#xA;     * &lt;code>double&lt;/code> value with mean &lt;code>0.0&lt;/code> and standard&#xA;     * deviation &lt;code>1.0&lt;/code> from this random number generator's sequence.&#xA;     * &lt;p>&#xA;     * The general contract of &lt;tt>nextGaussian&lt;/tt> is that one &#xA;     * &lt;tt>double&lt;/tt> value, chosen from (approximately) the usual &#xA;     * normal distribution with mean &lt;tt>0.0&lt;/tt> and standard deviation &#xA;     * &lt;tt>1.0&lt;/tt>, is pseudorandomly generated and returned. The method &#xA;     * &lt;tt>nextGaussian&lt;/tt> is implemented by class &lt;tt>Random&lt;/tt> as follows:&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * synchronized public double nextGaussian() {&#xA;     *    if (haveNextNextGaussian) {&#xA;     *            haveNextNextGaussian = false;&#xA;     *            return nextNextGaussian;&#xA;     *    } else {&#xA;     *            double v1, v2, s;&#xA;     *            do { &#xA;     *                    v1 = 2 * nextDouble() - 1;   // between -1.0 and 1.0&#xA;     *                    v2 = 2 * nextDouble() - 1;   // between -1.0 and 1.0&#xA;     *                    s = v1 * v1 + v2 * v2;&#xA;     *            } while (s >= 1 || s == 0);&#xA;     *            double multiplier = Math.sqrt(-2 * Math.log(s)/s);&#xA;     *            nextNextGaussian = v2 * multiplier;&#xA;     *            haveNextNextGaussian = true;&#xA;     *            return v1 * multiplier;&#xA;     *    }&#xA;     * }&lt;/pre>&lt;/blockquote>&#xA;     * This uses the &lt;i>polar method&lt;/i> of G. E. P. Box, M. E. Muller, and &#xA;     * G. Marsaglia, as described by Donald E. Knuth in &lt;i>The Art of &#xA;     * Computer Programming&lt;/i>, Volume 2: &lt;i>Seminumerical Algorithms&lt;/i>, &#xA;     * section 3.4.1, subsection C, algorithm P. Note that it generates two&#xA;     * independent values at the cost of only one call to &lt;tt>Math.log&lt;/tt> &#xA;     * and one call to &lt;tt>Math.sqrt&lt;/tt>. &#xA;     *&#xA;     * @return  the next pseudorandom, Gaussian (&quot;normally&quot;) distributed&#xA;     *          &lt;code>double&lt;/code> value with mean &lt;code>0.0&lt;/code> and&#xA;     *          standard deviation &lt;code>1.0&lt;/code> from this random number&#xA;     *          generator's sequence.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// See Knuth, ACP, Section 3.4.1 Algorithm C.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="v1">
+              <typeReference xsi:type="types:Double"/>
+              <additionalLocalVariables name="v2"/>
+              <additionalLocalVariables name="s"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:DoWhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.0">
+                    <comments>// between -1 and 1</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.1">
+                    <comments>// between -1 and 1 </comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable"/>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.0"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.0"/>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.1"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.1"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </children>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="multiplier">
+              <typeReference xsi:type="types:Double"/>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.17"/>
+                  <arguments xsi:type="expressions:MultiplicativeExpression">
+                    <children xsi:type="expressions:UnaryExpression">
+                      <operators xsi:type="operators:Subtraction"/>
+                      <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                    </children>
+                    <children xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../lang/Math.class.xmi#//@classifiers.0/@members.15"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.1"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+                    </children>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.1"/>
+                    <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    <multiplicativeOperators xsi:type="operators:Division"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../lang/Math.class.xmi#//@classifiers.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable/@additionalLocalVariables.0"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.2/@variable"/>
+                <multiplicativeOperators xsi:type="operators:Multiplication"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral" value="true"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:MultiplicativeExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.2/@variable"/>
+              <multiplicativeOperators xsi:type="operators:Multiplication"/>
+            </returnValue>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="serialPersistentFields">
+      <initialValue xsi:type="arrays:ArrayInstantiationByValues">
+        <arrayInitializer>
+          <initialValues xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../io/ObjectStreamField.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="seed"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../lang/Long.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../lang/Long.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </initialValues>
+          <initialValues xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../io/ObjectStreamField.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="nextNextGaussian"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../lang/Double.class.xmi#//@classifiers.0/@members.6"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../lang/Double.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </initialValues>
+          <initialValues xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../io/ObjectStreamField.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="haveNextNextGaussian"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../lang/Boolean.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../lang/Boolean.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </initialValues>
+        </arrayInitializer>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/ObjectStreamField.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Serializable fields for Random.&#xA;     *&#xA;     * @serialField    seed long;&#xA;     *              seed for random computations&#xA;     * @serialField    nextNextGaussian double;&#xA;     *              next Gaussian to be returned&#xA;     * @serialField      haveNextNextGaussian boolean&#xA;     *              nextNextGaussian is valid&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="readObject">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>io</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../io/ObjectInputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <namespaces>java</namespaces>
+        <namespaces>io</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/ClassNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Reconstitute the &lt;tt>Random&lt;/tt> instance from a stream (that is,&#xA;     * deserialize it). The seed is read in as long for&#xA;     * historical reasons, but it is converted to an AtomicLong.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="fields">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <namespaces>ObjectInputStream</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../io/ObjectInputStream$GetField.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../io/ObjectInputStream.class.xmi#//@classifiers.0/@members.20"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="seedVal">
+          <typeReference xsi:type="types:Long"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.1/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Long"/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../io/ObjectInputStream$GetField.class.xmi#//@classifiers.0/@members.8"/>
+                <arguments xsi:type="references:StringReference" value="seed"/>
+                <arguments xsi:type="expressions:UnaryExpression">
+                  <operators xsi:type="operators:Subtraction"/>
+                  <child xsi:type="literals:DecimalLongLiteral" decimalValue="1"/>
+                </arguments>
+              </next>
+            </child>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>java</namespaces>
+              <namespaces>io</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../io/StreamCorruptedException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="Random: invalid seed"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.1/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.1/@variable"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../io/ObjectInputStream$GetField.class.xmi#//@classifiers.0/@members.10"/>
+              <arguments xsi:type="references:StringReference" value="nextNextGaussian"/>
+              <arguments xsi:type="literals:DecimalDoubleLiteral"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../io/ObjectInputStream$GetField.class.xmi#//@classifiers.0/@members.3"/>
+              <arguments xsi:type="references:StringReference" value="haveNextNextGaussian"/>
+              <arguments xsi:type="literals:BooleanLiteral"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="writeObject">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../io/ObjectOutputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized">
+        <comments>/**&#xA;     * Save the &lt;tt>Random&lt;/tt> instance to a stream.&#xA;     * The seed of a Random is serialized as a long for&#xA;     * historical reasons.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="fields">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <comments>// set the values of the Serializable fields</comments>
+            <namespaces>ObjectOutputStream</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../io/ObjectOutputStream$PutField.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../io/ObjectOutputStream.class.xmi#//@classifiers.0/@members.18"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../io/ObjectOutputStream$PutField.class.xmi#//@classifiers.0/@members.6"/>
+            <arguments xsi:type="references:StringReference" value="seed"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="concurrent/atomic/AtomicLong.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../io/ObjectOutputStream$PutField.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:StringReference" value="nextNextGaussian"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../io/ObjectOutputStream$PutField.class.xmi#//@classifiers.0/@members.1"/>
+            <arguments xsi:type="references:StringReference" value="haveNextNextGaussian"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+          <comments>// save them</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../io/ObjectOutputStream.class.xmi#//@classifiers.0/@members.19"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An instance of this class is used to generate a stream of &#xA; * pseudorandom numbers. The class uses a 48-bit seed, which is &#xA; * modified using a linear congruential formula. (See Donald Knuth, &#xA; * &lt;i>The Art of Computer Programming, Volume 2&lt;/i>, Section 3.2.1.) &#xA; * &lt;p>&#xA; * If two instances of &lt;code>Random&lt;/code> are created with the same &#xA; * seed, and the same sequence of method calls is made for each, they &#xA; * will generate and return identical sequences of numbers. In order to &#xA; * guarantee this property, particular algorithms are specified for the &#xA; * class &lt;tt>Random&lt;/tt>. Java implementations must use all the algorithms &#xA; * shown here for the class &lt;tt>Random&lt;/tt>, for the sake of absolute &#xA; * portability of Java code. However, subclasses of class &lt;tt>Random&lt;/tt> &#xA; * are permitted to use other algorithms, so long as they adhere to the &#xA; * general contracts for all the methods.&#xA; * &lt;p>&#xA; * The algorithms implemented by class &lt;tt>Random&lt;/tt> use a &#xA; * &lt;tt>protected&lt;/tt> utility method that on each invocation can supply &#xA; * up to 32 pseudorandomly generated bits.&#xA; * &lt;p>&#xA; * Many applications will find the &lt;code>random&lt;/code> method in &#xA; * class &lt;code>Math&lt;/code> simpler to use.&#xA; *&#xA; * @author  Frank Yellin&#xA; * @version 1.43, 01/12/04&#xA; * @see     java.lang.Math#random()&#xA; * @since   JDK1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <namespaces>java</namespaces>
+      <namespaces>io</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../java.ecore#/17" name="ThreadContext.java">
+  <comments>/*&#xA; * @(#)file      ThreadContext.java&#xA; * @(#)author    Sun Microsystems, Inc.&#xA; * @(#)version   1.10&#xA; * @(#)date      08/05/28&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; *&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>jmx</namespaces>
+  <namespaces>snmp</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/util/Stack.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/util/EmptyStackException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="ThreadContext">
+    <members xsi:type="members:Field" name="previous">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0">
+          <comments>/*final*/</comments>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* The context of a thread is stored as a linked list.  At the&#xA;       head of the list is the value returned by localContext.get().&#xA;       At the tail of the list is a sentinel ThreadContext value with&#xA;       &quot;previous&quot; and &quot;key&quot; both null.  There is a different sentinel&#xA;       object for each thread.&#xA;&#xA;       Because a null key indicates the sentinel, we reject attempts to&#xA;       push context entries with a null key.&#xA;       &#xA;       The reason for using a sentinel rather than just terminating&#xA;       the list with a null reference is to protect against incorrect&#xA;       or even malicious code.  If you have a reference to the&#xA;       sentinel value, you can erase the context stack.  Only the&#xA;       caller of the first &quot;push&quot; that put something on the stack can&#xA;       get such a reference, so if that caller does not give this&#xA;       reference away, no one else can erase the stack.&#xA;&#xA;       If the restore method took a null reference to mean an empty&#xA;       stack, anyone could erase the stack, since anyone can make a&#xA;       null reference.&#xA;    &#xA;       When the stack is empty, we discard the sentinel object and&#xA;       have localContext.get() return null.  Then we recreate the&#xA;       sentinel object on the first subsequent push.  &#xA;&#xA;       ThreadContext objects are immutable.  As a consequence, you can&#xA;       give a ThreadContext object to setInitialContext that is no&#xA;       longer current.  But the interface says this can be rejected,&#xA;       in case we remove immutability later.  */</comments>
+        <comments>/* We have to comment out &quot;final&quot; here because of a bug in the JDK1.1&#xA;       compiler.  Uncomment it when we discard 1.1 compatibility.  */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="key">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/*final*/</comments>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="value">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/*final*/</comments>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ThreadContext">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.2"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="previous">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="get">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>Get the Object that was most recently pushed with the given key.&lt;/p>&#xA;     *&#xA;     * @param key the key of interest.&#xA;     *&#xA;     * @return the last Object that was pushed (using&#xA;     * &lt;code>push&lt;/code>) with that key and not subsequently cancelled&#xA;     * by a &lt;code>restore&lt;/code>; or null if there is no such object.&#xA;     * A null return value may also indicate that the last Object&#xA;     * pushed was the value &lt;code>null&lt;/code>.  Use the&#xA;     * &lt;code>contains&lt;/code> method to distinguish this case from the&#xA;     * case where there is no Object.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>key&lt;/code> is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="context">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:NullLiteral"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          </returnValue>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="contains">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Check whether a value with the given key exists in the stack.&#xA;     * This means that the &lt;code>push&lt;/code> method was called with&#xA;     * this key and it was not cancelled by a subsequent&#xA;     * &lt;code>restore&lt;/code>.  This method is useful when the&#xA;     * &lt;code>get&lt;/code> method returns null, to distinguish between&#xA;     * the case where the key exists in the stack but is associated&#xA;     * with a null value, and the case where the key does not exist in&#xA;     * the stack.&lt;/p>&#xA;     *&#xA;     * @return true if the key exists in the stack.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>key&lt;/code> is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+            </children>
+            <children xsi:type="literals:NullLiteral"/>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="contextContaining">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * &lt;p>Find the ThreadContext in the stack that contains the given key,&#xA;     * or return null if there is none.&lt;/p>&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>key&lt;/code> is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="null key"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <comments>/* Note that &quot;context.key&quot; may be null if &quot;context&quot; is the&#xA;&#x9;       sentinel, so don't write &quot;if (context.key.equals(key))&quot;!  */</comments>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Return">
+              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init"/>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init">
+                  <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                </arguments>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="context">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11"/>
+        </init>
+        <updates xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@statements.1/@init">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </value>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="push">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//  /**</comments>
+        <comments>//   * Change the value that was most recently associated with the given key</comments>
+        <comments>//   * in a &lt;code>push&lt;/code> operation not cancelled by a subsequent</comments>
+        <comments>//   * &lt;code>restore&lt;/code>.  If there is no such association, nothing happens</comments>
+        <comments>//   * and the return value is null.</comments>
+        <comments>//   *</comments>
+        <comments>//   * @param key the key of interest.</comments>
+        <comments>//   * @param value the new value to associate with that key.</comments>
+        <comments>//   *</comments>
+        <comments>//   * @return the value that was previously associated with the key, or null</comments>
+        <comments>//   * if the key does not exist in the stack.</comments>
+        <comments>//   *</comments>
+        <comments>//   * @exception IllegalArgumentException if &lt;code>key&lt;/code> is null.</comments>
+        <comments>//   */</comments>
+        <comments>//  public static Object set(String key, Object value)</comments>
+        <comments>//&#x9;    throws IllegalArgumentException {</comments>
+        <comments>//&#x9;ThreadContext context = contextContaining(key);</comments>
+        <comments>//&#x9;if (context == null)</comments>
+        <comments>//&#x9;    return null;</comments>
+        <comments>//&#x9;Object old = context.value;</comments>
+        <comments>//&#x9;context.value = value;</comments>
+        <comments>//&#x9;return old;</comments>
+        <comments>//  }</comments>
+        <comments>/**&#xA;     * &lt;p>Push an object on the context stack with the given key.&#xA;     * This operation can subsequently be undone by calling&#xA;     * &lt;code>restore&lt;/code> with the ThreadContext value returned&#xA;     * here.&lt;/p>&#xA;     *&#xA;     * @param key the key that will be used to find the object while it is&#xA;     * on the stack.&#xA;     * @param value the value to be associated with that key.  It may be null.&#xA;     *&#xA;     * @return a ThreadContext that can be given to &lt;code>restore&lt;/code> to&#xA;     * restore the stack to its state before the &lt;code>push&lt;/code>.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>key&lt;/code> is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="null key"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldContext">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <arguments xsi:type="literals:NullLiteral"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="newContext">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0">
+              <comments>// make sentinel</comments>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0"/>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getThreadContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return an object that can later be supplied to &lt;code>restore&lt;/code>&#xA;     * to restore the context stack to its current state.  The object can&#xA;     * also be given to &lt;code>setInitialContext&lt;/code>.&lt;/p>&#xA;     *&#xA;     * @return a ThreadContext that represents the current context stack.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="restore">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldContext">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/NullPointerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Restore the context stack to an earlier state.  This typically&#xA;     * undoes the effect of one or more &lt;code>push&lt;/code> calls.&lt;/p>&#xA;     *&#xA;     * @param oldContext the state to return.  This is usually the return&#xA;     * value of an earlier &lt;code>push&lt;/code> operation.&#xA;     *&#xA;     * @exception NullPointerException if &lt;code>oldContext&lt;/code> is null.&#xA;     * @exception IllegalArgumentException if &lt;code>oldContext&lt;/code>&#xA;     * does not represent a context from this thread, or if that&#xA;     * context was undone by an earlier &lt;code>restore&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <comments>/* The following test is not strictly necessary in the code as it&#xA;&#x9;   stands today, since the reference to &quot;oldContext.key&quot; would&#xA;&#x9;   generate a NullPointerException anyway.  But if someone&#xA;&#x9;   didn't notice that during subsequent changes, they could&#xA;&#x9;   accidentally permit restore(null) with the semantics of&#xA;&#x9;   trashing the context stack.  */</comments>
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/NullPointerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>/* Check that the restored context is in the stack.  */</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Restored context is not "/>
+                    <children xsi:type="references:StringReference" value="contained in current "/>
+                    <children xsi:type="references:StringReference" value="context"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </throwable>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="context">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11"/>
+        </init>
+        <updates xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@init">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </value>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>/* Discard the sentinel if the stack is empty.  This means that it&#xA;&#x9;   is an error to call &quot;restore&quot; a second time with the&#xA;&#x9;   ThreadContext value that means an empty stack.  That's why we&#xA;&#x9;   don't say that it is all right to restore the stack to the&#xA;&#x9;   state it was already in.  */</comments>
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="literals:NullLiteral"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setInitialContext">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="context">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set the initial context of the calling thread to a context obtained&#xA;     * from another thread.  After this call, the calling thread will see&#xA;     * the same results from the &lt;code>get&lt;/code> method as the thread&#xA;     * from which the &lt;code>context&lt;/code> argument was obtained, at the&#xA;     * time it was obtained.&lt;/p>&#xA;     *&#xA;     * &lt;p>The &lt;code>context&lt;/code> argument must be the result of an earlier&#xA;     * &lt;code>push&lt;/code> or &lt;code>getThreadContext&lt;/code> call.  It is an&#xA;     * error (which may or may not be detected) if this context has been&#xA;     * undone by a &lt;code>restore&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>The context stack of the calling thread must be empty before this&#xA;     * call, i.e., there must not have been a &lt;code>push&lt;/code> not undone&#xA;     * by a subsequent &lt;code>restore&lt;/code>.&lt;/p>&#xA;     *&#xA;     * @exception IllegalArgumentException if the context stack was&#xA;     * not empty before the call.  An implementation may also throw this&#xA;     * exception if &lt;code>context&lt;/code> is no longer current in the&#xA;     * thread from which it was obtained.&#xA;     */</comments>
+        <comments>/* We rely on the fact that ThreadContext objects are immutable.&#xA;       This means that we don't have to check that the &quot;context&quot;&#xA;       argument is valid.  It necessarily represents the head of a&#xA;       valid chain of ThreadContext objects, even if the thread from&#xA;       which it was obtained has subsequently been set to a point&#xA;       later in that chain using &quot;restore&quot;.  */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>/* The following test assumes that we discard sentinels when the&#xA;&#x9;   stack is empty.  */</comments>
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="previous context not empty"/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.11"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:CastExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../java/lang/ThreadLocal.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setContext">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="context">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../java/lang/ThreadLocal.class.xmi#//@classifiers.0/@members.7"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="localContext">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/ThreadLocal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/ThreadLocal.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>&lt;b>Warning: The interface of this class is subject to change.&#xA; * Use at your own risk.&lt;/b>&lt;/p>&#xA; *&#xA; * &lt;p>This class associates a context with each thread that&#xA; * references it.  The context is a set of mappings between Strings&#xA; * and Objects.  It is managed as a stack, typically with code like&#xA; * this:&lt;/p>&#xA; *&#xA; * &lt;pre>&#xA; * ThreadContext oldContext = ThreadContext.push(myKey, myObject);&#xA; * // plus possibly further calls to ThreadContext.push...&#xA; * try {&#xA; * &#x9;doSomeOperation();&#xA; * } finally {&#xA; * &#x9;ThreadContext.restore(oldContext);&#xA; * }&#xA; * &lt;/pre>&#xA; *&#xA; * &lt;p>The &lt;code>try&lt;/code>...&lt;code>finally&lt;/code> block ensures that&#xA; * the &lt;code>restore&lt;/code> is done even if&#xA; * &lt;code>doSomeOperation&lt;/code> terminates abnormally (with an&#xA; * exception).&lt;/p>&#xA; *&#xA; * &lt;p>A thread can consult its own context using&#xA; * &lt;code>ThreadContext.get(myKey)&lt;/code>.  The result is the&#xA; * value that was most recently pushed with the given key.&lt;/p>&#xA; *&#xA; * &lt;p>A thread cannot read or modify the context of another thread.&lt;/p>&#xA; *&#xA; * &lt;p>&lt;b>This API is a Sun Microsystems internal API  and is subject &#xA; * to change without notice.&lt;/b>&lt;/p>&#xA; * @version     1.10     12/19/03&#xA; * @author      Sun Microsystems, Inc&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../java/lang/Cloneable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

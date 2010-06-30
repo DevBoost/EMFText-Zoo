@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Registry.java">
+  <comments>/*&#xA; * @(#)Registry.java&#x9;1.18 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>rmi</namespaces>
+  <namespaces>registry</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../AccessException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../AlreadyBoundException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../NotBoundException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Registry">
+    <members xsi:type="members:Field" name="REGISTRY_PORT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1099"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Well known port for registry. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="lookup">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../NotBoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AccessException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the remote reference bound to the specified&#xA;     * &lt;code>name&lt;/code> in this registry.&#xA;     *&#xA;     * @param&#x9;name the name for the remote reference to look up&#xA;     *&#xA;     * @return&#x9;a reference to a remote object&#xA;     *&#xA;     * @throws&#x9;NotBoundException if &lt;code>name&lt;/code> is not currently bound&#xA;     *&#xA;     * @throws&#x9;RemoteException if remote communication with the&#xA;     * registry failed; if exception is a &lt;code>ServerException&lt;/code>&#xA;     * containing an &lt;code>AccessException&lt;/code>, then the registry&#xA;     * denies the caller access to perform this operation&#xA;     *&#xA;     * @throws&#x9;AccessException if this registry is local and it denies&#xA;     * the caller access to perform this operation&#xA;     *&#xA;     * @throws&#x9;NullPointerException if &lt;code>name&lt;/code> is &lt;code>null&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="bind">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AlreadyBoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AccessException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Binds a remote reference to the specified &lt;code>name&lt;/code> in&#xA;     * this registry.&#xA;     *&#xA;     * @param&#x9;name the name to associate with the remote reference&#xA;     * @param&#x9;obj a reference to a remote object (usually a stub)&#xA;     *&#xA;     * @throws&#x9;AlreadyBoundException if &lt;code>name&lt;/code> is already bound&#xA;     *&#xA;     * @throws&#x9;RemoteException if remote communication with the&#xA;     * registry failed; if exception is a &lt;code>ServerException&lt;/code>&#xA;     * containing an &lt;code>AccessException&lt;/code>, then the registry&#xA;     * denies the caller access to perform this operation (if&#xA;     * originating from a non-local host, for example)&#xA;     *&#xA;     * @throws&#x9;AccessException if this registry is local and it denies&#xA;     * the caller access to perform this operation&#xA;     *&#xA;     * @throws&#x9;NullPointerException if &lt;code>name&lt;/code> is&#xA;     * &lt;code>null&lt;/code>, or if &lt;code>obj&lt;/code> is &lt;code>null&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="unbind">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../NotBoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AccessException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes the binding for the specified &lt;code>name&lt;/code> in&#xA;     * this registry.&#xA;     *&#xA;     * @param&#x9;name the name of the binding to remove&#xA;     *&#xA;     * @throws&#x9;NotBoundException if &lt;code>name&lt;/code> is not currently bound&#xA;     *&#xA;     * @throws&#x9;RemoteException if remote communication with the&#xA;     * registry failed; if exception is a &lt;code>ServerException&lt;/code>&#xA;     * containing an &lt;code>AccessException&lt;/code>, then the registry&#xA;     * denies the caller access to perform this operation (if&#xA;     * originating from a non-local host, for example)&#xA;     *&#xA;     * @throws&#x9;AccessException if this registry is local and it denies&#xA;     * the caller access to perform this operation&#xA;     *&#xA;     * @throws&#x9;NullPointerException if &lt;code>name&lt;/code> is &lt;code>null&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="rebind">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AccessException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Replaces the binding for the specified &lt;code>name&lt;/code> in&#xA;     * this registry with the supplied remote reference.  If there is&#xA;     * an existing binding for the specified &lt;code>name&lt;/code>, it is&#xA;     * discarded.&#xA;     *&#xA;     * @param&#x9;name the name to associate with the remote reference&#xA;     * @param&#x9;obj a reference to a remote object (usually a stub)&#xA;     *&#xA;     * @throws&#x9;RemoteException if remote communication with the&#xA;     * registry failed; if exception is a &lt;code>ServerException&lt;/code>&#xA;     * containing an &lt;code>AccessException&lt;/code>, then the registry&#xA;     * denies the caller access to perform this operation (if&#xA;     * originating from a non-local host, for example)&#xA;     *&#xA;     * @throws&#x9;AccessException if this registry is local and it denies&#xA;     * the caller access to perform this operation&#xA;     *&#xA;     * @throws&#x9;NullPointerException if &lt;code>name&lt;/code> is&#xA;     * &lt;code>null&lt;/code>, or if &lt;code>obj&lt;/code> is &lt;code>null&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="list">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../AccessException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of the names bound in this registry.  The&#xA;     * array will contain a snapshot of the names bound in this&#xA;     * registry at the time of the given invocation of this method.&#xA;     *&#xA;     * @return&#x9;an array of the names bound in this registry&#xA;     *&#xA;     * @throws&#x9;RemoteException if remote communication with the&#xA;     * registry failed; if exception is a &lt;code>ServerException&lt;/code>&#xA;     * containing an &lt;code>AccessException&lt;/code>, then the registry&#xA;     * denies the caller access to perform this operation&#xA;     *&#xA;     * @throws&#x9;AccessException if this registry is local and it denies&#xA;     * the caller access to perform this operation&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;code>Registry&lt;/code> is a remote interface to a simple remote&#xA; * object registry that provides methods for storing and retrieving&#xA; * remote object references bound with arbitrary string names.  The&#xA; * &lt;code>bind&lt;/code>, &lt;code>unbind&lt;/code>, and &lt;code>rebind&lt;/code>&#xA; * methods are used to alter the name bindings in the registry, and&#xA; * the &lt;code>lookup&lt;/code> and &lt;code>list&lt;/code> methods are used to&#xA; * query the current name bindings.&#xA; *&#xA; * &lt;p>In its typical usage, a &lt;code>Registry&lt;/code> enables RMI client&#xA; * bootstrapping: it provides a simple means for a client to obtain an&#xA; * initial reference to a remote object.  Therefore, a registry's&#xA; * remote object implementation is typically exported with a&#xA; * well-known address, such as with a well-known {@link&#xA; * java.rmi.server.ObjID#REGISTRY_ID ObjID} and TCP port number&#xA; * (default is {@link #REGISTRY_PORT 1099}).&#xA; *&#xA; * &lt;p>The {@link LocateRegistry} class provides a programmatic API for&#xA; * constructing a bootstrap reference to a &lt;code>Registry&lt;/code> at a&#xA; * remote address (see the static &lt;code>getRegistry&lt;/code> methods)&#xA; * and for creating and exporting a &lt;code>Registry&lt;/code> in the&#xA; * current VM on a particular local address (see the static&#xA; * &lt;code>createRegistry&lt;/code> methods).&#xA; *&#xA; * &lt;p>A &lt;code>Registry&lt;/code> implementation may choose to restrict&#xA; * access to some or all of its methods (for example, methods that&#xA; * mutate the registry's bindings may be restricted to calls&#xA; * originating from the local host).  If a &lt;code>Registry&lt;/code>&#xA; * method chooses to deny access for a given invocation, its&#xA; * implementation may throw {@link java.rmi.AccessException}, which&#xA; * (because it extends {@link java.rmi.RemoteException}) will be&#xA; * wrapped in a {@link java.rmi.ServerException} when caught by a&#xA; * remote client.&#xA; *&#xA; * &lt;p>The names used for bindings in a &lt;code>Registry&lt;/code> are pure&#xA; * strings, not parsed.  A service which stores its remote reference&#xA; * in a &lt;code>Registry&lt;/code> may wish to use a package name as a&#xA; * prefix in the name binding to reduce the likelihood of name&#xA; * collisions in the registry.&#xA; *&#xA; * @author&#x9;Ann Wollrath&#xA; * @author&#x9;Peter Jones&#xA; * @version&#x9;1.18, 03/12/19&#xA; * @since&#x9;JDK1.1&#xA; * @see&#x9;&#x9;LocateRegistry&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

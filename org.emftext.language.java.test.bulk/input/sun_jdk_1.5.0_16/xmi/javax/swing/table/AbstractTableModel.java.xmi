@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../java.ecore#/17" name="AbstractTableModel.java">
+  <comments>/*&#xA; * @(#)AbstractTableModel.java&#x9;1.41 04/05/05&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>swing</namespaces>
+  <namespaces>table</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>event</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/util/EventListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="AbstractTableModel">
+    <members xsi:type="members:Field" name="listenerList">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../event/EventListenerList.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../event/EventListenerList.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>//</comments>
+        <comments>// Instance Variables</comments>
+        <comments>//</comments>
+        <comments>/** List of listeners */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getColumnName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="column">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>// Default Implementation of the Interface</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     *  Returns a default name for the column using spreadsheet conventions:&#xA;     *  A, B, C, ... Z, AA, AB, etc.  If &lt;code>column&lt;/code> cannot be found,&#xA;     *  returns an empty string.&#xA;     *&#xA;     * @param column  the column being queried&#xA;     * @return a string containing the default name of &lt;code>column&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:StringReference" value=""/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Char"/>
+                  <child xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:Char"/>
+                        <child xsi:type="expressions:NestedExpression">
+                          <expression xsi:type="expressions:MultiplicativeExpression">
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+                            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="26"/>
+                            <multiplicativeOperators xsi:type="operators:Remainder"/>
+                          </expression>
+                        </child>
+                      </children>
+                      <children xsi:type="literals:CharacterLiteral" value="65"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </expression>
+                  </child>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+        </condition>
+        <updates xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="expressions:MultiplicativeExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="26"/>
+              <multiplicativeOperators xsi:type="operators:Division"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </value>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="findColumn">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a column given its name.&#xA;     * Implementation is naive so this should be overridden if&#xA;     * this method is to be called often. This method is not&#xA;     * in the &lt;code>TableModel&lt;/code> interface and is not used by the&#xA;     * &lt;code>JTable&lt;/code>.&#xA;     *&#xA;     * @param columnName string containing name of column to be located&#xA;     * @return the column with &lt;code>columnName&lt;/code>, or -1 if not found&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@init"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.1">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@init"/>
+                </arguments>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@init"/>
+          <children xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="TableModel.class.xmi#//@classifiers.0/@members.1"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Subtraction"/>
+          <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getColumnClass">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  Returns &lt;code>Object.class&lt;/code> regardless of &lt;code>columnIndex&lt;/code>.&#xA;     *&#xA;     *  @param columnIndex  the column being queried&#xA;     *  @return the Object.class&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:ReflectiveClassReference"/>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isCellEditable">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rowIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  Returns false.  This is the default implementation for all cells.&#xA;     *&#xA;     *  @param  rowIndex  the row being queried&#xA;     *  @param  columnIndex the column being queried&#xA;     *  @return false&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setValueAt">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="aValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rowIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     *  This empty implementation is provided so users don't have to implement&#xA;     *  this method if their data model is not editable.&#xA;     *&#xA;     *  @param  aValue   value to assign to cell&#xA;     *  @param  rowIndex   row of cell&#xA;     *  @param  columnIndex  column of cell&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addTableModelListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>//  Managing Listeners</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     * Adds a listener to the list that's notified each time a change&#xA;     * to the data model occurs.&#xA;     *&#xA;     * @param&#x9;l&#x9;&#x9;the TableModelListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../event/EventListenerList.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:ReflectiveClassReference"/>
+              <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeTableModelListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes a listener from the list that's notified each time a&#xA;     * change to the data model occurs.&#xA;     *&#xA;     * @param&#x9;l&#x9;&#x9;the TableModelListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../event/EventListenerList.class.xmi#//@classifiers.0/@members.9"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:ReflectiveClassReference"/>
+              <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTableModelListeners">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of all the table model listeners &#xA;     * registered on this model.&#xA;     *&#xA;     * @return all of this model's &lt;code>TableModelListener&lt;/code>s &#xA;     *         or an empty&#xA;     *         array if no table model listeners are currently registered&#xA;     *&#xA;     * @see #addTableModelListener&#xA;     * @see #removeTableModelListener&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:CastExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../event/EventListenerList.class.xmi#//@classifiers.0/@members.4"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:ReflectiveClassReference"/>
+                <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </next>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableDataChanged">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//</comments>
+        <comments>//  Fire methods</comments>
+        <comments>//</comments>
+        <comments>/**&#xA;     * Notifies all listeners that all cell values in the table's&#xA;     * rows may have changed. The number of rows may also have changed&#xA;     * and the &lt;code>JTable&lt;/code> should redraw the&#xA;     * table from scratch. The structure of the table (as in the order of the&#xA;     * columns) is assumed to be the same.&#xA;     *&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     * @see javax.swing.JTable#tableChanged(TableModelEvent)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableStructureChanged">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Notifies all listeners that the table's structure has changed.&#xA;     * The number of columns in the table, and the names and types of&#xA;     * the new columns may be different from the previous state.&#xA;     * If the &lt;code>JTable&lt;/code> receives this event and its&#xA;     * &lt;code>autoCreateColumnsFromModel&lt;/code>&#xA;     * flag is set it discards any table columns that it had and reallocates&#xA;     * default columns in the order they appear in the model. This is the&#xA;     * same as calling &lt;code>setModel(TableModel)&lt;/code> on the&#xA;     * &lt;code>JTable&lt;/code>.&#xA;     *&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableRowsInserted">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="firstRow">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lastRow">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Notifies all listeners that rows in the range&#xA;     * &lt;code>[firstRow, lastRow]&lt;/code>, inclusive, have been inserted.&#xA;     *&#xA;     * @param  firstRow  the first row&#xA;     * @param  lastRow   the last row&#xA;     *&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableRowsUpdated">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="firstRow">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lastRow">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Notifies all listeners that rows in the range&#xA;     * &lt;code>[firstRow, lastRow]&lt;/code>, inclusive, have been updated.&#xA;     *&#xA;     * @param firstRow  the first row&#xA;     * @param lastRow   the last row&#xA;     *&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableRowsDeleted">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="firstRow">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lastRow">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Notifies all listeners that rows in the range&#xA;     * &lt;code>[firstRow, lastRow]&lt;/code>, inclusive, have been deleted.&#xA;     *&#xA;     * @param firstRow  the first row&#xA;     * @param lastRow   the last row&#xA;     *&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../event/TableModelEvent.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableCellUpdated">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="row">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="column">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Notifies all listeners that the value of the cell at &#xA;     * &lt;code>[row, column]&lt;/code> has been updated.&#xA;     *&#xA;     * @param row  row of cell which has been updated&#xA;     * @param column  column of cell which has been updated&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+          </arguments>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fireTableChanged">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="e">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../event/TableModelEvent.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Forwards the given notification event to all&#xA;     * &lt;code>TableModelListeners&lt;/code> that registered&#xA;     * themselves as listeners for this table model.&#xA;     *&#xA;     * @param e  the event to be forwarded&#xA;     *&#xA;     * @see #addTableModelListener&#xA;     * @see TableModelEvent&#xA;     * @see EventListenerList&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="listeners">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Guaranteed to return a non-null array</comments>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../event/EventListenerList.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>// Process the listeners last to first, notifying</comments>
+        <comments>// those that are interested in this event</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:NestedExpression">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../event/TableModelListener.class.xmi#//@classifiers.0/@members.0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+                  </next>
+                  <expression xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable">
+                      <arraySelectors>
+                        <position xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@init"/>
+                          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                        </position>
+                      </arraySelectors>
+                    </child>
+                  </expression>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@init"/>
+                </arraySelectors>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:ReflectiveClassReference"/>
+                <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@init"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable">
+              <next xsi:type="references:IdentifierReference"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </initialValue>
+        </init>
+        <updates xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@init"/>
+          <assignmentOperator xsi:type="operators:AssignmentMinus"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+        </updates>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getListeners">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.16/@typeParameters.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <typeParameters name="T">
+        <extendTypes xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../java/util/EventListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </extendTypes>
+      </typeParameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listenerType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.16/@typeParameters.0"/>
+              </typeReference>
+            </typeArguments>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of all the objects currently registered&#xA;     * as &lt;code>&lt;em>Foo&lt;/em>Listener&lt;/code>s&#xA;     * upon this &lt;code>AbstractTableModel&lt;/code>.&#xA;     * &lt;code>&lt;em>Foo&lt;/em>Listener&lt;/code>s are registered using the&#xA;     * &lt;code>add&lt;em>Foo&lt;/em>Listener&lt;/code> method.&#xA;     *&#xA;     * &lt;p>&#xA;     *&#xA;     * You can specify the &lt;code>listenerType&lt;/code> argument&#xA;     * with a class literal,&#xA;     * such as&#xA;     * &lt;code>&lt;em>Foo&lt;/em>Listener.class&lt;/code>.&#xA;     * For example, you can query a&#xA;     * model &lt;code>m&lt;/code>&#xA;     * for its table model listeners with the following code:&#xA;     *&#xA;     * &lt;pre>TableModelListener[] tmls = (TableModelListener[])(m.getListeners(TableModelListener.class));&lt;/pre>&#xA;     *&#xA;     * If no such listeners exist, this method returns an empty array.&#xA;     *&#xA;     * @param listenerType the type of listeners requested; this parameter&#xA;     *          should specify an interface that descends from&#xA;     *          &lt;code>java.util.EventListener&lt;/code>&#xA;     * @return an array of all objects registered as&#xA;     *          &lt;code>&lt;em>Foo&lt;/em>Listener&lt;/code>s on this component,&#xA;     *          or an empty array if no such&#xA;     *          listeners have been added&#xA;     * @exception ClassCastException if &lt;code>listenerType&lt;/code>&#xA;     *          doesn't specify a class or interface that implements&#xA;     *          &lt;code>java.util.EventListener&lt;/code>&#xA;     * &#xA;     * @see #getTableModelListeners&#xA;     *&#xA;     * @since 1.3&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../event/EventListenerList.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; *  This abstract class provides default implementations for most of&#xA; *  the methods in the &lt;code>TableModel&lt;/code> interface. It takes care of&#xA; *  the management of listeners and provides some conveniences for generating&#xA; *  &lt;code>TableModelEvents&lt;/code> and dispatching them to the listeners.&#xA; *  To create a concrete &lt;code>TableModel&lt;/code> as a subclass of&#xA; *  &lt;code>AbstractTableModel&lt;/code> you need only provide implementations &#xA; *  for the following three methods:&#xA; *&#xA; *  &lt;pre>&#xA; *  public int getRowCount();&#xA; *  public int getColumnCount();&#xA; *  public Object getValueAt(int row, int column);&#xA; *  &lt;/pre>&#xA; * &lt;p>&#xA; * &lt;strong>Warning:&lt;/strong>&#xA; * Serialized objects of this class will not be compatible with&#xA; * future Swing releases. The current serialization support is&#xA; * appropriate for short term storage or RMI between applications running&#xA; * the same version of Swing.  As of 1.4, support for long term storage&#xA; * of all JavaBeans&lt;sup>&lt;font size=&quot;-2&quot;>TM&lt;/font>&lt;/sup>&#xA; * has been added to the &lt;code>java.beans&lt;/code> package.&#xA; * Please see {@link java.beans.XMLEncoder}.&#xA; *&#xA; * @version 1.41 05/05/04&#xA; * @author Alan Chung&#xA; * @author Philip Milne&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="TableModel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

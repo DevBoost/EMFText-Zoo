@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="CyclicBarrier.java">
+  <comments>/*&#xA; * @(#)CyclicBarrier.java&#x9;1.12 06/01/03&#xA; *&#xA; * Copyright 2006 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>concurrent</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>concurrent</namespaces>
+    <namespaces>locks</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="CyclicBarrier">
+    <members xsi:type="classifiers:Class" name="Generation">
+      <members xsi:type="members:Field" name="broken">
+        <initialValue xsi:type="literals:BooleanLiteral"/>
+        <typeReference xsi:type="types:Boolean"/>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Each use of the barrier is represented as a generation instance.&#xA;     * The generation changes whenever the barrier is tripped, or&#xA;     * is reset. There can be many generations associated with threads&#xA;     * using the barrier - due to the non-deterministic way the lock&#xA;     * may be allocated to waiting threads - but only one of these&#xA;     * can be active at a time (the one to which &lt;tt>count&lt;/tt> applies)&#xA;     * and all the rest are either broken or tripped.&#xA;     * There need not be an active generation if there has been a break&#xA;     * but no subsequent reset.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="lock">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="locks/ReentrantLock.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="locks/ReentrantLock.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** The lock for guarding barrier entry */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="trip">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+        <next xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.9"/>
+        </next>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="locks/Condition.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Condition to wait on until tripped */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="parties">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** The number of parties */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="barrierCommand">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* The command to run when tripped */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="generation">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.0"/>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** The current generation */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="count">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Number of parties still waiting. Counts down from parties to 0&#xA;     * on each generation.  It is reset to parties on each new&#xA;     * generation or when broken.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextGeneration">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Updates state on barrier trip and wakes up everyone.&#xA;     * Called only while holding lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <comments>// signal completion of last generation</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="locks/Condition.class.xmi#//@classifiers.0/@members.6"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+            <comments>// set up next generation</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.0"/>
+            </typeReference>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="breakBarrier">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Sets current barrier generation as broken and wakes up everyone.&#xA;     * Called only while holding lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="locks/Condition.class.xmi#//@classifiers.0/@members.6"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="dowait">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timed">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nanos">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="BrokenBarrierException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="TimeoutException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Main barrier code, covering the various policies.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="lock">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="locks/ReentrantLock.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="g">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.0"/>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <annotationsAndModifiers xsi:type="modifiers:Final"/>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="BrokenBarrierException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8"/>
+            </statements>
+            <statements xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </throwable>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../lang/Thread.class.xmi#//@classifiers.0/@members.53"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../lang/Thread.class.xmi#//@classifiers.0"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="index">
+            <typeReference xsi:type="types:Int"/>
+            <initialValue xsi:type="expressions:PrefixUnaryModificationExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <operator xsi:type="operators:MinusMinus"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="ranAction">
+                <typeReference xsi:type="types:Boolean">
+                  <comments>// tripped</comments>
+                </typeReference>
+                <initialValue xsi:type="literals:BooleanLiteral"/>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:TryBlock">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="command">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                  <annotationsAndModifiers xsi:type="modifiers:Final"/>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.4/@statement/@statements.1/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../lang/Runnable.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.4/@statement/@statements.1/@statements.0/@variable"/>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.4/@statement/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.7"/>
+              </statements>
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </statements>
+              <finallyBlock>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8"/>
+                  </statement>
+                  <condition xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.4/@statement/@statements.0/@variable"/>
+                  </condition>
+                </statements>
+              </finallyBlock>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.3/@variable"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:ForLoop">
+          <comments>// loop until tripped, broken, interrupted, or timed out</comments>
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:TryBlock">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="locks/Condition.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:UnaryExpression">
+                  <operators xsi:type="operators:Negate"/>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+                </condition>
+                <elseStatement xsi:type="statements:Condition">
+                  <statement xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:InterfaceMethod" href="locks/Condition.class.xmi#//@classifiers.0/@members.2"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                        </next>
+                      </value>
+                    </expression>
+                  </statement>
+                  <condition xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                    <children xsi:type="literals:DecimalLongLiteral" decimalValue="0"/>
+                    <relationOperators xsi:type="operators:GreaterThan"/>
+                  </condition>
+                </elseStatement>
+              </statements>
+              <catcheBlocks>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8"/>
+                    </statements>
+                    <statements xsi:type="statements:Throw">
+                      <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.5/@statement/@statements.0/@catcheBlocks.0/@parameter"/>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:ConditionalAndExpression">
+                    <children xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:Equal"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.0/@variable"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                    </children>
+                    <children xsi:type="expressions:UnaryExpression">
+                      <operators xsi:type="operators:Negate"/>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.0/@variable">
+                        <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+                      </child>
+                    </children>
+                  </condition>
+                  <elseStatement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference">
+                        <comments>// We're about to finish waiting even if we had not</comments>
+                        <comments>// been interrupted, so this interrupt is deemed to</comments>
+                        <comments>// &quot;belong&quot; to subsequent execution.</comments>
+                        <next xsi:type="references:MethodCall">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../lang/Thread.class.xmi#//@classifiers.0/@members.52"/>
+                          </next>
+                          <target xsi:type="members:ClassMethod" href="../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../lang/Thread.class.xmi#//@classifiers.0"/>
+                      </expression>
+                    </statements>
+                  </elseStatement>
+                </statements>
+                <parameter name="ie">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </parameter>
+              </catcheBlocks>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="BrokenBarrierException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </throwable>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.0/@variable">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.3/@variable"/>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.2/@statements.0/@variable"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8"/>
+                </statements>
+                <statements xsi:type="statements:Throw">
+                  <throwable xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="TimeoutException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </throwable>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+                <children xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                  <children xsi:type="literals:DecimalLongLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:LessThanOrEqual"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </expression>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:Constructor" name="CyclicBarrier">
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThanOrEqual"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parties">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="barrierAction">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../lang/Runnable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a new &lt;tt>CyclicBarrier&lt;/tt> that will trip when the&#xA;     * given number of parties (threads) are waiting upon it, and which&#xA;     * will execute the given barrier action when the barrier is tripped,&#xA;     * performed by the last thread entering the barrier.&#xA;     *&#xA;     * @param parties the number of threads that must invoke {@link #await}&#xA;     * before the barrier is tripped.&#xA;     * @param barrierAction the command to execute when the barrier is&#xA;     * tripped, or &lt;tt>null&lt;/tt> if there is no action.&#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;tt>parties&lt;/tt> is less than 1.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="CyclicBarrier">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parties">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a new &lt;tt>CyclicBarrier&lt;/tt> that will trip when the&#xA;     * given number of parties (threads) are waiting upon it, and&#xA;     * does not perform a predefined action when the barrier is tripped.&#xA;     *&#xA;     * @param parties the number of threads that must invoke {@link #await}&#xA;     * before the barrier is tripped.&#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;tt>parties&lt;/tt> is less than 1.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getParties">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of parties required to trip this barrier.&#xA;     * @return the number of parties required to trip this barrier.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="await">
+      <typeReference xsi:type="types:Int"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="BrokenBarrierException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Waits until all {@link #getParties parties} have invoked &lt;tt>await&lt;/tt>&#xA;     * on this barrier.&#xA;     *&#xA;     * &lt;p>If the current thread is not the last to arrive then it is&#xA;     * disabled for thread scheduling purposes and lies dormant until&#xA;     * one of the following things happens:&#xA;     * &lt;ul>&#xA;     * &lt;li>The last thread arrives; or&#xA;     * &lt;li>Some other thread {@link Thread#interrupt interrupts} the current&#xA;     * thread; or&#xA;     * &lt;li>Some other thread  {@link Thread#interrupt interrupts} one of the&#xA;     * other waiting threads; or&#xA;     * &lt;li>Some other thread times out while waiting for barrier; or&#xA;     * &lt;li>Some other thread invokes {@link #reset} on this barrier.&#xA;     * &lt;/ul>&#xA;     * &lt;p>If the current thread:&#xA;     * &lt;ul>&#xA;     * &lt;li>has its interrupted status set on entry to this method; or&#xA;     * &lt;li>is {@link Thread#interrupt interrupted} while waiting&#xA;     * &lt;/ul>&#xA;     * then {@link InterruptedException} is thrown and the current thread's&#xA;     * interrupted status is cleared.&#xA;     *&#xA;     * &lt;p>If the barrier is {@link #reset} while any thread is waiting, or if&#xA;     * the barrier {@link #isBroken is broken} when &lt;tt>await&lt;/tt> is invoked,&#xA;     * or while any thread is waiting,&#xA;     * then {@link BrokenBarrierException} is thrown.&#xA;     *&#xA;     * &lt;p>If any thread is {@link Thread#interrupt interrupted} while waiting,&#xA;     * then all other waiting threads will throw&#xA;     * {@link BrokenBarrierException} and the barrier is placed in the broken&#xA;     * state.&#xA;     *&#xA;     * &lt;p>If the current thread is the last thread to arrive, and a&#xA;     * non-null barrier action was supplied in the constructor, then the&#xA;     * current thread runs the action before allowing the other threads to&#xA;     * continue.&#xA;     * If an exception occurs during the barrier action then that exception&#xA;     * will be propagated in the current thread and the barrier is placed in&#xA;     * the broken state.&#xA;     *&#xA;     * @return the arrival index of the current thread, where index&#xA;     *  &lt;tt>{@link #getParties()} - 1&lt;/tt> indicates the first to arrive and&#xA;     * zero indicates the last to arrive.&#xA;     *&#xA;     * @throws InterruptedException if the current thread was interrupted&#xA;     * while waiting.&#xA;     * @throws BrokenBarrierException if &lt;em>another&lt;/em> thread was&#xA;     * interrupted or timed out while the current thread was waiting,&#xA;     * or the barrier was reset, or the barrier was broken when&#xA;     * &lt;tt>await&lt;/tt> was called, or the barrier action (if present)&#xA;     * failed due an exception.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+            <arguments xsi:type="literals:BooleanLiteral"/>
+            <arguments xsi:type="literals:DecimalLongLiteral" decimalValue="0"/>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <comments>// cannot happen;</comments>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/Error.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@catcheBlocks.0/@parameter"/>
+            </throwable>
+          </statements>
+          <parameter name="toe">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="TimeoutException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="await">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="BrokenBarrierException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="TimeoutException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Waits until all {@link #getParties parties} have invoked &lt;tt>await&lt;/tt>&#xA;     * on this barrier.&#xA;     *&#xA;     * &lt;p>If the current thread is not the last to arrive then it is&#xA;     * disabled for thread scheduling purposes and lies dormant until&#xA;     * one of the following things happens:&#xA;     * &lt;ul>&#xA;     * &lt;li>The last thread arrives; or&#xA;     * &lt;li>The specified timeout elapses; or&#xA;     * &lt;li>Some other thread {@link Thread#interrupt interrupts} the current&#xA;     * thread; or&#xA;     * &lt;li>Some other thread  {@link Thread#interrupt interrupts} one of the&#xA;     * other waiting threads; or&#xA;     * &lt;li>Some other thread times out while waiting for barrier; or&#xA;     * &lt;li>Some other thread invokes {@link #reset} on this barrier.&#xA;     * &lt;/ul>&#xA;     * &lt;p>If the current thread:&#xA;     * &lt;ul>&#xA;     * &lt;li>has its interrupted status set on entry to this method; or&#xA;     * &lt;li>is {@link Thread#interrupt interrupted} while waiting&#xA;     * &lt;/ul>&#xA;     * then {@link InterruptedException} is thrown and the current thread's&#xA;     * interrupted status is cleared.&#xA;     *&#xA;     * &lt;p>If the specified waiting time elapses then {@link TimeoutException}&#xA;     * is thrown. If the time is less than or equal to zero, the&#xA;     * method will not wait at all.&#xA;     *&#xA;     * &lt;p>If the barrier is {@link #reset} while any thread is waiting, or if&#xA;     * the barrier {@link #isBroken is broken} when &lt;tt>await&lt;/tt> is invoked,&#xA;     * or while any thread is waiting,&#xA;     * then {@link BrokenBarrierException} is thrown.&#xA;     *&#xA;     * &lt;p>If any thread is {@link Thread#interrupt interrupted} while waiting,&#xA;     * then all other waiting threads will throw&#xA;     * {@link BrokenBarrierException} and the barrier is placed in the broken&#xA;     * state.&#xA;     *&#xA;     * &lt;p>If the current thread is the last thread to arrive, and a&#xA;     * non-null barrier action was supplied in the constructor, then the&#xA;     * current thread runs the action before allowing the other threads to&#xA;     * continue.&#xA;     * If an exception occurs during the barrier action then that exception&#xA;     * will be propagated in the current thread and the barrier is placed in&#xA;     * the broken state.&#xA;     *&#xA;     * @param timeout the time to wait for the barrier&#xA;     * @param unit the time unit of the timeout parameter&#xA;     * @return the arrival index of the current thread, where index&#xA;     * &lt;tt>{@link #getParties()} - 1&lt;/tt> indicates the first to arrive and&#xA;     * zero indicates the last to arrive.&#xA;     *&#xA;     * @throws InterruptedException if the current thread was interrupted&#xA;     * while waiting.&#xA;     * @throws TimeoutException if the specified timeout elapses.&#xA;     * @throws BrokenBarrierException if &lt;em>another&lt;/em> thread was&#xA;     * interrupted or timed out while the current thread was waiting,&#xA;     * or the barrier was reset, or the barrier was broken when&#xA;     * &lt;tt>await&lt;/tt> was called, or the barrier action (if present)&#xA;     * failed due an exception.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+          <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="TimeUnit.class.xmi#//@classifiers.0/@members.9"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            </next>
+          </arguments>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isBroken">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Queries if this barrier is in a broken state.&#xA;     * @return &lt;tt>true&lt;/tt> if one or more parties broke out of this&#xA;     * barrier due to interruption or timeout since construction or&#xA;     * the last reset, or a barrier action failed due to an exception;&#xA;     * &lt;tt>false&lt;/tt> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="lock">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="locks/ReentrantLock.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@members.0"/>
+          </returnValue>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </expression>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Resets the barrier to its initial state.  If any parties are&#xA;     * currently waiting at the barrier, they will return with a&#xA;     * {@link BrokenBarrierException}. Note that resets &lt;em>after&lt;/em>&#xA;     * a breakage has occurred for other reasons can be complicated to&#xA;     * carry out; threads need to re-synchronize in some other way,&#xA;     * and choose one to perform the reset.  It may be preferable to&#xA;     * instead create a new barrier for subsequent use.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="lock">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="locks/ReentrantLock.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <comments>// start a new generation</comments>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8"/>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.7">
+            <comments>// break the current generation</comments>
+          </expression>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </expression>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getNumberWaiting">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of parties currently waiting at the barrier.&#xA;     * This method is primarily useful for debugging and assertions.&#xA;     *&#xA;     * @return the number of parties currently blocked in {@link #await}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="lock">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="locks/ReentrantLock.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+          <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </returnValue>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="locks/ReentrantLock.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </expression>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A synchronization aid that allows a set of threads to all wait for&#xA; * each other to reach a common barrier point.  CyclicBarriers are&#xA; * useful in programs involving a fixed sized party of threads that&#xA; * must occasionally wait for each other. The barrier is called&#xA; * &lt;em>cyclic&lt;/em> because it can be re-used after the waiting threads&#xA; * are released.&#xA; *&#xA; * &lt;p>A &lt;tt>CyclicBarrier&lt;/tt> supports an optional {@link Runnable} command&#xA; * that is run once per barrier point, after the last thread in the party&#xA; * arrives, but before any threads are released.&#xA; * This &lt;em>barrier action&lt;/em> is useful&#xA; * for updating shared-state before any of the parties continue.&#xA; *&#xA; * &lt;p>&lt;b>Sample usage:&lt;/b> Here is an example of&#xA; *  using a barrier in a parallel decomposition design:&#xA; * &lt;pre>&#xA; * class Solver {&#xA; *   final int N;&#xA; *   final float[][] data;&#xA; *   final CyclicBarrier barrier;&#xA; *&#xA; *   class Worker implements Runnable {&#xA; *     int myRow;&#xA; *     Worker(int row) { myRow = row; }&#xA; *     public void run() {&#xA; *       while (!done()) {&#xA; *         processRow(myRow);&#xA; *&#xA; *         try {&#xA; *           barrier.await();&#xA; *         } catch (InterruptedException ex) {&#xA; *           return;&#xA; *         } catch (BrokenBarrierException ex) {&#xA; *           return;&#xA; *         }&#xA; *       }&#xA; *     }&#xA; *   }&#xA; *&#xA; *   public Solver(float[][] matrix) {&#xA; *     data = matrix;&#xA; *     N = matrix.length;&#xA; *     barrier = new CyclicBarrier(N,&#xA; *                                 new Runnable() {&#xA; *                                   public void run() {&#xA; *                                     mergeRows(...);&#xA; *                                   }&#xA; *                                 });&#xA; *     for (int i = 0; i &lt; N; ++i)&#xA; *       new Thread(new Worker(i)).start();&#xA; *&#xA; *     waitUntilDone();&#xA; *   }&#xA; * }&#xA; * &lt;/pre>&#xA; * Here, each worker thread processes a row of the matrix then waits at the&#xA; * barrier until all rows have been processed. When all rows are processed&#xA; * the supplied {@link Runnable} barrier action is executed and merges the&#xA; * rows. If the merger&#xA; * determines that a solution has been found then &lt;tt>done()&lt;/tt> will return&#xA; * &lt;tt>true&lt;/tt> and each worker will terminate.&#xA; *&#xA; * &lt;p>If the barrier action does not rely on the parties being suspended when&#xA; * it is executed, then any of the threads in the party could execute that&#xA; * action when it is released. To facilitate this, each invocation of&#xA; * {@link #await} returns the arrival index of that thread at the barrier.&#xA; * You can then choose which thread should execute the barrier action, for&#xA; * example:&#xA; * &lt;pre>  if (barrier.await() == 0) {&#xA; *     // log the completion of this iteration&#xA; *   }&lt;/pre>&#xA; *&#xA; * &lt;p>The &lt;tt>CyclicBarrier&lt;/tt> uses an all-or-none breakage model&#xA; * for failed synchronization attempts: If a thread leaves a barrier&#xA; * point prematurely because of interruption, failure, or timeout, all&#xA; * other threads waiting at that barrier point will also leave&#xA; * abnormally via {@link BrokenBarrierException} (or&#xA; * {@link InterruptedException} if they too were interrupted at about&#xA; * the same time).&#xA; *&#xA; * @since 1.5&#xA; * @see CountDownLatch&#xA; *&#xA; * @author Doug Lea&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

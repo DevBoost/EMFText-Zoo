@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../../../java.ecore#/17" name="CDROutputStream_1_2.java">
+  <comments>/*&#xA; * @(#)CDROutputStream_1_2.java&#x9;1.12 04/03/01&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>impl</namespaces>
+  <namespaces>encoding</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/BAD_PARAM.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/INTERNAL.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>ior</namespaces>
+    <namespaces>iiop</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../spi/ior/iiop/GIOPVersion.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>encoding</namespaces>
+    <classifier xsi:type="classifiers:Class" href="CodeSetConversion.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>orbutil</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../orbutil/ORBConstants.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="CDROutputStream_1_2">
+    <members xsi:type="members:Field" name="primitiveAcrossFragmentedChunk">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// There's a situation with chunking with fragmentation</comments>
+        <comments>// in which the alignment for a primitive value is needed</comments>
+        <comments>// to fill fragment N, but the primitive won't fit so</comments>
+        <comments>// must go into fragment N + 1.  The behavior is the same</comments>
+        <comments>// as that for specialChunks.</comments>
+        <comments>//</comments>
+        <comments>// Unfortunately, given the current code, we can't reuse</comments>
+        <comments>// specialChunk.  If you wrap each of the following</comments>
+        <comments>// write calls with handleSpecialChunkBegin/End, you</comments>
+        <comments>// will lose your state because the primitive calls will</comments>
+        <comments>// change the variables, etc.</comments>
+        <comments>//</comments>
+        <comments>// All of the CDR code should be rewritten moving chunking</comments>
+        <comments>// to a different level, perhaps in the buffer managers.</comments>
+        <comments>// We want to move to a compositional model rather than</comments>
+        <comments>// using inheritance.</comments>
+        <comments>//</comments>
+        <comments>// Note that in the grow case, chunks are _NOT_ closed</comments>
+        <comments>// at grow points, now.</comments>
+        <comments>//</comments>
+        <comments>// **** NOTE ****</comments>
+        <comments>// Since we will not support valuetypes with GIOP 1.1, that</comments>
+        <comments>// also means we do not support chunking there.</comments>
+        <comments>//</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="specialChunk">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// Used in chunking.  Here's how this works:</comments>
+        <comments>//</comments>
+        <comments>// When chunking and writing an array of primitives, a string, or a </comments>
+        <comments>// wstring, _AND_ it won't fit in the buffer do the following.  (As</comments>
+        <comments>// you can see, this is a very &quot;special&quot; chunk.)</comments>
+        <comments>//</comments>
+        <comments>//     1.  Write the length of the chunk including the array length</comments>
+        <comments>//     2.  Set specialChunk to true</comments>
+        <comments>// 3 applies to ALL chunking:</comments>
+        <comments>//     3.  In grow, if we need to fragment and specialChunk is false</comments>
+        <comments>//               a) call end_block</comments>
+        <comments>//               b) fragment</comments>
+        <comments>// Now back to the array only case:</comments>
+        <comments>//     [write the data]</comments>
+        <comments>//     4.  if specialChunk is true </comments>
+        <comments>//               a) Close the chunk</comments>
+        <comments>//               b) Set specialChunk to false</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="headerPadding">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Indicates whether the header should be padded. In GIOP 1.2 and above, the</comments>
+        <comments>// body must be aligned on a 8-octet boundary, and so the header needs to be</comments>
+        <comments>// padded appropriately. However, if there is no body to a request or reply</comments>
+        <comments>// message, there is no need to pad the header, in the unfragmented case.</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handleSpecialChunkBegin">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requiredSize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// If we're chunking and the item won't fit in the buffer</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="oldSize">
+              <typeReference xsi:type="types:Int">
+                <comments>// Duplicating some code from end_block.  Compute</comments>
+                <comments>// and write the total chunk length.</comments>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+                </next>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.7"/>
+                  </children>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <comments>//write_long(oldSize - blockSizeIndex);</comments>
+              <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.85"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statement/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.7"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </expression>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@statement/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <comments>// Set the special flag so we don't end the chunk when</comments>
+                <comments>// we fragment</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral" value="true"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.18"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+                </next>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+              </children>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </children>
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </children>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handleSpecialChunkEnd">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// If we're in a chunk and the item spanned fragments</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <comments>// This is unnecessary, but I just want to show that</comments>
+                <comments>// we're done with the current chunk.  (the end_block</comments>
+                <comments>// call is inappropriate here)</comments>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.18"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.7"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.8"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <comments>// Start a new chunk since we fragmented during the item.</comments>
+              <comments>// Thus, no one can go back to add more to the chunk length</comments>
+              <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.84"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <comments>// Now turn off the flag so we go back to the normal</comments>
+                <comments>// behavior of closing a chunk when we fragment and</comments>
+                <comments>// reopening afterwards.</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.18"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkPrimitiveAcrossFragmentedChunk">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Called after writing primitives</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.18"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <comments>// It would be nice to have a StreamPosition</comments>
+                <comments>// abstraction if we could avoid allocation</comments>
+                <comments>// overhead.</comments>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.7"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.8"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <comments>// Start a new chunk</comments>
+              <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.84"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_octet">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.45"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_short">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Short"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.57"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_long">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.59"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_longlong">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.61"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setHeaderPadding">
+      <typeReference xsi:type="types:Void">
+        <comments>// Called by RequestMessage_1_2 or ReplyMessage_1_2 classes only.</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="headerPadding">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="alignAndReserve">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="align">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// headerPadding bit is set by the write operation of RequestMessage_1_2</comments>
+        <comments>// or ReplyMessage_1_2 classes. When set, the very first body write</comments>
+        <comments>// operation (from the stub code) would trigger an alignAndReserve </comments>
+        <comments>// method call, that would in turn add the appropriate header padding,</comments>
+        <comments>// such that the body is aligned on a 8-octet boundary. The padding</comments>
+        <comments>// is required for GIOP versions 1.2 and above, only if body is present.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.135"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../orbutil/ORBConstants.class.xmi#//@classifiers.0/@members.57"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../orbutil/ORBConstants.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="literals:BooleanLiteral" value="true"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <comments>// In GIOP 1.2, we always end fragments at our</comments>
+          <comments>// fragment size, which is an &quot;evenly divisible</comments>
+          <comments>// 8 byte boundary&quot; (aka divisible by 16).  A fragment can </comments>
+          <comments>// end with appropriate alignment padding, but no padding</comments>
+          <comments>// is needed with respect to the next GIOP fragment</comments>
+          <comments>// header since it ends on an 8 byte boundary.</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.15"/>
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+                </next>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+              </children>
+              <children xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.38"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+              </children>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </arguments>
+          </next>
+          <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </children>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </children>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+            <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+          </children>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="grow">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="align">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="n">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldSize">
+          <typeReference xsi:type="types:Int">
+            <comments>// Save the current size for possible post-fragmentation calculation</comments>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+            </next>
+            <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="handleChunk">
+          <typeReference xsi:type="types:Boolean">
+            <comments>// See notes where specialChunk is defined, as well as the</comments>
+            <comments>// above notes for primitiveAcrossFragmentedChunk.</comments>
+            <comments>//</comments>
+            <comments>// If we're writing a primitive and chunking, we need to update</comments>
+            <comments>// the chunk length to include the length of the primitive (unless</comments>
+            <comments>// this complexity is handled by specialChunk).</comments>
+            <comments>//</comments>
+            <comments>// Note that this is wasted processing in the grow case, but that</comments>
+            <comments>// we don't actually close the chunk in that case.</comments>
+          </typeReference>
+          <initialValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.18"/>
+              </children>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Negate"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              </children>
+            </expression>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="oldIndex">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+                </next>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.7"/>
+                  </children>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.85"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.7"/>
+                    </children>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </expression>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="BufferManagerWrite.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+            </arguments>
+          </next>
+          <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// At this point, if we fragmented, we should have a ByteBufferWithInfo</comments>
+        <comments>// with the fragment header already marshalled.  The buflen and position</comments>
+        <comments>// should be updated accordingly, and the fragmented flag should be set.</comments>
+        <comments>// Note that fragmented is only true in the streaming and collect cases.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <comments>// Clear the flag</comments>
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+                <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference">
+                <comments>// Update fragmentOffset so indirections work properly.</comments>
+                <comments>// At this point, oldSize is the entire length of the</comments>
+                <comments>// previous buffer.  bbwi.position() is the length of the</comments>
+                <comments>// fragment header of this buffer.</comments>
+                <target xsi:type="members:Field" href="CDROutputStream_1_1.class.xmi#//@classifiers.0/@members.0"/>
+              </child>
+              <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+              <value xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.14"/>
+                    </next>
+                    <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+                  </children>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </expression>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>// We just fragmented, and need to signal that we should</comments>
+            <comments>// start a new chunk after writing the primitive.</comments>
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="literals:BooleanLiteral" value="true"/>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="ByteBufferWithInfo.class.xmi#//@classifiers.0/@members.6"/>
+          </next>
+          <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.3"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getGIOPVersion">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../spi/ior/iiop/GIOPVersion.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <target xsi:type="members:Field" href="../../spi/ior/iiop/GIOPVersion.class.xmi#//@classifiers.0/@members.2"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../spi/ior/iiop/GIOPVersion.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_wchar">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Char"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="converter">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <comments>// In GIOP 1.2, a wchar is encoded as an unsigned octet length</comments>
+            <comments>// followed by the octets of the converted wchar.  This is good,</comments>
+            <comments>// but it causes problems with our chunking code.  We don't</comments>
+            <comments>// want that octet to get put in a different chunk at the end</comments>
+            <comments>// of the previous fragment.  </comments>
+            <comments>//</comments>
+            <comments>// Ensure that this won't happen by overriding write_wchar_array</comments>
+            <comments>// and doing our own handleSpecialChunkBegin/End here.</comments>
+            <namespaces>CodeSetConversion</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.133"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+            </children>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+          <arguments xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Byte"/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+            </child>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <comments>// Write the bytes without messing with chunking</comments>
+          <comments>// See CDROutputStream_1_0</comments>
+          <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.68"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.4/@variable"/>
+          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_wchar_array">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:Char"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0/@members.446"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.5"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="converter">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <namespaces>CodeSetConversion</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.133"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="totalNumBytes">
+          <typeReference xsi:type="types:Int">
+            <comments>// Unfortunately, because of chunking, we have to convert the</comments>
+            <comments>// entire char[] to a byte[] array first so we can know how</comments>
+            <comments>// many bytes we're writing ahead of time.  You can't split</comments>
+            <comments>// an array of primitives into multiple chunks.</comments>
+          </typeReference>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="maxLength">
+          <typeReference xsi:type="types:Int">
+            <comments>// Remember that every wchar starts with an octet telling</comments>
+            <comments>// its length.  The buffer size is an upper bound estimate.</comments>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:Int"/>
+            <child xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/Math.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="expressions:MultiplicativeExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.4"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2"/>
+                  <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Math.class.xmi#//@classifiers.0"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="buffer">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@variable"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </sizes>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+              <comments>// Convert one wchar</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+                  <arraySelectors>
+                    <position xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@init"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </position>
+                  </arraySelectors>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@variable">
+                <comments>// Make sure to add the octet length</comments>
+                <arraySelectors>
+                  <position xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </position>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Byte"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </child>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <comments>// Copy it into our buffer</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/System.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.7"/>
+                  </next>
+                </arguments>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@variable"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </arguments>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../java/lang/System.class.xmi#//@classifiers.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+          <comments>// Now that we know the total length, we can deal with chunking.</comments>
+          <comments>// Note that we don't have to worry about alignment since they're</comments>
+          <comments>// just octets.</comments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <comments>// Must use totalNumBytes rather than buffer.length since the</comments>
+          <comments>// buffer.length is only the upper bound estimate.</comments>
+          <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.68"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@variable"/>
+          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write_wstring">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0/@members.446"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/CompletionStatus.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:Field" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.5"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// In GIOP 1.2, wstrings are not terminated by a null.  The</comments>
+        <comments>// length is the number of octets in the converted format.</comments>
+        <comments>// A zero length string is represented with the 4 byte length</comments>
+        <comments>// value of 0.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="converter">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <namespaces>CodeSetConversion</namespaces>
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.133"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+          <arguments xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.38"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+            </children>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <comments>// Write the octet array without tampering with chunking</comments>
+          <target xsi:type="members:ClassMethod" href="CDROutputStream_1_0.class.xmi#//@classifiers.0/@members.68"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+          </arguments>
+          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="CodeSetConversion$CTBConverter.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="CDROutputStream_1_1.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

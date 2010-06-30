@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="GatheringByteChannel.java">
+  <comments>/*&#xA; * @(#)GatheringByteChannel.java&#x9;1.12 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>nio</namespaces>
+  <namespaces>channels</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="GatheringByteChannel">
+    <members xsi:type="members:InterfaceMethod" name="write">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="srcs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes a sequence of bytes to this channel from a subsequence of the&#xA;     * given buffers.&#xA;     *&#xA;     * &lt;p> An attempt is made to write up to &lt;i>r&lt;/i> bytes to this channel,&#xA;     * where &lt;i>r&lt;/i> is the total number of bytes remaining in the specified&#xA;     * subsequence of the given buffer array, that is,&#xA;     *&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * srcs[offset].remaining()&#xA;     *     + srcs[offset+1].remaining()&#xA;     *     + ... + srcs[offset+length-1].remaining()&lt;/pre>&lt;/blockquote>&#xA;     *&#xA;     * at the moment that this method is invoked.&#xA;     *&#xA;     * &lt;p> Suppose that a byte sequence of length &lt;i>n&lt;/i> is written, where&#xA;     * &lt;tt>0&lt;/tt>&amp;nbsp;&lt;tt>&amp;lt;=&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>&amp;nbsp;&lt;tt>&amp;lt;=&lt;/tt>&amp;nbsp;&lt;i>r&lt;/i>.&#xA;     * Up to the first &lt;tt>srcs[offset].remaining()&lt;/tt> bytes of this sequence&#xA;     * are written from buffer &lt;tt>srcs[offset]&lt;/tt>, up to the next&#xA;     * &lt;tt>srcs[offset+1].remaining()&lt;/tt> bytes are written from buffer&#xA;     * &lt;tt>srcs[offset+1]&lt;/tt>, and so forth, until the entire byte sequence is&#xA;     * written.  As many bytes as possible are written from each buffer, hence&#xA;     * the final position of each updated buffer, except the last updated&#xA;     * buffer, is guaranteed to be equal to that buffer's limit.&#xA;     *&#xA;     * &lt;p> Unless otherwise specified, a write operation will return only after&#xA;     * writing all of the &lt;i>r&lt;/i> requested bytes.  Some types of channels,&#xA;     * depending upon their state, may write only some of the bytes or possibly&#xA;     * none at all.  A socket channel in non-blocking mode, for example, cannot&#xA;     * write any more bytes than are free in the socket's output buffer.&#xA;     *&#xA;     * &lt;p> This method may be invoked at any time.  If another thread has&#xA;     * already initiated a write operation upon this channel, however, then an&#xA;     * invocation of this method will block until the first operation is&#xA;     * complete. &lt;/p>&#xA;     *&#xA;     * @param  srcs&#xA;     *         The buffers from which bytes are to be retrieved&#xA;     *&#xA;     * @param  offset&#xA;     *         The offset within the buffer array of the first buffer from&#xA;     *         which bytes are to be retrieved; must be non-negative and no&#xA;     *         larger than &lt;tt>srcs.length&lt;/tt>&#xA;     *&#xA;     * @param  length&#xA;     *         The maximum number of buffers to be accessed; must be&#xA;     *         non-negative and no larger than&#xA;     *         &lt;tt>srcs.length&lt;/tt>&amp;nbsp;-&amp;nbsp;&lt;tt>offset&lt;/tt>&#xA;     *&#xA;     * @return  The number of bytes written, possibly zero&#xA;     *&#xA;     * @throws  IndexOutOfBoundsException&#xA;     *          If the preconditions on the &lt;tt>offset&lt;/tt> and &lt;tt>length&lt;/tt>&#xA;     *          parameters do not hold&#xA;     *&#xA;     * @throws  NonWritableChannelException&#xA;     *          If this channel was not opened for writing&#xA;     *&#xA;     * @throws  ClosedChannelException&#xA;     *          If this channel is closed&#xA;     *&#xA;     * @throws  AsynchronousCloseException&#xA;     *          If another thread closes this channel&#xA;     *          while the write operation is in progress&#xA;     *&#xA;     * @throws  ClosedByInterruptException&#xA;     *          If another thread interrupts the current thread&#xA;     *          while the write operation is in progress, thereby&#xA;     *          closing the channel and setting the current thread's&#xA;     *          interrupt status&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If some other I/O error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="write">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="srcs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes a sequence of bytes to this channel from the given buffers.&#xA;     *&#xA;     * &lt;p> An invocation of this method of the form &lt;tt>c.write(srcs)&lt;/tt>&#xA;     * behaves in exactly the same manner as the invocation&#xA;     *&#xA;     * &lt;blockquote>&lt;pre>&#xA;     * c.write(srcs, 0, srcs.length);&lt;/pre>&lt;/blockquote>&#xA;     *&#xA;     * @param  srcs&#xA;     *         The buffers from which bytes are to be retrieved&#xA;     *&#xA;     * @return  The number of bytes written, possibly zero&#xA;     *&#xA;     * @throws  NonWritableChannelException&#xA;     *          If this channel was not opened for writing&#xA;     *&#xA;     * @throws  ClosedChannelException&#xA;     *          If this channel is closed&#xA;     *&#xA;     * @throws  AsynchronousCloseException&#xA;     *          If another thread closes this channel&#xA;     *          while the write operation is in progress&#xA;     *&#xA;     * @throws  ClosedByInterruptException&#xA;     *          If another thread interrupts the current thread&#xA;     *          while the write operation is in progress, thereby&#xA;     *          closing the channel and setting the current thread's&#xA;     *          interrupt status&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If some other I/O error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A channel that can write bytes from a sequence of buffers.&#xA; *&#xA; * &lt;p> A &lt;i>gathering&lt;/i> write operation writes, in a single invocation, a&#xA; * sequence of bytes from one or more of a given sequence of buffers.&#xA; * Gathering writes are often useful when implementing network protocols or&#xA; * file formats that, for example, group data into segments consisting of one&#xA; * or more fixed-length headers followed by a variable-length body.  Similar&#xA; * &lt;i>scattering&lt;/i> read operations are defined in the {@link&#xA; * ScatteringByteChannel} interface.  &lt;/p>&#xA; *&#xA; *&#xA; * @author Mark Reinhold&#xA; * @author JSR-51 Expert Group&#xA; * @version 1.12, 03/12/19&#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="WritableByteChannel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

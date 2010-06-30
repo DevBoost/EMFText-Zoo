@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="DynUnionOperations.java">
+  <namespaces>org</namespaces>
+  <namespaces>omg</namespaces>
+  <namespaces>DynamicAny</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="DynUnionOperations">
+    <members xsi:type="members:InterfaceMethod" name="get_discriminator">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;        * Returns the current discriminator value.&#xA;        */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="DynAny.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_discriminator">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;        * Sets the discriminator of the DynUnion to the specified value.&#xA;        * Setting the discriminator to a value that is consistent with the currently active union member&#xA;        * does not affect the currently active member. Setting the discriminator to a value that is inconsistent&#xA;        * with the currently active member deactivates the member and activates the member that is consistent&#xA;        * with the new discriminator value (if there is a member for that value) by initializing the member&#xA;        * to its default value.&#xA;        * Setting the discriminator of a union sets the current position to 0 if the discriminator value&#xA;        * indicates a non-existent union member (has_no_active_member returns true in this case).&#xA;        * Otherwise, if the discriminator value indicates a named union member, the current position is set to 1&#xA;        * (has_no_active_member returns false and component_count returns 2 in this case).&#xA;        *&#xA;        * @exception TypeMismatch if the TypeCode of the parameter is not equivalent to the TypeCode&#xA;        *            of the union's discriminator&#xA;        */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="d">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>omg</namespaces>
+          <namespaces>DynamicAny</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="DynAny.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_to_default_member">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;        * Sets the discriminator to a value that is consistent with the value of the default case of a union.&#xA;        * It sets the current position to zero and causes component_count to return 2.&#xA;        *&#xA;        * @exception TypeMismatch if the union does not have an explicit default case&#xA;        */</comments>
+      </typeReference>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="set_to_no_active_member">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;        * Sets the discriminator to a value that does not correspond to any of the unions case labels.&#xA;        * It sets the current position to zero and causes component_count to return 1.&#xA;        *&#xA;        * @exception TypeMismatch if the union has an explicit default case or if it uses the entire range&#xA;        *            of discriminator values for explicit case labels&#xA;        */</comments>
+      </typeReference>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="has_no_active_member">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;        * Returns true if the union has no active member, that is, the unions value consists solely&#xA;        * of its discriminator because the discriminator has a value that is not listed as an explicit case label.&#xA;        * Calling this operation on a union that has a default case returns false.&#xA;        * Calling this operation on a union that uses the entire range of discriminator values&#xA;        * for explicit case labels returns false.&#xA;        */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="discriminator_kind">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;        * Returns the TCKind value of the discriminators TypeCode.&#xA;        */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>CORBA</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../CORBA/TCKind.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="member_kind">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;        * Returns the TCKind value of the currently active members TypeCode. &#xA;        *&#xA;        * @exception InvalidValue if the union does not have a currently active member&#xA;        */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>CORBA</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../CORBA/TCKind.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/InvalidValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="member">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;        * Returns the currently active member. Note that the returned reference remains valid only&#xA;        * for as long as the currently active member does not change. Using the returned reference&#xA;        * beyond the life time of the currently active member raises OBJECT_NOT_EXIST. &#xA;        *&#xA;        * @exception InvalidValue if the union has no active member&#xA;        */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="DynAny.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/InvalidValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="member_name">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;        * Returns the name of the currently active member. If the unions TypeCode does not contain&#xA;        * a member name for the currently active member, the operation returns an empty string.&#xA;        *&#xA;        * @exception InvalidValue if the union has no active member&#xA;        */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DynAnyPackage/InvalidValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xD;&#xA;* org/omg/DynamicAny/DynUnionOperations.java .&#xD;&#xA;* Generated by the IDL-to-Java compiler (portable), version &quot;3.2&quot;&#xD;&#xA;* from ../../../../src/share/classes/org/omg/DynamicAny/DynamicAny.idl&#xD;&#xA;* Wednesday, May 28, 2008 8:37:44 AM GMT&#xD;&#xA;*/</comments>
+      <comments>/**&#xA;    * DynUnion objects support the manipulation of IDL unions.&#xA;    * A union can have only two valid current positions:&#xA;    * &lt;UL>&#xA;    * &lt;LI>zero, which denotes the discriminator&#xA;    * &lt;LI>one, which denotes the active member&#xA;    * &lt;/UL>&#xA;    * The component_count value for a union depends on the current discriminator:&#xA;    * it is 2 for a union whose discriminator indicates a named member, and 1 otherwise.&#xA;    */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <namespaces>org</namespaces>
+      <namespaces>omg</namespaces>
+      <namespaces>DynamicAny</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="DynAnyOperations.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

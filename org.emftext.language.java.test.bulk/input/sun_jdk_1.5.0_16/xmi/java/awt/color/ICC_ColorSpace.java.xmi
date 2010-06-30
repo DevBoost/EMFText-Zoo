@@ -1,0 +1,2063 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../java.ecore#/17" name="ICC_ColorSpace.java">
+  <comments>/*&#xA; * @(#)ICC_ColorSpace.java&#x9;1.31 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <comments>/**********************************************************************&#xA; **********************************************************************&#xA; **********************************************************************&#xA; *** COPYRIGHT (c) Eastman Kodak Company, 1997                      ***&#xA; *** As  an unpublished  work pursuant to Title 17 of the United    ***&#xA; *** States Code.  All rights reserved.                             ***&#xA; **********************************************************************&#xA; **********************************************************************&#xA; **********************************************************************/</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>color</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>sun</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>color</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="ICC_ColorSpace">
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="3455889114070431483"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="thisProfile">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="minVal">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="maxVal">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="diffMinMax">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="invDiffMinMax">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="needScaleInit">
+      <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="this2srgb">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// {to,from}{RGB,CIEXYZ} methods create and cache these when needed</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+    </members>
+    <members xsi:type="members:Field" name="srgb2this">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+    </members>
+    <members xsi:type="members:Field" name="this2xyz">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+    </members>
+    <members xsi:type="members:Field" name="xyz2this">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ICC_ColorSpace">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ICC_Profile.class.xmi#//@classifiers.0/@members.144"/>
+            </next>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ICC_Profile.class.xmi#//@classifiers.0/@members.156"/>
+            </next>
+          </arguments>
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="profileClass">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ICC_Profile.class.xmi#//@classifiers.0/@members.143"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>/* REMIND - is NAMEDCOLOR OK? */</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid profile type"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+              </children>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.10"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+              </children>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.11"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+              </children>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.13"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+              </children>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.15"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+              </children>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="profile">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constructs a new ICC_ColorSpace from an ICC_Profile object.&#xA;    * @param profile the specified ICC_Profile object&#xA;    * @exception IllegalArgumentException if profile is inappropriate for&#xA;    *            representing a ColorSpace.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getProfile">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Returns the ICC_Profile for this ICC_ColorSpace.&#xA;    * @return the ICC_Profile for this ICC_ColorSpace.&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toRGB">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="colorvalue">
+        <typeReference xsi:type="types:Float"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Transforms a color value assumed to be in this ColorSpace&#xA;     * into a value in the default CS_sRGB color space.&#xA;     * &lt;p>&#xA;     * This method transforms color values using algorithms designed&#xA;     * to produce the best perceptual match between input and output&#xA;     * colors.  In order to do colorimetric conversion of color values,&#xA;     * you should use the &lt;code>toCIEXYZ&lt;/code>&#xA;     * method of this color space to first convert from the input&#xA;     * color space to the CS_CIEXYZ color space, and then use the&#xA;     * &lt;code>fromCIEXYZ&lt;/code> method of the CS_sRGB color space to&#xA;     * convert from CS_CIEXYZ to the output color space.&#xA;     * See {@link #toCIEXYZ(float[]) toCIEXYZ} and&#xA;     * {@link #fromCIEXYZ(float[]) fromCIEXYZ} for further information.&#xA;     * &lt;p>&#xA;     * @param colorvalue a float array with length of at least the number&#xA;     *      of components in this ColorSpace.&#xA;     * @return a float array of length 3.&#xA;     * @throws ArrayIndexOutOfBoundsException if array length is not&#xA;     * at least the number of components in this ColorSpace.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="transformList">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arrayDimensionsBefore/>
+              <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="srgbCS">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="ColorSpace.class.xmi#//@classifiers.0/@members.33"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.12"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@variable"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nc">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tmp">
+          <typeReference xsi:type="types:Short"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Short"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.2/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Short"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0">
+                            <arraySelectors>
+                              <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@init"/>
+                            </arraySelectors>
+                          </children>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                            <arraySelectors>
+                              <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@init"/>
+                            </arraySelectors>
+                          </children>
+                          <additiveOperators xsi:type="operators:Subtraction"/>
+                        </expression>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+                        <arraySelectors>
+                          <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@init"/>
+                        </arraySelectors>
+                      </children>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <children xsi:type="literals:DecimalFloatLiteral" decimalValue="0.5"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.2/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.19"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.2/@variable"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Float"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.5/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:Float"/>
+                    <child xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:AndExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.2/@variable">
+                          <arraySelectors>
+                            <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@init"/>
+                          </arraySelectors>
+                        </children>
+                        <children xsi:type="literals:HexIntegerLiteral" hexValue="65535"/>
+                      </expression>
+                    </child>
+                  </expression>
+                </children>
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+                <multiplicativeOperators xsi:type="operators:Division"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@init"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.6/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.5/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fromRGB">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rgbvalue">
+        <typeReference xsi:type="types:Float"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Transforms a color value assumed to be in the default CS_sRGB&#xA;     * color space into this ColorSpace.&#xA;     * &lt;p>&#xA;     * This method transforms color values using algorithms designed&#xA;     * to produce the best perceptual match between input and output&#xA;     * colors.  In order to do colorimetric conversion of color values,&#xA;     * you should use the &lt;code>toCIEXYZ&lt;/code>&#xA;     * method of the CS_sRGB color space to first convert from the input&#xA;     * color space to the CS_CIEXYZ color space, and then use the&#xA;     * &lt;code>fromCIEXYZ&lt;/code> method of this color space to&#xA;     * convert from CS_CIEXYZ to the output color space.&#xA;     * See {@link #toCIEXYZ(float[]) toCIEXYZ} and&#xA;     * {@link #fromCIEXYZ(float[]) fromCIEXYZ} for further information.&#xA;     * &lt;p>&#xA;     * @param rgbvalue a float array with length of at least 3.&#xA;     * @return a float array with length equal to the number of&#xA;     *       components in this ColorSpace.&#xA;     * @throws ArrayIndexOutOfBoundsException if array length is not&#xA;     * at least 3.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="transformList">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arrayDimensionsBefore/>
+              <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="srgbCS">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="ColorSpace.class.xmi#//@classifiers.0/@members.33"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@statement/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@statement/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.12"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@statement/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@statement/@statements.0/@variable"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tmp">
+          <typeReference xsi:type="types:Short"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Short"/>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Short"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:MultiplicativeExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+                          <arraySelectors>
+                            <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@init"/>
+                          </arraySelectors>
+                        </children>
+                        <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+                        <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                      </expression>
+                    </children>
+                    <children xsi:type="literals:DecimalFloatLiteral" decimalValue="0.5"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@init"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.19"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nc">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Float"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.4/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.5/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.6/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="expressions:MultiplicativeExpression">
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:CastExpression">
+                          <typeReference xsi:type="types:Float"/>
+                          <child xsi:type="expressions:NestedExpression">
+                            <expression xsi:type="expressions:AndExpression">
+                              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable">
+                                <arraySelectors>
+                                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.6/@init"/>
+                                </arraySelectors>
+                              </children>
+                              <children xsi:type="literals:HexIntegerLiteral" hexValue="65535"/>
+                            </expression>
+                          </child>
+                        </expression>
+                      </children>
+                      <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+                      <multiplicativeOperators xsi:type="operators:Division"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                    <arraySelectors>
+                      <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.6/@init"/>
+                    </arraySelectors>
+                  </children>
+                  <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.6/@init"/>
+                  </arraySelectors>
+                </children>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.6/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.4/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.6/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.5/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toCIEXYZ">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="colorvalue">
+        <typeReference xsi:type="types:Float"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Transforms a color value assumed to be in this ColorSpace&#xA;     * into the CS_CIEXYZ conversion color space.&#xA;     * &lt;p>&#xA;     * This method transforms color values using relative colorimetry,&#xA;     * as defined by the ICC Specification.  This&#xA;     * means that the XYZ values returned by this method are represented&#xA;     * relative to the D50 white point of the CS_CIEXYZ color space.&#xA;     * This representation is useful in a two-step color conversion&#xA;     * process in which colors are transformed from an input color&#xA;     * space to CS_CIEXYZ and then to an output color space.  This&#xA;     * representation is not the same as the XYZ values that would&#xA;     * be measured from the given color value by a colorimeter.&#xA;     * A further transformation is necessary to compute the XYZ values&#xA;     * that would be measured using current CIE recommended practices.&#xA;     * The paragraphs below explain this in more detail.&#xA;     * &lt;p>&#xA;     * The ICC standard uses a device independent color space (DICS) as the&#xA;     * mechanism for converting color from one device to another device.  In&#xA;     * this architecture, colors are converted from the source device's color&#xA;     * space to the ICC DICS and then from the ICC DICS to the destination&#xA;     * device's color space.  The ICC standard defines device profiles which&#xA;     * contain transforms which will convert between a device's color space&#xA;     * and the ICC DICS.  The overall conversion of colors from a source&#xA;     * device to colors of a destination device is done by connecting the&#xA;     * device-to-DICS transform of the profile for the source device to the&#xA;     * DICS-to-device transform of the profile for the destination device.&#xA;     * For this reason, the ICC DICS is commonly referred to as the profile&#xA;     * connection space (PCS).  The color space used in the methods&#xA;     * toCIEXYZ and fromCIEXYZ is the CIEXYZ PCS defined by the ICC&#xA;     * Specification.  This is also the color space represented by&#xA;     * ColorSpace.CS_CIEXYZ.&#xA;     * &lt;p>&#xA;     * The XYZ values of a color are often represented as relative to some&#xA;     * white point, so the actual meaning of the XYZ values cannot be known&#xA;     * without knowing the white point of those values.  This is known as&#xA;     * relative colorimetry.  The PCS uses a white point of D50, so the XYZ&#xA;     * values of the PCS are relative to D50.  For example, white in the PCS&#xA;     * will have the XYZ values of D50, which is defined to be X=.9642,&#xA;     * Y=1.000, and Z=0.8249.  This white point is commonly used for graphic&#xA;     * arts applications, but others are often used in other applications.&#xA;     * &lt;p>&#xA;     * To quantify the color characteristics of a device such as a printer&#xA;     * or monitor, measurements of XYZ values for particular device colors&#xA;     * are typically made.  For purposes of this discussion, the term&#xA;     * device XYZ values is used to mean the XYZ values that would be&#xA;     * measured from device colors using current CIE recommended practices.&#xA;     * &lt;p>&#xA;     * Converting between device XYZ values and the PCS XYZ values returned&#xA;     * by this method corresponds to converting between the device's color&#xA;     * space, as represented by CIE colorimetric values, and the PCS.  There&#xA;     * are many factors involved in this process, some of which are quite&#xA;     * subtle.  The most important, however, is the adjustment made to account&#xA;     * for differences between the device's white point and the white point of&#xA;     * the PCS.  There are many techniques for doing this and it is the&#xA;     * subject of much current research and controversy.  Some commonly used&#xA;     * methods are XYZ scaling, the von Kries transform, and the Bradford&#xA;     * transform.  The proper method to use depends upon each particular&#xA;     * application.&#xA;     * &lt;p>&#xA;     * The simplest method is XYZ scaling.  In this method each device XYZ&#xA;     * value is  converted to a PCS XYZ value by multiplying it by the ratio&#xA;     * of the PCS white point (D50) to the device white point.&#xA;     * &lt;pre>&#xA;     * &#xA;     * Xd, Yd, Zd are the device XYZ values&#xA;     * Xdw, Ydw, Zdw are the device XYZ white point values&#xA;     * Xp, Yp, Zp are the PCS XYZ values&#xA;     * Xd50, Yd50, Zd50 are the PCS XYZ white point values&#xA;     * &#xA;     * Xp = Xd * (Xd50 / Xdw)&#xA;     * Yp = Yd * (Yd50 / Ydw)&#xA;     * Zp = Zd * (Zd50 / Zdw)&#xA;     * &#xA;     * &lt;/pre>&#xA;     * &lt;p>&#xA;     * Conversion from the PCS to the device would be done by inverting these&#xA;     * equations:&#xA;     * &lt;pre>&#xA;     * &#xA;     * Xd = Xp * (Xdw / Xd50)&#xA;     * Yd = Yp * (Ydw / Yd50)&#xA;     * Zd = Zp * (Zdw / Zd50)&#xA;     * &#xA;     * &lt;/pre>&#xA;     * &lt;p>&#xA;     * Note that the media white point tag in an ICC profile is not the same&#xA;     * as the device white point.  The media white point tag is expressed in&#xA;     * PCS values and is used to represent the difference between the XYZ of&#xA;     * device illuminant and the XYZ of the device media when measured under&#xA;     * that illuminant.  The device white point is expressed as the device&#xA;     * XYZ values corresponding to white displayed on the device.  For&#xA;     * example, displaying the RGB color (1.0, 1.0, 1.0) on an sRGB device&#xA;     * will result in a measured device XYZ value of D65.  This will not&#xA;     * be the same as the media white point tag XYZ value in the ICC&#xA;     * profile for an sRGB device.&#xA;     * &lt;p>&#xA;     * @param colorvalue a float array with length of at least the number&#xA;     *        of components in this ColorSpace.&#xA;     * @return a float array of length 3.&#xA;     * @throws ArrayIndexOutOfBoundsException if array length is not&#xA;     * at least the number of components in this ColorSpace.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="transformList">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arrayDimensionsBefore/>
+              <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="xyzCS">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="ColorSpace.class.xmi#//@classifiers.0/@members.35"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable">
+                  <arraySelectors>
+                    <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  </arraySelectors>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.49"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </value>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable">
+                    <arraySelectors>
+                      <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </value>
+                </expression>
+              </statements>
+              <parameter name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="CMMException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.12"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nc">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tmp">
+          <typeReference xsi:type="types:Short"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Short"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Short"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+                            <arraySelectors>
+                              <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+                            </arraySelectors>
+                          </children>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                            <arraySelectors>
+                              <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+                            </arraySelectors>
+                          </children>
+                          <additiveOperators xsi:type="operators:Subtraction"/>
+                        </expression>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+                        <arraySelectors>
+                          <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+                        </arraySelectors>
+                      </children>
+                      <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                    </children>
+                    <children xsi:type="literals:DecimalFloatLiteral" decimalValue="0.5"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.1/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.19"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="ALMOST_TWO">
+          <typeReference xsi:type="types:Float"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="32767.0"/>
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="32768.0"/>
+                <multiplicativeOperators xsi:type="operators:Division"/>
+              </expression>
+            </children>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Float">
+            <comments>// For CIEXYZ, min = 0.0, max = ALMOST_TWO for all components</comments>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.6/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.7/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:MultiplicativeExpression">
+                    <children xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:Float"/>
+                        <child xsi:type="expressions:NestedExpression">
+                          <expression xsi:type="expressions:AndExpression">
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+                              <arraySelectors>
+                                <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.7/@init"/>
+                              </arraySelectors>
+                            </children>
+                            <children xsi:type="literals:HexIntegerLiteral" hexValue="65535"/>
+                          </expression>
+                        </child>
+                      </expression>
+                    </children>
+                    <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+                    <multiplicativeOperators xsi:type="operators:Division"/>
+                  </expression>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.5/@variable"/>
+                <multiplicativeOperators xsi:type="operators:Multiplication"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.7/@init"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.7/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.6/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fromCIEXYZ">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="colorvalue">
+        <typeReference xsi:type="types:Float"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Transforms a color value assumed to be in the CS_CIEXYZ conversion&#xA;     * color space into this ColorSpace.&#xA;     * &lt;p>&#xA;     * This method transforms color values using relative colorimetry,&#xA;     * as defined by the ICC Specification.  This&#xA;     * means that the XYZ argument values taken by this method are represented&#xA;     * relative to the D50 white point of the CS_CIEXYZ color space.&#xA;     * This representation is useful in a two-step color conversion&#xA;     * process in which colors are transformed from an input color&#xA;     * space to CS_CIEXYZ and then to an output color space.  The color&#xA;     * values returned by this method are not those that would produce&#xA;     * the XYZ value passed to the method when measured by a colorimeter.&#xA;     * If you have XYZ values corresponding to measurements made using&#xA;     * current CIE recommended practices, they must be converted to D50&#xA;     * relative values before being passed to this method.&#xA;     * The paragraphs below explain this in more detail.&#xA;     * &lt;p>&#xA;     * The ICC standard uses a device independent color space (DICS) as the&#xA;     * mechanism for converting color from one device to another device.  In&#xA;     * this architecture, colors are converted from the source device's color&#xA;     * space to the ICC DICS and then from the ICC DICS to the destination&#xA;     * device's color space.  The ICC standard defines device profiles which&#xA;     * contain transforms which will convert between a device's color space&#xA;     * and the ICC DICS.  The overall conversion of colors from a source&#xA;     * device to colors of a destination device is done by connecting the&#xA;     * device-to-DICS transform of the profile for the source device to the&#xA;     * DICS-to-device transform of the profile for the destination device.&#xA;     * For this reason, the ICC DICS is commonly referred to as the profile&#xA;     * connection space (PCS).  The color space used in the methods&#xA;     * toCIEXYZ and fromCIEXYZ is the CIEXYZ PCS defined by the ICC&#xA;     * Specification.  This is also the color space represented by&#xA;     * ColorSpace.CS_CIEXYZ.&#xA;     * &lt;p>&#xA;     * The XYZ values of a color are often represented as relative to some&#xA;     * white point, so the actual meaning of the XYZ values cannot be known&#xA;     * without knowing the white point of those values.  This is known as&#xA;     * relative colorimetry.  The PCS uses a white point of D50, so the XYZ&#xA;     * values of the PCS are relative to D50.  For example, white in the PCS&#xA;     * will have the XYZ values of D50, which is defined to be X=.9642,&#xA;     * Y=1.000, and Z=0.8249.  This white point is commonly used for graphic&#xA;     * arts applications, but others are often used in other applications.&#xA;     * &lt;p>&#xA;     * To quantify the color characteristics of a device such as a printer&#xA;     * or monitor, measurements of XYZ values for particular device colors&#xA;     * are typically made.  For purposes of this discussion, the term&#xA;     * device XYZ values is used to mean the XYZ values that would be&#xA;     * measured from device colors using current CIE recommended practices.&#xA;     * &lt;p>&#xA;     * Converting between device XYZ values and the PCS XYZ values taken as&#xA;     * arguments by this method corresponds to converting between the device's&#xA;     * color space, as represented by CIE colorimetric values, and the PCS.&#xA;     * There are many factors involved in this process, some of which are quite&#xA;     * subtle.  The most important, however, is the adjustment made to account&#xA;     * for differences between the device's white point and the white point of&#xA;     * the PCS.  There are many techniques for doing this and it is the&#xA;     * subject of much current research and controversy.  Some commonly used&#xA;     * methods are XYZ scaling, the von Kries transform, and the Bradford&#xA;     * transform.  The proper method to use depends upon each particular&#xA;     * application.&#xA;     * &lt;p>&#xA;     * The simplest method is XYZ scaling.  In this method each device XYZ&#xA;     * value is  converted to a PCS XYZ value by multiplying it by the ratio&#xA;     * of the PCS white point (D50) to the device white point.&#xA;     * &lt;pre>&#xA;     * &#xA;     * Xd, Yd, Zd are the device XYZ values&#xA;     * Xdw, Ydw, Zdw are the device XYZ white point values&#xA;     * Xp, Yp, Zp are the PCS XYZ values&#xA;     * Xd50, Yd50, Zd50 are the PCS XYZ white point values&#xA;     * &#xA;     * Xp = Xd * (Xd50 / Xdw)&#xA;     * Yp = Yd * (Yd50 / Ydw)&#xA;     * Zp = Zd * (Zd50 / Zdw)&#xA;     * &#xA;     * &lt;/pre>&#xA;     * &lt;p>&#xA;     * Conversion from the PCS to the device would be done by inverting these&#xA;     * equations:&#xA;     * &lt;pre>&#xA;     * &#xA;     * Xd = Xp * (Xdw / Xd50)&#xA;     * Yd = Yp * (Ydw / Yd50)&#xA;     * Zd = Zp * (Zdw / Zd50)&#xA;     * &#xA;     * &lt;/pre>&#xA;     * &lt;p>&#xA;     * Note that the media white point tag in an ICC profile is not the same&#xA;     * as the device white point.  The media white point tag is expressed in&#xA;     * PCS values and is used to represent the difference between the XYZ of&#xA;     * device illuminant and the XYZ of the device media when measured under&#xA;     * that illuminant.  The device white point is expressed as the device&#xA;     * XYZ values corresponding to white displayed on the device.  For&#xA;     * example, displaying the RGB color (1.0, 1.0, 1.0) on an sRGB device&#xA;     * will result in a measured device XYZ value of D65.  This will not&#xA;     * be the same as the media white point tag XYZ value in the ICC&#xA;     * profile for an sRGB device.&#xA;     * &lt;p>&#xA;     * &lt;p>&#xA;     * @param colorvalue a float array with length of at least 3.&#xA;     * @return a float array with length equal to the number of&#xA;     *         components in this ColorSpace.&#xA;     * @throws ArrayIndexOutOfBoundsException if array length is not&#xA;     * at least 3.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="transformList">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arrayDimensionsBefore/>
+              <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="xyzCS">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.39"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="ColorSpace.class.xmi#//@classifiers.0/@members.35"/>
+                    </arguments>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@statement/@statements.0/@variable">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@statement/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.12"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@statement/@statements.0/@variable">
+                  <arraySelectors>
+                    <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  </arraySelectors>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="ICC_Profile.class.xmi#//@classifiers.0/@members.49"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="ICC_Profile.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </value>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@statement/@statements.0/@variable">
+                    <arraySelectors>
+                      <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.3"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </value>
+                </expression>
+              </statements>
+              <parameter name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="CMMException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@statement/@statements.0/@variable"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tmp">
+          <typeReference xsi:type="types:Short"/>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Short"/>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="ALMOST_TWO">
+          <typeReference xsi:type="types:Float"/>
+          <initialValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="32767.0"/>
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="32768.0"/>
+                <multiplicativeOperators xsi:type="operators:Division"/>
+              </expression>
+            </children>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="factor">
+          <typeReference xsi:type="types:Float"/>
+          <initialValue xsi:type="expressions:MultiplicativeExpression">
+            <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.2/@variable"/>
+            <multiplicativeOperators xsi:type="operators:Division"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>// For CIEXYZ, min = 0.0, max = ALMOST_TWO for all components</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:Short"/>
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:MultiplicativeExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                          <arraySelectors>
+                            <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@init"/>
+                          </arraySelectors>
+                        </children>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.3/@variable"/>
+                        <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                      </expression>
+                    </children>
+                    <children xsi:type="literals:DecimalFloatLiteral" decimalValue="0.5"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </expression>
+                </child>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@init"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../sun/awt/color/ICC_Transform.class.xmi#//@classifiers.0/@members.19"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nc">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Float"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.6/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.7/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.8/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="expressions:MultiplicativeExpression">
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:MultiplicativeExpression">
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:CastExpression">
+                          <typeReference xsi:type="types:Float"/>
+                          <child xsi:type="expressions:NestedExpression">
+                            <expression xsi:type="expressions:AndExpression">
+                              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable">
+                                <arraySelectors>
+                                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.8/@init"/>
+                                </arraySelectors>
+                              </children>
+                              <children xsi:type="literals:HexIntegerLiteral" hexValue="65535"/>
+                            </expression>
+                          </child>
+                        </expression>
+                      </children>
+                      <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+                      <multiplicativeOperators xsi:type="operators:Division"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                    <arraySelectors>
+                      <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.8/@init"/>
+                    </arraySelectors>
+                  </children>
+                  <multiplicativeOperators xsi:type="operators:Multiplication"/>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.8/@init"/>
+                  </arraySelectors>
+                </children>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.8/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.6/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.8/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.7/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMinValue">
+      <typeReference xsi:type="types:Float"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="component">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the minimum normalized color component value for the&#xA;     * specified component.  For TYPE_XYZ spaces, this method returns&#xA;     * minimum values of 0.0 for all components.  For TYPE_Lab spaces,&#xA;     * this method returns 0.0 for L and -128.0 for a and b components.&#xA;     * This is consistent with the encoding of the XYZ and Lab Profile&#xA;     * Connection Spaces in the ICC specification.  For all other types, this&#xA;     * method returns 0.0 for all components.  When using an ICC_ColorSpace&#xA;     * with a profile that requires different minimum component values,&#xA;     * it is necessary to subclass this class and override this method.&#xA;     * @param component The component index.&#xA;     * @return The minimum normalized component value.&#xA;     * @throws IllegalArgumentException if component is less than 0 or&#xA;     *         greater than numComponents - 1.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Component index out of range: + component"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+              <children xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:SelfReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+                  </next>
+                  <self xsi:type="literals:This"/>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </children>
+              <relationOperators xsi:type="operators:GreaterThan"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <arraySelectors>
+            <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+          </arraySelectors>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxValue">
+      <typeReference xsi:type="types:Float"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="component">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the maximum normalized color component value for the&#xA;     * specified component.  For TYPE_XYZ spaces, this method returns&#xA;     * maximum values of 1.0 + (32767.0 / 32768.0) for all components.&#xA;     * For TYPE_Lab spaces,&#xA;     * this method returns 100.0 for L and 127.0 for a and b components.&#xA;     * This is consistent with the encoding of the XYZ and Lab Profile&#xA;     * Connection Spaces in the ICC specification.  For all other types, this&#xA;     * method returns 1.0 for all components.  When using an ICC_ColorSpace&#xA;     * with a profile that requires different maximum component values,&#xA;     * it is necessary to subclass this class and override this method.&#xA;     * @param component The component index.&#xA;     * @return The maximum normalized component value.&#xA;     * @throws IllegalArgumentException if component is less than 0 or&#xA;     *         greater than numComponents - 1.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Component index out of range: + component"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+              <children xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:SelfReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+                  </next>
+                  <self xsi:type="literals:This"/>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </children>
+              <relationOperators xsi:type="operators:GreaterThan"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+          <arraySelectors>
+            <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0"/>
+          </arraySelectors>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMinMax">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nc">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="type">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.45"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.0/@variable"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.0/@variable"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalFloatLiteral"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <comments>// L</comments>
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalFloatLiteral" decimalValue="100.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalFloatLiteral" decimalValue="128.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <comments>// a</comments>
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalFloatLiteral" decimalValue="127.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalFloatLiteral" decimalValue="128.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <comments>// b</comments>
+                <arraySelectors>
+                  <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalFloatLiteral" decimalValue="127.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.1/@variable"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="ColorSpace.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+          </children>
+        </condition>
+        <elseStatement xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                  <arraySelectors>
+                    <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  </arraySelectors>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                    <arraySelectors>
+                      <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                      <arraySelectors>
+                        <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      </arraySelectors>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:DecimalFloatLiteral"/>
+                  </value>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                  <comments>// X, Y, Z</comments>
+                  <arraySelectors>
+                    <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  </arraySelectors>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                    <arraySelectors>
+                      <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                      <arraySelectors>
+                        <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      </arraySelectors>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+                      <children xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="expressions:MultiplicativeExpression">
+                          <children xsi:type="literals:DecimalFloatLiteral" decimalValue="32767.0"/>
+                          <children xsi:type="literals:DecimalFloatLiteral" decimalValue="32768.0"/>
+                          <multiplicativeOperators xsi:type="operators:Division"/>
+                        </expression>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </value>
+                  </value>
+                </value>
+              </expression>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.1/@variable"/>
+            <children xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="ColorSpace.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+            </children>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:ForLoop">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                      <arraySelectors>
+                        <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.4/@elseStatement/@elseStatement/@statements.0/@init"/>
+                      </arraySelectors>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:DecimalFloatLiteral"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                      <arraySelectors>
+                        <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.4/@elseStatement/@elseStatement/@statements.0/@init"/>
+                      </arraySelectors>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.4/@elseStatement/@elseStatement/@statements.0/@init"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.0/@variable"/>
+                <relationOperators xsi:type="operators:LessThan"/>
+              </condition>
+              <init xsi:type="variables:LocalVariable" name="i">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </init>
+              <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@statements.4/@elseStatement/@elseStatement/@statements.0/@init"/>
+                <operator xsi:type="operators:PlusPlus"/>
+              </updates>
+            </statements>
+          </elseStatement>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setComponentScaling">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nc">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ColorSpace.class.xmi#//@classifiers.0/@members.46"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@variable"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Float"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@variable"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:SelfReference">
+                <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.17">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                </next>
+                <self xsi:type="literals:This"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <comments>// in case getMinVal is overridden</comments>
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:SelfReference">
+                <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.18">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                </next>
+                <self xsi:type="literals:This"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                <comments>// in case getMaxVal is overridden</comments>
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                  </arraySelectors>
+                </children>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                  </arraySelectors>
+                </children>
+                <additiveOperators xsi:type="operators:Subtraction"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="literals:DecimalFloatLiteral" decimalValue="65535.0"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+                  </arraySelectors>
+                </children>
+                <multiplicativeOperators xsi:type="operators:Division"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@variable"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; *  &#xA; * The ICC_ColorSpace class is an implementation of the abstract &#xA; * ColorSpace class.  This representation of&#xA; * device independent and device dependent color spaces is based on the&#xA; * International Color Consortium Specification ICC.1:2001-12, File Format for&#xA; * Color Profiles (see &lt;A href=&quot;http://www.color.org&quot;>http://www.color.org&lt;/A>).&#xA; * &lt;p>&#xA; * Typically, a Color or ColorModel would be associated with an ICC&#xA; * Profile which is either an input, display, or output profile (see&#xA; * the ICC specification).  There are other types of ICC Profiles, e.g.&#xA; * abstract profiles, device link profiles, and named color profiles,&#xA; * which do not contain information appropriate for representing the color&#xA; * space of a color, image, or device (see ICC_Profile).&#xA; * Attempting to create an ICC_ColorSpace object from an inappropriate ICC&#xA; * Profile is an error.&#xA; * &lt;p> &#xA; * ICC Profiles represent transformations from the color space of&#xA; * the profile (e.g. a monitor) to a Profile Connection Space (PCS).&#xA; * Profiles of interest for tagging images or colors have a&#xA; * PCS which is one of the device independent&#xA; * spaces (one CIEXYZ space and two CIELab spaces) defined in the&#xA; * ICC Profile Format Specification.  Most profiles of interest&#xA; * either have invertible transformations or explicitly specify&#xA; * transformations going both directions.  Should an ICC_ColorSpace&#xA; * object be used in a way requiring a conversion from PCS to&#xA; * the profile's native space and there is inadequate data to&#xA; * correctly perform the conversion, the ICC_ColorSpace object will&#xA; * produce output in the specified type of color space (e.g. TYPE_RGB,&#xA; * TYPE_CMYK, etc.), but the specific color values of the output data&#xA; * will be undefined.&#xA; * &lt;p>&#xA; * The details of this class are not important for simple applets,&#xA; * which draw in a default color space or manipulate and display&#xA; * imported images with a known color space.  At most, such applets&#xA; * would need to get one of the default color spaces via&#xA; * ColorSpace.getInstance().&#xA; * &lt;p>&#xA; * @see ColorSpace&#xA; * @see ICC_Profile&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="ColorSpace.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="TableModel.java">
+  <comments>/*&#xA; * @(#)TableModel.java&#x9;1.26 04/05/05&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>swing</namespaces>
+  <namespaces>table</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>event</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="TableModel">
+    <members xsi:type="members:InterfaceMethod" name="getRowCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of rows in the model. A&#xA;     * &lt;code>JTable&lt;/code> uses this method to determine how many rows it&#xA;     * should display.  This method should be quick, as it&#xA;     * is called frequently during rendering.&#xA;     *&#xA;     * @return the number of rows in the model&#xA;     * @see #getColumnCount&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getColumnCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of columns in the model. A&#xA;     * &lt;code>JTable&lt;/code> uses this method to determine how many columns it&#xA;     * should create and display by default.&#xA;     *&#xA;     * @return the number of columns in the model&#xA;     * @see #getRowCount&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getColumnName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the name of the column at &lt;code>columnIndex&lt;/code>.  This is used&#xA;     * to initialize the table's column header name.  Note: this name does&#xA;     * not need to be unique; two columns in a table can have the same name.&#xA;     *&#xA;     * @param&#x9;columnIndex&#x9;the index of the column&#xA;     * @return  the name of the column&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getColumnClass">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the most specific superclass for all the cell values &#xA;     * in the column.  This is used by the &lt;code>JTable&lt;/code> to set up a &#xA;     * default renderer and editor for the column.&#xA;     *&#xA;     * @param columnIndex  the index of the column&#xA;     * @return the common ancestor class of the object values in the model.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isCellEditable">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rowIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns true if the cell at &lt;code>rowIndex&lt;/code> and&#xA;     * &lt;code>columnIndex&lt;/code>&#xA;     * is editable.  Otherwise, &lt;code>setValueAt&lt;/code> on the cell will not&#xA;     * change the value of that cell.&#xA;     *&#xA;     * @param&#x9;rowIndex&#x9;the row whose value to be queried&#xA;     * @param&#x9;columnIndex&#x9;the column whose value to be queried&#xA;     * @return&#x9;true if the cell is editable&#xA;     * @see #setValueAt&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getValueAt">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rowIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the value for the cell at &lt;code>columnIndex&lt;/code> and&#xA;     * &lt;code>rowIndex&lt;/code>.&#xA;     *&#xA;     * @param&#x9;rowIndex&#x9;the row whose value is to be queried&#xA;     * @param&#x9;columnIndex &#x9;the column whose value is to be queried&#xA;     * @return&#x9;the value Object at the specified cell&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setValueAt">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="aValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rowIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the value in the cell at &lt;code>columnIndex&lt;/code> and&#xA;     * &lt;code>rowIndex&lt;/code> to &lt;code>aValue&lt;/code>.&#xA;     *&#xA;     * @param&#x9;aValue&#x9;&#x9; the new value&#xA;     * @param&#x9;rowIndex&#x9; the row whose value is to be changed&#xA;     * @param&#x9;columnIndex &#x9; the column whose value is to be changed&#xA;     * @see #getValueAt&#xA;     * @see #isCellEditable&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addTableModelListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds a listener to the list that is notified each time a change&#xA;     * to the data model occurs.&#xA;     *&#xA;     * @param&#x9;l&#x9;&#x9;the TableModelListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeTableModelListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="l">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../event/TableModelListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes a listener from the list that is notified each time a&#xA;     * change to the data model occurs.&#xA;     *&#xA;     * @param&#x9;l&#x9;&#x9;the TableModelListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; *  The &lt;code>TableModel&lt;/code> interface specifies the methods the&#xA; *  &lt;code>JTable&lt;/code> will use to interrogate a tabular data model. &lt;p>&#xA; *&#xA; *  The &lt;code>JTable&lt;/code> can be set up to display any data&#xA; *  model which implements the &#xA; *  &lt;code>TableModel&lt;/code> interface with a couple of lines of code:  &lt;p>&#xA; *  &lt;pre>&#xA; *  &#x9;TableModel myData = new MyTableModel(); &#xA; *  &#x9;JTable table = new JTable(myData);&#xA; *  &lt;/pre>&lt;p>&#xA; *&#xA; * For further documentation, see &lt;a href=&quot;http://java.sun.com/docs/books/tutorial/uiswing/components/table.html#data&quot;>Creating a Table Model&lt;/a>&#xA; * in &lt;em>The Java Tutorial&lt;/em>.&#xA; * &lt;p>&#xA; * @version 1.26 05/05/04&#xA; * @author Philip Milne&#xA; * @see JTable&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

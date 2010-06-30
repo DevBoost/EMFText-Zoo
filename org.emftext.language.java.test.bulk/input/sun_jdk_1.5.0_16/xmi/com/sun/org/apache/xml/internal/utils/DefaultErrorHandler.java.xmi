@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="DefaultErrorHandler.java">
+  <comments>/*&#xA; * Copyright 1999-2004 The Apache Software Foundation.&#xA; *&#xA; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA; * you may not use this file except in compliance with the License.&#xA; * You may obtain a copy of the License at&#xA; *&#xA; *     http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <comments>/*&#xA; * $Id: DefaultErrorHandler.java,v 1.15 2004/02/17 04:21:14 minchau Exp $&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>internal</namespaces>
+  <namespaces>utils</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/ErrorListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>transform</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>res</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../res/XMLErrorResources.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>internal</namespaces>
+    <namespaces>res</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../res/XMLMessages.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/xml/sax/ErrorHandler.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="DefaultErrorHandler">
+    <members xsi:type="members:Field" name="m_pw">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Constructor" name="DefaultErrorHandler">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pw">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Constructor DefaultErrorHandler&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DefaultErrorHandler">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+            <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pw">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Constructor DefaultErrorHandler&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="DefaultErrorHandler">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/System.class.xmi#//@classifiers.0"/>
+            </arguments>
+            <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+          </value>
+        </expression>
+      </statements>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Constructor DefaultErrorHandler&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="warning">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Receive notification of a warning.&#xA;   *&#xA;   * &lt;p>SAX parsers will use this method to report conditions that&#xA;   * are not errors or fatal errors as defined by the XML 1.0&#xA;   * recommendation.  The default behaviour is to take no action.&lt;/p>&#xA;   *&#xA;   * &lt;p>The SAX parser must continue to provide normal parsing events&#xA;   * after invoking this method: it should still be possible for the&#xA;   * application to process the document through to the end.&lt;/p>&#xA;   *&#xA;   * @param exception The warning information encapsulated in a&#xA;   *                  SAX parse exception.&#xA;   * @throws SAXException Any SAX exception, possibly&#xA;   *            wrapping another exception.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0/@members.41"/>
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:StringReference" value="Parser warning: "/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+              </children>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="error">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Receive notification of a recoverable error.&#xA;   *&#xA;   * &lt;p>This corresponds to the definition of &quot;error&quot; in section 1.2&#xA;   * of the W3C XML 1.0 Recommendation.  For example, a validating&#xA;   * parser would use this callback to report the violation of a&#xA;   * validity constraint.  The default behaviour is to take no&#xA;   * action.&lt;/p>&#xA;   *&#xA;   * &lt;p>The SAX parser must continue to provide normal parsing events&#xA;   * after invoking this method: it should still be possible for the&#xA;   * application to process the document through to the end.  If the&#xA;   * application cannot do so, then the parser should report a fatal&#xA;   * error even if the XML 1.0 recommendation does not require it to&#xA;   * do so.&lt;/p>&#xA;   *&#xA;   * @param exception The error information encapsulated in a&#xA;   *                  SAX parse exception.&#xA;   * @throws SAXException Any SAX exception, possibly&#xA;   *            wrapping another exception.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <comments>//printLocation(exception);</comments>
+        <comments>// m_pw.println(exception.getMessage());</comments>
+        <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fatalError">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Receive notification of a non-recoverable error.&#xA;   *&#xA;   * &lt;p>This corresponds to the definition of &quot;fatal error&quot; in&#xA;   * section 1.2 of the W3C XML 1.0 Recommendation.  For example, a&#xA;   * parser would use this callback to report the violation of a&#xA;   * well-formedness constraint.&lt;/p>&#xA;   *&#xA;   * &lt;p>The application must assume that the document is unusable&#xA;   * after the parser has invoked this method, and should continue&#xA;   * (if at all) only for the sake of collecting addition error&#xA;   * messages: in fact, SAX parsers are free to stop reporting any&#xA;   * other events once this method has been invoked.&lt;/p>&#xA;   *&#xA;   * @param exception The error information encapsulated in a&#xA;   *                  SAX parse exception.&#xA;   * @throws SAXException Any SAX exception, possibly&#xA;   *            wrapping another exception.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <comments>// printLocation(exception);</comments>
+        <comments>// m_pw.println(exception.getMessage());</comments>
+        <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="warning">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Receive notification of a warning.&#xA;   *&#xA;   * &lt;p>SAX parsers will use this method to report conditions that&#xA;   * are not errors or fatal errors as defined by the XML 1.0&#xA;   * recommendation.  The default behaviour is to take no action.&lt;/p>&#xA;   *&#xA;   * &lt;p>The SAX parser must continue to provide normal parsing events&#xA;   * after invoking this method: it should still be possible for the&#xA;   * application to process the document through to the end.&lt;/p>&#xA;   *&#xA;   * @param exception The warning information encapsulated in a&#xA;   *                  SAX parse exception.&#xA;   * @throws javax.xml.transform.TransformerException Any SAX exception, possibly&#xA;   *            wrapping another exception.&#xA;   * @see javax.xml.transform.TransformerException&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0/@members.41"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="error">
+      <comments>//throw exception;</comments>
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Receive notification of a recoverable error.&#xA;   *&#xA;   * &lt;p>This corresponds to the definition of &quot;error&quot; in section 1.2&#xA;   * of the W3C XML 1.0 Recommendation.  For example, a validating&#xA;   * parser would use this callback to report the violation of a&#xA;   * validity constraint.  The default behaviour is to take no&#xA;   * action.&lt;/p>&#xA;   *&#xA;   * &lt;p>The SAX parser must continue to provide normal parsing events&#xA;   * after invoking this method: it should still be possible for the&#xA;   * application to process the document through to the end.  If the&#xA;   * application cannot do so, then the parser should report a fatal&#xA;   * error even if the XML 1.0 recommendation does not require it to&#xA;   * do so.&lt;/p>&#xA;   *&#xA;   * @param exception The error information encapsulated in a&#xA;   *                  SAX parse exception.&#xA;   * @throws javax.xml.transform.TransformerException Any SAX exception, possibly&#xA;   *            wrapping another exception.&#xA;   * @see javax.xml.transform.TransformerException&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <comments>// printLocation(exception);</comments>
+          <comments>// ensureLocationSet(exception);</comments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0/@members.41"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="fatalError">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Receive notification of a non-recoverable error.&#xA;   *&#xA;   * &lt;p>This corresponds to the definition of &quot;fatal error&quot; in&#xA;   * section 1.2 of the W3C XML 1.0 Recommendation.  For example, a&#xA;   * parser would use this callback to report the violation of a&#xA;   * well-formedness constraint.&lt;/p>&#xA;   *&#xA;   * &lt;p>The application must assume that the document is unusable&#xA;   * after the parser has invoked this method, and should continue&#xA;   * (if at all) only for the sake of collecting addition error&#xA;   * messages: in fact, SAX parsers are free to stop reporting any&#xA;   * other events once this method has been invoked.&lt;/p>&#xA;   *&#xA;   * @param exception The error information encapsulated in a&#xA;   *                  SAX parse exception.&#xA;   * @throws javax.xml.transform.TransformerException Any SAX exception, possibly&#xA;   *            wrapping another exception.&#xA;   * @see javax.xml.transform.TransformerException&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <comments>// printLocation(exception);</comments>
+        <comments>// ensureLocationSet(exception);</comments>
+        <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="ensureLocationSet">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="locator">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// SourceLocator locator = exception.getLocator();</comments>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cause">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:DoWhileLoop">
+        <comments>// Try to find the locator closest to the cause.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="SAXSourceLocator.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                    </arguments>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:LocalVariableStatement">
+                  <variable name="causeLocator">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <initialValue xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                      </expression>
+                    </initialValue>
+                  </variable>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@statement/@statements.0/@elseStatement/@statement/@statements.0/@variable"/>
+                    </expression>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@statement/@statements.0/@elseStatement/@statement/@statements.0/@variable"/>
+                  </condition>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+              </condition>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="expressions:NestedExpression">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                  <expression xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                  </expression>
+                </value>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:NestedExpression">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0/@members.7"/>
+                    </next>
+                    <expression xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                    </expression>
+                  </value>
+                </expression>
+              </statement>
+              <condition xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+              </condition>
+              <elseStatement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:NullLiteral"/>
+                </expression>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0/@members.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="printLocation">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pw">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="printLocation">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pw">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>io</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>org</namespaces>
+          <namespaces>xml</namespaces>
+          <namespaces>sax</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="printLocation">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pw">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="exception">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="locator">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cause">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Throwable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:DoWhileLoop">
+        <comments>// Try to find the locator closest to the cause.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="SAXSourceLocator.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                    </arguments>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXParseException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:LocalVariableStatement">
+                  <variable name="causeLocator">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <initialValue xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                      </expression>
+                    </initialValue>
+                  </variable>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.2/@statement/@statements.0/@elseStatement/@statement/@statements.0/@variable"/>
+                    </expression>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.2/@statement/@statements.0/@elseStatement/@statement/@statements.0/@variable"/>
+                  </condition>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+              </condition>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="expressions:NestedExpression">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                  <expression xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                  </expression>
+                </value>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../javax/xml/transform/TransformerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:NestedExpression">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="WrappedRuntimeException.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <expression xsi:type="expressions:CastExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="WrappedRuntimeException.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                    </expression>
+                  </value>
+                </expression>
+              </statement>
+              <condition xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="WrappedRuntimeException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+              </condition>
+              <elseStatement xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0/@members.7"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                      </expression>
+                    </value>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:InstanceOfExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../org/xml/sax/SAXException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                </condition>
+                <elseStatement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </elseStatement>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="id">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <comments>// m_pw.println(&quot;Parser fatal error: &quot;+exception.getMessage());</comments>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </children>
+                  </expression>
+                </child>
+                <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </expressionIf>
+                <expressionElse xsi:type="expressions:ConditionalExpression">
+                  <child xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:NotEqual"/>
+                      <children xsi:type="literals:NullLiteral"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:InterfaceMethod" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0/@members.1"/>
+                        </next>
+                      </children>
+                    </expression>
+                  </child>
+                  <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </expressionIf>
+                  <expressionElse xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../res/XMLMessages.class.xmi#//@classifiers.0/@members.8"/>
+                      <arguments xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../res/XMLErrorResources.class.xmi#//@classifiers.0/@members.54"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../res/XMLErrorResources.class.xmi#//@classifiers.0"/>
+                      </arguments>
+                      <arguments xsi:type="literals:NullLiteral"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../res/XMLMessages.class.xmi#//@classifiers.0"/>
+                  </expressionElse>
+                </expressionElse>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0">
+              <comments>//&quot;SystemId Unknown&quot;;</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0/@members.31"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.3/@statement/@statements.0/@variable"/>
+                  <children xsi:type="references:StringReference" value="; "/>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../res/XMLMessages.class.xmi#//@classifiers.0/@members.8"/>
+                      <arguments xsi:type="references:StringReference" value="line"/>
+                      <arguments xsi:type="literals:NullLiteral"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../res/XMLMessages.class.xmi#//@classifiers.0"/>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:StringReference" value="; "/>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../res/XMLMessages.class.xmi#//@classifiers.0/@members.8"/>
+                      <arguments xsi:type="references:StringReference" value="column"/>
+                      <arguments xsi:type="literals:NullLiteral"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../res/XMLMessages.class.xmi#//@classifiers.0"/>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../../javax/xml/transform/SourceLocator.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:StringReference" value="; "/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="literals:NullLiteral"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable"/>
+        </condition>
+        <elseStatement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../java/io/PrintWriter.class.xmi#//@classifiers.0/@members.31"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="("/>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../res/XMLMessages.class.xmi#//@classifiers.0/@members.8"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../res/XMLErrorResources.class.xmi#//@classifiers.0/@members.55"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../res/XMLErrorResources.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                    <arguments xsi:type="literals:NullLiteral"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../res/XMLMessages.class.xmi#//@classifiers.0"/>
+                </children>
+                <children xsi:type="references:StringReference" value=")"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </next>
+          </expression>
+        </elseStatement>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Implement SAX error handler for default reporting.&#xA; * @xsl.usage general&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../../org/xml/sax/ErrorHandler.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../../javax/xml/transform/ErrorListener.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

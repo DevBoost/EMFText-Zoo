@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Sequencer.java">
+  <comments>/*&#xA; * @(#)Sequencer.java&#x9;1.36 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sound</namespaces>
+  <namespaces>midi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Sequencer">
+    <comments>// class SyncMode</comments>
+    <members xsi:type="members:Field" name="LOOP_CONTINUOUSLY">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A value indicating that looping should continue&#xA;     * indefinitely rather than complete after a specific&#xA;     * number of loops.&#xA;     *&#xA;     * @see #setLoopCount&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSequence">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sequence">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Sequence.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InvalidMidiDataException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the current sequence on which the sequencer operates.&#xA;     *&#xA;     * &lt;p>This method can be called even if the&#xA;     * &lt;code>Sequencer&lt;/code> is closed.&#xA;     *&#xA;     * @param sequence the sequence to be loaded.&#xA;     * @throws InvalidMidiDataException if the sequence contains invalid&#xA;     * MIDI data, or is not supported.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSequence">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="stream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InvalidMidiDataException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the current sequence on which the sequencer operates.&#xA;     * The stream must point to MIDI file data.&#xA;     *&#xA;     * &lt;p>This method can be called even if the&#xA;     * &lt;code>Sequencer&lt;/code> is closed.&#xA;     *&#xA;     * @param stream stream containing MIDI file data.&#xA;     * @throws IOException if an I/O exception occurs during reading of the stream.&#xA;     * @throws InvalidMidiDataException if invalid data is encountered&#xA;     * in the stream, or the stream is not supported.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSequence">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Sequence.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the sequence on which the Sequencer is currently operating.&#xA;     *&#xA;     * &lt;p>This method can be called even if the&#xA;     * &lt;code>Sequencer&lt;/code> is closed.&#xA;     *&#xA;     * @return the current sequence, or &lt;code>null&lt;/code> if no sequence is currently set.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="start">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Starts playback of the MIDI data in the currently&#xA;     * loaded sequence.&#xA;     * Playback will begin from the current position.&#xA;     * If the playback position reaches the loop end point,&#xA;     * and the loop count is greater than 0, playback will&#xA;     * resume at the loop start point for the number of&#xA;     * repetitions set with &lt;code>setLoopCount&lt;/code>.&#xA;     * After that, or if the loop count is 0, playback will&#xA;     * continue to play to the end of the sequence.&#xA;     *&#xA;     * &lt;p>The implementation ensures that the synthesizer&#xA;     * is brought to a consistent state when jumping&#xA;     * to the loop start point by sending appropriate&#xA;     * controllers, pitch bend, and program change events.&#xA;     *&#xA;     * @throws IllegalStateException if the &lt;code>Sequencer&lt;/code> is&#xA;     * closed.&#xA;     *&#xA;     * @see #setLoopStartPoint&#xA;     * @see #setLoopEndPoint&#xA;     * @see #setLoopCount&#xA;     * @see #stop&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="stop">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Stops recording, if active, and playback of the currently loaded sequence,&#xA;     * if any.&#xA;     *&#xA;     * @throws IllegalStateException if the &lt;code>Sequencer&lt;/code> is&#xA;     * closed.&#xA;     *&#xA;     * @see #start&#xA;     * @see #isRunning&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isRunning">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates whether the Sequencer is currently running.  The default is &lt;code>false&lt;/code>.&#xA;     * The Sequencer starts running when either &lt;code>{@link #start}&lt;/code> or &lt;code>{@link #startRecording}&lt;/code>&#xA;     * is called.  &lt;code>isRunning&lt;/code> then returns &lt;code>true&lt;/code> until playback of the&#xA;     * sequence completes or &lt;code>{@link #stop}&lt;/code> is called.&#xA;     * @return &lt;code>true&lt;/code> if the Sequencer is running, otherwise &lt;code>false&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="startRecording">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Starts recording and playback of MIDI data.  Data is recorded to all enabled tracks,&#xA;     * on the channel(s) for which they were enabled.  Recording begins at the current position&#xA;     * of the sequencer.   Any events already in the track are overwritten for the duration&#xA;     * of the recording session.  Events from the currently loaded sequence,&#xA;     * if any, are delivered to the sequencer's transmitter(s) along with messages&#xA;     * received during recording.&#xA;     * &lt;p>&#xA;     * Note that tracks are not by default enabled for recording.  In order to record MIDI data,&#xA;     * at least one track must be specifically enabled for recording.&#xA;     *&#xA;     * @throws IllegalStateException if the &lt;code>Sequencer&lt;/code> is&#xA;     * closed.&#xA;     *&#xA;     * @see #startRecording&#xA;     * @see #recordEnable&#xA;     * @see #recordDisable&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="stopRecording">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Stops recording, if active.  Playback of the current sequence continues.&#xA;     *&#xA;     * @throws IllegalStateException if the &lt;code>Sequencer&lt;/code> is&#xA;     * closed.&#xA;     *&#xA;     * @see #startRecording&#xA;     * @see #isRecording&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isRecording">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates whether the Sequencer is currently recording.  The default is &lt;code>false&lt;/code>.&#xA;     * The Sequencer begins recording when &lt;code>{@link #startRecording}&lt;/code> is called,&#xA;     * and then returns &lt;code>true&lt;/code> until &lt;code>{@link #stop}&lt;/code> or &lt;code>{@link #stopRecording}&lt;/code>&#xA;     * is called.&#xA;     * @return &lt;code>true&lt;/code> if the Sequencer is recording, otherwise &lt;code>false&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="recordEnable">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="track">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Track.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="channel">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Prepares the specified track for recording events received on a particular channel.&#xA;     * Once enabled, a track will receive events when recording is active.&#xA;     * @param track the track to which events will be recorded&#xA;     * @param channel the channel on which events will be received.  If -1 is specified&#xA;     * for the channel value, the track will receive data from all channels.&#xA;     * @throws IllegalArgumentException thrown if the track is not part of the current&#xA;     * sequence.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="recordDisable">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="track">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Track.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Disables recording to the specified track.  Events will no longer be recorded&#xA;     * into this track.&#xA;     * @param track the track to disable for recording, or &lt;code>null&lt;/code> to disable&#xA;     * recording for all tracks.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTempoInBPM">
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current tempo, expressed in beats per minute.  The&#xA;     * actual tempo of playback is the product of the returned value&#xA;     * and the tempo factor.&#xA;     *&#xA;     * @return the current tempo in beats per minute&#xA;     *&#xA;     * @see #getTempoFactor&#xA;     * @see #setTempoInBPM(float)&#xA;     * @see #getTempoInMPQ&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTempoInBPM">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bpm">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the tempo in beats per minute.   The actual tempo of playback&#xA;     * is the product of the specified value and the tempo factor.&#xA;     *&#xA;     * @param bpm desired new tempo in beats per minute&#xA;     * @see #getTempoFactor&#xA;     * @see #setTempoInMPQ(float)&#xA;     * @see #getTempoInBPM&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTempoInMPQ">
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current tempo, expressed in microseconds per quarter&#xA;     * note.  The actual tempo of playback is the product of the returned&#xA;     * value and the tempo factor.&#xA;     *&#xA;     * @return the current tempo in microseconds per quarter note&#xA;     * @see #getTempoFactor&#xA;     * @see #setTempoInMPQ(float)&#xA;     * @see #getTempoInBPM&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTempoInMPQ">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mpq">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the tempo in microseconds per quarter note.  The actual tempo&#xA;     * of playback is the product of the specified value and the tempo&#xA;     * factor.&#xA;     *&#xA;     * @param mpq desired new tempo in microseconds per quarter note.&#xA;     * @see #getTempoFactor&#xA;     * @see #setTempoInBPM(float)&#xA;     * @see #getTempoInMPQ&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTempoFactor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="factor">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Scales the sequencer's actual playback tempo by the factor provided.&#xA;     * The default is 1.0.  A value of 1.0 represents the natural rate (the&#xA;     * tempo specified in the sequence), 2.0 means twice as fast, etc.&#xA;     * The tempo factor does not affect the values returned by&#xA;     * &lt;code>{@link #getTempoInMPQ}&lt;/code> and &lt;code>{@link #getTempoInBPM}&lt;/code>.&#xA;     * Those values indicate the tempo prior to scaling.&#xA;     * &lt;p>&#xA;     * Note that the tempo factor cannot be adjusted when external&#xA;     * synchronization is used.  In that situation,&#xA;     * &lt;code>setTempoFactor&lt;/code> always sets the tempo factor to 1.0.&#xA;     *&#xA;     * @param factor the requested tempo scalar&#xA;     * @see #getTempoFactor&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTempoFactor">
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current tempo factor for the sequencer.  The default is&#xA;     * 1.0.&#xA;     *&#xA;     * @return tempo factor.&#xA;     * @see #setTempoFactor(float)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTickLength">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the length of the current sequence, expressed in MIDI ticks,&#xA;     * or 0 if no sequence is set.&#xA;     * @return length of the sequence in ticks&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTickPosition">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current position in the sequence, expressed in MIDI&#xA;     * ticks.  (The duration of a tick in seconds is determined both by&#xA;     * the tempo and by the timing resolution stored in the&#xA;     * &lt;code>{@link Sequence}&lt;/code>.)&#xA;     *&#xA;     * @return current tick&#xA;     * @see #setTickPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTickPosition">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tick">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the current sequencer position in MIDI ticks&#xA;     * @param tick the desired tick position&#xA;     * @see #getTickPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMicrosecondLength">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the length of the current sequence, expressed in microseconds,&#xA;     * or 0 if no sequence is set.&#xA;     * @return length of the sequence in microseconds.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMicrosecondPosition">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current position in the sequence, expressed in&#xA;     * microseconds.&#xA;     * @return the current position in microseconds&#xA;     * @see #setMicrosecondPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMicrosecondPosition">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="microseconds">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the current position in the sequence, expressed in microseconds&#xA;     * @param microseconds desired position in microseconds&#xA;     * @see #getMicrosecondPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMasterSyncMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sync">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.44"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the source of timing information used by this sequencer.&#xA;     * The sequencer synchronizes to the master, which is the internal clock,&#xA;     * MIDI clock, or MIDI time code, depending on the value of&#xA;     * &lt;code>sync&lt;/code>.  The &lt;code>sync&lt;/code> argument must be one&#xA;     * of the supported modes, as returned by&#xA;     * &lt;code>{@link #getMasterSyncModes}&lt;/code>.&#xA;     *&#xA;     * @param sync the desired master synchronization mode&#xA;     *&#xA;     * @see SyncMode#INTERNAL_CLOCK&#xA;     * @see SyncMode#MIDI_SYNC&#xA;     * @see SyncMode#MIDI_TIME_CODE&#xA;     * @see #getMasterSyncMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMasterSyncMode">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.44"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current master synchronization mode for this sequencer.&#xA;     *&#xA;     * @return the current master synchronization mode&#xA;     *&#xA;     * @see #setMasterSyncMode(Sequencer.SyncMode)&#xA;     * @see #getMasterSyncModes&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMasterSyncModes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.44"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the set of master synchronization modes supported by this&#xA;     * sequencer.&#xA;     *&#xA;     * @return the available master synchronization modes&#xA;     *&#xA;     * @see SyncMode#INTERNAL_CLOCK&#xA;     * @see SyncMode#MIDI_SYNC&#xA;     * @see SyncMode#MIDI_TIME_CODE&#xA;     * @see #getMasterSyncMode&#xA;     * @see #setMasterSyncMode(Sequencer.SyncMode)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSlaveSyncMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sync">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.44"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the slave synchronization mode for the sequencer.&#xA;     * This indicates the type of timing information sent by the sequencer&#xA;     * to its receiver.  The &lt;code>sync&lt;/code> argument must be one&#xA;     * of the supported modes, as returned by&#xA;     * &lt;code>{@link #getSlaveSyncModes}&lt;/code>.&#xA;     *&#xA;     * @param sync the desired slave synchronization mode&#xA;     *&#xA;     * @see SyncMode#MIDI_SYNC&#xA;     * @see SyncMode#MIDI_TIME_CODE&#xA;     * @see SyncMode#NO_SYNC&#xA;     * @see #getSlaveSyncModes&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSlaveSyncMode">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.44"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current slave synchronization mode for this sequencer.&#xA;     *&#xA;     * @return the current slave synchronization mode&#xA;     *&#xA;     * @see #setSlaveSyncMode(Sequencer.SyncMode)&#xA;     * @see #getSlaveSyncModes&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSlaveSyncModes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.44"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the set of slave synchronization modes supported by the sequencer.&#xA;     *&#xA;     * @return the available slave synchronization modes&#xA;     *&#xA;     * @see SyncMode#MIDI_SYNC&#xA;     * @see SyncMode#MIDI_TIME_CODE&#xA;     * @see SyncMode#NO_SYNC&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTrackMute">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="track">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mute">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the mute state for a track.  This method may fail for a number&#xA;     * of reasons.  For example, the track number specified may not be valid&#xA;     * for the current sequence, or the sequencer may not support this functionality.&#xA;     * An application which needs to verify whether this operation succeeded should&#xA;     * follow this call with a call to &lt;code>{@link #getTrackMute}&lt;/code>.&#xA;     *&#xA;     * @param track the track number.  Tracks in the current sequence are numbered&#xA;     * from 0 to the number of tracks in the sequence minus 1.&#xA;     * @param mute the new mute state for the track.  &lt;code>true&lt;/code> implies the&#xA;     * track should be muted, &lt;code>false&lt;/code> implies the track should be unmuted.&#xA;     * @see #getSequence&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTrackMute">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="track">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current mute state for a track.  The default mute&#xA;     * state for all tracks which have not been muted is false.  In any&#xA;     * case where the specified track has not been muted, this method should&#xA;     * return false.  This applies if the sequencer does not support muting&#xA;     * of tracks, and if the specified track index is not valid.&#xA;     *&#xA;     * @param track the track number.  Tracks in the current sequence are numbered&#xA;     * from 0 to the number of tracks in the sequence minus 1.&#xA;     * @return &lt;code>true&lt;/code> if muted, &lt;code>false&lt;/code> if not.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTrackSolo">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="track">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="solo">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the solo state for a track.  If &lt;code>solo&lt;/code> is &lt;code>true&lt;/code>&#xA;     * only this track and other solo'd tracks will sound. If &lt;code>solo&lt;/code>&#xA;     * is &lt;code>false&lt;/code> then only other solo'd tracks will sound, unless no&#xA;     * tracks are solo'd in which case all un-muted tracks will sound.&#xA;     * &lt;p>&#xA;     * This method may fail for a number&#xA;     * of reasons.  For example, the track number specified may not be valid&#xA;     * for the current sequence, or the sequencer may not support this functionality.&#xA;     * An application which needs to verify whether this operation succeeded should&#xA;     * follow this call with a call to &lt;code>{@link #getTrackSolo}&lt;/code>.&#xA;     *&#xA;     * @param track the track number.  Tracks in the current sequence are numbered&#xA;     * from 0 to the number of tracks in the sequence minus 1.&#xA;     * @param solo the new solo state for the track.  &lt;code>true&lt;/code> implies the&#xA;     * track should be solo'd, &lt;code>false&lt;/code> implies the track should not be solo'd.&#xA;     * @see #getSequence&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTrackSolo">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="track">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the current solo state for a track.  The default mute&#xA;     * state for all tracks which have not been solo'd is false.  In any&#xA;     * case where the specified track has not been solo'd, this method should&#xA;     * return false.  This applies if the sequencer does not support soloing&#xA;     * of tracks, and if the specified track index is not valid.&#xA;     *&#xA;     * @param track the track number.  Tracks in the current sequence are numbered&#xA;     * from 0 to the number of tracks in the sequence minus 1.&#xA;     * @return &lt;code>true&lt;/code> if solo'd, &lt;code>false&lt;/code> if not.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addMetaEventListener">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MetaEventListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Registers a meta-event listener to receive&#xA;     * notification whenever a meta-event is encountered in the sequence&#xA;     * and processed by the sequencer. This method can fail if, for&#xA;     * instance,this class of sequencer does not support meta-event&#xA;     * notification.&#xA;     *&#xA;     * @param listener listener to add&#xA;     * @return &lt;code>true&lt;/code> if the listener was successfully added,&#xA;     * otherwise &lt;code>false&lt;/code>&#xA;     *&#xA;     * @see #removeMetaEventListener&#xA;     * @see MetaEventListener&#xA;     * @see MetaMessage&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeMetaEventListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="MetaEventListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes the specified meta-event listener from this sequencer's&#xA;     * list of registered listeners, if in fact the listener is registered.&#xA;     *&#xA;     * @param listener the meta-event listener to remove&#xA;     * @see #addMetaEventListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addControllerEventListener">
+      <typeReference xsi:type="types:Int"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ControllerEventListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="controllers">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Registers a controller event listener to receive notification&#xA;     * whenever the sequencer processes a control-change event of the&#xA;     * requested type or types.  The types are specified by the&#xA;     * &lt;code>controllers&lt;/code> argument, which should contain an array of&#xA;     * MIDI controller numbers.  (Each number should be between 0 and 127,&#xA;     * inclusive.  See the MIDI 1.0 Specification for the numbers that&#xA;     * correspond to various types of controllers.)&#xA;     * &lt;p>&#xA;     * The returned array contains the MIDI controller&#xA;     * numbers for which the listener will now receive events.&#xA;     * Some sequencers might not support controller event notification, in&#xA;     * which case the array has a length of 0.  Other sequencers might&#xA;     * support notification for some controllers but not all.&#xA;     * This method may be invoked repeatedly.&#xA;     * Each time, the returned array indicates all the controllers&#xA;     * that the listener will be notified about, not only the controllers&#xA;     * requested in that particular invocation.&#xA;     *&#xA;     * @param listener the controller event listener to add to the list of&#xA;     * registered listeners&#xA;     * @param controllers the MIDI controller numbers for which change&#xA;     * notification is requested&#xA;     * @return the numbers of all the MIDI controllers whose changes will&#xA;     * now be reported to the specified listener&#xA;     *&#xA;     * @see #removeControllerEventListener&#xA;     * @see ControllerEventListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeControllerEventListener">
+      <typeReference xsi:type="types:Int"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ControllerEventListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="controllers">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes a controller event listener's interest in one or more&#xA;     * types of controller event. The &lt;code>controllers&lt;/code> argument&#xA;     * is an array of MIDI numbers corresponding to the  controllers for&#xA;     * which the listener should no longer receive change notifications.&#xA;     * To completely remove this listener from the list of registered&#xA;     * listeners, pass in &lt;code>null&lt;/code> for &lt;code>controllers&lt;/code>.&#xA;     * The returned array contains the MIDI controller&#xA;     * numbers for which the listener will now receive events.  The&#xA;     * array has a length of 0 if the listener will not receive&#xA;     * change notifications for any controllers.&#xA;     *&#xA;     * @param listener old listener&#xA;     * @param controllers the MIDI controller numbers for which change&#xA;     * notification should be cancelled, or &lt;code>null&lt;/code> to cancel&#xA;     * for all controllers&#xA;     * @return the numbers of all the MIDI controllers whose changes will&#xA;     * now be reported to the specified listener&#xA;     *&#xA;     * @see #addControllerEventListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setLoopStartPoint">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tick">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the first MIDI tick that will be&#xA;     * played in the loop. If the loop count is&#xA;     * greater than 0, playback will jump to this&#xA;     * point when reaching the loop end point.&#xA;     *&#xA;     * &lt;p>A value of 0 for the starting point means the&#xA;     * beginning of the loaded sequence. The starting&#xA;     * point must be lower than or equal to the ending&#xA;     * point, and it must fall within the size of the&#xA;     * loaded sequence.&#xA;     *&#xA;     * &lt;p>A sequencer's loop start point defaults to&#xA;     * start of the sequence.&#xA;     *&#xA;     * @param tick the loop's starting position,&#xA;     *        in MIDI ticks (zero-based)&#xA;     * @throws IllegalArgumentException if the requested&#xA;     *         loop start point cannot be set, usually because&#xA;     *         it falls outside the sequence's&#xA;     *         duration or because the start point is&#xA;     *         after the end point&#xA;     *&#xA;     * @see #setLoopEndPoint&#xA;     * @see #setLoopCount&#xA;     * @see #getLoopStartPoint&#xA;     * @see #start&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLoopStartPoint">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the start position of the loop,&#xA;     * in MIDI ticks.&#xA;     *&#xA;     * @return the start position of the loop,&#xA;               in MIDI ticks (zero-based)&#xA;     * @see #setLoopStartPoint&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setLoopEndPoint">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tick">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the last MIDI tick that will be played in&#xA;     * the loop. If the loop count is 0, the loop end&#xA;     * point has no effect and playback continues to&#xA;     * play when reaching the loop end point.&#xA;     *&#xA;     * &lt;p>A value of -1 for the ending point&#xA;     * indicates the last tick of the sequence.&#xA;     * Otherwise, the ending point must be greater&#xA;     * than or equal to the starting point, and it must&#xA;     * fall within the size of the loaded sequence.&#xA;     *&#xA;     * &lt;p>A sequencer's loop end point defaults to -1,&#xA;     * meaning the end of the sequence.&#xA;     *&#xA;     * @param tick the loop's ending position,&#xA;     *        in MIDI ticks (zero-based), or&#xA;     *        -1 to indicate the final tick&#xA;     * @throws IllegalArgumentException if the requested&#xA;     *         loop point cannot be set, usually because&#xA;     *         it falls outside the sequence's&#xA;     *         duration or because the ending point is&#xA;     *         before the starting point&#xA;     *&#xA;     * @see #setLoopStartPoint&#xA;     * @see #setLoopCount&#xA;     * @see #getLoopEndPoint&#xA;     * @see #start&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLoopEndPoint">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the end position of the loop,&#xA;     * in MIDI ticks.&#xA;     *&#xA;     * @return the end position of the loop, in MIDI&#xA;     *         ticks (zero-based), or -1 to indicate&#xA;     *         the end of the sequence&#xA;     * @see #setLoopEndPoint&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setLoopCount">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="count">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the number of repetitions of the loop for&#xA;     * playback.&#xA;     * When the playback position reaches the loop end point,&#xA;     * it will loop back to the loop start point&#xA;     * &lt;code>count&lt;/code> times, after which playback will&#xA;     * continue to play to the end of the sequence.&#xA;     * &lt;p>&#xA;     * If the current position when this method is invoked&#xA;     * is greater than the loop end point, playback&#xA;     * continues to the end of the sequence without looping,&#xA;     * unless the loop end point is changed subsequently.&#xA;     * &lt;p>&#xA;     * A &lt;code>count&lt;/code> value of 0 disables looping:&#xA;     * playback will continue at the loop end point, and it&#xA;     * will not loop back to the loop start point.&#xA;     * This is a sequencer's default.&#xA;     *&#xA;     * &lt;p>If playback is stopped during looping, the&#xA;     * current loop status is cleared; subsequent start&#xA;     * requests are not affected by an interrupted loop&#xA;     * operation.&#xA;     *&#xA;     * @param count the number of times playback should&#xA;     *        loop back from the loop's end position&#xA;     *        to the loop's start position, or&#xA;     *        &lt;code>{@link #LOOP_CONTINUOUSLY}&lt;/code>&#xA;     *        to indicate that looping should&#xA;     *        continue until interrupted&#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;code>count&lt;/code> is&#xA;     * negative and not equal to {@link #LOOP_CONTINUOUSLY}&#xA;     *&#xA;     * @see #setLoopStartPoint&#xA;     * @see #setLoopEndPoint&#xA;     * @see #getLoopCount&#xA;     * @see #start&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLoopCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the number of repetitions for&#xA;     * playback.&#xA;     *&#xA;     * @return the number of loops after which&#xA;     *         playback plays to the end of the&#xA;     *         sequence&#xA;     * @see #setLoopCount&#xA;     * @see #start&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="classifiers:Class" name="SyncMode">
+      <members xsi:type="members:Field" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Private">
+          <comments>/**&#xA;&#x9; * Synchronization mode name.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:Constructor" name="SyncMode">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@members.0"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@members.1/@parameters.0"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Protected">
+          <comments>/**&#xA;&#x9; * Constructs a synchronization mode.&#xA;&#x9; * @param name name of the synchronization mode&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+      </members>
+      <members xsi:type="members:ClassMethod" name="equals">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Determines whether two objects are equal.&#xA;&#x9; * Returns &lt;code>true&lt;/code> if the objects are identical&#xA;&#x9; * @param obj the reference object with which to compare&#xA;&#x9; * @return &lt;code>true&lt;/code> if this object is the same as the&#xA;&#x9; * &lt;code>obj&lt;/code> argument, &lt;code>false&lt;/code> otherwise&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@members.2/@parameters.0"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="hashCode">
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Finalizes the hashcode method.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/Object.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="toString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * Provides this synchronization mode's name as the string&#xA;&#x9; * representation of the mode.&#xA;&#x9; * @return the name of this synchronization mode&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:Field" name="INTERNAL_CLOCK">
+        <initialValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.44"/>
+          </typeReference>
+          <arguments xsi:type="references:StringReference" value="Internal Clock"/>
+        </initialValue>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.44"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * A master synchronization mode that makes the sequencer get&#xA;&#x9; * its timing information from its internal clock.  This is not&#xA;&#x9; * a legal slave sync mode.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Static"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </members>
+      <members xsi:type="members:Field" name="MIDI_SYNC">
+        <initialValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.44"/>
+          </typeReference>
+          <arguments xsi:type="references:StringReference" value="MIDI Sync"/>
+        </initialValue>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.44"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * A master or slave synchronization mode that specifies the&#xA;&#x9; * use of MIDI clock&#xA;&#x9; * messages.  If this mode is used as the master sync mode,&#xA;&#x9; * the sequencer gets its timing information from system real-time&#xA;&#x9; * MIDI clock messages.  This mode only applies as the master sync&#xA;&#x9; * mode for sequencers that are also MIDI receivers.  If this is the&#xA;&#x9; * slave sync mode, the sequencer sends system real-time MIDI clock&#xA;&#x9; * messages to its receiver.  MIDI clock messages are sent at a rate&#xA;&#x9; * of 24 per quarter note.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Static"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </members>
+      <members xsi:type="members:Field" name="MIDI_TIME_CODE">
+        <initialValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.44"/>
+          </typeReference>
+          <arguments xsi:type="references:StringReference" value="MIDI Time Code"/>
+        </initialValue>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.44"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * A master or slave synchronization mode that specifies the&#xA;&#x9; * use of MIDI Time Code.&#xA;&#x9; * If this mode is used as the master sync mode,&#xA;&#x9; * the sequencer gets its timing information from MIDI Time Code&#xA;&#x9; * messages.  This mode only applies as the master sync&#xA;&#x9; * mode to sequencers that are also MIDI receivers.  If this&#xA;&#x9; * mode is used as the&#xA;&#x9; * slave sync mode, the sequencer sends MIDI Time Code&#xA;&#x9; * messages to its receiver.  (See the MIDI 1.0 Detailed&#xA;&#x9; * Specification for a description of MIDI Time Code.)&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Static"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </members>
+      <members xsi:type="members:Field" name="NO_SYNC">
+        <initialValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.44"/>
+          </typeReference>
+          <arguments xsi:type="references:StringReference" value="No Timing"/>
+        </initialValue>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.44"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public">
+          <comments>/**&#xA;&#x9; * A slave synchronization mode indicating that no timing information&#xA;&#x9; * should be sent to the receiver.  This is not a legal master sync&#xA;&#x9; * mode.&#xA;&#x9; */</comments>
+        </annotationsAndModifiers>
+        <annotationsAndModifiers xsi:type="modifiers:Static"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A &lt;code>SyncMode&lt;/code> object represents one of the ways in which&#xA;     * a MIDI sequencer's notion of time can be synchronized with a master&#xA;     * or slave device.&#xA;     * If the sequencer is being synchronized to a master, the&#xA;     * sequencer revises its current time in response to messages from&#xA;     * the master.  If the sequencer has a slave, the sequencer&#xA;     * similarly sends messages to control the slave's timing.&#xA;     * &lt;p>&#xA;     * There are three predefined modes that specify possible masters&#xA;     * for a sequencer: &lt;code>INTERNAL_CLOCK&lt;/code>,&#xA;     * &lt;code>MIDI_SYNC&lt;/code>, and &lt;code>MIDI_TIME_CODE&lt;/code>.  The&#xA;     * latter two work if the sequencer receives MIDI messages from&#xA;     * another device.  In these two modes, the sequencer's time gets reset&#xA;     * based on system real-time timing clock messages or MIDI time code&#xA;     * (MTC) messages, respectively.  These two modes can also be used&#xA;     * as slave modes, in which case the sequencer sends the corresponding&#xA;     * types of MIDI messages to its receiver (whether or not the sequencer&#xA;     * is also receiving them from a master).  A fourth mode,&#xA;     * &lt;code>NO_SYNC&lt;/code>, is used to indicate that the sequencer should&#xA;     * not control its receiver's timing.&#xA;     *&#xA;     * @see Sequencer#setMasterSyncMode(Sequencer.SyncMode)&#xA;     * @see Sequencer#setSlaveSyncMode(Sequencer.SyncMode)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A hardware or software device that plays back a MIDI&#xA; * &lt;code>{@link Sequence sequence}&lt;/code> is known as a &lt;em>sequencer&lt;/em>.&#xA; * A MIDI sequence contains lists of time-stamped MIDI data, such as&#xA; * might be read from a standard MIDI file.  Most&#xA; * sequencers also provide functions for creating and editing sequences.&#xA; * &lt;p>&#xA; * The &lt;code>Sequencer&lt;/code> interface includes methods for the following&#xA; * basic MIDI sequencer operations:&#xA; * &lt;ul>&#xA; * &lt;li>obtaining a sequence from MIDI file data&lt;/li>&#xA; * &lt;li>starting and stopping playback&lt;/li>&#xA; * &lt;li>moving to an arbitrary position in the sequence&lt;/li>&#xA; * &lt;li>changing the tempo (speed) of playback&lt;/li>&#xA; * &lt;li>synchronizing playback to an internal clock or to received MIDI&#xA; * messages&lt;/li>&#xA; * &lt;li>controlling the timing of another device&lt;/li>&#xA; * &lt;/ul>&#xA; * In addition, the following operations are supported, either directly, or&#xA; * indirectly through objects that the &lt;code>Sequencer&lt;/code> has access to:&#xA; * &lt;ul>&#xA; * &lt;li>editing the data by adding or deleting individual MIDI events or entire&#xA; * tracks&lt;/li>&#xA; * &lt;li>muting or soloing individual tracks in the sequence&lt;/li>&#xA; * &lt;li>notifying listener objects about any meta-events or&#xA; * control-change events encountered while playing back the sequence.&lt;/li>&#xA; * &lt;/ul>&#xA; *&#xA; * @see Sequencer.SyncMode&#xA; * @see #addMetaEventListener&#xA; * @see ControllerEventListener&#xA; * @see Receiver&#xA; * @see Transmitter&#xA; * @see MidiDevice&#xA; *&#xA; * @version 1.36, 03/12/19&#xA; * @author Kara Kytle&#xA; * @author Florian Bomers&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="MidiDevice.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

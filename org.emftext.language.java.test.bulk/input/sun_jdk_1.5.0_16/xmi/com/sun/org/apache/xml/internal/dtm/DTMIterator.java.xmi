@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="DTMIterator.java">
+  <comments>/*&#xA; * Copyright 1999-2004 The Apache Software Foundation.&#xA; *&#xA; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA; * you may not use this file except in compliance with the License.&#xA; * You may obtain a copy of the License at&#xA; *&#xA; *     http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <comments>/*&#xA; * $Id: DTMIterator.java,v 1.7 2004/02/16 23:03:44 minchau Exp $&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>internal</namespaces>
+  <namespaces>dtm</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="DTMIterator">
+    <members xsi:type="members:Field" name="FILTER_ACCEPT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Short"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Constants returned by acceptNode, borrowed from the DOM Traversal chapter</comments>
+        <comments>// %REVIEW% Should we explicitly initialize them from, eg,</comments>
+        <comments>// org.w3c.dom.traversal.NodeFilter.FILTER_ACCEPT?</comments>
+        <comments>/**&#xA;   * Accept the node.&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FILTER_REJECT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Short"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Reject the node. Same behavior as FILTER_SKIP. (In the DOM these&#xA;   * differ when applied to a TreeWalker but have the same result when&#xA;   * applied to a NodeIterator).&#xA;   */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FILTER_SKIP">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Short"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Skip this single node. &#xA;   */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDTM">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="DTM.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nodeHandle">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get an instance of a DTM that &quot;owns&quot; a node handle.  Since a node &#xA;   * iterator may be passed without a DTMManager, this allows the &#xA;   * caller to easily get the DTM using just the iterator.&#xA;   *&#xA;   * @param nodeHandle the nodeHandle.&#xA;   *&#xA;   * @return a non-null DTM reference.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDTMManager">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="DTMManager.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get an instance of the DTMManager.  Since a node &#xA;   * iterator may be passed without a DTMManager, this allows the &#xA;   * caller to easily get the DTMManager using just the iterator.&#xA;   *&#xA;   * @return a non-null DTMManager reference.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getRoot">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * The root node of the &lt;code>DTMIterator&lt;/code>, as specified when it&#xA;   * was created.  Note the root node is not the root node of the &#xA;   * document tree, but the context node from where the iteration &#xA;   * begins and ends.&#xA;   *&#xA;   * @return nodeHandle int Handle of the context node.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setRoot">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nodeHandle">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="environment">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Reset the root node of the &lt;code>DTMIterator&lt;/code>, overriding&#xA;   * the value specified when it was created.  Note the root node is&#xA;   * not the root node of the document tree, but the context node from&#xA;   * where the iteration begins.&#xA;   *&#xA;   * @param nodeHandle int Handle of the context node.&#xA;   * @param environment The environment object.  &#xA;   * The environment in which this iterator operates, which should provide:&#xA;   * &lt;ul>&#xA;   * &lt;li>a node (the context node... same value as &quot;root&quot; defined below) &lt;/li>&#xA;   * &lt;li>a pair of non-zero positive integers (the context position and the context size) &lt;/li>&#xA;   * &lt;li>a set of variable bindings &lt;/li>&#xA;   * &lt;li>a function library &lt;/li>&#xA;   * &lt;li>the set of namespace declarations in scope for the expression.&lt;/li>&#xA;   * &lt;ul>&#xA;   * &#xA;   * &lt;p>At this time the exact implementation of this environment is application &#xA;   * dependent.  Probably a proper interface will be created fairly soon.&lt;/p>&#xA;   * &#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Reset the iterator to the start. After resetting, the next node returned&#xA;   * will be the root node -- or, if that's filtered out, the first node&#xA;   * within the root's subtree which is _not_ skipped by the filters.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getWhatToShow">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * This attribute determines which node types are presented via the&#xA;   * iterator. The available set of constants is defined above.  &#xA;   * Nodes not accepted by&#xA;   * &lt;code>whatToShow&lt;/code> will be skipped, but their children may still&#xA;   * be considered.&#xA;   *&#xA;   * @return one of the SHOW_XXX constants, or several ORed together.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getExpandEntityReferences">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * &lt;p>The value of this flag determines whether the children of entity&#xA;   * reference nodes are visible to the iterator. If false, they  and&#xA;   * their descendants will be rejected. Note that this rejection takes&#xA;   * precedence over &lt;code>whatToShow&lt;/code> and the filter. &lt;/p>&#xA;   * &#xA;   * &lt;p> To produce a view of the document that has entity references&#xA;   * expanded and does not expose the entity reference node itself, use&#xA;   * the &lt;code>whatToShow&lt;/code> flags to hide the entity reference node&#xA;   * and set &lt;code>expandEntityReferences&lt;/code> to true when creating the&#xA;   * iterator. To produce a view of the document that has entity reference&#xA;   * nodes but no entity expansion, use the &lt;code>whatToShow&lt;/code> flags&#xA;   * to show the entity reference node and set&#xA;   * &lt;code>expandEntityReferences&lt;/code> to false.&lt;/p>&#xA;   *&#xA;   * &lt;p>NOTE: In Xalan's use of DTM we will generally have fully expanded&#xA;   * entity references when the document tree was built, and thus this&#xA;   * flag will have no effect.&lt;/p>&#xA;   *&#xA;   * @return true if entity references will be expanded.  */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="nextNode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Returns the next node in the set and advances the position of the&#xA;   * iterator in the set. After a &lt;code>DTMIterator&lt;/code> has setRoot called,&#xA;   * the first call to &lt;code>nextNode()&lt;/code> returns that root or (if it&#xA;   * is rejected by the filters) the first node within its subtree which is&#xA;   * not filtered out.&#xA;   * @return The next node handle in the set being iterated over, or&#xA;   *  &lt;code>DTM.NULL&lt;/code> if there are no more members in that set.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="previousNode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Returns the previous node in the set and moves the position of the&#xA;   * &lt;code>DTMIterator&lt;/code> backwards in the set.&#xA;   * @return The previous node handle in the set being iterated over,&#xA;   *   or &lt;code>DTM.NULL&lt;/code> if there are no more members in that set.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="detach">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Detaches the &lt;code>DTMIterator&lt;/code> from the set which it iterated&#xA;   * over, releasing any computational resources and placing the iterator&#xA;   * in the INVALID state. After &lt;code>detach&lt;/code> has been invoked,&#xA;   * calls to &lt;code>nextNode&lt;/code> or &lt;code>previousNode&lt;/code> will&#xA;   * raise a runtime exception.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="allowDetachToRelease">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="allowRelease">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Specify if it's OK for detach to release the iterator for reuse.&#xA;   * &#xA;   * @param allowRelease true if it is OK for detach to release this iterator &#xA;   * for pooling.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCurrentNode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get the current node in the iterator. Note that this differs from&#xA;   * the DOM's NodeIterator, where the current position lies between two&#xA;   * nodes (as part of the maintain-relative-position semantic).&#xA;   *&#xA;   * @return The current node handle, or -1.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isFresh">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Tells if this NodeSetDTM is &quot;fresh&quot;, in other words, if&#xA;   * the first nextNode() that is called will return the&#xA;   * first node in the set.&#xA;   *&#xA;   * @return true if the iteration of this list has not yet begun.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setShouldCacheNodes">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//========= Random Access ==========</comments>
+        <comments>/**&#xA;   * If setShouldCacheNodes(true) is called, then nodes will&#xA;   * be cached, enabling random access, and giving the ability to do &#xA;   * sorts and the like.  They are not cached by default.&#xA;   *&#xA;   * %REVIEW% Shouldn't the other random-access methods throw an exception&#xA;   * if they're called on a DTMIterator with this flag set false?&#xA;   *&#xA;   * @param b true if the nodes should be cached.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isMutable">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Tells if this iterator can have nodes added to it or set via &#xA;   * the &lt;code>setItem(int node, int index)&lt;/code> method.&#xA;   * &#xA;   * @return True if the nodelist can be mutated.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCurrentPos">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Get the current position within the cached list, which is one&#xA;   * less than the next nextNode() call will retrieve.  i.e. if you&#xA;   * call getCurrentPos() and the return is 0, the next fetch will&#xA;   * take place at index 1.&#xA;   *&#xA;   * @return The position of the iteration.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="runTo">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="index">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * If an index is requested, NodeSetDTM will call this method&#xA;   * to run the iterator to the index.  By default this sets&#xA;   * m_next to the index.  If the index argument is -1, this&#xA;   * signals that the iterator should be run to the end and&#xA;   * completely fill the cache.&#xA;   *&#xA;   * @param index The index to run to, or -1 if the iterator should be run&#xA;   *              to the end.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCurrentPos">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="i">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Set the current position in the node set.&#xA;   * &#xA;   * @param i Must be a valid index.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="item">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="index">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Returns the &lt;code>node handle&lt;/code> of an item in the collection. If&#xA;   * &lt;code>index&lt;/code> is greater than or equal to the number of nodes in&#xA;   * the list, this returns &lt;code>null&lt;/code>.&#xA;   *&#xA;   * @param index of the item.&#xA;   * @return The node handle at the &lt;code>index&lt;/code>th position in the&#xA;   *   &lt;code>DTMIterator&lt;/code>, or &lt;code>-1&lt;/code> if that is not a valid&#xA;   *   index.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setItem">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="node">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="index">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Sets the node at the specified index of this vector to be the&#xA;   * specified node. The previous component at that position is discarded.&#xA;   *&#xA;   * &lt;p>The index must be a value greater than or equal to 0 and less&#xA;   * than the current size of the vector.  &#xA;   * The iterator must be in cached mode.&lt;/p>&#xA;   * &#xA;   * &lt;p>Meant to be used for sorted iterators.&lt;/p>&#xA;   *&#xA;   * @param node Node to set&#xA;   * @param index Index of where to set the node&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLength">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * The number of nodes in the list. The range of valid child node indices&#xA;   * is 0 to &lt;code>length-1&lt;/code> inclusive. Note that this requires running&#xA;   * the iterator to completion, and presumably filling the cache.&#xA;   *&#xA;   * @return The number of nodes in the list.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="cloneWithReset">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/CloneNotSupportedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//=========== Cloning operations. ============</comments>
+        <comments>/**&#xA;   * Get a cloned Iterator that is reset to the start of the iteration.&#xA;   *&#xA;   * @return A clone of this iteration that has been reset.&#xA;   *&#xA;   * @throws CloneNotSupportedException&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clone">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../java/lang/CloneNotSupportedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Get a clone of this iterator, but don't reset the iteration in the &#xA;   * process, so that it may be used from the current position.&#xA;   *&#xA;   * @return A clone of this object.&#xA;   *&#xA;   * @throws CloneNotSupportedException&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isDocOrdered">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Returns true if all the nodes in the iteration well be returned in document &#xA;   * order.&#xA;   * &#xA;   * @return true if all the nodes in the iteration well be returned in document &#xA;   * order.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAxis">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;   * Returns the axis being iterated, if it is known.&#xA;   * &#xA;   * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple &#xA;   * types.&#xA;   */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA;&#xA; * &lt;code>DTMIterators&lt;/code> are used to step through a (possibly&#xA; * filtered) set of nodes.  Their API is modeled largely after the DOM&#xA; * NodeIterator.&#xA; * &#xA; * &lt;p>A DTMIterator is a somewhat unusual type of iterator, in that it &#xA; * can serve both single node iteration and random access.&lt;/p>&#xA; * &#xA; * &lt;p>The DTMIterator's traversal semantics, i.e. how it walks the tree,&#xA; * are specified when it is created, possibly and probably by an XPath&#xA; * &lt;a href=&quot;http://www.w3.org/TR/xpath#NT-LocationPath>LocationPath&lt;/a> or &#xA; * a &lt;a href=&quot;http://www.w3.org/TR/xpath#NT-UnionExpr&quot;>UnionExpr&lt;/a>.&lt;/p>&#xA; * &#xA; * &lt;p>A DTMIterator is meant to be created once as a master static object, and &#xA; * then cloned many times for runtime use.  Or the master object itself may &#xA; * be used for simpler use cases.&lt;/p>&#xA; *&#xA; * &lt;p>At this time, we do not expect DTMIterator to emulate&#xA; * NodeIterator's &quot;maintain relative position&quot; semantics under&#xA; * document mutation.  It's likely to respond more like the&#xA; * TreeWalker's &quot;current node&quot; semantics. However, since the base DTM&#xA; * is immutable, this issue currently makes no practical&#xA; * difference.&lt;/p>&#xA; *&#xA; * &lt;p>State: In progress!!&lt;/p> */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

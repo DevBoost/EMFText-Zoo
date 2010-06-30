@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="ObjectAdapter.java">
+  <comments>/*&#xA; * @(#)ObjectAdapter.java&#x9;1.27 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>spi</namespaces>
+  <namespaces>oa</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/omg/CORBA/Policy.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/omg/PortableInterceptor/ObjectReferenceTemplate.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>PortableInterceptor</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/omg/PortableInterceptor/ObjectReferenceFactory.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>orb</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../orb/ORB.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>oa</namespaces>
+    <classifier xsi:type="classifiers:Class" href="OADestroyed.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>ior</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../ior/IORTemplate.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="ObjectAdapter">
+    <members xsi:type="members:InterfaceMethod" name="getORB">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>////////////////////////////////////////////////////////////////////////////</comments>
+          <comments>// Basic methods for supporting interceptors</comments>
+          <comments>////////////////////////////////////////////////////////////////////////////</comments>
+          <comments>/** Returns the ORB associated with this adapter.&#xA;    */</comments>
+          <target xsi:type="classifiers:Class" href="../orb/ORB.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEffectivePolicy">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/CORBA/Policy.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="type">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getIORTemplate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/** Returns the IOR template of this adapter.  The profiles&#xA;    * in this template may be updated only during the AdapterCreated call.&#xA;    * After that call completes, the IOR template must be made immutable.&#xA;    * Note that the server ID, ORB ID, and adapter name are all available&#xA;    * from the IOR template.&#xA;    */</comments>
+          <target xsi:type="classifiers:Interface" href="../ior/IORTemplate.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getManagerId">
+      <typeReference xsi:type="types:Int">
+        <comments>////////////////////////////////////////////////////////////////////////////</comments>
+        <comments>// Methods needed to support ORT.</comments>
+        <comments>////////////////////////////////////////////////////////////////////////////</comments>
+        <comments>/** Return the ID of the AdapterManager for this object adapter.&#xA;    */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getState">
+      <typeReference xsi:type="types:Short">
+        <comments>/** Return the current state of this object adapter (see &#xA;    * org.omg.PortableInterceptors for states.&#xA;    */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAdapterTemplate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/PortableInterceptor/ObjectReferenceTemplate.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCurrentFactory">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/PortableInterceptor/ObjectReferenceFactory.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCurrentFactory">
+      <typeReference xsi:type="types:Void">
+        <comments>/** Change the current factory.  This may only be called during the&#xA;    * AdapterCreated call.&#xA;    */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="factory">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/PortableInterceptor/ObjectReferenceFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLocalServant">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>////////////////////////////////////////////////////////////////////////////</comments>
+        <comments>// Methods required for dispatching to servants</comments>
+        <comments>////////////////////////////////////////////////////////////////////////////</comments>
+        <comments>/** Get the servant corresponding to the given objectId, if this is supported.&#xA;     * This method is only used for models where the servant is an ObjectImpl,&#xA;     * which allows the servant to be used directly as the stub.  This allows an object &#xA;     * reference to be replaced by its servant when it is unmarshalled locally.  &#xA;     * Such objects are not ORB mediated.&#xA;     */</comments>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>CORBA</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/CORBA/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="objectId">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getInvocationServant">
+      <typeReference xsi:type="types:Void">
+        <comments>/** Get the servant for the request given by the parameters.&#xA;    * info must contain a valid objectId in this call.&#xA;    * The servant is set in the InvocationInfo argument that is passed into &#xA;    * this call.  &#xA;    * @param info is the InvocationInfo object for the object reference&#xA;    * @exception ForwardException (a runtime exception) is thrown if the request &#xA;    * is to be handled by a different object reference.&#xA;    */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="info">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="OAInvocationInfo.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="enter">
+      <typeReference xsi:type="types:Void">
+        <comments>/** enter must be called before each request is invoked on a servant.&#xA;      * @exception OADestroyed is thrown when an OA has been destroyed, which &#xA;      * requires a retry in the case where an AdapterActivator is present.&#xA;      */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="OADestroyed.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="exit">
+      <typeReference xsi:type="types:Void">
+        <comments>/** exit must be called after each request has been completed.  If enter&#xA;    * is called, there must always be a corresponding exit.&#xA;    */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="returnServant">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Must be called every time getInvocationServant is called after&#xA;     * the request has completed.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="makeInvocationInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/** Create an instance of InvocationInfo that is appropriate for this &#xA;    * Object adapter.&#xA;    */</comments>
+          <target xsi:type="classifiers:Class" href="OAInvocationInfo.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="objectId">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getInterfaces">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/** Return the most derived interface for the given servant and objectId.&#xA;    */</comments>
+          <target xsi:type="classifiers:Class" href="../../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="servant">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="objectId">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>// REVISIT: What should the order be?  enter/push...pop/exit?</comments>
+      <comments>/** ObjectAdapter represents the abstract model of an object&#xA;* adapter that was introduced by ORT.  This means that all&#xA;* object adapters must:&#xA;* &lt;UL>&#xA;* &lt;LI>Have an ORB&lt;/LI>&#xA;* &lt;LI>Have a name&lt;/LI>&#xA;* &lt;LI>Have an adapter manager (represented by an ID)&lt;/LI>&#xA;* &lt;LI>Have an adapter template&lt;/LI>&#xA;* &lt;LI>Support getting and setting their ObjectReferenceFactory&lt;/LI>&#xA;* &lt;LI>Provide access to their current state&lt;/LI>&#xA;* &lt;LI>Support adding components to their profiles expressed in the adapter template&lt;/LI>&#xA;* &lt;/UL>&#xA;* Other requirements:&#xA;* &lt;UL>&#xA;* &lt;LI>All object adapters must invoke ORB.AdapterCreated when they are created.&#xA;* &lt;/LI>&#xA;* &lt;LI>All adapter managers must invoke ORB.AdapterManagerStateChanged when&#xA;* their state changes, mapping the internal state to an ORT state.&lt;/LI>&#xA;* &lt;LI>AdapterStateChanged must be invoked (from somewhere) whenever&#xA;* an adapter state changes that is not due to an adapter manager state change.&lt;/LI>&#xA;* &lt;/UL>&#xA;* &lt;P>&#xA;* Object adapters must also provide mechanisms for:&#xA;* &lt;UL>&#xA;* &lt;LI>Managing object reference lifecycle&lt;/LI>&#xA;* &lt;LI>Controlling how servants are associated with object references&lt;/LI>&#xA;* &lt;LI>Manage the state of the adapter, if the adapter desires to implement such mechanisms&lt;/LI>&#xA;* &lt;/UL>&#xA;* Such mechanisms are all object adapter specific, and so we do not attempt to&#xA;* create general APIs for these functions here.  The object adapter itself&#xA;* must provide these APIs directly to the user, and they do not affect the rest of the&#xA;* ORB.  This interface basically makes it possible to plug any object adapter into the&#xA;* ORB and have the OA work propertly with portable interceptors, and also have requests&#xA;* dispatched properly to the object adapter.&#xA;* &lt;P>&#xA;* The basic function of an ObjectAdapter is to map object IDs to servants and to support&#xA;* the dispatch operation of the subcontract, which dispatches requests to servants.&#xA;* This is the purpose of the getInvocationServant method.  In addition, ObjectAdapters must be&#xA;* able to change state gracefully in the presence of executing methods.  This&#xA;* requires the use of the enter/exit methods.  Finally, ObjectAdapters often&#xA;* require access to information about requests.  This is accomodated through the&#xA;* OAInvocationInfo class and the thread local stack maintained by push/pop/peekInvocationInfo&#xA;* on the ORB.&#xA;* &lt;P>&#xA;* To be useful, this dispatch cycle must be extremely efficient.  There are several&#xA;* scenarios that matter:&#xA;* &lt;ol>&#xA;* &lt;li>A remote invocation, where the dispatch is handled in the server subcontract.&lt;/li>&#xA;* &lt;li>A local invocation, where the dispatch is handled in the client subcontract.&lt;/li>&#xA;* &lt;li>A cached local invocation, where the servant is cached when the IOR is established&#xA;* for the client subcontract, and the dispatch is handled in the client subcontract&#xA;* to the cached subcontract.&lt;li>&#xA;* &lt;/ol>&#xA;* &lt;p>&#xA;* Each of these 3 cases is handled a bit differently.  On each request, assume as known&#xA;* ObjectId and ObjectAdapterId, which can be obtained from the object key.  &#xA;* The ObjectAdaptorFactory is available in the subcontract registry, where it is&#xA;* registered under the subcontract ID.  The Subcontract ID is also available in the&#xA;* object key.&#xA;* &lt;ol>&#xA;* &lt;li>The remote pattern:&#xA;*   &lt;ol>&#xA;*   &lt;li>oa = oaf.find( oaid )&lt;/li>&#xA;*   &lt;li>oa.enter()&lt;/li>&#xA;*   &lt;li>info = oa.makeInvocationInfo( oid )&lt;/li> &#xA;*   &lt;li>info.setOperation( operation )&lt;/li>&#xA;*   &lt;li>push info&lt;/li>&#xA;*   &lt;li>oa.getInvocationServant( info )&lt;/li>&#xA;*   &lt;li>sreq.setExecuteReturnServantInResponseConstructor( true )&lt;/li>&#xA;*   &lt;li>dispatch to servant&lt;/li>&#xA;*   &lt;li>oa.returnServant()&lt;/li>&#xA;*   &lt;li>oa.exit()&lt;/li>&#xA;*   &lt;li>pop info&lt;/li>&#xA;*   &lt;ol>&#xA;* &lt;/li>&#xA;* REVISIT: Is this the required order for exit/pop?  Cna they be nested instead?&#xA;* Note that getInvocationServant and returnServant may throw exceptions.  In such cases,&#xA;* returnServant, exit, and pop must be called in the correct order.&#xA;* &lt;li>The local pattern:  &#xA;*   &lt;ol>&#xA;*   &lt;li>oa = oaf.find( oaid )&lt;/li>&#xA;*   &lt;li>oa.enter()&lt;/li>&#xA;*   &lt;li>info = oa.makeInvocationInfo( oid )&lt;/li> &#xA;*   &lt;li>info.setOperation( operation )&lt;/li>&#xA;*   &lt;li>push info&lt;/li>&#xA;*   &lt;li>oa.getInvocationServant( info )&lt;/li>&#xA;*   &lt;li>dispatch to servant&lt;/li>&#xA;*   &lt;li>oa.returnServant()&lt;/li>&#xA;*   &lt;li>oa.exit()&lt;/li>&#xA;*   &lt;li>pop info&lt;/li>&#xA;*   &lt;ol>&#xA;* &lt;/li>&#xA;* This is the same as the remote case, except that setExecuteReturnServantInResponseConstructor&#xA;* is not needed (or possible, since there is no server request).&#xA;* &lt;li>The fast local pattern: When delegate is constructed, &#xA;*    first extract ObjectKey from IOR in delegate,&#xA;*    then get ObjectId, ObjectAdapterId, and ObjectAdapterFactory (oaf). Then:&#xA;*    &lt;ol>&#xA;*    &lt;li>oa = oaf.find( oaid )&lt;/li>&#xA;*    &lt;li>info = oa.makeInvocationInfo( oid ) (note: no operation!)&lt;/li> &#xA;*    &lt;li>push info (needed for the correct functioning of getInvocationServant)&lt;/li>&#xA;*    &lt;li>oa.getInvocationServant( info )&lt;/li>&#xA;*    &lt;li>pop info&#xA;*    &lt;/ol>&#xA;*    The info instance (which includes the Servant) is cached in the client subcontract.&#xA;*    &lt;p>Then, on each invocation:&lt;/p>&#xA;*    &lt;ol>&#xA;*    &lt;li>newinfo = copy of info (clone)&lt;/li>&#xA;*    &lt;li>info.setOperation( operation )&lt;/li>&#xA;*    &lt;li>push newinfo&lt;/li>&#xA;*    &lt;li>oa.enter()&lt;/li>&#xA;*    &lt;li>dispatch to servant&lt;/li>&#xA;*    &lt;li>oa.returnServant()&lt;/li>  // XXX This is probably wrong: remove it.&#xA;*    &lt;li>oa.exit()&lt;/li>&#xA;*    &lt;li>pop info&lt;/li>&#xA;*    &lt;/ol>&#xA;* &lt;/li>&#xA;* &lt;/ol>&#xA;* XXX fast local should not call returnServant: what is correct here?&#xA;*/</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

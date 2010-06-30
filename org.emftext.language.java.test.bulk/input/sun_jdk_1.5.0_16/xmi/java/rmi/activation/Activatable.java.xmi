@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Activatable.java">
+  <comments>/*&#xA; * @(#)Activatable.java&#x9;1.34 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>rmi</namespaces>
+  <namespaces>activation</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>lang</namespaces>
+    <namespaces>reflect</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../lang/reflect/Constructor.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>activation</namespaces>
+    <classifier xsi:type="classifiers:Class" href="UnknownGroupException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>activation</namespaces>
+    <classifier xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../NoSuchObjectException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>server</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>sun</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>server</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../sun/rmi/server/ActivatableServerRef.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Activatable">
+    <members xsi:type="members:Field" name="id">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** &#xA;     * @serial Activation Identifier for this object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalLongLiteral" decimalValue="3120617863591563455"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** indicate compatibility with the Java 2 SDK v1.2 version of class */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Constructor" name="Activatable">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.3"/>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="location">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="restart">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Constructor used to register and export the object on a&#xA;     * specified port (an anonymous port is chosen if port=0) .&#xA;     *&#xA;     * A concrete subclass of this class must call this constructor to&#xA;     * register and export the object during &lt;i>initial&lt;/i> construction.  As&#xA;     * a side-effect of activatable object construction, the remote&#xA;     * object is both &quot;registered&quot; with the activation system and&#xA;     * &quot;exported&quot; (on an anonymous port if port=0) to the RMI runtime&#xA;     * so that it is available to accept incoming calls from clients.&#xA;     *&#xA;     * @param location the location for classes for this object&#xA;     * @param data the object's initialization data&#xA;     * @param port the port on which the object is exported (an anonymous&#xA;     * port is used if port=0)&#xA;     * @param restart if true, the object is restarted (reactivated) when&#xA;     * either the activator is restarted or the object's activation group&#xA;     * is restarted after an unexpected crash; if false, the object is only&#xA;     * activated on demand.  Specifying &lt;code>restart&lt;/code> to be&#xA;     * &lt;code>true&lt;/code> does not force an initial immediate activation of&#xA;     * a newly registered object;  initial activation is lazy.&#xA;     * @exception ActivationException if object registration fails.&#xA;     * @exception RemoteException if either of the following fails:&#xA;     * a) registering the object with the activation system or b) exporting&#xA;     * the object to the RMI runtime.&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="Activatable">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+            <arguments xsi:type="references:SelfReference">
+              <self xsi:type="literals:This"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.5"/>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="location">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="restart">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="csf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIClientSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIServerSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Constructor used to register and export the object on a&#xA;     * specified port (an anonymous port is chosen if port=0) . &lt;p>&#xA;     *&#xA;     * A concrete subclass of this class must call this constructor to&#xA;     * register and export the object during &lt;i>initial&lt;/i> construction.  As&#xA;     * a side-effect of activatable object construction, the remote&#xA;     * object is both &quot;registered&quot; with the activation system and&#xA;     * &quot;exported&quot; (on an anonymous port if port=0) to the RMI runtime&#xA;     * so that it is available to accept incoming calls from clients.&#xA;     *&#xA;     * @param location the location for classes for this object&#xA;     * @param data the object's initialization data&#xA;     * @param restart if true, the object is restarted (reactivated) when&#xA;     * either the activator is restarted or the object's activation group&#xA;     * is restarted after an unexpected crash; if false, the object is only&#xA;     * activated on demand.  Specifying &lt;code>restart&lt;/code> to be&#xA;     * &lt;code>true&lt;/code> does not force an initial immediate activation of&#xA;     * a newly registered object;  initial activation is lazy.&#xA;     * @param port the port on which the object is exported (an anonymous&#xA;     * port is used if port=0)&#xA;     * @param csf the client-side socket factory for making calls to the&#xA;     * remote object&#xA;     * @param ssf the server-side socket factory for receiving remote calls&#xA;     * @exception ActivationException if object registration fails.&#xA;     * @exception RemoteException if either of the following fails:&#xA;     * a) registering the object with the activation system or b) exporting&#xA;     * the object to the RMI runtime.&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="Activatable">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.1"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Constructor used to activate/export the object on a specified&#xA;     * port. An &quot;activatable&quot; remote object must have a constructor that&#xA;     * takes two arguments: &lt;ul>&#xA;     * &lt;li>the object's activation identifier (&lt;code>ActivationID&lt;/code>), and&#xA;     * &lt;li>the object's initialization data (a &lt;code>MarshalledObject&lt;/code>).&#xA;     * &lt;/ul>&lt;p>&#xA;     *&#xA;     * A concrete subclass of this class must call this constructor when it is&#xA;     * &lt;i>activated&lt;/i> via the two parameter constructor described above. As&#xA;     * a side-effect of construction, the remote object is &quot;exported&quot;&#xA;     * to the RMI runtime (on the specified &lt;code>port&lt;/code>) and is&#xA;     * available to accept incoming calls from clients.&#xA;     *&#xA;     * @param id activation identifier for the object&#xA;     * @param port the port number on which the object is exported&#xA;     * @exception RemoteException if exporting the object to the RMI&#xA;     * runtime fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="Activatable">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <arguments xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.2"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.3"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="csf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIClientSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIServerSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Constructor used to activate/export the object on a specified&#xA;     * port. An &quot;activatable&quot; remote object must have a constructor that&#xA;     * takes two arguments: &lt;ul>&#xA;     * &lt;li>the object's activation identifier (&lt;code>ActivationID&lt;/code>), and&#xA;     * &lt;li>the object's initialization data (a &lt;code>MarshalledObject&lt;/code>).&#xA;     * &lt;/ul>&lt;p>&#xA;     *&#xA;     * A concrete subclass of this class must call this constructor when it is&#xA;     * &lt;i>activated&lt;/i> via the two parameter constructor described above. As&#xA;     * a side-effect of construction, the remote object is &quot;exported&quot;&#xA;     * to the RMI runtime (on the specified &lt;code>port&lt;/code>) and is&#xA;     * available to accept incoming calls from clients.&#xA;     *&#xA;     * @param id activation identifier for the object&#xA;     * @param port the port number on which the object is exported&#xA;     * @param csf the client-side socket factory for making calls to the&#xA;     * remote object&#xA;     * @param ssf the server-side socket factory for receiving remote calls&#xA;     * @exception RemoteException if exporting the object to the RMI&#xA;     * runtime fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getID">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Returns the object's activation identifier.  The method is&#xA;     * protected so that only subclasses can obtain an object's&#xA;     * identifier.&#xA;     * @return the object's activation identifier&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="register">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="desc">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationDesc.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownGroupException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Register an object descriptor for an activatable remote&#xA;     * object so that is can be activated on demand.&#xA;     *&#xA;     * @param desc  the object's descriptor&#xA;     * @return the stub for the activatable remote object&#xA;     * @exception UnknownGroupException if group id in &lt;code>desc&lt;/code>&#xA;     * is not registered with the activation system&#xA;     * @exception ActivationException if activation system is not running&#xA;     * @exception RemoteException if remote call fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="id">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// register object with activator.</comments>
+              <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ActivationSystem.class.xmi#//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../sun/rmi/server/ActivatableRef.class.xmi#//@classifiers.0/@members.9"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../sun/rmi/server/ActivatableRef.class.xmi#//@classifiers.0"/>
+              </next>
+            </next>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="inactive">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Informs the system that the object with the corresponding activation&#xA;     * &lt;code>id&lt;/code> is currently inactive. If the object is currently&#xA;     * active, the object is &quot;unexported&quot; from the RMI runtime (only if&#xA;     * there are no pending or in-progress calls)&#xA;     * so the that it can no longer receive incoming calls. This call&#xA;     * informs this VM's ActivationGroup that the object is inactive,&#xA;     * that, in turn, informs its ActivationMonitor. If this call&#xA;     * completes successfully, a subsequent activate request to the activator&#xA;     * will cause the object to reactivate. The operation may still&#xA;     * succeed if the object is considered active but has already&#xA;     * unexported itself.&#xA;     *&#xA;     * @param id the object's activation identifier&#xA;     * @return true if the operation succeeds (the operation will&#xA;     * succeed if the object in currently known to be active and is&#xA;     * either already unexported or is currently exported and has no&#xA;     * pending/executing calls); false is returned if the object has&#xA;     * pending/executing calls in which case it cannot be deactivated&#xA;     * @exception UnknownObjectException if object is not known (it may&#xA;     * already be inactive)&#xA;     * @exception ActivationException if group is not active&#xA;     * @exception RemoteException if call informing monitor fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.10"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.21"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unregister">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Revokes previous registration for the activation descriptor&#xA;     * associated with &lt;code>id&lt;/code>. An object can no longer be&#xA;     * activated via that &lt;code>id&lt;/code>.&#xA;     *&#xA;     * @param id the object's activation identifier&#xA;     * @exception UnknownObjectException if object (&lt;code>id&lt;/code>) is unknown&#xA;     * @exception ActivationException if activation system is not running&#xA;     * @exception RemoteException if remote call to activation system fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="ActivationSystem.class.xmi#//@classifiers.0/@members.2"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.16"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exportObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="location">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="restart">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This &lt;code>exportObject&lt;/code> method may be invoked explicitly&#xA;     * by an &quot;activatable&quot; object, that does not extend the&#xA;     * &lt;code>Activatable&lt;/code> class, in order to both a) register&#xA;     * the object's activation descriptor, constructed from the supplied&#xA;     * &lt;code>location&lt;/code>, and &lt;code>data&lt;/code>, with&#xA;     * the activation system (so the object can be activated), and&#xA;     * b) export the remote object, &lt;code>obj&lt;/code>, on a specific&#xA;     * port (if port=0, then an anonymous port is chosen). Once the&#xA;     * object is exported, it can receive incoming RMI calls.&lt;p>&#xA;     *&#xA;     * This method does not need to be called if &lt;code>obj&lt;/code>&#xA;     * extends &lt;code>Activatable&lt;/code>, since the first constructor&#xA;     * calls this method.&#xA;     *&#xA;     * @param obj the object being exported&#xA;     * @param location the object's code location&#xA;     * @param data the object's bootstrapping data&#xA;     * @param restart if true, the object is restarted (reactivated) when&#xA;     * either the activator is restarted or the object's activation group&#xA;     * is restarted after an unexpected crash; if false, the object is only&#xA;     * activated on demand.  Specifying &lt;code>restart&lt;/code> to be&#xA;     * &lt;code>true&lt;/code> does not force an initial immediate activation of&#xA;     * a newly registered object;  initial activation is lazy.&#xA;     * @param port the port on which the object is exported (an anonymous&#xA;     * port is used if port=0)&#xA;     * @return the activation identifier obtained from registering the&#xA;     * descriptor, &lt;code>desc&lt;/code>, with the activation system&#xA;     * the wrong group&#xA;     * @exception ActivationException if activation group is not active&#xA;     * @exception RemoteException if object registration or export fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="desc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ActivationDesc.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="ActivationDesc.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                </next>
+                <target xsi:type="members:ClassMethod" href="../../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="id">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ActivationSystem.class.xmi#//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="stub">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.4"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.11"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.21"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exportObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="location">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="restart">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="csf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIClientSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIServerSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This &lt;code>exportObject&lt;/code> method may be invoked explicitly&#xA;     * by an &quot;activatable&quot; object, that does not extend the&#xA;     * &lt;code>Activatable&lt;/code> class, in order to both a) register&#xA;     * the object's activation descriptor, constructed from the supplied&#xA;     * &lt;code>location&lt;/code>, and &lt;code>data&lt;/code>, with&#xA;     * the activation system (so the object can be activated), and&#xA;     * b) export the remote object, &lt;code>obj&lt;/code>, on a specific&#xA;     * port (if port=0, then an anonymous port is chosen). Once the&#xA;     * object is exported, it can receive incoming RMI calls.&lt;p>&#xA;     *&#xA;     * This method does not need to be called if &lt;code>obj&lt;/code>&#xA;     * extends &lt;code>Activatable&lt;/code>, since the first constructor&#xA;     * calls this method.&#xA;     *&#xA;     * @param obj the object being exported&#xA;     * @param location the object's code location&#xA;     * @param data the object's bootstrapping data&#xA;     * @param restart if true, the object is restarted (reactivated) when&#xA;     * either the activator is restarted or the object's activation group&#xA;     * is restarted after an unexpected crash; if false, the object is only&#xA;     * activated on demand.  Specifying &lt;code>restart&lt;/code> to be&#xA;     * &lt;code>true&lt;/code> does not force an initial immediate activation of&#xA;     * a newly registered object;  initial activation is lazy.&#xA;     * @param port the port on which the object is exported (an anonymous&#xA;     * port is used if port=0)&#xA;     * @param csf the client-side socket factory for making calls to the&#xA;     * remote object&#xA;     * @param ssf the server-side socket factory for receiving remote calls&#xA;     * @return the activation identifier obtained from registering the&#xA;     * descriptor, &lt;code>desc&lt;/code>, with the activation system&#xA;     * the wrong group&#xA;     * @exception ActivationException if activation group is not active&#xA;     * @exception RemoteException if object registration or export fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="desc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ActivationDesc.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="ActivationDesc.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                </next>
+                <target xsi:type="members:ClassMethod" href="../../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.3"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="id">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="ActivationSystem.class.xmi#//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="stub">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.5"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.6"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.11"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="ActivationGroup.class.xmi#//@classifiers.0/@members.21"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="ActivationGroup.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exportObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Export the activatable remote object to the RMI runtime to make&#xA;     * the object available to receive incoming calls. The object is&#xA;     * exported on an anonymous port, if &lt;code>port&lt;/code> is zero. &lt;p>&#xA;     *&#xA;     * During activation, this &lt;code>exportObject&lt;/code> method should&#xA;     * be invoked explicitly by an &quot;activatable&quot; object, that does not&#xA;     * extend the &lt;code>Activatable&lt;/code> class. There is no need for objects&#xA;     * that do extend the &lt;code>Activatable&lt;/code> class to invoke this&#xA;     * method directly; this method is called by the second constructor&#xA;     * above (which a subclass should invoke from its special activation&#xA;     * constructor).&#xA;     * &#xA;     * @return the stub for the activatable remote object&#xA;     * @param obj the remote object implementation&#xA;     * @param id the object's  activation identifier&#xA;     * @param port the port on which the object is exported (an anonymous&#xA;     * port is used if port=0)&#xA;     * @exception RemoteException if object export fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../sun/rmi/server/ActivatableServerRef.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2"/>
+          </arguments>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exportObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="port">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="csf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIClientSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../server/RMIServerSocketFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Export the activatable remote object to the RMI runtime to make&#xA;     * the object available to receive incoming calls. The object is&#xA;     * exported on an anonymous port, if &lt;code>port&lt;/code> is zero. &lt;p>&#xA;     *&#xA;     * During activation, this &lt;code>exportObject&lt;/code> method should&#xA;     * be invoked explicitly by an &quot;activatable&quot; object, that does not&#xA;     * extend the &lt;code>Activatable&lt;/code> class. There is no need for objects&#xA;     * that do extend the &lt;code>Activatable&lt;/code> class to invoke this&#xA;     * method directly; this method is called by the second constructor&#xA;     * above (which a subclass should invoke from its special activation&#xA;     * constructor).&#xA;     * &#xA;     * @return the stub for the activatable remote object&#xA;     * @param obj the remote object implementation&#xA;     * @param id the object's  activation identifier&#xA;     * @param port the port on which the object is exported (an anonymous&#xA;     * port is used if port=0)&#xA;     * @param csf the client-side socket factory for making calls to the&#xA;     * remote object&#xA;     * @param ssf the server-side socket factory for receiving remote calls&#xA;     * @exception RemoteException if object export fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../sun/rmi/server/ActivatableServerRef.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.4"/>
+          </arguments>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unexportObject">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="force">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../NoSuchObjectException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Remove the remote object, obj, from the RMI runtime. If&#xA;     * successful, the object can no longer accept incoming RMI calls.&#xA;     * If the force parameter is true, the object is forcibly unexported&#xA;     * even if there are pending calls to the remote object or the&#xA;     * remote object still has calls in progress.  If the force&#xA;     * parameter is false, the object is only unexported if there are&#xA;     * no pending or in progress calls to the object.&#xA;     *&#xA;     * @param obj the remote object to be unexported&#xA;     * @param force if true, unexports the object even if there are&#xA;     * pending or in-progress calls; if false, only unexports the object&#xA;     * if there are no pending or in-progress calls&#xA;     * @return true if operation is successful, false otherwise&#xA;     * @exception NoSuchObjectException if the remote object is not&#xA;     * currently exported&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../sun/rmi/transport/ObjectTable.class.xmi#//@classifiers.0/@members.13"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../sun/rmi/transport/ObjectTable.class.xmi#//@classifiers.0"/>
+              </next>
+            </next>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="exportObject">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sref">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../sun/rmi/server/ActivatableServerRef.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Exports the specified object using the specified server ref.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// if obj extends Activatable, set its ref.</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="expressions:NestedExpression">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../server/RemoteObject.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <expression xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0"/>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+                </expression>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../sun/rmi/server/UnicastServerRef.class.xmi#//@classifiers.0/@members.15"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <arguments xsi:type="literals:NullLiteral"/>
+            <arguments xsi:type="literals:BooleanLiteral"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Activatable&lt;/code> class provides support for remote&#xA; * objects that require persistent access over time and that&#xA; * can be activated by the system.&#xA; *&#xA; * &lt;p>For the constructors and static &lt;code>exportObject&lt;/code> methods,&#xA; * the stub for a remote object being exported is obtained as described in&#xA; * {@link java.rmi.server.UnicastRemoteObject}.&#xA; *&#xA; * @author&#x9;Ann Wollrath&#xA; * @version&#x9;1.34, 03/12/19&#xA; * @since&#x9;1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../server/RemoteServer.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

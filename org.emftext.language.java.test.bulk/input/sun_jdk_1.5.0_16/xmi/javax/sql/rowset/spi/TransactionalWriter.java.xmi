@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="TransactionalWriter.java">
+  <comments>/*&#xA; * @(#)TransactionalWriter.java&#x9;1.3 04/02/27&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sql</namespaces>
+  <namespaces>rowset</namespaces>
+  <namespaces>spi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>sql</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/io/Reader.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>sql</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../RowSetWriter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>sql</namespaces>
+    <namespaces>rowset</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>sql</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../java/sql/Savepoint.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="TransactionalWriter">
+    <members xsi:type="members:InterfaceMethod" name="commit">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Makes permanent all changes that have been performed by the&#xA;     * &lt;code>acceptChanges&lt;/code> method since the last call to either the&#xA;     * &lt;code>commit&lt;/code> or &lt;code>rollback&lt;/code> methods.&#xA;     * This method should be used only when auto-commit mode has been disabled.&#xA;     *&#xA;     * @throws SQLException  if a database access error occurs or the &#xA;     *         &lt;code>Connection&lt;/code> object within this &lt;code>CachedRowSet&lt;/code> &#xA;     *         object is in auto-commit mode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="rollback">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Undoes all changes made in the current transaction. This method should be&#xA;     * used only when auto-commit mode has been disabled.&#xA;     *&#xA;     * @throws SQLException if a database access error occurs or the &lt;code>Connection&lt;/code>&#xA;     *         object within this &lt;code>CachedRowSet&lt;/code> object is in auto-commit mode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="rollback">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../java/sql/Savepoint.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Undoes all changes made in the current transaction made prior to the given&#xA;     * &lt;code>Savepoint&lt;/code> object.  This method should be used only when auto-commit&#xA;     * mode has been disabled.&#xA;     *&#xA;     * @param s a &lt;code>Savepoint&lt;/code> object marking a savepoint in the current&#xA;     *        transaction.  All changes made before &lt;i>s&lt;/i> was set will be undone.&#xA;     *        All changes made after &lt;i>s&lt;/i> was set will be made permanent.&#xA;     * @throws SQLException if a database access error occurs or the &lt;code>Connection&lt;/code>&#xA;     *         object within this &lt;code>CachedRowSet&lt;/code> object is in auto-commit mode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A specialized interface that facilitates an extension of the standard&#xA; * &lt;code>SyncProvider&lt;/code> abstract class so that it has finer grained &#xA; * transaction control.&#xA; * &lt;p>&#xA; * If one or more disconnected &lt;code>RowSet&lt;/code> objects are particating &#xA; * in a global transaction, they may wish to coordinate their synchronization&#xA; * commits to preserve data integrity and reduce the number of &#xA; * sychronization exceptions. If this is the case, an application should set&#xA; * the &lt;code>CachedRowSet&lt;/code> constant &lt;code>COMMIT_ON_ACCEPT_CHANGES&lt;/code>&#xA; * to &lt;code>false&lt;/code> and use the &lt;code>commit&lt;/code> and &lt;code>rollback&lt;/code> &#xA; * methods defined in this interface to manage transaction boundaries.&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../RowSetWriter.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

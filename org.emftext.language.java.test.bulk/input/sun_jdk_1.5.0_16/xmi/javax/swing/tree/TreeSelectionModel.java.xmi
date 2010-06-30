@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="TreeSelectionModel.java">
+  <comments>/*&#xA; * @(#)TreeSelectionModel.java&#x9;1.24 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>swing</namespaces>
+  <namespaces>tree</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>event</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/beans/PropertyChangeListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="TreeSelectionModel">
+    <members xsi:type="members:Field" name="SINGLE_TREE_SELECTION">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Selection can only contain one path at a time. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="CONTIGUOUS_TREE_SELECTION">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Selection can only be contiguous. This will only be enforced if&#xA;     * a RowMapper instance is provided. That is, if no RowMapper is set&#xA;     * this behaves the same as DISCONTIGUOUS_TREE_SELECTION. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DISCONTIGUOUS_TREE_SELECTION">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** Selection can contain any number of items that are not necessarily&#xA;     * contiguous. */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSelectionMode">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the selection model, which must be one of SINGLE_TREE_SELECTION,&#xA;     * CONTIGUOUS_TREE_SELECTION or DISCONTIGUOUS_TREE_SELECTION.&#xA;     * &lt;p>&#xA;     * This may change the selection if the current selection is not valid&#xA;     * for the new mode. For example, if three TreePaths are&#xA;     * selected when the mode is changed to &lt;code>SINGLE_TREE_SELECTION&lt;/code>,&#xA;     * only one TreePath will remain selected. It is up to the particular&#xA;     * implementation to decide what TreePath remains selected.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mode">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSelectionMode">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the current selection mode, one of&#xA;     * &lt;code>SINGLE_TREE_SELECTION&lt;/code>,&#xA;     * &lt;code>CONTIGUOUS_TREE_SELECTION&lt;/code> or&#xA;     * &lt;code>DISCONTIGUOUS_TREE_SELECTION&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSelectionPath">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Sets the selection to path. If this represents a change, then&#xA;      * the TreeSelectionListeners are notified. If &lt;code>path&lt;/code> is&#xA;      * null, this has the same effect as invoking &lt;code>clearSelection&lt;/code>.&#xA;      *&#xA;      * @param path new path to select&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="path">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSelectionPaths">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Sets the selection to path. If this represents a change, then&#xA;      * the TreeSelectionListeners are notified. If &lt;code>paths&lt;/code> is&#xA;      * null, this has the same effect as invoking &lt;code>clearSelection&lt;/code>.&#xA;      *&#xA;      * @param paths new selection&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paths">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addSelectionPath">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Adds path to the current selection. If path is not currently&#xA;      * in the selection the TreeSelectionListeners are notified. This has&#xA;      * no effect if &lt;code>path&lt;/code> is null.&#xA;      *&#xA;      * @param path the new path to add to the current selection&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="path">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addSelectionPaths">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Adds paths to the current selection.  If any of the paths in&#xA;      * paths are not currently in the selection the TreeSelectionListeners&#xA;      * are notified. This has&#xA;      * no effect if &lt;code>paths&lt;/code> is null.&#xA;      *&#xA;      * @param paths the new paths to add to the current selection&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paths">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeSelectionPath">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Removes path from the selection. If path is in the selection&#xA;      * The TreeSelectionListeners are notified. This has no effect if&#xA;      * &lt;code>path&lt;/code> is null.&#xA;      *&#xA;      * @param path the path to remove from the selection&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="path">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeSelectionPaths">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Removes paths from the selection.  If any of the paths in &#xA;      * &lt;code>paths&lt;/code>&#xA;      * are in the selection, the TreeSelectionListeners are notified.&#xA;      * This method has no effect if &lt;code>paths&lt;/code> is null.&#xA;      *&#xA;      * @param paths the path to remove from the selection&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paths">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSelectionPath">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;      * Returns the first path in the selection. How first is defined is&#xA;      * up to implementors, and may not necessarily be the TreePath with&#xA;      * the smallest integer value as determined from the&#xA;      * &lt;code>RowMapper&lt;/code>.&#xA;      */</comments>
+          <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSelectionPaths">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;      * Returns the paths in the selection. This will return null (or an&#xA;      * empty array) if nothing is currently selected.&#xA;      */</comments>
+          <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSelectionCount">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the number of paths that are selected.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isPathSelected">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;      * Returns true if the path, &lt;code>path&lt;/code>, is in the current&#xA;      * selection.&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="path">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isSelectionEmpty">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;      * Returns true if the selection is currently empty.&#xA;      */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clearSelection">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Empties the current selection.  If this represents a change in the&#xA;      * current selection, the selection listeners are notified.&#xA;      */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setRowMapper">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the RowMapper instance. This instance is used to determine&#xA;     * the row for a particular TreePath.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newMapper">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="RowMapper.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getRowMapper">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the RowMapper instance that is able to map a TreePath to a&#xA;     * row.&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="RowMapper.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSelectionRows">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;      * Returns all of the currently selected rows. This will return&#xA;      * null (or an empty array) if there are no selected TreePaths or&#xA;      * a RowMapper has not been set.&#xA;      */</comments>
+      </typeReference>
+      <arrayDimensionsBefore/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMinSelectionRow">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the smallest value obtained from the RowMapper for the&#xA;     * current set of selected TreePaths. If nothing is selected,&#xA;     * or there is no RowMapper, this will return -1.&#xA;      */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxSelectionRow">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the largest value obtained from the RowMapper for the&#xA;     * current set of selected TreePaths. If nothing is selected,&#xA;     * or there is no RowMapper, this will return -1.&#xA;      */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isRowSelected">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;      * Returns true if the row identified by &lt;code>row&lt;/code> is selected.&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="row">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="resetRowSelection">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Updates this object's mapping from TreePaths to rows. This should&#xA;     * be invoked when the mapping from TreePaths to integers has changed&#xA;     * (for example, a node has been expanded).&#xA;     * &lt;p>&#xA;     * You do not normally have to call this; JTree and its associated&#xA;     * listeners will invoke this for you. If you are implementing your own&#xA;     * view class, then you will have to invoke this.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLeadSelectionRow">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the lead selection index. That is the last index that was&#xA;     * added.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLeadSelectionPath">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the last path that was added. This may differ from the &#xA;     * leadSelectionPath property maintained by the JTree.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="TreePath.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addPropertyChangeListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Adds a PropertyChangeListener to the listener list.&#xA;     * The listener is registered for all properties.&#xA;     * &lt;p>&#xA;     * A PropertyChangeEvent will get fired when the selection mode&#xA;     * changes.&#xA;     *&#xA;     * @param listener  the PropertyChangeListener to be added&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../java/beans/PropertyChangeListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removePropertyChangeListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Removes a PropertyChangeListener from the listener list.&#xA;     * This removes a PropertyChangeListener that was registered&#xA;     * for all properties.&#xA;     *&#xA;     * @param listener  the PropertyChangeListener to be removed&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../java/beans/PropertyChangeListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addTreeSelectionListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Adds x to the list of listeners that are notified each time the&#xA;      * set of selected TreePaths changes.&#xA;      *&#xA;      * @param x the new listener to be added&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../event/TreeSelectionListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeTreeSelectionListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;      * Removes x from the list of listeners that are notified each time&#xA;      * the set of selected TreePaths changes.&#xA;      *&#xA;      * @param x the listener to remove&#xA;      */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../event/TreeSelectionListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA;  * This interface represents the current state of the selection for&#xA;  * the tree component.&#xA;  * For information and examples of using tree selection models,&#xA;  * see &lt;a href=&quot;http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html&quot;>How to Use Trees&lt;/a>&#xA;  * in &lt;em>The Java Tutorial.&lt;/em>&#xA;  *&#xA;  * &lt;p>&#xA;  * The state of the tree selection is characterized by&#xA;  * a set of TreePaths, and optionally a set of integers. The mapping&#xA;  * from TreePath to integer is done by way of an instance of RowMapper.&#xA;  * It is not necessary for a TreeSelectionModel to have a RowMapper to&#xA;  * correctly operate, but without a RowMapper &lt;code>getSelectionRows&lt;/code>&#xA;  * will return null.&#xA;  *&#xA;  * &lt;p>&#xA;  * &#xA;  * A TreeSelectionModel can be configured to allow only one&#xA;  * path (&lt;code>SINGLE_TREE_SELECTION&lt;/code>) a number of&#xA;  * continguous paths (&lt;code>CONTIGUOUS_TREE_SELECTION&lt;/code>) or a number of&#xA;  * discontiguous paths (&lt;code>DISCONTIGUOUS_TREE_SELECTION&lt;/code>).&#xA;  * A &lt;code>RowMapper&lt;/code> is used to determine if TreePaths are&#xA;  * contiguous.&#xA;  * In the absence of a RowMapper &lt;code>CONTIGUOUS_TREE_SELECTION&lt;/code> and&#xA;  * &lt;code>DISCONTIGUOUS_TREE_SELECTION&lt;/code> behave the same, that is they&#xA;  * allow any number of paths to be contained in the TreeSelectionModel.&#xA;  *&#xA;  * &lt;p>&#xA;  * &#xA;  * For a selection model of &lt;code>CONTIGUOUS_TREE_SELECTION&lt;/code> any&#xA;  * time the paths are changed (&lt;code>setSelectionPath&lt;/code>,&#xA;  * &lt;code>addSelectionPath&lt;/code> ...) the TreePaths are again checked to&#xA;  * make they are contiguous. A check of the TreePaths can also be forced&#xA;  * by invoking &lt;code>resetRowSelection&lt;/code>. How a set of discontiguous&#xA;  * TreePaths is mapped to a contiguous set is left to implementors of&#xA;  * this interface to enforce a particular policy.&#xA;  *&#xA;  * &lt;p>&#xA;  *&#xA;  * Implementations should combine duplicate TreePaths that are&#xA;  * added to the selection. For example, the following code&#xA;  * &lt;pre>&#xA;  *   TreePath[] paths = new TreePath[] { treePath, treePath };&#xA;  *   treeSelectionModel.setSelectionPaths(paths);&#xA;  * &lt;/pre>&#xA;  * should result in only one path being selected:&#xA;  * &lt;code>treePath&lt;/code>, and&#xA;  * not two copies of &lt;code>treePath&lt;/code>.&#xA;  *&#xA;  * &lt;p>&#xA;  *&#xA;  * The lead TreePath is the last path that was added (or set). The lead&#xA;  * row is then the row that corresponds to the TreePath as determined&#xA;  * from the RowMapper.&#xA;  *&#xA;  * @version 1.24 12/19/03&#xA;  * @author Scott Violet&#xA;  */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

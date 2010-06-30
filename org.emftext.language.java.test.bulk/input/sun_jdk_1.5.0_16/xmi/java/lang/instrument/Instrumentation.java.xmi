@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Instrumentation.java">
+  <comments>/*&#xA; * @(#)Instrumentation.java&#x9;1.7 04/06/08&#xA; *&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms. &#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>lang</namespaces>
+  <namespaces>instrument</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/File.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Instrumentation">
+    <members xsi:type="members:InterfaceMethod" name="addTransformer">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Registers the supplied transformer. All future class definitions&#xA;     * will be seen by the transformer, except definitions of classes upon which any&#xA;     * registered transformer is dependent. If multiple transformers are&#xA;     * registered, they will be called in the order added. If a transformer throws&#xA;     * during execution, the JVM will still call the other registered transformers in order.&#xA;     * The same transformer may be added more than once.&#xA;     * All transformers registered with &lt;code>addTransformer&lt;/code>&#xA;     * will always see the class files before any external JVMTI ClassFileLoadHook event listener does.&#xA;     * &lt;P>&#xA;     * This method is intended for use in instrumentation, as described in the&#xA;     * {@linkplain Instrumentation class specification}.&#xA;     *&#xA;     * @param transformer          the transformer to register&#xA;     * @throws java.lang.NullPointerException if passed a &lt;code>null&lt;/code> transformer&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="transformer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClassFileTransformer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeTransformer">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Unregisters the supplied transformer. Future class definitions will&#xA;     * not be shown to the transformer. Removes the most-recently-added matching&#xA;     * instance of the transformer. Due to the multi-threaded nature of&#xA;     * class loading, it is possible for a transformer to receive calls&#xA;     * after it has been removed. Transformers should be written defensively&#xA;     * to expect this situation. &#xA;     *&#xA;     * @param transformer          the transformer to unregister&#xA;     * @return  true if the transformer was found and removed, false if the&#xA;     *           transformer was not found&#xA;     * @throws java.lang.NullPointerException if passed a &lt;code>null&lt;/code> transformer&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="transformer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ClassFileTransformer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isRedefineClassesSupported">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Returns whether or not the current JVM configuration supports redefinition of classes.&#xA;     * The ability to redefine an already loaded class is an optional capability&#xA;     * of a JVM.&#xA;     * During a single instantiation of a single JVM, multiple calls to this&#xA;     * method will always return the same answer.&#xA;     * @return  true if the current JVM configuration supports redefinition of classes,&#xA;     * false if not.&#xA;     * @see #redefineClasses&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="redefineClasses">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Redefine the supplied set of classes using the supplied class files. Operates on&#xA;     * a set in order to allow interlocked changes to more than one class at the same time&#xA;     * (a redefinition of class A can require a redefinition of class B).&#xA;     *&#xA;     * &lt;P>&#xA;     * If a redefined method has active stack frames, those active frames continue to&#xA;     * run the bytecodes of the original method. &#xA;     * The redefined method will be used on new invokes.&#xA;     *&#xA;     * &lt;P>&#xA;     * This method does not cause any initialization except that which would occur&#xA;     * under the customary JVM semantics. In other words, redefining a class&#xA;     * does not cause its initializers to be run. The values of static variables&#xA;     * will remain as they were prior to the call.&#xA;     *&#xA;     * &lt;P>&#xA;     * Instances of the redefined class are not affected.&#xA;     *&#xA;     * &lt;P>&#xA;     * Registered transformers will be called before the redefine operation is applied.&#xA;     *&#xA;     * &lt;P>&#xA;     * The redefinition may change method bodies, the constant pool and attributes.&#xA;     * The redefinition must not add, remove or rename fields or methods, change the &#xA;     * signatures of methods, or change inheritance.  These restrictions maybe be&#xA;     * lifted in future versions.&#xA;     *&#xA;     * &lt;P>&#xA;     * A zero-length &lt;code>definitions&lt;/code> array is allowed, in this case, this&#xA;     * method does nothing.&#xA;     *&#xA;     * &lt;P>&#xA;     * If this method throws an exception, no classes have been redefined.&#xA;     * &lt;P>&#xA;     * This method is intended for use in instrumentation, as described in the&#xA;     * {@linkplain Instrumentation class specification}.&#xA;     *&#xA;     * @param definitions array of classes to redefine with corresponding definitions&#xA;     * @throws java.lang.ClassNotFoundException if a specified class cannot be found&#xA;     * @throws java.lang.instrument.UnmodifiableClassException if a specified class cannot be modified&#xA;     * @throws java.lang.UnsupportedOperationException if the current configuration of the JVM does not allow &#xA;     * redefinition ({@link #isRedefineClassesSupported} is false) or the redefinition made unsupported changes&#xA;     * @throws java.lang.ClassFormatError if the data did not contain a valid class&#xA;     * @throws java.lang.NoClassDefFoundError if the name in the class file is not equal to the name of the class&#xA;     * @throws java.lang.UnsupportedClassVersionError if the class file version numbers are not supported&#xA;     * @throws java.lang.ClassCircularityError if the new classes contain a circularity&#xA;     * @throws java.lang.LinkageError if a linkage error occurs&#xA;     * @throws java.lang.NullPointerException if the supplied definitions array or any of its components is &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @see #isRedefineClassesSupported&#xA;     * @see #addTransformer&#xA;     * @see java.lang.instrument.ClassFileTransformer&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="definitions">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ClassDefinition.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../ClassNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnmodifiableClassException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAllLoadedClasses">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns an array of all classes currently loaded by the JVM.&#xA;     *&#xA;     * @return an array containing all the classes loaded by the JVM, zero-length if there are none&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../Class.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getInitiatedClasses">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns an array of all classes for which &lt;code>loader&lt;/code> is an initiating loader.&#xA;     * If the supplied loader is &lt;code>null&lt;/code>, classes initiated by the bootstrap class&#xA;     * loader are returned.&#xA;     *&#xA;     * @param loader          the loader whose initiated class list will be returned&#xA;     * @return an array containing all the classes for which loader is an initiating loader, &#xA;     *          zero-length if there are none&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../Class.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loader">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../ClassLoader.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectSize">
+      <typeReference xsi:type="types:Long">
+        <comments>/**&#xA;     * Returns an implementation-specific approximation of the amount of storage consumed by&#xA;     * the specified object. The result may include some or all of the object's overhead,&#xA;     * and thus is useful for comparison within an implementation but not between implementations.&#xA;     *&#xA;     * The estimate may change during a single invocation of the JVM.&#xA;     *&#xA;     * @param objectToSize     the object to size&#xA;     * @return an implementation-specific approximation of the amount of storage consumed by the specified object&#xA;     * @throws java.lang.NullPointerException if the supplied Object is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="objectToSize">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/*&#xA; * Copyright 2003 Wily Technology, Inc.&#xA; */</comments>
+      <comments>/**&#xA; * This class provides services needed to instrument Java&#xA; * programming language code.&#xA; * Instrumentation is the addition of byte-codes to methods for the&#xA; * purpose of gathering data to be utilized by tools. &#xA; * Since the changes are purely additive, these tools do not modify&#xA; * application state or behavior.&#xA; * Examples of such benign tools include monitoring agents, profilers,&#xA; * coverage analyzers, and event loggers.&#xA; *&#xA; * &lt;P>&#xA; * The only way to access an instance of the &lt;code>Instrumentation&lt;/code>&#xA; * interface is for the JVM to be launched in a way that indicates&#xA; * the agent class - see &#xA; * {@linkplain java.lang.instrument the package specification}.&#xA; * The &lt;code>Instrumentation&lt;/code> instance is passed&#xA; * to the &lt;code>premain&lt;/code> method of the agent class.&#xA; * Once an agent acquires the &lt;code>Instrumentation&lt;/code> instance,&#xA; * the agent may call methods on the instance at any time.&#xA; *&#xA; * @since   JDK1.5&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

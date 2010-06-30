@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Clip.java">
+  <comments>/*&#xA; * @(#)Clip.java&#x9;1.38 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sound</namespaces>
+  <namespaces>sampled</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Clip">
+    <members xsi:type="members:Field" name="LOOP_CONTINUOUSLY">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A value indicating that looping should continue indefinitely rather than&#xA;     * complete after a specific number of loops.&#xA;     * @see #loop&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="open">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="format">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="AudioFormat.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bufferSize">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="LineUnavailableException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Opens the clip, meaning that it should acquire any required&#xA;     * system resources and become operational.  The clip is opened&#xA;     * with the format and audio data indicated.&#xA;     * If this operation succeeds, the line is marked as open and an&#xA;     * &lt;code>{@link LineEvent.Type#OPEN OPEN}&lt;/code> event is dispatched&#xA;     * to the line's listeners.&#xA;     * &lt;p>&#xA;     * Invoking this method on a line which is already open is illegal&#xA;     * and may result in an IllegalStateException.&#xA;     * &lt;p>&#xA;     * Note that some lines, once closed, cannot be reopened.  Attempts&#xA;     * to reopen such a line will always result in a&#xA;     * &lt;code>{@link LineUnavailableException}&lt;/code>.&#xA;     *&#xA;     * @param format the format of the supplied audio data&#xA;     * @param data a byte array containing audio data to load into the clip&#xA;     * @param offset the point at which to start copying, expressed in&#xA;     * &lt;em>bytes&lt;/em> from the beginning of the array&#xA;     * @param bufferSize the number of &lt;em>bytes&lt;/em>&#xA;     * of data to load into the clip from the array.&#xA;     * @throws LineUnavailableException if the line cannot be&#xA;     * opened due to resource restrictions&#xA;     * @throws IllegalArgumentException if the buffer size does not represent&#xA;     * an integral number of sample frames,&#xA;     * or if &lt;code>format&lt;/code> is not fully specified or invalid&#xA;     * @throws IllegalStateException if the line is already open&#xA;     * @throws SecurityException if the line cannot be&#xA;     * opened due to security restrictions&#xA;     *&#xA;     * @see #close&#xA;     * @see #isOpen&#xA;     * @see LineListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="open">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="stream">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="AudioInputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="LineUnavailableException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Opens the clip with the format and audio data present in the provided audio&#xA;     * input stream.  Opening a clip means that it should acquire any required&#xA;     * system resources and become operational.  If this operation&#xA;     * input stream.  If this operation&#xA;     * succeeds, the line is marked open and an&#xA;     * &lt;code>{@link LineEvent.Type#OPEN OPEN}&lt;/code> event is dispatched&#xA;     * to the line's listeners.&#xA;     * &lt;p>&#xA;     * Invoking this method on a line which is already open is illegal&#xA;     * and may result in an IllegalStateException.&#xA;     * &lt;p>&#xA;     * Note that some lines, once closed, cannot be reopened.  Attempts&#xA;     * to reopen such a line will always result in a&#xA;     * &lt;code>{@link LineUnavailableException}&lt;/code>.&#xA;     *&#xA;     * @param stream an audio input stream from which audio data will be read into&#xA;     * the clip&#xA;     * @throws LineUnavailableException if the line cannot be&#xA;     * opened due to resource restrictions&#xA;     * @throws IOException if an I/O exception occurs during reading of&#xA;     * the stream&#xA;     * @throws IllegalArgumentException if the stream's audio format&#xA;     * is not fully specified or invalid&#xA;     * @throws IllegalStateException if the line is already open&#xA;     * @throws SecurityException if the line cannot be&#xA;     * opened due to security restrictions&#xA;     *&#xA;     * @see #close&#xA;     * @see #isOpen&#xA;     * @see LineListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFrameLength">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the media length in sample frames.&#xA;     * @return the media length, expressed in sample frames,&#xA;     * or &lt;code>AudioSystem.NOT_SPECIFIED&lt;/code> if the line is not open.&#xA;     * @see AudioSystem#NOT_SPECIFIED&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMicrosecondLength">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Obtains the media duration in microseconds&#xA;     * @return the media duration, expressed in microseconds,&#xA;     * or &lt;code>AudioSystem.NOT_SPECIFIED&lt;/code> if the line is not open.&#xA;     * @see AudioSystem#NOT_SPECIFIED&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setFramePosition">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="frames">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the media position in sample frames.  The position is zero-based;&#xA;     * the first frame is frame number zero.  When the clip begins playing the&#xA;     * next time, it will start by playing the frame at this position.&#xA;     * &lt;p>&#xA;     * To obtain the current position in sample frames, use the&#xA;     * &lt;code>{@link DataLine#getFramePosition getFramePosition}&lt;/code>&#xA;     * method of &lt;code>DataLine&lt;/code>.&#xA;     *&#xA;     * @param frames the desired new media position, expressed in sample frames&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMicrosecondPosition">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="microseconds">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the media position in microseconds.  When the clip begins playing the&#xA;     * next time, it will start at this position.&#xA;     * The level of precision is not guaranteed.  For example, an implementation&#xA;     * might calculate the microsecond position from the current frame position&#xA;     * and the audio sample frame rate.  The precision in microseconds would&#xA;     * then be limited to the number of microseconds per sample frame.&#xA;     * &lt;p>&#xA;     * To obtain the current position in microseconds, use the&#xA;     * &lt;code>{@link DataLine#getMicrosecondPosition getMicrosecondPosition}&lt;/code>&#xA;     * method of &lt;code>DataLine&lt;/code>.&#xA;     *&#xA;     * @param microseconds the desired new media position, expressed in microseconds&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setLoopPoints">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="end">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the first and last sample frames that will be played in&#xA;     * the loop.  The ending point must be greater than&#xA;     * or equal to the starting point, and both must fall within the&#xA;     * the size of the loaded media.  A value of 0 for the starting&#xA;     * point means the beginning of the loaded media.  Similarly, a value of -1&#xA;     * for the ending point indicates the last frame of the media.&#xA;     * @param start the loop's starting position, in sample frames (zero-based)&#xA;     * @param end the loop's ending position, in sample frames (zero-based), or&#xA;     * -1 to indicate the final frame&#xA;     * @throws IllegalArgumentException if the requested&#xA;     * loop points cannot be set, usually because one or both falls outside&#xA;     * the media's duration or because the ending point is&#xA;     * before the starting point&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="loop">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="count">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Starts looping playback from the current position.   Playback will&#xA;     * continue to the loop's end point, then loop back to the loop start point&#xA;     * &lt;code>count&lt;/code> times, and finally continue playback to the end of&#xA;     * the clip.&#xA;     * &lt;p>&#xA;     * If the current position when this method is invoked is greater than the&#xA;     * loop end point, playback simply continues to the&#xA;     * end of the clip without looping.&#xA;     * &lt;p>&#xA;     * A &lt;code>count&lt;/code> value of 0 indicates that any current looping should&#xA;     * cease and playback should continue to the end of the clip.  The behavior&#xA;     * is undefined when this method is invoked with any other value during a&#xA;     * loop operation.&#xA;     * &lt;p>&#xA;     * If playback is stopped during looping, the current loop status is&#xA;     * cleared; the behavior of subsequent loop and start requests is not&#xA;     * affected by an interrupted loop operation.&#xA;     *&#xA;     * @param count the number of times playback should loop back from the&#xA;     * loop's end position to the loop's  start position, or&#xA;     * &lt;code>{@link #LOOP_CONTINUOUSLY}&lt;/code> to indicate that looping should&#xA;     * continue until interrupted&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Clip&lt;/code> interface represents a special kind of data line whose&#xA; * audio data can be loaded prior to playback, instead of being streamed in&#xA; * real time.&#xA; * &lt;p>&#xA; * Because the data is pre-loaded and has a known length, you can set a clip&#xA; * to start playing at any position in its audio data.  You can also create a&#xA; * loop, so that when the clip is played it will cycle repeatedly.  Loops are&#xA; * specified with a starting and ending sample frame, along with the number of&#xA; * times that the loop should be played.&#xA; * &lt;p>&#xA; * Clips may be obtained from a &lt;code>{@link Mixer}&lt;/code> that supports lines&#xA; * of this type.  Data is loaded into a clip when it is opened.&#xA; * &lt;p>&#xA; * Playback of an audio clip may be started and stopped using the &lt;code>start&lt;/code>&#xA; * and &lt;code>stop&lt;/code> methods.  These methods do not reset the media position;&#xA; * &lt;code>start&lt;/code> causes playback to continue from the position where playback&#xA; * was last stopped.  To restart playback from the beginning of the clip's audio&#xA; * data, simply follow the invocation of &lt;code>{@link DataLine#stop stop}&lt;/code>&#xA; * with setFramePosition(0), which rewinds the media to the beginning&#xA; * of the clip.&#xA; *&#xA; * @author Kara Kytle&#xA; * @version 1.38, 03/12/19&#xA; * @since 1.3&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="DataLine.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

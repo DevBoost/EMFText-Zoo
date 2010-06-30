@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="Shape.java">
+  <comments>/*&#xA; * @(#)Shape.java&#x9;1.22 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="geom/AffineTransform.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="geom/PathIterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="geom/Point2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Shape">
+    <members xsi:type="members:InterfaceMethod" name="getBounds">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="Rectangle.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an integer {@link Rectangle} that completely encloses the&#xA;     * &lt;code>Shape&lt;/code>.  Note that there is no guarantee that the&#xA;     * returned &lt;code>Rectangle&lt;/code> is the smallest bounding box that&#xA;     * encloses the &lt;code>Shape&lt;/code>, only that the &lt;code>Shape&lt;/code>&#xA;     * lies entirely within the indicated  &lt;code>Rectangle&lt;/code>.  The&#xA;     * returned &lt;code>Rectangle&lt;/code> might also fail to completely&#xA;     * enclose the &lt;code>Shape&lt;/code> if the &lt;code>Shape&lt;/code> overflows&#xA;     * the limited range of the integer data type.  The &#xA;     * &lt;code>getBounds2D&lt;/code> method generally returns a&#xA;     * tighter bounding box due to its greater flexibility in&#xA;     * representation.&#xA;     * @return an integer &lt;code>Rectangle&lt;/code> that completely encloses&#xA;     *                 the &lt;code>Shape&lt;/code>.&#xA;     * @see #getBounds2D&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getBounds2D">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a high precision and more accurate bounding box of&#xA;     * the &lt;code>Shape&lt;/code> than the &lt;code>getBounds&lt;/code> method.&#xA;     * Note that there is no guarantee that the returned &#xA;     * {@link Rectangle2D} is the smallest bounding box that encloses &#xA;     * the &lt;code>Shape&lt;/code>, only that the &lt;code>Shape&lt;/code> lies &#xA;     * entirely within the indicated &lt;code>Rectangle2D&lt;/code>.  The &#xA;     * bounding box returned by this method is usually tighter than that &#xA;     * returned by the &lt;code>getBounds&lt;/code> method and never fails due &#xA;     * to overflow problems since the return value can be an instance of &#xA;     * the &lt;code>Rectangle2D&lt;/code> that uses double precision values to &#xA;     * store the dimensions.&#xA;     * @return an instance of &lt;code>Rectangle2D&lt;/code> that is a&#xA;     *                 high-precision bounding box of the &lt;code>Shape&lt;/code>.&#xA;     * @see #getBounds&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="contains">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if the specified coordinates are inside the boundary of the &#xA;     * &lt;code>Shape&lt;/code>.&#xA;     * @param x the specified x coordinate&#xA;     * @param y the specified y coordinate&#xA;     * @return &lt;code>true&lt;/code> if the specified coordinates are inside &#xA;     *         the &lt;code>Shape&lt;/code> boundary; &lt;code>false&lt;/code>&#xA;     *         otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="contains">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="p">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="geom/Point2D.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if a specified {@link Point2D} is inside the boundary&#xA;     * of the &lt;code>Shape&lt;/code>.&#xA;     * @param p a specified &lt;code>Point2D&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the specified &lt;code>Point2D&lt;/code> is &#xA;     *          inside the boundary of the &lt;code>Shape&lt;/code>;&#xA;     *&#x9;&#x9;&lt;code>false&lt;/code> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="intersects">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if the interior of the &lt;code>Shape&lt;/code> intersects the &#xA;     * interior of a specified rectangular area.&#xA;     * The rectangular area is considered to intersect the &lt;code>Shape&lt;/code> &#xA;     * if any point is contained in both the interior of the &#xA;     * &lt;code>Shape&lt;/code> and the specified rectangular area.&#xA;     * &lt;p>&#xA;     * This method might conservatively return &lt;code>true&lt;/code> when:&#xA;     * &lt;ul>&#xA;     * &lt;li>&#xA;     * there is a high probability that the rectangular area and the&#xA;     * &lt;code>Shape&lt;/code> intersect, but&#xA;     * &lt;li>&#xA;     * the calculations to accurately determine this intersection&#xA;     * are prohibitively expensive.&#xA;     * &lt;/ul>&#xA;     * This means that this method might return &lt;code>true&lt;/code> even&#xA;     * though the rectangular area does not intersect the &lt;code>Shape&lt;/code>.&#xA;     * The {@link java.awt.geom.Area Area} class can be used to perform &#xA;     * more accurate computations of geometric intersection for any &#xA;     * &lt;code>Shape&lt;/code> object if a more precise answer is required.&#xA;     * @param x the x coordinate of the specified rectangular area&#xA;     * @param y the y coordinate of the specified rectangular area&#xA;     * @param w the width of the specified rectangular area&#xA;     * @param h the height of the specified rectangular area&#xA;     * @return &lt;code>true&lt;/code> if the interior of the &lt;code>Shape&lt;/code> and&#xA;     * &#x9;&#x9;the interior of the rectangular area intersect, or are&#xA;     * &#x9;&#x9;both highly likely to intersect and intersection calculations &#xA;     * &#x9;&#x9;would be too expensive to perform; &lt;code>false&lt;/code> otherwise.&#xA;     * @see java.awt.geom.Area&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="intersects">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="r">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if the interior of the &lt;code>Shape&lt;/code> intersects the &#xA;     * interior of a specified &lt;code>Rectangle2D&lt;/code>.&#xA;     * This method might conservatively return &lt;code>true&lt;/code> when:&#xA;     * &lt;ul>&#xA;     * &lt;li>&#xA;     * there is a high probability that the &lt;code>Rectangle2D&lt;/code> and the&#xA;     * &lt;code>Shape&lt;/code> intersect, but&#xA;     * &lt;li>&#xA;     * the calculations to accurately determine this intersection&#xA;     * are prohibitively expensive.&#xA;     * &lt;/ul>&#xA;     * This means that this method might return &lt;code>true&lt;/code> even&#xA;     * though the &lt;code>Rectangle2D&lt;/code> does not intersect the&#xA;     * &lt;code>Shape&lt;/code>. &#xA;     * @param r the specified &lt;code>Rectangle2D&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the interior of the &lt;code>Shape&lt;/code> and  &#xA;     * &#x9;&#x9;the interior of the specified &lt;code>Rectangle2D&lt;/code>&#xA;     *&#x9;&#x9;intersect, or are both highly likely to intersect and intersection&#xA;     *&#x9;&#x9;calculations would be too expensive to perform; &lt;code>false&lt;/code>&#xA;     * &#x9;&#x9;otherwise.&#xA;     * @see #intersects(double, double, double, double)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="contains">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="w">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="h">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if the interior of the &lt;code>Shape&lt;/code> entirely contains &#xA;     * the specified rectangular area.  All coordinates that lie inside&#xA;     * the rectangular area must lie within the &lt;code>Shape&lt;/code> for the&#xA;     * entire rectanglar area to be considered contained within the &#xA;     * &lt;code>Shape&lt;/code>.&#xA;     * &lt;p>&#xA;     * This method might conservatively return &lt;code>false&lt;/code> when:&#xA;     * &lt;ul>&#xA;     * &lt;li>&#xA;     * the &lt;code>intersect&lt;/code> method returns &lt;code>true&lt;/code> and&#xA;     * &lt;li>&#xA;     * the calculations to determine whether or not the&#xA;     * &lt;code>Shape&lt;/code> entirely contains the rectangular area are&#xA;     * prohibitively expensive.&#xA;     * &lt;/ul>&#xA;     * This means that this method might return &lt;code>false&lt;/code> even&#xA;     * though the &lt;code>Shape&lt;/code> contains the rectangular area.&#xA;     * The &lt;code>Area&lt;/code> class can be used to perform more accurate &#xA;     * computations of geometric intersection for any &lt;code>Shape&lt;/code>&#xA;     * object if a more precise answer is required.&#xA;     * @param x the x coordinate of the specified rectangular area&#xA;     * @param y the y coordinate of the specified rectangular area&#xA;     * @param w the width of the specified rectangular area&#xA;     * @param h the height of the specified rectangular area&#xA;     * @return &lt;code>true&lt;/code> if the interior of the &lt;code>Shape&lt;/code>&#xA;     * &#x9;&#x9;entirely contains the specified rectangular area;&#xA;     * &#x9;&#x9;&lt;code>false&lt;/code> otherwise or, if the &lt;code>Shape&lt;/code>    &#xA;     *&#x9;&#x9;contains the rectangular area and the   &#xA;     *&#x9;&#x9;&lt;code>intersects&lt;/code> method returns &lt;code>true&lt;/code> &#xA;     * &#x9;&#x9;and the containment calculations would be too expensive to&#xA;     * &#x9;&#x9;perform.&#xA;     * @see java.awt.geom.Area&#xA;     * @see #intersects&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="contains">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="r">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if the interior of the &lt;code>Shape&lt;/code> entirely contains the &#xA;     * specified &lt;code>Rectangle2D&lt;/code>.&#xA;     * This method might conservatively return &lt;code>false&lt;/code> when:&#xA;     * &lt;ul>&#xA;     * &lt;li>&#xA;     * the &lt;code>intersect&lt;/code> method returns &lt;code>true&lt;/code> and&#xA;     * &lt;li>&#xA;     * the calculations to determine whether or not the&#xA;     * &lt;code>Shape&lt;/code> entirely contains the &lt;code>Rectangle2D&lt;/code>&#xA;     * are prohibitively expensive.&#xA;     * &lt;/ul>&#xA;     * This means that this method might return &lt;code>false&lt;/code> even   &#xA;     * though the &lt;code>Shape&lt;/code> contains the&#xA;     * &lt;code>Rectangle2D&lt;/code>.&#xA;     * The &lt;code>Area&lt;/code> class can be used to perform more accurate &#xA;     * computations of geometric intersection for any &lt;code>Shape&lt;/code>  &#xA;     * object if a more precise answer is required.&#xA;     * @param r The specified &lt;code>Rectangle2D&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the interior of the &lt;code>Shape&lt;/code>&#xA;     *          entirely contains the &lt;code>Rectangle2D&lt;/code>;&#xA;     *          &lt;code>false&lt;/code> otherwise or, if the &lt;code>Shape&lt;/code>&#xA;     *          contains the &lt;code>Rectangle2D&lt;/code> and the&#xA;     *          &lt;code>intersects&lt;/code> method returns &lt;code>true&lt;/code>&#xA;     *          and the containment calculations would be too expensive to&#xA;     *          perform. &#xA;     * @see #contains(double, double, double, double)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getPathIterator">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="geom/PathIterator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="at">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="geom/AffineTransform.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an iterator object that iterates along the &#xA;     * &lt;code>Shape&lt;/code> boundary and provides access to the geometry of the &#xA;     * &lt;code>Shape&lt;/code> outline.  If an optional {@link AffineTransform}&#xA;     * is specified, the coordinates returned in the iteration are&#xA;     * transformed accordingly.&#xA;     * &lt;p>&#xA;     * Each call to this method returns a fresh &lt;code>PathIterator&lt;/code>&#xA;     * object that traverses the geometry of the &lt;code>Shape&lt;/code> object&#xA;     * independently from any other &lt;code>PathIterator&lt;/code> objects in use&#xA;     * at the same time.&#xA;     * &lt;p>&#xA;     * It is recommended, but not guaranteed, that objects &#xA;     * implementing the &lt;code>Shape&lt;/code> interface isolate iterations&#xA;     * that are in process from any changes that might occur to the original&#xA;     * object's geometry during such iterations.&#xA;     * &lt;p>&#xA;     * Before using a particular implementation of the &lt;code>Shape&lt;/code> &#xA;     * interface in more than one thread simultaneously, refer to its &#xA;     * documentation to verify that it guarantees that iterations are isolated &#xA;     * from modifications.&#xA;     * @param at an optional &lt;code>AffineTransform&lt;/code> to be applied to the&#xA;     * &#x9;&#x9;coordinates as they are returned in the iteration, or &#xA;     *&#x9;&#x9;&lt;code>null&lt;/code> if untransformed coordinates are desired&#xA;     * @return a new &lt;code>PathIterator&lt;/code> object, which independently    &#xA;     *&#x9;&#x9;traverses the geometry of the &lt;code>Shape&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getPathIterator">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="geom/PathIterator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="at">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="geom/AffineTransform.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="flatness">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an iterator object that iterates along the &lt;code>Shape&lt;/code>&#xA;     * boundary and provides access to a flattened view of the&#xA;     * &lt;code>Shape&lt;/code> outline geometry.&#xA;     * &lt;p>&#xA;     * Only SEG_MOVETO, SEG_LINETO, and SEG_CLOSE point types are&#xA;     * returned by the iterator.&#xA;     * &lt;p>&#xA;     * If an optional &lt;code>AffineTransform&lt;/code> is specified,&#xA;     * the coordinates returned in the iteration are transformed&#xA;     * accordingly.&#xA;     * &lt;p>&#xA;     * The amount of subdivision of the curved segments is controlled&#xA;     * by the &lt;code>flatness&lt;/code> parameter, which specifies the&#xA;     * maximum distance that any point on the unflattened transformed&#xA;     * curve can deviate from the returned flattened path segments.&#xA;     * Note that a limit on the accuracy of the flattened path might be&#xA;     * silently imposed, causing very small flattening parameters to be&#xA;     * treated as larger values.  This limit, if there is one, is&#xA;     * defined by the particular implementation that is used.&#xA;     * &lt;p>&#xA;     * Each call to this method returns a fresh &lt;code>PathIterator&lt;/code>&#xA;     * object that traverses the &lt;code>Shape&lt;/code> object geometry &#xA;     * independently from any other &lt;code>PathIterator&lt;/code> objects in use at&#xA;     * the same time.&#xA;     * &lt;p>&#xA;     * It is recommended, but not guaranteed, that objects &#xA;     * implementing the &lt;code>Shape&lt;/code> interface isolate iterations&#xA;     * that are in process from any changes that might occur to the original&#xA;     * object's geometry during such iterations.&#xA;     * &lt;p>&#xA;     * Before using a particular implementation of this interface in more&#xA;     * than one thread simultaneously, refer to its documentation to&#xA;     * verify that it guarantees that iterations are isolated from&#xA;     * modifications.&#xA;     * @param at an optional &lt;code>AffineTransform&lt;/code> to be applied to the&#xA;     * &#x9;&#x9;coordinates as they are returned in the iteration, or &#xA;     *&#x9;&#x9;&lt;code>null&lt;/code> if untransformed coordinates are desired&#xA;     * @param flatness the maximum distance that the line segments used to&#xA;     *          approximate the curved segments are allowed to deviate&#xA;     *          from any point on the original curve&#xA;     * @return a new &lt;code>PathIterator&lt;/code> that independently traverses &#xA;     * &#x9;&#x9;the &lt;code>Shape&lt;/code> geometry.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Shape&lt;/code> interface provides definitions for objects &#xA; * that represent some form of geometric shape.  The &lt;code>Shape&lt;/code>&#xA; * is described by a {@link PathIterator} object, which can express the &#xA; * outline of the &lt;code>Shape&lt;/code> as well as a rule for determining &#xA; * how the outline divides the 2D plane into interior and exterior &#xA; * points.  Each &lt;code>Shape&lt;/code> object provides callbacks to get the &#xA; * bounding box of the geometry, determine whether points or &#xA; * rectangles lie partly or entirely within the interior&#xA; * of the &lt;code>Shape&lt;/code>, and retrieve a &lt;code>PathIterator&lt;/code>&#xA; * object that describes the trajectory path of the &lt;code>Shape&lt;/code>&#xA; * outline.&#xA; * &lt;p>&#xA; * &lt;b>Definition of insideness:&lt;/b>&#xA; * A point is considered to lie inside a &#xA; * &lt;code>Shape&lt;/code> if and only if:&#xA; * &lt;ul>&#xA; * &lt;li> it lies completely&#xA; * inside the&lt;code>Shape&lt;/code> boundary &lt;i>or&lt;/i> &#xA; * &lt;li>&#xA; * it lies exactly on the &lt;code>Shape&lt;/code> boundary &lt;i>and&lt;/i> the &#xA; * space immediately adjacent to the&#xA; * point in the increasing &lt;code>X&lt;/code> direction is &#xA; * entirely inside the boundary &lt;i>or&lt;/i>&#xA; * &lt;li>&#xA; * it lies exactly on a horizontal boundary segment &lt;b>and&lt;/b> the&#xA; * space immediately adjacent to the point in the &#xA; * increasing &lt;code>Y&lt;/code> direction is inside the boundary.&#xA; * &lt;/ul>&#xA; * &lt;p>The &lt;code>contains&lt;/code> and &lt;code>intersects&lt;/code> methods&#xA; * consider the interior of a &lt;code>Shape&lt;/code> to be the area it&#xA; * encloses as if it were filled.  This means that these methods&#xA; * consider&#xA; * unclosed shapes to be implicitly closed for the purpose of&#xA; * determining if a shape contains or intersects a rectangle or if a&#xA; * shape contains a point.&#xA; * &#xA; * @see java.awt.geom.PathIterator&#xA; * @see java.awt.geom.AffineTransform&#xA; * @see java.awt.geom.FlatteningPathIterator&#xA; * @see java.awt.geom.GeneralPath&#xA; *&#xA; * @version 1.19 06/24/98&#xA; * @author Jim Graham&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

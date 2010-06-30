@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="SyncProvider.java">
+  <comments>/*&#xA; * @(#)SyncProvider.java&#x9;1.9 04/03/11&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sql</namespaces>
+  <namespaces>rowset</namespaces>
+  <namespaces>spi</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>sql</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SyncProvider">
+    <members xsi:type="members:Constructor" name="SyncProvider">
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Creates a default &lt;code>SyncProvider&lt;/code> object.&#xA;    */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getProviderID">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the unique identifier for this &lt;code>SyncProvider&lt;/code> object. &#xA;     * &#xA;     * @return a &lt;code>String&lt;/code> object with the fully qualified class name of&#xA;     *         this &lt;code>SyncProvider&lt;/code> object&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getRowSetReader">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../RowSetReader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>javax.sql.RowSetReader&lt;/code> object, which can be used to&#xA;     * populate a &lt;code>RowSet&lt;/code> object with data.&#xA;     * &#xA;     * @return a &lt;code>javax.sql.RowSetReader&lt;/code> object&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getRowSetWriter">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../RowSetWriter.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>javax.sql.RowSetWriter&lt;/code> object, which can be&#xA;     * used to write a &lt;code>RowSet&lt;/code> object's data back to the&#xA;     * underlying data source.&#xA;     * &#xA;     * @return a &lt;code>javax.sql.RowSetWriter&lt;/code> object &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getProviderGrade">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a constant indicating the&#xA;     * grade of synchronization a &lt;code>RowSet&lt;/code> object can expect from &#xA;     * this &lt;code>SyncProvider&lt;/code> object.&#xA;     *&#xA;     * @return an int that is one of the following constants:&#xA;     *           SyncProvider.GRADE_NONE,&#xA;     *           SyncProvider.GRADE_CHECK_MODIFIED_AT_COMMIT,&#xA;     *           SyncProvider.GRADE_CHECK_ALL_AT_COMMIT,&#xA;     *           SyncProvider.GRADE_LOCK_WHEN_MODIFIED,&#xA;     *           SyncProvider.GRADE_LOCK_WHEN_LOADED&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDataSourceLock">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="datasource_lock">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SyncProviderException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets a lock on the underlying data source at the level indicated by&#xA;     * &lt;i>datasource_lock&lt;/i>. This should cause the&#xA;     * &lt;code>SyncProvider&lt;/code> to adjust its behavior by increasing or&#xA;     * decreasing the level of optimism it provides for a successful&#xA;     * synchronization.&#xA;     *&#xA;     * @param datasource_lock one of the following constants indicating the severity &#xA;     *           level of data source lock required:&#xA;     * &lt;pre>&#xA;     *           SyncProvider.DATASOURCE_NO_LOCK,&#xA;     *           SyncProvider.DATASOURCE_ROW_LOCK,&#xA;     *           SyncProvider.DATASOURCE_TABLE_LOCK,&#xA;     *           SyncProvider.DATASOURCE_DB_LOCK,          &#xA;     * &lt;/pre>&#xA;     * @throws SyncProviderException if an unsupported data source locking level &#xA;     *           is set.&#xA;     * @see #getDataSourceLock&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDataSourceLock">
+      <typeReference xsi:type="types:Int"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SyncProviderException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current data source lock severity level active in this&#xA;     * &lt;code>SyncProvider&lt;/code> implementation.&#xA;     *&#xA;     * @return a constant indicating the current level of data source lock&#xA;     *        active in this &lt;code>SyncProvider&lt;/code> object;&#xA;     *         one of the following:&#xA;     * &lt;pre>&#xA;     *           SyncProvider.DATASOURCE_NO_LOCK,&#xA;     *           SyncProvider.DATASOURCE_ROW_LOCK,&#xA;     *           SyncProvider.DATASOURCE_TABLE_LOCK,&#xA;     *           SyncProvider.DATASOURCE_DB_LOCK     &#xA;     * &lt;/pre>&#xA;     * @throws SyncProviderExceptiom if an error occurs determining the data&#xA;     *        source locking level.&#xA;     * @see #setDataSourceLock     &#xA;&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="supportsUpdatableView">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns whether this &lt;code>SyncProvider&lt;/code> implementation&#xA;     * can perform synchronization between a &lt;code>RowSet&lt;/code> object&#xA;     * and the SQL &lt;code>VIEW&lt;/code> in the data source from which &#xA;     * the &lt;code>RowSet&lt;/code> object got its data.&#xA;     *&#xA;     * @return an &lt;code>int&lt;/code> saying whether this &lt;code>SyncProvider&lt;/code>&#xA;     *         object supports updating an SQL &lt;code>VIEW&lt;/code>; one of the &#xA;     *         following: &#xA;     *            SyncProvider.UPDATABLE_VIEW_SYNC,&#xA;     *            SyncProvider.NONUPDATABLE_VIEW_SYNC&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getVersion">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the release version of this &lt;code>SyncProvider&lt;/code> instance.&#xA;     * &#xA;     * @return a &lt;code>String&lt;/code> detailing the release version of the &#xA;     *     &lt;code>SyncProvider&lt;/code> implementation&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getVendor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the vendor name of this &lt;code>SyncProvider&lt;/code> instance&#xA;     *     &#xA;     * @return a &lt;code>String&lt;/code> detailing the vendor name of this&#xA;     *     &lt;code>SyncProvider&lt;/code> implementation&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:Field" name="GRADE_NONE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/*&#xA;     * Standard description of synchronization grades that a SyncProvider&#xA;     * could provide.&#xA;     */</comments>
+        <comments>/**&#xA;     * Indicates that no synchronization with the originating data source is&#xA;     * provided. A &lt;code>SyncProvider&lt;/code> &#xA;     * implementation returning this grade will simply attempt to write&#xA;     * updates in the &lt;code>RowSet&lt;/code> object to the underlying data&#xA;     * source without checking the validity of any data.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="GRADE_CHECK_MODIFIED_AT_COMMIT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates a low level optimistic synchronization grade with &#xA;     * respect to the originating data source.&#xA;     *&#xA;     * A &lt;code>SyncProvider&lt;/code> implementation&#xA;     * returning this grade will check only rows that have changed.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="GRADE_CHECK_ALL_AT_COMMIT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates a high level optimistic synchronization grade with &#xA;     * respect to the originating data source.&#xA;     *&#xA;     * A &lt;code>SyncProvider&lt;/code> implementation&#xA;     * returning this grade will check all rows, including rows that have not&#xA;     * changed.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="GRADE_LOCK_WHEN_MODIFIED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates a pessimistic synchronization grade with &#xA;     * respect to the originating data source.&#xA;     *&#xA;     * A &lt;code>SyncProvider&lt;/code> &#xA;     * implementation returning this grade will lock the row in the originating&#xA;     * data source.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="GRADE_LOCK_WHEN_LOADED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="5"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates the most pessimistic synchronization grade with &#xA;     * respect to the originating &#xA;     * data source. A &lt;code>SyncProvider&lt;/code>&#xA;     * implementation returning this grade will lock the entire view and/or&#xA;     * table affected by the original statement used to populate a &#xA;     * &lt;code>RowSet&lt;/code> object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="DATASOURCE_NO_LOCK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that no locks remain on the originating data source. This is the default&#xA;     * lock setting for all &lt;code>SyncProvider&lt;/code> implementations unless&#xA;     * otherwise directed by a &lt;code>RowSet&lt;/code> object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="DATASOURCE_ROW_LOCK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that a lock is placed on the rows that are touched by the original&#xA;     * SQL statement used to populate the &lt;code>RowSet&lt;/code> object&#xA;     * that is using this &lt;code>SyncProvider&lt;/code> object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="DATASOURCE_TABLE_LOCK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that a lock is placed on all tables that are touched by the original&#xA;     * SQL statement used to populate the &lt;code>RowSet&lt;/code> object&#xA;     * that is using this &lt;code>SyncProvider&lt;/code> object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="DATASOURCE_DB_LOCK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that a lock is placed on the entire data source that is the source of&#xA;     * data for the &lt;code>RowSet&lt;/code> object&#xA;     * that is using this &lt;code>SyncProvider&lt;/code> object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="UPDATABLE_VIEW_SYNC">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="5"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that a &lt;code>SyncProvider&lt;/code> implementation&#xA;     * supports synchronization between a &lt;code>RowSet&lt;/code> object and&#xA;     * the SQL &lt;code>VIEW&lt;/code> used to populate it.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="NONUPDATABLE_VIEW_SYNC">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="6"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates that a &lt;code>SyncProvider&lt;/code> implementation&#xA;     * does &lt;B>not&lt;/B> support synchronization between a &lt;code>RowSet&lt;/code>&#xA;     * object and the SQL &lt;code>VIEW&lt;/code> used to populate it.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The synchronization mechanism that provides reader/writer capabilities for &#xA; * disconnected &lt;code>RowSet&lt;/code> objects.&#xA; * A &lt;code>SyncProvider&lt;/code> implementation is a class that extends the&#xA; * &lt;code>SyncProvider&lt;/code> abstract class.&#xA; * &lt;P>&#xA; * A &lt;code>SyncProvider&lt;/code> implementation is&#xA; * identified by a unique ID, which is its fully qualified class name.&#xA; * This name must be registered with the &#xA; * &lt;code>SyncFactory&lt;/code> SPI, thus making the implementation available to &#xA; * all &lt;code>RowSet&lt;/code> implementations. &#xA; * The factory mechanism in the reference implementation uses this name to instantiate&#xA; * the implementation, which can then provide a &lt;code>RowSet&lt;/code> object with its&#xA; * reader (a &lt;code>javax.sql.RowSetReader&lt;/code> object) and its writer (a&#xA; * &lt;code>javax.sql.RowSetWriter&lt;/code> object).&#xA; * &lt;P>&#xA; * The Jdbc &lt;code>RowSet&lt;/code> Implementations specification provides two&#xA; * reference implementations of the &lt;code>SyncProvider&lt;/code> abstract class: &#xA; * &lt;code>RIOptimisticProvider&lt;/code> and &lt;code>RIXMLProvider&lt;/code>. &#xA; * The &lt;code>RIOptimisticProvider&lt;/code> can set any &lt;code>RowSet&lt;/code>&#xA; * implementation with a &lt;code>RowSetReader&lt;/code> object and a &#xA; * &lt;code>RowSetWriter&lt;/code> object.  However, only the &lt;code>RIXMLProvider&lt;/code>&#xA; * implementation can set an &lt;code>XmlReader&lt;/code> object and an&#xA; * &lt;code>XmlWriter&lt;/code> object. A &lt;code>WebRowSet&lt;/code> object uses the&#xA; * &lt;code>XmlReader&lt;/code> object to read data in XML format to populate itself with that&#xA; * data.  It uses the &lt;code>XmlWriter&lt;/code> object to write itself to a stream or&#xA; * &lt;code>java.io.Writer&lt;/code> object in XML format. &#xA; * &lt;P>&#xA; * &lt;h3>1.0 Naming Convention for Implementations&lt;/h3>&#xA; * As a guide  to naming &lt;code>SyncProvider&lt;/code>&#xA; * implementations, the following should be noted:&#xA; * &lt;UL>&#xA; * &lt;li>The name for a &lt;code>SyncProvider&lt;/code> implementation &#xA; * is its fully qualified class name.  &#xA; * &lt;li>It is recommended that vendors supply a&#xA; * &lt;code>SyncProvider&lt;/code> implementation in a package named &lt;code>providers&lt;/code>.&#xA; * &lt;/UL>&#xA; * &lt;p>&#xA; * For instance, if a vendor named Fred, Inc. offered a &#xA; * &lt;code>SyncProvider&lt;/code> implementation, you could have the following:&#xA; * &lt;PRE>&#xA; *     Vendor name:  Fred, Inc.     &#xA; *     Domain name of vendor:  com.fred&#xA; *     Package name:  com.fred.providers&#xA; *     SyncProvider implementation class name:  HighAvailabilityProvider&#xA; *&#xA; *     Fully qualified class name of SyncProvider implementation:&#xA; *                        com.fred.providers.HighAvailabilityProvider &#xA; * &lt;/PRE>&#xA; * &lt;P>&#xA; * The following line of code uses the fully qualified name to register&#xA; * this implementation with the &lt;code>SyncFactory&lt;/code> static instance.&#xA; * &lt;PRE>&#xA; *     SyncFactory.registerProvider(&#xA; *                          &quot;com.fred.providers.HighAvailabilityProvider&quot;);&#xA; * &lt;/PRE>&#xA; * &lt;P>&#xA; * The default &lt;code>SyncProvider&lt;/code> object provided with the reference &#xA; * implementation uses the following name:&#xA; * &lt;pre>&#xA; *     com.sun.rowset.providers.RIOptimisticProvider &#xA; * &lt;/pre>&#xA; * &lt;p>&#xA; * A vendor can register a &lt;code>SyncProvider&lt;/code> implementation class name &#xA; * with Sun Microsystems, Inc. by sending email to jdbc@sun.com.&#xA; * Sun will maintain a database listing the &#xA; * available &lt;code>SyncProvider&lt;/code> implementations for use with compliant&#xA; * &lt;code>RowSet&lt;/code> implementations.  This database will be similar to the&#xA; * one already maintained to list available JDBC drivers.&#xA; * &lt;P>&#xA; * Vendors should refer to the reference implementation synchronization&#xA; * providers for additional guidance on how to implement a new &#xA; * &lt;code>SyncProvider&lt;/code> implementation.&#xA; * &#xA; * &lt;h3>2.0 How a &lt;code>RowSet&lt;/code> Object Gets Its Provider&lt;/h3>&#xA; * &#xA; * A disconnected &lt;code>Rowset&lt;/code> object may get access to a &#xA; * &lt;code>SyncProvider&lt;/code> object in one of the following two ways:&#xA; * &lt;UL>&#xA; *  &lt;LI>Using a constructor&lt;BR>&#xA; *      &lt;PRE>&#xA; *       CachedRowSet crs = new CachedRowSet(&#xA; *                  &quot;com.fred.providers.HighAvailabilitySyncProvider&quot;); &#xA; *      &lt;/PRE>&#xA; *  &lt;LI>Using the &lt;code>setSyncProvider&lt;/code> method&#xA; *      &lt;PRE>&#xA; *       CachedRowSet crs = new CachedRowSet(); &#xA; *       crs.setSyncProvider(&quot;com.fred.providers.HighAvailabilitySyncProvider&quot;); &#xA; *      &lt;/PRE>&#xA;&#xA; * &lt;/UL>&#xA; * &lt;p> &#xA; * By default, the reference implementations of the &lt;code>RowSet&lt;/code> synchronization&#xA; * providers are always available to the Java platform.&#xA; * If no other pluggable synchronization providers have been correctly&#xA; * registered, the &lt;code>SyncFactory&lt;/code> will automatically generate&#xA; * an instance of the default &lt;code>SyncProvider&lt;/code> reference implementation.&#xA; * Thus, in the preceding code fragment, if no implementation named&#xA; * &lt;code>com.fred.providers.HighAvailabilitySyncProvider&lt;/code> has been&#xA; * registered with the &lt;code>SyncFactory&lt;/code> instance, &lt;i>crs&lt;/i> will be &#xA; * assigned the default provider in the reference implementation, which is&#xA; * &lt;code>com.sun.rowset.providers.RIOptimisticProvider&lt;/code>. &#xA; * &lt;p>&#xA; * &lt;h3>3.0 Violations and Synchronization Issues&lt;/h3>&#xA; * If an update between a disconnected &lt;code>RowSet&lt;/code> object&#xA; * and a data source violates &#xA; * the original query or the underlying data source constraints, this will &#xA; * result in undefined behavior for all disconnected &lt;code>RowSet&lt;/code> implementations &#xA; * and their designated &lt;code>SyncProvider&lt;/code> implementations. &#xA; * Not defining the behavior when such violations occur offers greater flexibility &#xA; * for a &lt;code>SyncProvider&lt;/code>&#xA; * implementation to determine its own best course of action.&#xA; * &lt;p>&#xA; * A &lt;code>SyncProvider&lt;/code> implementation &#xA; * may choose to implement a specific handler to&#xA; * handle a subset of query violations.&#xA; * However if an original query violation or a more general data source constraint&#xA; * violation is not handled by the &lt;code>SyncProvider&lt;/code> implementation,&#xA; * all &lt;code>SyncProvider&lt;/code>&#xA; * objects must throw a &lt;code>SyncProviderException&lt;/code>.&#xA; * &lt;p>&#xA; * &lt;h3>4.0 Updatable SQL VIEWs&lt;/h3>&#xA; * It is possible for any disconnected or connected &lt;code>RowSet&lt;/code> object to be populated &#xA; * from an SQL query that is formulated originally from an SQL &lt;code>VIEW&lt;/code>.&#xA; * While in many cases it is possible for an update to be performed to an&#xA; * underlying view, such an update requires additional metadata, which may vary.&#xA; * The &lt;code>SyncProvider&lt;/code> class provides two constants to indicate whether&#xA; * an implementation supports updating an SQL &lt;code>VIEW&lt;/code>.&#xA; * &lt;ul>&#xA; * &lt;li>&lt;code>&lt;b>NONUPDATABLE_VIEW_SYNC&lt;/b>&lt;/code> - Indicates that a &lt;code>SyncProvider&lt;/code>&#xA; * implementation does not support synchronization with an SQL &lt;code>VIEW&lt;/code> as the&#xA; * underlying source of data for the &lt;code>RowSet&lt;/code> object.&#xA; * &lt;li>&lt;code>&lt;b>UPDATABLE_VIEW_SYNC&lt;/b>&lt;/code> - Indicates that a &#xA; * &lt;code>SyncProvider&lt;/code> implementation &#xA; * supports synchronization with an SQL &lt;code>VIEW&lt;/code> as the underlying source&#xA; * of data.&#xA; * &lt;/ul>&#xA; * &lt;P>&#xA; * The default is for a &lt;code>RowSet&lt;/code> object not to be updatable if it was&#xA; * populated with data from an SQL &lt;code>VIEW&lt;/code>.&#xA; * &lt;P>&#xA; * &lt;h3>5.0 &lt;code>SyncProvider&lt;/code> Constants&lt;/h3>&#xA; * The &lt;code>SyncProvider&lt;/code> class provides three sets of constants that&#xA; * are used as return values or parameters for &lt;code>SyncProvider&lt;/code> methods.&#xA; * &lt;code>SyncProvider&lt;/code> objects may be implemented to perform synchronization&#xA; * between a &lt;code>RowSet&lt;/code> object and its underlying data source with varying&#xA; * degrees of of care. The first group of constants indicate how synchronization&#xA; * is handled. For example, &lt;code>GRADE_NONE&lt;/code> indicates that a &#xA; * &lt;code>SyncProvider&lt;/code> object will not take any care to see what data is&#xA; * valid and will simply write the &lt;code>RowSet&lt;/code> data to the data source.&#xA; * &lt;code>GRADE_MODIFIED_AT_COMMIT&lt;/code> indicates that the provider will check&#xA; * only modified data for validity.  Other grades check all data for validity&#xA; * or set locks when data is modified or loaded.&#xA; * &lt;OL>&#xA; *  &lt;LI>Constants to indicate the synchronization grade of a &#xA; *     &lt;code>SyncProvider&lt;/code> object&#xA; *   &lt;UL>&#xA; *    &lt;LI>SyncProvider.GRADE_NONE&#xA; *    &lt;LI>SyncProvider.GRADE_MODIFIED_AT_COMMIT&#xA; *    &lt;LI>SyncProvider.GRADE_CHECK_ALL_AT_COMMIT&#xA; *    &lt;LI>SyncProvider.GRADE_LOCK_WHEN_MODIFIED&#xA; *    &lt;LI>SyncProvider.GRADE_LOCK_WHEN_LOADED&#xA; *   &lt;/UL>&#xA; *  &lt;LI>Constants to indicate what locks are set on the data source&#xA; *   &lt;UL> &#xA; *     &lt;LI>SyncProvider.DATASOURCE_NO_LOCK&#xA; *     &lt;LI>SyncProvider.DATASOURCE_ROW_LOCK&#xA; *     &lt;LI>SyncProvider.DATASOURCE_TABLE_LOCK&#xA; *     &lt;LI>SyncProvider.DATASOURCE_DB_LOCK&#xA; *   &lt;/UL> &#xA; *  &lt;LI>Constants to indicate whether a &lt;code>SyncProvider&lt;/code> object can&#xA; *       perform updates to an SQL &lt;code>VIEW&lt;/code> &lt;BR>&#xA; *       These constants are explained in the preceding section (4.0).&#xA; *   &lt;UL>&#xA; *     &lt;LI>SyncProvider.UPDATABLE_VIEW_SYNC&#xA; *     &lt;LI>SyncProvider.NONUPDATABLE_VIEW_SYNC&#xA; *   &lt;/UL>&#xA; * &lt;/OL>&#xA; *&#xA; * @author Jonathan Bruce&#xA; * @see javax.sql.rowset.spi.SyncFactory&#xA; * @see javax.sql.rowset.spi.SyncFactoryException&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

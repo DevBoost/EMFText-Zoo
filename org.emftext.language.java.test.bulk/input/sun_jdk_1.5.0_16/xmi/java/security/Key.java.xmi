@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/types ../../java.ecore#/16" name="Key.java">
+  <comments>/*&#xA; * @(#)Key.java&#x9;1.54 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>security</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="Key">
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="6603384152749567654"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>// Declare serialVersionUID to be compatible with JDK1.1</comments>
+        <comments>/**&#xA;    * The class fingerprint that is set to indicate &#xA;    * serialization compatibility with a previous &#xA;    * version of the class.&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAlgorithm">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the standard algorithm name for this key. For&#xA;     * example, &quot;DSA&quot; would indicate that this key is a DSA key.&#xA;     * See Appendix A in the &lt;a href=&#xA;     * &quot;../../../guide/security/CryptoSpec.html#AppA&quot;>&#xA;     * Java Cryptography Architecture API Specification &amp;amp; Reference &lt;/a>&#xA;     * for information about standard algorithm names.&#xA;     *&#xA;     * @return the name of the algorithm associated with this key.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFormat">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the name of the primary encoding format of this key,&#xA;     * or null if this key does not support encoding.&#xA;     * The primary encoding format is&#xA;     * named in terms of the appropriate ASN.1 data format, if an&#xA;     * ASN.1 specification for this key exists.&#xA;     * For example, the name of the ASN.1 data format for public&#xA;     * keys is &lt;I>SubjectPublicKeyInfo&lt;/I>, as&#xA;     * defined by the X.509 standard; in this case, the returned format is&#xA;     * &lt;code>&quot;X.509&quot;&lt;/code>. Similarly,&#xA;     * the name of the ASN.1 data format for private keys is&#xA;     * &lt;I>PrivateKeyInfo&lt;/I>,&#xA;     * as defined by the PKCS #8 standard; in this case, the returned format is&#xA;     * &lt;code>&quot;PKCS#8&quot;&lt;/code>.&#xA;     *&#xA;     * @return the primary encoding format of the key.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEncoded">
+      <typeReference xsi:type="types:Byte"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the key in its primary encoding format, or null&#xA;     * if this key does not support encoding.&#xA;     *&#xA;     * @return the encoded key, or null if the key does not support&#xA;     * encoding.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The Key interface is the top-level interface for all keys. It&#xA; * defines the functionality shared by all key objects. All keys&#xA; * have three characteristics:&#xA; *&#xA; * &lt;UL>&#xA; *&#xA; * &lt;LI>An Algorithm&#xA; *&#xA; * &lt;P>This is the key algorithm for that key. The key algorithm is usually&#xA; * an encryption or asymmetric operation algorithm (such as DSA or&#xA; * RSA), which will work with those algorithms and with related&#xA; * algorithms (such as MD5 with RSA, SHA-1 with RSA, Raw DSA, etc.)&#xA; * The name of the algorithm of a key is obtained using the&#xA; * {@link #getAlgorithm() getAlgorithm} method.&lt;P>&#xA; *&#xA; * &lt;LI>An Encoded Form&#xA; *&#xA; * &lt;P>This is an external encoded form for the key used when a standard&#xA; * representation of the key is needed outside the Java Virtual Machine,&#xA; * as when transmitting the key to some other party. The key&#xA; * is encoded according to a standard format (such as &#xA; * X.509 &lt;code>SubjectPublicKeyInfo&lt;/code> or PKCS#8), and&#xA; * is returned using the {@link #getEncoded() getEncoded} method.&#xA; * Note: The syntax of the ASN.1 type &lt;code>SubjectPublicKeyInfo&lt;/code> &#xA; * is defined as follows:&#xA; *&#xA; * &lt;pre>&#xA; * SubjectPublicKeyInfo ::= SEQUENCE {&#xA; *   algorithm AlgorithmIdentifier,&#xA; *   subjectPublicKey BIT STRING }&#xA; *&#xA; * AlgorithmIdentifier ::= SEQUENCE {&#xA; *   algorithm OBJECT IDENTIFIER,&#xA; *   parameters ANY DEFINED BY algorithm OPTIONAL }&#xA; * &lt;/pre>&#xA; * &#xA; * For more information, see &#xA; * &lt;a href=&quot;http://www.ietf.org/rfc/rfc2459.txt&quot;>RFC 2459: &#xA; * Internet X.509 Public Key Infrastructure Certificate and CRL Profile&lt;/a>.&#xA; * &lt;P>&#xA; *&#xA; * &lt;LI>A Format&#xA; *&#xA; * &lt;P>This is the name of the format of the encoded key. It is returned&#xA; * by the {@link #getFormat() getFormat} method.&lt;P>&#xA; *&#xA; * &lt;/UL>&#xA; *&#xA; * Keys are generally obtained through key generators, certificates,&#xA; * or various Identity classes used to manage keys.&#xA; * Keys may also be obtained from key specifications (transparent&#xA; * representations of the underlying key material) through the use of a key&#xA; * factory (see {@link KeyFactory}).&#xA; *&#xA; * &lt;p> A Key should use KeyRep as its serialized representation.&#xA; * Note that a serialized Key may contain sensitive information&#xA; * which should not be exposed in untrusted environments.  See the&#xA; * &lt;a href=&quot;../../../guide/serialization/spec/security.html&quot;>&#xA; * Security Appendix&lt;/a>&#xA; * of the Serialization Specification for more information.&#xA; *&#xA; * @see PublicKey&#xA; * @see PrivateKey&#xA; * @see KeyPair&#xA; * @see KeyPairGenerator&#xA; * @see KeyFactory&#xA; * @see KeyRep&#xA; * @see java.security.spec.KeySpec&#xA; * @see Identity&#xA; * @see Signer&#xA; *&#xA; * @version 1.54 03/12/19&#xA; * @author Benjamin Renaud&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <namespaces>java</namespaces>
+      <namespaces>io</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

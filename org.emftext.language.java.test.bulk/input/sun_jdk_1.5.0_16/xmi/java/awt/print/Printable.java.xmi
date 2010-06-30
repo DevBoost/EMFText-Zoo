@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Printable.java">
+  <comments>/*&#xA; * @(#)Printable.java&#x9;1.17 04/01/28&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>print</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Graphics.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Printable">
+    <members xsi:type="members:Field" name="PAGE_EXISTS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returned from {@link #print(Graphics, PageFormat, int)} &#xA;     * to signify that the requested page was rendered.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="NO_SUCH_PAGE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returned from &lt;code>print&lt;/code> to signify that the&#xA;     * &lt;code>pageIndex&lt;/code> is too large and that the requested page&#xA;     * does not exist.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="print">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Prints the page at the specified index into the specified &#xA;     * {@link Graphics} context in the specified&#xA;     * format.  A &lt;code>PrinterJob&lt;/code> calls the &#xA;     * &lt;code>Printable&lt;/code> interface to request that a page be&#xA;     * rendered into the context specified by &#xA;     * &lt;code>graphics&lt;/code>.  The format of the page to be drawn is&#xA;     * specified by &lt;code>pageFormat&lt;/code>.  The zero based index&#xA;     * of the requested page is specified by &lt;code>pageIndex&lt;/code>. &#xA;     * If the requested page does not exist then this method returns&#xA;     * NO_SUCH_PAGE; otherwise PAGE_EXISTS is returned.&#xA;     * The &lt;code>Graphics&lt;/code> class or subclass implements the&#xA;     * {@link PrinterGraphics} interface to provide additional&#xA;     * information.  If the &lt;code>Printable&lt;/code> object&#xA;     * aborts the print job then it throws a {@link PrinterException}.&#xA;     * @param graphics the context into which the page is drawn &#xA;     * @param pageFormat the size and orientation of the page being drawn&#xA;     * @param pageIndex the zero based index of the page to be drawn&#xA;     * @return PAGE_EXISTS if the page is rendered successfully&#xA;     *         or NO_SUCH_PAGE if &lt;code>pageIndex&lt;/code> specifies a&#xA;     *&#x9;       non-existent page.&#xA;     * @exception java.awt.print.PrinterException&#xA;     *         thrown when the print job is terminated.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="graphics">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../Graphics.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pageFormat">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="PageFormat.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pageIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="PrinterException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Printable&lt;/code> interface is implemented &#xA; * by the &lt;code>print&lt;/code> methods of the current&#xA; * page painter, which is called by the printing&#xA; * system to render a page.  When building a &#xA; * {@link Pageable}, pairs of {@link PageFormat}&#xA; * instances and instances that implement&#xA; * this interface are used to describe each page. The &#xA; * instance implementing &lt;code>Printable&lt;/code> is called to &#xA; * print the page's graphics.&#xA; * &lt;p>&#xA; * A &lt;code>Printable(..)&lt;/code> may be set on a &lt;code>PrinterJob&lt;/code>.&#xA; * When the client subsequently initiates printing by calling&#xA; * &lt;code>PrinterJob.print(..)&lt;/code> control&#xA; * &lt;p>&#xA; * is handed to the printing system until all pages have been printed.&#xA; * It does this by calling &lt;code>Printable.print(..)&lt;/code> until&#xA; * all pages in the document have been printed.&#xA; * In using the &lt;code>Printable&lt;/code> interface the printing&#xA; * commits to image the contents of a page whenever&#xA; * requested by the printing system.&#xA; * &lt;p>&#xA; * The parameters to &lt;code>Printable.print(..)&lt;/code> include a&#xA; * &lt;code>PageFormat&lt;/code> which describes the printable area of&#xA; * the page, needed for calculating the contents that will fit the&#xA; * page, and the page index, which specifies the zero-based print&#xA; * stream index of the requested page.&#xA; * &lt;p>&#xA; * For correct printing behaviour, the following points should be&#xA; * observed:&#xA; * &lt;ul>&#xA; * &lt;li> The printing system may request a page index more than once.&#xA; * On each occasion equal PageFormat parameters will be supplied.&#xA; *&#xA; * &lt;li>The printing system will call &lt;code>Printable.print(..)&lt;/code>&#xA; * with page indexes which increase monotonically, although as noted above,&#xA; * the &lt;code>Printable&lt;/code> should expect multiple calls for a page index&#xA; * and that page indexes may be skipped, when page ranges are specified&#xA; * by the client, or by a user through a print dialog.&#xA; *  &#xA; * &lt;li>If multiple collated copies of a document are requested, and the&#xA; * printer cannot natively support this, then the document may be imaged&#xA; * multiple times. Printing will start each copy from the lowest print&#xA; * stream page index page.&#xA; * &#xA; * &lt;li>With the exception of re-imaging an entire document for multiple&#xA; * collated copies, the increasing page index order means that when&#xA; * page N is requested if a client needs to calculate page break position,&#xA; * it may safely discard any state related to pages &lt; N, and make current&#xA; * that for page N. &quot;State&quot; usually is just the calculated position in the&#xA; * document that corresponds to the start of the page.&#xA; *  &#xA; * &lt;li>When called by the printing system the &lt;code>Printable&lt;/code> must&#xA; * inspect and honour the supplied PageFormat parameter as well as the&#xA; * page index.&#xA; * This is key to correct printing behaviour, and it has the&#xA; * implication that the client has the responsibility of tracking&#xA; * what content belongs on the specified page.&#xA; *  &#xA; * &lt;li>When the &lt;code>Printable&lt;/code> is obtained from a client-supplied&#xA; * &lt;code>Pageable&lt;/code> then the client may provide different PageFormats&#xA; * for each page index. Calculations of page breaks must account for this.&#xA; * &lt;/ul>&#xA; * &lt;p>&#xA; * @see java.awt.print.Pageable&#xA; * @see java.awt.print.PageFormat&#xA; * @see java.awt.print.PrinterJob&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="TreeWalker.java">
+  <comments>/*&#xA; * Copyright (c) 2000 World Wide Web Consortium,&#xA; * (Massachusetts Institute of Technology, Institut National de&#xA; * Recherche en Informatique et en Automatique, Keio University). All&#xA; * Rights Reserved. This program is distributed under the W3C's Software&#xA; * Intellectual Property License. This program is distributed in the&#xA; * hope that it will be useful, but WITHOUT ANY WARRANTY; without even&#xA; * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR&#xA; * PURPOSE.&#xA; * See W3C License http://www.w3.org/Consortium/Legal/ for more details.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>w3c</namespaces>
+  <namespaces>dom</namespaces>
+  <namespaces>traversal</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>w3c</namespaces>
+    <namespaces>dom</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>w3c</namespaces>
+    <namespaces>dom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../DOMException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="TreeWalker">
+    <members xsi:type="members:InterfaceMethod" name="getRoot">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The &lt;code>root&lt;/code> node of the &lt;code>TreeWalker&lt;/code>, as specified &#xA;     * when it was created.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getWhatToShow">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This attribute determines which node types are presented via the &#xA;     * &lt;code>TreeWalker&lt;/code>. The available set of constants is defined in &#xA;     * the &lt;code>NodeFilter&lt;/code> interface.  Nodes not accepted by &#xA;     * &lt;code>whatToShow&lt;/code> will be skipped, but their children may still &#xA;     * be considered. Note that this skip takes precedence over the filter, &#xA;     * if any. &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFilter">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="NodeFilter.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The filter used to screen nodes.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getExpandEntityReferences">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The value of this flag determines whether the children of entity &#xA;     * reference nodes are visible to the &lt;code>TreeWalker&lt;/code>. If false, &#xA;     * these children  and their descendants will be rejected. Note that &#xA;     * this rejection takes precedence over &lt;code>whatToShow&lt;/code> and the &#xA;     * filter, if any. &#xA;     * &lt;br> To produce a view of the document that has entity references &#xA;     * expanded and does not expose the entity reference node itself, use &#xA;     * the &lt;code>whatToShow&lt;/code> flags to hide the entity reference node &#xA;     * and set &lt;code>expandEntityReferences&lt;/code> to true when creating the &#xA;     * &lt;code>TreeWalker&lt;/code>. To produce a view of the document that has &#xA;     * entity reference nodes but no entity expansion, use the &#xA;     * &lt;code>whatToShow&lt;/code> flags to show the entity reference node and &#xA;     * set &lt;code>expandEntityReferences&lt;/code> to false.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCurrentNode">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The node at which the &lt;code>TreeWalker&lt;/code> is currently positioned.&#xA;     * &lt;br>Alterations to the DOM tree may cause the current node to no longer &#xA;     * be accepted by the &lt;code>TreeWalker&lt;/code>'s associated filter. &#xA;     * &lt;code>currentNode&lt;/code> may also be explicitly set to any node, &#xA;     * whether or not it is within the subtree specified by the &#xA;     * &lt;code>root&lt;/code> node or would be accepted by the filter and &#xA;     * &lt;code>whatToShow&lt;/code> flags. Further traversal occurs relative to &#xA;     * &lt;code>currentNode&lt;/code> even if it is not part of the current view, &#xA;     * by applying the filters in the requested direction; if no traversal &#xA;     * is possible, &lt;code>currentNode&lt;/code> is not changed. &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCurrentNode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="currentNode">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../DOMException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The node at which the &lt;code>TreeWalker&lt;/code> is currently positioned.&#xA;     * &lt;br>Alterations to the DOM tree may cause the current node to no longer &#xA;     * be accepted by the &lt;code>TreeWalker&lt;/code>'s associated filter. &#xA;     * &lt;code>currentNode&lt;/code> may also be explicitly set to any node, &#xA;     * whether or not it is within the subtree specified by the &#xA;     * &lt;code>root&lt;/code> node or would be accepted by the filter and &#xA;     * &lt;code>whatToShow&lt;/code> flags. Further traversal occurs relative to &#xA;     * &lt;code>currentNode&lt;/code> even if it is not part of the current view, &#xA;     * by applying the filters in the requested direction; if no traversal &#xA;     * is possible, &lt;code>currentNode&lt;/code> is not changed. &#xA;     * @exception DOMException&#xA;     *   NOT_SUPPORTED_ERR: Raised if an attempt is made to set &#xA;     *   &lt;code>currentNode&lt;/code> to &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="parentNode">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves to and returns the closest visible ancestor node of the current &#xA;     * node. If the search for &lt;code>parentNode&lt;/code> attempts to step &#xA;     * upward from the &lt;code>TreeWalker&lt;/code>'s &lt;code>root&lt;/code> node, or &#xA;     * if it fails to find a visible ancestor node, this method retains the &#xA;     * current position and returns &lt;code>null&lt;/code>.&#xA;     * @return The new parent node, or &lt;code>null&lt;/code> if the current node &#xA;     *   has no parent  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="firstChild">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the &lt;code>TreeWalker&lt;/code> to the first visible child of the &#xA;     * current node, and returns the new node. If the current node has no &#xA;     * visible children, returns &lt;code>null&lt;/code>, and retains the current &#xA;     * node.&#xA;     * @return The new node, or &lt;code>null&lt;/code> if the current node has no &#xA;     *   visible children  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="lastChild">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the &lt;code>TreeWalker&lt;/code> to the last visible child of the &#xA;     * current node, and returns the new node. If the current node has no &#xA;     * visible children, returns &lt;code>null&lt;/code>, and retains the current &#xA;     * node.&#xA;     * @return The new node, or &lt;code>null&lt;/code> if the current node has no &#xA;     *   children  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="previousSibling">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the &lt;code>TreeWalker&lt;/code> to the previous sibling of the &#xA;     * current node, and returns the new node. If the current node has no &#xA;     * visible previous sibling, returns &lt;code>null&lt;/code>, and retains the &#xA;     * current node.&#xA;     * @return The new node, or &lt;code>null&lt;/code> if the current node has no &#xA;     *   previous sibling.  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="nextSibling">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the &lt;code>TreeWalker&lt;/code> to the next sibling of the current &#xA;     * node, and returns the new node. If the current node has no visible &#xA;     * next sibling, returns &lt;code>null&lt;/code>, and retains the current node.&#xA;     * @return The new node, or &lt;code>null&lt;/code> if the current node has no &#xA;     *   next sibling.  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="previousNode">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the &lt;code>TreeWalker&lt;/code> to the previous visible node in &#xA;     * document order relative to the current node, and returns the new &#xA;     * node. If the current node has no previous node,  or if the search for &#xA;     * &lt;code>previousNode&lt;/code> attempts to step upward from the &#xA;     * &lt;code>TreeWalker&lt;/code>'s &lt;code>root&lt;/code> node,  returns &#xA;     * &lt;code>null&lt;/code>, and retains the current node. &#xA;     * @return The new node, or &lt;code>null&lt;/code> if the current node has no &#xA;     *   previous node  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="nextNode">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../Node.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the &lt;code>TreeWalker&lt;/code> to the next visible node in document &#xA;     * order relative to the current node, and returns the new node. If the &#xA;     * current node has no next node, or if the search for nextNode attempts &#xA;     * to step upward from the &lt;code>TreeWalker&lt;/code>'s &lt;code>root&lt;/code> &#xA;     * node, returns &lt;code>null&lt;/code>, and retains the current node.&#xA;     * @return The new node, or &lt;code>null&lt;/code> if the current node has no &#xA;     *   next node  in the &lt;code>TreeWalker&lt;/code>'s logical view.  &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;code>TreeWalker&lt;/code> objects are used to navigate a document tree or &#xA; * subtree using the view of the document defined by their &#xA; * &lt;code>whatToShow&lt;/code> flags and filter (if any). Any function which &#xA; * performs navigation using a &lt;code>TreeWalker&lt;/code> will automatically &#xA; * support any view defined by a &lt;code>TreeWalker&lt;/code>.&#xA; * &lt;p>Omitting nodes from the logical view of a subtree can result in a &#xA; * structure that is substantially different from the same subtree in the &#xA; * complete, unfiltered document. Nodes that are siblings in the &#xA; * &lt;code>TreeWalker&lt;/code> view may be children of different, widely &#xA; * separated nodes in the original view. For instance, consider a &#xA; * &lt;code>NodeFilter&lt;/code> that skips all nodes except for Text nodes and &#xA; * the root node of a document. In the logical view that results, all text &#xA; * nodes will be siblings and appear as direct children of the root node, no &#xA; * matter how deeply nested the structure of the original document.&#xA; * &lt;p>See also the &lt;a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'>Document Object Model (DOM) Level 2 Traversal and Range Specification&lt;/a>.&#xA; * @since DOM Level 2&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

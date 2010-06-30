@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="KeyEventDispatcher.java">
+  <comments>/*&#xA; * @(#)KeyEventDispatcher.java&#x9;1.5 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>event</namespaces>
+    <classifier xsi:type="classifiers:Class" href="event/KeyEvent.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="KeyEventDispatcher">
+    <members xsi:type="members:InterfaceMethod" name="dispatchKeyEvent">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * This method is called by the current KeyboardFocusManager requesting&#xA;     * that this KeyEventDispatcher dispatch the specified event on its behalf.&#xA;     * This KeyEventDispatcher is free to retarget the event, consume it,&#xA;     * dispatch it itself, or make other changes. This capability is typically&#xA;     * used to deliver KeyEvents to Components other than the focus owner. This&#xA;     * can be useful when navigating children of non-focusable Windows in an&#xA;     * accessible environment, for example. Note that if a KeyEventDispatcher&#xA;     * dispatches the KeyEvent itself, it must use &lt;code>redispatchEvent&lt;/code>&#xA;     * to prevent the current KeyboardFocusManager from recursively requesting&#xA;     * that this KeyEventDispatcher dispatch the event again.&#xA;     * &lt;p>&#xA;     * If an implementation of this method returns &lt;code>false&lt;/code>, then&#xA;     * the KeyEvent is passed to the next KeyEventDispatcher in the chain,&#xA;     * ending with the current KeyboardFocusManager. If an implementation&#xA;     * returns &lt;code>true&lt;/code>, the KeyEvent is assumed to have been&#xA;     * dispatched (although this need not be the case), and the current&#xA;     * KeyboardFocusManager will take no further action with regard to the&#xA;     * KeyEvent. In such a case,&#xA;     * &lt;code>KeyboardFocusManager.dispatchEvent&lt;/code> should return&#xA;     * &lt;code>true&lt;/code> as well. If an implementation consumes the KeyEvent,&#xA;     * but returns &lt;code>false&lt;/code>, the consumed event will still be passed&#xA;     * to the next KeyEventDispatcher in the chain. It is important for&#xA;     * developers to check whether the KeyEvent has been consumed before&#xA;     * dispatching it to a target. By default, the current KeyboardFocusManager&#xA;     * will not dispatch a consumed KeyEvent.&#xA;     *&#xA;     * @param e the KeyEvent to dispatch&#xA;     * @return &lt;code>true&lt;/code> if the KeyboardFocusManager should take no&#xA;     *         further action with regard to the KeyEvent; &lt;code>false&lt;/code>&#xA;     *         otherwise&#xA;     * @see KeyboardFocusManager#redispatchEvent&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="e">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="event/KeyEvent.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A KeyEventDispatcher cooperates with the current KeyboardFocusManager in the&#xA; * targeting and dispatching of all KeyEvents. KeyEventDispatchers registered&#xA; * with the current KeyboardFocusManager will receive KeyEvents before they are&#xA; * dispatched to their targets, allowing each KeyEventDispatcher to retarget&#xA; * the event, consume it, dispatch the event itself, or make other changes.&#xA; * &lt;p>&#xA; * Note that KeyboardFocusManager itself implements KeyEventDispatcher. By&#xA; * default, the current KeyboardFocusManager will be the sink for all KeyEvents&#xA; * not dispatched by the registered KeyEventDispatchers. The current&#xA; * KeyboardFocusManager cannot be completely deregistered as a&#xA; * KeyEventDispatcher. However, if a KeyEventDispatcher reports that it&#xA; * dispatched the KeyEvent, regardless of whether it actually did so, the&#xA; * KeyboardFocusManager will take no further action with regard to the&#xA; * KeyEvent. (While it is possible for client code to register the current&#xA; * KeyboardFocusManager as a KeyEventDispatcher one or more times, this is&#xA; * usually unnecessary and not recommended.)&#xA; *&#xA; * @author David Mendenhall&#xA; * @version 1.5, 12/19/03&#xA; *&#xA; * @see KeyboardFocusManager#addKeyEventDispatcher&#xA; * @see KeyboardFocusManager#removeKeyEventDispatcher&#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

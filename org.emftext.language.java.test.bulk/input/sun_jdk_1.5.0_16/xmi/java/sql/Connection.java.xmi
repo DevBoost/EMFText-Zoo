@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/generics ../../java.ecore#/6 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="Connection.java">
+  <comments>/*&#xA; * @(#)Connection.java&#x9;1.43 04/05/05&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>sql</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="Connection">
+    <members xsi:type="members:InterfaceMethod" name="createStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>Statement&lt;/code> object for sending&#xA;     * SQL statements to the database.&#xA;     * SQL statements without parameters are normally&#xA;     * executed using &lt;code>Statement&lt;/code> objects. If the same SQL statement &#xA;     * is executed many times, it may be more efficient to use a &#xA;     * &lt;code>PreparedStatement&lt;/code> object.&#xA;     * &lt;P>&#xA;     * Result sets created using the returned &lt;code>Statement&lt;/code>&#xA;     * object will by default be type &lt;code>TYPE_FORWARD_ONLY&lt;/code>&#xA;     * and have a concurrency level of &lt;code>CONCUR_READ_ONLY&lt;/code>.&#xA;     *&#xA;     * @return a new default &lt;code>Statement&lt;/code> object &#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Statement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>PreparedStatement&lt;/code> object for sending&#xA;     * parameterized SQL statements to the database.&#xA;     * &lt;P>&#xA;     * A SQL statement with or without IN parameters can be&#xA;     * pre-compiled and stored in a &lt;code>PreparedStatement&lt;/code> object. This&#xA;     * object can then be used to efficiently execute this statement&#xA;     * multiple times.&#xA;     *&#xA;     * &lt;P>&lt;B>Note:&lt;/B> This method is optimized for handling&#xA;     * parametric SQL statements that benefit from precompilation. If&#xA;     * the driver supports precompilation,&#xA;     * the method &lt;code>prepareStatement&lt;/code> will send&#xA;     * the statement to the database for precompilation. Some drivers&#xA;     * may not support precompilation. In this case, the statement may&#xA;     * not be sent to the database until the &lt;code>PreparedStatement&lt;/code> &#xA;     * object is executed.  This has no direct effect on users; however, it does&#xA;     * affect which methods throw certain &lt;code>SQLException&lt;/code> objects.&#xA;     * &lt;P>&#xA;     * Result sets created using the returned &lt;code>PreparedStatement&lt;/code>&#xA;     * object will by default be type &lt;code>TYPE_FORWARD_ONLY&lt;/code>&#xA;     * and have a concurrency level of &lt;code>CONCUR_READ_ONLY&lt;/code>.&#xA;     *&#xA;     * @param sql an SQL statement that may contain one or more '?' IN&#xA;     * parameter placeholders&#xA;     * @return a new default &lt;code>PreparedStatement&lt;/code> object containing the&#xA;     * pre-compiled SQL statement &#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="PreparedStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareCall">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>CallableStatement&lt;/code> object for calling&#xA;     * database stored procedures.&#xA;     * The &lt;code>CallableStatement&lt;/code> object provides&#xA;     * methods for setting up its IN and OUT parameters, and&#xA;     * methods for executing the call to a stored procedure.&#xA;     *&#xA;     * &lt;P>&lt;B>Note:&lt;/B> This method is optimized for handling stored&#xA;     * procedure call statements. Some drivers may send the call&#xA;     * statement to the database when the method &lt;code>prepareCall&lt;/code>&#xA;     * is done; others&#xA;     * may wait until the &lt;code>CallableStatement&lt;/code> object&#xA;     * is executed. This has no&#xA;     * direct effect on users; however, it does affect which method&#xA;     * throws certain SQLExceptions.&#xA;     * &lt;P>&#xA;     * Result sets created using the returned &lt;code>CallableStatement&lt;/code>&#xA;     * object will by default be type &lt;code>TYPE_FORWARD_ONLY&lt;/code>&#xA;     * and have a concurrency level of &lt;code>CONCUR_READ_ONLY&lt;/code>.&#xA;     *&#xA;     * @param sql an SQL statement that may contain one or more '?'&#xA;     * parameter placeholders. Typically this  statement is a JDBC&#xA;     * function call escape string.&#xA;     * @return a new default &lt;code>CallableStatement&lt;/code> object containing the&#xA;     * pre-compiled SQL statement &#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="CallableStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="nativeSQL">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Converts the given SQL statement into the system's native SQL grammar.&#xA;     * A driver may convert the JDBC SQL grammar into its system's&#xA;     * native SQL grammar prior to sending it. This method returns the&#xA;     * native form of the statement that the driver would have sent.&#xA;     *&#xA;     * @param sql an SQL statement that may contain one or more '?'&#xA;     * parameter placeholders&#xA;     * @return the native form of this statement&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setAutoCommit">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets this connection's auto-commit mode to the given state.&#xA;     * If a connection is in auto-commit mode, then all its SQL&#xA;     * statements will be executed and committed as individual&#xA;     * transactions.  Otherwise, its SQL statements are grouped into&#xA;     * transactions that are terminated by a call to either&#xA;     * the method &lt;code>commit&lt;/code> or the method &lt;code>rollback&lt;/code>.&#xA;     * By default, new connections are in auto-commit&#xA;     * mode.&#xA;     * &lt;P>&#xA;     * The commit occurs when the statement completes or the next&#xA;     * execute occurs, whichever comes first. In the case of&#xA;     * statements returning a &lt;code>ResultSet&lt;/code> object, &#xA;     * the statement completes when the last row of the &#xA;     * &lt;code>ResultSet&lt;/code> object has been retrieved or the&#xA;     * &lt;code>ResultSet&lt;/code> object has been closed. In advanced cases, a single&#xA;     * statement may return multiple results as well as output&#xA;     * parameter values. In these cases, the commit occurs when all results and&#xA;     * output parameter values have been retrieved.&#xA;     * &lt;P>&#xA;     * &lt;B>NOTE:&lt;/B>  If this method is called during a transaction, the&#xA;     * transaction is committed.&#xA;     *&#xA;     * @param autoCommit &lt;code>true&lt;/code> to enable auto-commit mode; &#xA;     *         &lt;code>false&lt;/code> to disable it&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #getAutoCommit&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="autoCommit">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAutoCommit">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Retrieves the current auto-commit mode for this &lt;code>Connection&lt;/code>&#xA;     * object.&#xA;     *&#xA;     * @return the current state of this &lt;code>Connection&lt;/code> object's &#xA;     *         auto-commit mode&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #setAutoCommit &#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="commit">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Makes all changes made since the previous&#xA;     * commit/rollback permanent and releases any database locks&#xA;     * currently held by this &lt;code>Connection&lt;/code> object. &#xA;     * This method should be&#xA;     * used only when auto-commit mode has been disabled.&#xA;     *&#xA;     * @exception SQLException if a database access error occurs or this&#xA;     *            &lt;code>Connection&lt;/code> object is in auto-commit mode&#xA;     * @see #setAutoCommit &#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="rollback">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Undoes all changes made in the current transaction&#xA;     * and releases any database locks currently held&#xA;     * by this &lt;code>Connection&lt;/code> object. This method should be &#xA;     * used only when auto-commit mode has been disabled.&#xA;     *&#xA;     * @exception SQLException if a database access error occurs or this&#xA;     *            &lt;code>Connection&lt;/code> object is in auto-commit mode&#xA;     * @see #setAutoCommit &#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="close">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Releases this &lt;code>Connection&lt;/code> object's database and JDBC resources&#xA;     * immediately instead of waiting for them to be automatically released.&#xA;     * &lt;P>&#xA;     * Calling the method &lt;code>close&lt;/code> on a &lt;code>Connection&lt;/code>&#xA;     * object that is already closed is a no-op.&#xA;     * &lt;P>&#xA;     * &lt;B>Note:&lt;/B> A &lt;code>Connection&lt;/code> object is automatically &#xA;     * closed when it is garbage collected. Certain fatal errors also &#xA;     * close a &lt;code>Connection&lt;/code> object.&#xA;     *&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isClosed">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Retrieves whether this &lt;code>Connection&lt;/code> object has been&#xA;     * closed.  A connection is closed if the method &lt;code>close&lt;/code>&#xA;     * has been called on it or if certain fatal errors have occurred.&#xA;     * This method is guaranteed to return &lt;code>true&lt;/code> only when&#xA;     * it is called after the method &lt;code>Connection.close&lt;/code> has&#xA;     * been called.&#xA;     * &lt;P>&#xA;     * This method generally cannot be called to determine whether a&#xA;     * connection to a database is valid or invalid.  A typical client&#xA;     * can determine that a connection is invalid by catching any&#xA;     * exceptions that might be thrown when an operation is attempted.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if this &lt;code>Connection&lt;/code> object &#xA;     *         is closed; &lt;code>false&lt;/code> if it is still open&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMetaData">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>//======================================================================</comments>
+          <comments>// Advanced features:</comments>
+          <comments>/**&#xA;     * Retrieves a &lt;code>DatabaseMetaData&lt;/code> object that contains&#xA;     * metadata about the database to which this&#xA;     * &lt;code>Connection&lt;/code> object represents a connection.&#xA;     * The metadata includes information about the database's&#xA;     * tables, its supported SQL grammar, its stored&#xA;     * procedures, the capabilities of this connection, and so on.&#xA;     *&#xA;     * @return a &lt;code>DatabaseMetaData&lt;/code> object for this &#xA;     *         &lt;code>Connection&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="DatabaseMetaData.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setReadOnly">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Puts this connection in read-only mode as a hint to the driver to enable &#xA;     * database optimizations.&#xA;     *&#xA;     * &lt;P>&lt;B>Note:&lt;/B> This method cannot be called during a transaction.&#xA;     *&#xA;     * @param readOnly &lt;code>true&lt;/code> enables read-only mode; &#xA;     *        &lt;code>false&lt;/code> disables it&#xA;     * @exception SQLException if a database access error occurs or this&#xA;     *            method is called during a transaction&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="readOnly">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isReadOnly">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Retrieves whether this &lt;code>Connection&lt;/code> &#xA;     * object is in read-only mode.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if this &lt;code>Connection&lt;/code> object&#xA;     *         is read-only; &lt;code>false&lt;/code> otherwise&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCatalog">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the given catalog name in order to select &#x9;&#xA;     * a subspace of this &lt;code>Connection&lt;/code> object's database &#xA;     * in which to work.&#xA;     * &lt;P>&#xA;     * If the driver does not support catalogs, it will&#xA;     * silently ignore this request.&#xA;     *&#xA;     * @param catalog the name of a catalog (subspace in this &#xA;     *        &lt;code>Connection&lt;/code> object's database) in which to work&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #getCatalog&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="catalog">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCatalog">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Retrieves this &lt;code>Connection&lt;/code> object's current catalog name.&#xA;     *&#xA;     * @return the current catalog name or &lt;code>null&lt;/code> if there is none&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #setCatalog&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:Field" name="TRANSACTION_NONE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant indicating that transactions are not supported. &#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="TRANSACTION_READ_UNCOMMITTED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant indicating that&#xA;     * dirty reads, non-repeatable reads and phantom reads can occur.&#xA;     * This level allows a row changed by one transaction to be read&#xA;     * by another transaction before any changes in that row have been&#xA;     * committed (a &quot;dirty read&quot;).  If any of the changes are rolled back, &#xA;     * the second transaction will have retrieved an invalid row.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="TRANSACTION_READ_COMMITTED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant indicating that&#xA;     * dirty reads are prevented; non-repeatable reads and phantom&#xA;     * reads can occur.  This level only prohibits a transaction&#xA;     * from reading a row with uncommitted changes in it.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="TRANSACTION_REPEATABLE_READ">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant indicating that&#xA;     * dirty reads and non-repeatable reads are prevented; phantom&#xA;     * reads can occur.  This level prohibits a transaction from&#xA;     * reading a row with uncommitted changes in it, and it also&#xA;     * prohibits the situation where one transaction reads a row,&#xA;     * a second transaction alters the row, and the first transaction&#xA;     * rereads the row, getting different values the second time&#xA;     * (a &quot;non-repeatable read&quot;).&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="TRANSACTION_SERIALIZABLE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant indicating that&#xA;     * dirty reads, non-repeatable reads and phantom reads are prevented.&#xA;     * This level includes the prohibitions in&#xA;     * &lt;code>TRANSACTION_REPEATABLE_READ&lt;/code> and further prohibits the &#xA;     * situation where one transaction reads all rows that satisfy&#xA;     * a &lt;code>WHERE&lt;/code> condition, a second transaction inserts a row that&#xA;     * satisfies that &lt;code>WHERE&lt;/code> condition, and the first transaction&#xA;     * rereads for the same condition, retrieving the additional&#xA;     * &quot;phantom&quot; row in the second read.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTransactionIsolation">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Attempts to change the transaction isolation level for this&#xA;     * &lt;code>Connection&lt;/code> object to the one given.&#xA;     * The constants defined in the interface &lt;code>Connection&lt;/code>&#xA;     * are the possible transaction isolation levels.&#xA;     * &lt;P>&#xA;     * &lt;B>Note:&lt;/B> If this method is called during a transaction, the result&#xA;     * is implementation-defined.&#xA;     *&#xA;     * @param level one of the following &lt;code>Connection&lt;/code> constants:&#xA;     *        &lt;code>Connection.TRANSACTION_READ_UNCOMMITTED&lt;/code>,&#xA;     *        &lt;code>Connection.TRANSACTION_READ_COMMITTED&lt;/code>,&#xA;     *        &lt;code>Connection.TRANSACTION_REPEATABLE_READ&lt;/code>, or&#xA;     *        &lt;code>Connection.TRANSACTION_SERIALIZABLE&lt;/code>.&#xA;     *        (Note that &lt;code>Connection.TRANSACTION_NONE&lt;/code> cannot be used &#xA;     *        because it specifies that transactions are not supported.)&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or the given parameter is not one of the &lt;code>Connection&lt;/code>&#xA;     *            constants&#xA;     * @see DatabaseMetaData#supportsTransactionIsolationLevel &#xA;     * @see #getTransactionIsolation&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="level">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTransactionIsolation">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves this &lt;code>Connection&lt;/code> object's current &#xA;     * transaction isolation level.&#xA;     *&#xA;     * @return the current transaction isolation level, which will be one&#xA;     *         of the following constants:&#xA;     *        &lt;code>Connection.TRANSACTION_READ_UNCOMMITTED&lt;/code>, &#xA;     *        &lt;code>Connection.TRANSACTION_READ_COMMITTED&lt;/code>,&#xA;     *        &lt;code>Connection.TRANSACTION_REPEATABLE_READ&lt;/code>, &#xA;     *        &lt;code>Connection.TRANSACTION_SERIALIZABLE&lt;/code>, or&#xA;     *        &lt;code>Connection.TRANSACTION_NONE&lt;/code>.&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #setTransactionIsolation&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getWarnings">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Retrieves the first warning reported by calls on this &#xA;     * &lt;code>Connection&lt;/code> object.  If there is more than one&#xA;     * warning, subsequent warnings will be chained to the first one&#xA;     * and can be retrieved by calling the method&#xA;     * &lt;code>SQLWarning.getNextWarning&lt;/code> on the warning &#xA;     * that was retrieved previously.&#xA;     * &lt;P>&#xA;     * This method may not be&#xA;     * called on a closed connection; doing so will cause an&#xA;     * &lt;code>SQLException&lt;/code> to be thrown.&#xA;     *&#xA;     * &lt;P>&lt;B>Note:&lt;/B> Subsequent warnings will be chained to this&#xA;     * SQLWarning.&#xA;     *&#xA;     * @return the first &lt;code>SQLWarning&lt;/code> object or &lt;code>null&lt;/code>&#xA;     *         if there are none &#xA;     * @exception SQLException if a database access error occurs or&#xA;     *            this method is called on a closed connection&#xA;     * @see SQLWarning&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="SQLWarning.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clearWarnings">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Clears all warnings reported for this &lt;code>Connection&lt;/code> object.&#x9;&#xA;     * After a call to this method, the method &lt;code>getWarnings&lt;/code>&#xA;     * returns &lt;code>null&lt;/code> until a new warning is&#xA;     * reported for this &lt;code>Connection&lt;/code> object.  &#xA;     *&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>//--------------------------JDBC 2.0-----------------------------</comments>
+          <comments>/**&#xA;     * Creates a &lt;code>Statement&lt;/code> object that will generate&#xA;     * &lt;code>ResultSet&lt;/code> objects with the given type and concurrency.&#xA;     * This method is the same as the &lt;code>createStatement&lt;/code> method&#xA;     * above, but it allows the default result set&#xA;     * type and concurrency to be overridden.&#xA;     *&#xA;     * @param resultSetType a result set type; one of &#xA;     *        &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>,&#xA;     *        &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;     *        &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @param resultSetConcurrency a concurrency type; one of&#xA;     *        &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     *        &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @return a new &lt;code>Statement&lt;/code> object that will generate&#xA;     *         &lt;code>ResultSet&lt;/code> objects with the given type and&#xA;     *         concurrency&#xA;     * @exception SQLException if a database access error occurs&#xA;     *         or the given parameters are not &lt;code>ResultSet&lt;/code> &#xA;     *         constants indicating type and concurrency&#xA;     * @since 1.2&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Statement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetConcurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     *&#xA;     * Creates a &lt;code>PreparedStatement&lt;/code> object that will generate&#xA;     * &lt;code>ResultSet&lt;/code> objects with the given type and concurrency.&#xA;     * This method is the same as the &lt;code>prepareStatement&lt;/code> method&#xA;     * above, but it allows the default result set&#xA;     * type and concurrency to be overridden.&#xA;     *&#xA;     * @param sql a &lt;code>String&lt;/code> object that is the SQL statement to&#xA;     *            be sent to the database; may contain one or more ? IN&#xA;     *            parameters&#xA;     * @param resultSetType a result set type; one of &#xA;     *         &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>, &#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @param resultSetConcurrency a concurrency type; one of&#xA;     *         &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     *         &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @return a new PreparedStatement object containing the&#xA;     * pre-compiled SQL statement that will produce &lt;code>ResultSet&lt;/code>&#xA;     * objects with the given type and concurrency&#xA;     * @exception SQLException if a database access error occurs&#xA;     *         or the given parameters are not &lt;code>ResultSet&lt;/code> &#xA;     *         constants indicating type and concurrency&#xA;     * @since 1.2&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="PreparedStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetConcurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareCall">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>CallableStatement&lt;/code> object that will generate&#xA;     * &lt;code>ResultSet&lt;/code> objects with the given type and concurrency.&#xA;     * This method is the same as the &lt;code>prepareCall&lt;/code> method&#xA;     * above, but it allows the default result set&#xA;     * type and concurrency to be overridden.&#xA;     *&#xA;     * @param sql a &lt;code>String&lt;/code> object that is the SQL statement to&#xA;     *            be sent to the database; may contain on or more ? parameters&#xA;     * @param resultSetType a result set type; one of &#xA;     *         &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>, &#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @param resultSetConcurrency a concurrency type; one of&#xA;     *         &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     *         &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @return a new &lt;code>CallableStatement&lt;/code> object containing the&#xA;     * pre-compiled SQL statement that will produce &lt;code>ResultSet&lt;/code>&#xA;     * objects with the given type and concurrency&#xA;     * @exception SQLException if a database access error occurs&#xA;     *         or the given parameters are not &lt;code>ResultSet&lt;/code> &#xA;     *         constants indicating type and concurrency&#xA;     * @since 1.2&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="CallableStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetConcurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTypeMap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;     * Retrieves the &lt;code>Map&lt;/code> object associated with this &#xA;     * &lt;code>Connection&lt;/code> object.&#xA;     * Unless the application has added an entry, the type map returned &#xA;     * will be empty.&#xA;     *&#xA;     * @return the &lt;code>java.util.Map&lt;/code> object associated &#xA;     *         with this &lt;code>Connection&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.2&#xA;     * @see #setTypeMap&#xA;     */</comments>
+        <namespaces>java</namespaces>
+        <namespaces>util</namespaces>
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+                <target xsi:type="classifiers:Class" href="../lang/Class.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../util/Map.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTypeMap">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Installs the given &lt;code>TypeMap&lt;/code> object as the type map for&#xA;     * this &lt;code>Connection&lt;/code> object.  The type map will be used for the&#xA;     * custom mapping of SQL structured types and distinct types.&#xA;     *&#xA;     * @param map the &lt;code>java.util.Map&lt;/code> object to install&#xA;     *        as the replacement for this &lt;code>Connection&lt;/code>&#xA;     *        object's default type map&#xA;     * @exception SQLException if a database access error occurs or&#xA;     *        the given parameter is not a &lt;code>java.util.Map&lt;/code> &#xA;     *        object&#xA;     * @since 1.2&#xA;     * @see #getTypeMap&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="map">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>util</namespaces>
+          <classifierReferences>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </typeArguments>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+                  <target xsi:type="classifiers:Class" href="../lang/Class.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </typeArguments>
+            <target xsi:type="classifiers:Interface" href="../util/Map.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setHoldability">
+      <typeReference xsi:type="types:Void">
+        <comments>//--------------------------JDBC 3.0-----------------------------</comments>
+        <comments>/**&#xA;     * Changes the holdability of &lt;code>ResultSet&lt;/code> objects&#xA;     * created using this &lt;code>Connection&lt;/code> object to the given&#xA;     * holdability.&#xA;     *&#xA;     * @param holdability a &lt;code>ResultSet&lt;/code> holdability constant; one of&#xA;     *        &lt;code>ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code> or&#xA;     *        &lt;code>ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code>&#xA;     * @throws SQLException if a database access occurs, the given parameter&#xA;     *         is not a &lt;code>ResultSet&lt;/code> constant indicating holdability,&#xA;     *         or the given holdability is not supported&#xA;     * @see #getHoldability&#xA;     * @see ResultSet&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="holdability">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getHoldability">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the current holdability of &lt;code>ResultSet&lt;/code> objects&#xA;     * created using this &lt;code>Connection&lt;/code> object.&#xA;     *&#xA;     * @return the holdability, one of&#xA;     *        &lt;code>ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code> or&#xA;     *        &lt;code>ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code>&#xA;     * @throws SQLException if a database access occurs&#xA;     * @see #setHoldability&#xA;     * @see ResultSet&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSavepoint">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates an unnamed savepoint in the current transaction and &#xA;     * returns the new &lt;code>Savepoint&lt;/code> object that represents it.&#xA;     *&#xA;     * @return the new &lt;code>Savepoint&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or this &lt;code>Connection&lt;/code> object is currently in&#xA;     *            auto-commit mode&#xA;     * @see Savepoint&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Savepoint.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSavepoint">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a savepoint with the given name in the current transaction&#xA;     * and returns the new &lt;code>Savepoint&lt;/code> object that represents it.&#xA;     *&#xA;     * @param name a &lt;code>String&lt;/code> containing the name of the savepoint&#xA;     * @return the new &lt;code>Savepoint&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or this &lt;code>Connection&lt;/code> object is currently in&#xA;     *            auto-commit mode&#xA;     * @see Savepoint&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Savepoint.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="rollback">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Undoes all changes made after the given &lt;code>Savepoint&lt;/code> object&#xA;     * was set. &#xA;     * &lt;P>&#xA;     * This method should be used only when auto-commit has been disabled.&#xA;     *&#xA;     * @param savepoint the &lt;code>Savepoint&lt;/code> object to roll back to&#xA;     * @exception SQLException if a database access error occurs,&#xA;     *            the &lt;code>Savepoint&lt;/code> object is no longer valid,&#xA;     *            or this &lt;code>Connection&lt;/code> object is currently in&#xA;     *            auto-commit mode&#xA;     * @see Savepoint&#xA;     * @see #rollback&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="savepoint">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Savepoint.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="releaseSavepoint">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Removes the given &lt;code>Savepoint&lt;/code> object from the current &#xA;     * transaction. Any reference to the savepoint after it have been removed &#xA;     * will cause an &lt;code>SQLException&lt;/code> to be thrown.&#xA;     *&#xA;     * @param savepoint the &lt;code>Savepoint&lt;/code> object to be removed&#xA;     * @exception SQLException if a database access error occurs or&#xA;     *            the given &lt;code>Savepoint&lt;/code> object is not a valid &#xA;     *            savepoint in the current transaction&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="savepoint">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Savepoint.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>Statement&lt;/code> object that will generate&#xA;     * &lt;code>ResultSet&lt;/code> objects with the given type, concurrency,&#xA;     * and holdability.&#xA;     * This method is the same as the &lt;code>createStatement&lt;/code> method&#xA;     * above, but it allows the default result set&#xA;     * type, concurrency, and holdability to be overridden.&#xA;     *&#xA;     * @param resultSetType one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>, &#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @param resultSetConcurrency one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     *         &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @param resultSetHoldability one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code> or&#xA;     *         &lt;code>ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code>&#xA;     * @return a new &lt;code>Statement&lt;/code> object that will generate&#xA;     *         &lt;code>ResultSet&lt;/code> objects with the given type,&#xA;     *         concurrency, and holdability&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or the given parameters are not &lt;code>ResultSet&lt;/code> &#xA;     *            constants indicating type, concurrency, and holdability&#xA;     * @see ResultSet&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Statement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetConcurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetHoldability">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>PreparedStatement&lt;/code> object that will generate&#xA;     * &lt;code>ResultSet&lt;/code> objects with the given type, concurrency,&#xA;     * and holdability.&#xA;     * &lt;P>&#xA;     * This method is the same as the &lt;code>prepareStatement&lt;/code> method&#xA;     * above, but it allows the default result set&#xA;     * type, concurrency, and holdability to be overridden.&#xA;     *&#xA;     * @param sql a &lt;code>String&lt;/code> object that is the SQL statement to&#xA;     *            be sent to the database; may contain one or more ? IN&#xA;     *            parameters&#xA;     * @param resultSetType one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>, &#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @param resultSetConcurrency one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     *         &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @param resultSetHoldability one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code> or&#xA;     *         &lt;code>ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code>&#xA;     * @return a new &lt;code>PreparedStatement&lt;/code> object, containing the&#xA;     *         pre-compiled SQL statement, that will generate&#xA;     *         &lt;code>ResultSet&lt;/code> objects with the given type,&#xA;     *         concurrency, and holdability&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or the given parameters are not &lt;code>ResultSet&lt;/code> &#xA;     *            constants indicating type, concurrency, and holdability&#xA;     * @see ResultSet&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="PreparedStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetConcurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetHoldability">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareCall">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a &lt;code>CallableStatement&lt;/code> object that will generate&#xA;     * &lt;code>ResultSet&lt;/code> objects with the given type and concurrency.&#xA;     * This method is the same as the &lt;code>prepareCall&lt;/code> method&#xA;     * above, but it allows the default result set&#xA;     * type, result set concurrency type and holdability to be overridden.&#xA;     *&#xA;     * @param sql a &lt;code>String&lt;/code> object that is the SQL statement to&#xA;     *            be sent to the database; may contain on or more ? parameters&#xA;     * @param resultSetType one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>, &#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;     *         &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @param resultSetConcurrency one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     *         &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @param resultSetHoldability one of the following &lt;code>ResultSet&lt;/code> &#xA;     *        constants:&#xA;     *         &lt;code>ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code> or&#xA;     *         &lt;code>ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code>&#xA;     * @return a new &lt;code>CallableStatement&lt;/code> object, containing the&#xA;     *         pre-compiled SQL statement, that will generate&#xA;     *         &lt;code>ResultSet&lt;/code> objects with the given type,&#xA;     *         concurrency, and holdability&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or the given parameters are not &lt;code>ResultSet&lt;/code> &#xA;     *            constants indicating type, concurrency, and holdability&#xA;     * @see ResultSet&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="CallableStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetConcurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resultSetHoldability">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a default &lt;code>PreparedStatement&lt;/code> object that has&#xA;     * the capability to retrieve auto-generated keys. The given constant&#xA;     * tells the driver whether it should make auto-generated keys&#xA;     * available for retrieval.  This parameter is ignored if the SQL &#xA;     * statement is not an &lt;code>INSERT&lt;/code> statement.&#xA;     * &lt;P>&#xA;     * &lt;B>Note:&lt;/B> This method is optimized for handling&#xA;     * parametric SQL statements that benefit from precompilation. If&#xA;     * the driver supports precompilation,&#xA;     * the method &lt;code>prepareStatement&lt;/code> will send&#xA;     * the statement to the database for precompilation. Some drivers&#xA;     * may not support precompilation. In this case, the statement may&#xA;     * not be sent to the database until the &lt;code>PreparedStatement&lt;/code> &#xA;     * object is executed.  This has no direct effect on users; however, it does&#xA;     * affect which methods throw certain SQLExceptions.&#xA;     * &lt;P>&#xA;     * Result sets created using the returned &lt;code>PreparedStatement&lt;/code>&#xA;     * object will by default be type &lt;code>TYPE_FORWARD_ONLY&lt;/code>&#xA;     * and have a concurrency level of &lt;code>CONCUR_READ_ONLY&lt;/code>.&#xA;     *&#xA;     * @param sql an SQL statement that may contain one or more '?' IN&#xA;     *        parameter placeholders&#xA;     * @param autoGeneratedKeys a flag indicating whether auto-generated keys &#xA;     *        should be returned; one of&#xA;     *        &lt;code>Statement.RETURN_GENERATED_KEYS&lt;/code> or&#xA;     *&#x9;      &lt;code>Statement.NO_GENERATED_KEYS&lt;/code>  &#xA;     * @return a new &lt;code>PreparedStatement&lt;/code> object, containing the&#xA;     *         pre-compiled SQL statement, that will have the capability of&#xA;     *         returning auto-generated keys&#xA;     * @exception SQLException if a database access error occurs&#xA;     *         or the given parameter is not a &lt;code>Statement&lt;/code>&#xA;     *         constant indicating whether auto-generated keys should be&#xA;     *         returned&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="PreparedStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="autoGeneratedKeys">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a default &lt;code>PreparedStatement&lt;/code> object capable&#xA;     * of returning the auto-generated keys designated by the given array.&#xA;     * This array contains the indexes of the columns in the target&#xA;     * table that contain the auto-generated keys that should be made&#xA;     * available. This array is ignored if the SQL &#xA;     * statement is not an &lt;code>INSERT&lt;/code> statement.&#xA;     * &lt;P>&#xA;     * An SQL statement with or without IN parameters can be&#xA;     * pre-compiled and stored in a &lt;code>PreparedStatement&lt;/code> object. This&#xA;     * object can then be used to efficiently execute this statement&#xA;     * multiple times.&#xA;     * &lt;P>&#xA;     * &lt;B>Note:&lt;/B> This method is optimized for handling&#xA;     * parametric SQL statements that benefit from precompilation. If&#xA;     * the driver supports precompilation,&#xA;     * the method &lt;code>prepareStatement&lt;/code> will send&#xA;     * the statement to the database for precompilation. Some drivers&#xA;     * may not support precompilation. In this case, the statement may&#xA;     * not be sent to the database until the &lt;code>PreparedStatement&lt;/code> &#xA;     * object is executed.  This has no direct effect on users; however, it does&#xA;     * affect which methods throw certain SQLExceptions.&#xA;     * &lt;P>&#xA;     * Result sets created using the returned &lt;code>PreparedStatement&lt;/code>&#xA;     * object will by default be type &lt;code>TYPE_FORWARD_ONLY&lt;/code>&#xA;     * and have a concurrency level of &lt;code>CONCUR_READ_ONLY&lt;/code>.&#xA;     *&#xA;     * @param sql an SQL statement that may contain one or more '?' IN&#xA;     *        parameter placeholders&#xA;     * @param columnIndexes an array of column indexes indicating the columns&#xA;     *        that should be returned from the inserted row or rows &#xA;     * @return a new &lt;code>PreparedStatement&lt;/code> object, containing the&#xA;     *         pre-compiled statement, that is capable of returning the&#xA;     *         auto-generated keys designated by the given array of column&#xA;     *         indexes&#xA;     * @exception SQLException if a database access error occurs&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="PreparedStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndexes">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="prepareStatement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Creates a default &lt;code>PreparedStatement&lt;/code> object capable&#xA;     * of returning the auto-generated keys designated by the given array.&#xA;     * This array contains the names of the columns in the target&#xA;     * table that contain the auto-generated keys that should be returned.&#xA;     * This array is ignored if the SQL &#xA;     * statement is not an &lt;code>INSERT&lt;/code> statement.&#xA;     * &lt;P>&#xA;     * An SQL statement with or without IN parameters can be&#xA;     * pre-compiled and stored in a &lt;code>PreparedStatement&lt;/code> object. This&#xA;     * object can then be used to efficiently execute this statement&#xA;     * multiple times.&#xA;     * &lt;P>&#xA;     * &lt;B>Note:&lt;/B> This method is optimized for handling&#xA;     * parametric SQL statements that benefit from precompilation. If&#xA;     * the driver supports precompilation,&#xA;     * the method &lt;code>prepareStatement&lt;/code> will send&#xA;     * the statement to the database for precompilation. Some drivers&#xA;     * may not support precompilation. In this case, the statement may&#xA;     * not be sent to the database until the &lt;code>PreparedStatement&lt;/code> &#xA;     * object is executed.  This has no direct effect on users; however, it does&#xA;     * affect which methods throw certain SQLExceptions.&#xA;     * &lt;P>&#xA;     * Result sets created using the returned &lt;code>PreparedStatement&lt;/code>&#xA;     * object will by default be type &lt;code>TYPE_FORWARD_ONLY&lt;/code>&#xA;     * and have a concurrency level of &lt;code>CONCUR_READ_ONLY&lt;/code>.&#xA;     *&#xA;     * @param sql an SQL statement that may contain one or more '?' IN&#xA;     *        parameter placeholders&#xA;     * @param columnNames an array of column names indicating the columns&#xA;     *        that should be returned from the inserted row or rows &#xA;     * @return a new &lt;code>PreparedStatement&lt;/code> object, containing the&#xA;     *         pre-compiled statement, that is capable of returning the&#xA;     *         auto-generated keys designated by the given array of column&#xA;     *         names&#xA;     * @exception SQLException if a database access error occurs&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="PreparedStatement.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnNames">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;P>A connection (session) with a specific&#xA; * database. SQL statements are executed and results are returned&#xA; * within the context of a connection.&#xA; * &lt;P>&#xA; * A &lt;code>Connection&lt;/code> object's database is able to provide information&#xA; * describing its tables, its supported SQL grammar, its stored&#xA; * procedures, the capabilities of this connection, and so on. This&#xA; * information is obtained with the &lt;code>getMetaData&lt;/code> method.&#xA; *&#xA; * &lt;P>&lt;B>Note:&lt;/B> By default a &lt;code>Connection&lt;/code> object is in&#xA; * auto-commit mode, which means that it automatically commits changes &#xA; * after executing each statement. If auto-commit mode has been&#xA; * disabled, the method &lt;code>commit&lt;/code> must be called explicitly in&#xA; * order to commit changes; otherwise, database changes will not be saved.&#xA; * &lt;P>&#xA; * A new &lt;code>Connection&lt;/code> object created using the JDBC 2.1 core API&#xA; * has an initially empty type map associated with it. A user may enter a&#xA; * custom mapping for a UDT in this type map.&#xA; * When a UDT is retrieved from a data source with the&#xA; * method &lt;code>ResultSet.getObject&lt;/code>, the &lt;code>getObject&lt;/code> method&#xA; * will check the connection's type map to see if there is an entry for that&#xA; * UDT.  If so, the &lt;code>getObject&lt;/code> method will map the UDT to the&#xA; * class indicated.  If there is no entry, the UDT will be mapped using the&#xA; * standard mapping.&#xA; * &lt;p>&#xA; * A user may create a new type map, which is a &lt;code>java.util.Map&lt;/code>&#xA; * object, make an entry in it, and pass it to the &lt;code>java.sql&lt;/code>&#xA; * methods that can perform custom mapping.  In this case, the method&#xA; * will use the given type map instead of the one associated with&#xA; * the connection.&#xA; * &lt;p>&#xA; * For example, the following code fragment specifies that the SQL&#xA; * type &lt;code>ATHLETES&lt;/code> will be mapped to the class&#xA; * &lt;code>Athletes&lt;/code> in the Java programming language.&#xA; * The code fragment retrieves the type map for the &lt;code>Connection&#xA; * &lt;/code> object &lt;code>con&lt;/code>, inserts the entry into it, and then sets&#xA; * the type map with the new entry as the connection's type map.&#xA; * &lt;pre>&#xA; *      java.util.Map map = con.getTypeMap();&#xA; *      map.put(&quot;mySchemaName.ATHLETES&quot;, Class.forName(&quot;Athletes&quot;));&#xA; *      con.setTypeMap(map);&#xA; * &lt;/pre>&#xA; *&#xA; * @see DriverManager#getConnection&#xA; * @see Statement &#xA; * @see ResultSet&#xA; * @see DatabaseMetaData&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

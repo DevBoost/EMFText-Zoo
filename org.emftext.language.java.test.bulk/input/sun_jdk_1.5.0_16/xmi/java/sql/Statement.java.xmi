@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="Statement.java">
+  <comments>/*&#xA; * @(#)Statement.java&#x9;1.40 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>sql</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="Statement">
+    <members xsi:type="members:InterfaceMethod" name="executeQuery">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Executes the given SQL statement, which returns a single &#xA;     * &lt;code>ResultSet&lt;/code> object.&#xA;     *&#xA;     * @param sql an SQL statement to be sent to the database, typically a &#xA;     *        static SQL &lt;code>SELECT&lt;/code> statement&#xA;     * @return a &lt;code>ResultSet&lt;/code> object that contains the data produced &#xA;     *         by the given query; never &lt;code>null&lt;/code> &#xA;     * @exception SQLException if a database access error occurs or the given&#xA;     *            SQL statement produces anything other than a single&#xA;     *            &lt;code>ResultSet&lt;/code> object&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="ResultSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="executeUpdate">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Executes the given SQL statement, which may be an &lt;code>INSERT&lt;/code>, &#xA;     * &lt;code>UPDATE&lt;/code>, or &lt;code>DELETE&lt;/code> statement or an&#xA;     * SQL statement that returns nothing, such as an SQL DDL statement.&#xA;     *&#xA;     * @param sql an SQL &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code> or&#xA;     * &lt;code>DELETE&lt;/code> statement or an SQL statement that returns nothing&#xA;     * @return either the row count for &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code>&#xA;     * or &lt;code>DELETE&lt;/code> statements, or &lt;code>0&lt;/code> for SQL statements &#xA;     * that return nothing&#xA;     * @exception SQLException if a database access error occurs or the given&#xA;     *            SQL statement produces a &lt;code>ResultSet&lt;/code> object&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="close">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Releases this &lt;code>Statement&lt;/code> object's database &#xA;     * and JDBC resources immediately instead of waiting for&#xA;     * this to happen when it is automatically closed.&#xA;     * It is generally good practice to release resources as soon as&#xA;     * you are finished with them to avoid tying up database&#xA;     * resources.&#xA;     * &lt;P>&#xA;     * Calling the method &lt;code>close&lt;/code> on a &lt;code>Statement&lt;/code>&#xA;     * object that is already closed has no effect.&#xA;     * &lt;P>&#xA;     * &lt;B>Note:&lt;/B> A &lt;code>Statement&lt;/code> object is automatically closed &#xA;     * when it is garbage collected. When a &lt;code>Statement&lt;/code> object is &#xA;     * closed, its current &lt;code>ResultSet&lt;/code> object, if one exists, is &#xA;     * also closed.  &#xA;     *&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxFieldSize">
+      <typeReference xsi:type="types:Int">
+        <comments>//----------------------------------------------------------------------</comments>
+        <comments>/**&#xA;     * Retrieves the maximum number of bytes that can be&#xA;     * returned for character and binary column values in a &lt;code>ResultSet&lt;/code> &#xA;     * object produced by this &lt;code>Statement&lt;/code> object.&#xA;     * This limit applies only to &lt;code>BINARY&lt;/code>,&#xA;     * &lt;code>VARBINARY&lt;/code>, &lt;code>LONGVARBINARY&lt;/code>, &lt;code>CHAR&lt;/code>,&#xA;     * &lt;code>VARCHAR&lt;/code>, and &lt;code>LONGVARCHAR&lt;/code>&#xA;     * columns.  If the limit is exceeded, the excess data is silently&#xA;     * discarded.&#xA;     *&#xA;     * @return the current column size limit for columns storing character and &#xA;     *         binary values; zero means there is no limit &#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #setMaxFieldSize&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMaxFieldSize">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the limit for the maximum number of bytes in a &lt;code>ResultSet&lt;/code>&#xA;     * column storing character or binary values to&#xA;     * the given number of bytes.  This limit applies&#xA;     * only to &lt;code>BINARY&lt;/code>, &lt;code>VARBINARY&lt;/code>,&#xA;     * &lt;code>LONGVARBINARY&lt;/code>, &lt;code>CHAR&lt;/code>, &lt;code>VARCHAR&lt;/code>, and&#xA;     * &lt;code>LONGVARCHAR&lt;/code> fields.  If the limit is exceeded, the excess data&#xA;     * is silently discarded. For maximum portability, use values&#xA;     * greater than 256.&#xA;     *&#xA;     * @param max the new column size limit in bytes; zero means there is no limit &#xA;     * @exception SQLException if a database access error occurs &#xA;     *            or the condition max >= 0 is not satisfied&#xA;     * @see #getMaxFieldSize&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="max">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxRows">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the maximum number of rows that a&#xA;     * &lt;code>ResultSet&lt;/code> object produced by this&#xA;     * &lt;code>Statement&lt;/code> object can contain.  If this limit is exceeded, &#xA;     * the excess rows are silently dropped.&#xA;     *&#xA;     * @return the current maximum number of rows for a &lt;code>ResultSet&lt;/code>&#xA;     *         object produced by this &lt;code>Statement&lt;/code> object; &#xA;     *         zero means there is no limit&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #setMaxRows&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMaxRows">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the limit for the maximum number of rows that any&#xA;     * &lt;code>ResultSet&lt;/code> object can contain to the given number.&#xA;     * If the limit is exceeded, the excess&#xA;     * rows are silently dropped.&#xA;     *&#xA;     * @param max the new max rows limit; zero means there is no limit &#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or the condition max >= 0 is not satisfied&#xA;     * @see #getMaxRows&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="max">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setEscapeProcessing">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets escape processing on or off.&#xA;     * If escape scanning is on (the default), the driver will do&#xA;     * escape substitution before sending the SQL statement to the database.&#xA;     *&#xA;     * Note: Since prepared statements have usually been parsed prior&#xA;     * to making this call, disabling escape processing for &#xA;     * &lt;code>PreparedStatements&lt;/code> objects will have no effect.&#xA;     *&#xA;     * @param enable &lt;code>true&lt;/code> to enable escape processing;&#xA;     *       &lt;code>false&lt;/code> to disable it&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="enable">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getQueryTimeout">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the number of seconds the driver will&#xA;     * wait for a &lt;code>Statement&lt;/code> object to execute. If the limit is exceeded, a&#xA;     * &lt;code>SQLException&lt;/code> is thrown.&#xA;     *&#xA;     * @return the current query timeout limit in seconds; zero means there is &#xA;     *         no limit &#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #setQueryTimeout&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setQueryTimeout">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the number of seconds the driver will wait for a &#xA;     * &lt;code>Statement&lt;/code> object to execute to the given number of seconds.&#xA;     * If the limit is exceeded, an &lt;code>SQLException&lt;/code> is thrown.&#xA;     *&#xA;     * @param seconds the new query timeout limit in seconds; zero means &#xA;     *        there is no limit&#xA;     * @exception SQLException if a database access error occurs&#xA;     *            or the condition seconds >= 0 is not satisfied&#xA;     * @see #getQueryTimeout&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="seconds">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="cancel">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Cancels this &lt;code>Statement&lt;/code> object if both the DBMS and&#xA;     * driver support aborting an SQL statement.&#xA;     * This method can be used by one thread to cancel a statement that&#xA;     * is being executed by another thread.&#xA;     *&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getWarnings">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Retrieves the first warning reported by calls on this &lt;code>Statement&lt;/code> object.&#xA;     * Subsequent &lt;code>Statement&lt;/code> object warnings will be chained to this&#xA;     * &lt;code>SQLWarning&lt;/code> object.&#xA;     *&#xA;     * &lt;p>The warning chain is automatically cleared each time&#xA;     * a statement is (re)executed. This method may not be called on a closed&#xA;     * &lt;code>Statement&lt;/code> object; doing so will cause an &lt;code>SQLException&lt;/code>&#xA;     * to be thrown.&#xA;     *&#xA;     * &lt;P>&lt;B>Note:&lt;/B> If you are processing a &lt;code>ResultSet&lt;/code> object, any&#xA;     * warnings associated with reads on that &lt;code>ResultSet&lt;/code> object &#xA;     * will be chained on it rather than on the &lt;code>Statement&lt;/code>&#xA;     * object that produced it.&#xA;     *&#xA;     * @return the first &lt;code>SQLWarning&lt;/code> object or &lt;code>null&lt;/code> &#xA;     *         if there are no warnings&#xA;     * @exception SQLException if a database access error occurs or this &#xA;     *            method is called on a closed statement&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="SQLWarning.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clearWarnings">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Clears all the warnings reported on this &lt;code>Statement&lt;/code>&#xA;     * object. After a call to this method,&#xA;     * the method &lt;code>getWarnings&lt;/code> will return &#xA;     * &lt;code>null&lt;/code> until a new warning is reported for this&#xA;     * &lt;code>Statement&lt;/code> object.  &#xA;     *&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCursorName">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Sets the SQL cursor name to the given &lt;code>String&lt;/code>, which &#xA;     * will be used by subsequent &lt;code>Statement&lt;/code> object &#xA;     * &lt;code>execute&lt;/code> methods. This name can then be&#xA;     * used in SQL positioned update or delete statements to identify the&#xA;     * current row in the &lt;code>ResultSet&lt;/code> object generated by this &#xA;     * statement.  If the database does not support positioned update/delete, &#xA;     * this method is a noop.  To insure that a cursor has the proper isolation&#xA;     * level to support updates, the cursor's &lt;code>SELECT&lt;/code> statement &#xA;     * should have the form &lt;code>SELECT FOR UPDATE&lt;/code>.  If &#xA;     * &lt;code>FOR UPDATE&lt;/code> is not present, positioned updates may fail.&#xA;     *&#xA;     * &lt;P>&lt;B>Note:&lt;/B> By definition, the execution of positioned updates and&#xA;     * deletes must be done by a different &lt;code>Statement&lt;/code> object than &#xA;     * the one that generated the &lt;code>ResultSet&lt;/code> object being used for &#xA;     * positioning. Also, cursor names must be unique within a connection.&#xA;     *&#xA;     * @param name the new cursor name, which must be unique within&#xA;     *             a connection&#xA;     * @exception SQLException if a database access error occurs&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="execute">
+      <typeReference xsi:type="types:Boolean">
+        <comments>//----------------------- Multiple Results --------------------------</comments>
+        <comments>/**&#xA;     * Executes the given SQL statement, which may return multiple results.&#xA;     * In some (uncommon) situations, a single SQL statement may return&#xA;     * multiple result sets and/or update counts.  Normally you can ignore&#xA;     * this unless you are (1) executing a stored procedure that you know may&#xA;     * return multiple results or (2) you are dynamically executing an&#xA;     * unknown SQL string.  &#xA;     * &lt;P>&#xA;     * The &lt;code>execute&lt;/code> method executes an SQL statement and indicates the&#xA;     * form of the first result.  You must then use the methods &#xA;     * &lt;code>getResultSet&lt;/code> or &lt;code>getUpdateCount&lt;/code>&#xA;     * to retrieve the result, and &lt;code>getMoreResults&lt;/code> to&#xA;     * move to any subsequent result(s).&#xA;     *&#xA;     * @param sql any SQL statement&#xA;     * @return &lt;code>true&lt;/code> if the first result is a &lt;code>ResultSet&lt;/code> &#xA;     *         object; &lt;code>false&lt;/code> if it is an update count or there are &#xA;     *         no results&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #getResultSet&#xA;     * @see #getUpdateCount&#xA;     * @see #getMoreResults &#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getResultSet">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     *  Retrieves the current result as a &lt;code>ResultSet&lt;/code> object. &#xA;     *  This method should be called only once per result.&#xA;     *&#xA;     * @return the current result as a &lt;code>ResultSet&lt;/code> object or&#xA;     * &lt;code>null&lt;/code> if the result is an update count or there are no more results&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #execute &#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="ResultSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getUpdateCount">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     *  Retrieves the current result as an update count;&#xA;     *  if the result is a &lt;code>ResultSet&lt;/code> object or there are no more results, -1&#xA;     *  is returned. This method should be called only once per result.&#xA;     * &#xA;     * @return the current result as an update count; -1 if the current result is a&#xA;     * &lt;code>ResultSet&lt;/code> object or there are no more results&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #execute &#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMoreResults">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Moves to this &lt;code>Statement&lt;/code> object's next result, returns&#xA;     * &lt;code>true&lt;/code> if it is a &lt;code>ResultSet&lt;/code> object, and&#xA;     * implicitly closes any current &lt;code>ResultSet&lt;/code>&#xA;     * object(s) obtained with the method &lt;code>getResultSet&lt;/code>.&#xA;     *&#xA;     * &lt;P>There are no more results when the following is true:&#xA;     * &lt;PRE>&#xA;     *     // stmt is a Statement object&#xA;     *     ((stmt.getMoreResults() == false) &amp;&amp; (stmt.getUpdateCount() == -1))&#xA;     * &lt;/PRE>&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the next result is a &lt;code>ResultSet&lt;/code>&#xA;     *         object; &lt;code>false&lt;/code> if it is an update count or there are &#xA;     *         no more results&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @see #execute &#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setFetchDirection">
+      <typeReference xsi:type="types:Void">
+        <comments>//--------------------------JDBC 2.0-----------------------------</comments>
+        <comments>/**&#xA;     * Gives the driver a hint as to the direction in which&#xA;     * rows will be processed in &lt;code>ResultSet&lt;/code>&#xA;     * objects created using this &lt;code>Statement&lt;/code> object.  The &#xA;     * default value is &lt;code>ResultSet.FETCH_FORWARD&lt;/code>.&#xA;     * &lt;P>&#xA;     * Note that this method sets the default fetch direction for &#xA;     * result sets generated by this &lt;code>Statement&lt;/code> object.&#xA;     * Each result set has its own methods for getting and setting&#xA;     * its own fetch direction.&#xA;     *&#xA;     * @param direction the initial direction for processing rows&#xA;     * @exception SQLException if a database access error occurs&#xA;     * or the given direction&#xA;     * is not one of &lt;code>ResultSet.FETCH_FORWARD&lt;/code>,&#xA;     * &lt;code>ResultSet.FETCH_REVERSE&lt;/code>, or &lt;code>ResultSet.FETCH_UNKNOWN&lt;/code>&#xA;     * @since 1.2&#xA;     * @see #getFetchDirection&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="direction">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFetchDirection">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the direction for fetching rows from&#xA;     * database tables that is the default for result sets&#xA;     * generated from this &lt;code>Statement&lt;/code> object.&#xA;     * If this &lt;code>Statement&lt;/code> object has not set&#xA;     * a fetch direction by calling the method &lt;code>setFetchDirection&lt;/code>,&#xA;     * the return value is implementation-specific.&#xA;     *&#xA;     * @return the default fetch direction for result sets generated&#xA;     *          from this &lt;code>Statement&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.2&#xA;     * @see #setFetchDirection&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setFetchSize">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Gives the JDBC driver a hint as to the number of rows that should &#xA;     * be fetched from the database when more rows are needed.  The number &#xA;     * of rows specified affects only result sets created using this &#xA;     * statement. If the value specified is zero, then the hint is ignored.&#xA;     * The default value is zero.&#xA;     *&#xA;     * @param rows the number of rows to fetch&#xA;     * @exception SQLException if a database access error occurs, or the&#xA;     *        condition 0 &lt;= &lt;code>rows&lt;/code> &lt;= &lt;code>this.getMaxRows()&lt;/code> &#xA;     *        is not satisfied.&#xA;     * @since 1.2&#xA;     * @see #getFetchSize&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="rows">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFetchSize">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the number of result set rows that is the default &#xA;     * fetch size for &lt;code>ResultSet&lt;/code> objects&#xA;     * generated from this &lt;code>Statement&lt;/code> object.&#xA;     * If this &lt;code>Statement&lt;/code> object has not set&#xA;     * a fetch size by calling the method &lt;code>setFetchSize&lt;/code>,&#xA;     * the return value is implementation-specific.&#xA;     *&#xA;     * @return the default fetch size for result sets generated&#xA;     *          from this &lt;code>Statement&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.2&#xA;     * @see #setFetchSize&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getResultSetConcurrency">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the result set concurrency for &lt;code>ResultSet&lt;/code> objects&#xA;     * generated by this &lt;code>Statement&lt;/code> object.&#xA;     *&#xA;     * @return either &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;     * &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.2&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getResultSetType">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the result set type for &lt;code>ResultSet&lt;/code> objects&#xA;     * generated by this &lt;code>Statement&lt;/code> object.&#xA;     *&#xA;     * @return one of &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>,&#xA;     * &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#x9;&#xA;     * &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.2&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addBatch">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Adds the given SQL command to the current list of commmands for this&#xA;     * &lt;code>Statement&lt;/code> object. The commands in this list can be&#xA;     * executed as a batch by calling the method &lt;code>executeBatch&lt;/code>.&#xA;     * &lt;P>&#xA;     * &lt;B>NOTE:&lt;/B>  This method is optional.&#xA;     *&#xA;     * @param sql typically this is a static SQL &lt;code>INSERT&lt;/code> or &#xA;     * &lt;code>UPDATE&lt;/code> statement&#xA;     * @exception SQLException if a database access error occurs, or the&#xA;     * driver does not support batch updates&#xA;     * @see #executeBatch&#xA;     * @since 1.2&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clearBatch">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Empties this &lt;code>Statement&lt;/code> object's current list of &#xA;     * SQL commands.&#xA;     * &lt;P>&#xA;     * &lt;B>NOTE:&lt;/B>  This method is optional.&#xA;     *&#xA;     * @exception SQLException if a database access error occurs or the&#xA;     * driver does not support batch updates&#xA;     * @see #addBatch&#xA;     * @since 1.2&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="executeBatch">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Submits a batch of commands to the database for execution and&#xA;     * if all commands execute successfully, returns an array of update counts.&#xA;     * The &lt;code>int&lt;/code> elements of the array that is returned are ordered&#xA;     * to correspond to the commands in the batch, which are ordered &#xA;     * according to the order in which they were added to the batch.&#xA;     * The elements in the array returned by the method &lt;code>executeBatch&lt;/code>&#xA;     * may be one of the following:&#xA;     * &lt;OL>&#xA;     * &lt;LI>A number greater than or equal to zero -- indicates that the&#xA;     * command was processed successfully and is an update count giving the&#xA;     * number of rows in the database that were affected by the command's&#xA;     * execution&#xA;     * &lt;LI>A value of &lt;code>SUCCESS_NO_INFO&lt;/code> -- indicates that the command was&#xA;     * processed successfully but that the number of rows affected is&#xA;     * unknown&#xA;     * &lt;P> &#xA;     * If one of the commands in a batch update fails to execute properly,&#xA;     * this method throws a &lt;code>BatchUpdateException&lt;/code>, and a JDBC&#xA;     * driver may or may not continue to process the remaining commands in&#xA;     * the batch.  However, the driver's behavior must be consistent with a&#xA;     * particular DBMS, either always continuing to process commands or never&#xA;     * continuing to process commands.  If the driver continues processing&#xA;     * after a failure, the array returned by the method&#xA;     * &lt;code>BatchUpdateException.getUpdateCounts&lt;/code>&#xA;     * will contain as many elements as there are commands in the batch, and&#xA;     * at least one of the elements will be the following:&#xA;     * &lt;P> &#xA;     * &lt;LI>A value of &lt;code>EXECUTE_FAILED&lt;/code> -- indicates that the command failed&#xA;     * to execute successfully and occurs only if a driver continues to&#xA;     * process commands after a command fails&#xA;     * &lt;/OL>&#xA;     * &lt;P>&#xA;     * A driver is not required to implement this method.&#xA;     * The possible implementations and return values have been modified in&#xA;     * the Java 2 SDK, Standard Edition, version 1.3 to&#xA;     * accommodate the option of continuing to proccess commands in a batch&#xA;     * update after a &lt;code>BatchUpdateException&lt;/code> obejct has been thrown.&#xA;     *&#xA;     * @return an array of update counts containing one element for each&#xA;     * command in the batch.  The elements of the array are ordered according &#xA;     * to the order in which commands were added to the batch.&#xA;     * @exception SQLException if a database access error occurs or the&#xA;     * driver does not support batch statements. Throws {@link BatchUpdateException}&#xA;     * (a subclass of &lt;code>SQLException&lt;/code>) if one of the commands sent to the&#xA;     * database fails to execute properly or attempts to return a result set.&#xA;     * @since 1.3&#xA;     */</comments>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getConnection">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Retrieves the &lt;code>Connection&lt;/code> object&#xA;     * that produced this &lt;code>Statement&lt;/code> object.&#xA;     * @return the connection that produced this statement&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.2&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="Connection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:Field" name="CLOSE_CURRENT_RESULT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>//--------------------------JDBC 3.0-----------------------------</comments>
+        <comments>/** &#xA;     * The constant indicating that the current &lt;code>ResultSet&lt;/code> object &#xA;     * should be closed when calling &lt;code>getMoreResults&lt;/code>.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="KEEP_CURRENT_RESULT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The constant indicating that the current &lt;code>ResultSet&lt;/code> object&#xA;     * should not be closed when calling &lt;code>getMoreResults&lt;/code>.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CLOSE_ALL_RESULTS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The constant indicating that all &lt;code>ResultSet&lt;/code> objects that&#xA;     * have previously been kept open should be closed when calling&#xA;     * &lt;code>getMoreResults&lt;/code>.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="SUCCESS_NO_INFO">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The constant indicating that a batch statement executed successfully&#xA;     * but that no count of the number of rows it affected is available.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="EXECUTE_FAILED">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The constant indicating that an error occured while executing a&#xA;     * batch statement.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="RETURN_GENERATED_KEYS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The constant indicating that generated keys should be made &#xA;     * available for retrieval.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="NO_GENERATED_KEYS">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The constant indicating that generated keys should not be made &#xA;     * available for retrieval.&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMoreResults">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Moves to this &lt;code>Statement&lt;/code> object's next result, deals with&#xA;     * any current &lt;code>ResultSet&lt;/code> object(s) according  to the instructions&#xA;     * specified by the given flag, and returns&#xA;     * &lt;code>true&lt;/code> if the next result is a &lt;code>ResultSet&lt;/code> object.&#xA;     *&#xA;     * &lt;P>There are no more results when the following is true:&#xA;     * &lt;PRE>&#xA;     *     // stmt is a Statement object&#xA;     *     ((stmt.getMoreResults() == false) &amp;&amp; (stmt.getUpdateCount() == -1))&#xA;     * &lt;/PRE>&#xA;     *&#xA;     * @param current one of the following &lt;code>Statement&lt;/code>&#xA;     *        constants indicating what should happen to current &#xA;     *        &lt;code>ResultSet&lt;/code> objects obtained using the method&#xA;     *        &lt;code>getResultSet&lt;/code>:&#xA;     *        &lt;code>Statement.CLOSE_CURRENT_RESULT&lt;/code>, &#xA;     *        &lt;code>Statement.KEEP_CURRENT_RESULT&lt;/code>, or&#xA;     *        &lt;code>Statement.CLOSE_ALL_RESULTS&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the next result is a &lt;code>ResultSet&lt;/code> &#xA;     *         object; &lt;code>false&lt;/code> if it is an update count or there are no &#xA;     *         more results&#xA;     * @exception SQLException if a database access error occurs or the argument&#xA;&#x9; *         supplied is not one of the following:&#xA;     *        &lt;code>Statement.CLOSE_CURRENT_RESULT&lt;/code>, &#xA;     *        &lt;code>Statement.KEEP_CURRENT_RESULT&lt;/code>, or&#xA;     *        &lt;code>Statement.CLOSE_ALL_RESULTS&lt;/code>&#xA;     * @since 1.4&#xA;     * @see #execute&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="current">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getGeneratedKeys">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Retrieves any auto-generated keys created as a result of executing this&#xA;     * &lt;code>Statement&lt;/code> object. If this &lt;code>Statement&lt;/code> object did &#xA;     * not generate any keys, an empty &lt;code>ResultSet&lt;/code>&#xA;     * object is returned.&#xA;     *&#xA;     * @return a &lt;code>ResultSet&lt;/code> object containing the auto-generated key(s) &#xA;     *         generated by the execution of this &lt;code>Statement&lt;/code> object&#xA;     * @exception SQLException if a database access error occurs&#xA;     * @since 1.4&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="ResultSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="executeUpdate">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Executes the given SQL statement and signals the driver with the&#xA;     * given flag about whether the&#xA;     * auto-generated keys produced by this &lt;code>Statement&lt;/code> object&#xA;     * should be made available for retrieval. &#xA;     *&#xA;     * @param sql must be an SQL &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code> or&#xA;     *        &lt;code>DELETE&lt;/code> statement or an SQL statement that &#xA;     *        returns nothing&#xA;     * @param autoGeneratedKeys a flag indicating whether auto-generated keys&#xA;     *        should be made available for retrieval;&#xA;     *         one of the following constants:&#xA;     *         &lt;code>Statement.RETURN_GENERATED_KEYS&lt;/code>&#xA;     *         &lt;code>Statement.NO_GENERATED_KEYS&lt;/code>&#xA;     * @return either the row count for &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code>&#xA;     *         or &lt;code>DELETE&lt;/code> statements, or &lt;code>0&lt;/code> for SQL &#xA;     *         statements that return nothing&#xA;     * @exception SQLException if a database access error occurs, the given&#xA;     *            SQL statement returns a &lt;code>ResultSet&lt;/code> object, or&#xA;     *            the given constant is not one of those allowed&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="autoGeneratedKeys">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="executeUpdate">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Executes the given SQL statement and signals the driver that the&#xA;     * auto-generated keys indicated in the given array should be made available&#xA;     * for retrieval.  The driver will ignore the array if the SQL statement&#xA;     * is not an &lt;code>INSERT&lt;/code> statement.&#xA;     *&#xA;     * @param sql an SQL &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code> or&#xA;     *        &lt;code>DELETE&lt;/code> statement or an SQL statement that returns nothing,&#xA;     *        such as an SQL DDL statement&#xA;     * @param columnIndexes an array of column indexes indicating the columns&#xA;     *        that should be returned from the inserted row&#xA;     * @return either the row count for &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code>,&#xA;     *         or &lt;code>DELETE&lt;/code> statements, or 0 for SQL statements &#xA;     *         that return nothing&#xA;     * @exception SQLException if a database access error occurs, the SQL&#xA;     *            statement returns a &lt;code>ResultSet&lt;/code> object, or the&#xA;&#x9; *            second argument supplied to this method is not an &lt;code>int&lt;/code> array&#xA;&#x9; *            whose elements are valid column indexes &#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndexes">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="executeUpdate">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Executes the given SQL statement and signals the driver that the&#xA;     * auto-generated keys indicated in the given array should be made available&#xA;     * for retrieval.  The driver will ignore the array if the SQL statement&#xA;     * is not an &lt;code>INSERT&lt;/code> statement.&#xA;     *&#xA;     * @param sql an SQL &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code> or&#xA;     *        &lt;code>DELETE&lt;/code> statement or an SQL statement that returns nothing&#xA;     * @param columnNames an array of the names of the columns that should be &#xA;     *        returned from the inserted row&#xA;     * @return either the row count for &lt;code>INSERT&lt;/code>, &lt;code>UPDATE&lt;/code>,&#xA;     *         or &lt;code>DELETE&lt;/code> statements, or 0 for SQL statements &#xA;     *         that return nothing&#xA;     * @exception SQLException if a database access error occurs, the SQL&#xA;     *            statement returns a &lt;code>ResultSet&lt;/code> object, or the&#xA;&#x9; *            second argument supplied to this method is not a &lt;code>String&lt;/code> array&#xA;     *            whose elements are valid column names&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnNames">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="execute">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Executes the given SQL statement, which may return multiple results,&#xA;     * and signals the driver that any&#xA;     * auto-generated keys should be made available&#xA;     * for retrieval.  The driver will ignore this signal if the SQL statement&#xA;     * is not an &lt;code>INSERT&lt;/code> statement.&#xA;     * &lt;P>&#xA;     * In some (uncommon) situations, a single SQL statement may return&#xA;     * multiple result sets and/or update counts.  Normally you can ignore&#xA;     * this unless you are (1) executing a stored procedure that you know may&#xA;     * return multiple results or (2) you are dynamically executing an&#xA;     * unknown SQL string.  &#xA;     * &lt;P>&#xA;     * The &lt;code>execute&lt;/code> method executes an SQL statement and indicates the&#xA;     * form of the first result.  You must then use the methods &#xA;     * &lt;code>getResultSet&lt;/code> or &lt;code>getUpdateCount&lt;/code>&#xA;     * to retrieve the result, and &lt;code>getMoreResults&lt;/code> to&#xA;     * move to any subsequent result(s).&#xA;     *&#xA;     * @param sql any SQL statement&#xA;     * @param autoGeneratedKeys a constant indicating whether auto-generated &#xA;     *        keys should be made available for retrieval using the method&#xA;     *        &lt;code>getGeneratedKeys&lt;/code>; one of the following constants:&#xA;     *        &lt;code>Statement.RETURN_GENERATED_KEYS&lt;/code> or&#xA;     *&#x9;      &lt;code>Statement.NO_GENERATED_KEYS&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the first result is a &lt;code>ResultSet&lt;/code>&#xA;     *         object; &lt;code>false&lt;/code> if it is an update count or there are&#xA;     *         no results&#xA;     * @exception SQLException if a database access error occurs or the second &#xA;&#x9; *         parameter supplied to this method is not &#xA;     *         &lt;code>Statement.RETURN_GENERATED_KEYS&lt;/code> or&#xA;&#x9; *         &lt;code>Statement.NO_GENERATED_KEYS&lt;/code>.&#xA;     * @see #getResultSet&#xA;     * @see #getUpdateCount&#xA;     * @see #getMoreResults&#xA;     * @see #getGeneratedKeys&#xA;     *&#xA;     * @since 1.4 &#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="autoGeneratedKeys">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="execute">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Executes the given SQL statement, which may return multiple results,&#xA;     * and signals the driver that the&#xA;     * auto-generated keys indicated in the given array should be made available&#xA;     * for retrieval.  This array contains the indexes of the columns in the &#xA;     * target table that contain the auto-generated keys that should be made&#xA;     * available. The driver will ignore the array if the given SQL statement&#xA;     * is not an &lt;code>INSERT&lt;/code> statement.&#xA;     * &lt;P>&#xA;     * Under some (uncommon) situations, a single SQL statement may return&#xA;     * multiple result sets and/or update counts.  Normally you can ignore&#xA;     * this unless you are (1) executing a stored procedure that you know may&#xA;     * return multiple results or (2) you are dynamically executing an&#xA;     * unknown SQL string.  &#xA;     * &lt;P>&#xA;     * The &lt;code>execute&lt;/code> method executes an SQL statement and indicates the&#xA;     * form of the first result.  You must then use the methods &#xA;     * &lt;code>getResultSet&lt;/code> or &lt;code>getUpdateCount&lt;/code>&#xA;     * to retrieve the result, and &lt;code>getMoreResults&lt;/code> to&#xA;     * move to any subsequent result(s).&#xA;     *&#xA;     * @param sql any SQL statement&#xA;     * @param columnIndexes an array of the indexes of the columns in the &#xA;     *        inserted row that should be  made available for retrieval by a&#xA;     *        call to the method &lt;code>getGeneratedKeys&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the first result is a &lt;code>ResultSet&lt;/code> &#xA;     *         object; &lt;code>false&lt;/code> if it is an update count or there &#xA;     *         are no results&#xA;     * @exception SQLException if a database access error occurs or the &#xA;     *            elements in the &lt;code>int&lt;/code> array passed to this method&#xA;     *            are not valid column indexes&#xA;     * @see #getResultSet&#xA;     * @see #getUpdateCount&#xA;     * @see #getMoreResults&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnIndexes">
+        <typeReference xsi:type="types:Int"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="execute">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Executes the given SQL statement, which may return multiple results,&#xA;     * and signals the driver that the&#xA;     * auto-generated keys indicated in the given array should be made available&#xA;     * for retrieval. This array contains the names of the columns in the &#xA;     * target table that contain the auto-generated keys that should be made&#xA;     * available. The driver will ignore the array if the given SQL statement&#xA;     * is not an &lt;code>INSERT&lt;/code> statement.&#xA;     * &lt;P>&#xA;     * In some (uncommon) situations, a single SQL statement may return&#xA;     * multiple result sets and/or update counts.  Normally you can ignore&#xA;     * this unless you are (1) executing a stored procedure that you know may&#xA;     * return multiple results or (2) you are dynamically executing an&#xA;     * unknown SQL string.  &#xA;     * &lt;P>&#xA;     * The &lt;code>execute&lt;/code> method executes an SQL statement and indicates the&#xA;     * form of the first result.  You must then use the methods &#xA;     * &lt;code>getResultSet&lt;/code> or &lt;code>getUpdateCount&lt;/code>&#xA;     * to retrieve the result, and &lt;code>getMoreResults&lt;/code> to&#xA;     * move to any subsequent result(s).&#xA;     *&#xA;     * @param sql any SQL statement&#xA;     * @param columnNames an array of the names of the columns in the inserted&#xA;     *        row that should be made available for retrieval by a call to the&#xA;     *        method &lt;code>getGeneratedKeys&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the next result is a &lt;code>ResultSet&lt;/code> &#xA;     *         object; &lt;code>false&lt;/code> if it is an update count or there &#xA;     *         are no more results&#xA;     * @exception SQLException if a database access error occurs or the &#xA;&#x9; *          elements of the &lt;code>String&lt;/code> array passed to this&#xA;     *          method are not valid column names&#xA;     * @see #getResultSet&#xA;     * @see #getUpdateCount&#xA;     * @see #getMoreResults&#xA;     * @see #getGeneratedKeys&#xA;     *&#xA;     * @since 1.4 &#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sql">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="columnNames">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getResultSetHoldability">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Retrieves the result set holdability for &lt;code>ResultSet&lt;/code> objects&#xA;     * generated by this &lt;code>Statement&lt;/code> object.&#xA;     *&#xA;     * @return either &lt;code>ResultSet.HOLD_CURSORS_OVER_COMMIT&lt;/code> or&#xA;     *         &lt;code>ResultSet.CLOSE_CURSORS_AT_COMMIT&lt;/code>&#xA;     * @exception SQLException if a database access error occurs&#xA;     *&#xA;     * @since 1.4&#xA;     */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;P>The object used for executing a static SQL statement&#xA; * and returning the results it produces.&#xA; * &lt;P>&#xA; * By default, only one &lt;code>ResultSet&lt;/code> object per &lt;code>Statement&lt;/code>&#xA; * object can be open at the same time. Therefore, if the reading of one &#xA; * &lt;code>ResultSet&lt;/code> object is interleaved&#xA; * with the reading of another, each must have been generated by&#xA; * different &lt;code>Statement&lt;/code> objects. All execution methods in the&#xA; * &lt;code>Statement&lt;/code> interface implicitly close a statment's current &#xA; * &lt;code>ResultSet&lt;/code> object if an open one exists.&#xA; *&#xA; * @see Connection#createStatement&#xA; * @see ResultSet &#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

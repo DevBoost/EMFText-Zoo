@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="QName.java">
+  <comments>// $Id: QName.java,v 1.10 2004/02/09 23:41:21 jsuttor Exp $</comments>
+  <comments>/*&#xA; * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>namespace</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/security/AccessController.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../java/security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="QName">
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * &lt;p>Stream Unique Identifier.&lt;/p>&#xA;     *&#xA;     * &lt;p>Due to a historical defect, QName was released with multiple&#xA;     * serialVersionUID values even though its serialization was the&#xA;     * same.&lt;/p>&#xA;     *&#xA;     * &lt;p>To workaround this issue, serialVersionUID is set with either&#xA;     * a default value or a compatibility value.  To use the&#xA;     * compatiblity value, set the system property:&lt;/p>&#xA;     *&#xA;     * &lt;code>com.sun.xml.namespace.QName.useCompatibleSerialVersionUID=1.0&lt;/code>&#xA;     *&#xA;     * &lt;p>This workaround was inspired by classes in the javax.management&#xA;     * package, e.g. ObjectName, etc.&#xA;     * See CR6267224 for original defect report.&lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="defaultSerialVersionUID">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalLongLiteral" decimalValue="9120448754896609940"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** &#xA;     * &lt;p>Default &lt;code>serialVersionUID&lt;/code> value.&lt;/p> &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="compatibleSerialVersionUID">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="4418622981026545151"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** &#xA;     * &lt;p>Compatibility &lt;code>serialVersionUID&lt;/code> value.&lt;/p> &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="useDefaultSerialVersionUID">
+      <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** &#xA;     * &lt;p>Flag to use default or campatible serialVersionUID.&lt;/p> &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="valueUseCompatibleSerialVersionUID">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <comments>// use a privileged block as reading a system property </comments>
+                <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../java/security/AccessController.class.xmi#//@classifiers.0/@members.1"/>
+                  <arguments xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../../../java/security/PrivilegedAction.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <anonymousClass>
+                      <members xsi:type="members:ClassMethod" name="run">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                        <statements xsi:type="statements:Return">
+                          <returnValue xsi:type="references:IdentifierReference">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../java/lang/System.class.xmi#//@classifiers.0/@members.25"/>
+                              <arguments xsi:type="references:StringReference" value="com.sun.xml.namespace.QName.useCompatibleSerialVersionUID"/>
+                            </next>
+                            <target xsi:type="classifiers:Class" href="../../../java/lang/System.class.xmi#//@classifiers.0"/>
+                          </returnValue>
+                        </statements>
+                      </members>
+                    </anonymousClass>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../java/security/AccessController.class.xmi#//@classifiers.0"/>
+              </child>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="expressions:ConditionalExpression">
+              <child xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@statements.0/@variable"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </children>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                      <arguments xsi:type="references:StringReference" value="1.0"/>
+                    </next>
+                  </children>
+                </expression>
+              </child>
+              <expressionIf xsi:type="literals:BooleanLiteral"/>
+              <expressionElse xsi:type="literals:BooleanLiteral" value="true"/>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <comments>// use default if any Exceptions </comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral" value="true"/>
+            </expression>
+          </statements>
+          <parameter name="exception">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../java/lang/Exception.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// set serialVersionUID to desired value</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <modifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="namespaceURI">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * &lt;p>Namespace URI of this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="localPart">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * &lt;p>local part of this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="prefix">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * &lt;p>prefix of this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Constructor" name="QName">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="namespaceURI">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="localPart">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>&lt;code>QName&lt;/code> constructor specifying the Namespace URI&#xA;     * and local part.&lt;/p>&#xA;     *&#xA;     * &lt;p>If the Namespace URI is &lt;code>null&lt;/code>, it is set to&#xA;     * {@link javax.xml.XMLConstants#NULL_NS_URI&#xA;     * XMLConstants.NULL_NS_URI}.  This value represents no&#xA;     * explicitly defined Namespace as defined by the &lt;a&#xA;     * href=&quot;http://www.w3.org/TR/REC-xml-names/#ns-qualnames&quot;>Namespaces&#xA;     * in XML&lt;/a> specification.  This action preserves compatible&#xA;     * behavior with QName 1.0.  Explicitly providing the {@link&#xA;     * javax.xml.XMLConstants#NULL_NS_URI&#xA;     * XMLConstants.NULL_NS_URI} value is the preferred coding&#xA;     * style.&lt;/p>&#xA;     *&#xA;     * &lt;p>If the local part is &lt;code>null&lt;/code> an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> is thrown.&#xA;     * A local part of &quot;&quot; is allowed to preserve&#xA;     * compatible behavior with QName 1.0. &lt;/p>&#xA;     *&#xA;     * &lt;p>When using this constructor, the prefix is set to {@link&#xA;     * javax.xml.XMLConstants#DEFAULT_NS_PREFIX&#xA;     * XMLConstants.DEFAULT_NS_PREFIX}.&lt;/p>&#xA;     *&#xA;     * &lt;p>The Namespace URI is not validated as a&#xA;     * &lt;a href=&quot;http://www.ietf.org/rfc/rfc2396.txt&quot;>URI reference&lt;/a>.&#xA;     * The local part is not validated as a&#xA;     * &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/#NT-NCName&quot;>NCName&lt;/a>&#xA;     * as specified in &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/&quot;>Namespaces&#xA;     * in XML&lt;/a>.&lt;/p>&#xA;     *&#xA;     * @param namespaceURI Namespace URI of the &lt;code>QName&lt;/code>&#xA;     * @param localPart    local part of the &lt;code>QName&lt;/code>&#xA;     * &#xA;     * @see #QName(String namespaceURI, String localPart, String&#xA;     * prefix) QName(String namespaceURI, String localPart, String&#xA;     * prefix)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="QName">
+      <statements xsi:type="statements:Condition">
+        <comments>// map null Namespace URI to default to preserve compatibility with QName 1.0</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:SelfReference">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                <self xsi:type="literals:This"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:SelfReference">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                <self xsi:type="literals:This"/>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// local part is required.  &quot;&quot; is allowed to preserve compatibility with QName 1.0        </comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="local part cannot be &quot;null&quot; when creating a QName"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// prefix is required        </comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="prefix cannot be &quot;null&quot; when creating a QName"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="namespaceURI">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="localPart">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="prefix">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>&lt;code>QName&lt;/code> constructor specifying the Namespace URI,&#xA;     * local part and prefix.&lt;/p>&#xA;     *&#xA;     * &lt;p>If the Namespace URI is &lt;code>null&lt;/code>, it is set to&#xA;     * {@link javax.xml.XMLConstants#NULL_NS_URI&#xA;     * XMLConstants.NULL_NS_URI}.  This value represents no&#xA;     * explicitly defined Namespace as defined by the &lt;a&#xA;     * href=&quot;http://www.w3.org/TR/REC-xml-names/#ns-qualnames&quot;>Namespaces&#xA;     * in XML&lt;/a> specification.  This action preserves compatible&#xA;     * behavior with QName 1.0.  Explicitly providing the {@link&#xA;     * javax.xml.XMLConstants#NULL_NS_URI&#xA;     * XMLConstants.NULL_NS_URI} value is the preferred coding&#xA;     * style.&lt;/p>&#xA;     * &#xA;     * &lt;p>If the local part is &lt;code>null&lt;/code> an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> is thrown.&#xA;     * A local part of &quot;&quot; is allowed to preserve&#xA;     * compatible behavior with QName 1.0. &lt;/p>&#xA;     * &#xA;     * &lt;p>If the prefix is &lt;code>null&lt;/code>, an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> is thrown.  Use {@link&#xA;     * javax.xml.XMLConstants#DEFAULT_NS_PREFIX&#xA;     * XMLConstants.DEFAULT_NS_PREFIX} to explicitly indicate that no&#xA;     * prefix is present or the prefix is not relevant.&lt;/p>&#xA;     *&#xA;     * &lt;p>The Namespace URI is not validated as a&#xA;     * &lt;a href=&quot;http://www.ietf.org/rfc/rfc2396.txt&quot;>URI reference&lt;/a>.&#xA;     * The local part and prefix are not validated as a&#xA;     * &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/#NT-NCName&quot;>NCName&lt;/a>&#xA;     * as specified in &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/&quot;>Namespaces&#xA;     * in XML&lt;/a>.&lt;/p>&#xA;     *&#xA;     * @param namespaceURI Namespace URI of the &lt;code>QName&lt;code>&#xA;     * @param localPart    local part of the &lt;code>QName&lt;code>&#xA;     * @param prefix       prefix of the &lt;code>QName&lt;code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="QName">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="localPart">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>&lt;code>QName&lt;/code> constructor specifying the local part.&lt;/p>&#xA;     *&#xA;     * &lt;p>If the local part is &lt;code>null&lt;/code> an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> is thrown.&#xA;     * A local part of &quot;&quot; is allowed to preserve&#xA;     * compatible behavior with QName 1.0. &lt;/p>&#xA;     *&#xA;     * &lt;p>When using this constructor, the Namespace URI is set to&#xA;     * {@link javax.xml.XMLConstants#NULL_NS_URI&#xA;     * XMLConstants.NULL_NS_URI} and the prefix is set to {@link&#xA;     * javax.xml.XMLConstants#DEFAULT_NS_PREFIX&#xA;     * XMLConstants.DEFAULT_NS_PREFIX}.&lt;/p>&#xA;     *&#xA;     * &lt;p>&lt;em>In an XML context, all Element and Attribute names exist&#xA;     * in the context of a Namespace.  Making this explicit during the&#xA;     * construction of a &lt;code>QName&lt;/code> helps prevent hard to&#xA;     * diagnosis XML validity errors.  The constructors {@link&#xA;     * #QName(String namespaceURI, String localPart) QName(String&#xA;     * namespaceURI, String localPart)} and&#xA;     * {@link #QName(String namespaceURI, String localPart, String prefix)} &#xA;     * are preferred.&lt;/em>&lt;/p>&#xA;     * &#xA;     * &lt;p>The local part is not validated as a&#xA;     * &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/#NT-NCName&quot;>NCName&lt;/a>&#xA;     * as specified in &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/&quot;>Namespaces&#xA;     * in XML&lt;/a>.&lt;/p>&#xA;     *&#xA;     * @param localPart local part of the &lt;code>QName&lt;/code>&#xA;     * @see #QName(String namespaceURI, String localPart) QName(String&#xA;     * namespaceURI, String localPart)&#xA;     * @see #QName(String namespaceURI, String localPart, String&#xA;     * prefix) QName(String namespaceURI, String localPart, String&#xA;     * prefix)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getNamespaceURI">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>Get the Namespace URI of this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     *&#xA;     * @return Namespace URI of this &lt;code>QName&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLocalPart">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Get the local part of this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     *&#xA;     *  @return local part of this &lt;code>QName&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPrefix">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>Get the prefix of this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>The prefix assigned to a &lt;code>QName&lt;/code> might&#xA;     * &lt;strong>&lt;em>NOT&lt;/em>&lt;/strong> be valid in a different&#xA;     * context. For example, a &lt;code>QName&lt;/code> may be assigned a&#xA;     * prefix in the context of parsing a document but that prefix may&#xA;     * be invalid in the context of a different document.&lt;/p>&#xA;     *&#xA;     *  @return prefix of this &lt;code>QName&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="equals">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="objectToTest">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Test this &lt;code>QName&lt;/code> for equality with another&#xA;     * &lt;code>Object&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>If the &lt;code>Object&lt;/code> to be tested is not a&#xA;     * &lt;code>QName&lt;/code> or is &lt;code>null&lt;/code>, then this method&#xA;     * returns &lt;code>false&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>Two &lt;code>QName&lt;/code>s are considered equal if and only if&#xA;     * both the Namespace URI and local part are equal. This method&#xA;     * uses &lt;code>String.equals()&lt;/code> to check equality of the&#xA;     * Namespace URI and local part. The prefix is&#xA;     * &lt;strong>&lt;em>NOT&lt;/em>&lt;/strong> used to determine equality.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method satisfies the general contract of {@link&#xA;     * java.lang.Object#equals(Object) Object.equals(Object)}&lt;/p>&#xA;     *&#xA;     * @param objectToTest the &lt;code>Object&lt;/code> to test for&#xA;     * equality with this &lt;code>QName&lt;/code>&#xA;     * @return &lt;code>true&lt;/code> if the given &lt;code>Object&lt;/code> is&#xA;     * equal to this &lt;code>QName&lt;/code> else &lt;code>false&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+              </expression>
+            </child>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="qName">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0"/>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              </arguments>
+            </next>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@variable">
+                <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              </arguments>
+            </next>
+          </children>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="hashCode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Generate the hash code for this &lt;code>QName&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>The hash code is calculated using both the Namespace URI and&#xA;     * the local part of the &lt;code>QName&lt;/code>.  The prefix is&#xA;     * &lt;strong>&lt;em>NOT&lt;/em>&lt;/strong> used to calculate the hash&#xA;     * code.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method satisfies the general contract of {@link&#xA;     * java.lang.Object#hashCode() Object.hashCode()}.&lt;/p>&#xA;     *&#xA;     * @return hash code for this &lt;code>QName&lt;/code> &lt;code>Object&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:ExclusiveOrExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.44"/>
+            </next>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.44"/>
+            </next>
+          </children>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>&lt;code>String&lt;/code> representation of this&#xA;&#x9; * &lt;code>QName&lt;/code>.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>The commonly accepted way of representing a &lt;code>QName&lt;/code>&#xA;&#x9; * as a &lt;code>String&lt;/code> was &lt;a href=&quot;http://jclark.com/xml/xmlns.htm&quot;>defined&lt;/a>&#xA;&#x9; * by James Clark.  Although this is not a &lt;em>standard&lt;/em>&#xA;&#x9; * specification, it is in common use,  e.g. {@link javax.xml.transform.Transformer#setParameter(String name, Object value)}.&#xA;&#x9; * This implementation represents a &lt;code>QName&lt;/code> as:&#xA;&#x9; * &quot;{&quot; + Namespace URI + &quot;}&quot; + local part.  If the Namespace URI&#xA;&#x9; * &lt;code>.equals(XMLConstants.NULL_NS_URI)&lt;/code>, only the&#xA;&#x9; * local part is returned.  An appropriate use of this method is&#xA;&#x9; * for debugging or logging for human consumption.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Note the prefix value is &lt;strong>&lt;em>NOT&lt;/em>&lt;/strong>&#xA;&#x9; * returned as part of the &lt;code>String&lt;/code> representation.&lt;/p>&#xA;&#x9; *  &#xA;&#x9; * &lt;p>This method satisfies the general contract of {@link&#xA;&#x9; * java.lang.Object#toString() Object.toString()}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; *  @return &lt;code>String&lt;/code> representation of this &lt;code>QName&lt;/code>&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+            </arguments>
+          </next>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:StringReference" value="{"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <children xsi:type="references:StringReference" value="}"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </returnValue>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="valueOf">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="qNameAsString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * &lt;p>&lt;code>QName&lt;/code> derived from parsing the formatted&#xA;     * &lt;code>String&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>If the &lt;code>String&lt;/code> is &lt;code>null&lt;/code> or does not conform to&#xA;     * {@link #toString() QName.toString()} formatting, an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> is thrown.&lt;/p>&#xA;     *  &#xA;     * &lt;p>&lt;em>The &lt;code>String&lt;/code> &lt;strong>MUST&lt;/strong> be in the&#xA;     * form returned by {@link #toString() QName.toString()}.&lt;/em>&lt;/p>&#xA;&#xA;&#x9; * &lt;p>The commonly accepted way of representing a &lt;code>QName&lt;/code>&#xA;&#x9; * as a &lt;code>String&lt;/code> was &lt;a href=&quot;http://jclark.com/xml/xmlns.htm&quot;>defined&lt;/a>&#xA;&#x9; * by James Clark.  Although this is not a &lt;em>standard&lt;/em>&#xA;&#x9; * specification, it is in common use,  e.g. {@link javax.xml.transform.Transformer#setParameter(String name, Object value)}.&#xA;     * This implementation parses a &lt;code>String&lt;/code> formatted&#xA;     * as: &quot;{&quot; + Namespace URI + &quot;}&quot; + local part.  If the Namespace&#xA;     * URI &lt;code>.equals(XMLConstants.NULL_NS_URI)&lt;/code>, only the&#xA;     * local part should be provided.&lt;/p>&#xA;     *&#xA;     * &lt;p>The prefix value &lt;strong>&lt;em>CANNOT&lt;/em>&lt;/strong> be&#xA;     * represented in the &lt;code>String&lt;/code> and will be set to&#xA;     * {@link javax.xml.XMLConstants#DEFAULT_NS_PREFIX&#xA;     * XMLConstants.DEFAULT_NS_PREFIX}.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method does not do full validation of the resulting&#xA;     * &lt;code>QName&lt;/code>. &#xA;     * &lt;p>The Namespace URI is not validated as a&#xA;     * &lt;a href=&quot;http://www.ietf.org/rfc/rfc2396.txt&quot;>URI reference&lt;/a>.&#xA;     * The local part is not validated as a&#xA;     * &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/#NT-NCName&quot;>NCName&lt;/a>&#xA;     * as specified in&#xA;     * &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/&quot;>Namespaces in XML&lt;/a>.&lt;/p>&#xA;     *&#xA;     * @param qNameAsString &lt;code>String&lt;/code> representation&#xA;     * of the &lt;code>QName&lt;/code>&#xA;     * @return &lt;code>QName&lt;/code> corresponding to the given &lt;code>String&lt;/code>&#xA;     * @see #toString() QName.toString()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <comments>// null is not valid</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="cannot create QName from &quot;null&quot; or &quot;&quot; String"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// &quot;&quot; local part is valid to preserve compatible behavior with QName 1.0</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// local part only?</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.23"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </next>
+          </children>
+          <children xsi:type="literals:CharacterLiteral" value="123"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// Namespace URI improperly specified?</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="Namespace URI .equals(XMLConstants.NULL_NS_URI), "/>
+                <children xsi:type="references:StringReference" value=".equals(&quot;"/>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+                </children>
+                <children xsi:type="references:StringReference" value="&quot;), "/>
+                <children xsi:type="references:StringReference" value="only the local part, "/>
+                <children xsi:type="references:StringReference" value="&quot;"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.55"/>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      <children xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                          </next>
+                          <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </next>
+                </children>
+                <children xsi:type="references:StringReference" value="&quot;, "/>
+                <children xsi:type="references:StringReference" value="should be provided."/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.42"/>
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:StringReference" value="{"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+              </children>
+              <children xsi:type="references:StringReference" value="}"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+              <additiveOperators xsi:type="operators:Addition"/>
+            </arguments>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="endOfNamespaceURI">
+          <typeReference xsi:type="types:Int">
+            <comments>// Namespace URI and local part specified</comments>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.45"/>
+              <arguments xsi:type="literals:CharacterLiteral" value="125"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="cannot create QName from &quot;"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+                <children xsi:type="references:StringReference" value="&quot;, missing closing &quot;}&quot;"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@variable"/>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.56"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@variable"/>
+            </next>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/lang/String.class.xmi#//@classifiers.0/@members.55"/>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@variable"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </next>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../XMLConstants.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../XMLConstants.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** &#xA; * &lt;p>&lt;code>QName&lt;/code> represents a &lt;strong>qualified name&lt;/strong>&#xA; * as defined in the XML specifications: &lt;a&#xA; * href=&quot;http://www.w3.org/TR/xmlschema-2/#QName&quot;>XML Schema Part2:&#xA; * Datatypes specification&lt;/a>, &lt;a&#xA; * href=&quot;http://www.w3.org/TR/REC-xml-names/#ns-qualnames&quot;>Namespaces&#xA; * in XML&lt;/a>, &lt;a&#xA; * href=&quot;http://www.w3.org/XML/xml-names-19990114-errata&quot;>Namespaces&#xA; * in XML Errata&lt;/a>.&lt;/p>&#xA; *&#xA; * &lt;p>The value of a &lt;code>QName&lt;/code> contains a &lt;strong>Namespace&#xA; * URI&lt;/strong>, &lt;strong>local part&lt;/strong> and&#xA; * &lt;strong>prefix&lt;/strong>.&lt;/p>&#xA; *&#xA; * &lt;p>The prefix is included in &lt;code>QName&lt;/code> to retain lexical&#xA; * information &lt;strong>&lt;em>when present&lt;/em>&lt;/strong> in an {@link&#xA; * javax.xml.transform.Source XML input source}. The prefix is&#xA; * &lt;strong>&lt;em>NOT&lt;/em>&lt;/strong> used in {@link #equals(Object)&#xA; * QName.equals(Object)} or to compute the {@link #hashCode()&#xA; * QName.hashCode()}.  Equality and the hash code are defined using&#xA; * &lt;strong>&lt;em>only&lt;/em>&lt;/strong> the Namespace URI and local part.&lt;/p>&#xA; *&#xA; * &lt;p>If not specified, the Namespace URI is set to {@link&#xA; * javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}.&#xA; * If not specified, the prefix is set to {@link&#xA; * javax.xml.XMLConstants#DEFAULT_NS_PREFIX&#xA; * XMLConstants.DEFAULT_NS_PREFIX}.&lt;/p>&#xA; *&#xA; * &lt;p>&lt;code>QName&lt;/code> is immutable.&lt;/p>&#xA; *&#xA; * @author &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;>Jeff Suttor&lt;/a>&#xA; * @version $Revision: 1.10 $, $Date: 2004/02/09 23:41:21 $&#xA; * @see &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#QName&quot;>XML Schema Part2: Datatypes specification&lt;/a>&#xA; * @see &lt;a href=&quot;http://www.w3.org/TR/REC-xml-names/#ns-qualnames&quot;>Namespaces in XML&lt;/a>&#xA; * @see &lt;a href=&quot;http://www.w3.org/XML/xml-names-19990114-errata&quot;>Namespaces in XML Errata&lt;/a>&#xA; * @since 1.5&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../java/io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

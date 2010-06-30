@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="WritableByteChannel.java">
+  <comments>/*&#xA; * @(#)WritableByteChannel.java&#x9;1.15 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>nio</namespaces>
+  <namespaces>channels</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="WritableByteChannel">
+    <members xsi:type="members:InterfaceMethod" name="write">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="src">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes a sequence of bytes to this channel from the given buffer.&#xA;     *&#xA;     * &lt;p> An attempt is made to write up to &lt;i>r&lt;/i> bytes to the channel,&#xA;     * where &lt;i>r&lt;/i> is the number of bytes remaining in the buffer, that is,&#xA;     * &lt;tt>dst.remaining()&lt;/tt>, at the moment this method is invoked.&#xA;     *&#xA;     * &lt;p> Suppose that a byte sequence of length &lt;i>n&lt;/i> is written, where&#xA;     * &lt;tt>0&lt;/tt>&amp;nbsp;&lt;tt>&amp;lt;=&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>&amp;nbsp;&lt;tt>&amp;lt;=&lt;/tt>&amp;nbsp;&lt;i>r&lt;/i>.&#xA;     * This byte sequence will be transferred from the buffer starting at index&#xA;     * &lt;i>p&lt;/i>, where &lt;i>p&lt;/i> is the buffer's position at the moment this&#xA;     * method is invoked; the index of the last byte written will be&#xA;     * &lt;i>p&lt;/i>&amp;nbsp;&lt;tt>+&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>&amp;nbsp;&lt;tt>-&lt;/tt>&amp;nbsp;&lt;tt>1&lt;/tt>.&#xA;     * Upon return the buffer's position will be equal to&#xA;     * &lt;i>p&lt;/i>&amp;nbsp;&lt;tt>+&lt;/tt>&amp;nbsp;&lt;i>n&lt;/i>; its limit will not have changed.&#xA;     *&#xA;     * &lt;p> Unless otherwise specified, a write operation will return only after&#xA;     * writing all of the &lt;i>r&lt;/i> requested bytes.  Some types of channels,&#xA;     * depending upon their state, may write only some of the bytes or possibly&#xA;     * none at all.  A socket channel in non-blocking mode, for example, cannot&#xA;     * write any more bytes than are free in the socket's output buffer.&#xA;     *&#xA;     * &lt;p> This method may be invoked at any time.  If another thread has&#xA;     * already initiated a write operation upon this channel, however, then an&#xA;     * invocation of this method will block until the first operation is&#xA;     * complete. &lt;/p>&#xA;     *&#xA;     * @param  src&#xA;     *         The buffer from which bytes are to be retrieved&#xA;     *&#xA;     * @return The number of bytes written, possibly zero&#xA;     *&#xA;     * @throws  NonWritableChannelException&#xA;     *          If this channel was not opened for writing&#xA;     *&#xA;     * @throws  ClosedChannelException&#xA;     *          If this channel is closed&#xA;     *&#xA;     * @throws  AsynchronousCloseException&#xA;     *          If another thread closes this channel&#xA;     *          while the write operation is in progress&#xA;     *&#xA;     * @throws  ClosedByInterruptException&#xA;     *          If another thread interrupts the current thread&#xA;     *          while the write operation is in progress, thereby&#xA;     *          closing the channel and setting the current thread's&#xA;     *          interrupt status&#xA;     *&#xA;     * @throws  IOException&#xA;     *          If some other I/O error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A channel that can write bytes.&#xA; *&#xA; * &lt;p> Only one write operation upon a writable channel may be in progress at&#xA; * any given time.  If one thread initiates a write operation upon a channel&#xA; * then any other thread that attempts to initiate another write operation will&#xA; * block until the first operation is complete.  Whether or not other kinds of&#xA; * I/O operations may proceed concurrently with a write operation depends upon&#xA; * the type of the channel. &lt;/p>&#xA; *&#xA; *&#xA; * @author Mark Reinhold&#xA; * @author JSR-51 Expert Group&#xA; * @version 1.15, 03/12/19&#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="Channel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

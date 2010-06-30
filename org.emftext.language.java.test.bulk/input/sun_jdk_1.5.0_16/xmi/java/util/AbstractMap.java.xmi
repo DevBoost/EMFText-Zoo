@@ -1,0 +1,2296 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/generics ../../java.ecore#/6 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16" name="AbstractMap.java">
+  <comments>/*&#xA; * @(#)AbstractMap.java&#x9;1.42 04/02/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>util</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>Map</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="AbstractMap">
+    <typeParameters name="K"/>
+    <typeParameters name="V"/>
+    <members xsi:type="members:Constructor" name="AbstractMap">
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Sole constructor.  (For invocation by subclass constructors, typically&#xA;     * implicit.)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="size">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Query Operations</comments>
+        <comments>/**&#xA;     * Returns the number of key-value mappings in this map.  If the map&#xA;     * contains more than &lt;tt>Integer.MAX_VALUE&lt;/tt> elements, returns&#xA;     * &lt;tt>Integer.MAX_VALUE&lt;/tt>.&lt;p>&#xA;     *&#xA;     * This implementation returns &lt;tt>entrySet().size()&lt;/tt>.&#xA;     *&#xA;     * @return the number of key-value mappings in this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isEmpty">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;tt>true&lt;/tt> if this map contains no key-value mappings. &lt;p>&#xA;     *&#xA;     * This implementation returns &lt;tt>size() == 0&lt;/tt>.&#xA;     *&#xA;     * @return &lt;tt>true&lt;/tt> if this map contains no key-value mappings.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.1"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="containsValue">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;tt>true&lt;/tt> if this map maps one or more keys to this value.&#xA;     * More formally, returns &lt;tt>true&lt;/tt> if and only if this map contains&#xA;     * at least one mapping to a value &lt;tt>v&lt;/tt> such that &lt;tt>(value==null ?&#xA;     * v==null : value.equals(v))&lt;/tt>.  This operation will probably require&#xA;     * time linear in the map size for most implementations of map.&lt;p>&#xA;     *&#xA;     * This implementation iterates over entrySet() searching for an entry&#xA;     * with the specified value.  If such an entry is found, &lt;tt>true&lt;/tt> is&#xA;     * returned.  If the iteration terminates without finding such an entry,&#xA;     * &lt;tt>false&lt;/tt> is returned.  Note that this implementation requires&#xA;     * linear time in the size of the map.&#xA;     *&#xA;     * @param value value whose presence in this map is to be tested.&#xA;     * &#xA;     * @return &lt;tt>true&lt;/tt> if this map maps one or more keys to this value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.1/@statement/@statements.0/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </children>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.1/@elseStatement/@statements.0/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="containsKey">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;tt>true&lt;/tt> if this map contains a mapping for the specified&#xA;     * key. &lt;p>&#xA;     *&#xA;     * This implementation iterates over &lt;tt>entrySet()&lt;/tt> searching for an&#xA;     * entry with the specified key.  If such an entry is found, &lt;tt>true&lt;/tt>&#xA;     * is returned.  If the iteration terminates without finding such an&#xA;     * entry, &lt;tt>false&lt;/tt> is returned.  Note that this implementation&#xA;     * requires linear time in the size of the map; many implementations will&#xA;     * override this method.&#xA;     *&#xA;     * @param key key whose presence in this map is to be tested.&#xA;     * @return &lt;tt>true&lt;/tt> if this map contains a mapping for the specified&#xA;     *            key.&#xA;     * &#xA;     * @throws NullPointerException if the key is &lt;tt>null&lt;/tt> and this map&#xA;     *            does not permit &lt;tt>null&lt;/tt> keys.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <namespaces>Map</namespaces>
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.1/@statement/@statements.0/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </children>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.1/@elseStatement/@statements.0/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="get">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the value to which this map maps the specified key.  Returns&#xA;     * &lt;tt>null&lt;/tt> if the map contains no mapping for this key.  A return&#xA;     * value of &lt;tt>null&lt;/tt> does not &lt;i>necessarily&lt;/i> indicate that the&#xA;     * map contains no mapping for the key; it's also possible that the map&#xA;     * explicitly maps the key to &lt;tt>null&lt;/tt>.  The containsKey operation&#xA;     * may be used to distinguish these two cases. &lt;p>&#xA;     *&#xA;     * This implementation iterates over &lt;tt>entrySet()&lt;/tt> searching for an&#xA;     * entry with the specified key.  If such an entry is found, the entry's&#xA;     * value is returned.  If the iteration terminates without finding such an&#xA;     * entry, &lt;tt>null&lt;/tt> is returned.  Note that this implementation&#xA;     * requires linear time in the size of the map; many implementations will&#xA;     * override this method.&#xA;     *&#xA;     * @param key key whose associated value is to be returned.&#xA;     * @return the value to which this map maps the specified key.&#xA;     * &#xA;     * @throws NullPointerException if the key is &lt;tt>null&lt;/tt> and this map&#xA;     *&#x9;&#x9;  does not permit &lt;tt>null&lt;/tt> keys.&#xA;     * &#xA;     * @see #containsKey(Object)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@statement/@statements.0/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </returnValue>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@statement/@statements.0/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </children>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@elseStatement/@statements.0/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </returnValue>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@elseStatement/@statements.0/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="put">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Modification Operations</comments>
+        <comments>/**&#xA;     * Associates the specified value with the specified key in this map&#xA;     * (optional operation).  If the map previously contained a mapping for&#xA;     * this key, the old value is replaced.&lt;p>&#xA;     *&#xA;     * This implementation always throws an&#xA;     * &lt;tt>UnsupportedOperationException&lt;/tt>.&#xA;     *&#xA;     * @param key key with which the specified value is to be associated.&#xA;     * @param value value to be associated with the specified key.&#xA;     * &#xA;     * @return previous value associated with specified key, or &lt;tt>null&lt;/tt>&#xA;     *&#x9;       if there was no mapping for key.  (A &lt;tt>null&lt;/tt> return can&#xA;     *&#x9;       also indicate that the map previously associated &lt;tt>null&lt;/tt>&#xA;     *&#x9;       with the specified key, if the implementation supports&#xA;     *&#x9;       &lt;tt>null&lt;/tt> values.)&#xA;     * &#xA;     * @throws UnsupportedOperationException if the &lt;tt>put&lt;/tt> operation is&#xA;     *&#x9;          not supported by this map.&#xA;     * &#xA;     * @throws ClassCastException if the class of the specified key or value&#xA;     * &#x9;          prevents it from being stored in this map.&#xA;     * &#xA;     * @throws IllegalArgumentException if some aspect of this key or value *&#xA;     *            prevents it from being stored in this map.&#xA;     * &#xA;     * @throws NullPointerException if this map does not permit &lt;tt>null&lt;/tt>&#xA;     *            keys or values, and the specified key or value is&#xA;     *            &lt;tt>null&lt;/tt>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Throw">
+        <throwable xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </throwable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="remove">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes the mapping for this key from this map if present (optional&#xA;     * operation). &lt;p>&#xA;     *&#xA;     * This implementation iterates over &lt;tt>entrySet()&lt;/tt> searching for an&#xA;     * entry with the specified key.  If such an entry is found, its value is&#xA;     * obtained with its &lt;tt>getValue&lt;/tt> operation, the entry is removed&#xA;     * from the Collection (and the backing map) with the iterator's&#xA;     * &lt;tt>remove&lt;/tt> operation, and the saved value is returned.  If the&#xA;     * iteration terminates without finding such an entry, &lt;tt>null&lt;/tt> is&#xA;     * returned.  Note that this implementation requires linear time in the&#xA;     * size of the map; many implementations will override this method.&lt;p>&#xA;     *&#xA;     * Note that this implementation throws an&#xA;     * &lt;tt>UnsupportedOperationException&lt;/tt> if the &lt;tt>entrySet&lt;/tt> iterator&#xA;     * does not support the &lt;tt>remove&lt;/tt> method and this map contains a&#xA;     * mapping for the specified key.&#xA;     *&#xA;     * @param key key whose mapping is to be removed from the map.&#xA;     * @return previous value associated with specified key, or &lt;tt>null&lt;/tt>&#xA;     *&#x9;       if there was no entry for key.  (A &lt;tt>null&lt;/tt> return can&#xA;     *&#x9;       also indicate that the map previously associated &lt;tt>null&lt;/tt>&#xA;     *&#x9;       with the specified key, if the implementation supports&#xA;     *&#x9;       &lt;tt>null&lt;/tt> values.)&#xA;     * @throws UnsupportedOperationException if the &lt;tt>remove&lt;/tt> operation&#xA;     * &#x9;&#x9;  is not supported by this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="correctEntry">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                </typeReference>
+              </typeArguments>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@statement/@statements.0/@statement/@statements.0/@variable"/>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@statement/@statements.0/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </children>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:WhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="e">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@elseStatement/@statements.0/@statement/@statements.0/@variable"/>
+                  </expression>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.2/@elseStatement/@statements.0/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </children>
+            </condition>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldValue">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.3/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="putAll">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="t">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:ExtendsTypeArgument">
+              <extendTypes xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+              </extendTypes>
+            </typeArguments>
+            <typeArguments xsi:type="generics:ExtendsTypeArgument">
+              <extendTypes xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+              </extendTypes>
+            </typeArguments>
+            <target xsi:type="classifiers:Interface" href="Map.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Bulk Operations</comments>
+        <comments>/**&#xA;     * Copies all of the mappings from the specified map to this map&#xA;     * (optional operation).  These mappings will replace any mappings that&#xA;     * this map had for any of the keys currently in the specified map.&lt;p>&#xA;     *&#xA;     * This implementation iterates over the specified map's&#xA;     * &lt;tt>entrySet()&lt;/tt> collection, and calls this map's &lt;tt>put&lt;/tt>&#xA;     * operation once for each entry returned by the iteration.&lt;p>&#xA;     *&#xA;     * Note that this implementation throws an&#xA;     * &lt;tt>UnsupportedOperationException&lt;/tt> if this map does not support&#xA;     * the &lt;tt>put&lt;/tt> operation and the specified map is nonempty.&#xA;     *&#xA;     * @param t mappings to be stored in this map.&#xA;     * &#xA;     * @throws UnsupportedOperationException if the &lt;tt>putAll&lt;/tt> operation&#xA;     * &#x9;&#x9;  is not supported by this map.&#xA;     * &#xA;     * @throws ClassCastException if the class of a key or value in the&#xA;     * &#x9;          specified map prevents it from being stored in this map.&#xA;     * &#xA;     * @throws IllegalArgumentException if some aspect of a key or value in&#xA;     *&#x9;          the specified map prevents it from being stored in this map.&#xA;     * @throws NullPointerException if the specified map is &lt;tt>null&lt;/tt>, or if&#xA;     *         this map does not permit &lt;tt>null&lt;/tt> keys or values, and the&#xA;     *         specified map contains &lt;tt>null&lt;/tt> keys or values.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:ExtendsTypeArgument">
+                <extendTypes xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:ExtendsTypeArgument">
+                      <extendTypes xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </extendTypes>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:ExtendsTypeArgument">
+                      <extendTypes xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </extendTypes>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </extendTypes>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="Map.class.xmi#//@classifiers.0/@members.11"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="e">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <typeArguments xsi:type="generics:ExtendsTypeArgument">
+                    <extendTypes xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                    </extendTypes>
+                  </typeArguments>
+                  <typeArguments xsi:type="generics:ExtendsTypeArgument">
+                    <extendTypes xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                    </extendTypes>
+                  </typeArguments>
+                  <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.6">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.1/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.1/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </arguments>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="clear">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes all mappings from this map (optional operation). &lt;p>&#xA;     *&#xA;     * This implementation calls &lt;tt>entrySet().clear()&lt;/tt>.&#xA;     *&#xA;     * Note that this implementation throws an&#xA;     * &lt;tt>UnsupportedOperationException&lt;/tt> if the &lt;tt>entrySet&lt;/tt>&#xA;     * does not support the &lt;tt>clear&lt;/tt> operation.&#xA;     *&#xA;     * @throws    UnsupportedOperationException clear is not supported&#xA;     * &#x9;&#x9;  by this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.12"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:Field" name="keySet">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Transient">
+        <comments>// Views</comments>
+        <comments>/**&#xA;     * Each of these fields are initialized to contain an instance of the&#xA;     * appropriate view the first time this view is requested.  The views are&#xA;     * stateless, so there's no reason to create more than one of each.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:Field" name="values">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Transient"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="keySet">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a Set view of the keys contained in this map.  The Set is&#xA;     * backed by the map, so changes to the map are reflected in the Set,&#xA;     * and vice-versa.  (If the map is modified while an iteration over&#xA;     * the Set is in progress, the results of the iteration are undefined.)&#xA;     * The Set supports element removal, which removes the corresponding entry&#xA;     * from the map, via the Iterator.remove, Set.remove,  removeAll&#xA;     * retainAll, and clear operations.  It does not support the add or&#xA;     * addAll operations.&lt;p>&#xA;     *&#xA;     * This implementation returns a Set that subclasses&#xA;     * AbstractSet.  The subclass's iterator method returns a &quot;wrapper&#xA;     * object&quot; over this map's entrySet() iterator.  The size method delegates&#xA;     * to this map's size method and the contains method delegates to this&#xA;     * map's containsKey method.&lt;p>&#xA;     *&#xA;     * The Set is created the first time this method is called,&#xA;     * and returned in response to all subsequent calls.  No synchronization&#xA;     * is performed, so there is a slight chance that multiple calls to this&#xA;     * method will not all return the same Set.&#xA;     *&#xA;     * @return a Set view of the keys contained in this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Class" href="AbstractSet.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <anonymousClass>
+                  <members xsi:type="members:ClassMethod" name="iterator">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                          <typeReference xsi:type="types:NamespaceClassifierReference">
+                            <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                          </typeReference>
+                        </typeArguments>
+                        <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="instantiations:NewConstructorCall">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                              <typeReference xsi:type="types:NamespaceClassifierReference">
+                                <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                              </typeReference>
+                            </typeArguments>
+                            <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <anonymousClass>
+                          <members xsi:type="members:Field" name="i">
+                            <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+                              <next xsi:type="references:MethodCall">
+                                <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+                              </next>
+                            </initialValue>
+                            <typeReference xsi:type="types:NamespaceClassifierReference">
+                              <classifierReferences>
+                                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                                    <classifierReferences>
+                                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                                        </typeReference>
+                                      </typeArguments>
+                                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                                        </typeReference>
+                                      </typeArguments>
+                                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                                    </classifierReferences>
+                                  </typeReference>
+                                </typeArguments>
+                                <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+                              </classifierReferences>
+                            </typeReference>
+                            <annotationsAndModifiers xsi:type="modifiers:Private"/>
+                          </members>
+                          <members xsi:type="members:ClassMethod" name="hasNext">
+                            <typeReference xsi:type="types:Boolean"/>
+                            <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                            <statements xsi:type="statements:Return">
+                              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.0/@statements.0/@returnValue/@anonymousClass/@members.0">
+                                <next xsi:type="references:MethodCall">
+                                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+                                </next>
+                              </returnValue>
+                            </statements>
+                          </members>
+                          <members xsi:type="members:ClassMethod" name="next">
+                            <typeReference xsi:type="types:NamespaceClassifierReference">
+                              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                            </typeReference>
+                            <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                            <statements xsi:type="statements:Return">
+                              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.0/@statements.0/@returnValue/@anonymousClass/@members.0">
+                                <next xsi:type="references:MethodCall">
+                                  <next xsi:type="references:MethodCall">
+                                    <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                                  </next>
+                                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                                </next>
+                              </returnValue>
+                            </statements>
+                          </members>
+                          <members xsi:type="members:ClassMethod" name="remove">
+                            <typeReference xsi:type="types:Void"/>
+                            <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                            <statements xsi:type="statements:ExpressionStatement">
+                              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.0/@statements.0/@returnValue/@anonymousClass/@members.0">
+                                <next xsi:type="references:MethodCall">
+                                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.2"/>
+                                </next>
+                              </expression>
+                            </statements>
+                          </members>
+                        </anonymousClass>
+                      </returnValue>
+                    </statements>
+                  </members>
+                  <members xsi:type="members:ClassMethod" name="size">
+                    <typeReference xsi:type="types:Int"/>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                        <next xsi:type="references:SelfReference">
+                          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.1"/>
+                          <self xsi:type="literals:This"/>
+                        </next>
+                      </returnValue>
+                    </statements>
+                  </members>
+                  <members xsi:type="members:ClassMethod" name="contains">
+                    <typeReference xsi:type="types:Boolean"/>
+                    <parameters xsi:type="parameters:OrdinaryParameter" name="k">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                    </parameters>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                        <next xsi:type="references:SelfReference">
+                          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.2/@parameters.0"/>
+                          </next>
+                          <self xsi:type="literals:This"/>
+                        </next>
+                      </returnValue>
+                    </statements>
+                  </members>
+                </anonymousClass>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="values">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a collection view of the values contained in this map.  The&#xA;     * collection is backed by the map, so changes to the map are reflected in&#xA;     * the collection, and vice-versa.  (If the map is modified while an&#xA;     * iteration over the collection is in progress, the results of the&#xA;     * iteration are undefined.)  The collection supports element removal,&#xA;     * which removes the corresponding entry from the map, via the&#xA;     * &lt;tt>Iterator.remove&lt;/tt>, &lt;tt>Collection.remove&lt;/tt>,&#xA;     * &lt;tt>removeAll&lt;/tt>, &lt;tt>retainAll&lt;/tt> and &lt;tt>clear&lt;/tt> operations.&#xA;     * It does not support the &lt;tt>add&lt;/tt> or &lt;tt>addAll&lt;/tt> operations.&lt;p>&#xA;     *&#xA;     * This implementation returns a collection that subclasses abstract&#xA;     * collection.  The subclass's iterator method returns a &quot;wrapper object&quot;&#xA;     * over this map's &lt;tt>entrySet()&lt;/tt> iterator.  The size method&#xA;     * delegates to this map's size method and the contains method delegates&#xA;     * to this map's containsValue method.&lt;p>&#xA;     *&#xA;     * The collection is created the first time this method is called, and&#xA;     * returned in response to all subsequent calls.  No synchronization is&#xA;     * performed, so there is a slight chance that multiple calls to this&#xA;     * method will not all return the same Collection.&#xA;     *&#xA;     * @return a collection view of the values contained in this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Class" href="AbstractCollection.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <anonymousClass>
+                  <members xsi:type="members:ClassMethod" name="iterator">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                          <typeReference xsi:type="types:NamespaceClassifierReference">
+                            <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                          </typeReference>
+                        </typeArguments>
+                        <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="instantiations:NewConstructorCall">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                              <typeReference xsi:type="types:NamespaceClassifierReference">
+                                <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                              </typeReference>
+                            </typeArguments>
+                            <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <anonymousClass>
+                          <members xsi:type="members:Field" name="i">
+                            <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+                              <next xsi:type="references:MethodCall">
+                                <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+                              </next>
+                            </initialValue>
+                            <typeReference xsi:type="types:NamespaceClassifierReference">
+                              <classifierReferences>
+                                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                                    <classifierReferences>
+                                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                                        </typeReference>
+                                      </typeArguments>
+                                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                                        </typeReference>
+                                      </typeArguments>
+                                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                                    </classifierReferences>
+                                  </typeReference>
+                                </typeArguments>
+                                <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+                              </classifierReferences>
+                            </typeReference>
+                            <annotationsAndModifiers xsi:type="modifiers:Private"/>
+                          </members>
+                          <members xsi:type="members:ClassMethod" name="hasNext">
+                            <typeReference xsi:type="types:Boolean"/>
+                            <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                            <statements xsi:type="statements:Return">
+                              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.0/@statements.0/@returnValue/@anonymousClass/@members.0">
+                                <next xsi:type="references:MethodCall">
+                                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+                                </next>
+                              </returnValue>
+                            </statements>
+                          </members>
+                          <members xsi:type="members:ClassMethod" name="next">
+                            <typeReference xsi:type="types:NamespaceClassifierReference">
+                              <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                            </typeReference>
+                            <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                            <statements xsi:type="statements:Return">
+                              <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.0/@statements.0/@returnValue/@anonymousClass/@members.0">
+                                <next xsi:type="references:MethodCall">
+                                  <next xsi:type="references:MethodCall">
+                                    <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                                  </next>
+                                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                                </next>
+                              </returnValue>
+                            </statements>
+                          </members>
+                          <members xsi:type="members:ClassMethod" name="remove">
+                            <typeReference xsi:type="types:Void"/>
+                            <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                            <statements xsi:type="statements:ExpressionStatement">
+                              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.0/@statements.0/@returnValue/@anonymousClass/@members.0">
+                                <next xsi:type="references:MethodCall">
+                                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.2"/>
+                                </next>
+                              </expression>
+                            </statements>
+                          </members>
+                        </anonymousClass>
+                      </returnValue>
+                    </statements>
+                  </members>
+                  <members xsi:type="members:ClassMethod" name="size">
+                    <typeReference xsi:type="types:Int"/>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                        <next xsi:type="references:SelfReference">
+                          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.1"/>
+                          <self xsi:type="literals:This"/>
+                        </next>
+                      </returnValue>
+                    </statements>
+                  </members>
+                  <members xsi:type="members:ClassMethod" name="contains">
+                    <typeReference xsi:type="types:Boolean"/>
+                    <parameters xsi:type="parameters:OrdinaryParameter" name="v">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                    </parameters>
+                    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                        <next xsi:type="references:SelfReference">
+                          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@statement/@statements.0/@expression/@value/@anonymousClass/@members.2/@parameters.0"/>
+                          </next>
+                          <self xsi:type="literals:This"/>
+                        </next>
+                      </returnValue>
+                    </statements>
+                  </members>
+                </anonymousClass>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="entrySet">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                  </typeReference>
+                </typeArguments>
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                  </typeReference>
+                </typeArguments>
+                <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a set view of the mappings contained in this map.  Each element&#xA;     * in this set is a Map.Entry.  The set is backed by the map, so changes&#xA;     * to the map are reflected in the set, and vice-versa.  (If the map is&#xA;     * modified while an iteration over the set is in progress, the results of&#xA;     * the iteration are undefined.)  The set supports element removal, which&#xA;     * removes the corresponding entry from the map, via the&#xA;     * &lt;tt>Iterator.remove&lt;/tt>, &lt;tt>Set.remove&lt;/tt>, &lt;tt>removeAll&lt;/tt>,&#xA;     * &lt;tt>retainAll&lt;/tt> and &lt;tt>clear&lt;/tt> operations.  It does not support&#xA;     * the &lt;tt>add&lt;/tt> or &lt;tt>addAll&lt;/tt> operations.&#xA;     *&#xA;     * @return a set view of the mappings contained in this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="equals">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="o">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Comparison and hashing</comments>
+        <comments>/**&#xA;     * Compares the specified object with this map for equality.  Returns&#xA;     * &lt;tt>true&lt;/tt> if the given object is also a map and the two maps&#xA;     * represent the same mappings.  More formally, two maps &lt;tt>t1&lt;/tt> and&#xA;     * &lt;tt>t2&lt;/tt> represent the same mappings if&#xA;     * &lt;tt>t1.keySet().equals(t2.keySet())&lt;/tt> and for every key &lt;tt>k&lt;/tt>&#xA;     * in &lt;tt>t1.keySet()&lt;/tt>, &lt;tt> (t1.get(k)==null ? t2.get(k)==null :&#xA;     * t1.get(k).equals(t2.get(k))) &lt;/tt>.  This ensures that the&#xA;     * &lt;tt>equals&lt;/tt> method works properly across different implementations&#xA;     * of the map interface.&lt;p>&#xA;     *&#xA;     * This implementation first checks if the specified object is this map;&#xA;     * if so it returns &lt;tt>true&lt;/tt>.  Then, it checks if the specified&#xA;     * object is a map whose size is identical to the size of this set; if&#xA;     * not, it returns &lt;tt>false&lt;/tt>.  If so, it iterates over this map's&#xA;     * &lt;tt>entrySet&lt;/tt> collection, and checks that the specified map&#xA;     * contains each mapping that this map contains.  If the specified map&#xA;     * fails to contain such a mapping, &lt;tt>false&lt;/tt> is returned.  If the&#xA;     * iteration completes, &lt;tt>true&lt;/tt> is returned.&#xA;     *&#xA;     * @param o object to be compared for equality with this map.&#xA;     * @return &lt;tt>true&lt;/tt> if the specified object is equal to this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+          <children xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:BooleanLiteral"/>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="Map.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            </expression>
+          </child>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="t">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                </typeReference>
+              </typeArguments>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Map.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                  </typeReference>
+                </typeArguments>
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                  </typeReference>
+                </typeArguments>
+                <target xsi:type="classifiers:Interface" href="Map.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:BooleanLiteral"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Map.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </children>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.1"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="i">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                        </typeReference>
+                      </typeArguments>
+                      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                        </typeReference>
+                      </typeArguments>
+                      <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                </typeArguments>
+                <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+              </next>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:WhileLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="key">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                </typeReference>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="value">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                </typeReference>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Return">
+                    <returnValue xsi:type="literals:BooleanLiteral"/>
+                  </statement>
+                  <condition xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:ConditionalAndExpression">
+                        <children xsi:type="expressions:EqualityExpression">
+                          <equalityOperators xsi:type="operators:Equal"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:InterfaceMethod" href="Map.class.xmi#//@classifiers.0/@members.4"/>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.1/@variable"/>
+                            </next>
+                          </children>
+                          <children xsi:type="literals:NullLiteral"/>
+                        </children>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="Map.class.xmi#//@classifiers.0/@members.2"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.1/@variable"/>
+                          </next>
+                        </children>
+                      </expression>
+                    </child>
+                  </condition>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.2/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Return">
+                    <returnValue xsi:type="literals:BooleanLiteral"/>
+                  </statement>
+                  <condition xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.2/@variable">
+                      <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="Map.class.xmi#//@classifiers.0/@members.4"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.1/@statement/@statements.1/@variable"/>
+                          </next>
+                        </arguments>
+                      </next>
+                    </child>
+                  </condition>
+                </statements>
+              </elseStatement>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.4/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </condition>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statements>
+          <parameter name="unused">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/ClassCastException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+        <catcheBlocks>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statements>
+          <parameter name="unused">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/NullPointerException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="hashCode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the hash code value for this map.  The hash code of a map is&#xA;     * defined to be the sum of the hash codes of each entry in the map's&#xA;     * &lt;tt>entrySet()&lt;/tt> view.  This ensures that &lt;tt>t1.equals(t2)&lt;/tt>&#xA;     * implies that &lt;tt>t1.hashCode()==t2.hashCode()&lt;/tt> for any two maps&#xA;     * &lt;tt>t1&lt;/tt> and &lt;tt>t2&lt;/tt>, as required by the general contract of&#xA;     * Object.hashCode.&lt;p>&#xA;     *&#xA;     * This implementation iterates over &lt;tt>entrySet()&lt;/tt>, calling&#xA;     * &lt;tt>hashCode&lt;/tt> on each element (entry) in the Collection, and adding&#xA;     * up the results.&#xA;     *&#xA;     * @return the hash code value for this map.&#xA;     * @see Map.Entry#hashCode()&#xA;     * @see Object#hashCode()&#xA;     * @see Object#equals(Object)&#xA;     * @see Set#equals(Object)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="h">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable"/>
+            <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.4"/>
+                </next>
+                <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a string representation of this map.  The string representation&#xA;     * consists of a list of key-value mappings in the order returned by the&#xA;     * map's &lt;tt>entrySet&lt;/tt> view's iterator, enclosed in braces&#xA;     * (&lt;tt>&quot;{}&quot;&lt;/tt>).  Adjacent mappings are separated by the characters&#xA;     * &lt;tt>&quot;, &quot;&lt;/tt> (comma and space).  Each key-value mapping is rendered as&#xA;     * the key followed by an equals sign (&lt;tt>&quot;=&quot;&lt;/tt>) followed by the&#xA;     * associated value.  Keys and values are converted to strings as by&#xA;     * &lt;tt>String.valueOf(Object)&lt;/tt>.&lt;p>&#xA;     *&#xA;     * This implementation creates an empty string buffer, appends a left&#xA;     * brace, and iterates over the map's &lt;tt>entrySet&lt;/tt> view, appending&#xA;     * the string representation of each &lt;tt>map.entry&lt;/tt> in turn.  After&#xA;     * appending each entry except the last, the string &lt;tt>&quot;, &quot;&lt;/tt> is&#xA;     * appended.  Finally a right brace is appended.  A string is obtained&#xA;     * from the stringbuffer, and returned.&#xA;     *&#xA;     * @return a String representation of this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="buf">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:StringReference" value="{"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                      </typeReference>
+                    </typeArguments>
+                    <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                      </typeReference>
+                    </typeArguments>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Iterator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Set.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="hasNext">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="e">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                    </typeReference>
+                  </typeArguments>
+                  <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                    </typeReference>
+                  </typeArguments>
+                  <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="key">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="value">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                  <arguments xsi:type="references:StringReference" value="(this Map)"/>
+                </next>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@statement/@statements.1/@variable"/>
+              <children xsi:type="references:SelfReference">
+                <self xsi:type="literals:This"/>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.18"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@statement/@statements.1/@variable"/>
+                </next>
+              </expression>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:StringReference" value="="/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                  <arguments xsi:type="references:StringReference" value="(this Map)"/>
+                </next>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@statement/@statements.2/@variable"/>
+              <children xsi:type="references:SelfReference">
+                <self xsi:type="literals:This"/>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.18"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.4/@statement/@statements.2/@variable"/>
+                </next>
+              </expression>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.3/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Iterator.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                  <arguments xsi:type="references:StringReference" value=", "/>
+                </next>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.3/@variable"/>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.3/@variable"/>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:StringReference" value="}"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../lang/StringBuffer.class.xmi#//@classifiers.0/@members.55"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="clone">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../lang/CloneNotSupportedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Returns a shallow copy of this &lt;tt>AbstractMap&lt;/tt> instance: the keys&#xA;     * and values themselves are not cloned.&#xA;     *&#xA;     * @return a shallow copy of this map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0">
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                </typeReference>
+              </typeArguments>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                </typeReference>
+              </typeArguments>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0">
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+                  </typeReference>
+                </typeArguments>
+                <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+                  </typeReference>
+                </typeArguments>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.5"/>
+              </next>
+              <self xsi:type="literals:Super"/>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="classifiers:Class" name="SimpleEntry">
+      <typeParameters name="K"/>
+      <typeParameters name="V"/>
+      <members xsi:type="members:Field" name="key">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.0"/>
+        </typeReference>
+      </members>
+      <members xsi:type="members:Field" name="value">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+        </typeReference>
+      </members>
+      <members xsi:type="members:Constructor" name="SimpleEntry">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.2/@parameters.0"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.2/@parameters.1"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="key">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.0"/>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <members xsi:type="members:Constructor" name="SimpleEntry">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.3/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.3/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+              </next>
+            </value>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="e">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.0"/>
+                </typeReference>
+              </typeArguments>
+              <typeArguments xsi:type="generics:QualifiedTypeArgument">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+                </typeReference>
+              </typeArguments>
+              <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getKey">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.0"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="setValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+        </typeReference>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="oldValue">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+            </typeReference>
+            <initialValue xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.6/@parameters.0"/>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.6/@statements.0/@variable"/>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="equals">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="o">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Condition">
+          <statement xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral"/>
+          </statement>
+          <condition xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <namespaces>Map</namespaces>
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.7/@parameters.0"/>
+              </expression>
+            </child>
+          </condition>
+        </statements>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>Map</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <namespaces>Map</namespaces>
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.7/@parameters.0"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:ConditionalAndExpression">
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.19/@members.10">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.7/@statements.1/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </arguments>
+            </children>
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.19/@members.10">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.7/@statements.1/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="Map$Entry.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </arguments>
+            </children>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="hashCode">
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:ExclusiveOrExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </child>
+                <expressionIf xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0">
+                  <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.19/@members.8"/>
+                </expressionElse>
+              </expression>
+            </children>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ConditionalExpression">
+                <child xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </child>
+                <expressionIf xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1">
+                  <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.19/@members.8"/>
+                </expressionElse>
+              </expression>
+            </children>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="toString">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.0"/>
+            <children xsi:type="references:StringReference" value="="/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.1"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+            <additiveOperators xsi:type="operators:Addition"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="eq">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="o1">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="o2">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Private"/>
+        <annotationsAndModifiers xsi:type="modifiers:Static"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalExpression">
+              <child xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.10/@parameters.0"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </child>
+              <expressionIf xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.10/@parameters.1"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </expressionIf>
+              <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.10/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../lang/Object.class.xmi#//@classifiers.0/@members.4"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@members.10/@parameters.1"/>
+                </next>
+              </expressionElse>
+            </expression>
+          </returnValue>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/**&#xA;     * This should be made public as soon as possible.  It greatly simplifies&#xA;     * the task of implementing Map.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <implements xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.19/@typeParameters.1"/>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Map$Entry.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </implements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * This class provides a skeletal implementation of the &lt;tt>Map&lt;/tt>&#xA; * interface, to minimize the effort required to implement this interface. &lt;p>&#xA; *&#xA; * To implement an unmodifiable map, the programmer needs only to extend this&#xA; * class and provide an implementation for the &lt;tt>entrySet&lt;/tt> method, which&#xA; * returns a set-view of the map's mappings.  Typically, the returned set&#xA; * will, in turn, be implemented atop &lt;tt>AbstractSet&lt;/tt>.  This set should&#xA; * not support the &lt;tt>add&lt;/tt> or &lt;tt>remove&lt;/tt> methods, and its iterator&#xA; * should not support the &lt;tt>remove&lt;/tt> method.&lt;p>&#xA; *&#xA; * To implement a modifiable map, the programmer must additionally override&#xA; * this class's &lt;tt>put&lt;/tt> method (which otherwise throws an&#xA; * &lt;tt>UnsupportedOperationException&lt;/tt>), and the iterator returned by&#xA; * &lt;tt>entrySet().iterator()&lt;/tt> must additionally implement its&#xA; * &lt;tt>remove&lt;/tt> method.&lt;p>&#xA; *&#xA; * The programmer should generally provide a void (no argument) and map&#xA; * constructor, as per the recommendation in the &lt;tt>Map&lt;/tt> interface&#xA; * specification.&lt;p>&#xA; *&#xA; * The documentation for each non-abstract methods in this class describes its&#xA; * implementation in detail.  Each of these methods may be overridden if the&#xA; * map being implemented admits a more efficient implementation.&lt;p>&#xA; *&#xA; * This class is a member of the &#xA; * &lt;a href=&quot;{@docRoot}/../guide/collections/index.html&quot;>&#xA; * Java Collections Framework&lt;/a>.&#xA; *&#xA; * @author  Josh Bloch&#xA; * @author  Neal Gafter&#xA; * @version 1.42, 02/19/04&#xA; * @see Map&#xA; * @see Collection&#xA; * @since 1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+          </typeReference>
+        </typeArguments>
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+          </typeReference>
+        </typeArguments>
+        <target xsi:type="classifiers:Interface" href="Map.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

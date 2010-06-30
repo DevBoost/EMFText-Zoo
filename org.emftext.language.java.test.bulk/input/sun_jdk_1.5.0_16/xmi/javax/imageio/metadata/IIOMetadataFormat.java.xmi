@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/types ../../../java.ecore#/16" name="IIOMetadataFormat.java">
+  <comments>/*&#xA; * @(#)IIOMetadataFormat.java&#x9;1.24 04/05/05&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>imageio</namespaces>
+  <namespaces>metadata</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/util/Locale.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>imageio</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ImageTypeSpecifier.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="IIOMetadataFormat">
+    <members xsi:type="members:Field" name="CHILD_POLICY_EMPTY">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int">
+        <comments>// Child policies</comments>
+        <comments>/**&#xA;     * A constant returned by &lt;code>getChildPolicy&lt;/code> to indicate&#xA;     * that an element may not have any children.  In other words, it&#xA;     * is required to be a leaf node.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CHILD_POLICY_ALL">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getChildPolicy&lt;/code> to indicate&#xA;     * that an element must have a single instance of each of its&#xA;     * legal child elements, in order.  In DTD terms, the contents of&#xA;     * the element are defined by a sequence &lt;code>a,b,c,d,...&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CHILD_POLICY_SOME">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getChildPolicy&lt;/code> to indicate&#xA;     * that an element must have zero or one instance of each of its&#xA;     * legal child elements, in order.  In DTD terms, the contents of&#xA;     * the element are defined by a sequence&#xA;     * &lt;code>a?,b?,c?,d?,...&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CHILD_POLICY_CHOICE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getChildPolicy&lt;/code> to indicate&#xA;     * that an element must have zero or one children, selected from&#xA;     * among its legal child elements.  In DTD terms, the contents of&#xA;     * the element are defined by a selection&#xA;     * &lt;code>a|b|c|d|...&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CHILD_POLICY_SEQUENCE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getChildPolicy&lt;/code> to indicate&#xA;     * that an element must have a sequence of instances of any of its&#xA;     * legal child elements.  In DTD terms, the contents of the&#xA;     * element are defined by a sequence &lt;code>(a|b|c|d|...)*&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CHILD_POLICY_REPEAT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="5"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getChildPolicy&lt;/code> to indicate&#xA;     * that an element must have zero or more instances of its unique&#xA;     * legal child element.  In DTD terms, the contents of the element&#xA;     * are defined by a starred expression &lt;code>a*&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="CHILD_POLICY_MAX">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * The largest valid &lt;code>CHILD_POLICY_*&lt;/code> constant,&#xA;     * to be used for range checks.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_NONE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getObjectValueType&lt;/code> to&#xA;     * indicate the absence of a user object.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_ARBITRARY">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set a single, arbitrary value.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_RANGE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set a range of values.  Both the minimum&#xA;     * and maximum values of the range are exclusive.  It is&#xA;     * recommended that ranges of integers be inclusive on both ends,&#xA;     * and that exclusive ranges be used only for floating-point data.&#xA;     *&#xA;     * @see #VALUE_RANGE_MIN_MAX_INCLUSIVE&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_RANGE_MIN_INCLUSIVE_MASK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A value that may be or'ed with &lt;code>VALUE_RANGE&lt;/code> to&#xA;     * obtain &lt;code>VALUE_RANGE_MIN_INCLUSIVE&lt;/code>, and with&#xA;     * &lt;code>VALUE_RANGE_MAX_INCLUSIVE&lt;/code> to obtain&#xA;     * &lt;code>VALUE_RANGE_MIN_MAX_INCLUSIVE&lt;/code>.&#xA;     *&#xA;     * &lt;p> Similarly, the value may be and'ed with the value of&#xA;     * &lt;code>getAttributeValueType&lt;/code>or&#xA;     * &lt;code>getObjectValueType&lt;/code> to determine if the minimum&#xA;     * value of the range is inclusive.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_RANGE_MAX_INCLUSIVE_MASK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A value that may be or'ed with &lt;code>VALUE_RANGE&lt;/code> to&#xA;     * obtain &lt;code>VALUE_RANGE_MAX_INCLUSIVE&lt;/code>, and with&#xA;     * &lt;code>VALUE_RANGE_MIN_INCLUSIVE&lt;/code> to obtain&#xA;     * &lt;code>VALUE_RANGE_MIN_MAX_INCLUSIVE&lt;/code>.&#xA;     *&#xA;     * &lt;p> Similarly, the value may be and'ed with the value of&#xA;     * &lt;code>getAttributeValueType&lt;/code>or&#xA;     * &lt;code>getObjectValueType&lt;/code> to determine if the maximum&#xA;     * value of the range is inclusive.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_RANGE_MIN_INCLUSIVE">
+      <initialValue xsi:type="expressions:InclusiveOrExpression">
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set to a range of values.  The minimum&#xA;     * (but not the maximum) value of the range is inclusive.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_RANGE_MAX_INCLUSIVE">
+      <initialValue xsi:type="expressions:InclusiveOrExpression">
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set to a range of values.  The maximum&#xA;     * (but not the minimum) value of the range is inclusive.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_RANGE_MIN_MAX_INCLUSIVE">
+      <initialValue xsi:type="expressions:InclusiveOrExpression">
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set a range of values.  Both the minimum&#xA;     * and maximum values of the range are inclusive.  It is&#xA;     * recommended that ranges of integers be inclusive on both ends,&#xA;     * and that exclusive ranges be used only for floating-point data.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_ENUMERATION">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="16"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set one of a number of enumerated values.&#xA;     * In the case of attributes, these values are&#xA;     * &lt;code>String&lt;/code>s; for objects, they are&#xA;     * &lt;code>Object&lt;/code>s implementing a given class or interface.&#xA;     *&#xA;     * &lt;p> Attribute values of type &lt;code>DATATYPE_BOOLEAN&lt;/code>&#xA;     * should be marked as enumerations.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="VALUE_LIST">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="32"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeValueType&lt;/code> and&#xA;     * &lt;code>getObjectValueType&lt;/code> to indicate that the attribute&#xA;     * or user object may be set to a list or array of values.  In the&#xA;     * case of attributes, the list will consist of&#xA;     * whitespace-separated values within a &lt;code>String&lt;/code>; for&#xA;     * objects, an array will be used.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="DATATYPE_STRING">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeDataType&lt;/code>&#xA;     * indicating that the value of an attribute is a general Unicode&#xA;     * string.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="DATATYPE_BOOLEAN">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeDataType&lt;/code>&#xA;     * indicating that the value of an attribute is one of 'true' or&#xA;     * 'false'.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="DATATYPE_INTEGER">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeDataType&lt;/code>&#xA;     * indicating that the value of an attribute is a string&#xA;     * representation of an integer.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="DATATYPE_FLOAT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeDataType&lt;/code>&#xA;     * indicating that the value of an attribute is a string&#xA;     * representation of a decimal floating-point number.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:Field" name="DATATYPE_DOUBLE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * A constant returned by &lt;code>getAttributeDataType&lt;/code>&#xA;     * indicating that the value of an attribute is a string&#xA;     * representation of a double-precision decimal floating-point&#xA;     * number.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getRootName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>// Root</comments>
+          <comments>/**&#xA;     * Returns the name of the root element of the format.&#xA;     *&#xA;     * @return a &lt;code>String&lt;/code>.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="canNodeAppear">
+      <typeReference xsi:type="types:Boolean">
+        <comments>// Multiplicity</comments>
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the element (and the subtree below&#xA;     * it) is allowed to appear in a metadata document for an image of&#xA;     * the given type, defined by an &lt;code>ImageTypeSpecifier&lt;/code>.&#xA;     * For example, a metadata document format might contain an&#xA;     * element that describes the primary colors of the image, which&#xA;     * would not be allowed when writing a grayscale image.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param imageType an &lt;code>ImageTypeSpecifier&lt;/code> indicating&#xA;     * the type of the image that will be associated with the&#xA;     * metadata.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the node is meaningful for images&#xA;     * of the given type.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="imageType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../ImageTypeSpecifier.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getElementMinChildren">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the minimum number of children of the named element&#xA;     * with child policy &lt;code>CHILD_POLICY_REPEAT&lt;/code>.  For&#xA;     * example, an element representing color primary information&#xA;     * might be required to have at least 3 children, one for each&#xA;     * primay.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return an &lt;code>int&lt;/code>.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element does&#xA;     * not have a child policy of &lt;code>CHILD_POLICY_REPEAT&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getElementMaxChildren">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the maximum number of children of the named element&#xA;     * with child policy &lt;code>CHILD_POLICY_REPEAT&lt;/code>.  For&#xA;     * example, an element representing an entry in an 8-bit color&#xA;     * palette might be allowed to repeat up to 256 times.  A value of&#xA;     * &lt;code>Integer.MAX_VALUE&lt;/code> may be used to specify that&#xA;     * there is no upper bound.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return an &lt;code>int&lt;/code>.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element does&#xA;     * not have a child policy of &lt;code>CHILD_POLICY_REPEAT&lt;/code>.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getElementDescription">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns a &lt;code>String&lt;/code> containing a description of the&#xA;     * named element, or &lt;code>null&lt;/code>.  The desciption will be&#xA;     * localized for the supplied &lt;code>Locale&lt;/code> if possible.&#xA;     *&#xA;     * &lt;p> If &lt;code>locale&lt;/code> is &lt;code>null&lt;/code>, the current&#xA;     * default &lt;code>Locale&lt;/code> returned by &lt;code>Locale.getLocale&lt;/code>&#xA;     * will be used.&#xA;     *&#xA;     * @param elementName the name of the element.&#xA;     * @param locale the &lt;code>Locale&lt;/code> for which localization&#xA;     * will be attempted.&#xA;     *&#xA;     * @return the element description.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code>, or is not a legal element name for this format.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locale">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/util/Locale.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getChildPolicy">
+      <typeReference xsi:type="types:Int">
+        <comments>// Children</comments>
+        <comments>/**&#xA;     * Returns one of the constants starting with&#xA;     * &lt;code>CHILD_POLICY_&lt;/code>, indicating the legal pattern of&#xA;     * children for the named element.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return one of the &lt;code>CHILD_POLICY_*&lt;/code> constants.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getChildNames">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns an array of &lt;code>String&lt;/code>s indicating the names&#xA;     * of the element which are allowed to be children of the named&#xA;     * element, in the order in which they should appear.  If the&#xA;     * element cannot have children, &lt;code>null&lt;/code> is returned.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return an array of &lt;code>String&lt;/code>s, or null.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeNames">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>// Attributes</comments>
+          <comments>/**&#xA;     * Returns an array of &lt;code>String&lt;/code>s listing the names of&#xA;     * the attributes that may be associated with the named element.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return an array of &lt;code>String&lt;/code>s.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeValueType">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns one of the constants starting with &lt;code>VALUE_&lt;/code>,&#xA;     * indicating whether the values of the given attribute within the&#xA;     * named element are arbitrary, constrained to lie within a&#xA;     * specified range, constrained to be one of a set of enumerated&#xA;     * values, or are a whitespace-separated list of arbitrary values.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return one of the &lt;code>VALUE_*&lt;/code> constants. &#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeDataType">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns one of the constants starting with&#xA;     * &lt;code>DATATYPE_&lt;/code>, indicating the format and&#xA;     * interpretation of the value of the given attribute within th&#xA;     * enamed element.  If &lt;code>getAttributeValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_LIST&lt;/code>, then the legal value is a&#xA;     * whitespace-spearated list of values of the returned datatype.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return one of the &lt;code>DATATYPE_*&lt;/code> constants.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isAttributeRequired">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the named attribute must be&#xA;     * present within the named element.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the attribut must be present.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeDefaultValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the default value of the named attribute, if it is not&#xA;     * explictly present within the named element, as a&#xA;     * &lt;code>String&lt;/code>, or &lt;code>null&lt;/code> if no default value&#xA;     * is available.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return a &lt;code>String&lt;/code> containing the default value, or&#xA;     * &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeEnumerations">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns an array of &lt;code>String&lt;/code>s containing the legal&#xA;     * enumerated values for the given attribute within the named&#xA;     * element.  This method should only be called if&#xA;     * &lt;code>getAttributeValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_ENUMERATION&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return an array of &lt;code>String&lt;/code>s.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     * @exception IllegalArgumentException if the given attribute is&#xA;     * not defined as an enumeration.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeMinValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the minimum legal value for the attribute.  Whether&#xA;     * this value is inclusive or exclusive may be determined by the&#xA;     * value of &lt;code>getAttributeValueType&lt;/code>.  The value is&#xA;     * returned as a &lt;code>String&lt;/code>; its interpretation is&#xA;     * dependent on the value of &lt;code>getAttributeDataType&lt;/code>.&#xA;     * This method should only be called if&#xA;     * &lt;code>getAttributeValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_RANGE_*&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return a &lt;code>String&lt;/code> containing the smallest legal&#xA;     * value for the attribute.&#xA;     * &#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     * @exception IllegalArgumentException if the given attribute is&#xA;     * not defined as a range.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeMaxValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the maximum legal value for the attribute.  Whether&#xA;     * this value is inclusive or exclusive may be determined by the&#xA;     * value of &lt;code>getAttributeValueType&lt;/code>.  The value is&#xA;     * returned as a &lt;code>String&lt;/code>; its interpretation is&#xA;     * dependent on the value of &lt;code>getAttributeDataType&lt;/code>.&#xA;     * This method should only be called if&#xA;     * &lt;code>getAttributeValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_RANGE_*&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried, as a&#xA;     * &lt;code>String&lt;/code>.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return a &lt;code>String&lt;/code> containing the largest legal&#xA;     * value for the attribute.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     * @exception IllegalArgumentException if the given attribute is&#xA;     * not defined as a range.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeListMinLength">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the minimum number of list items that may be used to&#xA;     * define this attribute.  The attribute itself is defined as a&#xA;     * &lt;code>String&lt;/code> containing multiple whitespace-separated&#xA;     * items.  This method should only be called if&#xA;     * &lt;code>getAttributeValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_LIST&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return the smallest legal number of list items for the&#xA;     * attribute.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     * @exception IllegalArgumentException if the given attribute is&#xA;     * not defined as a list.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeListMaxLength">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the maximum number of list items that may be used to&#xA;     * define this attribute.  A value of&#xA;     * &lt;code>Integer.MAX_VALUE&lt;/code> may be used to specify that&#xA;     * there is no upper bound.  The attribute itself is defined as a&#xA;     * &lt;code>String&lt;/code> containing multiple whitespace-separated&#xA;     * items.  This method should only be called if&#xA;     * &lt;code>getAttributeValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_LIST&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     * @param attrName the name of the attribute being queried.&#xA;     *&#xA;     * @return the largest legal number of list items for the&#xA;     * attribute.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     * @exception IllegalArgumentException if the given attribute is&#xA;     * not defined as a list.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributeDescription">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns a &lt;code>String&lt;/code> containing a description of the&#xA;     * named attribute, or &lt;code>null&lt;/code>.  The desciption will be&#xA;     * localized for the supplied &lt;code>Locale&lt;/code> if possible.&#xA;     *&#xA;     * &lt;p> If &lt;code>locale&lt;/code> is &lt;code>null&lt;/code>, the current&#xA;     * default &lt;code>Locale&lt;/code> returned by &lt;code>Locale.getLocale&lt;/code>&#xA;     * will be used.&#xA;     *&#xA;     * @param elementName the name of the element.&#xA;     * @param attrName the name of the attribute.&#xA;     * @param locale the &lt;code>Locale&lt;/code> for which localization&#xA;     * will be attempted.&#xA;     *&#xA;     * @return the attribute description.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code>, or is not a legal element name for this format.&#xA;     * @exception IllegalArgumentException if &lt;code>attrName&lt;/code> is&#xA;     * &lt;code>null&lt;/code> or is not a legal attribute name for this&#xA;     * element.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locale">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/util/Locale.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectValueType">
+      <typeReference xsi:type="types:Int">
+        <comments>// Object value</comments>
+        <comments>/**&#xA;     * Returns one of the enumerated values starting with&#xA;     * &lt;code>VALUE_&lt;/code>, indicating the type of values&#xA;     * (enumeration, range, or array) that are allowed for the&#xA;     * &lt;code>Object&lt;/code> reference.  If no object value can be&#xA;     * stored within the given element, the result of this method will&#xA;     * be &lt;code>VALUE_NONE&lt;/code>.&#xA;     *&#xA;     * &lt;p> &lt;code>Object&lt;/code> references whose legal values are&#xA;     * defined as a range must implement the &lt;code>Comparable&lt;/code>&#xA;     * interface.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return one of the &lt;code>VALUE_*&lt;/code> constants. &#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     *&#xA;     * @see Comparable&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectClass">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the &lt;code>Class&lt;/code> type of the &lt;code>Object&lt;/code>&#xA;     * reference stored within the element.  If this element may not&#xA;     * contain an &lt;code>Object&lt;/code> reference, an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> will be thrown.  If the&#xA;     * class type is an array, this field indicates the underlying&#xA;     * class type (&lt;i>e.g&lt;/i>, for an array of &lt;code>int&lt;/code>s, this&#xA;     * method would return &lt;code>int.class&lt;/code>).&#xA;     *&#xA;     * &lt;p> &lt;code>Object&lt;/code> references whose legal values are&#xA;     * defined as a range must implement the &lt;code>Comparable&lt;/code>&#xA;     * interface.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return a &lt;code>Class&lt;/code> object.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     */</comments>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Class.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectDefaultValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns an &lt;code>Object&lt;/code>s containing the default&#xA;     * value for the &lt;code>Object&lt;/code> reference within&#xA;     * the named element.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return an &lt;code>Object&lt;/code>.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectEnumerations">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns an array of &lt;code>Object&lt;/code>s containing the legal&#xA;     * enumerated values for the &lt;code>Object&lt;/code> reference within&#xA;     * the named element.  This method should only be called if&#xA;     * &lt;code>getObjectValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_ENUMERATION&lt;/code>.&#xA;     *&#xA;     * &lt;p> The &lt;code>Object&lt;/code> associated with a node that accepts&#xA;     * emuerated values must be equal to one of the values returned by&#xA;     * this method, as defined by the &lt;code>==&lt;/code> operator (as&#xA;     * opposed to the &lt;code>Object.equals&lt;/code> method).&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return an array of &lt;code>Object&lt;/code>s.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     * @exception IllegalArgumentException if the &lt;code>Object&lt;/code>&#xA;     * is not defined as an enumeration.&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectMinValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the minimum legal value for the &lt;code>Object&lt;/code>&#xA;     * reference within the named element.  Whether this value is&#xA;     * inclusive or exclusive may be determined by the value of&#xA;     * &lt;code>getObjectValueType&lt;/code>.  This method should only be&#xA;     * called if &lt;code>getObjectValueType&lt;/code> returns one of the&#xA;     * constants starting with &lt;code>VALUE_RANGE&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return the smallest legal value for the attribute.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     * @exception IllegalArgumentException if the &lt;code>Object&lt;/code>&#xA;     * is not defined as a range.&#xA;     */</comments>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Interface" href="../../../java/lang/Comparable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectMaxValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the maximum legal value for the &lt;code>Object&lt;/code>&#xA;     * reference within the named element.  Whether this value is&#xA;     * inclusive or exclusive may be determined by the value of&#xA;     * &lt;code>getObjectValueType&lt;/code>.  This method should only be&#xA;     * called if &lt;code>getObjectValueType&lt;/code> returns one of the&#xA;     * constants starting with &lt;code>VALUE_RANGE&lt;/code>.&#xA;     *&#xA;     * @return the smallest legal value for the attribute.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     * @exception IllegalArgumentException if the &lt;code>Object&lt;/code>&#xA;     * is not defined as a range.&#xA;     */</comments>
+          <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+          <target xsi:type="classifiers:Interface" href="../../../java/lang/Comparable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectArrayMinLength">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the minimum number of array elements that may be used&#xA;     * to define the &lt;code>Object&lt;/code> reference within the named&#xA;     * element.  This method should only be called if&#xA;     * &lt;code>getObjectValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_LIST&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return the smallest valid array length for the&#xA;     * &lt;code>Object&lt;/code> reference.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     * @exception IllegalArgumentException if the &lt;code>Object&lt;/code> is not&#xA;     * an array.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectArrayMaxLength">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;     * Returns the maximum number of array elements that may be used&#xA;     * to define the &lt;code>Object&lt;/code> reference within the named&#xA;     * element.  A value of &lt;code>Integer.MAX_VALUE&lt;/code> may be used&#xA;     * to specify that there is no upper bound.  This method should&#xA;     * only be called if &lt;code>getObjectValueType&lt;/code> returns&#xA;     * &lt;code>VALUE_LIST&lt;/code>.&#xA;     *&#xA;     * @param elementName the name of the element being queried.&#xA;     *&#xA;     * @return the largest valid array length for the&#xA;     * &lt;code>Object&lt;/code> reference.&#xA;     *&#xA;     * @exception IllegalArgumentException if &lt;code>elementName&lt;/code>&#xA;     * is &lt;code>null&lt;/code> or is not a legal element name for this&#xA;     * format.&#xA;     * @exception IllegalArgumentException if the named element cannot&#xA;     * contain an object value (&lt;i>i.e.&lt;/i>, if&#xA;     * &lt;code>getObjectValueType(elementName) == VALUE_NONE&lt;/code>).&#xA;     * @exception IllegalArgumentException if the &lt;code>Object&lt;/code> is not&#xA;     * an array.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="elementName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An object describing the structure of metadata documents returned&#xA; * from &lt;code>IIOMetadata.getAsTree&lt;/code> and passed to&#xA; * &lt;code>IIOMetadata.setFromTree&lt;/code> and &lt;code>mergeTree&lt;/code>.&#xA; * Document structures are described by a set of constraints on the&#xA; * type and number of child elements that may belong to a given parent&#xA; * element type, the names, types, and values of attributes that may&#xA; * belong to an element, and the type and values of&#xA; * &lt;code>Object&lt;/code> reference that may be stored at a node.&#xA; *&#xA; * &lt;p> N.B: classes that implement this interface should contain a&#xA; * method declared as &lt;code>public static getInstance()&lt;/code> which&#xA; * returns an instance of the class.  Commonly, an implentation will&#xA; * construct only a single instance and cache it for future&#xA; * invocations of &lt;code>getInstance&lt;/code>.&#xA; *&#xA; * &lt;p> The structures that may be described by this class are a subset&#xA; * of those expressible using XML document type definitions (DTDs),&#xA; * with the addition of some basic information on the datatypes of&#xA; * attributes and the ability to store an &lt;code>Object&lt;/code>&#xA; * reference within a node.  In the future, XML Schemas could be used&#xA; * to represent these structures, and many others.&#xA; *&#xA; * &lt;p> The differences between&#xA; * &lt;code>IIOMetadataFormat&lt;/code>-described structures and DTDs are as&#xA; * follows:&#xA; *&#xA; * &lt;ul>&#xA; * &lt;li> Elements may not contain text or mix text with embedded&#xA; * tags.&#xA; *&#xA; * &lt;li> The children of an element must conform to one of a few simple&#xA; * patterns, described in the documentation for the&#xA; * &lt;code>CHILD_*&lt;/code> constants;&#xA; *&#xA; * &lt;li> The in-memory representation of an elements may contain a&#xA; * reference to an &lt;code>Object&lt;/code>.  There is no provision for&#xA; * representing such objects textually.&#xA; * &lt;/ul>&#xA; *&#xA; * @version 0.5&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

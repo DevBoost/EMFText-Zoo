@@ -1,0 +1,1749 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="DynAnyUtil.java">
+  <comments>/*&#xA; * @(#)DynAnyUtil.java&#x9;1.12 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>com</namespaces>
+  <namespaces>sun</namespaces>
+  <namespaces>corba</namespaces>
+  <namespaces>se</namespaces>
+  <namespaces>impl</namespaces>
+  <namespaces>dynamicany</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <namespaces>portable</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/portable/OutputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>//import org.omg.CORBA.ORBPackage.*;</comments>
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <namespaces>TypeCodePackage</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCodePackage/BadKind.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <namespaces>TypeCodePackage</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCodePackage/Bounds.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>CORBA</namespaces>
+    <namespaces>portable</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/portable/InputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>DynamicAny</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>DynamicAny</namespaces>
+    <namespaces>DynAnyPackage</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>omg</namespaces>
+    <namespaces>DynamicAny</namespaces>
+    <namespaces>DynAnyFactoryPackage</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyFactoryPackage/InconsistentTypeCode.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>math</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>corba</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../corba/AnyImpl.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>orb</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>spi</namespaces>
+    <namespaces>logging</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../spi/logging/CORBALogDomains.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>com</namespaces>
+    <namespaces>sun</namespaces>
+    <namespaces>corba</namespaces>
+    <namespaces>se</namespaces>
+    <namespaces>impl</namespaces>
+    <namespaces>logging</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="DynAnyUtil">
+    <members xsi:type="members:ClassMethod" name="isConsistentType">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="typeCode">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="kind">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.67"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="expressions:ConditionalAndExpression">
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.13"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.31"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.32"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isConstructedDynAny">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dynAny">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="kind">
+          <typeReference xsi:type="types:Int">
+            <comments>// DynFixed is constructed but not a subclass of DynAnyConstructedImpl</comments>
+            <comments>//return (dynAny instanceof DynAnyConstructedImpl);</comments>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.67"/>
+                </next>
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0/@members.4"/>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/omg/DynamicAny/DynAnyOperations.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="expressions:ConditionalOrExpression">
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.19"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.15"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.20"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.16"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.17"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.28"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.29"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+            <children xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.30"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+              </children>
+            </children>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createMostDerivedDynAny">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="any">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orb">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="copyValue">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyFactoryPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyFactoryPackage/InconsistentTypeCode.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>org</namespaces>
+              <namespaces>omg</namespaces>
+              <namespaces>DynamicAny</namespaces>
+              <namespaces>DynAnyFactoryPackage</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyFactoryPackage/InconsistentTypeCode.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.0">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                </arguments>
+              </next>
+            </child>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynSequenceImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.19"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynStructImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.15"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynArrayImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.20"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynUnionImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynEnumImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynFixedImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.28"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynValueImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.29"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynValueBoxImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.30"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:DefaultSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynAnyBasicImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.2"/>
+            </returnValue>
+          </statements>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.67"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.2"/>
+          </next>
+        </variable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createMostDerivedDynAny">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="typeCode">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orb">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <namespaces>org</namespaces>
+        <namespaces>omg</namespaces>
+        <namespaces>DynamicAny</namespaces>
+        <namespaces>DynAnyFactoryPackage</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyFactoryPackage/InconsistentTypeCode.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>org</namespaces>
+              <namespaces>omg</namespaces>
+              <namespaces>DynamicAny</namespaces>
+              <namespaces>DynAnyFactoryPackage</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyFactoryPackage/InconsistentTypeCode.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.0">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+              </next>
+            </child>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynSequenceImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.19"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynStructImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.15"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynArrayImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.20"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynUnionImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynEnumImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynFixedImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.28"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynValueImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.29"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynValueBoxImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.30"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:DefaultSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="DynAnyBasicImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+            </returnValue>
+          </statements>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.67"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </variable>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="extractAnyFromStream">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="memberType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="input">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/portable/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orb">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>// Extracts a member value according to the given TypeCode from the given complex Any</comments>
+        <comments>// (at the Anys current internal stream position, consuming the anys stream on the way)</comments>
+        <comments>// and returns it wrapped into a new Any</comments>
+        <comments>/*&#xA;    static Any extractAnyFromAny(TypeCode memberType, Any any, ORB orb) {&#xA;        // Moved this functionality into AnyImpl because it is needed for Any.equal()&#xA;        return ((AnyImpl)any).extractAny(memberType, orb);&#xA;    }&#xA;*/</comments>
+        <comments>// Extracts a member value according to the given TypeCode from the given complex Any</comments>
+        <comments>// (at the Anys current internal stream position, consuming the anys stream on the way)</comments>
+        <comments>// and returns it wrapped into a new Any</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../corba/AnyImpl.class.xmi#//@classifiers.0/@members.73"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.2"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../corba/AnyImpl.class.xmi#//@classifiers.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createDefaultAnyOfType">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="typeCode">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orb">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>// Creates a default Any of the given type.</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="wrapper">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0/@members.299"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../spi/logging/CORBALogDomains.class.xmi#//@classifiers.0/@members.2"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../spi/logging/CORBALogDomains.class.xmi#//@classifiers.0"/>
+              </arguments>
+            </next>
+            <target xsi:type="classifiers:Class" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="returnValue">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/ORB.class.xmi#//@classifiers.0/@members.51"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Switch">
+        <comments>// The spec for DynAny differs from Any on initialization via type code:</comments>
+        <comments>// - false for boolean</comments>
+        <comments>// - zero for numeric types</comments>
+        <comments>// - zero for types octet, char, and wchar</comments>
+        <comments>// - the empty string for string and wstring</comments>
+        <comments>// - nil for object references</comments>
+        <comments>// - a type code with a TCKind value of tk_null for type codes</comments>
+        <comments>// - for Any values, an Any containing a type code with a TCKind value of tk_null</comments>
+        <comments>//   type and no value</comments>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// false for boolean</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.25"/>
+                <arguments xsi:type="literals:BooleanLiteral"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.9"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Short"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.2"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Short"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.11"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.3"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.17"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.13"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Long"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.23"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Long"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.24"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.21"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Float"/>
+                  <child xsi:type="literals:DecimalDoubleLiteral"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for numeric types</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.23"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Double"/>
+                  <child xsi:type="literals:DecimalDoubleLiteral"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for types octet, char, and wchar</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.31"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Byte"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.10"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for types octet, char, and wchar</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.27"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Char"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// zero for types octet, char, and wchar</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.29"/>
+                <arguments xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:Char"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.26"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// the empty string for string and wstring</comments>
+              <comments>// Make sure that type code for bounded strings gets respected</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// Doesn't erase the type of bounded string</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.41"/>
+                <arguments xsi:type="references:StringReference" value=""/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.18"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// the empty string for string and wstring</comments>
+              <comments>// Make sure that type code for bounded strings gets respected</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// Doesn't erase the type of bounded string</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.43"/>
+                <arguments xsi:type="references:StringReference" value=""/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.27"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// nil for object references</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.35"/>
+                <arguments xsi:type="literals:NullLiteral"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.14"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// a type code with a TCKind value of tk_null for type codes</comments>
+              <comments>// We can reuse the type code that's already in the any.</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.45"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.2"/>
+                  </next>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.12"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// for Any values, an Any containing a type code with a TCKind value</comments>
+              <comments>// of tk_null type and no value.</comments>
+              <comments>// This is exactly what the default AnyImpl constructor provides.</comments>
+              <comments>// _REVISIT_ Note that this inner Any is considered uninitialized.</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.1">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/ORB.class.xmi#//@classifiers.0/@members.51"/>
+                  </next>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.11"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.15"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.19"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.20"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.29"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <comments>// There are no default value for complex types since there is no</comments>
+              <comments>// concept of a hierarchy of Anys. Only DynAnys can be arrange in</comments>
+              <comments>// a hierarchy to mirror the TypeCode hierarchy.</comments>
+              <comments>// See DynAnyConstructedImpl.initializeComponentsFromTypeCode()</comments>
+              <comments>// on how this DynAny hierarchy is created from TypeCodes.</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.30"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.52"/>
+                <arguments xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="0.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.28"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.31"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.21"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.13"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Break"/>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.32"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Break">
+            <comments>// Any is already initialized to null</comments>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Throw">
+            <comments>// Unspecified for Java</comments>
+            <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0/@members.1008"/>
+              </next>
+            </throwable>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.25"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:DefaultSwitchCase">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../logging/ORBUtilSystemException.class.xmi#//@classifiers.0/@members.1012"/>
+              </next>
+            </throwable>
+          </statements>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.67"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="copy">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="inAny">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orb">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/*&#xA;    static Any setTypeOfAny(TypeCode typeCode, Any value) {&#xA;        if (value != null) {&#xA;            value.read_value(value.create_input_stream(), typeCode);&#xA;        }&#xA;        return value;&#xA;    }&#xA;*/</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../corba/AnyImpl.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="convertToNative">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dynAny">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="orb">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../spi/orb/ORB.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>/*&#xA;    static Any copy(Any inAny, ORB orb) {&#xA;        Any outAny = null;&#xA;        if (inAny != null &amp;&amp; orb != null) {&#xA;            outAny = orb.create_any();&#xA;            outAny.read_value(inAny.create_input_stream(), inAny.type());&#xA;            // isInitialized is set to true&#xA;        }&#xA;        return outAny;&#xA;    }&#xA;*/</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="DynAnyImpl.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:TryBlock">
+            <comments>// if copy flag wasn't true we would be using our DynAny with</comments>
+            <comments>// a foreign Any in it.</comments>
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.2">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/omg/DynamicAny/DynAnyOperations.class.xmi#//@classifiers.0/@members.3"/>
+                  </next>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+                <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+              </returnValue>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="literals:NullLiteral"/>
+              </statements>
+              <parameter name="ictc">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyFactoryPackage/InconsistentTypeCode.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isInitialized">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="any">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="isInitialized">
+          <typeReference xsi:type="types:Boolean">
+            <comments>// Returning simply the value of Any.isInitialized() is not enough.</comments>
+            <comments>// The DynAny spec says that Anys containing null strings do not contain</comments>
+            <comments>// a &quot;legal value&quot; (see ptc 99-10-07, 9.2.3.3)</comments>
+          </typeReference>
+          <initialValue xsi:type="expressions:NestedExpression">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../corba/AnyImpl.class.xmi#//@classifiers.0/@members.74"/>
+            </next>
+            <expression xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../corba/AnyImpl.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+            </expression>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable"/>
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.40"/>
+                      </next>
+                    </children>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </children>
+              </expression>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.18"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable"/>
+                <children xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.42"/>
+                      </next>
+                    </children>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </expression>
+                </children>
+              </expression>
+            </returnValue>
+          </statements>
+          <condition xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.27"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0"/>
+          </condition>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TCKind.class.xmi#//@classifiers.0/@members.67"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/TypeCode.class.xmi#//@classifiers.0/@members.4"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/omg/CORBA/Any.class.xmi#//@classifiers.0/@members.2"/>
+          </next>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="set_current_component">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dynAny">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="currentComponent">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/omg/DynamicAny/DynAny.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static">
+        <comments>// This is a convenient method to reset the current component to where it was</comments>
+        <comments>// before we changed it. See DynAnyConstructedImpl.equal for use.</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/omg/DynamicAny/DynAnyOperations.class.xmi#//@classifiers.0/@members.46"/>
+                </next>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:DoWhileLoop">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Return">
+                    <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/omg/DynamicAny/DynAnyOperations.class.xmi#//@classifiers.0/@members.49"/>
+                      </next>
+                    </children>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                  </condition>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/omg/DynamicAny/DynAnyOperations.class.xmi#//@classifiers.0/@members.47"/>
+                </next>
+              </condition>
+            </statements>
+            <catcheBlocks>
+              <comments>/* impossible */</comments>
+              <parameter name="tm">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../../org/omg/DynamicAny/DynAnyPackage/TypeMismatch.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+  </classifiers>
+</containers:CompilationUnit>

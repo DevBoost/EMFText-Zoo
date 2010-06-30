@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Paper.java">
+  <comments>/*&#xA; * @(#)Paper.java&#x9;1.17 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>print</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>geom</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Paper">
+    <members xsi:type="members:Field" name="INCH">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="72"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Private Class Variables */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="LETTER_WIDTH">
+      <initialValue xsi:type="expressions:MultiplicativeExpression">
+        <children xsi:type="literals:DecimalDoubleLiteral" decimalValue="8.5"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        <multiplicativeOperators xsi:type="operators:Multiplication"/>
+      </initialValue>
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="LETTER_HEIGHT">
+      <initialValue xsi:type="expressions:MultiplicativeExpression">
+        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="11"/>
+        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        <multiplicativeOperators xsi:type="operators:Multiplication"/>
+      </initialValue>
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="mHeight">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/* Instance Variables */</comments>
+        <comments>/**&#xA;     * The height of the physical page in 1/72nds&#xA;     * of an inch. The number is stored as a floating&#xA;     * point value rather than as an integer&#xA;     * to facilitate the conversion from metric&#xA;     * units to 1/72nds of an inch and then back.&#xA;     * (This may or may not be a good enough reason&#xA;     * for a float).&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="mWidth">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The width of the physical page in 1/72nds&#xA;     * of an inch.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="mImageableArea">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../geom/Rectangle2D.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The area of the page on which drawing will&#xA;     * be visable. The area outside of this&#xA;     * rectangle but on the Page generally&#xA;     * reflects the printer's hardware margins.&#xA;     * The origin of the physical page is&#xA;     * at (0, 0) with this rectangle provided&#xA;     * in that coordinate system.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="Paper">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>Rectangle2D</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../geom/Rectangle2D$Double.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <children xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                <multiplicativeOperators xsi:type="operators:Multiplication"/>
+              </children>
+              <additiveOperators xsi:type="operators:Subtraction"/>
+            </arguments>
+            <arguments xsi:type="expressions:AdditiveExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+              <children xsi:type="expressions:MultiplicativeExpression">
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                <multiplicativeOperators xsi:type="operators:Multiplication"/>
+              </children>
+              <additiveOperators xsi:type="operators:Subtraction"/>
+            </arguments>
+          </value>
+        </expression>
+      </statements>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/* Constructors */</comments>
+        <comments>/**&#xA;     * Creates a letter sized piece of paper&#xA;     * with one inch margins.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="clone">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/* Instance Methods */</comments>
+        <comments>/**&#xA;     * Creates a copy of this &lt;code>Paper&lt;/code> with the same contents&#xA;     * as this &lt;code>Paper&lt;/code>.&#xA;     * @return a copy of this &lt;code>Paper&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="newPaper">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable">
+              <comments>/* It's okay to copy the reference to the imageable&#xA;&#x9;     * area into the clone since we always return a copy&#xA;&#x9;     * of the imageable area when asked for it.&#xA;&#x9;     */</comments>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0"/>
+              </typeReference>
+              <child xsi:type="references:SelfReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../lang/Object.class.xmi#//@classifiers.0/@members.5"/>
+                </next>
+                <self xsi:type="literals:Super"/>
+              </child>
+            </value>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <comments>// should never happen.</comments>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.1/@catcheBlocks.0/@parameter">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Throwable.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:NullLiteral"/>
+            </expression>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/CloneNotSupportedException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getHeight">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the height of the page in 1/72nds of an inch.&#xA;     * @return the height of the page described by this&#xA;     *&#x9;&#x9;&lt;code>Paper&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSize">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="width">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="height">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the width and height of this &lt;code>Paper&lt;/code>&#xA;     * object, which represents the properties of the page onto&#xA;     * which printing occurs.&#xA;     * The dimensions are supplied in 1/72nds of&#xA;     * an inch.&#xA;     * @param width the value to which to set this &lt;code>Paper&lt;/code>&#xA;     * object's width&#xA;     * @param height the value to which to set this &lt;code>Paper&lt;/code>&#xA;     * object's height&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getWidth">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the width of the page in 1/72nds&#xA;     * of an inch.&#xA;     * @return the width of the page described by this&#xA;     * &lt;code>Paper&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setImageableArea">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="y">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="width">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="height">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the imageable area of this &lt;code>Paper&lt;/code>.  The &#xA;     * imageable area is the area on the page in which printing&#xA;     * occurs. &#xA;     * @param x,&amp;nbsp;y the coordinates to which to set the&#xA;     * upper-left corner of the imageable area of this &lt;code>Paper&lt;/code>&#xA;     * @param width the value to which to set the width of the &#xA;     * imageable area of this &lt;code>Paper&lt;/code>&#xA;     * @param height the value to which to set the height of the&#xA;     * imageable area of this &lt;code>Paper&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <namespaces>Rectangle2D</namespaces>
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../geom/Rectangle2D$Double.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.3"/>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getImageableX">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the x coordinate of the upper-left corner of this&#xA;     * &lt;code>Paper&lt;/code> object's imageable area.&#xA;     * @return the x coordinate of the imageable area.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.1"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getImageableY">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the y coordinate of the upper-left corner of this&#xA;     * &lt;code>Paper&lt;/code> object's imageable area.&#xA;     * @return the y coordinate of the imageable area.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.2"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getImageableWidth">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the width of this &lt;code>Paper&lt;/code> object's imageable&#xA;     * area.&#xA;     * @return the width of the imageable area.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.3"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getImageableHeight">
+      <typeReference xsi:type="types:Double"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the height of this &lt;code>Paper&lt;/code> object's imageable&#xA;     * area.&#xA;     * @return the height of the imageable area.   &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../geom/RectangularShape.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Paper&lt;/code> class describes the physical characteristics of&#xA; * a piece of paper.&#xA; * &lt;p>&#xA; * When creating a &lt;code>Paper&lt;/code> object, it is the application's &#xA; * responsibility to ensure that the paper size and the imageable area&#xA; * are compatible.  For example, if the paper size is changed from &#xA; * 11 x 17 to 8.5 x 11, the application might need to reduce the &#xA; * imageable area so that whatever is printed fits on the page.&#xA; * &lt;p>&#xA; * @see #setSize(double, double)&#xA; * @see #setImageableArea(double, double, double, double)&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../lang/Cloneable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

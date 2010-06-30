@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="PathIterator.java">
+  <comments>/*&#xA; * @(#)PathIterator.java&#x9;1.16 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>geom</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="PathIterator">
+    <members xsi:type="members:Field" name="WIND_EVEN_ODD">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The winding rule constant for specifying an even-odd rule&#xA;     * for determining the interior of a path.&#xA;     * The even-odd rule specifies that a point lies inside the&#xA;     * path if a ray drawn in any direction from that point to&#xA;     * infinity is crossed by path segments an odd number of times.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="WIND_NON_ZERO">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The winding rule constant for specifying a non-zero rule&#xA;     * for determining the interior of a path.&#xA;     * The non-zero rule specifies that a point lies inside the&#xA;     * path if a ray drawn in any direction from that point to&#xA;     * infinity is crossed by path segments a different number&#xA;     * of times in the counter-clockwise direction than the&#xA;     * clockwise direction.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEG_MOVETO">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The segment type constant for a point that specifies the&#xA;     * starting location for a new subpath.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEG_LINETO">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The segment type constant for a point that specifies the&#xA;     * end point of a line to be drawn from the most recently&#xA;     * specified point.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEG_QUADTO">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The segment type constant for the pair of points that specify&#xA;     * a quadratic parametric curve to be drawn from the most recently&#xA;     * specified point.&#xA;     * The curve is interpolated by solving the parametric control&#xA;     * equation in the range &lt;code>(t=[0..1])&lt;/code> using&#xA;     * the most recently specified (current) point (CP),&#xA;     * the first control point (P1),&#xA;     * and the final interpolated control point (P2).&#xA;     * The parametric control equation for this curve is:&#xA;     * &lt;pre>&#xA;     *          P(t) = B(2,0)*CP + B(2,1)*P1 + B(2,2)*P2&#xA;     *          0 &amp;lt;= t &amp;lt;= 1&#xA;     *&#xA;     *        B(n,m) = mth coefficient of nth degree Bernstein polynomial&#xA;     *               = C(n,m) * t^(m) * (1 - t)^(n-m)&#xA;     *        C(n,m) = Combinations of n things, taken m at a time&#xA;     *               = n! / (m! * (n-m)!)&#xA;     * &lt;/pre>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEG_CUBICTO">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The segment type constant for the set of 3 points that specify&#xA;     * a cubic parametric curve to be drawn from the most recently&#xA;     * specified point.&#xA;     * The curve is interpolated by solving the parametric control&#xA;     * equation in the range &lt;code>(t=[0..1])&lt;/code> using&#xA;     * the most recently specified (current) point (CP),&#xA;     * the first control point (P1),&#xA;     * the second control point (P2),&#xA;     * and the final interpolated control point (P3).&#xA;     * The parametric control equation for this curve is:&#xA;     * &lt;pre>&#xA;     *          P(t) = B(3,0)*CP + B(3,1)*P1 + B(3,2)*P2 + B(3,3)*P3&#xA;     *          0 &amp;lt;= t &amp;lt;= 1&#xA;     *&#xA;     *        B(n,m) = mth coefficient of nth degree Bernstein polynomial&#xA;     *               = C(n,m) * t^(m) * (1 - t)^(n-m)&#xA;     *        C(n,m) = Combinations of n things, taken m at a time&#xA;     *               = n! / (m! * (n-m)!)&#xA;     * &lt;/pre>&#xA;     * This form of curve is commonly known as a B&amp;eacute;zier curve.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEG_CLOSE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The segment type constant that specifies that&#xA;     * the preceding subpath should be closed by appending a line segment&#xA;     * back to the point corresponding to the most recent SEG_MOVETO.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getWindingRule">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the winding rule for determining the interior of the&#xA;     * path.&#xA;     * @return the winding rule.&#xA;     * @see #WIND_EVEN_ODD&#xA;     * @see #WIND_NON_ZERO&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isDone">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Tests if the iteration is complete.&#xA;     * @return &lt;code>true&lt;/code> if all the segments have &#xA;     * been read; &lt;code>false&lt;/code> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="next">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Moves the iterator to the next segment of the path forwards&#xA;     * along the primary direction of traversal as long as there are&#xA;     * more points in that direction.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="currentSegment">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="coords">
+        <typeReference xsi:type="types:Float"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the coordinates and type of the current path segment in&#xA;     * the iteration.&#xA;     * The return value is the path-segment type:&#xA;     * SEG_MOVETO, SEG_LINETO, SEG_QUADTO, SEG_CUBICTO, or SEG_CLOSE.&#xA;     * A float array of length 6 must be passed in and can be used to&#xA;     * store the coordinates of the point(s).&#xA;     * Each point is stored as a pair of float x,y coordinates.&#xA;     * SEG_MOVETO and SEG_LINETO types returns one point,&#xA;     * SEG_QUADTO returns two points,&#xA;     * SEG_CUBICTO returns 3 points&#xA;     * and SEG_CLOSE does not return any points.&#xA;     * @param coords an array that holds the data returned from&#xA;     * this method&#xA;     * @return the path-segment type of the current path segment.&#xA;     * @see #SEG_MOVETO&#xA;     * @see #SEG_LINETO&#xA;     * @see #SEG_QUADTO&#xA;     * @see #SEG_CUBICTO&#xA;     * @see #SEG_CLOSE&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="currentSegment">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="coords">
+        <typeReference xsi:type="types:Double"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the coordinates and type of the current path segment in&#xA;     * the iteration.&#xA;     * The return value is the path-segment type:&#xA;     * SEG_MOVETO, SEG_LINETO, SEG_QUADTO, SEG_CUBICTO, or SEG_CLOSE.&#xA;     * A double array of length 6 must be passed in and can be used to&#xA;     * store the coordinates of the point(s).&#xA;     * Each point is stored as a pair of double x,y coordinates.&#xA;     * SEG_MOVETO and SEG_LINETO types returns one point,&#xA;     * SEG_QUADTO returns two points,&#xA;     * SEG_CUBICTO returns 3 points&#xA;     * and SEG_CLOSE does not return any points.&#xA;     * @param coords an array that holds the data returned from&#xA;     * this method&#xA;     * @return the path-segment type of the current path segment.&#xA;     * @see #SEG_MOVETO&#xA;     * @see #SEG_LINETO&#xA;     * @see #SEG_QUADTO&#xA;     * @see #SEG_CUBICTO&#xA;     * @see #SEG_CLOSE&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>PathIterator&lt;/code> interface provides the mechanism &#xA; * for objects that implement the {@link java.awt.Shape Shape}&#xA; * interface to return the geometry of their boundary by allowing&#xA; * a caller to retrieve the path of that boundary a segment at a&#xA; * time.  This interface allows these objects to retrieve the path of&#xA; * their boundary a segment at a time by using 1st through 3rd order&#xA; * B&amp;eacute;zier curves, which are lines and quadratic or cubic&#xA; * B&amp;eacute;zier splines.&#xA; * &lt;p>&#xA; * Multiple subpaths can be expressed by using a &quot;MOVETO&quot; segment to&#xA; * create a discontinuity in the geometry to move from the end of&#xA; * one subpath to the beginning of the next.&#xA; * &lt;p>&#xA; * Each subpath can be closed manually by ending the last segment in&#xA; * the subpath on the same coordinate as the beginning &quot;MOVETO&quot; segment&#xA; * for that subpath or by using a &quot;CLOSE&quot; segment to append a line&#xA; * segment from the last point back to the first.&#xA; * Be aware that manually closing an outline as opposed to using a&#xA; * &quot;CLOSE&quot; segment to close the path might result in different line&#xA; * style decorations being used at the end points of the subpath.&#xA; * For example, the {@link java.awt.BasicStroke BasicStroke} object &#xA; * uses a line &quot;JOIN&quot; decoration to connect the first and last points &#xA; * if a &quot;CLOSE&quot; segment is encountered, whereas simply ending the path &#xA; * on the same coordinate as the beginning coordinate results in line&#xA; * &quot;CAP&quot; decorations being used at the ends.&#xA; *&#xA; * @see java.awt.Shape&#xA; * @see java.awt.BasicStroke&#xA; *&#xA; * @version 1.16, 12/19/03&#xA; * @author Jim Graham&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

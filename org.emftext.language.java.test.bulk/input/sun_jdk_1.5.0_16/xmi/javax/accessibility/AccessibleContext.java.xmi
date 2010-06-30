@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16" name="AccessibleContext.java">
+  <comments>/*&#xA; * @(#)AccessibleContext.java&#x9;1.43 04/04/02&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>accessibility</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/util/Locale.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../java/beans/PropertyChangeListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeEvent.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/awt/IllegalComponentStateException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="AccessibleContext">
+    <members xsi:type="members:Field" name="ACCESSIBLE_NAME_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleName"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the accessibleName property has&#xA;    * changed.  The old value in the PropertyChangeEvent will be the old &#xA;    * accessibleName and the new value will be the new accessibleName.&#xA;    *&#xA;    * @see #getAccessibleName&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_DESCRIPTION_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleDescription"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the accessibleDescription property has&#xA;    * changed.  The old value in the PropertyChangeEvent will be the&#xA;    * old accessibleDescription and the new value will be the new&#xA;    * accessibleDescription.&#xA;    *&#xA;    * @see #getAccessibleDescription&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_STATE_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleState"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the accessibleStateSet property has &#xA;    * changed.  The old value will be the old AccessibleState and the new&#xA;    * value will be the new AccessibleState in the accessibleStateSet.  &#xA;    * For example, if a component that supports the vertical and horizontal&#xA;    * states changes its orientation from vertical to horizontal, the old&#xA;    * value will be AccessibleState.VERTICAL and the new value will be&#xA;    * AccessibleState.HORIZONTAL.  Please note that either value can also &#xA;    * be null.  For example, when a component changes from being enabled &#xA;    * to disabled, the old value will be AccessibleState.ENABLED&#xA;    * and the new value will be null.&#xA;    *&#xA;    * @see #getAccessibleStateSet&#xA;    * @see AccessibleState&#xA;    * @see AccessibleStateSet&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_VALUE_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleValue"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the accessibleValue property has&#xA;    * changed.  The old value in the PropertyChangeEvent will be a Number &#xA;    * representing the old value and the new value will be a Number &#xA;    * representing the new value&#xA;    *&#xA;    * @see #getAccessibleValue&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_SELECTION_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleSelection"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the accessibleSelection has changed.&#xA;    * The old and new values in the PropertyChangeEvent are currently &#xA;    * reserved for future use.&#xA;    *&#xA;    * @see #getAccessibleSelection&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_CARET_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleCaret"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the accessibleText caret has changed.&#xA;    * The old value in the PropertyChangeEvent will be an&#xA;    * integer representing the old caret position, and the new value will &#xA;    * be an integer representing the new/current caret position.&#xA;    *&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_VISIBLE_DATA_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleVisibleData"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the visual appearance of the object&#xA;    * has changed.  The old and new values in the PropertyChangeEvent are &#xA;    * currently reserved for future use.&#xA;    *&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_CHILD_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleChild"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when Accessible children are added/removed&#xA;    * from the object.  If an Accessible child is being added, the old&#xA;    * value will be null and the new value will be the Accessible child.  If an&#xA;    * Accessible child is being removed, the old value will be the Accessible&#xA;    * child, and the new value will be null.&#xA;    *&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_ACTIVE_DESCENDANT_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleActiveDescendant"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;    * Constant used to determine when the active descendant of a component&#xA;    * has changed.  The active descendant is used for objects such as &#xA;    * list, tree, and table, which may have transient children.  When the&#xA;    * active descendant has changed, the old value of the property change&#xA;    * event will be the Accessible representing the previous active child, and &#xA;    * the new value will be the Accessible representing the current active&#xA;    * child.&#xA;    *&#xA;    * @see #addPropertyChangeListener&#xA;    */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_CAPTION_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableCaptionChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that the table caption has changed&#xA;     * The old value in the PropertyChangeEvent will be an Accessible&#xA;     * representing the previous table caption and the new value will&#xA;     * be an Accessible representing the new table caption.&#xA;     * @see Accessible&#xA;     * @see AccessibleTable&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_SUMMARY_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableSummaryChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that the table summary has changed&#xA;     * The old value in the PropertyChangeEvent will be an Accessible&#xA;     * representing the previous table summary and the new value will&#xA;     * be an Accessible representing the new table summary.&#xA;     * @see Accessible&#xA;     * @see AccessibleTable&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_MODEL_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableModelChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that table data has changed.&#xA;     * The old value in the PropertyChangeEvent will be null and the &#xA;     * new value will be an AccessibleTableModelChange representing&#xA;     * the table change.&#xA;     * @see AccessibleTable&#xA;     * @see AccessibleTableModelChange&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_ROW_HEADER_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableRowHeaderChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that the row header has changed&#xA;     * The old value in the PropertyChangeEvent will be null and the &#xA;     * new value will be an AccessibleTableModelChange representing&#xA;     * the header change.&#xA;     * @see AccessibleTable&#xA;     * @see AccessibleTableModelChange&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_ROW_DESCRIPTION_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableRowDescriptionChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that the row description has changed&#xA;     * The old value in the PropertyChangeEvent will be null and the &#xA;     * new value will be an Integer representing the row index.&#xA;     * @see AccessibleTable&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_COLUMN_HEADER_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableColumnHeaderChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that the column header has changed&#xA;     * The old value in the PropertyChangeEvent will be null and the &#xA;     * new value will be an AccessibleTableModelChange representing&#xA;     * the header change.&#xA;     * @see AccessibleTable&#xA;     * @see AccessibleTableModelChange&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TABLE_COLUMN_DESCRIPTION_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTableColumnDescriptionChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Constant used to indicate that the column description has changed&#xA;     * The old value in the PropertyChangeEvent will be null and the &#xA;     * new value will be an Integer representing the column index.&#xA;     * @see AccessibleTable&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_ACTION_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="accessibleActionProperty"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constant used to indicate that the supported set of actions&#xA;     * has changed.  The old value in the PropertyChangeEvent will&#xA;     * be an Integer representing the old number of actions supported&#xA;     * and the new value will be an Integer representing the new &#xA;     * number of actions supported.&#xA;     * @see AccessibleAction&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_HYPERTEXT_OFFSET">
+      <initialValue xsi:type="references:StringReference" value="AccessibleHypertextOffset"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constant used to indicate that a hypertext element has received focus.&#xA;     * The old value in the PropertyChangeEvent will be an Integer&#xA;     * representing the start index in the document of the previous element&#xA;     * that had focus and the new value will be an Integer representing&#xA;     * the start index in the document of the current element that has&#xA;     * focus.  A value of -1 indicates that an element does not or did &#xA;     * not have focus.&#xA;     * @see AccessibleHyperlink&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TEXT_PROPERTY">
+      <initialValue xsi:type="references:StringReference" value="AccessibleText"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * PropertyChangeEvent which indicates that text has changed.&#xA;     * &lt;br>&#xA;     * For text insertion, the oldValue is null and the newValue&#xA;     * is an AccessibleTextSequence specifying the text that was&#xA;     * inserted.  &#xA;     * &lt;br>&#xA;     * For text deletion, the oldValue is an AccessibleTextSequence&#xA;     * specifying the text that was deleted and the newValue is null.&#xA;     * &lt;br>&#xA;     * For text replacement, the oldValue is an AccessibleTextSequence&#xA;     * specifying the old text and the newValue is an AccessibleTextSequence&#xA;     * specifying the new text.&#xA;     *&#xA;     * @see #getAccessibleText&#xA;     * @see #addPropertyChangeListener&#xA;     * @see #AccessibleText.AccessibleTextSequence&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_INVALIDATE_CHILDREN">
+      <initialValue xsi:type="references:StringReference" value="accessibleInvalidateChildren"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * PropertyChangeEvent which indicates that a significant change&#xA;     * has occurred to the children of a component like a tree or text.  &#xA;     * This change notifies the event listener that it needs to&#xA;     * reacquire the state of the subcomponents. The oldValue is&#xA;     * null and the newValue is the component whose children have&#xA;     * become invalid.&#xA;     *&#xA;     * @see #getAccessibleText&#xA;     * @see #addPropertyChangeListener&#xA;     * @see #AccessibleText.AccessibleTextSequence&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_TEXT_ATTRIBUTES_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleTextAttributesChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * PropertyChangeEvent which indicates that text attributes have changed.&#xA;     * &lt;br>&#xA;     * For attribute insertion, the oldValue is null and the newValue&#xA;     * is an AccessibleAttributeSequence specifying the attributes that were&#xA;     * inserted.  &#xA;     * &lt;br>&#xA;     * For attribute deletion, the oldValue is an AccessibleAttributeSequence&#xA;     * specifying the attributes that were deleted and the newValue is null.&#xA;     * &lt;br>&#xA;     * For attribute replacement, the oldValue is an AccessibleAttributeSequence&#xA;     * specifying the old attributes and the newValue is an   &#xA;     * AccessibleAttributeSequence specifying the new attributes.&#xA;     *&#xA;     * @see #getAccessibleText&#xA;     * @see #addPropertyChangeListener&#xA;     * @see #AccessibleText.AccessibleAttributeSequence&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ACCESSIBLE_COMPONENT_BOUNDS_CHANGED">
+      <initialValue xsi:type="references:StringReference" value="accessibleComponentBoundsChanged"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * PropertyChangeEvent which indicates that a change has occurred&#xA;     * in a component's bounds.  &#xA;     * The oldValue is the old component bounds and the newValue is &#xA;     * the new component bounds.&#xA;     *&#xA;     * @see #addPropertyChangeListener&#xA;     *&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="accessibleParent">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Accessible.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** &#xA;     * The accessible parent of this object.&#xA;     *&#xA;     * @see #getAccessibleParent&#xA;     * @see #setAccessibleParent&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="accessibleName">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A localized String containing the name of the object.&#xA;     *&#xA;     * @see #getAccessibleName&#xA;     * @see #setAccessibleName &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="accessibleDescription">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A localized String containing the description of the object.&#xA;     *&#xA;     * @see #getAccessibleDescription&#xA;     * @see #setAccessibleDescription &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="accessibleChangeSupport">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Used to handle the listener list for property change events.&#xA;     *&#xA;     * @see #addPropertyChangeListener&#xA;     * @see #removePropertyChangeListener&#xA;     * @see #firePropertyChangeListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="relationSet">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="AccessibleRelationSet.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AccessibleRelationSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Used to represent the context's relation set&#xA;     * @see #getAccessibleRelationSet&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the accessibleName property of this object.  The accessibleName&#xA;     * property of an object is a localized String that designates the purpose&#xA;     * of the object.  For example, the accessibleName property of a label&#xA;     * or button might be the text of the label or button itself.  In the&#xA;     * case of an object that doesn't display its name, the accessibleName&#xA;     * should still be set.  For example, in the case of a text field used&#xA;     * to enter the name of a city, the accessibleName for the en_US locale&#xA;     * could be 'city.'&#xA;     *&#xA;     * @return the localized name of the object; null if this &#xA;     * object does not have a name&#xA;     *&#xA;     * @see #setAccessibleName&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAccessibleName">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the localized accessible name of this object.  Changing the&#xA;     * name will cause a PropertyChangeEvent to be fired for the&#xA;     * ACCESSIBLE_NAME_PROPERTY property.&#xA;     *&#xA;     * @param s the new localized name of the object.&#xA;     *&#xA;     * @see #getAccessibleName&#xA;     * @see #addPropertyChangeListener&#xA;     *&#xA;     * @beaninfo&#xA;     *    preferred:   true&#xA;     *    description: Sets the accessible name for the component.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldName">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.50">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.0/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleDescription">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the accessibleDescription property of this object.  The&#xA;     * accessibleDescription property of this object is a short localized&#xA;     * phrase describing the purpose of the object.  For example, in the &#xA;     * case of a 'Cancel' button, the accessibleDescription could be&#xA;     * 'Ignore changes and close dialog box.'&#xA;     *&#xA;     * @return the localized description of the object; null if &#xA;     * this object does not have a description&#xA;     *&#xA;     * @see #setAccessibleDescription&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAccessibleDescription">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the accessible description of this object.  Changing the&#xA;     * name will cause a PropertyChangeEvent to be fired for the&#xA;     * ACCESSIBLE_DESCRIPTION_PROPERTY property.&#xA;     *&#xA;     * @param s the new localized description of the object&#xA;     *&#xA;     * @see #setAccessibleName&#xA;     * @see #addPropertyChangeListener&#xA;     *&#xA;     * @beaninfo&#xA;     *    preferred:   true&#xA;     *    description: Sets the accessible description for the component.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="oldDescription">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.50">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.30/@statements.0/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAccessibleRole">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AccessibleRole.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the role of this object.  The role of the object is the generic&#xA;     * purpose or use of the class of this object.  For example, the role&#xA;     * of a push button is AccessibleRole.PUSH_BUTTON.  The roles in &#xA;     * AccessibleRole are provided so component developers can pick from&#xA;     * a set of predefined roles.  This enables assistive technologies to&#xA;     * provide a consistent interface to various tweaked subclasses of &#xA;     * components (e.g., use AccessibleRole.PUSH_BUTTON for all components&#xA;     * that act like a push button) as well as distinguish between sublasses&#xA;     * that behave differently (e.g., AccessibleRole.CHECK_BOX for check boxes&#xA;     * and AccessibleRole.RADIO_BUTTON for radio buttons).&#xA;     * &lt;p>Note that the AccessibleRole class is also extensible, so &#xA;     * custom component developers can define their own AccessibleRole's&#xA;     * if the set of predefined roles is inadequate.&#xA;     *&#xA;     * @return an instance of AccessibleRole describing the role of the object&#xA;     * @see AccessibleRole&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAccessibleStateSet">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AccessibleStateSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the state set of this object.  The AccessibleStateSet of an object&#xA;     * is composed of a set of unique AccessibleStates.  A change in the &#xA;     * AccessibleStateSet of an object will cause a PropertyChangeEvent to &#xA;     * be fired for the ACCESSIBLE_STATE_PROPERTY property.&#xA;     *&#xA;     * @return an instance of AccessibleStateSet containing the &#xA;     * current state set of the object&#xA;     * @see AccessibleStateSet&#xA;     * @see AccessibleState&#xA;     * @see #addPropertyChangeListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleParent">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Accessible.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the Accessible parent of this object.&#xA;     *&#xA;     * @return the Accessible parent of this object; null if this&#xA;     * object does not have an Accessible parent&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAccessibleParent">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="a">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="Accessible.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the Accessible parent of this object.  This is meant to be used&#xA;     * only in the situations where the actual component's parent should &#xA;     * not be treated as the component's accessible parent and is a method &#xA;     * that should only be called by the parent of the accessible child. &#xA;     *&#xA;     * @param a - Accessible to be set as the parent&#x9;&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.34/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAccessibleIndexInParent">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the 0-based index of this object in its accessible parent.&#xA;     *&#xA;     * @return the 0-based index of this object in its parent; -1 if this &#xA;     * object does not have an accessible parent.&#xA;     *&#xA;     * @see #getAccessibleParent &#xA;     * @see #getAccessibleChildrenCount&#xA;     * @see #getAccessibleChild&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAccessibleChildrenCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of accessible children of the object.&#xA;     *&#xA;     * @return the number of accessible children of the object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAccessibleChild">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Accessible.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="i">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the specified Accessible child of the object.  The Accessible&#xA;     * children of an Accessible object are zero-based, so the first child &#xA;     * of an Accessible child is at index 0, the second child is at index 1,&#xA;     * and so on.&#xA;     *&#xA;     * @param i zero-based index of child&#xA;     * @return the Accessible child of the object&#xA;     * @see #getAccessibleChildrenCount&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLocale">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/util/Locale.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/awt/IllegalComponentStateException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;     * Gets the locale of the component. If the component does not have a &#xA;     * locale, then the locale of its parent is returned.  &#xA;     *&#xA;     * @return this component's locale.  If this component does not have &#xA;     * a locale, the locale of its parent is returned.&#xA;     *&#xA;     * @exception IllegalComponentStateException &#xA;     * If the Component does not have its own locale and has not yet been &#xA;     * added to a containment hierarchy such that the locale can be&#xA;     * determined from the containing parent. &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addPropertyChangeListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../java/beans/PropertyChangeListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds a PropertyChangeListener to the listener list.&#xA;     * The listener is registered for all Accessible properties and will&#xA;     * be called when those properties change.&#xA;     *&#xA;     * @see #ACCESSIBLE_NAME_PROPERTY&#xA;     * @see #ACCESSIBLE_DESCRIPTION_PROPERTY&#xA;     * @see #ACCESSIBLE_STATE_PROPERTY&#xA;     * @see #ACCESSIBLE_VALUE_PROPERTY&#xA;     * @see #ACCESSIBLE_SELECTION_PROPERTY&#xA;     * @see #ACCESSIBLE_TEXT_PROPERTY&#xA;     * @see #ACCESSIBLE_VISIBLE_DATA_PROPERTY&#xA;     *&#xA;     * @param listener  The PropertyChangeListener to be added&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0/@members.6"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.39/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removePropertyChangeListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../java/beans/PropertyChangeListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes a PropertyChangeListener from the listener list.&#xA;     * This removes a PropertyChangeListener that was registered&#xA;     * for all properties.&#xA;     *&#xA;     * @param listener  The PropertyChangeListener to be removed&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0/@members.7"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.40/@parameters.0"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleAction">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleAction.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleAction associated with this object that supports&#xA;     * one or more actions. &#xA;     *&#xA;     * @return AccessibleAction if supported by object; else return null&#xA;     * @see AccessibleAction&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleComponent">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleComponent.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleComponent associated with this object that has a &#xA;     * graphical representation.&#xA;     *&#xA;     * @return AccessibleComponent if supported by object; else return null&#xA;     * @see AccessibleComponent&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleSelection">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleSelection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleSelection associated with this object which allows its&#xA;     * Accessible children to be selected.  &#xA;     * &#xA;     * @return AccessibleSelection if supported by object; else return null&#xA;     * @see AccessibleSelection&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleText">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleText.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleText associated with this object presenting &#xA;     * text on the display.&#xA;     *&#xA;     * @return AccessibleText if supported by object; else return null&#xA;     * @see AccessibleText&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleEditableText">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleEditableText.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleEditableText associated with this object &#xA;     * presenting editable text on the display.&#xA;     *&#xA;     * @return AccessibleEditableText if supported by object; else return null&#xA;     * @see AccessibleEditableText&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleValue">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleValue.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleValue associated with this object that supports a &#xA;     * Numerical value. &#xA;     * &#xA;     * @return AccessibleValue if supported by object; else return null &#xA;     * @see AccessibleValue&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleIcon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleIcon.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleIcons associated with an object that has&#xA;     * one or more associated icons&#xA;     * &#xA;     * @return an array of AccessibleIcon if supported by object; &#xA;     * otherwise return null &#xA;     * @see AccessibleIcon&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleRelationSet">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AccessibleRelationSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleRelationSet associated with an object&#xA;     * &#xA;     * @return an AccessibleRelationSet if supported by object;&#xA;     * otherwise return null&#xA;     * @see AccessibleRelationSet&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.26"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAccessibleTable">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AccessibleTable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the AccessibleTable associated with an object&#xA;     * &#xA;     * @return an AccessibleTable if supported by object;&#xA;     * otherwise return null&#xA;     * @see AccessibleTable&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="firePropertyChange">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="propertyName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="oldValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newValue">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Support for reporting bound property changes.  If oldValue and &#xA;     * newValue are not equal and the PropertyChangeEvent listener list &#xA;     * is not empty, then fire a PropertyChange event to each listener.&#xA;     * In general, this is for use by the Accessible objects themselves&#xA;     * and should not be called by an application program.&#xA;     * @param propertyName  The programmatic name of the property that&#xA;     * was changed.&#xA;     * @param oldValue  The old value of the property.&#xA;     * @param newValue  The new value of the property.&#xA;     * @see java.beans.PropertyChangeSupport&#xA;     * @see #addPropertyChangeListener&#xA;     * @see #removePropertyChangeListener&#xA;     * @see #ACCESSIBLE_NAME_PROPERTY&#xA;     * @see #ACCESSIBLE_DESCRIPTION_PROPERTY&#xA;     * @see #ACCESSIBLE_STATE_PROPERTY&#xA;     * @see #ACCESSIBLE_VALUE_PROPERTY&#xA;     * @see #ACCESSIBLE_SELECTION_PROPERTY&#xA;     * @see #ACCESSIBLE_TEXT_PROPERTY&#xA;     * @see #ACCESSIBLE_VISIBLE_DATA_PROPERTY&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="pce">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeEvent.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeEvent.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.50/@parameters.2"/>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0/@members.15"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.50/@statements.0/@statement/@statements.0/@statement/@statements.0/@variable"/>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:InstanceOfExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/beans/PropertyChangeEvent.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.50/@parameters.2"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../java/beans/PropertyChangeSupport.class.xmi#//@classifiers.0/@members.12"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.50/@parameters.0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.50/@parameters.1"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.50/@parameters.2"/>
+                  </next>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * AccessibleContext represents the minimum information all accessible objects&#xA; * return.  This information includes the accessible name, description, role,&#xA; * and state of the object, as well as information about its parent and &#xA; * children.  AccessibleContext also contains methods for&#xA; * obtaining more specific accessibility information about a component.&#xA; * If the component supports them, these methods will return an object that&#xA; * implements one or more of the following interfaces:&#xA; * &lt;P>&lt;ul>&#xA; * &lt;li>{@link AccessibleAction} - the object can perform one or more actions.  &#xA; * This interface provides the standard mechanism for an assistive&#xA; * technology to determine what those actions are and tell the object&#xA; * to perform them.  Any object that can be manipulated should&#xA; * support this interface.&#xA; * &lt;li>{@link AccessibleComponent} - the object has a graphical representation.&#xA; * This interface provides the standard mechanism for an assistive &#xA; * technology to determine and set the graphical representation of the &#xA; * object.  Any object that is rendered on the screen should support&#xA; * this interface.&#xA; * &lt;li>{@link  AccessibleSelection} - the object allows its children to be &#xA; * selected.  This interface provides the standard mechanism for an&#xA; * assistive technology to determine the currently selected children of the object&#xA; * as well as modify its selection set.  Any object that has children&#xA; * that can be selected should support this interface.&#xA; * &lt;li>{@link AccessibleText} - the object presents editable textual information&#xA; * on the display.  This interface provides the standard mechanism for&#xA; * an assistive technology to access that text via its content, attributes,&#xA; * and spatial location.  Any object that contains editable text should&#xA; * support this interface.&#xA; * &lt;li>{@link AccessibleValue} - the object supports a numerical value.  This&#xA; * interface provides the standard mechanism for an assistive technology&#xA; * to determine and set the current value of the object, as well as obtain its&#xA; * minimum and maximum values.  Any object that supports a numerical value&#xA; * should support this interface.&lt;/ul>&#xA; *&#xA; *&#xA; * @beaninfo&#xA; *   attribute: isContainer false&#xA; * description: Minimal information that all accessible objects return&#xA; *&#xA;&#xA; * @version     1.43 04/02/04&#xA; * @author&#x9;Peter Korn&#xA; * @author      Hans Muller&#xA; * @author      Willie Walker&#xA; * @author      Lynn Monsanto&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

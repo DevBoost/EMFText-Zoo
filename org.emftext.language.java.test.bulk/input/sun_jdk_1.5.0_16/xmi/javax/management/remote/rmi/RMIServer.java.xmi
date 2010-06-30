@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="RMIServer.java">
+  <comments>/*&#xA; * @(#)RMIServer.java&#x9;1.19 03/12/19&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>management</namespaces>
+  <namespaces>remote</namespaces>
+  <namespaces>rmi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../java/rmi/Remote.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../java/rmi/RemoteException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="RMIServer">
+    <members xsi:type="members:InterfaceMethod" name="getVersion">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/rmi/RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>The version of the RMI Connector Protocol understood by this&#xA;     * connector server.  This is a string with the following format:&lt;/p>&#xA;     *&#xA;     * &lt;pre>&#xA;     * &lt;em>protocol-version&lt;/em> &lt;em>implementation-name&lt;/em>&#xA;     * &lt;/pre>&#xA;     *&#xA;     * &lt;p>The &lt;code>&lt;em>protocol-version&lt;/em>&lt;/code> is a series of&#xA;     * two or more non-negative integers separated by periods&#xA;     * (&lt;code>.&lt;/code>).  An implementation of the version described&#xA;     * by this documentation must use the string &lt;code>1.0&lt;/code>&#xA;     * here.&lt;/p>&#xA;     *&#xA;     * &lt;p>After the protocol version there must be a space, followed&#xA;     * by the implementation name.  The format of the implementation&#xA;     * name is unspecified.  It is recommended that it include an&#xA;     * implementation version number.  An implementation can use an&#xA;     * empty string as its implementation name, for example for&#xA;     * security reasons.&lt;/p>&#xA;     *&#xA;     * @return a string with the format described here.&#xA;     *&#xA;     * @exception RemoteException if there is a communication&#xA;     * exception during the remote method call.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="newClient">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="RMIConnection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="credentials">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Makes a new connection through this RMI connector.  Each&#xA;     * remote client calls this method to obtain a new RMI object&#xA;     * representing its connection.&lt;/p>&#xA;     *&#xA;     * @param credentials this object specifies the user-defined credentials&#xA;     * to be passed in to the server in order to authenticate the user before&#xA;     * creating the &lt;code>RMIConnection&lt;/code>.  Can be null.&#xA;     *&#xA;     * @return the newly-created connection object.&#xA;     *&#xA;     * @exception IOException if the new client object cannot be&#xA;     * created or exported, or if there is a communication exception&#xA;     * during the remote method call.&#xA;     *&#xA;     * @exception SecurityException if the given credentials do not&#xA;     * allow the server to authenticate the caller successfully.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** &#xA; * &lt;p>RMI object used to establish connections to an RMI connector.&#xA; * There is one Remote object implementing this interface for each RMI&#xA; * connector.&lt;/p>&#xA; *&#xA; * &lt;p>User code does not usually refer to this interface.  It is&#xA; * specified as part of the public API so that different&#xA; * implementations of that API will interoperate.&lt;/p>&#xA; *&#xA; * @since 1.5&#xA; * @since.unbundled 1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../java/rmi/Remote.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

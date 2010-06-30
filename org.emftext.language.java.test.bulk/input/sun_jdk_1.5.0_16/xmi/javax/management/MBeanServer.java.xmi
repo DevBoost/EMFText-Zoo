@@ -1,0 +1,1288 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:annotations="http://www.emftext.org/java/annotations" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/annotations ../../java.ecore#/0 http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="MBeanServer.java">
+  <comments>/*&#xA; * @(#)MBeanServer.java&#x9;1.140 04/05/18&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>management</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// java import</comments>
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../java/util/Set.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/io/ObjectInputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <comments>// RI import</comments>
+    <namespaces>javax</namespaces>
+    <namespaces>management</namespaces>
+    <namespaces>loading</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="loading/ClassLoaderRepository.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="MBeanServer">
+    <members xsi:type="members:InterfaceMethod" name="createMBean">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectInstance.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceAlreadyExistsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanRegistrationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotCompliantMBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Instantiates and registers an MBean in the MBean server.  The&#xA;     * MBean server will use its {@link&#xA;     * javax.management.loading.ClassLoaderRepository Default Loader&#xA;     * Repository} to load the class of the MBean.  An object name is&#xA;     * associated to the MBean.&#x9; If the object name given is null, the&#xA;     * MBean must provide its own name by implementing the {@link&#xA;     * javax.management.MBeanRegistration MBeanRegistration} interface&#xA;     * and returning the name from the {@link&#xA;     * MBeanRegistration#preRegister preRegister} method.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method is equivalent to {@link&#xA;     * #createMBean(String,ObjectName,Object[],String[])&#xA;     * createMBean(className, name, (Object[]) null, (String[])&#xA;     * null)}.&lt;/p>&#xA;     *&#xA;     * @param className The class name of the MBean to be instantiated.&#x9;   &#xA;     * @param name The object name of the MBean. May be null.&#x9; &#xA;     *&#xA;     * @return An &lt;CODE>ObjectInstance&lt;/CODE>, containing the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and the Java class name of the newly&#xA;     * instantiated MBean.  If the contained &lt;code>ObjectName&lt;/code>&#xA;     * is &lt;code>n&lt;/code>, the contained Java class name is&#xA;     * &lt;code>{@link #getMBeanInfo getMBeanInfo(n)}.getClassName()&lt;/code>.&#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or a&#xA;     * &lt;CODE>&lt;CODE>java.lang.Exception&lt;/CODE>&lt;/CODE> that occurred&#xA;     * when trying to invoke the MBean's constructor.&#xA;     * @exception InstanceAlreadyExistsException The MBean is already&#xA;     * under the control of the MBean server.&#xA;     * @exception MBeanRegistrationException The&#xA;     * &lt;CODE>preRegister&lt;/CODE> (&lt;CODE>MBeanRegistration&lt;/CODE>&#xA;     * interface) method of the MBean has thrown an exception. The&#xA;     * MBean will not be registered.&#xA;     * @exception MBeanException The constructor of the MBean has&#xA;     * thrown an exception&#xA;     * @exception NotCompliantMBeanException This class is not a JMX&#xA;     * compliant MBean&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null, the &lt;CODE>ObjectName&lt;/CODE> passed&#xA;     * in parameter contains a pattern or no &lt;CODE>ObjectName&lt;/CODE>&#xA;     * is specified for the MBean.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createMBean">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectInstance.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loaderName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceAlreadyExistsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanRegistrationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotCompliantMBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Instantiates and registers an MBean in the MBean server.  The&#xA;     * class loader to be used is identified by its object name. An&#xA;     * object name is associated to the MBean. If the object name of&#xA;     * the loader is null, the ClassLoader that loaded the MBean&#xA;     * server will be used.  If the MBean's object name given is null,&#xA;     * the MBean must provide its own name by implementing the {@link&#xA;     * javax.management.MBeanRegistration MBeanRegistration} interface&#xA;     * and returning the name from the {@link&#xA;     * MBeanRegistration#preRegister preRegister} method.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method is equivalent to {@link&#xA;     * #createMBean(String,ObjectName,ObjectName,Object[],String[])&#xA;     * createMBean(className, name, loaderName, (Object[]) null,&#xA;     * (String[]) null)}.&lt;/p>&#xA;     *&#xA;     * @param className The class name of the MBean to be instantiated.&#x9;   &#xA;     * @param name The object name of the MBean. May be null.&#x9; &#xA;     * @param loaderName The object name of the class loader to be used.&#xA;     *&#xA;     * @return An &lt;CODE>ObjectInstance&lt;/CODE>, containing the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and the Java class name of the newly&#xA;     * instantiated MBean.  If the contained &lt;code>ObjectName&lt;/code>&#xA;     * is &lt;code>n&lt;/code>, the contained Java class name is&#xA;     * &lt;code>{@link #getMBeanInfo getMBeanInfo(n)}.getClassName()&lt;/code>.&#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or a&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> that occurred when trying to&#xA;     * invoke the MBean's constructor.&#xA;     * @exception InstanceAlreadyExistsException The MBean is already&#xA;     * under the control of the MBean server.&#xA;     * @exception MBeanRegistrationException The&#xA;     * &lt;CODE>preRegister&lt;/CODE> (&lt;CODE>MBeanRegistration&lt;/CODE>&#xA;     * interface) method of the MBean has thrown an exception. The&#xA;     * MBean will not be registered.&#xA;     * @exception MBeanException The constructor of the MBean has&#xA;     * thrown an exception&#xA;     * @exception NotCompliantMBeanException This class is not a JMX&#xA;     * compliant MBean&#xA;     * @exception InstanceNotFoundException The specified class loader&#xA;     * is not registered in the MBean server.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null, the &lt;CODE>ObjectName&lt;/CODE> passed&#xA;     * in parameter contains a pattern or no &lt;CODE>ObjectName&lt;/CODE>&#xA;     * is specified for the MBean.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createMBean">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectInstance.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="signature">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceAlreadyExistsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanRegistrationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotCompliantMBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Instantiates and registers an MBean in the MBean server.  The&#xA;     * MBean server will use its {@link&#xA;     * javax.management.loading.ClassLoaderRepository Default Loader&#xA;     * Repository} to load the class of the MBean.  An object name is&#xA;     * associated to the MBean.  If the object name given is null, the&#xA;     * MBean must provide its own name by implementing the {@link&#xA;     * javax.management.MBeanRegistration MBeanRegistration} interface&#xA;     * and returning the name from the {@link&#xA;     * MBeanRegistration#preRegister preRegister} method.&#xA;     *&#xA;     * @param className The class name of the MBean to be instantiated.&#xA;     * @param name The object name of the MBean. May be null.&#xA;     * @param params An array containing the parameters of the&#xA;     * constructor to be invoked.&#xA;     * @param signature An array containing the signature of the&#xA;     * constructor to be invoked.&#xA;     *&#xA;     * @return An &lt;CODE>ObjectInstance&lt;/CODE>, containing the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and the Java class name of the newly&#xA;     * instantiated MBean.  If the contained &lt;code>ObjectName&lt;/code>&#xA;     * is &lt;code>n&lt;/code>, the contained Java class name is&#xA;     * &lt;code>{@link #getMBeanInfo getMBeanInfo(n)}.getClassName()&lt;/code>.&#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or a&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> that occurred when trying to&#xA;     * invoke the MBean's constructor.&#xA;     * @exception InstanceAlreadyExistsException The MBean is already&#xA;     * under the control of the MBean server.&#xA;     * @exception MBeanRegistrationException The&#xA;     * &lt;CODE>preRegister&lt;/CODE> (&lt;CODE>MBeanRegistration&lt;/CODE>&#xA;     * interface) method of the MBean has thrown an exception. The&#xA;     * MBean will not be registered.&#xA;     * @exception MBeanException The constructor of the MBean has&#xA;     * thrown an exception&#xA;     * @exception NotCompliantMBeanException This class is not a JMX&#xA;     * compliant MBean&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null, the &lt;CODE>ObjectName&lt;/CODE> passed&#xA;     * in parameter contains a pattern or no &lt;CODE>ObjectName&lt;/CODE>&#xA;     * is specified for the MBean.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createMBean">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectInstance.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loaderName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="signature">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceAlreadyExistsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanRegistrationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotCompliantMBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Instantiates and registers an MBean in the MBean server.  The&#xA;     * class loader to be used is identified by its object name. An&#xA;     * object name is associated to the MBean. If the object name of&#xA;     * the loader is not specified, the ClassLoader that loaded the&#xA;     * MBean server will be used.  If the MBean object name given is&#xA;     * null, the MBean must provide its own name by implementing the&#xA;     * {@link javax.management.MBeanRegistration MBeanRegistration}&#xA;     * interface and returning the name from the {@link&#xA;     * MBeanRegistration#preRegister preRegister} method.&#xA;     *&#xA;     * @param className The class name of the MBean to be instantiated.&#xA;     * @param name The object name of the MBean. May be null.&#xA;     * @param params An array containing the parameters of the&#xA;     * constructor to be invoked.&#xA;     * @param signature An array containing the signature of the&#xA;     * constructor to be invoked.&#xA;     * @param loaderName The object name of the class loader to be used.&#xA;     *&#xA;     * @return An &lt;CODE>ObjectInstance&lt;/CODE>, containing the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and the Java class name of the newly&#xA;     * instantiated MBean.  If the contained &lt;code>ObjectName&lt;/code>&#xA;     * is &lt;code>n&lt;/code>, the contained Java class name is&#xA;     * &lt;code>{@link #getMBeanInfo getMBeanInfo(n)}.getClassName()&lt;/code>.&#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or a&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> that occurred when trying to&#xA;     * invoke the MBean's constructor.&#xA;     * @exception InstanceAlreadyExistsException The MBean is already&#xA;     * under the control of the MBean server.&#xA;     * @exception MBeanRegistrationException The&#xA;     * &lt;CODE>preRegister&lt;/CODE> (&lt;CODE>MBeanRegistration&lt;/CODE>&#xA;     * interface) method of the MBean has thrown an exception. The&#xA;     * MBean will not be registered.&#xA;     * @exception MBeanException The constructor of the MBean has&#xA;     * thrown an exception&#xA;     * @exception NotCompliantMBeanException This class is not a JMX&#xA;     * compliant MBean&#xA;     * @exception InstanceNotFoundException The specified class loader&#xA;     * is not registered in the MBean server.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null, the &lt;CODE>ObjectName&lt;/CODE> passed&#xA;     * in parameter contains a pattern or no &lt;CODE>ObjectName&lt;/CODE>&#xA;     * is specified for the MBean.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="registerMBean">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectInstance.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="object">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceAlreadyExistsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanRegistrationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="NotCompliantMBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Registers a pre-existing object as an MBean with the MBean&#xA;     * server. If the object name given is null, the MBean must&#xA;     * provide its own name by implementing the {@link&#xA;     * javax.management.MBeanRegistration MBeanRegistration} interface&#xA;     * and returning the name from the {@link&#xA;     * MBeanRegistration#preRegister preRegister} method.&#xA;     *&#xA;     * @param object The  MBean to be registered as an MBean.&#x9;  &#xA;     * @param name The object name of the MBean. May be null.&#xA;     *&#xA;     * @return An &lt;CODE>ObjectInstance&lt;/CODE>, containing the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and the Java class name of the newly&#xA;     * registered MBean.  If the contained &lt;code>ObjectName&lt;/code>&#xA;     * is &lt;code>n&lt;/code>, the contained Java class name is&#xA;     * &lt;code>{@link #getMBeanInfo getMBeanInfo(n)}.getClassName()&lt;/code>.&#xA;     *&#xA;     * @exception InstanceAlreadyExistsException The MBean is already&#xA;     * under the control of the MBean server.&#xA;     * @exception MBeanRegistrationException The&#xA;     * &lt;CODE>preRegister&lt;/CODE> (&lt;CODE>MBeanRegistration&lt;/CODE>&#xA;     * interface) method of the MBean has thrown an exception. The&#xA;     * MBean will not be registered.&#xA;     * @exception NotCompliantMBeanException This object is not a JMX&#xA;     * compliant MBean&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * passed in parameter is null or no object name is specified.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="unregisterMBean">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanRegistrationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Unregisters an MBean from the MBean server. The MBean is&#xA;     * identified by its object name. Once the method has been&#xA;     * invoked, the MBean may no longer be accessed by its object&#xA;     * name.&#xA;     *&#xA;     * @param name The object name of the MBean to be unregistered.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     * @exception MBeanRegistrationException The preDeregister&#xA;     * ((&lt;CODE>MBeanRegistration&lt;/CODE> interface) method of the MBean&#xA;     * has thrown an exception.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * name in parameter is null or the MBean you are when trying to&#xA;     * unregister is the {@link javax.management.MBeanServerDelegate&#xA;     * MBeanServerDelegate} MBean.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getObjectInstance">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ObjectInstance.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the &lt;CODE>ObjectInstance&lt;/CODE> for a given MBean&#xA;     * registered with the MBean server.&#xA;     *&#xA;     * @param name The object name of the MBean.&#xA;     *&#xA;     * @return The &lt;CODE>ObjectInstance&lt;/CODE> associated with the MBean&#xA;     * specified by &lt;VAR>name&lt;/VAR>.  The contained &lt;code>ObjectName&lt;/code>&#xA;     * is &lt;code>name&lt;/code> and the contained class name is&#xA;     * &lt;code>{@link #getMBeanInfo getMBeanInfo(name)}.getClassName()&lt;/code>.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="queryMBeans">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../java/util/Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="query">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="QueryExp.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets MBeans controlled by the MBean server. This method allows&#xA;     * any of the following to be obtained: All MBeans, a set of&#xA;     * MBeans specified by pattern matching on the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and/or a Query expression, a specific&#xA;     * MBean. When the object name is null or no domain and key&#xA;     * properties are specified, all objects are to be selected (and&#xA;     * filtered if a query is specified). It returns the set of&#xA;     * &lt;CODE>ObjectInstance&lt;/CODE> objects (containing the&#xA;     * &lt;CODE>ObjectName&lt;/CODE> and the Java Class name) for the&#xA;     * selected MBeans.&#xA;     *&#xA;     * @param name The object name pattern identifying the MBeans to&#xA;     * be retrieved. If null or no domain and key properties are&#xA;     * specified, all the MBeans registered will be retrieved.&#xA;     * @param query The query expression to be applied for selecting&#xA;     * MBeans. If null no query expression will be applied for&#xA;     * selecting MBeans.&#xA;     *&#xA;     * @return A set containing the &lt;CODE>ObjectInstance&lt;/CODE>&#xA;     * objects for the selected MBeans.  If no MBean satisfies the&#xA;     * query an empty set is returned.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="queryNames">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../java/util/Set.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="query">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="QueryExp.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the names of MBeans controlled by the MBean server. This&#xA;     * method enables any of the following to be obtained: The names&#xA;     * of all MBeans, the names of a set of MBeans specified by&#xA;     * pattern matching on the &lt;CODE>ObjectName&lt;/CODE> and/or a Query&#xA;     * expression, a specific MBean name (equivalent to testing&#xA;     * whether an MBean is registered). When the object name is null&#xA;     * or no domain and key properties are specified, all objects are&#xA;     * selected (and filtered if a query is specified). It returns the&#xA;     * set of ObjectNames for the MBeans selected.&#xA;     *&#xA;     * @param name The object name pattern identifying the MBean names&#xA;     * to be retrieved. If null or no domain and key properties are&#xA;     * specified, the name of all registered MBeans will be retrieved.&#xA;     * @param query The query expression to be applied for selecting&#xA;     * MBeans. If null no query expression will be applied for&#xA;     * selecting MBeans.&#xA;     *&#xA;     * @return A set containing the ObjectNames for the MBeans&#xA;     * selected.  If no MBean satisfies the query, an empty set is&#xA;     * returned.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isRegistered">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Checks whether an MBean, identified by its object name, is&#xA;     * already registered with the MBean server.&#xA;     *&#xA;     * @param name The object name of the MBean to be checked.&#xA;     *&#xA;     * @return True if the MBean is already registered in the MBean&#xA;     * server, false otherwise.&#xA;     *&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * name in parameter is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMBeanCount">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Integer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the number of MBeans registered in the MBean server.&#xA;     *&#xA;     * @return the number of registered MBeans, wrapped in an Integer.&#xA;     * If the caller's permissions are restricted, this number may&#xA;     * be greater than the number of MBeans the caller can access.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttribute">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attribute">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AttributeNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the value of a specific attribute of a named MBean. The MBean&#xA;     * is identified by its object name.&#xA;     *&#xA;     * @param name The object name of the MBean from which the&#xA;     * attribute is to be retrieved.&#xA;     * @param attribute A String specifying the name of the attribute&#xA;     * to be retrieved.&#xA;     *&#xA;     * @return&#x9;The value of the retrieved attribute.&#xA;     *&#xA;     * @exception AttributeNotFoundException The attribute specified&#xA;     * is not accessible in the MBean.&#xA;     * @exception MBeanException Wraps an exception thrown by the&#xA;     * MBean's getter.&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> thrown when trying to invoke&#xA;     * the setter.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * name in parameter is null or the attribute in parameter is&#xA;     * null.&#xA;     *&#xA;     * @see #setAttribute&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AttributeList.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributes">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the values of several attributes of a named MBean. The MBean&#xA;     * is identified by its object name.&#xA;     *&#xA;     * @param name The object name of the MBean from which the&#xA;     * attributes are retrieved.&#xA;     * @param attributes A list of the attributes to be retrieved.&#xA;     *&#xA;     * @return The list of the retrieved attributes.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     * @exception ReflectionException An exception occurred when&#xA;     * trying to invoke the getAttributes method of a Dynamic MBean.&#xA;     * @exception RuntimeOperationsException Wrap a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * name in parameter is null or attributes in parameter is null.&#xA;     *&#xA;     * @see #setAttributes&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setAttribute">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attribute">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Attribute.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AttributeNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InvalidAttributeValueException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the value of a specific attribute of a named MBean. The MBean&#xA;     * is identified by its object name.&#xA;     *&#xA;     * @param name The name of the MBean within which the attribute is&#xA;     * to be set.&#xA;     * @param attribute The identification of the attribute to be set&#xA;     * and the value it is to be set to.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     * @exception AttributeNotFoundException The attribute specified&#xA;     * is not accessible in the MBean.&#xA;     * @exception InvalidAttributeValueException The value specified&#xA;     * for the attribute is not valid.&#xA;     * @exception MBeanException Wraps an exception thrown by the&#xA;     * MBean's setter.&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> thrown when trying to invoke&#xA;     * the setter.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * name in parameter is null or the attribute in parameter is&#xA;     * null.&#xA;     *&#xA;     * @see #getAttribute&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setAttributes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="AttributeList.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributes">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="AttributeList.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the values of several attributes of a named MBean. The MBean is&#xA;     * identified by its object name.&#xA;     *&#xA;     * @param name The object name of the MBean within which the&#xA;     * attributes are to be set.&#xA;     * @param attributes A list of attributes: The identification of&#xA;     * the attributes to be set and the values they are to be set to.&#xA;     *&#xA;     * @return The list of attributes that were set, with their new&#xA;     * values.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     * @exception ReflectionException An exception occurred when&#xA;     * trying to invoke the setAttributes method of a Dynamic MBean.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The object&#xA;     * name in parameter is null or attributes in parameter is null.&#xA;     *&#xA;     * @see #getAttributes&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="invoke">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="operationName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="signature">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Invokes an operation on an MBean.&#xA;     *&#xA;     * @param name The object name of the MBean on which the method is&#xA;     * to be invoked.&#xA;     * @param operationName The name of the operation to be invoked.&#xA;     * @param params An array containing the parameters to be set when&#xA;     * the operation is invoked&#xA;     * @param signature An array containing the signature of the&#xA;     * operation. The class objects will be loaded using the same&#xA;     * class loader as the one used for loading the MBean on which the&#xA;     * operation was invoked.&#xA;     *&#xA;     * @return The object returned by the operation, which represents&#xA;     * the result of invoking the operation on the MBean specified.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     * @exception MBeanException Wraps an exception thrown by the&#xA;     * MBean's invoked method.&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> thrown while trying to invoke&#xA;     * the method.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDefaultDomain">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the default domain used for naming the MBean.&#xA;     * The default domain name is used as the domain part in the ObjectName&#xA;     * of MBeans if no domain is specified by the user.&#xA;     *&#xA;     * @return the default domain.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDomains">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Returns the list of domains in which any MBean is currently&#xA;     * registered.  A string is in the returned array if and only if&#xA;     * there is at least one MBean registered with an ObjectName whose&#xA;     * {@link ObjectName#getDomain() getDomain()} is equal to that&#xA;     * string.  The order of strings within the returned array is&#xA;     * not defined.&lt;/p>&#xA;     *&#xA;     * @return the list of domains.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addNotificationListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filter">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationFilter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handback">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Adds a listener to a registered MBean.&lt;/p>&#xA;     *&#xA;     * &lt;P> A notification emitted by the MBean will be forwarded by the&#xA;     * MBeanServer to the listener.  If the source of the notification&#xA;     * is a reference to the MBean object, the MBean server will replace it&#xA;     * by the MBean's ObjectName.  Otherwise the source is unchanged.&#xA;     *&#xA;     * @param name The name of the MBean on which the listener should&#xA;     * be added.&#xA;     * @param listener The listener object which will handle the&#xA;     * notifications emitted by the registered MBean.&#xA;     * @param filter The filter object. If filter is null, no&#xA;     * filtering will be performed before handling notifications.&#xA;     * @param handback The context to be sent to the listener when a&#xA;     * notification is emitted.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean name provided&#xA;     * does not match any of the registered MBeans.&#xA;     *&#xA;     * @see #removeNotificationListener(ObjectName, NotificationListener)&#xA;     * @see #removeNotificationListener(ObjectName, NotificationListener,&#xA;     * NotificationFilter, Object)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addNotificationListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filter">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationFilter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handback">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Adds a listener to a registered MBean.&lt;/p>&#xA;     *&#xA;     * &lt;P> A notification emitted by the MBean will be forwarded by the&#xA;     * MBeanServer to the listener.  If the source of the notification&#xA;     * is a reference to the MBean object, the MBean server will replace it&#xA;     * by the MBean's ObjectName.  Otherwise the source is unchanged.&#xA;     *&#xA;     * &lt;p>The listener object that receives notifications is the one&#xA;     * that is registered with the given name at the time this method&#xA;     * is called.  Even if it is subsequently unregistered, it will&#xA;     * continue to receive notifications.&lt;/p>&#xA;     *&#xA;     * @param name The name of the MBean on which the listener should&#xA;     * be added.&#xA;     * @param listener The object name of the listener which will&#xA;     * handle the notifications emitted by the registered MBean.&#xA;     * @param filter The filter object. If filter is null, no&#xA;     * filtering will be performed before handling notifications.&#xA;     * @param handback The context to be sent to the listener when a&#xA;     * notification is emitted.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean name of the&#xA;     * notification listener or of the notification broadcaster does&#xA;     * not match any of the registered MBeans.&#xA;     * @exception RuntimeOperationsException Wraps an {@link&#xA;     * IllegalArgumentException}.  The MBean named by&#xA;     * &lt;code>listener&lt;/code> exists but does not implement the {@link&#xA;     * NotificationListener} interface.&#xA;     *&#xA;     * @see #removeNotificationListener(ObjectName, ObjectName)&#xA;     * @see #removeNotificationListener(ObjectName, ObjectName,&#xA;     * NotificationFilter, Object)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeNotificationListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ListenerNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes a listener from a registered MBean.&#xA;     *&#xA;     * &lt;P> If the listener is registered more than once, perhaps with&#xA;     * different filters or callbacks, this method will remove all&#xA;     * those registrations.&#xA;     *&#xA;     * @param name The name of the MBean on which the listener should&#xA;     * be removed.&#xA;     * @param listener The object name of the listener to be removed.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean name provided&#xA;     * does not match any of the registered MBeans.&#xA;     * @exception ListenerNotFoundException The listener is not&#xA;     * registered in the MBean.&#xA;     *&#xA;     * @see #addNotificationListener(ObjectName, ObjectName,&#xA;     * NotificationFilter, Object)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeNotificationListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filter">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationFilter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handback">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ListenerNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Removes a listener from a registered MBean.&lt;/p>&#xA;     *&#xA;     * &lt;p>The MBean must have a listener that exactly matches the&#xA;     * given &lt;code>listener&lt;/code>, &lt;code>filter&lt;/code>, and&#xA;     * &lt;code>handback&lt;/code> parameters.  If there is more than one&#xA;     * such listener, only one is removed.&lt;/p>&#xA;     *&#xA;     * &lt;p>The &lt;code>filter&lt;/code> and &lt;code>handback&lt;/code> parameters&#xA;     * may be null if and only if they are null in a listener to be&#xA;     * removed.&lt;/p>&#xA;     *&#xA;     * @param name The name of the MBean on which the listener should&#xA;     * be removed.&#xA;     * @param listener A listener that was previously added to this&#xA;     * MBean.&#xA;     * @param filter The filter that was specified when the listener&#xA;     * was added.&#xA;     * @param handback The handback that was specified when the&#xA;     * listener was added.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean name provided&#xA;     * does not match any of the registered MBeans.&#xA;     * @exception ListenerNotFoundException The listener is not&#xA;     * registered in the MBean, or it is not registered with the given&#xA;     * filter and handback.&#xA;     *&#xA;     * @see #addNotificationListener(ObjectName, ObjectName,&#xA;     * NotificationFilter, Object)&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeNotificationListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ListenerNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Removes a listener from a registered MBean.&lt;/p>&#xA;     *&#xA;     * &lt;P> If the listener is registered more than once, perhaps with&#xA;     * different filters or callbacks, this method will remove all&#xA;     * those registrations.&#xA;     *&#xA;     * @param name The name of the MBean on which the listener should&#xA;     * be removed.&#xA;     * @param listener The object name of the listener to be removed.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean name provided&#xA;     * does not match any of the registered MBeans.&#xA;     * @exception ListenerNotFoundException The listener is not&#xA;     * registered in the MBean.&#xA;     *&#xA;     * @see #addNotificationListener(ObjectName, NotificationListener,&#xA;     * NotificationFilter, Object)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeNotificationListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filter">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="NotificationFilter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handback">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ListenerNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Removes a listener from a registered MBean.&lt;/p>&#xA;     *&#xA;     * &lt;p>The MBean must have a listener that exactly matches the&#xA;     * given &lt;code>listener&lt;/code>, &lt;code>filter&lt;/code>, and&#xA;     * &lt;code>handback&lt;/code> parameters.  If there is more than one&#xA;     * such listener, only one is removed.&lt;/p>&#xA;     *&#xA;     * &lt;p>The &lt;code>filter&lt;/code> and &lt;code>handback&lt;/code> parameters&#xA;     * may be null if and only if they are null in a listener to be&#xA;     * removed.&lt;/p>&#xA;     *&#xA;     * @param name The name of the MBean on which the listener should&#xA;     * be removed.&#xA;     * @param listener A listener that was previously added to this&#xA;     * MBean.&#xA;     * @param filter The filter that was specified when the listener&#xA;     * was added.&#xA;     * @param handback The handback that was specified when the&#xA;     * listener was added.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean name provided&#xA;     * does not match any of the registered MBeans.&#xA;     * @exception ListenerNotFoundException The listener is not&#xA;     * registered in the MBean, or it is not registered with the given&#xA;     * filter and handback.&#xA;     *&#xA;     * @see #addNotificationListener(ObjectName, NotificationListener,&#xA;     * NotificationFilter, Object)&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMBeanInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanInfo.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="IntrospectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method discovers the attributes and operations that an&#xA;     * MBean exposes for management.&#xA;     *&#xA;     * @param name The name of the MBean to analyze&#xA;     *&#xA;     * @return An instance of &lt;CODE>MBeanInfo&lt;/CODE> allowing the&#xA;     * retrieval of all attributes and operations of this MBean.&#xA;     *&#xA;     * @exception IntrospectionException An exception occurred during&#xA;     * introspection.&#xA;     * @exception InstanceNotFoundException The MBean specified was&#xA;     * not found.&#xA;     * @exception ReflectionException An exception occurred when&#xA;     * trying to invoke the getMBeanInfo of a Dynamic MBean.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isInstanceOf">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Returns true if the MBean specified is an instance of the&#xA;     * specified class, false otherwise.&lt;/p>&#xA;     *&#xA;     * &lt;p>If &lt;code>name&lt;/code> does not name an MBean, this method&#xA;     * throws {@link InstanceNotFoundException}.&lt;/p>&#xA;     *&#xA;     * &lt;p>Otherwise, let&lt;br>&#xA;     * X be the MBean named by &lt;code>name&lt;/code>,&lt;br>&#xA;     * L be the ClassLoader of X,&lt;br>&#xA;     * N be the class name in X's {@link MBeanInfo}.&lt;/p>&#xA;     *&#xA;     * &lt;p>If N equals &lt;code>className&lt;/code>, the result is true.&lt;/p>&#xA;     *&#xA;     * &lt;p>Otherwise, if L successfully loads both N and&#xA;     * &lt;code>className&lt;/code>, and the second class is assignable from&#xA;     * the first, the result is true.&lt;/p>&#xA;     *&#xA;     * &lt;p>Otherwise, the result is false.&lt;/p>&#xA;     * &#xA;     * @param name The &lt;CODE>ObjectName&lt;/CODE> of the MBean.&#xA;     * @param className The name of the class.&#xA;     *&#xA;     * @return true if the MBean specified is an instance of the&#xA;     * specified class according to the rules above, false otherwise.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * registered in the MBean server.&#xA;     *&#xA;     * @see Class#isAssignableFrom(Class)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="instantiate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Instantiates an object using the list of all class loaders&#xA;     * registered in the MBean server's {@link&#xA;     * javax.management.loading.ClassLoaderRepository Class Loader&#xA;     * Repository}.  The object's class should have a public&#xA;     * constructor.  This method returns a reference to the newly&#xA;     * created object.&#x9;The newly created object is not registered in&#xA;     * the MBean server.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method is equivalent to {@link&#xA;     * #instantiate(String,Object[],String[])&#xA;     * instantiate(className, (Object[]) null, (String[]) null)}.&lt;/p>&#xA;     *&#xA;     * @param className The class name of the object to be instantiated.    &#xA;     *&#xA;     * @return The newly instantiated object.&#x9; &#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or the&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> that occurred when trying to&#xA;     * invoke the object's constructor.&#xA;     * @exception MBeanException The constructor of the object has&#xA;     * thrown an exception&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="instantiate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loaderName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Instantiates an object using the class Loader specified by its&#xA;     * &lt;CODE>ObjectName&lt;/CODE>.&#x9; If the loader name is null, the&#xA;     * ClassLoader that loaded the MBean Server will be used.  The&#xA;     * object's class should have a public constructor.&#x9; This method&#xA;     * returns a reference to the newly created object.&#x9; The newly&#xA;     * created object is not registered in the MBean server.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method is equivalent to {@link&#xA;     * #instantiate(String,ObjectName,Object[],String[])&#xA;     * instantiate(className, loaderName, (Object[]) null, (String[])&#xA;     * null)}.&lt;/p>&#xA;     *&#xA;     * @param className The class name of the MBean to be instantiated.&#x9;   &#xA;     * @param loaderName The object name of the class loader to be used.&#xA;     *&#xA;     * @return The newly instantiated object.&#x9; &#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or the&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> that occurred when trying to&#xA;     * invoke the object's constructor.&#xA;     * @exception MBeanException The constructor of the object has&#xA;     * thrown an exception.&#xA;     * @exception InstanceNotFoundException The specified class loader&#xA;     * is not registered in the MBeanServer.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="instantiate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="signature">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Instantiates an object using the list of all class loaders&#xA;     * registered in the MBean server {@link&#xA;     * javax.management.loading.ClassLoaderRepository Class Loader&#xA;     * Repository}.  The object's class should have a public&#xA;     * constructor.  The call returns a reference to the newly created&#xA;     * object.&#x9;The newly created object is not registered in the&#xA;     * MBean server.&lt;/p>&#xA;     *&#xA;     * @param className The class name of the object to be instantiated.&#xA;     * @param params An array containing the parameters of the&#xA;     * constructor to be invoked.&#xA;     * @param signature An array containing the signature of the&#xA;     * constructor to be invoked.&#xA;     *&#xA;     * @return The newly instantiated object.&#x9; &#xA;     *&#xA;     * @exception ReflectionException Wraps a&#xA;     * &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or the&#xA;     * &lt;CODE>java.lang.Exception&lt;/CODE> that occurred when trying to&#xA;     * invoke the object's constructor.&#xA;     * @exception MBeanException The constructor of the object has&#xA;     * thrown an exception&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="instantiate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loaderName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="signature">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="MBeanException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Instantiates an object. The class loader to be used is&#xA;     * identified by its object name. If the object name of the loader&#xA;     * is null, the ClassLoader that loaded the MBean server will be&#xA;     * used.  The object's class should have a public constructor.&#xA;     * The call returns a reference to the newly created object.  The&#xA;     * newly created object is not registered in the MBean server.&lt;/p>&#xA;     *&#xA;     * @param className The class name of the object to be instantiated.&#xA;     * @param params An array containing the parameters of the&#xA;     * constructor to be invoked.&#xA;     * @param signature An array containing the signature of the&#xA;     * constructor to be invoked.&#xA;     * @param loaderName The object name of the class loader to be used.&#xA;     *&#xA;     * @return The newly instantiated object.&#x9; &#xA;     *&#xA;     * @exception ReflectionException Wraps a &lt;CODE>java.lang.ClassNotFoundException&lt;/CODE> or the &lt;CODE>java.lang.Exception&lt;/CODE> that &#xA;     * occurred when trying to invoke the object's constructor.&#x9; &#xA;     * @exception MBeanException The constructor of the object has&#xA;     * thrown an exception&#xA;     * @exception InstanceNotFoundException The specified class loader&#xA;     * is not registered in the MBean server.&#xA;     * @exception RuntimeOperationsException Wraps a&#xA;     * &lt;CODE>java.lang.IllegalArgumentException&lt;/CODE>: The className&#xA;     * passed in parameter is null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="deserialize">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/io/ObjectInputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="OperationsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/**&#xA;     * &lt;p>De-serializes a byte array in the context of the class loader &#xA;     * of an MBean.&lt;/p>&#xA;     *&#xA;     * @param name The name of the MBean whose class loader should be&#xA;     * used for the de-serialization.&#xA;     * @param data The byte array to be de-sererialized.&#xA;     *&#xA;     * @return The de-serialized object stream.&#xA;     *&#xA;     * @exception InstanceNotFoundException The MBean specified is not&#xA;     * found.&#xA;     * @exception OperationsException Any of the usual Input/Output&#xA;     * related exceptions.&#xA;     *&#xA;     * @deprecated Use {@link #getClassLoaderFor getClassLoaderFor} to&#xA;     * obtain the appropriate class loader for deserialization.&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="../../java/lang/Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="deserialize">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/io/ObjectInputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="OperationsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/**&#xA;     * &lt;p>De-serializes a byte array in the context of a given MBean&#xA;     * class loader.  The class loader is found by loading the class&#xA;     * &lt;code>className&lt;/code> through the {@link&#xA;     * javax.management.loading.ClassLoaderRepository Class Loader&#xA;     * Repository}.  The resultant class's class loader is the one to&#xA;     * use.&#xA;     *&#xA;     * @param className The name of the class whose class loader should be&#xA;     * used for the de-serialization.&#xA;     * @param data The byte array to be de-sererialized.&#xA;     *&#xA;     * @return  The de-serialized object stream.&#xA;     *&#xA;     * @exception OperationsException Any of the usual Input/Output&#xA;     * related exceptions.&#xA;     * @exception ReflectionException The specified class could not be&#xA;     * loaded by the class loader repository&#xA;     *&#xA;     * @deprecated Use {@link #getClassLoaderRepository} to obtain the&#xA;     * class loader repository and use it to deserialize.&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="../../java/lang/Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="deserialize">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/io/ObjectInputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loaderName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="OperationsException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ReflectionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="annotations:AnnotationInstance">
+        <comments>/**&#xA;     * &lt;p>De-serializes a byte array in the context of a given MBean&#xA;     * class loader.  The class loader is the one that loaded the&#xA;     * class with name &quot;className&quot;.  The name of the class loader to&#xA;     * be used for loading the specified class is specified.  If null,&#xA;     * the MBean Server's class loader will be used.&lt;/p>&#xA;     *&#xA;     * @param className The name of the class whose class loader should be&#xA;     * used for the de-serialization.&#xA;     * @param data The byte array to be de-sererialized.&#xA;     * @param loaderName The name of the class loader to be used for&#xA;     * loading the specified class.  If null, the MBean Server's class&#xA;     * loader will be used.&#xA;     *&#xA;     * @return  The de-serialized object stream.&#xA;     *&#xA;     * @exception InstanceNotFoundException The specified class loader&#xA;     * MBean is not found.&#xA;     * @exception OperationsException Any of the usual Input/Output&#xA;     * related exceptions.&#xA;     * @exception ReflectionException The specified class could not be&#xA;     * loaded by the specified class loader.&#xA;     *&#xA;     * @deprecated Use {@link #getClassLoader getClassLoader} to obtain&#xA;     * the class loader for deserialization.&#xA;     */</comments>
+        <annotation xsi:type="classifiers:Annotation" href="../../java/lang/Deprecated.class.xmi#//@classifiers.0"/>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getClassLoaderFor">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/ClassLoader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mbeanName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return the {@link java.lang.ClassLoader} that was used for&#xA;     * loading the class of the named MBean.&lt;/p>&#xA;     *&#xA;     * @param mbeanName The ObjectName of the MBean.&#xA;     *&#xA;     * @return The ClassLoader used for that MBean.  If &lt;var>l&lt;/var>&#xA;     * is the MBean's actual ClassLoader, and &lt;var>r&lt;/var> is the&#xA;     * returned value, then either:&#xA;     *&#xA;     * &lt;ul>&#xA;     * &lt;li>&lt;var>r&lt;/var> is identical to &lt;var>l&lt;/var>; or&#xA;     * &lt;li>the result of &lt;var>r&lt;/var>{@link&#xA;     * ClassLoader#loadClass(String) .loadClass(&lt;var>s&lt;/var>)} is the&#xA;     * same as &lt;var>l&lt;/var>{@link ClassLoader#loadClass(String)&#xA;     * .loadClass(&lt;var>s&lt;/var>)} for any string &lt;var>s&lt;/var>.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * What this means is that the ClassLoader may be wrapped in&#xA;     * another ClassLoader for security or other reasons.&#xA;     *&#xA;     * @exception InstanceNotFoundException if the named MBean is not found.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getClassLoader">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/ClassLoader.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="loaderName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ObjectName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="InstanceNotFoundException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return the named {@link java.lang.ClassLoader}.&lt;/p>&#xA;     *&#xA;     * @param loaderName The ObjectName of the ClassLoader.  May be&#xA;     * null, in which case the MBean server's own ClassLoader is&#xA;     * returned.&#xA;     *&#xA;     * @return The named ClassLoader.  If &lt;var>l&lt;/var> is the actual&#xA;     * ClassLoader with that name, and &lt;var>r&lt;/var> is the returned&#xA;     * value, then either:&#xA;     *&#xA;     * &lt;ul>&#xA;     * &lt;li>&lt;var>r&lt;/var> is identical to &lt;var>l&lt;/var>; or&#xA;     * &lt;li>the result of &lt;var>r&lt;/var>{@link&#xA;     * ClassLoader#loadClass(String) .loadClass(&lt;var>s&lt;/var>)} is the&#xA;     * same as &lt;var>l&lt;/var>{@link ClassLoader#loadClass(String)&#xA;     * .loadClass(&lt;var>s&lt;/var>)} for any string &lt;var>s&lt;/var>.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * What this means is that the ClassLoader may be wrapped in&#xA;     * another ClassLoader for security or other reasons.&#xA;     *&#xA;     * @exception InstanceNotFoundException if the named ClassLoader is &#xA;     *    not found.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getClassLoaderRepository">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="loading/ClassLoaderRepository.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return the ClassLoaderRepository for this MBeanServer.&#xA;     * @return The ClassLoaderRepository for this MBeanServer.&#xA;     *&#xA;     * @since.unbundled JMX 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>This is the interface for MBean manipulation on the agent&#xA; * side. It contains the methods necessary for the creation,&#xA; * registration, and deletion of MBeans as well as the access methods&#xA; * for registered MBeans.  This is the core component of the JMX&#xA; * infrastructure.&lt;/p>&#xA; *&#xA; * &lt;p>User code does not usually implement this interface.  Instead,&#xA; * an object that implements this interface is obtained with one of&#xA; * the methods in the {@link MBeanServerFactory} class.&lt;/p>&#xA; *&#xA; * &lt;p>Every MBean which is added to the MBean server becomes&#xA; * manageable: its attributes and operations become remotely&#xA; * accessible through the connectors/adaptors connected to that MBean&#xA; * server.  A Java object cannot be registered in the MBean server&#xA; * unless it is a JMX compliant MBean.&lt;/p>&#xA; *&#xA; * &lt;p>When an MBean is registered or unregistered in the MBean server&#xA; * a {@link javax.management.MBeanServerNotification&#xA; * MBeanServerNotification} Notification is emitted. To register an&#xA; * object as listener to MBeanServerNotifications you should call the&#xA; * MBean server method {@link #addNotificationListener&#xA; * addNotificationListener} with &lt;CODE>ObjectName&lt;/CODE> the&#xA; * &lt;CODE>ObjectName&lt;/CODE> of the {@link&#xA; * javax.management.MBeanServerDelegate MBeanServerDelegate}.  This&#xA; * &lt;CODE>ObjectName&lt;/CODE> is: &lt;BR>&#xA; * &lt;CODE>JMImplementation:type=MBeanServerDelegate&lt;/CODE>.&lt;/p>&#xA; *&#xA; * &lt;p>An object obtained from the {@link&#xA; * MBeanServerFactory#createMBeanServer(String) createMBeanServer} or&#xA; * {@link MBeanServerFactory#newMBeanServer(String) newMBeanServer}&#xA; * methods of the {@link MBeanServerFactory} class applies security&#xA; * checks to its methods, as follows.&lt;/p>&#xA; *&#xA; * &lt;p>First, if there is no security manager ({@link&#xA; * System#getSecurityManager()} is null), then no checks are made.&lt;/p>&#xA; *&#xA; * &lt;p>Assuming there is a security manager, the checks are made as&#xA; * detailed below.  In what follows, &lt;code>className&lt;/code> is the&#xA; * string returned by {@link MBeanInfo#getClassName()} for the target&#xA; * MBean.&lt;/p>&#xA; *&#xA; * &lt;p>If a security check fails, the method throws {@link&#xA; * SecurityException}.&lt;/p>&#xA; *&#xA; * &lt;p>For methods that can throw {@link InstanceNotFoundException},&#xA; * this exception is thrown for a non-existent MBean, regardless of&#xA; * permissions.  This is because a non-existent MBean has no&#xA; * &lt;code>className&lt;/code>.&lt;/p>&#xA; *&#xA; * &lt;ul>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #invoke invoke} method, the caller's&#xA; * permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, operationName, name, &quot;invoke&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getAttribute getAttribute} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, attribute, name, &quot;getAttribute&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getAttributes getAttributes} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;getAttribute&quot;)}.&#xA; * Additionally, for each attribute &lt;em>a&lt;/em> in the {@link&#xA; * AttributeList}, if the caller's permissions do not imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, &lt;em>a&lt;/em>, name, &quot;getAttribute&quot;)}, the&#xA; * MBean server will behave as if that attribute had not been in the&#xA; * supplied list.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #setAttribute setAttribute} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, attrName, name, &quot;setAttribute&quot;)}, where&#xA; * &lt;code>attrName&lt;/code> is {@link Attribute#getName()&#xA; * attribute.getName()}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #setAttributes setAttributes} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;setAttribute&quot;)}.&#xA; * Additionally, for each attribute &lt;em>a&lt;/em> in the {@link&#xA; * AttributeList}, if the caller's permissions do not imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, &lt;em>a&lt;/em>, name, &quot;setAttribute&quot;)}, the&#xA; * MBean server will behave as if that attribute had not been in the&#xA; * supplied list.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the &lt;code>addNotificationListener&lt;/code> methods,&#xA; * the caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name,&#xA; * &quot;addNotificationListener&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the &lt;code>removeNotificationListener&lt;/code> methods,&#xA; * the caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name,&#xA; * &quot;removeNotificationListener&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getMBeanInfo getMBeanInfo} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;getMBeanInfo&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getObjectInstance getObjectInstance} method,&#xA; * the caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;getObjectInstance&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #isInstanceOf isInstanceOf} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;isInstanceOf&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #queryMBeans queryMBeans} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(null, null, name, &quot;queryMBeans&quot;)}.&#xA; * Additionally, for each MBean that matches &lt;code>name&lt;/code>,&#xA; * if the caller's permissions do not imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;queryMBeans&quot;)}, the&#xA; * MBean server will behave as if that MBean did not exist.&lt;/p>&#xA; *&#xA; * &lt;p>Certain query elements perform operations on the MBean server.&#xA; * If the caller does not have the required permissions for a given&#xA; * MBean, that MBean will not be included in the result of the query.&#xA; * The standard query elements that are affected are {@link&#xA; * Query#attr(String)}, {@link Query#attr(String,String)}, and {@link&#xA; * Query#classattr()}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #queryNames queryNames} method, the checks&#xA; * are the same as for &lt;code>queryMBeans&lt;/code> except that&#xA; * &lt;code>&quot;queryNames&quot;&lt;/code> is used instead of&#xA; * &lt;code>&quot;queryMBeans&quot;&lt;/code> in the &lt;code>MBeanPermission&lt;/code>&#xA; * objects.  Note that a &lt;code>&quot;queryMBeans&quot;&lt;/code> permission implies&#xA; * the corresponding &lt;code>&quot;queryNames&quot;&lt;/code> permission.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getDomains getDomains} method, the caller's&#xA; * permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(null, null, name, &quot;getDomains&quot;)}.  Additionally,&#xA; * for each domain &lt;var>d&lt;/var> in the returned array, if the caller's&#xA; * permissions do not imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(null, null, new ObjectName(&quot;&lt;var>d&lt;/var>:x=x&quot;),&#xA; * &quot;getDomains&quot;)}, the domain is eliminated from the array.  Here,&#xA; * &lt;code>x=x&lt;/code> is any &lt;var>key=value&lt;/var> pair, needed to&#xA; * satisfy ObjectName's constructor but not otherwise relevant.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getClassLoader getClassLoader} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, loaderName,&#xA; * &quot;getClassLoader&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getClassLoaderFor getClassLoaderFor} method,&#xA; * the caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, mbeanName,&#xA; * &quot;getClassLoaderFor&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #getClassLoaderRepository&#xA; * getClassLoaderRepository} method, the caller's permissions must&#xA; * imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(null, null, null, &quot;getClassLoaderRepository&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the deprecated &lt;code>deserialize&lt;/code> methods, the&#xA; * required permissions are the same as for the methods that replace&#xA; * them.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the &lt;code>instantiate&lt;/code> methods, the caller's&#xA; * permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, null, &quot;instantiate&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #registerMBean registerMBean} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;registerMBean&quot;)}.  Here&#xA; * &lt;code>className&lt;/code> is the string returned by {@link&#xA; * MBeanInfo#getClassName()} for an object of this class.&#xA; *&#xA; * &lt;p>If the &lt;code>MBeanPermission&lt;/code> check succeeds, the MBean's&#xA; * class is validated by checking that its {@link&#xA; * java.security.ProtectionDomain ProtectionDomain} implies {@link&#xA; * MBeanTrustPermission#MBeanTrustPermission(String)&#xA; * MBeanTrustPermission(&quot;register&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;p>Finally, if the &lt;code>name&lt;/code> argument is null, another&#xA; * &lt;code>MBeanPermission&lt;/code> check is made using the&#xA; * &lt;code>ObjectName&lt;/code> returned by {@link&#xA; * MBeanRegistration#preRegister MBeanRegistration.preRegister}.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the &lt;code>createMBean&lt;/code> methods, the caller's&#xA; * permissions must imply the permissions needed by the equivalent&#xA; * &lt;code>instantiate&lt;/code> followed by&#xA; * &lt;code>registerMBean&lt;/code>.&lt;/p>&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #unregisterMBean unregisterMBean} method,&#xA; * the caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(className, null, name, &quot;unregisterMBean&quot;)}.&lt;/p>&#xA; *&#xA; * &lt;/ul>&#xA; *&#xA; * @since 1.5&#xA; */</comments>
+      <comments>/* DELETED:&#xA; *&#xA; * &lt;li>&lt;p>For the {@link #isRegistered isRegistered} method, the&#xA; * caller's permissions must imply {@link&#xA; * MBeanPermission#MBeanPermission(String,String,ObjectName,String)&#xA; * MBeanPermission(null, null, name, &quot;isRegistered&quot;)}.&lt;/p>&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="MBeanServerConnection.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

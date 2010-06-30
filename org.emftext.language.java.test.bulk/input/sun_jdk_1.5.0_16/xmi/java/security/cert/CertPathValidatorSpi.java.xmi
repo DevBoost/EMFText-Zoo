@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="CertPathValidatorSpi.java">
+  <comments>/*&#xA; * @(#)CertPathValidatorSpi.java&#x9;1.5 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>security</namespaces>
+  <namespaces>cert</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../InvalidAlgorithmParameterException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="CertPathValidatorSpi">
+    <members xsi:type="members:Constructor" name="CertPathValidatorSpi">
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The default constructor.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="engineValidate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="CertPathValidatorResult.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="certPath">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="CertPath.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="params">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="CertPathParameters.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="CertPathValidatorException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../InvalidAlgorithmParameterException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Validates the specified certification path using the specified &#xA;     * algorithm parameter set.&#xA;     * &lt;p>&#xA;     * The &lt;code>CertPath&lt;/code> specified must be of a type that is &#xA;     * supported by the validation algorithm, otherwise an &#xA;     * &lt;code>InvalidAlgorithmParameterException&lt;/code> will be thrown. For &#xA;     * example, a &lt;code>CertPathValidator&lt;/code> that implements the PKIX &#xA;     * algorithm validates &lt;code>CertPath&lt;/code> objects of type X.509.&#xA;     *&#xA;     * @param certPath the &lt;code>CertPath&lt;/code> to be validated&#xA;     * @param params the algorithm parameters&#xA;     * @return the result of the validation algorithm&#xA;     * @exception CertPathValidatorException if the &lt;code>CertPath&lt;/code> &#xA;     * does not validate&#xA;     * @exception InvalidAlgorithmParameterException if the specified &#xA;     * parameters or the type of the specified &lt;code>CertPath&lt;/code> are &#xA;     * inappropriate for this &lt;code>CertPathValidator&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; *&#xA; * The &lt;i>Service Provider Interface&lt;/i> (&lt;b>SPI&lt;/b>) &#xA; * for the {@link CertPathValidator CertPathValidator} class. All &#xA; * &lt;code>CertPathValidator&lt;/code> implementations must include a class (the&#xA; * SPI class) that extends this class (&lt;code>CertPathValidatorSpi&lt;/code>) &#xA; * and implements all of its methods. In general, instances of this class &#xA; * should only be accessed through the &lt;code>CertPathValidator&lt;/code> class. &#xA; * For details, see the Java Cryptography Architecture.&#xA; * &lt;p>&#xA; * &lt;b>Concurrent Access&lt;/b>&#xA; * &lt;p>&#xA; * Instances of this class need not be protected against concurrent&#xA; * access from multiple threads. Threads that need to access a single&#xA; * &lt;code>CertPathValidatorSpi&lt;/code> instance concurrently should synchronize&#xA; * amongst themselves and provide the necessary locking before calling the&#xA; * wrapping &lt;code>CertPathValidator&lt;/code> object.&#xA; * &lt;p>&#xA; * However, implementations of &lt;code>CertPathValidatorSpi&lt;/code> may still&#xA; * encounter concurrency issues, since multiple threads each&#xA; * manipulating a different &lt;code>CertPathValidatorSpi&lt;/code> instance need not&#xA; * synchronize.&#xA; *&#xA; * @version &#x9;1.5 12/19/03&#xA; * @since&#x9;1.4&#xA; * @author&#x9;Yassir Elley&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+  </classifiers>
+</containers:CompilationUnit>

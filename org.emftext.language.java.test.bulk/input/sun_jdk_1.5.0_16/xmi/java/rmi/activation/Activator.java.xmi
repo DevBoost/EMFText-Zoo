@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Activator.java">
+  <comments>/*&#xA; * @(#)Activator.java&#x9;1.18 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>rmi</namespaces>
+  <namespaces>activation</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>rmi</namespaces>
+    <namespaces>activation</namespaces>
+    <classifier xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Activator">
+    <members xsi:type="members:InterfaceMethod" name="activate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../MarshalledObject.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="id">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="ActivationID.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="force">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="ActivationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="UnknownObjectException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../RemoteException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Activate the object associated with the activation identifier,&#xA;     * &lt;code>id&lt;/code>. If the activator knows the object to be active&#xA;     * already, and &lt;code>force&lt;/code> is false , the stub with a&#xA;     * &quot;live&quot; reference is returned immediately to the caller;&#xA;     * otherwise, if the activator does not know that corresponding&#xA;     * the remote object is active, the activator uses the activation&#xA;     * descriptor information (previously registered) to determine the&#xA;     * group (VM) in which the object should be activated. If an&#xA;     * &lt;code>ActivationInstantiator&lt;/code> corresponding to the&#xA;     * object's group descriptor already exists, the activator invokes&#xA;     * the activation group's &lt;code>newInstance&lt;/code> method passing&#xA;     * it the object's id and descriptor. &lt;p>&#xA;     *&#xA;     * If the activation group for the object's group descriptor does&#xA;     * not yet exist, the activator starts an&#xA;     * &lt;code>ActivationInstantiator&lt;/code> executing (by spawning a&#xA;     * child process, for example). When the activator receives the&#xA;     * activation group's call back (via the&#xA;     * &lt;code>ActivationSystem&lt;/code>'s &lt;code>activeGroup&lt;/code>&#xA;     * method) specifying the activation group's reference, the&#xA;     * activator can then invoke that activation instantiator's&#xA;     * &lt;code>newInstance&lt;/code> method to forward each pending&#xA;     * activation request to the activation group and return the&#xA;     * result (a marshalled remote object reference, a stub) to the&#xA;     * caller.&lt;p>&#xA;     *&#xA;     * Note that the activator receives a &quot;marshalled&quot; object instead of a&#xA;     * Remote object so that the activator does not need to load the&#xA;     * code for that object, or participate in distributed garbage&#xA;     * collection for that object. If the activator kept a strong&#xA;     * reference to the remote object, the activator would then&#xA;     * prevent the object from being garbage collected under the&#xA;     * normal distributed garbage collection mechanism. &lt;p>&#xA;     *&#xA;     * @param id the activation identifier for the object being activated&#xA;     * @param force if true, the activator contacts the group to obtain&#xA;     * the remote object's reference; if false, returning the cached value&#xA;     * is allowed.&#xA;     * @return the remote object (a stub) in a marshalled form&#xA;     * @exception ActivationException if object activation fails&#xA;     * @exception UnknownObjectException if object is unknown (not registered)&#xA;     * @exception RemoteException if remote call fails&#xA;     * @since 1.2&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>Activator&lt;/code> facilitates remote object activation. A&#xA; * &quot;faulting&quot; remote reference calls the activator's&#xA; * &lt;code>activate&lt;/code> method to obtain a &quot;live&quot; reference to a&#xA; * &quot;activatable&quot; remote object. Upon receiving a request for activation,&#xA; * the activator looks up the activation descriptor for the activation&#xA; * identifier, &lt;code>id&lt;/code>, determines the group in which the&#xA; * object should be activated initiates object re-creation via the&#xA; * group's &lt;code>ActivationInstantiator&lt;/code> (via a call to the&#xA; * &lt;code>newInstance&lt;/code> method). The activator initiates the&#xA; * execution of activation groups as necessary. For example, if an&#xA; * activation group for a specific group identifier is not already&#xA; * executing, the activator initiates the execution of a VM for the&#xA; * group. &lt;p>&#xA; *&#xA; * The &lt;code>Activator&lt;/code> works closely with&#xA; * &lt;code>ActivationSystem&lt;/code>, which provides a means for registering&#xA; * groups and objects within those groups, and &lt;code>ActivationMonitor&lt;/code>,&#xA; * which recives information about active and inactive objects and inactive&#xA; * groups. &lt;p>&#xA; *&#xA; * The activator is responsible for monitoring and detecting when&#xA; * activation groups fail so that it can remove stale remote references&#xA; * to groups and active object's within those groups.&lt;p>&#xA; *&#xA; * @author &#x9;Ann Wollrath&#xA; * @version&#x9;1.18, 12/19/03&#xA; * @see &#x9;ActivationInstantiator&#xA; * @see&#x9;&#x9;ActivationGroupDesc&#xA; * @see&#x9;&#x9;ActivationGroupID&#xA; * @since &#x9;1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../Remote.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

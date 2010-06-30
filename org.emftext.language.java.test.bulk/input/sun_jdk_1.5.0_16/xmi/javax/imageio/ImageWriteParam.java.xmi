@@ -1,0 +1,2348 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/expressions ../../java.ecore#/5 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../java.ecore#/8 http://www.emftext.org/java/literals ../../java.ecore#/9 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/operators ../../java.ecore#/12 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/references ../../java.ecore#/14 http://www.emftext.org/java/statements ../../java.ecore#/15 http://www.emftext.org/java/types ../../java.ecore#/16 http://www.emftext.org/java/variables ../../java.ecore#/17" name="ImageWriteParam.java">
+  <comments>/*&#xA; * @(#)ImageWriteParam.java&#x9;1.62 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>imageio</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>color</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/awt/color/ICC_Profile.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/awt/image/LookupTable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>image</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../java/awt/image/RenderedImage.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../java/util/Locale.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="ImageWriteParam">
+    <members xsi:type="members:Field" name="MODE_DISABLED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A constant value that may be passed into methods such as&#xA;     * &lt;code>setTilingMode&lt;/code>, &lt;code>setProgressiveMode&lt;/code>,&#xA;     * and &lt;code>setCompressionMode&lt;/code> to disable a feature for&#xA;     * future writes.  That is, when this mode is set the stream will&#xA;     * &lt;b>not&lt;/b> be tiled, progressive, or compressed, and the&#xA;     * relevant accessor methods will throw an&#xA;     * &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     * @see #MODE_EXPLICIT&#xA;     * @see #MODE_COPY_FROM_METADATA&#xA;     * @see #MODE_DEFAULT&#xA;     * @see #setProgressiveMode&#xA;     * @see #getProgressiveMode&#xA;     * @see #setTilingMode&#xA;     * @see #getTilingMode&#xA;     * @see #setCompressionMode&#xA;     * @see #getCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MODE_DEFAULT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A constant value that may be passed into methods such as&#xA;     * &lt;code>setTilingMode&lt;/code>,&#xA;     * &lt;code>setProgressiveMode&lt;/code>, and&#xA;     * &lt;code>setCompressionMode&lt;/code> to enable that feature for&#xA;     * future writes.  That is, when this mode is enabled the stream&#xA;     * will be tiled, progressive, or compressed according to a&#xA;     * sensible default chosen internally by the writer in a plug-in&#xA;     * dependent way, and the relevant accessor methods will&#xA;     * throw an &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     * @see #MODE_DISABLED&#xA;     * @see #MODE_EXPLICIT&#xA;     * @see #MODE_COPY_FROM_METADATA&#xA;     * @see #setProgressiveMode&#xA;     * @see #getProgressiveMode&#xA;     * @see #setTilingMode&#xA;     * @see #getTilingMode&#xA;     * @see #setCompressionMode&#xA;     * @see #getCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MODE_EXPLICIT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A constant value that may be passed into methods such as&#xA;     * &lt;code>setTilingMode&lt;/code> or &lt;code>setCompressionMode&lt;/code>&#xA;     * to enable a feature for future writes. That is, when this mode&#xA;     * is set the stream will be tiled or compressed according to&#xA;     * additional information supplied to the corresponding&#xA;     * &lt;code>set&lt;/code> methods in this class and retrievable from the&#xA;     * corresponding &lt;code>get&lt;/code> methods.  Note that this mode is&#xA;     * not supported for progressive output.&#xA;     *&#xA;     * @see #MODE_DISABLED&#xA;     * @see #MODE_COPY_FROM_METADATA&#xA;     * @see #MODE_DEFAULT&#xA;     * @see #setProgressiveMode&#xA;     * @see #getProgressiveMode&#xA;     * @see #setTilingMode&#xA;     * @see #getTilingMode&#xA;     * @see #setCompressionMode&#xA;     * @see #getCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MODE_COPY_FROM_METADATA">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * A constant value that may be passed into methods such as&#xA;     * &lt;code>setTilingMode&lt;/code>, &lt;code>setProgressiveMode&lt;/code>, or&#xA;     * &lt;code>setCompressionMode&lt;/code> to enable that feature for&#xA;     * future writes.  That is, when this mode is enabled the stream&#xA;     * will be tiled, progressive, or compressed based on the contents&#xA;     * of stream and/or image metadata passed into the write&#xA;     * operation, and any relevant accessor methods will throw an&#xA;     * &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     * &lt;p> This is the default mode for all features, so that a read&#xA;     * including metadata followed by a write including metadata will&#xA;     * preserve as much information as possible.&#xA;     *&#xA;     * @see #MODE_DISABLED&#xA;     * @see #MODE_EXPLICIT&#xA;     * @see #MODE_DEFAULT&#xA;     * @see #setProgressiveMode&#xA;     * @see #getProgressiveMode&#xA;     * @see #setTilingMode&#xA;     * @see #getTilingMode&#xA;     * @see #setCompressionMode&#xA;     * @see #getCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MAX_MODE">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// If more modes are added, this should be updated.</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="canWriteTiles">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>boolean&lt;/code> that is &lt;code>true&lt;/code> if this&#xA;     * &lt;code>ImageWriteParam&lt;/code> allows tile width and tile height&#xA;     * parameters to be set.  By default, the value is&#xA;     * &lt;code>false&lt;/code>.  Subclasses must set the value manually.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support writing tiles should ensure&#xA;     * that this value is set to &lt;code>false&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="tilingMode">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The mode controlling tiling settings, which Must be&#xA;     * set to one of the four &lt;code>MODE_*&lt;/code> values.  The default&#xA;     * is &lt;code>MODE_COPY_FROM_METADATA&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not writing tiles may ignore this value.&#xA;     *&#xA;     * @see #MODE_DISABLED&#xA;     * @see #MODE_EXPLICIT&#xA;     * @see #MODE_COPY_FROM_METADATA&#xA;     * @see #MODE_DEFAULT&#xA;     * @see #setTilingMode&#xA;     * @see #getTilingMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="preferredTileSizes">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * An array of preferred tile size range pairs.  The default value&#xA;     * is &lt;code>null&lt;/code>, which indicates that there are no&#xA;     * preferred sizes.  If the value is non-&lt;code>null&lt;/code>, it&#xA;     * must have an even length of at least two.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support writing tiles may ignore&#xA;     * this value.&#xA;     *&#xA;     * @see #getPreferredTileSizes&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="tilingSet">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>boolean&lt;/code> that is &lt;code>true&lt;/code> if tiling&#xA;     * parameters have been specified.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support writing tiles may ignore&#xA;     * this value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="tileWidth">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The width of each tile if tiling has been set, or 0 otherwise.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support tiling may ignore this&#xA;     * value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="tileHeight">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The height of each tile if tiling has been set, or 0 otherwise.&#xA;     * The initial value is &lt;code>0&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support tiling may ignore this&#xA;     * value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="canOffsetTiles">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>boolean&lt;/code> that is &lt;code>true&lt;/code> if this&#xA;     * &lt;code>ImageWriteParam&lt;/code> allows tiling grid offset&#xA;     * parameters to be set.  By default, the value is&#xA;     * &lt;code>false&lt;/code>.  Subclasses must set the value manually.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support writing tiles, or that&#xA;     * supprt writing but not offsetting tiles must ensure that this&#xA;     * value is set to &lt;code>false&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="tileGridXOffset">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The amount by which the tile grid origin should be offset&#xA;     * horizontally from the image origin if tiling has been set,&#xA;     * or 0 otherwise.  The initial value is &lt;code>0&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support offsetting tiles may ignore&#xA;     * this value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="tileGridYOffset">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The amount by which the tile grid origin should be offset&#xA;     * vertically from the image origin if tiling has been set,&#xA;     * or 0 otherwise.  The initial value is &lt;code>0&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support offsetting tiles may ignore&#xA;     * this value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="canWriteProgressive">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>boolean&lt;/code> that is &lt;code>true&lt;/code> if this&#xA;     * &lt;code>ImageWriteParam&lt;/code> allows images to be written as a&#xA;     * progressive sequence of increasing quality passes.  By default,&#xA;     * the value is &lt;code>false&lt;/code>.  Subclasses must set the value&#xA;     * manually.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support progressive encoding must&#xA;     * ensure that this value is set to &lt;code>false&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="progressiveMode">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The mode controlling progressive encoding, which must be set to&#xA;     * one of the four &lt;code>MODE_*&lt;/code> values, except&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  The default is&#xA;     * &lt;code>MODE_COPY_FROM_METADATA&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support progressive encoding may&#xA;     * ignore this value.&#xA;     *&#xA;     * @see #MODE_DISABLED&#xA;     * @see #MODE_EXPLICIT&#xA;     * @see #MODE_COPY_FROM_METADATA&#xA;     * @see #MODE_DEFAULT&#xA;     * @see #setProgressiveMode&#xA;     * @see #getProgressiveMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="canWriteCompressed">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>boolean&lt;/code> that is &lt;code>true&lt;/code> if this writer&#xA;     * can write images using compression. By default, the value is&#xA;     * &lt;code>false&lt;/code>.  Subclasses must set the value manually.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support compression must ensure that&#xA;     * this value is set to &lt;code>false&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="compressionMode">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The mode controlling compression settings, which must be set to&#xA;     * one of the four &lt;code>MODE_*&lt;/code> values.  The default is&#xA;     * &lt;code>MODE_COPY_FROM_METADATA&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support compression may ignore this&#xA;     * value.&#xA;     *&#xA;     * @see #MODE_DISABLED&#xA;     * @see #MODE_EXPLICIT&#xA;     * @see #MODE_COPY_FROM_METADATA&#xA;     * @see #MODE_DEFAULT&#xA;     * @see #setCompressionMode&#xA;     * @see #getCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="compressionTypes">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * An array of &lt;code>String&lt;/code>s containing the names of the&#xA;     * available compression types.  Subclasses must set the value&#xA;     * manually.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support compression may ignore this&#xA;     * value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="compressionType">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>String&lt;/code> containing the name of the current&#xA;     * compression type, or &lt;code>null&lt;/code> if none is set.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support compression may ignore this&#xA;     * value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="compressionQuality">
+      <initialValue xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>float&lt;/code> containing the current compression quality&#xA;     * setting.  The initial value is &lt;code>1.0F&lt;/code>.&#xA;     *&#xA;     * &lt;p> Subclasses that do not support compression may ignore this&#xA;     * value.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="locale">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/util/Locale.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * A &lt;code>Locale&lt;/code> to be used to localize compression type&#xA;     * names and quality descriptions, or &lt;code>null&lt;/code> to use a&#xA;     * default &lt;code>Locale&lt;/code>.  Subclasses must set the value&#xA;     * manually.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="ImageWriteParam">
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Constructs an empty &lt;code>ImageWriteParam&lt;/code>.  It is up to&#xA;     * the subclass to set up the instance variables properly.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="ImageWriteParam">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locale">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/util/Locale.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs an &lt;code>ImageWriteParam&lt;/code> set to use a&#xA;     * given &lt;code>Locale&lt;/code>.&#xA;     *&#xA;     * @param locale a &lt;code>Locale&lt;/code> to be used to localize&#xA;     * compression type names and quality descriptions, or&#xA;     * &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="clonePreferredTileSizes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sizes">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// Return a deep copy of the array</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:NullLiteral"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="temp">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+              <next xsi:type="references:IdentifierReference"/>
+            </sizes>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.1/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.2/@init"/>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.2/@init"/>
+                  </arraySelectors>
+                </arguments>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.2/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+            <next xsi:type="references:IdentifierReference"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.2/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLocale">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/util/Locale.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the currently set &lt;code>Locale&lt;/code>, or&#xA;     * &lt;code>null&lt;/code> if only a default &lt;code>Locale&lt;/code> is&#xA;     * supported.&#xA;     *&#xA;     * @return the current &lt;code>Locale&lt;/code>, or &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="canWriteTiles">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the writer can perform tiling&#xA;     * while writing.  If this method returns &lt;code>false&lt;/code>, then&#xA;     * &lt;code>setTiling&lt;/code> will throw an&#xA;     * &lt;code>UnsupportedOperationException&lt;/code>.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the writer supports tiling.&#xA;     *&#xA;     * @see #canOffsetTiles()&#xA;     * @see #setTiling(int, int, int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="canOffsetTiles">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the writer can perform tiling with&#xA;     * non-zero grid offsets while writing.  If this method returns&#xA;     * &lt;code>false&lt;/code>, then &lt;code>setTiling&lt;/code> will throw an&#xA;     * &lt;code>UnsupportedOperationException&lt;/code> if the grid offset&#xA;     * arguments are not both zero.  If &lt;code>canWriteTiles&lt;/code>&#xA;     * returns &lt;code>false&lt;/code>, this method will return&#xA;     * &lt;code>false&lt;/code> as well.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the writer supports non-zero tile&#xA;     * offsets.&#xA;     *&#xA;     * @see #canWriteTiles()&#xA;     * @see #setTiling(int, int, int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTilingMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mode">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Determines whether the image will be tiled in the output&#xA;     * stream and, if it will, how the tiling parameters will be &#xA;     * determined.  The modes are interpreted as follows:&#xA;     *&#xA;     * &lt;ul>&#xA;     *&#xA;     * &lt;li>&lt;code>MODE_DISABLED&lt;/code> - The image will not be tiled.&#xA;     * &lt;code>setTiling&lt;/code> will throw an&#xA;     * &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     * &lt;li>&lt;code>MODE_DEFAULT&lt;/code> - The image will be tiled using&#xA;     * default parameters.  &lt;code>setTiling&lt;/code> will throw an&#xA;     * &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     * &lt;li>&lt;code>MODE_EXPLICIT&lt;/code> - The image will be tiled&#xA;     * according to parameters given in the {@link #setTiling&#xA;     * &lt;code>setTiling&lt;/code>} method.  Any previously set tiling&#xA;     * parameters are discarded.&#xA;     *&#xA;     * &lt;li>&lt;code>MODE_COPY_FROM_METADATA&lt;/code> - The image will&#xA;     * conform to the metadata object passed in to a write.&#xA;     * &lt;code>setTiling&lt;/code> will throw an&#xA;     * &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     * &lt;/ul>&#xA;     *&#xA;     * @param mode The mode to use for tiling.&#xA;     *&#xA;     * @exception UnsupportedOperationException if&#xA;     * &lt;code>canWriteTiles&lt;/code> returns &lt;code>false&lt;/code>.&#xA;     * @exception IllegalArgumentException if &lt;code>mode&lt;/code> is not&#xA;     * one of the modes listed above.&#xA;     *&#xA;     * @see #setTiling&#xA;     * @see #getTilingMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+          <children xsi:type="literals:BooleanLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Illegal value for mode!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.32"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTilingMode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current tiling mode, if tiling is supported.&#xA;     * Otherwise throws an &lt;code>UnsupportedOperationException&lt;/code>.&#xA;     *&#xA;     * @return the current tiling mode.&#xA;     *&#xA;     * @exception UnsupportedOperationException if&#xA;     * &lt;code>canWriteTiles&lt;/code> returns &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @see #setTilingMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPreferredTileSizes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of &lt;code>Dimension&lt;/code>s indicating the&#xA;     * legal size ranges for tiles as they will be encoded in the&#xA;     * output file or stream.  The returned array is a copy.&#xA;     *&#xA;     * &lt;p> The information is returned as a set of pairs; the first&#xA;     * element of a pair contains an (inclusive) minimum width and&#xA;     * height, and the second element contains an (inclusive) maximum&#xA;     * width and height.  Together, each pair defines a valid range of&#xA;     * sizes.  To specify a fixed size, use the same width and height&#xA;     * for both elements.  To specify an arbitrary range, a value of&#xA;     * &lt;code>null&lt;/code> is used in place of an actual array of&#xA;     * &lt;code>Dimension&lt;/code>s.&#xA;     *&#xA;     * &lt;p> If no array is specified on the constructor, but tiling is&#xA;     * allowed, then this method returns &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does&#xA;     * not support tiling.&#xA;     *&#xA;     * @return an array of &lt;code>Dimension&lt;/code>s with an even length&#xA;     * of at least two, or &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.24">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTiling">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tileWidth">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tileHeight">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tileGridXOffset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="tileGridYOffset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Specifies that the image should be tiled in the output stream.&#xA;     * The &lt;code>tileWidth&lt;/code> and &lt;code>tileHeight&lt;/code>&#xA;     * parameters specify the width and height of the tiles in the&#xA;     * file.  If the tile width or height is greater than the width or&#xA;     * height of the image, the image is not tiled in that dimension.&#xA;     *&#xA;     * &lt;p> If &lt;code>canOffsetTiles&lt;/code> returns &lt;code>false&lt;/code>,&#xA;     * then the &lt;code>tileGridXOffset&lt;/code> and&#xA;     * &lt;code>tileGridYOffset&lt;/code> parameters must be zero.&#xA;     *&#xA;     * @param tileWidth the width of each tile.&#xA;     * @param tileHeight the height of each tile.&#xA;     * @param tileGridXOffset the horizontal offset of the tile grid.&#xA;     * @param tileGridYOffset the vertical offset of the tile grid.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support tiling.&#xA;     * @exception IllegalStateException if the tiling mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support grid offsets, and the grid offsets are not both zero.&#xA;     * @exception IllegalArgumentException if the tile size is not&#xA;     * within one of the allowable ranges returned by&#xA;     * &lt;code>getPreferredTileSizes&lt;/code>.&#xA;     * @exception IllegalArgumentException if &lt;code>tileWidth&lt;/code>&#xA;     * or &lt;code>tileHeight&lt;/code> is less than or equal to 0.&#xA;     *&#xA;     * @see #canWriteTiles&#xA;     * @see #canOffsetTiles&#xA;     * @see #getTileWidth()&#xA;     * @see #getTileHeight()&#xA;     * @see #getTileGridXOffset()&#xA;     * @see #getTileGridYOffset()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="tile dimensions are non-positive!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:LessThanOrEqual"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.1"/>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <relationOperators xsi:type="operators:LessThanOrEqual"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tilesOffset">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="expressions:ConditionalOrExpression">
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.2"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </expression>
+            </children>
+            <children xsi:type="expressions:NestedExpression">
+              <expression xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.3"/>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </expression>
+            </children>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Can't offset tiles!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.27"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.3/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="ok">
+              <typeReference xsi:type="types:Boolean"/>
+              <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ForLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="min">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7">
+                    <arraySelectors>
+                      <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@init"/>
+                    </arraySelectors>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="max">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../java/awt/Dimension.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7">
+                    <arraySelectors>
+                      <position xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@init"/>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </position>
+                    </arraySelectors>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="literals:BooleanLiteral"/>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:Break"/>
+                </statement>
+                <condition xsi:type="expressions:ConditionalOrExpression">
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:RelationExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../java/awt/Dimension.class.xmi#//@classifiers.0/@members.0"/>
+                        </next>
+                      </children>
+                      <relationOperators xsi:type="operators:LessThan"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:RelationExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@statement/@statements.1/@variable">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../java/awt/Dimension.class.xmi#//@classifiers.0/@members.0"/>
+                        </next>
+                      </children>
+                      <relationOperators xsi:type="operators:GreaterThan"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:RelationExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.1"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@statement/@statements.0/@variable">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../java/awt/Dimension.class.xmi#//@classifiers.0/@members.1"/>
+                        </next>
+                      </children>
+                      <relationOperators xsi:type="operators:LessThan"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:RelationExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.1"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@statement/@statements.1/@variable">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../java/awt/Dimension.class.xmi#//@classifiers.0/@members.1"/>
+                        </next>
+                      </children>
+                      <relationOperators xsi:type="operators:GreaterThan"/>
+                    </expression>
+                  </children>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@init"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7">
+                <next xsi:type="references:IdentifierReference"/>
+              </children>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </condition>
+            <init xsi:type="variables:LocalVariable" name="i">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </init>
+            <updates xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.1/@init"/>
+              <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+              <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+            </updates>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="Illegal tile size!"/>
+                </throwable>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@statements.5/@statement/@statements.0/@variable"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.31/@parameters.3"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unsetTiling">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes any previous tile grid parameters specified by calls to&#xA;     * &lt;code>setTiling&lt;/code>.&#xA;     *&#xA;     * &lt;p> The default implementation sets the instance variables&#xA;     * &lt;code>tileWidth&lt;/code>, &lt;code>tileHeight&lt;/code>,&#xA;     * &lt;code>tileGridXOffset&lt;/code>, and&#xA;     * &lt;code>tileGridYOffset&lt;/code> to &lt;code>0&lt;/code>.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support tiling.&#xA;     * @exception IllegalStateException if the tiling mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     *&#xA;     * @see #setTiling(int, int, int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTileWidth">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the width of each tile in an image as it will be&#xA;     * written to the output stream.  If tiling parameters have not&#xA;     * been set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * @return the tile width to be used for encoding.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support tiling.&#xA;     * @exception IllegalStateException if the tiling mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the tiling parameters have&#xA;     * not been set.&#xA;     * &#xA;     * @see #setTiling(int, int, int, int)&#xA;     * @see #getTileHeight()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling parameters not set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTileHeight">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the height of each tile in an image as it will be written to&#xA;     * the output stream.  If tiling parameters have not&#xA;     * been set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     * &#xA;     * @return the tile height to be used for encoding.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support tiling.&#xA;     * @exception IllegalStateException if the tiling mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the tiling parameters have&#xA;     * not been set.&#xA;     * &#xA;     * @see #setTiling(int, int, int, int)&#xA;     * @see #getTileWidth()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling parameters not set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTileGridXOffset">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the horizontal tile grid offset of an image as it will&#xA;     * be written to the output stream.  If tiling parameters have not&#xA;     * been set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     * &#xA;     * @return the tile grid X offset to be used for encoding.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support tiling.&#xA;     * @exception IllegalStateException if the tiling mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the tiling parameters have&#xA;     * not been set.&#xA;     * &#xA;     * @see #setTiling(int, int, int, int)&#xA;     * @see #getTileGridYOffset()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling parameters not set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTileGridYOffset">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the vertical tile grid offset of an image as it will&#xA;     * be written to the output stream.  If tiling parameters have not&#xA;     * been set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     * &#xA;     * @return the tile grid Y offset to be used for encoding.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support tiling.&#xA;     * @exception IllegalStateException if the tiling mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the tiling parameters have&#xA;     * not been set.&#xA;     * &#xA;     * @see #setTiling(int, int, int, int)&#xA;     * @see #getTileGridXOffset()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling not supported!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.26"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.29"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Tiling parameters not set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="canWriteProgressive">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the writer can write out images&#xA;     * as a series of passes of progressively increasing quality.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the writer supports progressive &#xA;     * encoding.&#xA;     *&#xA;     * @see #setProgressiveMode&#xA;     * @see #getProgressiveMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setProgressiveMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mode">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Specifies that the writer is to write the image out in a&#xA;     * progressive mode such that the stream will contain a series of&#xA;     * scans of increasing quality.  If progressive encoding is not&#xA;     * supported, an &lt;code>UnsupportedOperationException&lt;/code> will&#xA;     * be thrown.&#xA;     *&#xA;     * &lt;p>  The mode argument determines how&#xA;     * the progression parameters are chosen, and must be either&#xA;     * &lt;code>MODE_DISABLED&lt;/code>,&#xA;     * &lt;code>MODE_COPY_FROM_METADATA&lt;/code>, or&#xA;     * &lt;code>MODE_DEFAULT&lt;/code>.  Otherwise an&#xA;     * &lt;code>IllegalArgumentException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The modes are interpreted as follows:&#xA;     *&#xA;     * &lt;ul>&#xA;     *   &lt;li>&lt;code>MODE_DISABLED&lt;/code> - No progression.  Use this to&#xA;     *   turn off progession.&#xA;     *&#xA;     *   &lt;li>&lt;code>MODE_COPY_FROM_METADATA&lt;/code> - The output image&#xA;     *   will use whatever progression parameters are found in the&#xA;     *   metadata objects passed into the writer.&#xA;     *&#xA;     *   &lt;li>&lt;code>MODE_DEFAULT&lt;/code> - The image will be written&#xA;     *   progressively, with parameters chosen by the writer.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * &lt;p> The default is &lt;code>MODE_COPY_FROM_METADATA&lt;/code>.&#xA;     *&#xA;     * @param mode The mode for setting progression in the output&#xA;     * stream.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support progressive encoding.&#xA;     * @exception IllegalArgumentException if &lt;code>mode&lt;/code> is not&#xA;     * one of the modes listed above.&#xA;     *&#xA;     * @see #getProgressiveMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Progressive output not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.37"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Illegal value for mode!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="MODE_EXPLICIT not supported for progressive output"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.38/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getProgressiveMode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current mode for writing the stream in a&#xA;     * progressive manner.&#xA;     *&#xA;     * @return the current mode for progressive encoding.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support progressive encoding.&#xA;     *&#xA;     * @see #setProgressiveMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Progressive output not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.37"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="canWriteCompressed">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if this writer supports compression.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the writer supports compression.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCompressionMode">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mode">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Specifies whether compression is to be performed, and if so how&#xA;     * compression parameters are to be determined.  The &lt;code>mode&lt;/code>&#xA;     * argument must be one of the four modes, interpreted as follows:&#xA;     *&#xA;     * &lt;ul>&#xA;     *   &lt;li>&lt;code>MODE_DISABLED&lt;/code> - Do not compress.  This may&#xA;     *   not be permitted by some writers, such as JPEG, which do not&#xA;     *   normally offer uncompressed output.  The corresponding&#xA;     *   &lt;code>set&lt;/code> and &lt;code>get&lt;/code> methods will throw an&#xA;     *   &lt;code>IllegalStateException&lt;/code>.&#xA;     *&#xA;     *   &lt;li>&lt;code>MODE_EXPLICIT&lt;/code> - Compress using the&#xA;     *   compression type and quality settings specified in this&#xA;     *   &lt;code>ImageWriteParam&lt;/code>.  Any previously set compression&#xA;     *   parameters are discarded.&#xA;     *&#xA;     *   &lt;li>&lt;code>MODE_COPY_FROM_METADATA&lt;/code> - Use whatever&#xA;     *   compression parameters are specified in metadata objects&#xA;     *   passed in to the writer.&#xA;     *&#xA;     *   &lt;li>&lt;code>MODE_DEFAULT&lt;/code> - Use default compression&#xA;     *   parameters.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * &lt;p> The default is &lt;code>MODE_COPY_FROM_METADATA&lt;/code>.&#xA;     *&#xA;     * @param mode The mode for setting compression in the output&#xA;     * stream.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression, or does not support the requested mode.&#xA;     * @exception IllegalArgumentException if &lt;code>mode&lt;/code> is not&#xA;     * one of the modes listed above.&#xA;     *&#xA;     * @see #getCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Illegal value for mode!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.46"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.41/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCompressionMode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current compression mode, if compression is&#xA;     * supported.&#xA;     *&#xA;     * @return the current compression mode.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     *&#xA;     * @see #setCompressionMode&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCompressionTypes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a list of available compression types, as an array or&#xA;     * &lt;code>String&lt;/code>s, or &lt;code>null&lt;/code> if a compression&#xA;     * type may not be chosen using these interfaces.  The array&#xA;     * returned is a copy.&#xA;     *&#xA;     * &lt;p> If the writer only offers a single, mandatory form of&#xA;     * compression, it is not necessary to provide any named&#xA;     * compression types.  Named compression types should only be&#xA;     * used where the user is able to make a meaningful choice&#xA;     * between different schemes.&#xA;     *&#xA;     * &lt;p> The default implementation checks if compression is&#xA;     * supported and throws an&#xA;     * &lt;code>UnsupportedOperationException&lt;/code> if not.  Otherwise,&#xA;     * it returns a clone of the &lt;code>compressionTypes&lt;/code>&#xA;     * instance variable if it is non-&lt;code>null&lt;/code>, or else&#xA;     * returns &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @return an array of &lt;code>String&lt;/code>s containing the&#xA;     * (non-localized) names of available compression types, or&#xA;     * &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:NullLiteral"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:CastExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../java/lang/Object.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCompressionType">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="compressionType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the compression type to one of the values indicated by&#xA;     * &lt;code>getCompressionTypes&lt;/code>.  If a value of&#xA;     * &lt;code>null&lt;/code> is passed in, any previous setting is&#xA;     * removed.&#xA;     *&#xA;     * &lt;p> The default implementation checks whether compression is&#xA;     * supported and the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, it calls&#xA;     * &lt;code>getCompressionTypes&lt;/code> and checks if&#xA;     * &lt;code>compressionType&lt;/code> is one of the legal values.  If it&#xA;     * is, the &lt;code>compressionType&lt;/code> instance variable is set.&#xA;     * If &lt;code>compressionType&lt;/code> is &lt;code>null&lt;/code>, the&#xA;     * instance variable is set without performing any checking.&#xA;     *&#xA;     * @param compressionType one of the &lt;code>String&lt;/code>s returned&#xA;     * by &lt;code>getCompressionTypes&lt;/code>, or &lt;code>null&lt;/code> to&#xA;     * remove any previous setting.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception UnsupportedOperationException if there are no&#xA;     * settable compression types.&#xA;     * @exception IllegalArgumentException if&#xA;     * &lt;code>compressionType&lt;/code> is non-&lt;code>null&lt;/code> but is not&#xA;     * one of the values returned by &lt;code>getCompressionTypes&lt;/code>.&#xA;     *&#xA;     * @see #getCompressionTypes&#xA;     * @see #getCompressionType&#xA;     * @see #unsetCompression&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="legalTypes">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No settable compression types"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.2/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="found">
+              <typeReference xsi:type="types:Boolean"/>
+              <initialValue xsi:type="literals:BooleanLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ForLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:Condition">
+                    <statement xsi:type="statements:Block">
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.4/@statement/@statements.0/@variable"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="literals:BooleanLiteral" value="true"/>
+                        </expression>
+                      </statements>
+                      <statements xsi:type="statements:Break"/>
+                    </statement>
+                    <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../java/lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.2/@variable">
+                          <arraySelectors>
+                            <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.4/@statement/@statements.1/@statement/@statements.0/@init"/>
+                          </arraySelectors>
+                        </arguments>
+                      </next>
+                    </condition>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.4/@statement/@statements.1/@statement/@statements.0/@init"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.2/@variable">
+                    <next xsi:type="references:IdentifierReference"/>
+                  </children>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </condition>
+                <init xsi:type="variables:LocalVariable" name="i">
+                  <typeReference xsi:type="types:Int"/>
+                  <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </init>
+                <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.4/@statement/@statements.1/@statement/@statements.0/@init"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </updates>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.2/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="Unknown compression type!"/>
+                </throwable>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@statements.4/@statement/@statements.0/@variable"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.44/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCompressionType">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the currently set compression type, or&#xA;     * &lt;code>null&lt;/code> if none has been set.  The type is returned&#xA;     * as a &lt;code>String&lt;/code> from among those returned by&#xA;     * &lt;code>getCompressionTypes&lt;/code>.&#xA;     * If no compression type has been set, &lt;code>null&lt;/code> is&#xA;     * returned.&#xA;     *&#xA;     * &lt;p> The default implementation checks whether compression is&#xA;     * supported and the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, it returns the value of the&#xA;     * &lt;code>compressionType&lt;/code> instance variable.&#xA;     *&#xA;     * @return the current compression type as a &lt;code>String&lt;/code>,&#xA;     * or &lt;code>null&lt;/code> if no type is set.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     *&#xA;     * @see #setCompressionType&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unsetCompression">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Removes any previous compression type and quality settings.&#xA;     *&#xA;     * &lt;p> The default implementation sets the instance variable&#xA;     * &lt;code>compressionType&lt;/code> to &lt;code>null&lt;/code>, and the&#xA;     * instance variable &lt;code>compressionQuality&lt;/code> to&#xA;     * &lt;code>1.0F&lt;/code>.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the plug-in does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     *&#xA;     * @see #setCompressionType&#xA;     * @see #setCompressionQuality&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLocalizedCompressionTypeName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a localized version of the name of the current&#xA;     * compression type, using the &lt;code>Locale&lt;/code> returned by&#xA;     * &lt;code>getLocale&lt;/code>.&#xA;     *&#xA;     * &lt;p> The default implementation checks whether compression is&#xA;     * supported and the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>compressionType&lt;/code> is &lt;code>non-null&lt;/code> the value&#xA;     * of &lt;code>getCompressionType&lt;/code> is returned as a&#xA;     * convenience.&#xA;     *&#xA;     * @return a &lt;code>String&lt;/code> containing a localized version of&#xA;     * the name of the current compression type.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if no compression type is set.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isCompressionLossless">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if the current compression type&#xA;     * provides lossless compression.  If a plug-in provides only&#xA;     * one mandatory compression type, then this method may be&#xA;     * called without calling &lt;code>setCompressionType&lt;/code> first.&#xA;     *&#xA;     * &lt;p> If there are multiple compression types but none has&#xA;     * been set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The default implementation checks whether compression is&#xA;     * supported and the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>getCompressionTypes()&lt;/code> is &lt;code>null&lt;/code> or&#xA;     * &lt;code>getCompressionType()&lt;/code> is non-&lt;code>null&lt;/code>&#xA;     * &lt;code>true&lt;/code> is returned as a convenience.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> if the current compression type is&#xA;     * lossless.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the set of legal&#xA;     * compression types is non-&lt;code>null&lt;/code> and the current&#xA;     * compression type is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCompressionQuality">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="quality">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the compression quality to a value between &lt;code>0&lt;/code>&#xA;     * and &lt;code>1&lt;/code>.  Only a single compression quality setting&#xA;     * is supported by default; writers can provide extended versions&#xA;     * of &lt;code>ImageWriteParam&lt;/code> that offer more control.  For&#xA;     * lossy compression schemes, the compression quality should&#xA;     * control the tradeoff between file size and image quality (for&#xA;     * example, by choosing quantization tables when writing JPEG&#xA;     * images).  For lossless schemes, the compression quality may be&#xA;     * used to control the tradeoff between file size and time taken&#xA;     * to perform the compression (for example, by optimizing row&#xA;     * filters and setting the ZLIB compression level when writing&#xA;     * PNG images).&#xA;     *&#xA;     * &lt;p> A compression quality setting of 0.0 is most generically&#xA;     * interpreted as &quot;high compression is important,&quot; while a setting of&#xA;     * 1.0 is most generically interpreted as &quot;high image quality is&#xA;     * important.&quot;&#xA;     *&#xA;     * &lt;p> If there are multiple compression types but none has been&#xA;     * set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The default implementation checks that compression is&#xA;     * supported, and that the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>getCompressionTypes()&lt;/code> returns &lt;code>null&lt;/code> or&#xA;     * &lt;code>compressionType&lt;/code> is non-&lt;code>null&lt;/code> it sets&#xA;     * the &lt;code>compressionQuality&lt;/code> instance variable.&#xA;     *&#xA;     * @param quality a &lt;code>float&lt;/code> between &lt;code>0&lt;/code>and&#xA;     * &lt;code>1&lt;/code> indicating the desired quality level.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the set of legal&#xA;     * compression types is non-&lt;code>null&lt;/code> and the current&#xA;     * compression type is &lt;code>null&lt;/code>.&#xA;     * @exception IllegalArgumentException if &lt;code>quality&lt;/code> is&#xA;     * not between &lt;code>0&lt;/code>and &lt;code>1&lt;/code>, inclusive.&#xA;     *&#xA;     * @see #getCompressionQuality&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Quality out-of-bounds!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.0"/>
+            <children xsi:type="literals:DecimalFloatLiteral"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.0"/>
+            <children xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.49/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCompressionQuality">
+      <typeReference xsi:type="types:Float"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current compression quality setting.&#xA;     * &#xA;     * &lt;p> If there are multiple compression types but none has been&#xA;     * set, an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The default implementation checks that compression is&#xA;     * supported and that the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>getCompressionTypes()&lt;/code> is &lt;code>null&lt;/code> or&#xA;     * &lt;code>getCompressionType()&lt;/code> is non-&lt;code>null&lt;/code>, it&#xA;     * returns the value of the &lt;code>compressionQuality&lt;/code>&#xA;     * instance variable.&#xA;     *&#xA;     * @return the current compression quality setting.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the set of legal&#xA;     * compression types is non-&lt;code>null&lt;/code> and the current&#xA;     * compression type is &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @see #setCompressionQuality&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBitRate">
+      <typeReference xsi:type="types:Float"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="quality">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a &lt;code>float&lt;/code> indicating an estimate of the&#xA;     * number of bits of output data for each bit of input image data&#xA;     * at the given quality level.  The value will typically lie&#xA;     * between &lt;code>0&lt;/code> and &lt;code>1&lt;/code>, with smaller values&#xA;     * indicating more compression.  A special value of&#xA;     * &lt;code>-1.0F&lt;/code> is used to indicate that no estimate is&#xA;     * available.&#xA;     *&#xA;     * &lt;p> If there are multiple compression types but none has been set,&#xA;     * an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The default implementation checks that compression is&#xA;     * supported and the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>getCompressionTypes()&lt;/code> is &lt;code>null&lt;/code> or&#xA;     * &lt;code>getCompressionType()&lt;/code> is non-&lt;code>null&lt;/code>, and&#xA;     * &lt;code>quality&lt;/code> is within bounds, it returns&#xA;     * &lt;code>-1.0&lt;/code>.&#xA;     *&#xA;     * @param quality the quality setting whose bit rate is to be&#xA;     * queried.&#xA;     *&#xA;     * @return an estimate of the compressed bit rate, or&#xA;     * &lt;code>-1.0F&lt;/code> if no estimate is available.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the set of legal&#xA;     * compression types is non-&lt;code>null&lt;/code> and the current&#xA;     * compression type is &lt;code>null&lt;/code>.&#xA;     * @exception IllegalArgumentException if &lt;code>quality&lt;/code> is&#xA;     * not between &lt;code>0&lt;/code>and &lt;code>1&lt;/code>, inclusive.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Quality out-of-bounds!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.51/@parameters.0"/>
+            <children xsi:type="literals:DecimalFloatLiteral"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.51/@parameters.0"/>
+            <children xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Subtraction"/>
+          <child xsi:type="literals:DecimalFloatLiteral" decimalValue="1.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCompressionQualityDescriptions">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of &lt;code>String&lt;/code>s that may be used along&#xA;     * with &lt;code>getCompressionQualityValues&lt;/code> as part of a user&#xA;     * interface for setting or displaying the compression quality&#xA;     * level.  The &lt;code>String&lt;/code> with index &lt;code>i&lt;/code>&#xA;     * provides a description of the range of quality levels between&#xA;     * &lt;code>getCompressionQualityValues[i]&lt;/code> and&#xA;     * &lt;code>getCompressionQualityValues[i + 1]&lt;/code>.  Note that the&#xA;     * length of the array returned from&#xA;     * &lt;code>getCompressionQualityValues&lt;/code> will always be one&#xA;     * greater than that returned from&#xA;     * &lt;code>getCompressionQualityDescriptions&lt;/code>.&#xA;     *&#xA;     * &lt;p> As an example, the strings &quot;Good&quot;, &quot;Better&quot;, and &quot;Best&quot;&#xA;     * could be associated with the ranges &lt;code>[0, .33)&lt;/code>,&#xA;     * &lt;code>[.33, .66)&lt;/code>, and &lt;code>[.66, 1.0]&lt;/code>.  In this&#xA;     * case, &lt;code>getCompressionQualityDescriptions&lt;/code> would&#xA;     * return &lt;code>{ &quot;Good&quot;, &quot;Better&quot;, &quot;Best&quot; }&lt;/code> and&#xA;     * &lt;code>getCompressionQualityValues&lt;/code> would return&#xA;     * &lt;code>{ 0.0F, .33F, .66F, 1.0F }&lt;/code>.&#xA;     *&#xA;     * &lt;p> If no descriptions are available, &lt;code>null&lt;/code> is&#xA;     * returned.  If &lt;code>null&lt;/code> is returned from&#xA;     * &lt;code>getCompressionQualityValues&lt;/code>, this method must also&#xA;     * return &lt;code>null&lt;/code>.&#xA;     *&#xA;     * &lt;p> The descriptions should be localized for the&#xA;     * &lt;code>Locale&lt;/code> returned by &lt;code>getLocale&lt;/code>, if it&#xA;     * is non-&lt;code>null&lt;/code>.&#xA;     *&#xA;     * &lt;p> If there are multiple compression types but none has been set,&#xA;     * an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The default implementation checks that compression is&#xA;     * supported and that the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>getCompressionTypes()&lt;/code> is &lt;code>null&lt;/code> or&#xA;     * &lt;code>getCompressionType()&lt;/code> is non-&lt;code>null&lt;/code>, it&#xA;     * returns &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @return an array of &lt;code>String&lt;/code>s containing localized&#xA;     * descriptions of the compression quality levels.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the set of legal&#xA;     * compression types is non-&lt;code>null&lt;/code> and the current&#xA;     * compression type is &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @see #getCompressionQualityValues&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCompressionQualityValues">
+      <typeReference xsi:type="types:Float"/>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an array of &lt;code>float&lt;/code>s that may be used along&#xA;     * with &lt;code>getCompressionQualityDescriptions&lt;/code> as part of a user&#xA;     * interface for setting or displaying the compression quality&#xA;     * level.  See {@link #getCompressionQualityDescriptions&#xA;     * &lt;code>getCompressionQualityDescriptions&lt;/code>} for more information.&#xA;     *&#xA;     * &lt;p> If no descriptions are available, &lt;code>null&lt;/code> is&#xA;     * returned.  If &lt;code>null&lt;/code> is returned from&#xA;     * &lt;code>getCompressionQualityDescriptions&lt;/code>, this method&#xA;     * must also return &lt;code>null&lt;/code>.&#xA;     *&#xA;     * &lt;p> If there are multiple compression types but none has been set,&#xA;     * an &lt;code>IllegalStateException&lt;/code> is thrown.&#xA;     *&#xA;     * &lt;p> The default implementation checks that compression is&#xA;     * supported and that the compression mode is&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.  If so, if&#xA;     * &lt;code>getCompressionTypes()&lt;/code> is &lt;code>null&lt;/code> or&#xA;     * &lt;code>getCompressionType()&lt;/code> is non-&lt;code>null&lt;/code>, it&#xA;     * returns &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @return an array of &lt;code>float&lt;/code>s indicating the&#xA;     * boundaries between the compression quality levels as described&#xA;     * by the &lt;code>String&lt;/code>s from&#xA;     * &lt;code>getCompressionQualityDescriptions&lt;/code>.&#xA;     *&#xA;     * @exception UnsupportedOperationException if the writer does not&#xA;     * support compression.&#xA;     * @exception IllegalStateException if the compression mode is not&#xA;     * &lt;code>MODE_EXPLICIT&lt;/code>.&#xA;     * @exception IllegalStateException if the set of legal&#xA;     * compression types is non-&lt;code>null&lt;/code> and the current&#xA;     * compression type is &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @see #getCompressionQualityDescriptions&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression not supported."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.40"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Compression mode not MODE_EXPLICIT!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.42"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="No compression type set!"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.43"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.45"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A class describing how a stream is to be encoded.  Instances of&#xA; * this class or its subclasses are used to supply prescriptive&#xA; * &quot;how-to&quot; information to instances of &lt;code>ImageWriter&lt;/code>.&#xA; *&#xA; * &lt;p> A plug-in for a specific image format may define a subclass of&#xA; * this class, and return objects of that class from the&#xA; * &lt;code>getDefaultWriteParam&lt;/code> method of its&#xA; * &lt;code>ImageWriter&lt;/code> implementation.  For example, the built-in&#xA; * JPEG writer plug-in will return instances of&#xA; * &lt;code>javax.imageio.plugins.jpeg.JPEGImageWriteParam&lt;/code>.&#xA; *&#xA; * &lt;p> The region of the image to be written is determined by first&#xA; * intersecting the actual bounds of the image with the rectangle&#xA; * specified by &lt;code>IIOParam.setSourceRegion&lt;/code>, if any.  If the&#xA; * resulting rectangle has a width or height of zero, the writer will&#xA; * throw an &lt;code>IIOException&lt;/code>. If the intersection is&#xA; * non-empty, writing will commence with the first subsampled pixel&#xA; * and include additional pixels within the intersected bounds&#xA; * according to the horizontal and vertical subsampling factors&#xA; * specified by {@link IIOParam#setSourceSubsampling&#xA; * &lt;code>IIOParam.setSourceSubsampling&lt;/code>}.&#xA; *&#xA; * &lt;p> Individual features such as tiling, progressive encoding, and&#xA; * compression may be set in one of four modes.&#xA; * &lt;code>MODE_DISABLED&lt;/code> disables the features;&#xA; * &lt;code>MODE_DEFAULT&lt;/code> enables the feature with&#xA; * writer-controlled parameter values; &lt;code>MODE_EXPLICIT&lt;/code>&#xA; * enables the feature and allows the use of a &lt;code>set&lt;/code> method&#xA; * to provide additional parameters; and&#xA; * &lt;code>MODE_COPY_FROM_METADATA&lt;/code> copies relevant parameter&#xA; * values from the stream and image metadata objects passed to the&#xA; * writer.  The default for all features is&#xA; * &lt;code>MODE_COPY_FROM_METADATA&lt;/code>.  Non-standard features&#xA; * supplied in subclasses are encouraged, but not required to use a&#xA; * similar scheme.&#xA; *&#xA; * &lt;p> Plug-in writers may extend the functionality of&#xA; * &lt;code>ImageWriteParam&lt;/code> by providing a subclass that implements&#xA; * additional, plug-in specific interfaces.  It is up to the plug-in&#xA; * to document what interfaces are available and how they are to be&#xA; * used.  Writers will silently ignore any extended features of an&#xA; * &lt;code>ImageWriteParam&lt;/code> subclass of which they are not aware.&#xA; * Also, they may ignore any optional features that they normally&#xA; * disable when creating their own &lt;code>ImageWriteParam&lt;/code>&#xA; * instances via &lt;code>getDefaultWriteParam&lt;/code>.&#xA; *&#xA; * &lt;p> Note that unless a query method exists for a capability, it must&#xA; * be supported by all &lt;code>ImageWriter&lt;/code> implementations&#xA; * (&lt;i>e.g.&lt;/i> progressive encoding is optional, but subsampling must be&#xA; * supported).&#xA; *&#xA; * @version 0.5&#xA; * &#xA; * @see ImageReadParam&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="IIOParam.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

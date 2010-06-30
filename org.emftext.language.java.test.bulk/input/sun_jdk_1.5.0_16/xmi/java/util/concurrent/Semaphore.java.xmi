@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Semaphore.java">
+  <comments>/*&#xA; * @(#)Semaphore.java&#x9;1.8 04/07/12&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>concurrent</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>concurrent</namespaces>
+    <namespaces>locks</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>concurrent</namespaces>
+    <namespaces>atomic</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="Semaphore">
+    <members xsi:type="members:Field" name="serialVersionUID">
+      <initialValue xsi:type="expressions:UnaryExpression">
+        <operators xsi:type="operators:Subtraction"/>
+        <child xsi:type="literals:DecimalLongLiteral" decimalValue="3222578661600680210"/>
+      </initialValue>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="sync">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.2"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** All mechanics via AbstractQueuedSynchronizer subclass */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="classifiers:Class" name="Sync">
+      <members xsi:type="members:Constructor" name="Sync">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.12"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.0/@parameters.0"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="getPermits">
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.11"/>
+          </returnValue>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="nonfairTryAcquireShared">
+        <typeReference xsi:type="types:Int"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="acquires">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:ForLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="available">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.11"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="remaining">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.2/@statements.0/@statement/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.2/@parameters.0"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.2/@statements.0/@statement/@statements.1/@variable"/>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.2/@statements.0/@statement/@statements.1/@variable"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </children>
+                <children xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.13"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.2/@statements.0/@statement/@statements.0/@variable"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.2/@statements.0/@statement/@statements.1/@variable"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="tryReleaseShared">
+        <typeReference xsi:type="types:Boolean"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="releases">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:ForLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="p">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.11"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+              </statement>
+              <condition xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.13"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.3/@statements.0/@statement/@statements.0/@variable"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.3/@statements.0/@statement/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.3/@parameters.0"/>
+                  <additiveOperators xsi:type="operators:Addition"/>
+                </arguments>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="reducePermits">
+        <typeReference xsi:type="types:Void"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="reductions">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:ForLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="current">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.11"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="next">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.4/@statements.0/@statement/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.4/@parameters.0"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return"/>
+              <condition xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.13"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.4/@statements.0/@statement/@statements.0/@variable"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.4/@statements.0/@statement/@statements.1/@variable"/>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="drainPermits">
+        <typeReference xsi:type="types:Int"/>
+        <annotationsAndModifiers xsi:type="modifiers:Final"/>
+        <statements xsi:type="statements:ForLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="current">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.11"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.5/@statements.0/@statement/@statements.0/@variable"/>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.5/@statements.0/@statement/@statements.0/@variable"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </children>
+                <children xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.13"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@members.5/@statements.0/@statement/@statements.0/@variable"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract">
+        <comments>/**&#xA;     * Synchronization implementation for semaphore.  Uses AQS state&#xA;     * to represent permits. Subclassed into fair and nonfair&#xA;     * versions.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </extends>
+    </members>
+    <members xsi:type="classifiers:Class" name="NonfairSync">
+      <members xsi:type="members:Constructor" name="NonfairSync">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="instantiations:ExplicitConstructorCall">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@members.0/@parameters.0"/>
+            <callTarget xsi:type="literals:Super"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="tryAcquireShared">
+        <typeReference xsi:type="types:Int"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="acquires">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.2">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@members.1/@parameters.0"/>
+          </returnValue>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * NonFair version&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.2"/>
+      </extends>
+    </members>
+    <members xsi:type="classifiers:Class" name="FairSync">
+      <members xsi:type="members:Constructor" name="FairSync">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="instantiations:ExplicitConstructorCall">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.0/@parameters.0"/>
+            <callTarget xsi:type="literals:Super"/>
+          </expression>
+        </statements>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+      </members>
+      <members xsi:type="members:ClassMethod" name="tryAcquireShared">
+        <typeReference xsi:type="types:Int"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="acquires">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="current">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/Thread.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../lang/Thread.class.xmi#//@classifiers.0"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ForLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="first">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../lang/Thread.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.44"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="expressions:UnaryExpression">
+                  <operators xsi:type="operators:Subtraction"/>
+                  <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </returnValue>
+              </statement>
+              <condition xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.0/@variable"/>
+                  <children xsi:type="literals:NullLiteral"/>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.0/@variable"/>
+                </children>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="available">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.11"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="remaining">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.2/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@parameters.0"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.3/@variable"/>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.3/@variable"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </children>
+                <children xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.13"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.2/@variable"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@members.1/@statements.1/@statement/@statements.3/@variable"/>
+                </children>
+              </condition>
+            </statements>
+          </statement>
+        </statements>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Final">
+        <comments>/**&#xA;     * Fair version&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.2"/>
+      </extends>
+    </members>
+    <members xsi:type="members:Constructor" name="Semaphore">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@members.3"/>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.0"/>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a &lt;tt>Semaphore&lt;/tt> with the given number of&#xA;     * permits and nonfair fairness setting.&#xA;     * @param permits the initial number of permits available. This&#xA;     * value may be negative, in which case releases must&#xA;     * occur before any acquires will be granted.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="Semaphore">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+            </child>
+            <expressionIf xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.4"/>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+            </expressionIf>
+            <expressionElse xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences target="//@classifiers.0/@members.3"/>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+            </expressionElse>
+          </value>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fair">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a &lt;tt>Semaphore&lt;/tt> with the given number of&#xA;     * permits and the given fairness setting.&#xA;     * @param permits the initial number of permits available. This&#xA;     * value may be negative, in which case releases must&#xA;     * occur before any acquires will be granted.&#xA;     * @param fair true if this semaphore will guarantee first-in&#xA;     * first-out granting of permits under contention, else false.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="acquire">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires a permit from this semaphore, blocking until one is&#xA;     * available, or the thread is {@link Thread#interrupt interrupted}.&#xA;     *&#xA;     * &lt;p>Acquires a permit, if one is available and returns immediately,&#xA;     * reducing the number of available permits by one.&#xA;     * &lt;p>If no permit is available then the current thread becomes&#xA;     * disabled for thread scheduling purposes and lies dormant until&#xA;     * one of two things happens:&#xA;     * &lt;ul>&#xA;     * &lt;li>Some other thread invokes the {@link #release} method for this&#xA;     * semaphore and the current thread is next to be assigned a permit; or&#xA;     * &lt;li>Some other thread {@link Thread#interrupt interrupts} the current&#xA;     * thread.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * &lt;p>If the current thread:&#xA;     * &lt;ul>&#xA;     * &lt;li>has its interrupted status set on entry to this method; or&#xA;     * &lt;li>is {@link Thread#interrupt interrupted} while waiting&#xA;     * for a permit,&#xA;     * &lt;/ul>&#xA;     * then {@link InterruptedException} is thrown and the current thread's&#xA;     * interrupted status is cleared.&#xA;     *&#xA;     * @throws InterruptedException if the current thread is interrupted&#xA;     *&#xA;     * @see Thread#interrupt&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.39"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="acquireUninterruptibly">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires a permit from this semaphore, blocking until one is&#xA;     * available.&#xA;     *&#xA;     * &lt;p>Acquires a permit, if one is available and returns immediately,&#xA;     * reducing the number of available permits by one.&#xA;     * &lt;p>If no permit is available then the current thread becomes&#xA;     * disabled for thread scheduling purposes and lies dormant until&#xA;     * some other thread invokes the {@link #release} method for this&#xA;     * semaphore and the current thread is next to be assigned a permit.&#xA;     *&#xA;     * &lt;p>If the current thread&#xA;     * is {@link Thread#interrupt interrupted} while waiting&#xA;     * for a permit then it will continue to wait, but the time at which&#xA;     * the thread is assigned a permit may change compared to the time it&#xA;     * would have received the permit had no interruption occurred. When the&#xA;     * thread does return from this method its interrupt status will be set.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.38"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="tryAcquire">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires a permit from this semaphore, only if one is available at the &#xA;     * time of invocation.&#xA;     * &lt;p>Acquires a permit, if one is available and returns immediately,&#xA;     * with the value &lt;tt>true&lt;/tt>,&#xA;     * reducing the number of available permits by one.&#xA;     *&#xA;     * &lt;p>If no permit is available then this method will return&#xA;     * immediately with the value &lt;tt>false&lt;/tt>.&#xA;     *&#xA;     * &lt;p>Even when this semaphore has been set to use a&#xA;     * fair ordering policy, a call to &lt;tt>tryAcquire()&lt;/tt> &lt;em>will&lt;/em>&#xA;     * immediately acquire a permit if one is available, whether or not&#xA;     * other threads are currently waiting. &#xA;     * This &amp;quot;barging&amp;quot; behavior can be useful in certain &#xA;     * circumstances, even though it breaks fairness. If you want to honor&#xA;     * the fairness setting, then use &#xA;     * {@link #tryAcquire(long, TimeUnit) tryAcquire(0, TimeUnit.SECONDS) }&#xA;     * which is almost equivalent (it also detects interruption).&#xA;     *&#xA;     * @return &lt;tt>true&lt;/tt> if a permit was acquired and &lt;tt>false&lt;/tt>&#xA;     * otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.2">
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </next>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="tryAcquire">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires a permit from this semaphore, if one becomes available &#xA;     * within the given waiting time and the&#xA;     * current thread has not been {@link Thread#interrupt interrupted}.&#xA;     * &lt;p>Acquires a permit, if one is available and returns immediately,&#xA;     * with the value &lt;tt>true&lt;/tt>,&#xA;     * reducing the number of available permits by one.&#xA;     * &lt;p>If no permit is available then&#xA;     * the current thread becomes disabled for thread scheduling&#xA;     * purposes and lies dormant until one of three things happens:&#xA;     * &lt;ul>&#xA;     * &lt;li>Some other thread invokes the {@link #release} method for this&#xA;     * semaphore and the current thread is next to be assigned a permit; or&#xA;     * &lt;li>Some other thread {@link Thread#interrupt interrupts} the current&#xA;     * thread; or&#xA;     * &lt;li>The specified waiting time elapses.&#xA;     * &lt;/ul>&#xA;     * &lt;p>If a permit is acquired then the value &lt;tt>true&lt;/tt> is returned.&#xA;     * &lt;p>If the current thread:&#xA;     * &lt;ul>&#xA;     * &lt;li>has its interrupted status set on entry to this method; or&#xA;     * &lt;li>is {@link Thread#interrupt interrupted} while waiting to acquire&#xA;     * a permit,&#xA;     * &lt;/ul>&#xA;     * then {@link InterruptedException} is thrown and the current thread's&#xA;     * interrupted status is cleared.&#xA;     * &lt;p>If the specified waiting time elapses then the value &lt;tt>false&lt;/tt>&#xA;     * is returned.&#xA;     * If the time is less than or equal to zero, the method will not wait &#xA;     * at all.&#xA;     *&#xA;     * @param timeout the maximum time to wait for a permit&#xA;     * @param unit the time unit of the &lt;tt>timeout&lt;/tt> argument.&#xA;     * @return &lt;tt>true&lt;/tt> if a permit was acquired and &lt;tt>false&lt;/tt>&#xA;     * if the waiting time elapsed before a permit was acquired.&#xA;     *&#xA;     * @throws InterruptedException if the current thread is interrupted&#xA;     *&#xA;     * @see Thread#interrupt&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.40"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="TimeUnit.class.xmi#//@classifiers.0/@members.9"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+              </next>
+            </arguments>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="release">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Releases a permit, returning it to the semaphore.&#xA;     * &lt;p>Releases a permit, increasing the number of available permits&#xA;     * by one.&#xA;     * If any threads are trying to acquire a permit, then one&#xA;     * is selected and given the permit that was just released.&#xA;     * That thread is (re)enabled for thread scheduling purposes.&#xA;     * &lt;p>There is no requirement that a thread that releases a permit must&#xA;     * have acquired that permit by calling {@link #acquire}.&#xA;     * Correct usage of a semaphore is established by programming convention&#xA;     * in the application.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.41"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="acquire">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires the given number of permits from this semaphore, &#xA;     * blocking until all are available, &#xA;     * or the thread is {@link Thread#interrupt interrupted}.&#xA;     *&#xA;     * &lt;p>Acquires the given number of permits, if they are available,&#xA;     * and returns immediately,&#xA;     * reducing the number of available permits by the given amount.&#xA;     *&#xA;     * &lt;p>If insufficient permits are available then the current thread becomes&#xA;     * disabled for thread scheduling purposes and lies dormant until&#xA;     * one of two things happens:&#xA;     * &lt;ul>&#xA;     * &lt;li>Some other thread invokes one of the {@link #release() release} &#xA;     * methods for this semaphore, the current thread is next to be assigned&#xA;     * permits and the number of available permits satisfies this request; or&#xA;     * &lt;li>Some other thread {@link Thread#interrupt interrupts} the current&#xA;     * thread.&#xA;     * &lt;/ul>&#xA;     *&#xA;     * &lt;p>If the current thread:&#xA;     * &lt;ul>&#xA;     * &lt;li>has its interrupted status set on entry to this method; or&#xA;     * &lt;li>is {@link Thread#interrupt interrupted} while waiting&#xA;     * for a permit,&#xA;     * &lt;/ul>&#xA;     * then {@link InterruptedException} is thrown and the current thread's&#xA;     * interrupted status is cleared. &#xA;     * Any permits that were to be assigned to this thread are instead &#xA;     * assigned to other threads trying to acquire permits, as if&#xA;     * permits had been made available by a call to {@link #release()}.&#xA;     *&#xA;     * @param permits the number of permits to acquire&#xA;     *&#xA;     * @throws InterruptedException if the current thread is interrupted&#xA;     * @throws IllegalArgumentException if permits less than zero.&#xA;     *&#xA;     * @see Thread#interrupt&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.39"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="acquireUninterruptibly">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires the given number of permits from this semaphore, &#xA;     * blocking until all are available.&#xA;     *&#xA;     * &lt;p>Acquires the given number of permits, if they are available,&#xA;     * and returns immediately,&#xA;     * reducing the number of available permits by the given amount.&#xA;     *&#xA;     * &lt;p>If insufficient permits are available then the current thread becomes&#xA;     * disabled for thread scheduling purposes and lies dormant until&#xA;     * some other thread invokes one of the {@link #release() release} &#xA;     * methods for this semaphore, the current thread is next to be assigned&#xA;     * permits and the number of available permits satisfies this request.&#xA;     *&#xA;     * &lt;p>If the current thread&#xA;     * is {@link Thread#interrupt interrupted} while waiting&#xA;     * for permits then it will continue to wait and its position in the&#xA;     * queue is not affected. When the&#xA;     * thread does return from this method its interrupt status will be set.&#xA;     *&#xA;     * @param permits the number of permits to acquire&#xA;     * @throws IllegalArgumentException if permits less than zero.&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.38"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="tryAcquire">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires the given number of permits from this semaphore, only&#xA;     * if all are available at the time of invocation.&#xA;     *&#xA;     * &lt;p>Acquires the given number of permits, if they are available, and &#xA;     * returns immediately, with the value &lt;tt>true&lt;/tt>,&#xA;     * reducing the number of available permits by the given amount.&#xA;     *&#xA;     * &lt;p>If insufficient permits are available then this method will return&#xA;     * immediately with the value &lt;tt>false&lt;/tt> and the number of available&#xA;     * permits is unchanged.&#xA;     *&#xA;     * &lt;p>Even when this semaphore has been set to use a fair ordering&#xA;     * policy, a call to &lt;tt>tryAcquire&lt;/tt> &lt;em>will&lt;/em>&#xA;     * immediately acquire a permit if one is available, whether or&#xA;     * not other threads are currently waiting.  This&#xA;     * &amp;quot;barging&amp;quot; behavior can be useful in certain&#xA;     * circumstances, even though it breaks fairness. If you want to&#xA;     * honor the fairness setting, then use {@link #tryAcquire(int,&#xA;     * long, TimeUnit) tryAcquire(permits, 0, TimeUnit.SECONDS) }&#xA;     * which is almost equivalent (it also detects interruption).&#xA;     *&#xA;     * @param permits the number of permits to acquire&#xA;     *&#xA;     * @return &lt;tt>true&lt;/tt> if the permits were acquired and &lt;tt>false&lt;/tt>&#xA;     * otherwise.&#xA;     * @throws IllegalArgumentException if permits less than zero.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.2">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            </next>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="tryAcquire">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="unit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Enumeration" href="TimeUnit.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires the given number of permits from this semaphore, if all &#xA;     * become available within the given waiting time and the&#xA;     * current thread has not been {@link Thread#interrupt interrupted}.&#xA;     * &lt;p>Acquires the given number of permits, if they are available and &#xA;     * returns immediately, with the value &lt;tt>true&lt;/tt>,&#xA;     * reducing the number of available permits by the given amount.&#xA;     * &lt;p>If insufficient permits are available then&#xA;     * the current thread becomes disabled for thread scheduling&#xA;     * purposes and lies dormant until one of three things happens:&#xA;     * &lt;ul>&#xA;     * &lt;li>Some other thread invokes one of the {@link #release() release} &#xA;     * methods for this semaphore, the current thread is next to be assigned&#xA;     * permits and the number of available permits satisfies this request; or&#xA;     * &lt;li>Some other thread {@link Thread#interrupt interrupts} the current&#xA;     * thread; or&#xA;     * &lt;li>The specified waiting time elapses.&#xA;     * &lt;/ul>&#xA;     * &lt;p>If the permits are acquired then the value &lt;tt>true&lt;/tt> is returned.&#xA;     * &lt;p>If the current thread:&#xA;     * &lt;ul>&#xA;     * &lt;li>has its interrupted status set on entry to this method; or&#xA;     * &lt;li>is {@link Thread#interrupt interrupted} while waiting to acquire&#xA;     * the permits,&#xA;     * &lt;/ul>&#xA;     * then {@link InterruptedException} is thrown and the current thread's&#xA;     * interrupted status is cleared.&#xA;     * Any permits that were to be assigned to this thread, are instead &#xA;     * assigned to other threads trying to acquire permits, as if&#xA;     * the permits had been made available by a call to {@link #release()}.&#xA;     *&#xA;     * &lt;p>If the specified waiting time elapses then the value &lt;tt>false&lt;/tt>&#xA;     * is returned.&#xA;     * If the time is&#xA;     * less than or equal to zero, the method will not wait at all.&#xA;     * Any permits that were to be assigned to this thread, are instead &#xA;     * assigned to other threads trying to acquire permits, as if&#xA;     * the permits had been made available by a call to {@link #release()}.&#xA;     *&#xA;     * @param permits the number of permits to acquire&#xA;     * @param timeout the maximum time to wait for the permits&#xA;     * @param unit the time unit of the &lt;tt>timeout&lt;/tt> argument.&#xA;     * @return &lt;tt>true&lt;/tt> if all permits were acquired and &lt;tt>false&lt;/tt>&#xA;     * if the waiting time elapsed before all permits were acquired.&#xA;     *&#xA;     * @throws InterruptedException if the current thread is interrupted&#xA;     * @throws IllegalArgumentException if permits less than zero.&#xA;     *&#xA;     * @see Thread#interrupt&#xA;     *&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.40"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="TimeUnit.class.xmi#//@classifiers.0/@members.9"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+              </next>
+            </arguments>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="release">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="permits">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Releases the given number of permits, returning them to the semaphore.&#xA;     * &lt;p>Releases the given number of permits, increasing the number of &#xA;     * available permits by that amount.&#xA;     * If any threads are trying to acquire permits, then one&#xA;     * is selected and given the permits that were just released.&#xA;     * If the number of available permits satisfies that thread's request&#xA;     * then that thread is (re)enabled for thread scheduling purposes;&#xA;     * otherwise the thread will wait until sufficient permits are available.&#xA;     * If there are still permits available&#xA;     * after this thread's request has been satisfied, then those permits&#xA;     * are assigned in turn to other threads trying to acquire permits.&#xA;     *&#xA;     * &lt;p>There is no requirement that a thread that releases a permit must&#xA;     * have acquired that permit by calling {@link Semaphore#acquire acquire}.&#xA;     * Correct usage of a semaphore is established by programming convention&#xA;     * in the application.&#xA;     *&#xA;     * @param permits the number of permits to release&#xA;     * @throws IllegalArgumentException if permits less than zero.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.41"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="availablePermits">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current number of permits available in this semaphore.&#xA;     * &lt;p>This method is typically used for debugging and testing purposes.&#xA;     * @return the number of permits available in this semaphore.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="drainPermits">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquire and return all permits that are immediately available.&#xA;     * @return the number of permits &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.5"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="reducePermits">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="reduction">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Shrinks the number of available permits by the indicated&#xA;     * reduction. This method can be useful in subclasses that use&#xA;     * semaphores to track resources that become unavailable. This&#xA;     * method differs from &lt;tt>acquire&lt;/tt> in that it does not block&#xA;     * waiting for permits to become available.&#xA;     * @param reduction the number of permits to remove&#xA;     * @throws IllegalArgumentException if reduction is negative&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.4">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isFair">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns true if this semaphore has fairness set true.&#xA;     * @return true if this semaphore has fairness set true.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@members.4"/>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="hasQueuedThreads">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Queries whether any threads are waiting to acquire. Note that&#xA;     * because cancellations may occur at any time, a &lt;tt>true&lt;/tt>&#xA;     * return does not guarantee that any other thread will ever&#xA;     * acquire.  This method is designed primarily for use in&#xA;     * monitoring of the system state.&#xA;     *&#xA;     * @return true if there may be other threads waiting to acquire&#xA;     * the lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.42"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getQueueLength">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an estimate of the number of threads waiting to&#xA;     * acquire.  The value is only an estimate because the number of&#xA;     * threads may change dynamically while this method traverses&#xA;     * internal data structures.  This method is designed for use in&#xA;     * monitoring of the system state, not for synchronization&#xA;     * control.&#xA;     * @return the estimated number of threads waiting for this lock&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.47"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getQueuedThreads">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../lang/Thread.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../Collection.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Returns a collection containing threads that may be waiting to&#xA;     * acquire.  Because the actual set of threads may change&#xA;     * dynamically while constructing this result, the returned&#xA;     * collection is only a best-effort estimate.  The elements of the&#xA;     * returned collection are in no particular order.  This method is&#xA;     * designed to facilitate construction of subclasses that provide&#xA;     * more extensive monitoring facilities.&#xA;     * @return the collection of threads&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="locks/AbstractQueuedSynchronizer.class.xmi#//@classifiers.0/@members.48"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a string identifying this semaphore, as well as its state.&#xA;     * The state, in brackets, includes the String &#xA;     * &amp;quot;Permits =&amp;quot; followed by the number of permits.&#xA;     * @return a string identifying this semaphore, as well as its&#xA;     * state&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../lang/Object.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </children>
+          <children xsi:type="references:StringReference" value="[Permits = "/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.2/@members.1"/>
+          </children>
+          <children xsi:type="references:StringReference" value="]"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A counting semaphore.  Conceptually, a semaphore maintains a set of&#xA; * permits.  Each {@link #acquire} blocks if necessary until a permit is&#xA; * available, and then takes it.  Each {@link #release} adds a permit,&#xA; * potentially releasing a blocking acquirer.&#xA; * However, no actual permit objects are used; the &lt;tt>Semaphore&lt;/tt> just&#xA; * keeps a count of the number available and acts accordingly.&#xA; *&#xA; * &lt;p>Semaphores are often used to restrict the number of threads than can&#xA; * access some (physical or logical) resource. For example, here is&#xA; * a class that uses a semaphore to control access to a pool of items:&#xA; * &lt;pre>&#xA; * class Pool {&#xA; *   private static final MAX_AVAILABLE = 100;&#xA; *   private final Semaphore available = new Semaphore(MAX_AVAILABLE, true);&#xA; *&#xA; *   public Object getItem() throws InterruptedException {&#xA; *     available.acquire();&#xA; *     return getNextAvailableItem();&#xA; *   }&#xA; *&#xA; *   public void putItem(Object x) {&#xA; *     if (markAsUnused(x))&#xA; *       available.release();&#xA; *   }&#xA; *&#xA; *   // Not a particularly efficient data structure; just for demo&#xA; *&#xA; *   protected Object[] items = ... whatever kinds of items being managed&#xA; *   protected boolean[] used = new boolean[MAX_AVAILABLE];&#xA; *&#xA; *   protected synchronized Object getNextAvailableItem() {&#xA; *     for (int i = 0; i &lt; MAX_AVAILABLE; ++i) {&#xA; *       if (!used[i]) {&#xA; *          used[i] = true;&#xA; *          return items[i];&#xA; *       }&#xA; *     }&#xA; *     return null; // not reached&#xA; *   }&#xA; *&#xA; *   protected synchronized boolean markAsUnused(Object item) {&#xA; *     for (int i = 0; i &lt; MAX_AVAILABLE; ++i) {&#xA; *       if (item == items[i]) {&#xA; *          if (used[i]) {&#xA; *            used[i] = false;&#xA; *            return true;&#xA; *          } else&#xA; *            return false;&#xA; *       }&#xA; *     }&#xA; *     return false;&#xA; *   }&#xA; *&#xA; * }&#xA; * &lt;/pre>&#xA; *&#xA; * &lt;p>Before obtaining an item each thread must acquire a permit from&#xA; * the semaphore, guaranteeing that an item is available for use. When&#xA; * the thread has finished with the item it is returned back to the&#xA; * pool and a permit is returned to the semaphore, allowing another&#xA; * thread to acquire that item.  Note that no synchronization lock is&#xA; * held when {@link #acquire} is called as that would prevent an item&#xA; * from being returned to the pool.  The semaphore encapsulates the&#xA; * synchronization needed to restrict access to the pool, separately&#xA; * from any synchronization needed to maintain the consistency of the&#xA; * pool itself.&#xA; *&#xA; * &lt;p>A semaphore initialized to one, and which is used such that it&#xA; * only has at most one permit available, can serve as a mutual&#xA; * exclusion lock.  This is more commonly known as a &lt;em>binary&#xA; * semaphore&lt;/em>, because it only has two states: one permit&#xA; * available, or zero permits available.  When used in this way, the&#xA; * binary semaphore has the property (unlike many {@link Lock}&#xA; * implementations), that the &amp;quot;lock&amp;quot; can be released by a&#xA; * thread other than the owner (as semaphores have no notion of&#xA; * ownership).  This can be useful in some specialized contexts, such&#xA; * as deadlock recovery.&#xA; *&#xA; * &lt;p> The constructor for this class optionally accepts a&#xA; * &lt;em>fairness&lt;/em> parameter. When set false, this class makes no&#xA; * guarantees about the order in which threads acquire permits. In&#xA; * particular, &lt;em>barging&lt;/em> is permitted, that is, a thread&#xA; * invoking {@link #acquire} can be allocated a permit ahead of a&#xA; * thread that has been waiting - logically the new thread places itself at&#xA; * the head of the queue of waiting threads. When fairness is set true, the&#xA; * semaphore guarantees that threads invoking any of the {@link&#xA; * #acquire() acquire} methods are selected to obtain permits in the order in&#xA; * which their invocation of those methods was processed&#xA; * (first-in-first-out; FIFO). Note that FIFO ordering necessarily&#xA; * applies to specific internal points of execution within these&#xA; * methods.  So, it is possible for one thread to invoke&#xA; * &lt;tt>acquire&lt;/tt> before another, but reach the ordering point after&#xA; * the other, and similarly upon return from the method.&#xA; * Also note that the untimed {@link #tryAcquire() tryAcquire} methods do not&#xA; * honor the fairness setting, but will take any permits that are&#xA; * available.&#xA; *&#xA; * &lt;p>Generally, semaphores used to control resource access should be&#xA; * initialized as fair, to ensure that no thread is starved out from&#xA; * accessing a resource. When using semaphores for other kinds of&#xA; * synchronization control, the throughput advantages of non-fair&#xA; * ordering often outweigh fairness considerations.&#xA; *&#xA; * &lt;p>This class also provides convenience methods to {@link&#xA; * #acquire(int) acquire} and {@link #release(int) release} multiple&#xA; * permits at a time.  Beware of the increased risk of indefinite&#xA; * postponement when these methods are used without fairness set true.&#xA; *&#xA; * @since 1.5&#xA; * @author Doug Lea&#xA; *&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <namespaces>java</namespaces>
+      <namespaces>io</namespaces>
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../io/Serializable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

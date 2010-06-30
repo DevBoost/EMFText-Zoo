@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Element.java">
+  <comments>/*&#xA; * @(#)Element.java&#x9;1.23 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>swing</namespaces>
+  <namespaces>text</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="Element">
+    <members xsi:type="members:InterfaceMethod" name="getDocument">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="Document.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the document associated with this element.&#xA;     *&#xA;     * @return the document&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getParentElement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the parent element.  If the element is a root level&#xA;     * element returns &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @return the parent element&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the name of the element.  If the element is used to&#xA;     * represent some type of structure, this would be the type&#xA;     * name.&#xA;     *&#xA;     * @return the element name&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getAttributes">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="AttributeSet.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the collection of attributes this element contains.&#xA;     *&#xA;     * @return the attributes for the element&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getStartOffset">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the offset from the beginning of the document&#xA;     * that this element begins at.  If this element has&#xA;     * children, this will be the offset of the first child.&#xA;     * As a document position, there is an implied forward bias.&#xA;     *&#xA;     * @return the starting offset >= 0 and &lt; getEndOffset();&#xA;     * @see Document&#xA;     * @see AbstractDocument&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEndOffset">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the offset from the beginning of the document&#xA;     * that this element ends at.  If this element has&#xA;     * children, this will be the end offset of the last child.&#xA;     * As a document position, there is an implied backward bias.&#xA;     * &lt;p>&#xA;     * All the default &lt;code>Document&lt;/code> implementations&#xA;     * descend from &lt;code>AbstractDocument&lt;/code>.&#xA;     * &lt;code>AbstractDocument&lt;/code> models an implied break at the end of&#xA;     * the document. As a result of this, it is possible for this to&#xA;     * return a value greater than the length of the document.&#xA;     * &#xA;     * @return the ending offset > getStartOffset() and&#xA;     *     &lt;= getDocument().getLength() + 1&#xA;     * @see Document&#xA;     * @see AbstractDocument&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getElementIndex">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the child element index closest to the given offset.&#xA;     * The offset is specified relative to the beginning of the&#xA;     * document.  Returns &lt;code>-1&lt;/code> if the&#xA;     * &lt;code>Element&lt;/code> is a leaf, otherwise returns&#xA;     * the index of the &lt;code>Element&lt;/code> that best represents&#xA;     * the given location.  Returns &lt;code>0&lt;/code> if the location&#xA;     * is less than the start offset. Returns&#xA;     * &lt;code>getElementCount() - 1&lt;/code> if the location is&#xA;     * greater than or equal to the end offset.&#xA;     *&#xA;     * @param offset the specified offset >= 0&#xA;     * @return the element index >= 0&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getElementCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gets the number of child elements contained by this element.&#xA;     * If this element is a leaf, a count of zero is returned.&#xA;     *&#xA;     * @return the number of child elements >= 0&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getElement">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="index">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Fetches the child element at the given index.&#xA;     *&#xA;     * @param index the specified index >= 0&#xA;     * @return the child element&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isLeaf">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Is this element a leaf element? An element that&#xA;     * &lt;i>may&lt;/i> have children, even if it currently&#xA;     * has no children, would return &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @return true if a leaf element else false&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Interface to describe a structural piece of a document.  It&#xA; * is intended to capture the spirit of an SGML element.&#xA; *&#xA; * @author  Timothy Prinzing&#xA; * @version 1.23 12/19/03&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

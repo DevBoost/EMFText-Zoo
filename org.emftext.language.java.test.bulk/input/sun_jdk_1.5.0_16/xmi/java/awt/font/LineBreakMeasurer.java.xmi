@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="LineBreakMeasurer.java">
+  <comments>/*&#xA; * @(#)LineBreakMeasurer.java&#x9;1.23 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <comments>/*&#xA; * (C) Copyright Taligent, Inc. 1996 - 1997, All Rights Reserved&#xA; * (C) Copyright IBM Corp. 1996 - 1998, All Rights Reserved&#xA; *&#xA; * The original version of this source code and documentation is&#xA; * copyrighted and owned by Taligent, Inc., a wholly-owned subsidiary&#xA; * of IBM. These materials are provided under terms of a License&#xA; * Agreement between Taligent and Sun. This technology is protected&#xA; * by multiple US and International patents.&#xA; *&#xA; * This notice and attribution to Taligent may not be removed.&#xA; * Taligent is a registered trademark of Taligent, Inc.&#xA; *&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>font</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>text</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../text/BreakIterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>text</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../text/CharacterIterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>text</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../text/AttributedCharacterIterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <namespaces>font</namespaces>
+    <classifier xsi:type="classifiers:Class" href="FontRenderContext.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="LineBreakMeasurer">
+    <members xsi:type="members:Field" name="breakIter">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../text/BreakIterator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="start">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="pos">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="limit">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="measurer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="TextMeasurer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="charIter">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="CharArrayIterator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Constructor" name="LineBreakMeasurer">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../text/BreakIterator.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="text">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../text/AttributedCharacterIterator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="frc">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="FontRenderContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs a &lt;code>LineBreakMeasurer&lt;/code> for the specified text.&#xA;     *&#xA;     * @param text the text for which this &lt;code>LineBreakMeasurer&lt;/code>&#xA;     *       produces &lt;code>TextLayout&lt;/code> objects; the text must contain &#xA;     *       at least one character; if the text available through &#xA;     *       &lt;code>iter&lt;/code> changes, further calls to this &#xA;     *       &lt;code>LineBreakMeasurer&lt;/code> instance are undefined (except,&#xA;     *       in some cases, when &lt;code>insertChar&lt;/code> or &#xA;     *       &lt;code>deleteChar&lt;/code> are invoked afterward - see below)&#xA;     * @param frc contains information about a graphics device which is &#xA;     *       needed to measure the text correctly;&#xA;     *       text measurements can vary slightly depending on the&#xA;     *       device resolution, and attributes such as antialiasing; this&#xA;     *       parameter does not specify a translation between the&#xA;     *       &lt;code>LineBreakMeasurer&lt;/code> and user space&#xA;     * @see LineBreakMeasurer#insertChar&#xA;     * @see LineBreakMeasurer#deleteChar&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="LineBreakMeasurer">
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Text must contain at least one character."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="expressions:AdditiveExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+            </children>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+            </children>
+            <additiveOperators xsi:type="operators:Subtraction"/>
+          </children>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="TextMeasurer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+            </value>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="CharArrayIterator.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.39"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:SelfReference">
+              <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <self xsi:type="literals:This"/>
+            </arguments>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.18"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            </next>
+          </next>
+          <self xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="text">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../text/AttributedCharacterIterator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="breakIter">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../text/BreakIterator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="frc">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="FontRenderContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Constructs a &lt;code>LineBreakMeasurer&lt;/code> for the specified text.&#xA;     *&#xA;     * @param text the text for which this &lt;code>LineBreakMeasurer&lt;/code>&#xA;     *     produces &lt;code>TextLayout&lt;/code> objects; the text must contain &#xA;     *     at least one character; if the text available through &#xA;     *     &lt;code>iter&lt;/code> changes, further calls to this &#xA;     *     &lt;code>LineBreakMeasurer&lt;/code> instance are undefined (except,&#xA;     *     in some cases, when &lt;code>insertChar&lt;/code> or &#xA;     *     &lt;code>deleteChar&lt;/code> are invoked afterward - see below)&#xA;     * @param breakIter the {@link BreakIterator} which defines line&#xA;     *     breaks&#xA;     * @param frc contains information about a graphics device which is&#xA;     *       needed to measure the text correctly;&#xA;     *       text measurements can vary slightly depending on the&#xA;     *       device resolution, and attributes such as antialiasing; this&#xA;     *       parameter does not specify a translation between the&#xA;     *       &lt;code>LineBreakMeasurer&lt;/code> and user space&#xA;     * @throws IllegalArgumentException if the text has less than one character&#xA;     * @see LineBreakMeasurer#insertChar&#xA;     * @see LineBreakMeasurer#deleteChar&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextOffset">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wrappingWidth">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the position at the end of the next layout.  Does NOT&#xA;     * update the current position of this &lt;code>LineBreakMeasurer&lt;/code>.&#xA;     *&#xA;     * @param wrappingWidth the maximum visible advance permitted for&#xA;     *    the text in the next layout&#xA;     * @return an offset in the text representing the limit of the&#xA;     *    next &lt;code>TextLayout&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextOffset">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wrappingWidth">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offsetLimit">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requireNextWord">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the position at the end of the next layout.  Does NOT&#xA;     * update the current position of this &lt;code>LineBreakMeasurer&lt;/code>.&#xA;     *&#xA;     * @param wrappingWidth the maximum visible advance permitted for&#xA;     *    the text in the next layout&#xA;     * @param offsetLimit the first character that can not be included&#xA;     *    in the next layout, even if the text after the limit would fit&#xA;     *    within the wrapping width; &lt;code>offsetLimit&lt;/code> must be&#xA;     *    greater than the current position&#xA;     * @param requireNextWord if &lt;code>true&lt;/code>, the current position&#xA;     *    that is returned if the entire next word does not fit within&#xA;     *    &lt;code>wrappingWidth&lt;/code>; if &lt;code>false&lt;/code>, the offset&#xA;     *    returned is at least one greater than the current position&#xA;     * @return an offset in the text representing the limit of the&#xA;     *    next &lt;code>TextLayout&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="nextOffset">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="references:StringReference" value="offsetLimit must be after current position"/>
+                </throwable>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <relationOperators xsi:type="operators:LessThanOrEqual"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="charAtMaxAdvance">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.33"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.1/@variable"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.13"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.1/@variable"/>
+                      </next>
+                    </value>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../lang/Character.class.xmi#//@classifiers.0/@members.141"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                    <next xsi:type="references:MethodCall">
+                      <arraySelectors>
+                        <position xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.1/@variable"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                          <additiveOperators xsi:type="operators:Subtraction"/>
+                        </position>
+                      </arraySelectors>
+                      <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.39"/>
+                    </next>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../lang/Character.class.xmi#//@classifiers.0"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:LocalVariableStatement">
+                  <variable name="testPos">
+                    <typeReference xsi:type="types:Int">
+                      <comments>// Break is in a word;  back up to previous break.</comments>
+                      <comments>// NOTE:  I think that breakIter.preceding(limit) should be</comments>
+                      <comments>// equivalent to breakIter.last(), breakIter.previous() but</comments>
+                      <comments>// the authors of BreakIterator thought otherwise...</comments>
+                      <comments>// If they were equivalent then the first branch would be</comments>
+                      <comments>// unnecessary.</comments>
+                    </typeReference>
+                    <initialValue xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.1/@variable"/>
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </initialValue>
+                  </variable>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.9"/>
+                        </next>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:AssignmentExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                        <assignmentOperator xsi:type="operators:Assignment"/>
+                        <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.12"/>
+                          </next>
+                        </value>
+                      </expression>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.2/@elseStatement/@elseStatement/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                  </condition>
+                  <elseStatement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:AssignmentExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                        <assignmentOperator xsi:type="operators:Assignment"/>
+                        <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.14"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.2/@elseStatement/@elseStatement/@statements.0/@variable"/>
+                          </next>
+                        </value>
+                      </expression>
+                    </statements>
+                  </elseStatement>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Condition">
+                      <comments>// first word doesn't fit on line</comments>
+                      <statement xsi:type="statements:Block">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="expressions:AssignmentExpression">
+                            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                            <assignmentOperator xsi:type="operators:Assignment"/>
+                            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                          </expression>
+                        </statements>
+                      </statement>
+                      <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2"/>
+                      <elseStatement xsi:type="statements:Block">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="expressions:AssignmentExpression">
+                            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                            <assignmentOperator xsi:type="operators:Assignment"/>
+                            <value xsi:type="references:IdentifierReference">
+                              <next xsi:type="references:MethodCall">
+                                <target xsi:type="members:ClassMethod" href="../../lang/Math.class.xmi#//@classifiers.0/@members.33"/>
+                                <arguments xsi:type="expressions:AdditiveExpression">
+                                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                                  <additiveOperators xsi:type="operators:Addition"/>
+                                </arguments>
+                                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@statement/@statements.1/@variable"/>
+                              </next>
+                              <target xsi:type="classifiers:Class" href="../../lang/Math.class.xmi#//@classifiers.0"/>
+                            </value>
+                          </expression>
+                        </statements>
+                      </elseStatement>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                    <relationOperators xsi:type="operators:LessThanOrEqual"/>
+                  </condition>
+                </statements>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextLayout">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="TextLayout.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wrappingWidth">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next layout, and updates the current position.&#xA;     *&#xA;     * @param wrappingWidth the maximum visible advance permitted for&#xA;     *     the text in the next layout&#xA;     * @return a &lt;code>TextLayout&lt;/code>, beginning at the current&#xA;     *     position, which represents the next line fitting within &#xA;     *     &lt;code>wrappingWidth&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="nextLayout">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="TextLayout.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wrappingWidth">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offsetLimit">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requireNextWord">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the next layout, and updates the current position.&#xA;     *&#xA;     * @param wrappingWidth the maximum visible advance permitted&#xA;     *    for the text in the next layout&#xA;     * @param offsetLimit the first character that can not be&#xA;     *    included in the next layout, even if the text after the limit&#xA;     *    would fit within the wrapping width; &lt;code>offsetLimit&lt;/code> &#xA;     *    must be greater than the current position&#xA;     * @param requireNextWord if &lt;code>true&lt;/code>, and if the entire word&#xA;     *    at the current position does not fit within the wrapping width,&#xA;     *    &lt;code>null&lt;/code> is returned. If &lt;code>false&lt;/code>, a valid&#xA;     *    layout is returned that includes at least the character at the&#xA;     *    current position&#xA;     * @return a &lt;code>TextLayout&lt;/code>, beginning at the current&#xA;     *    position, that represents the next line fitting within &#xA;     *    &lt;code>wrappingWidth&lt;/code>.  If the current position is at the end &#xA;     *    of the text used by this &lt;code>LineBreakMeasurer&lt;/code>,&#xA;     *    &lt;code>null&lt;/code> is returned&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="layoutLimit">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="literals:NullLiteral"/>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@statement/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="result">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="TextLayout.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.35"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@statement/@statements.0/@variable"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@statement/@statements.0/@variable"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@statement/@statements.2/@variable"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:NullLiteral"/>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPosition">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the current position of this &lt;code>LineBreakMeasurer&lt;/code>.&#xA;     *&#xA;     * @return the current position of this &lt;code>LineBreakMeasurer&lt;/code>&#xA;     * @see #setPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPosition">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newPosition">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the current position of this &lt;code>LineBreakMeasurer&lt;/code>.&#xA;     *&#xA;     * @param newPosition the current position of this&#xA;     *    &lt;code>LineBreakMeasurer&lt;/code>; the position should be within the&#xA;     *    text used to construct this &lt;code>LineBreakMeasurer&lt;/code> (or in&#xA;     *    the text most recently passed to &lt;code>insertChar&lt;/code>&#xA;     *    or &lt;code>deleteChar&lt;/code>&#xA;     * @see #getPosition&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="position is out of range"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="insertChar">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newParagraph">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../text/AttributedCharacterIterator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="insertPos">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Updates this &lt;code>LineBreakMeasurer&lt;/code> after a single&#xA;     * character is inserted into the text, and sets the current&#xA;     * position to the beginning of the paragraph.&#xA;     *&#xA;     * @param newParagraph the text after the insertion&#xA;     * @param insertPos the position in the text at which the character&#xA;     *    is inserted&#xA;     * @throws IndexOutOfBoundsException if &lt;code>insertPos&lt;/code> is less&#xA;     *         than the start of &lt;code>newParagraph&lt;/code> or greater than&#xA;     *         or equal to the end of &lt;code>newParagraph&lt;/code>&#xA;     * @throws NullPointerException if &lt;code>newParagraph&lt;/code> is   &#xA;     *         &lt;code>null&lt;/code>&#xA;     * @see #deleteChar&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.37"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+            </value>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CharArrayIterator.class.xmi#//@classifiers.0/@members.16"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.39"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.18"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="deleteChar">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newParagraph">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../text/AttributedCharacterIterator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="deletePos">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Updates this &lt;code>LineBreakMeasurer&lt;/code> after a single&#xA;     * character is deleted from the text, and sets the current&#xA;     * position to the beginning of the paragraph.&#xA;     * @param newParagraph the text after the deletion&#xA;     * @param deletePos the position in the text at which the character&#xA;     *    is deleted&#xA;     * @throws IndexOutOfBoundsException if &lt;code>deletePos&lt;/code> is&#xA;     *         less than the start of &lt;code>newParagraph&lt;/code> or greater&#xA;     *         than the end of &lt;code>newParagraph&lt;/code>&#xA;     * @throws NullPointerException if &lt;code>newParagraph&lt;/code> is&#xA;     *         &lt;code>null&lt;/code>&#xA;     * @see #insertChar&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.38"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../text/CharacterIterator.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+            </value>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="CharArrayIterator.class.xmi#//@classifiers.0/@members.16"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="TextMeasurer.class.xmi#//@classifiers.0/@members.39"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../text/BreakIterator.class.xmi#//@classifiers.0/@members.18"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The &lt;code>LineBreakMeasurer&lt;/code> class allows styled text to be&#xA; * broken into lines (or segments) that fit within a particular visual&#xA; * advance.  This is useful for clients who wish to display a paragraph of&#xA; * text that fits within a specific width, called the &lt;b>wrapping&#xA; * width&lt;/b>.&#xA; * &lt;p>&#xA; * &lt;code>LineBreakMeasurer&lt;/code> is constructed with an iterator over&#xA; * styled text.  The iterator's range should be a single paragraph in the&#xA; * text.&#xA; * &lt;code>LineBreakMeasurer&lt;/code> maintains a position in the text for the&#xA; * start of the next text segment.  Initially, this position is the&#xA; * start of text.  Paragraphs are assigned an overall direction (either&#xA; * left-to-right or right-to-left) according to the bidirectional&#xA; * formatting rules.  All segments obtained from a paragraph have the&#xA; * same direction as the paragraph.&#xA; * &lt;p>&#xA; * Segments of text are obtained by calling the method&#xA; * &lt;code>nextLayout&lt;/code>, which returns a {@link TextLayout}&#xA; * representing the text that fits within the wrapping width.&#xA; * The &lt;code>nextLayout&lt;/code> method moves the current position&#xA; * to the end of the layout returned from &lt;code>nextLayout&lt;/code>.&#xA; * &lt;p>&#xA; * &lt;code>LineBreakMeasurer&lt;/code> implements the most commonly used&#xA; * line-breaking policy: Every word that fits within the wrapping&#xA; * width is placed on the line. If the first word does not fit, then all&#xA; * of the characters that fit within the wrapping width are placed on the&#xA; * line.  At least one character is placed on each line.&#xA; * &lt;p>&#xA; * The &lt;code>TextLayout&lt;/code> instances returned by &#xA; * &lt;code>LineBreakMeasurer&lt;/code> treat tabs like 0-width spaces.  Clients&#xA; * who wish to obtain tab-delimited segments for positioning should use&#xA; * the overload of &lt;code>nextLayout&lt;/code> which takes a limiting offset&#xA; * in the text.&#xA; * The limiting offset should be the first character after the tab.&#xA; * The &lt;code>TextLayout&lt;/code> objects returned from this method end&#xA; * at the limit provided (or before, if the text between the current&#xA; * position and the limit won't fit entirely within the  wrapping&#xA; * width).&#xA; * &lt;p>&#xA; * Clients who are laying out tab-delimited text need a slightly&#xA; * different line-breaking policy after the first segment has been&#xA; * placed on a line.  Instead of fitting partial words in the&#xA; * remaining space, they should place words which don't fit in the&#xA; * remaining space entirely on the next line.  This change of policy&#xA; * can be requested in the overload of &lt;code>nextLayout&lt;/code> which&#xA; * takes a &lt;code>boolean&lt;/code> parameter.  If this parameter is&#xA; * &lt;code>true&lt;/code>, &lt;code>nextLayout&lt;/code> returns &#xA; * &lt;code>null&lt;/code> if the first word won't fit in&#xA; * the given space.  See the tab sample below.&#xA; * &lt;p>&#xA; * In general, if the text used to construct the &#xA; * &lt;code>LineBreakMeasurer&lt;/code> changes, a new &#xA; * &lt;code>LineBreakMeasurer&lt;/code> must be constructed to reflect&#xA; * the change.  (The old &lt;code>LineBreakMeasurer&lt;/code> continues to&#xA; * function properly, but it won't be aware of the text change.)&#xA; * Nevertheless, if the text change is the insertion or deletion of a&#xA; * single character, an existing &lt;code>LineBreakMeasurer&lt;/code> can be&#xA; * 'updated' by calling &lt;code>insertChar&lt;/code> or&#xA; * &lt;code>deleteChar&lt;/code>. Updating an existing&#xA; * &lt;code>LineBreakMeasurer&lt;/code> is much faster than creating a new one.&#xA; * Clients who modify text based on user typing should take advantage&#xA; * of these methods.&#xA; * &lt;p>&#xA; * &lt;strong>Examples&lt;/strong>:&lt;p>&#xA; * Rendering a paragraph in a component&#xA; * &lt;blockquote>&#xA; * &lt;pre>&#xA; * public void paint(Graphics graphics) {&#xA; *&#xA; *     Point2D pen = new Point2D(10, 20);&#xA; *     Graphics2D g2d = (Graphics2D)graphics;&#xA; *     FontRenderContext frc = g2d.getFontRenderContext();&#xA; *&#xA; *     // let styledText be an AttributedCharacterIterator containing at least&#xA; *     // one character&#xA; *&#xA; *     LineBreakMeasurer measurer = new LineBreakMeasurer(styledText, frc);&#xA; *     float wrappingWidth = getSize().width - 15;&#xA; *&#xA; *     while (measurer.getPosition() &lt; fStyledText.length()) {&#xA; *&#xA; *         TextLayout layout = measurer.nextLayout(wrappingWidth);&#xA; *&#xA; *         pen.y += (layout.getAscent());&#xA; *         float dx = layout.isLeftToRight() ?&#xA; *             0 : (wrappingWidth - layout.getAdvance());&#xA; *&#xA; *         layout.draw(graphics, pen.x + dx, pen.y);&#xA; *         pen.y += layout.getDescent() + layout.getLeading();&#xA; *     }&#xA; * }&#xA; * &lt;/pre>&#xA; * &lt;/blockquote>&#xA; * &lt;p>&#xA; * Rendering text with tabs.  For simplicity, the overall text&#xA; * direction is assumed to be left-to-right&#xA; * &lt;blockquote>&#xA; * &lt;pre>&#xA; * public void paint(Graphics graphics) {&#xA; *&#xA; *     float leftMargin = 10, rightMargin = 310;&#xA; *     float[] tabStops = { 100, 250 };&#xA; *&#xA; *     // assume styledText is an AttributedCharacterIterator, and the number&#xA; *     // of tabs in styledText is tabCount&#xA; *&#xA; *     int[] tabLocations = new int[tabCount+1];&#xA; *&#xA; *     int i = 0;&#xA; *     for (char c = styledText.first(); c != styledText.DONE; c = styledText.next()) {&#xA; *         if (c == '\t') {&#xA; *             tabLocations[i++] = styledText.getIndex();&#xA; *         }&#xA; *     }&#xA; *     tabLocations[tabCount] = styledText.getEndIndex() - 1;&#xA; *&#xA; *     // Now tabLocations has an entry for every tab's offset in&#xA; *     // the text.  For convenience, the last entry is tabLocations&#xA; *     // is the offset of the last character in the text.&#xA; *&#xA; *     LineBreakMeasurer measurer = new LineBreakMeasurer(styledText);&#xA; *     int currentTab = 0;&#xA; *     float verticalPos = 20;&#xA; *&#xA; *     while (measurer.getPosition() &lt; styledText.getEndIndex()) {&#xA; *&#xA; *         // Lay out and draw each line.  All segments on a line&#xA; *         // must be computed before any drawing can occur, since&#xA; *         // we must know the largest ascent on the line.&#xA; *         // TextLayouts are computed and stored in a Vector;&#xA; *         // their horizontal positions are stored in a parallel&#xA; *         // Vector.&#xA; *&#xA; *         // lineContainsText is true after first segment is drawn&#xA; *         boolean lineContainsText = false;&#xA; *         boolean lineComplete = false;&#xA; *         float maxAscent = 0, maxDescent = 0;&#xA; *         float horizontalPos = leftMargin;&#xA; *         Vector layouts = new Vector(1);&#xA; *         Vector penPositions = new Vector(1);&#xA; *&#xA; *         while (!lineComplete) {&#xA; *             float wrappingWidth = rightMargin - horizontalPos;&#xA; *             TextLayout layout =&#xA; *                     measurer.nextLayout(wrappingWidth,&#xA; *                                         tabLocations[currentTab]+1,&#xA; *                                         lineContainsText);&#xA; *&#xA; *             // layout can be null if lineContainsText is true&#xA; *             if (layout != null) {&#xA; *                 layouts.addElement(layout);&#xA; *                 penPositions.addElement(new Float(horizontalPos));&#xA; *                 horizontalPos += layout.getAdvance();&#xA; *                 maxAscent = Math.max(maxAscent, layout.getAscent());&#xA; *                 maxDescent = Math.max(maxDescent,&#xA; *                     layout.getDescent() + layout.getLeading());&#xA; *             } else {&#xA; *                 lineComplete = true;&#xA; *             }&#xA; *&#xA; *             lineContainsText = true;&#xA; *&#xA; *             if (measurer.getPosition() == tabLocations[currentTab]+1) {&#xA; *                 currentTab++;&#xA; *             }&#xA; *&#xA; *             if (measurer.getPosition() == styledText.getEndIndex())&#xA; *                 lineComplete = true;&#xA; *             else if (horizontalPos >= tabStops[tabStops.length-1])&#xA; *                 lineComplete = true;&#xA; *&#xA; *             if (!lineComplete) {&#xA; *                 // move to next tab stop&#xA; *                 int j;&#xA; *                 for (j=0; horizontalPos >= tabStops[j]; j++) {}&#xA; *                 horizontalPos = tabStops[j];&#xA; *             }&#xA; *         }&#xA; *&#xA; *         verticalPos += maxAscent;&#xA; *&#xA; *         Enumeration layoutEnum = layouts.elements();&#xA; *         Enumeration positionEnum = penPositions.elements();&#xA; *&#xA; *         // now iterate through layouts and draw them&#xA; *         while (layoutEnum.hasMoreElements()) {&#xA; *             TextLayout nextLayout = (TextLayout) layoutEnum.nextElement();&#xA; *             Float nextPosition = (Float) positionEnum.nextElement();&#xA; *             nextLayout.draw(graphics, nextPosition.floatValue(), verticalPos);&#xA; *         }&#xA; *&#xA; *         verticalPos += maxDescent;&#xA; *     }&#xA; * }&#xA; * &lt;/pre>&#xA; * &lt;/blockquote>&#xA; * @see TextLayout&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Final"/>
+  </classifiers>
+</containers:CompilationUnit>

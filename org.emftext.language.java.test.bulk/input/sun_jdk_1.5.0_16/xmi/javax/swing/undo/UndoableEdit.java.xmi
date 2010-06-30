@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="UndoableEdit.java">
+  <comments>/*&#xA; * @(#)UndoableEdit.java&#x9;1.19 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>swing</namespaces>
+  <namespaces>undo</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>swing</namespaces>
+    <namespaces>event</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="UndoableEdit">
+    <members xsi:type="members:InterfaceMethod" name="undo">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="CannotUndoException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Undo the edit that was made.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="canUndo">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * True if it is still possible to undo this operation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="redo">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="CannotRedoException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Re-apply the edit, assuming that it has been undone.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="canRedo">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * True if it is still possible to redo this operation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="die">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * May be sent to inform an edit that it should no longer be&#xA;     * used. This is a useful hook for cleaning up state no longer&#xA;     * needed once undoing or redoing is impossible--for example,&#xA;     * deleting file resources used by objects that can no longer be&#xA;     * undeleted. &lt;code>UndoManager&lt;/code> calls this before it dequeues edits.&#xA;     *&#xA;     * Note that this is a one-way operation. There is no &quot;un-die&quot;&#xA;     * method.&#xA;     *&#xA;     * @see CompoundEdit#die&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addEdit">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="anEdit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This &lt;code>UndoableEdit&lt;/code> should absorb &lt;code>anEdit&lt;/code>&#xA;     * if it can. Returns true&#xA;     * if &lt;code.anEdit&lt;/code> has been incorporated, false if it has not.&#xA;     *&#xA;     * &lt;p>Typically the receiver is already in the queue of a&#xA;     * &lt;code>UndoManager&lt;/code> (or other &lt;code>UndoableEditListener&lt;/code>),&#xA;     * and is being given a chance to incorporate &lt;code>anEdit&lt;/code>&#xA;     * rather than letting it be added to the queue in turn.&lt;/p>&#xA;     *&#xA;     * &lt;p>If true is returned, from now on &lt;code>anEdit&lt;/code> must return&#xA;     * false from &lt;code>canUndo&lt;/code> and &lt;code>canRedo&lt;/code>,&#xA;     * and must throw the appropriate exception on &lt;code>undo&lt;/code> or&#xA;     * &lt;code>redo&lt;/code>.&lt;/p>&#xA;     * @param anEdit the edit to be added&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="replaceEdit">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="anEdit">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns true if this &lt;code>UndoableEdit&lt;/code> should replace&#xA;     * &lt;code>anEdit&lt;/code>. The receiver should incorporate&#xA;     * &lt;code>anEdit&lt;/code>'s state before returning true.&#xA;     *&#xA;     * &lt;p>This message is the opposite of addEdit--anEdit has typically&#xA;     * already been queued in a &lt;code>UndoManager&lt;/code> (or other&#xA;     * UndoableEditListener), and the receiver is being given a chance&#xA;     * to take its place.&lt;/p>&#xA;     *&#xA;     * &lt;p>If true is returned, from now on anEdit must return false from&#xA;     * canUndo() and canRedo(), and must throw the appropriate&#xA;     * exception on undo() or redo().&lt;/p>&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isSignificant">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns false if this edit is insignificant--for example one&#xA;     * that maintains the user's selection, but does not change any&#xA;     * model state. This status can be used by an &#xA;     * &lt;code>UndoableEditListener&lt;/code>&#xA;     * (like UndoManager) when deciding which UndoableEdits to present&#xA;     * to the user as Undo/Redo options, and which to perform as side&#xA;     * effects of undoing or redoing other events.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getPresentationName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Provides a localized, human readable description of this edit&#xA;     * suitable for use in, say, a change log.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getUndoPresentationName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Provides a localized, human readable description of the undoable&#xA;     * form of this edit, e.g. for use as an Undo menu item. Typically&#xA;     * derived from &lt;code>getDescription&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getRedoPresentationName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Provides a localized, human readable description of the redoable&#xA;     * form of this edit, e.g. for use as a Redo menu item. Typically&#xA;     * derived from &lt;code>getPresentationName&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An object representing an edit that has been done, and that can be&#xA; * undone and redone.&#xA; *&#xA; * @version 1.19, 12/19/03&#xA; * @author Ray Ryan&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

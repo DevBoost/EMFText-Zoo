@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/generics ../../java.ecore#/6 http://www.emftext.org/java/imports ../../java.ecore#/7 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="RowSet.java">
+  <comments>/*&#xA; * @(#)RowSet.java&#x9;1.15 04/05/05&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sql</namespaces>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>sql</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>math</namespaces>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="RowSet">
+    <members xsi:type="members:InterfaceMethod" name="getUrl">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>//-----------------------------------------------------------------------</comments>
+          <comments>// Properties </comments>
+          <comments>//-----------------------------------------------------------------------</comments>
+          <comments>//-----------------------------------------------------------------------</comments>
+          <comments>// The following properties may be used to create a Connection.</comments>
+          <comments>//-----------------------------------------------------------------------</comments>
+          <comments>/** &#xA;   * Retrieves the url property this &lt;code>RowSet&lt;/code> object will use to&#xA;   * create a connection if it uses the &lt;code>DriverManager&lt;/code>&#xA;   * instead of a &lt;code>DataSource&lt;/code> object to establish the connection.&#xA;   * The default value is &lt;code>null&lt;/code>.&#xA;   *&#xA;   * @return a string url&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #setUrl&#xA;   */</comments>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setUrl">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the URL this &lt;code>RowSet&lt;/code> object will use when it uses the&#xA;   * &lt;code>DriverManager&lt;/code> to create a connection.&#xA;   *&#xA;   * Setting this property is optional.  If a URL is used, a JDBC driver&#xA;   * that accepts the URL must be loaded by the application before the&#xA;   * rowset is used to connect to a database.  The rowset will use the URL&#xA;   * internally to create a database connection when reading or writing&#xA;   * data.  Either a URL or a data source name is used to create a&#xA;   * connection, whichever was specified most recently.&#xA;   * &#xA;   * @param url a string value; may be &lt;code>null&lt;/code>&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getUrl&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="url">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDataSourceName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;   * Retrieves the logical name that identifies the data source for this&#xA;   * &lt;code>RowSet&lt;/code> object.  Users should set&#xA;   * either the url property or the data source name property.  The rowset will use&#xA;   * the property that was set more recently to get a connection.&#xA;   *&#xA;   * @return a data source name&#xA;   * @see #setDataSourceName&#xA;   * @see #setUrl&#xA;   */</comments>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDataSourceName">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the data source name property for this &lt;code>RowSet&lt;/code> object to the &#xA;   * given &lt;code>String&lt;/code>.&#xA;   * &lt;P>&#xA;   * The value of the data source name property can be used to do a lookup of&#xA;   * a &lt;code>DataSource&lt;/code> object that has been registered with a naming&#xA;   * service.  After being retrieved, the &lt;code>DataSource&lt;/code> object can be&#xA;   * used to create a connection to the data source that it represents.&#xA;   *&#xA;   * @param name the logical name of the data source for this &lt;code>RowSet&lt;/code>&#xA;   *        object&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getDataSourceName&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getUsername">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/** &#xA;   * Retrieves the username used to create a database connection for this&#xA;   * &lt;code>RowSet&lt;/code> object.  &#xA;   * The username property is set at run time before calling the method &#xA;   * &lt;code>execute&lt;/code>.  It is &#xA;   * not usually part of the serialized state of a &lt;code>RowSet&lt;/code> object.&#xA;   *&#xA;   * @return the username property&#xA;   * @see #setUsername&#xA;   */</comments>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setUsername">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the username property for this &lt;code>RowSet&lt;/code> object to the &#xA;   * given &lt;code>String&lt;/code>.&#xA;   *&#xA;   * @param name a user name&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getUsername&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getPassword">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/** &#xA;   * Retrieves the password used to create a database connection. &#xA;   * The password property is set at run time before calling the method&#xA;   * &lt;code>execute&lt;/code>.  It is not usually part of the serialized state &#xA;   * of a &lt;code>RowSet&lt;/code> object.&#xA;   *&#xA;   * @return the password for making a database connection&#xA;   * @see #setPassword&#xA;   */</comments>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setPassword">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the database password for this &lt;code>RowSet&lt;/code> object to&#xA;   * the given &lt;code>String&lt;/code>.&#xA;   *&#xA;   * @param password the password string&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getPassword&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="password">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTransactionIsolation">
+      <typeReference xsi:type="types:Int">
+        <comments>/** &#xA;   * Retrieves the transaction isolation level set for this&#xA;   * &lt;code>RowSet&lt;/code> object.&#xA;   *&#xA;   * @return the transaction isolation level; one of&#xA;   *      &lt;code>Connection.TRANSACTION_READ_UNCOMMITTED&lt;/code>,&#xA;   *      &lt;code>Connection.TRANSACTION_READ_COMMITTED&lt;/code>,&#xA;   *      &lt;code>Connection.TRANSACTION_REPEATABLE_READ&lt;/code>, or&#xA;   *      &lt;code>Connection.TRANSACTION_SERIALIZABLE&lt;/code>&#xA;   * @see #setTransactionIsolation&#xA;   */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTransactionIsolation">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the transaction isolation level for this &lt;code>RowSet&lt;/code> obejct.&#xA;   *&#xA;   * @param level the transaction isolation level; one of&#xA;   *      &lt;code>Connection.TRANSACTION_READ_UNCOMMITTED&lt;/code>,&#xA;   *      &lt;code>Connection.TRANSACTION_READ_COMMITTED&lt;/code>,&#xA;   *      &lt;code>Connection.TRANSACTION_REPEATABLE_READ&lt;/code>, or&#xA;   *      &lt;code>Connection.TRANSACTION_SERIALIZABLE&lt;/code>&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getTransactionIsolation&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="level">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTypeMap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <comments>/**&#xA;   * Retrieves the &lt;code>Map&lt;/code> object associated with this&#xA;   * &lt;code>RowSet&lt;/code> object, which specifies the custom mapping&#xA;   * of SQL user-defined types, if any.  The default is for the&#xA;   * type map to be empty.&#xA;   *&#xA;   * @return a &lt;code>java.util.Map&lt;/code> object containing the names of&#xA;   *         SQL user-defined types and the Java classes to which they are&#xA;   *         to be mapped&#xA;   *&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #setTypeMap&#xA;   */</comments>
+        <namespaces>java</namespaces>
+        <namespaces>util</namespaces>
+        <classifierReferences>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+                <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="../../java/util/Map.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTypeMap">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Installs the given &lt;code>java.util.Map&lt;/code> object as the default &#xA;   * type map for this &lt;code>RowSet&lt;/code> object. This type map will be&#xA;   * used unless another type map is supplied as a method parameter.&#xA;   *&#xA;   * @param map  a &lt;code>java.util.Map&lt;/code> object containing the names of&#xA;   *         SQL user-defined types and the Java classes to which they are&#xA;   *         to be mapped&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getTypeMap&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="map">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>util</namespaces>
+          <classifierReferences>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </typeArguments>
+            <typeArguments xsi:type="generics:QualifiedTypeArgument">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+                  <target xsi:type="classifiers:Class" href="../../java/lang/Class.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </typeArguments>
+            <target xsi:type="classifiers:Interface" href="../../java/util/Map.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCommand">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>//-----------------------------------------------------------------------</comments>
+          <comments>// The following properties may be used to create a Statement.</comments>
+          <comments>//-----------------------------------------------------------------------</comments>
+          <comments>/** &#xA;   * Retrieves this &lt;code>RowSet&lt;/code> object's command property.&#xA;   *&#xA;   * The command property contains a command string, which must be an SQL&#xA;   * query, that can be executed to fill the rowset with data.  &#xA;   * The default value is &lt;code>null&lt;/code>.&#xA;   *&#xA;   * @return the command string; may be &lt;code>null&lt;/code>&#xA;   * @see #setCommand&#xA;   */</comments>
+          <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCommand">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets this &lt;code>RowSet&lt;/code> object's command property to the given&#xA;   * SQL query.&#xA;   *&#xA;   * This property is optional&#xA;   * when a rowset gets its data from a data source that does not support&#xA;   * commands, such as a spreadsheet. &#xA;   *&#xA;   * @param cmd the SQL query that will be used to get the data for this&#xA;   *        &lt;code>RowSet&lt;/code> object; may be &lt;code>null&lt;/code>&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getCommand&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmd">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isReadOnly">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/** &#xA;   * Retrieves whether this &lt;code>RowSet&lt;/code> object is read-only.&#xA;   * If updates are possible, the default is for a rowset to be&#xA;   * updatable.&#xA;   * &lt;P>&#xA;   * Attempts to update a read-only rowset will result in an&#xA;   * &lt;code>SQLException&lt;/code> being thrown. &#xA;   *&#xA;   * @return &lt;code>true&lt;/code> if this &lt;code>RowSet&lt;/code> object is&#xA;   *         read-only; &lt;code>false&lt;/code> if it is updatable &#xA;   * @see #setReadOnly&#xA;   */</comments>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setReadOnly">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets whether this &lt;code>RowSet&lt;/code> object is read-only to the&#xA;   * given &lt;code>boolean&lt;/code>.&#xA;   *&#xA;   * @param value &lt;code>true&lt;/code> if read-only; &lt;code>false&lt;/code> if &#xA;   *        updatable&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #isReadOnly&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="value">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxFieldSize">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;   * Retrieves the maximum number of bytes that may be returned &#xA;   * for certain column values. &#xA;   * This limit applies only to &lt;code>BINARY&lt;/code>,&#xA;   * &lt;code>VARBINARY&lt;/code>, &lt;code>LONGVARBINARYBINARY&lt;/code>, &lt;code>CHAR&lt;/code>,&#xA;   * &lt;code>VARCHAR&lt;/code>, and &lt;code>LONGVARCHAR&lt;/code> columns.&#xA;   * If the limit is exceeded, the excess data is silently discarded.&#xA;   *&#xA;   * @return the current maximum column size limit; zero means that there&#xA;   *          is no limit&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #setMaxFieldSize&#xA;   */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMaxFieldSize">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the maximum number of bytes that can be returned for a column&#xA;   * value to the given number of bytes.&#xA;   * This limit applies only to &lt;code>BINARY&lt;/code>,&#xA;   * &lt;code>VARBINARY&lt;/code>, &lt;code>LONGVARBINARYBINARY&lt;/code>, &lt;code>CHAR&lt;/code>,&#xA;   * &lt;code>VARCHAR&lt;/code>, and &lt;code>LONGVARCHAR&lt;/code> columns.&#xA;   * If the limit is exceeded, the excess data is silently discarded.&#xA;   * For maximum portability, use values greater than 256.&#xA;   *&#xA;   * @param max the new max column size limit in bytes; zero means unlimited &#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getMaxFieldSize&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="max">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMaxRows">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;   * Retrieves the maximum number of rows that this &lt;code>RowSet&lt;/code>&#xA;   * object can contain.&#xA;   * If the limit is exceeded, the excess rows are silently dropped.&#xA;   *&#xA;   * @return the current maximum number of rows that this &lt;code>RowSet&lt;/code>&#xA;   *         object can contain; zero means unlimited&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #setMaxRows&#xA;   */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMaxRows">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the maximum number of rows that this &lt;code>RowSet&lt;/code>&#xA;   * object can contain to the specified number.&#xA;   * If the limit is exceeded, the excess rows are silently dropped.&#xA;   *&#xA;   * @param max the new maximum number of rows; zero means unlimited &#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getMaxRows&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="max">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEscapeProcessing">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;   * Retrieves whether escape processing is enabled for this&#xA;   * &lt;code>RowSet&lt;/code> object.  &#xA;   * If escape scanning is enabled, which is the default, the driver will do&#xA;   * escape substitution before sending an SQL statement to the database.&#xA;   *&#xA;   * @return &lt;code>true&lt;/code> if escape processing is enabled; &#xA;   *         &lt;code>false&lt;/code> if it is disabled&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #setEscapeProcessing&#xA;   */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setEscapeProcessing">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets escape processing for this &lt;code>RowSet&lt;/code> object on or&#xA;   * off. If escape scanning is on (the default), the driver will do&#xA;   * escape substitution before sending an SQL statement to the database.&#xA;   *&#xA;   * @param enable &lt;code>true&lt;/code> to enable escape processing;&#xA;   *        &lt;code>false&lt;/code> to disable it&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getEscapeProcessing&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="enable">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getQueryTimeout">
+      <typeReference xsi:type="types:Int">
+        <comments>/**&#xA;   * Retrieves the maximum number of seconds the driver will wait for&#xA;   * a statement to execute.&#xA;   * If this limit is exceeded, an &lt;code>SQLException&lt;/code> is thrown.&#xA;   *&#xA;   * @return the current query timeout limit in seconds; zero means &#xA;   *          unlimited &#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #setQueryTimeout&#xA;   */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setQueryTimeout">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the maximum time the driver will wait for&#xA;   * a statement to execute to the given number of seconds.&#xA;   * If this limit is exceeded, an &lt;code>SQLException&lt;/code> is thrown.&#xA;   *&#xA;   * @param seconds the new query timeout limit in seconds; zero means &#xA;   *        that there is no limit&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see #getQueryTimeout&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="seconds">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setType">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the type of this &lt;code>RowSet&lt;/code> object to the given type.&#xA;   * This method is used to change the type of a rowset, which is by&#xA;   * default read-only and non-scrollable.&#xA;   *&#xA;   * @param type one of the &lt;code>ResultSet&lt;/code> constants specifying a type:&#xA;   *        &lt;code>ResultSet.TYPE_FORWARD_ONLY&lt;/code>,&#xA;   *        &lt;code>ResultSet.TYPE_SCROLL_INSENSITIVE&lt;/code>, or&#xA;   *        &lt;code>ResultSet.TYPE_SCROLL_SENSITIVE&lt;/code>&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see java.sql.ResultSet#getType&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="type">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setConcurrency">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the concurrency of this &lt;code>RowSet&lt;/code> object to the given&#xA;   * concurrency level. This method is used to change the concurrency level&#xA;   * of a rowset, which is by default &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code>&#xA;   *&#xA;   * @param concurrency one of the &lt;code>ResultSet&lt;/code> constants specifying a&#xA;   *        concurrency level:  &lt;code>ResultSet.CONCUR_READ_ONLY&lt;/code> or&#xA;   *        &lt;code>ResultSet.CONCUR_UPDATABLE&lt;/code>&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see ResultSet#getConcurrency&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="concurrency">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setNull">
+      <typeReference xsi:type="types:Void">
+        <comments>//-----------------------------------------------------------------------</comments>
+        <comments>// Parameters</comments>
+        <comments>//-----------------------------------------------------------------------</comments>
+        <comments>/** &#xA;   * The &lt;code>RowSet&lt;/code> setter methods are used to set any input parameters&#xA;   * needed by the &lt;code>RowSet&lt;/code> object's command.&#xA;   * Parameters are set at run time, as opposed to design time.&#xA;   */</comments>
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's SQL&#xA;   * command to SQL &lt;code>NULL&lt;/code>.&#xA;   *&#xA;   * &lt;P>&lt;B>Note:&lt;/B> You must specify the parameter's SQL type.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param sqlType a SQL type code defined by &lt;code>java.sql.Types&lt;/code>&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sqlType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setNull">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's SQL&#xA;   * command to SQL &lt;code>NULL&lt;/code>. This version of the method &lt;code>setNull&lt;/code>&#xA;   * should  be used for SQL user-defined types (UDTs) and &lt;code>REF&lt;/code> type&#xA;   * parameters.  Examples of UDTs include: &lt;code>STRUCT&lt;/code>, &lt;code>DISTINCT&lt;/code>,&#xA;   * &lt;code>JAVA_OBJECT&lt;/code>, and named array types.&#xA;   *&#xA;   * &lt;P>&lt;B>Note:&lt;/B> To be portable, applications must give the&#xA;   * SQL type code and the fully qualified SQL type name when specifying&#xA;   * a NULL UDT or &lt;code>REF&lt;/code> parameter.  In the case of a UDT,&#xA;   * the name is the type name of the parameter itself.  For a &lt;code>REF&lt;/code> &#xA;   * parameter, the name is the type name of the referenced type.  If &#xA;   * a JDBC driver does not need the type code or type name information, &#xA;   * it may ignore it.     &#xA;   *&#xA;   * Although it is intended for UDT and &lt;code>REF&lt;/code> parameters,&#xA;   * this method may be used to set a null parameter of any JDBC type.&#xA;   * If the parameter does not have a user-defined or &lt;code>REF&lt;/code> type,&#xA;   * the typeName parameter is ignored.&#xA;   *&#xA;   *&#xA;   * @param paramIndex the first parameter is 1, the second is 2, ...&#xA;   * @param sqlType a value from &lt;code>java.sql.Types&lt;/code>&#xA;   * @param typeName the fully qualified name of an SQL UDT or the type&#xA;   *        name of the SQL structured type being referenced by a &lt;code>REF&lt;/code>&#xA;   *        type; ignored if the parameter is not a UDT or &lt;code>REF&lt;/code> type&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paramIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sqlType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="typeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setBoolean">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>boolean&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>BIT&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setByte">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>byte&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>TINYINT&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setShort">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>short&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>SMALLINT&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Short"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setInt">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>int&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>INTEGER&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setLong">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>long&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>BIGINT&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setFloat">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>float&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>REAL&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Float"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDouble">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>double&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>DOUBLE&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Double"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setBigDecimal">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.math.BigDeciaml&lt;/code> value.&#xA;   * The driver converts this to&#xA;   * an SQL &lt;code>NUMERIC&lt;/code> value before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setString">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java &lt;code>String&lt;/code> value. Before sending it to the &#xA;   * database, the driver converts this to an SQL &lt;code>VARCHAR&lt;/code> or&#xA;   * &lt;code>LONGVARCHAR&lt;/code> value, depending on the argument's size relative&#xA;   * to the driver's limits on &lt;code>VARCHAR&lt;/code> values.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setBytes">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given Java array of &lt;code>byte&lt;/code> values. Before sending it to the &#xA;   * database, the driver converts this to an SQL &lt;code>VARBINARY&lt;/code> or&#xA;   * &lt;code>LONGVARBINARY&lt;/code> value, depending on the argument's size relative&#xA;   * to the driver's limits on &lt;code>VARBINARY&lt;/code> values.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value &#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsAfter/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDate">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.sql.Date&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>DATE&lt;/code> value before sending it to the database, using the&#xA;   * default &lt;code>java.util.Calendar&lt;/code> to calculate the date.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>sql</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/sql/Date.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTime">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.sql.Time&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>TIME&lt;/code> value before sending it to the database, using the&#xA;   * default &lt;code>java.util.Calendar&lt;/code> to calculate it.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>sql</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/sql/Time.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTimestamp">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.sql.Timestamp&lt;/code> value. The driver converts this to&#xA;   * an SQL &lt;code>TIMESTAMP&lt;/code> value before sending it to the database, using the&#xA;   * default &lt;code>java.util.Calendar&lt;/code> to calculate it.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value &#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>sql</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/sql/Timestamp.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setAsciiStream">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.io.InputStream&lt;/code> value. &#xA;   * It may be more practical to send a very large ASCII value via a&#xA;   * &lt;code>java.io.InputStream&lt;/code> rather than as a &lt;code>LONGVARCHAR&lt;/code> &#xA;   * parameter. The driver will read the data from the stream&#xA;   * as needed until it reaches end-of-file.   &#xA;   * &#xA;   * &lt;P>&lt;B>Note:&lt;/B> This stream object can either be a standard&#xA;   * Java stream object or your own subclass that implements the&#xA;   * standard interface.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the Java input stream that contains the ASCII parameter value&#xA;   * @param length the number of bytes in the stream &#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>io</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setBinaryStream">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.io.InputStream&lt;/code> value. &#xA;   * It may be more practical to send a very large binary value via a&#xA;   * &lt;code>java.io.InputStream&lt;/code> rather than as a &lt;code>LONGVARBINARY&lt;/code> &#xA;   * parameter. The driver will read the data from the stream&#xA;   * as needed until it reaches end-of-file.   &#xA;   * &#xA;   * &lt;P>&lt;B>Note:&lt;/B> This stream object can either be a standard&#xA;   * Java stream object or your own subclass that implements the&#xA;   * standard interface.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the java input stream which contains the binary parameter value&#xA;   * @param length the number of bytes in the stream &#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>io</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/io/InputStream.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setCharacterStream">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * to the given &lt;code>java.io.Reader&lt;/code> value. &#xA;   * It may be more practical to send a very large UNICODE value via a&#xA;   * &lt;code>java.io.Reader&lt;/code> rather than as a &lt;code>LONGVARCHAR&lt;/code> &#xA;   * parameter. The driver will read the data from the stream&#xA;   * as needed until it reaches end-of-file.   &#xA;   * &#xA;   * &lt;P>&lt;B>Note:&lt;/B> This stream object can either be a standard&#xA;   * Java stream object or your own subclass that implements the&#xA;   * standard interface.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param reader the &lt;code>Reader&lt;/code> object that contains the UNICODE data&#xA;   *        to be set&#xA;   * @param length the number of characters in the stream &#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="reader">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/io/Reader.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="length">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setObject">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given Java &lt;code>Object&lt;/code>.  For integral values, the &#xA;   * &lt;code>java.lang&lt;/code> equivalent objects should be used (for example,&#xA;   * an instance of the class &lt;code>Integer&lt;/code> for an &lt;code>int&lt;/code>).&#xA;   *&#xA;   * &lt;p>The given Java object will be converted to the targetSqlType&#xA;   * before being sent to the database.&#xA;   * &lt;P>&#xA;   * If the object is of a class implementing &lt;code>SQLData&lt;/code>,&#xA;   * the rowset should call the method &lt;code>SQLData.writeSQL&lt;/code>&#xA;   * to write the object to an &lt;code>SQLOutput&lt;/code> data stream.&#xA;   * If the object is an instance of a class implementing the &lt;code>Ref&lt;/code>,&#xA;   * &lt;code>Struct&lt;/code>, &lt;code>Array&lt;/code>, &lt;code>Blob&lt;/code>,&#xA;   * or &lt;code>Clob&lt;/code> interfaces,&#xA;   * the driver uses the default mapping to the corresponding SQL type.&#xA;   *&#xA;   * &lt;p>Note that this method may be used to pass datatabase-specific&#xA;   * abstract data types. &#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the object containing the input parameter value&#xA;   * @param targetSqlType the SQL type (as defined in &lt;code>java.sql.Types&lt;/code>) &#xA;   *        to be sent to the database. The scale argument may further qualify this&#xA;   *        type.&#xA;   * @param scale for &lt;code>java.sql.Types.DECIMAL&lt;/code> or&#xA;   *        &lt;code>java.sql.Types.NUMERIC&lt;/code> types, this is the number of&#xA;   *         digits after the decimal point.  For all other types, this value&#xA;   *         will be ignored.&#xA;   * @exception SQLException if a database access error occurs&#xA;   * @see java.sql.Types &#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="targetSqlType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="scale">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setObject">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with a Java &lt;code>Object&lt;/code>.  For integral values, the &#xA;   * &lt;code>java.lang&lt;/code> equivalent objects should be used.&#xA;   * This method is like &lt;code>setObject&lt;/code> above, but the scale used is the scale&#xA;   * of the second parameter.  Scalar values have a scale of zero.  Literal&#xA;   * values have the scale present in the literal.  &#xA;   * &lt;P>&#xA;   * Even though it is supported, it is not recommended that this method&#xA;   * be called with floating point input values.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the object containing the input parameter value&#xA;   * @param targetSqlType the SQL type (as defined in &lt;code>java.sql.Types&lt;/code>) &#xA;   *        to be sent to the database&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="targetSqlType">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setObject">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with a Java &lt;code>Object&lt;/code>.  For integral values, the &#xA;   * &lt;code>java.lang&lt;/code> equivalent objects should be used.&#xA;   *&#xA;   * &lt;p>The JDBC specification provides a standard mapping from&#xA;   * Java Object types to SQL types.  The driver will convert the &#xA;   * given Java object to its standard SQL mapping before sending it&#xA;   * to the database.&#xA;   *&#xA;   * &lt;p>Note that this method may be used to pass datatabase-specific&#xA;   * abstract data types by using a driver-specific Java type.&#xA;   *&#xA;   * If the object is of a class implementing &lt;code>SQLData&lt;/code>,&#xA;   * the rowset should call the method &lt;code>SQLData.writeSQL&lt;/code>&#xA;   * to write the object to an &lt;code>SQLOutput&lt;/code> data stream.&#xA;   * If the object is an instance of a class implementing the &lt;code>Ref&lt;/code>,&#xA;   * &lt;code>Struct&lt;/code>, &lt;code>Array&lt;/code>, &lt;code>Blob&lt;/code>,&#xA;   * or &lt;code>Clob&lt;/code> interfaces,&#xA;   * the driver uses the default mapping to the corresponding SQL type.&#xA;   * &lt;P>&#xA;   * An exception is thrown if there is an ambiguity, for example, if the&#xA;   * object is of a class implementing more than one of these interfaces.&#xA;   *&#xA;   * @param parameterIndex The first parameter is 1, the second is 2, ...&#xA;   * @param x The object containing the input parameter value &#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setRef">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>Ref&lt;/code> value.  The driver will convert this&#xA;   * to the appropriate &lt;code>REF(&amp;lt;structured-type&amp;gt;)&lt;/code> value.&#xA;   *&#xA;   * @param i the first parameter is 1, the second is 2, ...&#xA;   * @param x an object representing data of an SQL &lt;code>REF&lt;/code> type&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="i">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../java/sql/Ref.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setBlob">
+      <typeReference xsi:type="types:Void">
+        <comments>/** &#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>Blob&lt;/code> value.  The driver will convert this&#xA;   * to the &lt;code>BLOB&lt;/code> value that the &lt;code>Blob&lt;/code> object&#xA;   * represents before sending it to the database.&#xA;   *&#xA;   * @param i the first parameter is 1, the second is 2, ...&#xA;   * @param x an object representing a BLOB&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="i">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../java/sql/Blob.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setClob">
+      <typeReference xsi:type="types:Void">
+        <comments>/** &#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>Clob&lt;/code> value.  The driver will convert this&#xA;   * to the &lt;code>CLOB&lt;/code> value that the &lt;code>Clob&lt;/code> object&#xA;   * represents before sending it to the database.&#xA;   *&#xA;   * @param i the first parameter is 1, the second is 2, ...&#xA;   * @param x an object representing a CLOB&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="i">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../java/sql/Clob.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setArray">
+      <typeReference xsi:type="types:Void">
+        <comments>/** &#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>Array&lt;/code> value.  The driver will convert this&#xA;   * to the &lt;code>ARRAY&lt;/code> value that the &lt;code>Array&lt;/code> object&#xA;   * represents before sending it to the database.&#xA;   *&#xA;   * @param i the first parameter is 1, the second is 2, ...&#xA;   * @param x an object representing an SQL array&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="i">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../java/sql/Array.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDate">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>java.sql.Date&lt;/code> value.  The driver will convert this&#xA;   * to an SQL &lt;code>DATE&lt;/code> value, using the given &lt;code>java.util.Calendar&lt;/code>&#xA;   * object to calculate the date.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @param cal the &lt;code>java.util.Calendar&lt;/code> object to use for calculating the date&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>sql</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/sql/Date.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cal">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/util/Calendar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTime">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>java.sql.Time&lt;/code> value.  The driver will convert this&#xA;   * to an SQL &lt;code>TIME&lt;/code> value, using the given &lt;code>java.util.Calendar&lt;/code>&#xA;   * object to calculate it, before sending it to the database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value&#xA;   * @param cal the &lt;code>java.util.Calendar&lt;/code> object to use for calculating the time&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>sql</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/sql/Time.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cal">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/util/Calendar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTimestamp">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Sets the designated parameter in this &lt;code>RowSet&lt;/code> object's command&#xA;   * with the given  &lt;code>java.sql.Timestamp&lt;/code> value.  The driver will&#xA;   * convert this to an SQL &lt;code>TIMESTAMP&lt;/code> value, using the given&#xA;   * &lt;code>java.util.Calendar&lt;/code> object to calculate it, before sending it to the&#xA;   * database.&#xA;   *&#xA;   * @param parameterIndex the first parameter is 1, the second is 2, ...&#xA;   * @param x the parameter value &#xA;   * @param cal the &lt;code>java.util.Calendar&lt;/code> object to use for calculating the &#xA;   *        timestamp&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="parameterIndex">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="x">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>sql</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/sql/Timestamp.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cal">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../java/util/Calendar.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clearParameters">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Clears the parameters set for this &lt;code>RowSet&lt;/code> object's command.&#xA;   * &lt;P>In general, parameter values remain in force for repeated use of a&#xA;   * &lt;code>RowSet&lt;/code> object. Setting a parameter value automatically clears its&#xA;   * previous value.  However, in some cases it is useful to immediately&#xA;   * release the resources used by the current parameter values, which can&#xA;   * be done by calling the method &lt;code>clearParameters&lt;/code>.&#xA;   *&#xA;   * @exception SQLException if a database access error occurs&#xA;   */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="execute">
+      <typeReference xsi:type="types:Void">
+        <comments>//---------------------------------------------------------------------</comments>
+        <comments>// Reading and writing data</comments>
+        <comments>//---------------------------------------------------------------------</comments>
+        <comments>/**&#xA;   * Fills this &lt;code>RowSet&lt;/code> object with data.  &#xA;   * &lt;P>&#xA;   * The &lt;code>execute&lt;/code> method may use the following properties &#xA;   * to create a connection for reading data: url, data source name, &#xA;   * user name, password, transaction isolation, and type map.&#xA;   * &#xA;   * The &lt;code>execute&lt;/code> method  may use the following properties &#xA;   * to create a statement to execute a command:&#xA;   * command, read only, maximum field size, &#xA;   * maximum rows, escape processing, and query timeout.&#xA;   * &lt;P>&#xA;   * If the required properties have not been set, an exception is &#xA;   * thrown.  If this method is successful, the current contents of the rowset are &#xA;   * discarded and the rowset's metadata is also (re)set.  If there are &#xA;   * outstanding updates, they are ignored.   &#xA;   * &lt;P>&#xA;   * If this &lt;code>RowSet&lt;/code> object does not maintain a continuous connection &#xA;   * with its source of data, it may use a reader (a &lt;code>RowSetReader&lt;/code> &#xA;   * object) to fill itself with data.  In this case, a reader will have been&#xA;   * registered with this &lt;code>RowSet&lt;/code> object, and the method &#xA;   * &lt;code>execute&lt;/code> will call on the reader's &lt;code>readData&lt;/code>&#xA;   * method as part of its implementation.&#xA;   *&#xA;   * @exception SQLException if a database access error occurs or any of the&#xA;   *            properties necessary for making a connection and creating&#xA;   *            a statement have not been set&#xA;   */</comments>
+      </typeReference>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../java/sql/SQLException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addRowSetListener">
+      <typeReference xsi:type="types:Void">
+        <comments>//--------------------------------------------------------------------</comments>
+        <comments>// Events</comments>
+        <comments>//--------------------------------------------------------------------</comments>
+        <comments>/**&#xA;   * Registers the given listener so that it will be notified of events&#xA;   * that occur on this &lt;code>RowSet&lt;/code> object.&#xA;   *&#xA;   * @param listener a component that has implemented the &lt;code>RowSetListener&lt;/code>&#xA;   *        interface and wants to be notified when events occur on this&#xA;   *        &lt;code>RowSet&lt;/code> object&#xA;   * @see #removeRowSetListener&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="RowSetListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeRowSetListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;   * Removes the specified listener from the list of components that will be&#xA;   * notified when an event occurs on this &lt;code>RowSet&lt;/code> object.&#xA;   *&#xA;   * @param listener a component that has been registered as a listener for this&#xA;   *        &lt;code>RowSet&lt;/code> object&#xA;   * @see #addRowSetListener&#xA;   */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="RowSetListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The interface that adds support to the JDBC API for the&#xA; * JavaBeans&lt;sup>&lt;font size=-2>TM&lt;/font>&lt;/sup> component model.&#xA; * A rowset, which can be used as a JavaBeans component in&#xA; * a visual Bean development environment, can be created and&#xA; * configured at design time and executed at run time.  &#xA; * &lt;P>&#xA; * The &lt;code>RowSet&lt;/code>&#xA; * interface provides a set of JavaBeans properties that allow a &lt;code>RowSet&lt;/code>&#xA; * instance to be configured to connect to a JDBC data source and read&#xA; * some data from the data source.  A group of setter methods (&lt;code>setInt&lt;/code>,&#xA; * &lt;code>setBytes&lt;/code>, &lt;code>setString&lt;/code>, and so on)&#xA; * provide a way to pass input parameters to a rowset's command property.&#xA; * This command is the SQL query the rowset uses when it gets its data from&#xA; * a relational database, which is generally the case.&#xA; * &lt;P>&#xA; * The &lt;code>RowSet&lt;/code>&#xA; * interface supports JavaBeans events, allowing other components in an&#xA; * application to be notified when an event occurs on a rowset,&#xA; * such as a change in its value.&#xA; * &#xA; * &lt;P>The &lt;code>RowSet&lt;/code> interface is unique in that it is intended to be&#xA; * implemented using the rest of the JDBC API.  In other words, a&#xA; * &lt;code>RowSet&lt;/code> implementation is a layer of software that executes &quot;on top&quot;&#xA; * of a JDBC driver.  Implementations of the &lt;code>RowSet&lt;/code> interface can&#xA; * be provided by anyone, including JDBC driver vendors who want to&#xA; * provide a &lt;code>RowSet&lt;/code> implementation as part of their JDBC products. &#xA; * &lt;P>&#xA; * A &lt;code>RowSet&lt;/code> object may make a connection with a data source and&#xA; * maintain that connection throughout its life cycle, in which case it is&#xA; * called a &lt;i>connected&lt;/i> rowset.  A rowset may also make a connection with&#xA; * a data source, get data from it, and then close the connection. Such a rowset&#xA; * is called a &lt;i>disconnected&lt;/i> rowset.  A disconnected rowset may make&#xA; * changes to its data while it is disconnected and then send the changes back&#xA; * to the original source of the data, but it must reestablish a connection to do so.&#xA; * &lt;P>&#xA; * A disconnected rowset may have a reader (a &lt;code>RowSetReader&lt;/code> object)&#xA; * and a writer (a &lt;code>RowSetWriter&lt;/code> object) associated with it.&#xA; * The reader may be implemented in many different ways to populate a rowset&#xA; * with data, including getting data from a non-relational data source. The&#xA; * writer can also be implemented in many different ways to propagate changes&#xA; * made to the rowset's data back to the underlying data source.&#xA; * &lt;P>&#xA; * Rowsets are easy to use.  The &lt;code>RowSet&lt;/code> interface extends the standard&#xA; * &lt;code>java.sql.ResultSet&lt;/code> interface.  The &lt;code>RowSetMetaData&lt;/code>&#xA; * interface extends the &lt;code>java.sql.ResultSetMetaData&lt;/code> interface.&#xA; * Thus, developers familiar&#xA; * with the JDBC API will have to learn a minimal number of new APIs to&#xA; * use rowsets.  In addition, third-party software tools that work with&#xA; * JDBC &lt;code>ResultSet&lt;/code> objects will also easily be made to work with rowsets.&#xA; * &#xA; * @since 1.4&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../java/sql/ResultSet.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

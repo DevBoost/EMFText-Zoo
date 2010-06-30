@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="BeanContextServices.java">
+  <comments>/*&#xA; * @(#)BeanContextServices.java&#x9;1.10 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>beans</namespaces>
+  <namespaces>beancontext</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../util/Iterator.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../util/TooManyListenersException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <namespaces>beancontext</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="BeanContext.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <namespaces>beancontext</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="BeanContextServiceProvider.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>beans</namespaces>
+    <namespaces>beancontext</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="BeanContextServicesListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="BeanContextServices">
+    <members xsi:type="members:InterfaceMethod" name="addService">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Adds a service to this BeanContext.&#xA;     * &lt;code>BeanContextServiceProvider&lt;/code>s call this method &#xA;     * to register a particular service with this context. &#xA;     * If the service has not previously been added, the &#xA;     * &lt;code>BeanContextServices&lt;/code> associates&#xA;     * the service with the &lt;code>BeanContextServiceProvider&lt;/code> and &#xA;     * fires a &lt;code>BeanContextServiceAvailableEvent&lt;/code> to all &#xA;     * currently registered &lt;code>BeanContextServicesListeners&lt;/code>. &#xA;     * The method then returns &lt;code>true&lt;/code>, indicating that &#xA;     * the addition of the service was successful.&#xA;     * If the given service has already been added, this method &#xA;     * simply returns &lt;code>false&lt;/code>.&#xA;     * @param serviceClass     the service to add&#xA;     * @param serviceProvider  the &lt;code>BeanContextServiceProvider&lt;/code> &#xA;     * associated with the service&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceProvider">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextServiceProvider.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="revokeService">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * BeanContextServiceProviders wishing to remove &#xA;     * a currently registered service from this context&#xA;     * may do so via invocation of this method. Upon revocation of &#xA;     * the service, the &lt;code>BeanContextServices&lt;/code> fires a &#xA;     * &lt;code>BeanContextServiceRevokedEvent&lt;/code> to its&#xA;     * list of currently registered &#xA;     * &lt;code>BeanContextServiceRevokedListeners&lt;/code> and &#xA;     * &lt;code>BeanContextServicesListeners&lt;/code>.&#xA;     * @param serviceClass the service to revoke from this BeanContextServices&#xA;     * @param serviceProvider the BeanContextServiceProvider associated with&#xA;     * this particular service that is being revoked&#xA;     * @param revokeCurrentServicesNow a value of &lt;code>true&lt;/code> &#xA;     * indicates an exceptional circumstance where the &#xA;     * &lt;code>BeanContextServiceProvider&lt;/code> or&#xA;     * &lt;code>BeanContextServices&lt;/code> wishes to immediately &#xA;     * terminate service to all currently outstanding references &#xA;     * to the specified service.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceProvider">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextServiceProvider.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="revokeCurrentServicesNow">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="hasService">
+      <typeReference xsi:type="types:Boolean">
+        <comments>/**&#xA;     * Reports whether or not a given service is &#xA;     * currently available from this context.&#xA;     * @param serviceClass the service in question&#xA;     * @return true if the service is available&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getService">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * A &lt;code>BeanContextChild&lt;/code>, or any arbitrary object &#xA;     * associated with a &lt;code>BeanContextChild&lt;/code>, may obtain &#xA;     * a reference to a currently registered service from its &#xA;     * nesting &lt;code>BeanContextServices&lt;/code> &#xA;     * via invocation of this method. When invoked, this method&#xA;     * gets the service by calling the getService() method on the &#xA;     * underlying &lt;code>BeanContextServiceProvider&lt;/code>.&#xA;     * @param child the &lt;code>BeanContextChild&lt;/code> &#xA;     * associated with this request&#xA;     * @param requestor the object requesting the service&#xA;     * @param serviceClass class of the requested service&#xA;     * @param serviceSelector the service dependent parameter&#xA;     * @param bcsrl the &#xA;     * &lt;code>BeanContextServiceRevokedListener&lt;/code> to notify&#xA;     * if the service should later become revoked&#xA;     * @throws TooManyListenersException &#xA;     * @return a reference to this context's named &#xA;     * Service as requested or &lt;code>null&lt;/code>&#xA;     */</comments>
+          <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="child">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextChild.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requestor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceSelector">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bcsrl">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextServiceRevokedListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../util/TooManyListenersException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="releaseService">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Releases a &lt;code>BeanContextChild&lt;/code>'s &#xA;     * (or any arbitrary object associated with a BeanContextChild) &#xA;     * reference to the specified service by calling releaseService() &#xA;     * on the underlying &lt;code>BeanContextServiceProvider&lt;/code>.&#xA;     * @param child the &lt;code>BeanContextChild&lt;/code>&#xA;     * @param requestor the requestor&#xA;     * @param service the service&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="child">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextChild.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requestor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="service">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCurrentServiceClasses">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Gets the currently available services for this context.&#xA;     * @return an &lt;code>Iterator&lt;/code> consisting of the &#xA;     * currently available services&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="../../util/Iterator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCurrentServiceSelectors">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Gets the list of service dependent service parameters &#xA;     * (Service Selectors) for the specified service, by &#xA;     * calling getCurrentServiceSelectors() on the&#xA;     * underlying BeanContextServiceProvider.&#xA;     * @param serviceClass the specified service&#xA;     * @return the currently available service selectors &#xA;     * for the named serviceClass&#xA;     */</comments>
+          <target xsi:type="classifiers:Interface" href="../../util/Iterator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="serviceClass">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addBeanContextServicesListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Adds a &lt;code>BeanContextServicesListener&lt;/code> to this BeanContext&#xA;     * @param bcsl the &lt;code>BeanContextServicesListener&lt;/code> to add&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bcsl">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextServicesListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeBeanContextServicesListener">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Removes a &lt;code>BeanContextServicesListener&lt;/code> &#xA;     * from this &lt;code>BeanContext&lt;/code>&#xA;     * @param bcsl the &lt;code>BeanContextServicesListener&lt;/code> &#xA;     * to remove from this context&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bcsl">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="BeanContextServicesListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>&#xA; * The BeanContextServices interface provides a mechanism for a BeanContext&#xA; * to expose generic &quot;services&quot; to the BeanContextChild objects within.&#xA; * &lt;/p>&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="BeanContext.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="BeanContextServicesListener.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

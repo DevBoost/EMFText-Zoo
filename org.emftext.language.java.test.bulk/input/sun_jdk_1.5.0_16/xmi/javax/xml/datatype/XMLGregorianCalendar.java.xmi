@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="XMLGregorianCalendar.java">
+  <comments>// $Id: XMLGregorianCalendar.java,v 1.28.4.2.2.4.2.1.2.2.2.6 2004/06/09 19:06:01 ndw Exp $</comments>
+  <comments>/*&#xA; * @(#)XMLGregorianCalendar.java&#x9;1.16 04/07/26&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>datatype</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>namespace</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../namespace/QName.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>math</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>math</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/math/BigInteger.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/util/TimeZone.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/util/GregorianCalendar.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="XMLGregorianCalendar">
+    <members xsi:type="members:InterfaceMethod" name="clear">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Unset all fields to undefined.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Set all int fields to {@link DatatypeConstants#FIELD_UNDEFINED} and reference fields &#xA;&#x9; * to null.&lt;/p>&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Reset this &lt;code>XMLGregorianCalendar&lt;/code> to its original values.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>&lt;code>XMLGregorianCalendar&lt;/code> is reset to the same values as when it was created with&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendar()},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendar(String lexicalRepresentation)},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendar(&#xA;&#x9; *   BigInteger year,&#xA;&#x9; *   int month,&#xA;&#x9; *   int day,&#xA;&#x9; *   int hour,&#xA;&#x9; *   int minute,&#xA;&#x9; *   int second,&#xA;&#x9; *   BigDecimal fractionalSecond,&#xA;&#x9; *   int timezone)},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendar(&#xA;&#x9; *   int year,&#xA;&#x9; *   int month,&#xA;&#x9; *   int day,&#xA;&#x9; *   int hour,&#xA;&#x9; *   int minute,&#xA;&#x9; *   int second,&#xA;&#x9; *   int millisecond,&#xA;&#x9; *   int timezone)},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendar(GregorianCalendar cal)},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendarDate(&#xA;&#x9; *   int year,&#xA;&#x9; *   int month,&#xA;&#x9; *   int day,&#xA;&#x9; *   int timezone)},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendarTime(&#xA;&#x9; *   int hours,&#xA;&#x9; *   int minutes,&#xA;&#x9; *   int seconds,&#xA;&#x9; *   int timezone)},&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendarTime(&#xA;&#x9; *   int hours,&#xA;&#x9; *   int minutes,&#xA;&#x9; *   int seconds,&#xA;&#x9; *   BigDecimal fractionalSecond,&#xA;&#x9; *   int timezone)} or&#xA;&#x9; * {@link DatatypeFactory#newXMLGregorianCalendarTime(&#xA;&#x9; *   int hours,&#xA;&#x9; *   int minutes,&#xA;&#x9; *   int seconds,&#xA;&#x9; *   int milliseconds,&#xA;&#x9; *   int timezone)}.&#xA;&#x9; * &lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>&lt;code>reset()&lt;/code> is designed to allow the reuse of existing &lt;code>XMLGregorianCalendar&lt;/code>s&#xA;&#x9; * thus saving resources associated with the creation of new &lt;code>XMLGregorianCalendar&lt;/code>s.&lt;/p>&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setYear">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="year">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/math/BigInteger.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set low and high order component of XSD &lt;code>dateTime&lt;/code> year field.&lt;/p>&#xA;     * &#xA;     * &lt;p>Unset this field by invoking the setter with a parameter value of &lt;code>null&lt;/code>.&lt;/p>&#xA;     *&#xA;     * @param year value constraints summarized in &lt;a href=&quot;#datetimefield-year&quot;>year field of date/time field mapping table&lt;/a>.     &#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;code>year&lt;/code> parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setYear">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="year">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set year of XSD &lt;code>dateTime&lt;/code> year field.&lt;/p>&#xA;     *&#xA;     * &lt;p>Unset this field by invoking the setter with a parameter value of &#xA;     * {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;     *&#xA;     * &lt;p>Note: if the absolute value of the &lt;code>year&lt;/code> parameter &#xA;     * is less than 10^9, the eon component of the XSD year field is set to &#xA;     * &lt;code>null&lt;/code> by this method.&lt;/p>&#xA;     *&#xA;     * @param year value constraints are summarized in &lt;a href=&quot;#datetimefield-year&quot;>year field of date/time field mapping table&lt;/a>.&#xA;     *   If year is {@link DatatypeConstants#FIELD_UNDEFINED}, then eon is set to &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMonth">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="month">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set month.&lt;/p>&#xA;     *&#xA;     * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;     *&#xA;     * @param month value constraints summarized in &lt;a href=&quot;#datetimefield-month&quot;>month field of date/time field mapping table&lt;/a>.&#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;code>month&lt;/code> parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDay">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="day">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set days in month.&lt;/p>&#xA;     *&#xA;     * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;     *&#xA;     * @param day value constraints summarized in &lt;a href=&quot;#datetimefield-day&quot;>day field of date/time field mapping table&lt;/a>.&#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;code>day&lt;/code> parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTimezone">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="offset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set the number of minutes in the timezone offset.&lt;/p>&#xA;     *&#xA;     * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;     *&#xA;     * @param offset value constraints summarized in &lt;a href=&quot;#datetimefield-timezone&quot;>&#xA;     *   timezone field of date/time field mapping table&lt;/a>.&#xA;     *&#xA;     * @throws IllegalArgumentException if &lt;code>offset&lt;/code> parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTime">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hour">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="minute">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="second">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set time as one unit.&lt;/p>&#xA;     *&#xA;     * @param hour value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-hour&quot;>hour field of date/time field mapping table&lt;/a>.&#xA;     * @param minute value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-minute&quot;>minute field of date/time field mapping table&lt;/a>.&#xA;     * @param second value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&#xA;     *&#xA;     * @see #setTime(int, int, int, BigDecimal)&#xA;     *&#xA;     * @throws IllegalArgumentException if any parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <comments>// fractional</comments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.2"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setHour">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hour">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA; &#x9; * &lt;p>Set hours.&lt;/p>&#xA; &#x9; *&#xA; &#x9; * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA; &#x9; *&#xA; &#x9; * @param hour value constraints summarized in &lt;a href=&quot;#datetimefield-hour&quot;>hour field of date/time field mapping table&lt;/a>.&#xA; &#x9; *&#xA; &#x9; * @throws IllegalArgumentException if &lt;code>hour&lt;/code> parameter is outside value constraints for the field as specified in &#xA; &#x9; *   &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA; &#x9;*/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMinute">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="minute">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Set minutes.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * @param minute value constraints summarized in &lt;a href=&quot;#datetimefield-minute&quot;>minute field of date/time field mapping table&lt;/a>.&#xA;&#x9; *&#xA;&#x9; * @throws IllegalArgumentException if &lt;code>minute&lt;/code> parameter is outside value constraints for the field as specified in &#xA;&#x9; *   &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;&#x9;*/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setSecond">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="second">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Set seconds.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * @param second value constraints summarized in &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&#xA;&#x9; *&#xA;&#x9; * @throws IllegalArgumentException if &lt;code>second&lt;/code> parameter is outside value constraints for the field as specified in &#xA;&#x9; *   &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;&#x9;*/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setMillisecond">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="millisecond">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Set milliseconds.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * @param millisecond value constraints summarized in&#xA;&#x9; *   &lt;a href=&quot;#datetimefield-millisecond&quot;>millisecond field of date/time field mapping table&lt;/a>.&#xA;&#x9; *&#xA;&#x9; * @throws IllegalArgumentException if &lt;code>millisecond&lt;/code> parameter is outside value constraints for the field as specified&#xA;&#x9; *   in &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;&#x9;*/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setFractionalSecond">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fractional">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Set fractional seconds.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Unset this field by invoking the setter with a parameter value of &lt;code>null&lt;/code>.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * @param fractional value constraints summarized in&#xA;&#x9; *   &lt;a href=&quot;#datetimefield-fractional&quot;>fractional field of date/time field mapping table&lt;/a>.&#xA;&#x9; *&#xA;&#x9; * @throws IllegalArgumentException if &lt;code>fractional&lt;/code> parameter is outside value constraints for the field as specified&#xA;&#x9; *   in &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;&#x9;*/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTime">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hour">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="minute">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="second">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fractional">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set time as one unit, including the optional infinite precision &#xA;     * fractional seconds.&lt;/p>&#xA;     *&#xA;     * @param hour value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-hour&quot;>hour field of date/time field mapping table&lt;/a>.&#xA;     * @param minute value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-minute&quot;>minute field of date/time field mapping table&lt;/a>.&#xA;     * @param second value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&#xA;     * @param fractional value of &lt;code>null&lt;/code> indicates this optional &#xA;     *   field is not set.&#xA;     *&#xA;     * @throws IllegalArgumentException if any parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.3"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTime">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="hour">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="minute">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="second">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="millisecond">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Set time as one unit, including optional milliseconds.&lt;/p>&#xA;     *&#xA;     * @param hour value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-hour&quot;>hour field of date/time field mapping table&lt;/a>.&#xA;     * @param minute value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-minute&quot;>minute field of date/time field mapping table&lt;/a>.&#xA;     * @param second value constraints are summarized in &#xA;     * &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&#xA;     * @param millisecond value of {@link DatatypeConstants#FIELD_UNDEFINED} indicates this &#xA;     *                    optional field is not set. &#xA;     *&#xA;     * @throws IllegalArgumentException if any parameter is &#xA;     * outside value constraints for the field as specified in &#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.9">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.2"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.3"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEon">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/math/BigInteger.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return high order component for XML Schema 1.0 dateTime datatype field for &#xA;&#x9; * &lt;code>year&lt;/code>.&#xA;&#x9; * &lt;code>null&lt;/code> if this optional part of the year field is not defined.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-year&quot;>year field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * @return eon of this &lt;code>XMLGregorianCalendar&lt;/code>. The value &#xA;&#x9; * returned is an integer multiple of 10^9.&#xA;&#x9; * &#xA;&#x9; * @see #getYear()&#xA;&#x9; * @see #getEonAndYear()&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getYear">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return low order component for XML Schema 1.0 dateTime datatype field for &#xA;&#x9; * &lt;code>year&lt;/code> or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-year&quot;>year field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @return year  of this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;&#x9; * &#xA;&#x9; * @see #getEon()&#xA;&#x9; * @see #getEonAndYear()&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEonAndYear">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/math/BigInteger.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return XML Schema 1.0 dateTime datatype field for &#xA;&#x9; * &lt;code>year&lt;/code>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-year&quot;>year field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @return sum of &lt;code>eon&lt;/code> and &lt;code>BigInteger.valueOf(year)&lt;/code>&#xA;&#x9; * when both fields are defined. When only &lt;code>year&lt;/code> is defined, &#xA;&#x9; * return it. When both &lt;code>eon&lt;/code> and &lt;code>year&lt;/code> are not &#xA;&#x9; * defined, return &lt;code>null&lt;/code>.&#xA;&#x9; * &#xA;&#x9; * @see #getEon()&#xA;&#x9; * @see #getYear()&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMonth">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return number of month or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-month&quot;>month field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @return year  of this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;&#x9; * &#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getDay">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Return day in month or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-day&quot;>day field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @see #setDay(int)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTimezone">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Return timezone offset in minutes or &#xA;&#x9; * {@link DatatypeConstants#FIELD_UNDEFINED} if this optional field is not defined.&#xA;&#x9; *&#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-timezone&quot;>timezone field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @see #setTimezone(int)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getHour">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * Return hours or {@link DatatypeConstants#FIELD_UNDEFINED}.&#xA;&#x9; * Returns {@link DatatypeConstants#FIELD_UNDEFINED} if this field is not defined.&#xA;&#x9; *&#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-hour&quot;>hour field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * @see #setTime(int, int, int)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMinute">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * Return minutes or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; * Returns {@link DatatypeConstants#FIELD_UNDEFINED} if this field is not defined.&#xA;&#x9; *&#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-minute&quot;>minute field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * @see #setTime(int, int, int)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSecond">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return seconds or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Returns {@link DatatypeConstants#FIELD_UNDEFINED} if this field is not defined.&#xA;&#x9; * When this field is not defined, the optional xs:dateTime &#xA;&#x9; * fractional seconds field, represented by &#xA;&#x9; * {@link #getFractionalSecond()} and {@link #getMillisecond()},&#xA;&#x9; * must not be defined.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @return Second  of this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;&#x9; * &#xA;&#x9; * @see #getFractionalSecond()&#xA;&#x9; * @see #getMillisecond()&#xA;&#x9; * @see #setTime(int, int, int)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMillisecond">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return millisecond precision of {@link #getFractionalSecond()}.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>This method represents a convenience accessor to infinite&#xA;&#x9; * precision fractional second value returned by &#xA;&#x9; * {@link #getFractionalSecond()}. The returned value is the rounded &#xA;&#x9; * down to milliseconds value of &#xA;&#x9; * {@link #getFractionalSecond()}. When {@link #getFractionalSecond()} &#xA;&#x9; * returns &lt;code>null&lt;/code>, this method must return &#xA;&#x9; * {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * &lt;p>Value constraints for this value are summarized in &#xA;&#x9; * &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @return Millisecond  of this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;&#x9; * &#xA;&#x9; * @see #getFractionalSecond()&#xA;&#x9; * @see #setTime(int, int, int)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="fractionalSeconds">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.25"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// is field undefined?</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="DatatypeConstants.class.xmi#//@classifiers.0/@members.16"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="DatatypeConstants.class.xmi#//@classifiers.0"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.25">
+          <next xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0/@members.100"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0/@members.84"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="3"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getFractionalSecond">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/math/BigDecimal.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9; * &lt;p>Return fractional seconds.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>&lt;code>null&lt;/code> is returned when this optional field is not defined.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>Value constraints are detailed in&#xA;&#x9; * &lt;a href=&quot;#datetimefield-second&quot;>second field of date/time field mapping table&lt;/a>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>This optional field can only have a defined value when the&#xA;&#x9; * xs:dateTime second field, represented by {@link #getSecond()}, &#xA;&#x9; * does not return {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;/p>&#xA;&#x9; *&#xA;&#x9; * @return fractional seconds  of this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;&#x9; * &#xA;&#x9; * @see #getSecond()&#xA;&#x9; * @see #setTime(int, int, int, BigDecimal)&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="compare">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="xmlGregorianCalendar">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// comparisons</comments>
+        <comments>/**&#xA;     * &lt;p>Compare two instances of W3C XML Schema 1.0 date/time datatypes &#xA;     * according to partial order relation defined in &#xA;     * &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#dateTime-order&quot;>W3C XML Schema 1.0 Part 2, Section 3.2.7.3,&#xA;     * &lt;i>Order relation on dateTime&lt;/i>&lt;/a>.&lt;/p>&#xA;     *&#xA;     * &lt;p>&lt;code>xsd:dateTime&lt;/code> datatype field mapping to accessors of&#xA;     * this class are defined in&#xA;     * &lt;a href=&quot;#datetimefieldmapping&quot;>date/time field mapping table&lt;/a>.&lt;/p>&#xA;     * &#xA;     * @param xmlGregorianCalendar Instance of &lt;code>XMLGregorianCalendar&lt;/code> to compare&#xA;     * &#xA;     * @return The relationship between &lt;code>this&lt;/code> &lt;code>XMLGregorianCalendar&lt;/code> and&#xA;     *   the specified &lt;code>xmlGregorianCalendar&lt;/code> as&#xA;     *   {@link DatatypeConstants#LESSER},&#xA;     *   {@link DatatypeConstants#EQUAL},&#xA;     *   {@link DatatypeConstants#GREATER} or&#xA;     *   {@link DatatypeConstants#INDETERMINATE}.&#xA;     *&#xA;     * @throws NullPointerException if &lt;code>xmlGregorianCalendar&lt;/code> is null. &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="normalize">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Normalize this instance to UTC.&lt;/p>&#xA;     *&#xA;     * &lt;p>2000-03-04T23:00:00+03:00 normalizes to 2000-03-04T20:00:00Z&lt;/p>&#xA;     * &lt;p>Implements W3C XML Schema Part 2, Section 3.2.7.3 (A).&lt;/p>&#xA;     * &#xA;     * @return &lt;code>this&lt;/code> &lt;code>XMLGregorianCalendar&lt;/code> normalized to UTC.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="equals">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Indicates whether parameter &lt;code>obj&lt;/code> is &quot;equal to&quot; this one.&lt;/p>&#xA;     * &#xA;     * @param obj to compare.&#xA;     *&#xA;     * @return &lt;code>true&lt;/code> when &lt;code>obj&lt;/code> is an instance of &lt;code>XMLGregorianCalendar&lt;/code>&#xA;     *   and  {@link #compare(XMLGregorianCalendar obj)} returns {@link DatatypeConstants#EQUAL}, otherwise &lt;code>false&lt;/code>.&#xA;     * &#xA;     * @throws NullPointerException If &lt;code>obj&lt;/code> is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../java/lang/NullPointerException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Cannot test null for equality with this XMLGregorianCalendar"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.1/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.26">
+                  <arguments xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences target="//@classifiers.0"/>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+                  </arguments>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="DatatypeConstants.class.xmi#//@classifiers.0/@members.13"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="DatatypeConstants.class.xmi#//@classifiers.0"/>
+                </children>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="hashCode">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Returns a hash code consistent with the definition of the equals method.&lt;/p>&#xA;     * &#xA;     * @return hash code of this object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="timezone">
+          <typeReference xsi:type="types:Int">
+            <comments>// Following two dates compare to EQUALS since in different timezones.</comments>
+            <comments>// 2000-01-15T12:00:00-05:00 == 2000-01-15T13:00:00-04:00 &#x9;</comments>
+            <comments>//</comments>
+            <comments>// Must ensure both instances generate same hashcode by normalizing </comments>
+            <comments>// this to UTC timezone.</comments>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.20"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.0/@variable"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="DatatypeConstants.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="DatatypeConstants.class.xmi#//@classifiers.0"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="gc">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0"/>
+          </typeReference>
+          <initialValue xsi:type="references:SelfReference">
+            <self xsi:type="literals:This"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:SelfReference">
+                <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.27"/>
+                <self xsi:type="literals:This"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.0/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:AdditiveExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.16"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.21"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.29/@statements.2/@variable">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.23"/>
+          </children>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+          <additiveOperators xsi:type="operators:Addition"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="toXMLFormat">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return the lexical representation of &lt;code>this&lt;/code> instance. &#xA;     * The format is specified in &#xA;     * &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#dateTime-order&quot;>XML Schema 1.0 Part 2, Section 3.2.[7-14].1,&#xA;     * &lt;i>Lexical Representation&lt;/i>&quot;.&lt;/a>&lt;/p>&#xA;     * &#xA;     * &lt;p>Specific target lexical representation format is determined by &#xA;     * {@link #getXMLSchemaType()}.&lt;/p>&#xA;     * &#xA;     * @return XML, as &lt;code>String&lt;/code>, representation of this &lt;code>XMLGregorianCalendar&lt;/code> &#xA;     * &#xA;     * @throws IllegalStateException if the combination of set fields&#xA;     *    does not match one of the eight defined XML Schema builtin date/time datatypes. &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getXMLSchemaType">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../namespace/QName.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Return the name of the XML Schema date/time type that this instance &#xA;     * maps to. Type is computed based on fields that are set.&lt;/p>&#xA;     *&#xA;     * &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;2&quot;>&#xA;     *   &lt;thead>&#xA;     *     &lt;tr>&#xA;     *       &lt;th align=&quot;center&quot; colspan=&quot;7&quot;>&#xA;     *         Required fields for XML Schema 1.0 Date/Time Datatypes.&lt;br/>&#xA;     *         &lt;i>(timezone is optional for all date/time datatypes)&lt;/i>&#xA;     *       &lt;/th>&#xA;     *     &lt;/tr>&#xA;     *   &lt;/thead>&#xA;     *   &lt;tbody>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>Datatype&lt;/td>&#xA;     *       &lt;td>year&lt;/td>&#xA;     *       &lt;td>month&lt;/td>&#xA;     *       &lt;td>day&lt;/td>&#xA;     *       &lt;td>hour&lt;/td>&#xA;     *       &lt;td>minute&lt;/td>&#xA;     *       &lt;td>second&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#DATETIME}&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#DATE}&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#TIME}&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#GYEARMONTH}&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#GMONTHDAY}&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#GYEAR}&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#GMONTH}&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>{@link DatatypeConstants#GDAY}&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>X&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *       &lt;td>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *   &lt;/tbody>&#xA;     * &lt;/table>&#xA;     * &#xA;     * @throws java.lang.IllegalStateException if the combination of set fields&#xA;     *    does not match one of the eight defined XML Schema builtin &#xA;     *    date/time datatypes.&#xA;     * @return One of the following class constants:&#xA;     *   {@link DatatypeConstants#DATETIME},&#xA;     *   {@link DatatypeConstants#TIME},&#xA;     *   {@link DatatypeConstants#DATE},&#xA;     *   {@link DatatypeConstants#GYEARMONTH},&#xA;     *   {@link DatatypeConstants#GMONTHDAY},&#xA;     *   {@link DatatypeConstants#GYEAR},&#xA;     *   {@link DatatypeConstants#GMONTH} or&#xA;     *   {@link DatatypeConstants#GDAY}.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Returns a &lt;code>String&lt;/code> representation of this &lt;code>XMLGregorianCalendar&lt;/code> &lt;code>Object&lt;/code>.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>The result is a lexical representation generated by {@link #toXMLFormat()}.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * @return A non-&lt;code>null&lt;/code> valid &lt;code>String&lt;/code> representation of this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;&#x9; * &#xA;     * @throws IllegalStateException if the combination of set fields&#xA;     *    does not match one of the eight defined XML Schema builtin date/time datatypes.&#xA;     * &#xA;     * @see #toXMLFormat() &#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.30"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="isValid">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Validate instance by &lt;code>getXMLSchemaType()&lt;/code> constraints.&#xA;     * @return true if data values are valid.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="add">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="duration">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="Duration.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Add &lt;code>duration&lt;/code> to this instance.&lt;/p>&#xA;     * &#xA;     * &lt;p>The computation is specified in&#xA;     * &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#adding-durations-to-dateTimes&quot;>XML Schema 1.0 Part 2, Appendix E,&#xA;     * &lt;i>Adding durations to dateTimes&lt;/i>>&lt;/a>.&#xA;     * &lt;a href=&quot;#datetimefieldsmapping&quot;>date/time field mapping table&lt;/a>&#xA;     * defines the mapping from XML Schema 1.0 &lt;code>dateTime&lt;/code> fields &#xA;     * to this class' representation of those fields.&lt;/p>&#xA;     * &#xA;     * @param duration Duration to add to this &lt;code>XMLGregorianCalendar&lt;/code>.&#xA;     * &#xA;     * @throws NullPointerException  when &lt;code>duration&lt;/code> parameter is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="toGregorianCalendar">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/util/GregorianCalendar.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Convert this &lt;code>XMLGregorianCalendar&lt;/code> to a {@link GregorianCalendar}.&lt;/p>&#xA;     * &#xA;     * &lt;p>When &lt;code>this&lt;/code> instance has an undefined field, this&#xA;     * conversion relies on the &lt;code>java.util.GregorianCalendar&lt;/code> default &#xA;     * for its corresponding field. A notable difference between&#xA;     * XML Schema 1.0 date/time datatypes and &lt;code>java.util.GregorianCalendar&lt;/code>&#xA;     * is that Timezone value is optional for date/time datatypes and it is&#xA;     * a required field for &lt;code>java.util.GregorianCalendar&lt;/code>. See javadoc&#xA;     * for &lt;code>java.util.TimeZone.getDefault()&lt;/code> on how the default&#xA;     * is determined. To explicitly specify the &lt;code>TimeZone&lt;/code>&#xA;     * instance, see &#xA;     * {@link #toGregorianCalendar(TimeZone, Locale, XMLGregorianCalendar)}.&lt;/p>&#xA;     * &#xA;     * &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;2&quot;>&#xA;     *   &lt;thead>&#xA;     *     &lt;tr>&#xA;     *       &lt;th align=&quot;center&quot; colspan=&quot;2&quot;>&#xA;     *          Field by Field Conversion from this class to &#xA;     *          &lt;code>java.util.GregorianCalendar&lt;/code>&#xA;     *       &lt;/th>&#xA;     *     &lt;/tr>&#xA;     *   &lt;/thead>&#xA;     *   &lt;tbody>&#xA;     *     &lt;tr>&#xA;     *        &lt;td>&lt;code>java.util.GregorianCalendar&lt;/code> field&lt;/td>&#xA;     *        &lt;td>&lt;code>javax.xml.datatype.XMLGregorianCalendar&lt;/code> field&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>ERA&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getEonAndYear()}&lt;code>.signum() &lt; 0 ? GregorianCalendar.BC : GregorianCalendar.AD&lt;/code>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>YEAR&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getEonAndYear()}&lt;code>.abs().intValue()&lt;/code>&lt;i>*&lt;/i>&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>MONTH&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getMonth()} - {@link DatatypeConstants#JANUARY} + {@link GregorianCalendar#JANUARY}&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>DAY_OF_MONTH&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getDay()}&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>HOUR_OF_DAY&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getHour()}&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>MINUTE&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getMinute()}&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>SECOND&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getSecond()}&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>MILLISECOND&lt;/code>&lt;/td>&#xA;     *       &lt;td>get millisecond order from {@link #getFractionalSecond()}&lt;i>*&lt;/i> &lt;/td>&#xA;     *     &lt;/tr>&#xA;     *     &lt;tr>&#xA;     *       &lt;td>&lt;code>GregorianCalendar.setTimeZone(TimeZone)&lt;/code>&lt;/td>&#xA;     *       &lt;td>{@link #getTimezone()} formatted into Custom timezone id&lt;/td>&#xA;     *     &lt;/tr>&#xA;     *   &lt;/tbody>&#xA;     * &lt;/table>&#xA;     * &lt;i>*&lt;/i> designates possible loss of precision during the conversion due&#xA;     * to source datatype having higher precision than target datatype.&#xA;     * &#xA;     * &lt;p>To ensure consistency in conversion implementations, the new&#xA;     * &lt;code>GregorianCalendar&lt;/code> should be instantiated in following&#xA;     * manner.&#xA;     * &lt;ul>&#xA;     *   &lt;li>Using &lt;code>timeZone&lt;/code> value as defined above, create a new &#xA;     * &lt;code>java.util.GregorianCalendar(timeZone,Locale.getDefault())&lt;/code>.&#xA;     *   &lt;/li>&#xA;     *   &lt;li>Initialize all GregorianCalendar fields by calling {(@link GegorianCalendar#clear()}.&lt;/li>&#xA;     *   &lt;li>Obtain a pure Gregorian Calendar by invoking&#xA;     *   &lt;code>GregorianCalendar.setGregorianChange(&#xA;     *   new Date(Long.MIN_VALUE))&lt;/code>.&lt;/li>&#xA;     *   &lt;li>Its fields ERA, YEAR, MONTH, DAY_OF_MONTH, HOUR_OF_DAY, &#xA;     *       MINUTE, SECOND and MILLISECOND are set using the method &#xA;     *       &lt;code>Calendar.set(int,int)&lt;/code>&lt;/li>&#xA;     * &lt;/ul>&#xA;     * &lt;/p>&#xA;     * &#xA;     * @see #toGregorianCalendar(java.util.TimeZone, java.util.Locale, XMLGregorianCalendar)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="toGregorianCalendar">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/util/GregorianCalendar.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timezone">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>util</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/util/TimeZone.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="aLocale">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <namespaces>java</namespaces>
+          <namespaces>util</namespaces>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/util/Locale.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="defaults">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Convert this &lt;code>XMLGregorianCalendar&lt;/code> along with provided parameters&#xA;     * to a {@link GregorianCalendar} instance.&lt;/p>&#xA;     * &#xA;     * &lt;p> Since XML Schema 1.0 date/time datetypes has no concept of&#xA;     * timezone ids or daylight savings timezone ids, this conversion operation&#xA;     * allows the user to explicitly specify one with&#xA;     * &lt;code>timezone&lt;/code> parameter.&lt;/p>&#xA;     * &#xA;     * &lt;p>To compute the return value's &lt;code>TimeZone&lt;/code> field,&#xA;     * &lt;ul>&#xA;     * &lt;li>when parameter &lt;code>timeZone&lt;/code> is non-null, &#xA;     * it is the timezone field.&lt;/li>&#xA;     * &lt;li>else when &lt;code>this.getTimezone() != FIELD_UNDEFINED&lt;/code>,&#xA;     * create a &lt;code>java.util.TimeZone&lt;/code> with a custom timezone id &#xA;     * using the &lt;code>this.getTimezone()&lt;/code>.&lt;/li>&#xA;     * &lt;li>else when &lt;code>defaults.getTimezone() != FIELD_UNDEFINED&lt;/code>, &#xA;     * create a &lt;code>java.util.TimeZone&lt;/code> with a custom timezone id &#xA;     * using &lt;code>defaults.getTimezone()&lt;/code>.&lt;/li>&#xA;     * &lt;li>else use the &lt;code>GregorianCalendar&lt;/code> default timezone value &#xA;     * for the host is defined as specified by &#xA;     * &lt;code>java.util.TimeZone.getDefault()&lt;/code>.&lt;/li>&lt;/p>&#xA;     * &#xA;     * &lt;p>To ensure consistency in conversion implementations, the new&#xA;     * &lt;code>GregorianCalendar&lt;/code> should be instantiated in following&#xA;     * manner.&#xA;     * &lt;ul>&#xA;     *   &lt;li>Create a new &lt;code>java.util.GregorianCalendar(TimeZone, &#xA;     *       Locale)&lt;/code> with TimeZone set as specified above and the&#xA;     *       &lt;code>Locale&lt;/code> parameter. &#xA;     *   &lt;/li>&#xA;     *   &lt;li>Initialize all GregorianCalendar fields by calling {@link GregorianCalendar#clear()}&lt;/li>&#xA;     *   &lt;li>Obtain a pure Gregorian Calendar by invoking&#xA;     *   &lt;code>GregorianCalendar.setGregorianChange(&#xA;     *   new Date(Long.MIN_VALUE))&lt;/code>.&lt;/li>&#xA;     *   &lt;li>Its fields ERA, YEAR, MONTH, DAY_OF_MONTH, HOUR_OF_DAY, &#xA;     *       MINUTE, SECOND and MILLISECOND are set using the method &#xA;     *       &lt;code>Calendar.set(int,int)&lt;/code>&lt;/li>&#xA;     * &lt;/ul>&#xA;     * &#xA;     * @param timezone provide Timezone. &lt;code>null&lt;/code> is a legal value.&#xA;     * @param aLocale  provide explicit Locale. Use default GregorianCalendar locale if&#xA;     *                 value is &lt;code>null&lt;/code>.&#xA;     * @param defaults provide default field values to use when corresponding&#xA;     *                 field for this instance is FIELD_UNDEFINED or null. &#xA;     *                 If &lt;code>defaults&lt;/code>is &lt;code>null&lt;/code> or a field&#xA;     *                 within the specified &lt;code>defaults&lt;/code> is undefined,&#xA;     *                 just use &lt;code>java.util.GregorianCalendar&lt;/code> defaults.&#xA;     * @return a java.util.GregorianCalendar conversion of this instance.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getTimeZone">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/util/TimeZone.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="defaultZoneoffset">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Returns a &lt;code>java.util.TimeZone&lt;/code> for this class.&lt;/p>&#xA;     * &#xA;     * &lt;p>If timezone field is defined for this instance, &#xA;     * returns TimeZone initialized with custom timezone id&#xA;     * of zoneoffset. If timezone field is undefined, &#xA;     * try the defaultZoneoffset that was passed in. &#xA;     * If defaultZoneoffset is FIELD_UNDEFINED, return&#xA;     * default timezone for this host.&#xA;     * (Same default as java.util.GregorianCalendar).&lt;/p>&#xA;     *&#xA;     * @param defaultZoneoffset default zoneoffset if this zoneoffset is &#xA;     * {@link DatatypeConstants#FIELD_UNDEFINED}.&#xA;     *&#xA;     * @return TimeZone for this.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="clone">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Creates and returns a copy of this object.&lt;/p>&#xA;     * &#xA;     * @return copy of this &lt;code>Object&lt;/code>&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** &#xA; * &lt;p>Representation for W3C XML Schema 1.0 date/time datatypes.&#xA; * Specifically, these date/time datatypes are &#xA; * &lt;a href=&quot;#DATETIME&quot;>&lt;code>dateTime&lt;/code>&lt;/a>,&#xA; * &lt;a href=&quot;#TIME&quot;>&lt;code>time&lt;/code>&lt;/a>,&#xA; * &lt;a href=&quot;#DATE&quot;>&lt;code>date&lt;/code>&lt;/a>,&#xA; * &lt;a href=&quot;#GYEARMONTH&quot;>&lt;code>gYearMonth&lt;/code>&lt;/a>,&#xA; * &lt;a href=&quot;#GMONTHDAY&quot;>&lt;code>gMonthDay&lt;/code>&lt;/a>,&#xA; * &lt;a href=&quot;#GYEAR&quot;>&lt;code>gYear&lt;/code>&lt;/a>&#xA; * &lt;a href=&quot;#GMONTH&quot;>&lt;code>gMonth&lt;/code>&lt;/a> and&#xA; * &lt;a href=&quot;#GDAY&quot;>&lt;code>gDay&lt;/code>&lt;/a> defined in the XML Namespace&#xA; * &lt;code>&quot;http://www.w3.org/2001/XMLSchema&quot;&lt;/code>.&#xA; * These datatypes are normatively defined in &#xA; * &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#dateTime&quot;>W3C XML Schema 1.0 Part 2, Section 3.2.7-14&lt;/a>.&lt;/p>&#xA; *&#xA; * &lt;p>The table below defines the mapping between XML Schema 1.0&#xA; * date/time datatype fields and this class' fields. It also summarizes&#xA; * the value constraints for the date and time fields defined in&#xA; * &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#isoformats&quot;>W3C XML Schema 1.0 Part 2, Appendix D,&#xA; * &lt;i>ISO 8601 Date and Time Formats&lt;/i>&lt;/a>.&lt;/p>&#xA; * &#xA; * &lt;a name=&quot;datetimefieldsmapping&quot;/>&#xA; * &lt;table border=&quot;2&quot; rules=&quot;all&quot; cellpadding=&quot;2&quot;>&#xA; *   &lt;thead>&#xA; *     &lt;tr>&#xA; *       &lt;th align=&quot;center&quot; colspan=&quot;3&quot;>&#xA; *         Date/Time Datatype Field Mapping Between XML Schema 1.0 and Java Representation&#xA; *       &lt;/th>&#xA; *     &lt;/tr>&#xA; *   &lt;/thead>&#xA; *   &lt;tbody>&#xA; *     &lt;tr>&#xA; *       &lt;th>XML Schema 1.0&lt;br/>&#xA; *           datatype&lt;br/> &#xA; *            field&lt;/th>&#xA; *       &lt;th>Related&lt;br/>XMLGregorianCalendar&lt;br/>Accessor(s)&lt;/th>&#xA; *       &lt;th>Value Range&lt;/th>&#xA; *     &lt;/tr>&#xA; *     &lt;a name=&quot;datetimefield-year&quot;/>&#xA; *     &lt;tr>&#xA; *       &lt;td> year &lt;/td>&#xA; *       &lt;td> {@link #getYear()} + {@link #getEon()} or&lt;br/>&#xA; *            {@link #getEonAndYear}&#xA; *       &lt;/td>&#xA; *       &lt;td> &lt;code>getYear()&lt;/code> is a value between -(10^9-1) to (10^9)-1 &#xA; *            or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;br/>&#xA; *            {@link #getEon()} is high order year value in billion of years.&lt;br/>&#xA; *            &lt;code>getEon()&lt;/code> has values greater than or equal to (10^9) or less than or equal to -(10^9).&#xA; *            A value of null indicates field is undefined.&lt;/br>&#xA; *            Given that &lt;a href=&quot;http://www.w3.org/2001/05/xmlschema-errata#e2-63&quot;>XML Schema 1.0 errata&lt;/a> states that the year zero&#xA; *            will be a valid lexical value in a future version of XML Schema, &#xA; *            this class allows the year field to be set to zero. Otherwise,&#xA; *            the year field value is handled exactly as described&#xA; *            in the errata and [ISO-8601-1988]. Note that W3C XML Schema 1.0&#xA; *            validation does not allow for the year field to have a value of zero.&#xA; *            &lt;/td>&#xA; *     &lt;/tr>&#xA; *     &lt;a name=&quot;datetimefield-month&quot;/>&#xA; *     &lt;tr>&#xA; *       &lt;td> month &lt;/td>&#xA; *       &lt;td> {@link #getMonth()} &lt;/td>&#xA; *       &lt;td> 1 to 12 or {@link DatatypeConstants#FIELD_UNDEFINED} &lt;/td>&#xA; *     &lt;/tr>&#xA; *     &lt;a name=&quot;datetimefield-day&quot;/>&#xA; *     &lt;tr>&#xA; *       &lt;td> day &lt;/td>&#xA; *       &lt;td> {@link #getDay()} &lt;/td>&#xA; *       &lt;td> Independent of month, max range is 1 to 31 or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;br/>&#xA; *            The normative value constraint stated relative to month &#xA; *            field's value is in &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#isoformats&quot;>W3C XML Schema 1.0 Part 2, Appendix D&lt;/a>.&#xA; *       &lt;/td> &#xA; *     &lt;/tr>&#xA; *     &lt;tr id=&quot;datetimefield-hour&quot;>&#xA; *       &lt;td>hour&lt;/td>&#xA; *       &lt;td>{@link #getHour()}&lt;/td>&#xA; *       &lt;td>&#xA; *         0 to 24 or {@link DatatypeConstants#FIELD_UNDEFINED}.&#xA; *         For a value of 24, the minute and second field must be zero per&#xA; *         &lt;a href=&quot;http://www.w3.org/2001/05/xmlschema-errata#e2-45&quot;>XML Schema Errata&lt;/a>.&#xA; *       &lt;/td>&#xA; *     &lt;/tr>&#xA; *     &lt;a name=&quot;datetimefield-minute&quot;/>&#xA; *     &lt;tr>&#xA; *       &lt;td> minute &lt;/td>&#xA; *       &lt;td> {@link #getMinute()} &lt;/td>&#xA; *       &lt;td> 0 to 59 or {@link DatatypeConstants#FIELD_UNDEFINED} &lt;/td>&#xA; *     &lt;/tr>&#xA; *     &lt;a name=&quot;datetimefield-second&quot;/>&#xA; *     &lt;tr>&#xA; *       &lt;td>second&lt;/td>&#xA; *       &lt;td>&#xA; *         {@link #getSecond()} + {@link #getMillisecond()}/1000 or&lt;br/>&#xA; *         {@link #getSecond()} + {@link #getFractionalSecond()}&#xA; *       &lt;/td>&#xA; *       &lt;td>&#xA; *         {@link #getSecond()} from 0 to 60 or {@link DatatypeConstants#FIELD_UNDEFINED}.&lt;br/>&#xA; *         &lt;i>(Note: 60 only allowable for leap second.)&lt;/i>&lt;br/>&#xA; *         {@link #getFractionalSecond()} allows for infinite precision over the range from 0.0 to 1.0 when &#xA; *         the {@link #getSecond()} is defined.&lt;br/>&#xA; *         &lt;code>FractionalSecond&lt;/code> is optional and has a value of &lt;code>null&lt;/code> when it is undefined.&lt;br />&#xA; *            {@link #getMillisecond()} is the convenience &#xA; *            millisecond precision of value of {@link #getFractionalSecond()}.&#xA; *       &lt;/td>&#xA; *     &lt;/tr>&#xA; *     &lt;tr id=&quot;datetimefield-timezone&quot;>&#xA; *       &lt;td> timezone &lt;/td>&#xA; *       &lt;td> {@link #getTimezone()} &lt;/td>&#xA; *       &lt;td> Number of minutes or {@link DatatypeConstants#FIELD_UNDEFINED}.&#xA; *         Value range from -14 hours (-14 * 60 minutes) to 14 hours (14 * 60 minutes).&#xA; *       &lt;/td>&#xA; *     &lt;/tr>&#xA; *   &lt;/tbody>&#xA; *  &lt;/table>&#xA; *&#xA; * &lt;p>All maximum value space constraints listed for the fields in the table &#xA; * above are checked by factory methods, @{link DatatypeFactory},&#xA; * setter methods and parse methods of&#xA; * this class. &lt;code>IllegalArgumentException&lt;/code> is thrown when a&#xA; * parameter's value is outside the value constraint for the field or&#xA; * if the composite&#xA; * values constitute an invalid XMLGregorianCalendar instance (for example, if&#xA; * the 31st of June is specified).&#xA; * &lt;/p>&#xA; * &#xA; * &lt;p>The following operations are defined for this class:&#xA; * &lt;ul>&#xA; *   &lt;li>accessors/mutators for independent date/time fields&lt;/li>&#xA; *   &lt;li>conversion between this class and W3C XML Schema 1.0 lexical representation,&#xA; *     {@link #toString()}, {@link DatatypeFactory#newXMLGregorianCalendar(String lexicalRepresentation)}&lt;/li>&#xA; *   &lt;li>conversion between this class and {@link GregorianCalendar},&#xA; *     {@link #toGregorianCalendar(java.util.TimeZone timezone, java.util.Locale aLocale, XMLGregorianCalendar defaults)},&#xA; *     {@link DatatypeFactory}&lt;/li>&#xA; *   &lt;li>partial order relation comparator method, {@link #compare(XMLGregorianCalendar xmlGregorianCalendar)}&lt;/li>&#xA; *   &lt;li>{@link #equals(Object)} defined relative to {@link #compare(XMLGregorianCalendar xmlGregorianCalendar)}.&lt;/li>&#xA; *   &lt;li>addition operation with {@link Duration} &#xA; *      instance as defined in &lt;a href=&quot;http://www.w3.org/TR/xmlschema-2/#adding-durations-to-dateTimes&quot;>&#xA; *      W3C XML Schema 1.0 Part 2, Appendix E, &lt;i>Adding durations to dateTimes&lt;/i>&lt;/a>.&#xA; *   &lt;/li>&#xA; * &lt;/ul>&#xA; * &lt;/p>&#xA; * &#xA; * @author &lt;a href=&quot;mailto:Joseph.Fialli@Sun.com&quot;>Joseph Fialli&lt;/a>&#xA; * @author &lt;a href=&quot;mailto:Kohsuke.Kawaguchi@Sun.com&quot;>Kohsuke Kawaguchi&lt;/a>&#xA; * @author &lt;a href=&quot;mailto:Jeff.Suttor@Sun.com&quot;>Jeff Suttor&lt;/a>&#xA; * @version $Revision: 1.28.4.2.2.4.2.1.2.2.2.6 $, $Date: 2004/06/09 19:06:01 $    &#xA; * @see Duration&#xA; * @see DatatypeFactory&#xA; * @since 1.5&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../java/lang/Cloneable.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Parser.java">
+  <comments>// SAX parser interface.</comments>
+  <comments>// http://www.saxproject.org</comments>
+  <comments>// No warranty; no copyright -- use this as you will.</comments>
+  <comments>// $Id: Parser.java,v 1.1.24.1 2004/05/01 08:34:40 jsuttor Exp $</comments>
+  <namespaces>org</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>sax</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/util/Locale.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Parser">
+    <members xsi:type="members:InterfaceMethod" name="setLocale">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="locale">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/util/Locale.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Allow an application to request a locale for errors and warnings.&#xA;     *&#xA;     * &lt;p>SAX parsers are not required to provide localisation for errors&#xA;     * and warnings; if they cannot support the requested locale,&#xA;     * however, they must throw a SAX exception.  Applications may&#xA;     * not request a locale change in the middle of a parse.&lt;/p>&#xA;     *&#xA;     * @param locale A Java Locale object.&#xA;     * @exception org.xml.sax.SAXException Throws an exception&#xA;     *            (using the previous or default locale) if the &#xA;     *            requested locale is not supported.&#xA;     * @see org.xml.sax.SAXException&#xA;     * @see org.xml.sax.SAXParseException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setEntityResolver">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resolver">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="EntityResolver.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Allow an application to register a custom entity resolver.&#xA;     *&#xA;     * &lt;p>If the application does not register an entity resolver, the&#xA;     * SAX parser will resolve system identifiers and open connections&#xA;     * to entities itself (this is the default behaviour implemented in&#xA;     * HandlerBase).&lt;/p>&#xA;     *&#xA;     * &lt;p>Applications may register a new or different entity resolver&#xA;     * in the middle of a parse, and the SAX parser must begin using&#xA;     * the new resolver immediately.&lt;/p>&#xA;     *&#xA;     * @param resolver The object for resolving entities.&#xA;     * @see EntityResolver&#xA;     * @see HandlerBase&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDTDHandler">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="DTDHandler.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Allow an application to register a DTD event handler.&#xA;     *&#xA;     * &lt;p>If the application does not register a DTD handler, all DTD&#xA;     * events reported by the SAX parser will be silently&#xA;     * ignored (this is the default behaviour implemented by&#xA;     * HandlerBase).&lt;/p>&#xA;     *&#xA;     * &lt;p>Applications may register a new or different&#xA;     * handler in the middle of a parse, and the SAX parser must&#xA;     * begin using the new handler immediately.&lt;/p>&#xA;     *&#xA;     * @param handler The DTD handler.&#xA;     * @see DTDHandler&#xA;     * @see HandlerBase&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setDocumentHandler">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="DocumentHandler.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Allow an application to register a document event handler.&#xA;     *&#xA;     * &lt;p>If the application does not register a document handler, all&#xA;     * document events reported by the SAX parser will be silently&#xA;     * ignored (this is the default behaviour implemented by&#xA;     * HandlerBase).&lt;/p>&#xA;     *&#xA;     * &lt;p>Applications may register a new or different handler in the&#xA;     * middle of a parse, and the SAX parser must begin using the new&#xA;     * handler immediately.&lt;/p>&#xA;     *&#xA;     * @param handler The document handler.&#xA;     * @see DocumentHandler&#xA;     * @see HandlerBase&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setErrorHandler">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="ErrorHandler.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Allow an application to register an error event handler.&#xA;     *&#xA;     * &lt;p>If the application does not register an error event handler,&#xA;     * all error events reported by the SAX parser will be silently&#xA;     * ignored, except for fatalError, which will throw a SAXException&#xA;     * (this is the default behaviour implemented by HandlerBase).&lt;/p>&#xA;     *&#xA;     * &lt;p>Applications may register a new or different handler in the&#xA;     * middle of a parse, and the SAX parser must begin using the new&#xA;     * handler immediately.&lt;/p>&#xA;     *&#xA;     * @param handler The error handler.&#xA;     * @see ErrorHandler&#xA;     * @see SAXException&#xA;     * @see HandlerBase&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="parse">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="InputSource.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Parse an XML document.&#xA;     *&#xA;     * &lt;p>The application can use this method to instruct the SAX parser&#xA;     * to begin parsing an XML document from any valid input&#xA;     * source (a character stream, a byte stream, or a URI).&lt;/p>&#xA;     *&#xA;     * &lt;p>Applications may not invoke this method while a parse is in&#xA;     * progress (they should create a new Parser instead for each&#xA;     * additional XML document).  Once a parse is complete, an&#xA;     * application may reuse the same Parser object, possibly with a&#xA;     * different input source.&lt;/p>&#xA;     *&#xA;     * @param source The input source for the top-level of the&#xA;     *        XML document.&#xA;     * @exception org.xml.sax.SAXException Any SAX exception, possibly&#xA;     *            wrapping another exception.&#xA;     * @exception java.io.IOException An IO exception from the parser,&#xA;     *            possibly from a byte stream or character stream&#xA;     *            supplied by the application.&#xA;     * @see org.xml.sax.InputSource&#xA;     * @see #parse(java.lang.String)&#xA;     * @see #setEntityResolver&#xA;     * @see #setDTDHandler&#xA;     * @see #setDocumentHandler&#xA;     * @see #setErrorHandler&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="parse">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="systemId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="SAXException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Parse an XML document from a system identifier (URI).&#xA;     *&#xA;     * &lt;p>This method is a shortcut for the common case of reading a&#xA;     * document from a system identifier.  It is the exact&#xA;     * equivalent of the following:&lt;/p>&#xA;     *&#xA;     * &lt;pre>&#xA;     * parse(new InputSource(systemId));&#xA;     * &lt;/pre>&#xA;     *&#xA;     * &lt;p>If the system identifier is a URL, it must be fully resolved&#xA;     * by the application before it is passed to the parser.&lt;/p>&#xA;     *&#xA;     * @param systemId The system identifier (URI).&#xA;     * @exception org.xml.sax.SAXException Any SAX exception, possibly&#xA;     *            wrapping another exception.&#xA;     * @exception java.io.IOException An IO exception from the parser,&#xA;     *            possibly from a byte stream or character stream&#xA;     *            supplied by the application.&#xA;     * @see #parse(org.xml.sax.InputSource)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Basic interface for SAX (Simple API for XML) parsers.&#xA; *&#xA; * &lt;blockquote>&#xA; * &lt;em>This module, both source code and documentation, is in the&#xA; * Public Domain, and comes with &lt;strong>NO WARRANTY&lt;/strong>.&lt;/em>&#xA; * See &lt;a href='http://www.saxproject.org'>http://www.saxproject.org&lt;/a>&#xA; * for further information.&#xA; * &lt;/blockquote>&#xA; *&#xA; * &lt;p>This was the main event supplier interface for SAX1; it has&#xA; * been replaced in SAX2 by {@link org.xml.sax.XMLReader XMLReader},&#xA; * which includes Namespace support and sophisticated configurability&#xA; * and extensibility.&lt;/p>&#xA; *&#xA; * &lt;p>All SAX1 parsers must implement this basic interface: it allows&#xA; * applications to register handlers for different types of events&#xA; * and to initiate a parse from a URI, or a character stream.&lt;/p>&#xA; *&#xA; * &lt;p>All SAX1 parsers must also implement a zero-argument constructor&#xA; * (though other constructors are also allowed).&lt;/p>&#xA; *&#xA; * &lt;p>SAX1 parsers are reusable but not re-entrant: the application&#xA; * may reuse a parser object (possibly with a different input source)&#xA; * once the first parse has completed successfully, but it may not&#xA; * invoke the parse() methods recursively within a parse.&lt;/p>&#xA; *&#xA; * @deprecated This interface has been replaced by the SAX2&#xA; *             {@link org.xml.sax.XMLReader XMLReader}&#xA; *             interface, which includes Namespace support.&#xA; * @since SAX 1.0&#xA; * @author David Megginson&#xA; * @version 2.0.1 (sax2r2)&#xA; * @see org.xml.sax.EntityResolver&#xA; * @see org.xml.sax.DTDHandler&#xA; * @see org.xml.sax.DocumentHandler&#xA; * @see org.xml.sax.ErrorHandler&#xA; * @see org.xml.sax.HandlerBase&#xA; * @see org.xml.sax.InputSource&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

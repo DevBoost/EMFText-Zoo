@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/references ../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../java.ecore#/15 http://www.emftext.org/java/types ../../../java.ecore#/16" name="VolatileImage.java">
+  <comments>/*&#xA; * @(#)VolatileImage.java&#x9;1.17 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>awt</namespaces>
+  <namespaces>image</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Color.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Graphics.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Graphics2D.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../GraphicsConfiguration.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../GraphicsDevice.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Image.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../ImageCapabilities.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../Toolkit.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>awt</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../Transparency.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="VolatileImage">
+    <members xsi:type="members:Field" name="IMAGE_OK">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Return codes for validate() method</comments>
+        <comments>/**&#xA;     * Validated image is ready to use as-is.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="IMAGE_RESTORED">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Validated image has been restored and is now ready to use.&#xA;     * Note that restoration causes contents of the image to be lost.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="IMAGE_INCOMPATIBLE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Validated image is incompatible with supplied &#xA;     * &lt;code>GraphicsConfiguration&lt;/code> object and should be&#xA;     * re-created as appropriate.  Usage of the image as-is&#xA;     * after receiving this return code from &lt;code>validate&lt;/code>&#xA;     * is undefined.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getSnapshot">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="BufferedImage.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns a static snapshot image of this object.  The&#xA;     * &lt;code>BufferedImage&lt;/code> returned is only current with&#xA;     * the &lt;code>VolatileImage&lt;/code> at the time of the request &#xA;     * and will not be updated with any future changes to the &#xA;     * &lt;code>VolatileImage&lt;/code>.&#xA;     * @return a {@link BufferedImage} representation of this&#xA;     *&#x9;&#x9;&lt;code>VolatileImage&lt;/code>&#xA;     * @see BufferedImage&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getWidth">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the width of the &lt;code>VolatileImage&lt;/code>.&#xA;     * @return the width of this &lt;code>VolatileImage&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getHeight">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the height of the &lt;code>VolatileImage&lt;/code>.&#xA;     * @return the height of this &lt;code>VolatileImage&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSource">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="ImageProducer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Image overrides</comments>
+        <comments>/** &#xA;     * This returns an ImageProducer for this VolatileImage.&#xA;     * Note that the VolatileImage object is optimized for &#xA;     * rendering operations and blitting to the screen or other&#xA;     * VolatileImage objects, as opposed to reading back the&#xA;     * pixels of the image.  Therefore, operations such as&#xA;     * &lt;code>getSource&lt;/code> may not perform as fast as&#xA;     * operations that do not rely on reading the pixels.&#xA;     * Note also that the pixel values read from the image are current&#xA;     * with those in the image only at the time that they are &#xA;     * retrieved. This method takes a snapshot&#xA;     * of the image at the time the request is made and the&#xA;     * ImageProducer object returned works with&#xA;     * that static snapshot image, not the original VolatileImage.&#xA;     * Calling getSource()&#xA;     * is equivalent to calling getSnapshot().getSource().&#xA;     * @return an {@link ImageProducer} that can be used to produce the&#xA;     * pixels for a &lt;code>BufferedImage&lt;/code> representation of&#xA;     * this Image.&#xA;     * @see ImageProducer&#xA;     * @see #getSnapshot()&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <comments>// REMIND: Make sure this functionality is in line with the</comments>
+        <comments>// spec.  In particular, we are returning the Source for a </comments>
+        <comments>// static image (the snapshot), not a changing image (the </comments>
+        <comments>// VolatileImage).  So if the user expects the Source to be</comments>
+        <comments>// up-to-date with the current contents of the VolatileImage,</comments>
+        <comments>// they will be disappointed...</comments>
+        <comments>// REMIND: This assumes that getSnapshot() returns something</comments>
+        <comments>// valid and not the default null object returned by this class</comments>
+        <comments>// (so it assumes that the actual VolatileImage object is </comments>
+        <comments>// subclassed off something that does the right thing </comments>
+        <comments>// (e.g., SunVolatileImage).</comments>
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="BufferedImage.class.xmi#//@classifiers.0/@members.50"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="flush">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// REMIND: if we want any decent performance for getScaledInstance(),</comments>
+        <comments>// we should override the Image implementation of it...</comments>
+        <comments>/**&#xA;     * Releases system resources currently consumed by this image.&#xA;     * &lt;p>&#xA;     * When a VolatileImage object is created, limited system resources&#xA;     * such as video memory (VRAM) may be allocated in order to&#xA;     * support the image.  When a VolatileImage object is no longer&#xA;     * used, it may be garbage-collected and those system resources&#xA;     * will be returned, but this process does &#xA;     * not happen at guaranteed times.  Applications that create&#xA;     * many VolatileImage objects (for example, a resizing window&#xA;     * may force recreation of its back buffer as the size&#xA;     * changes) may run out of optimal system&#xA;     * resources for new VolatileImage objects simply because the&#xA;     * old objects have not yet been removed from the system.  &#xA;     * (New VolatileImage objects may still be created, but they&#xA;     * may not perform as well as those created in accelerated&#xA;     * memory).&#xA;     * &lt;p>&#xA;     * By calling this flush method, applications can have more control over&#xA;     * the state of the resources taken up by obsolete VolatileImage objects.&#xA;     * &lt;p>&#xA;     * This method will cause the contents of the image to be lost, so&#xA;     * calls to {@link #contentsLost} will return &lt;code>true&lt;/code>&#xA;     * and the image must be validated before it can be used again.&#xA;     * @see #contentsLost&#xA;     * @see #validate&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getGraphics">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../Graphics.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * This method returns a {@link Graphics2D}, but is here&#xA;     * for backwards compatibility.  {@link #createGraphics() createGraphics} is more&#xA;     * convenient, since it is declared to return a &#xA;     * &lt;code>Graphics2D&lt;/code>.&#xA;     * @return a &lt;code>Graphics2D&lt;/code>, which can be used to draw into&#xA;     *          this image.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.9"/>
+      </statements>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="createGraphics">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../Graphics2D.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Creates a &lt;code>Graphics2D&lt;/code>, which can be used to draw into&#xA;     * this &lt;code>VolatileImage&lt;/code>.&#xA;     * @return a &lt;code>Graphics2D&lt;/code>, used for drawing into this&#xA;     *          image. &#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="validate">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="gc">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../GraphicsConfiguration.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// Volatile management methods</comments>
+        <comments>/**&#xA;     * Attempts to restore the drawing surface of the image if the surface&#xA;     * had been lost since the last &lt;code>validate&lt;/code> call.  Also&#xA;     * validates this image against the given GraphicsConfiguration&#xA;     * parameter to see whether operations from this image to the&#xA;     * GraphicsConfiguration are compatible.  An example of an&#xA;     * incompatible combination might be a situation where a VolatileImage&#xA;     * object was created on one graphics device and then was used&#xA;     * to render to a different graphics device.  Since VolatileImage&#xA;     * objects tend to be very device-specific, this operation might&#xA;     * not work as intended, so the return code from this validate&#xA;     * call would note that incompatibility.  A null or incorrect &#xA;     * value for gc may cause incorrect values to be returned from&#xA;     * &lt;code>validate&lt;/code> and may cause later problems with rendering.&#xA;     *&#xA;     * @param   gc   a &lt;code>GraphicsConfiguration&lt;/code> object for this&#xA;     *&#x9;&#x9;image to be validated against.  A null gc implies that the&#xA;     *&#x9;&#x9;validate method should skip the compatibility test.&#xA;     * @return&#x9;&lt;code>IMAGE_OK&lt;/code> if the image did not need validation&lt;BR>&#xA;     *&#x9;&#x9;&lt;code>IMAGE_RESTORED&lt;/code> if the image needed restoration.  &#xA;     *&#x9;&#x9;Restoration implies that the contents of the image may have &#xA;     *&#x9;&#x9;been affected and the image may need to be re-rendered.&lt;BR>&#xA;     *&#x9;&#x9;&lt;code>IMAGE_INCOMPATIBLE&lt;/code> if the image is incompatible&#xA;     *&#x9;&#x9;with the &lt;code>GraphicsConfiguration&lt;/code> object passed&#xA;     *&#x9;&#x9;into the &lt;code>validate&lt;/code> method.  Incompatibility&#xA;     *&#x9;&#x9;implies that the image may need to be recreated with a&#xA;     *&#x9;&#x9;new &lt;code>Component&lt;/code> or &#xA;     *&#x9;&#x9;&lt;code>GraphicsConfiguration&lt;/code> in order to get an image&#xA;     *&#x9;&#x9;that can be used successfully with this &#xA;     *&#x9;&#x9;&lt;code>GraphicsConfiguration&lt;/code>.&#xA;     *&#x9;&#x9;An incompatible image is not checked for whether restoration&#xA;     *&#x9;&#x9;was necessary, so the state of the image is unchanged &#xA;     *&#x9;&#x9;after a return value of &lt;code>IMAGE_INCOMPATIBLE&lt;/code>&#xA;     *&#x9;&#x9;and this return value implies nothing about whether the&#xA;     *&#x9;&#x9;image needs to be restored.&#xA;     * @see java.awt.GraphicsConfiguration&#xA;     * @see java.awt.Component&#xA;     * @see #IMAGE_OK&#xA;     * @see #IMAGE_RESTORED&#xA;     * @see #IMAGE_INCOMPATIBLE&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="contentsLost">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns &lt;code>true&lt;/code> if rendering data was lost since last &#xA;     * &lt;code>validate&lt;/code> call.  This method should be called by the &#xA;     * application at the end of any series of rendering operations to &#xA;     * or from the image to see whether&#xA;     * the image needs to be validated and the rendering redone.&#xA;     * @return &lt;code>true&lt;/code> if the drawing surface needs to be restored;&#xA;     * &lt;code>false&lt;/code> otherwise.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getCapabilities">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../ImageCapabilities.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns an ImageCapabilities object which can be&#xA;     * inquired as to the specific capabilities of this&#xA;     * VolatileImage.  This would allow programmers to find&#xA;     * out more runtime information on the specific VolatileImage&#xA;     * object that they have created.  For example, the user&#xA;     * might create a VolatileImage but the system may have&#xA;     * no video memory left for creating an image of that&#xA;     * size, so although the object is a VolatileImage, it is&#xA;     * not as accelerated as other VolatileImage objects on&#xA;     * this platform might be.  The user might want that&#xA;     * information to find other solutions to their problem.&#xA;     * @return an &lt;code>ImageCapabilities&lt;/code> object that contains&#xA;     *         the capabilities of this &lt;code>VolatileImage&lt;/code>.&#xA;     * @since 1.4&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    </members>
+    <members xsi:type="members:Field" name="transparency">
+      <initialValue xsi:type="references:IdentifierReference">
+        <target xsi:type="members:Field" href="../Transparency.class.xmi#//@classifiers.0/@members.2"/>
+      </initialValue>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The transparency value with which this image was created.&#xA;     * @see java.awt.GraphicsConfiguration#createCompatibleVolatileImage(int,&#xA;     *      int,int)&#xA;     * @see java.awt.GraphicsConfiguration#createCompatibleVolatileImage(int,&#xA;     *      int,ImageCapabilities,int)&#xA;     * @see Transparency&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTransparency">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the transparency.  Returns either OPAQUE, BITMASK,&#xA;     * or TRANSLUCENT.&#xA;     * @return the transparency of this &lt;code>VolatileImage&lt;/code>.&#xA;     * @see Transparency#OPAQUE&#xA;     * @see Transparency#BITMASK&#xA;     * @see Transparency#TRANSLUCENT&#xA;     * @since 1.5&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * VolatileImage is an image which can lose its &#xA; * contents at any time due to circumstances beyond the control of the &#xA; * application (e.g., situations caused by the operating system or by&#xA; * other applications). Because of the potential for hardware acceleration,&#xA; * a VolatileImage object can have significant performance benefits on &#xA; * some platforms.&#xA; * &lt;p>&#xA; * The drawing surface of an image (the memory where the image contents &#xA; * actually reside) can be lost or invalidated, causing the contents of that &#xA; * memory to go away.  The drawing surface thus needs to be restored&#xA; * or recreated and the contents of that surface need to be&#xA; * re-rendered.  VolatileImage provides an interface for &#xA; * allowing the user to detect these problems and fix them&#xA; * when they occur.&#xA; * &lt;p>&#xA; * This image should not be subclassed directly but should be created&#xA; * by using the {@link java.awt.Component#createVolatileImage(int, int)&#xA; * Component.createVolatileImage} or &#xA; * {@link java.awt.GraphicsConfiguration#createCompatibleVolatileImage(int, int)&#xA; * GraphicsConfiguration.createCompatibleVolatileImage(int, int)} methods.&#xA; * &lt;P>&#xA; * An example of using a VolatileImage object follows:&#xA; * &lt;pre>&#xA; * // image creation&#xA; * VolatileImage vImg = createVolatileImage(w, h);&#xA; *&#xA; * &#xA; * // rendering to the image&#xA; * void renderOffscreen() {&#xA; *&#x9;do {&#xA; *&#x9;    if (vImg.validate(getGraphicsConfiguration()) ==&#xA; *&#x9;&#x9;VolatileImage.IMAGE_INCOMPATIBLE)&#xA; *&#x9;    {&#xA; *&#x9;&#x9;// old vImg doesn't work with new GraphicsConfig; re-create it&#xA; *&#x9;&#x9;vImg = createVolatileImage(w, h);&#xA; *&#x9;    }&#xA; *&#x9;    Graphics2D g = vImg.createGraphics();&#xA; *&#x9;    //&#xA; *&#x9;    // miscellaneous rendering commands...&#xA; *&#x9;    //&#xA; *&#x9;    g.dispose();&#xA; *&#x9;} while (vImg.contentsLost());&#xA; * }&#xA; *&#xA; *&#xA; * // copying from the image (here, gScreen is the Graphics&#xA; * // object for the onscreen window)&#xA; * do {&#xA; *&#x9;int returnCode = vImg.validate(getGraphicsConfiguration());&#xA; *&#x9;if (returnCode == VolatileImage.IMAGE_RESTORED) {&#xA; *&#x9;    // Contents need to be restored&#xA; *&#x9;    renderOffscreen();&#x9;    // restore contents&#xA; *&#x9;} else if (returnCode == VolatileImage.IMAGE_INCOMPATIBLE) {&#xA; *&#x9;    // old vImg doesn't work with new GraphicsConfig; re-create it&#xA; *&#x9;    vImg = createVolatileImage(w, h);&#xA; *&#x9;    renderOffscreen();&#xA; *&#x9;}&#xA; *&#x9;gScreen.drawImage(vImg, 0, 0, this);&#xA; * } while (vImg.contentsLost());&#xA; * &lt;/pre>&#xA; * &lt;P>&#xA; * Note that this class subclasses from the {@link Image} class, which&#xA; * includes methods that take an {@link ImageObserver} parameter for&#xA; * asynchronous notifications as information is received from&#xA; * a potential {@link ImageProducer}.  Since this &lt;code>VolatileImage&lt;/code> &#xA; * is not loaded from an asynchronous source, the various methods that take&#xA; * an &lt;code>ImageObserver&lt;/code> parameter will behave as if the data has&#xA; * already been obtained from the &lt;code>ImageProducer&lt;/code>.  &#xA; * Specifically, this means that the return values from such methods &#xA; * will never indicate that the information is not yet available and &#xA; * the &lt;code>ImageObserver&lt;/code> used in such methods will never &#xA; * need to be recorded for an asynchronous callback notification.&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Abstract"/>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../Transparency.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../Image.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

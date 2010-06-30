@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/literals ../../../java.ecore#/9 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/types ../../../java.ecore#/16" name="VoiceStatus.java">
+  <comments>/*&#xA; * @(#)VoiceStatus.java&#x9;1.18 03/12/19&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>sound</namespaces>
+  <namespaces>midi</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="VoiceStatus">
+    <members xsi:type="members:Field" name="active">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Indicates whether the voice is currently processing a MIDI note.&#xA;     * See the explanation of &#xA;     * &lt;A HREF=&quot;#description_of_active&quot;>active and inactive voices&lt;/A>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="channel">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The MIDI channel on which this voice is playing.  The value is a &#xA;     * zero-based channel number if the voice is active, or &#xA;     * unspecified if the voice is inactive.&#xA;     *&#xA;     * @see MidiChannel&#xA;     * @see #active&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="bank">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The bank number of the instrument that this voice is currently using.&#xA;     * This is a number dictated by the MIDI bank-select message; it does not&#xA;     * refer to a &lt;code>SoundBank&lt;/code> object.&#xA;     * The value ranges from 0 to 16383 if the voice is active, and is&#xA;     * unspecified if the voice is inactive.&#xA;     * @see Patch&#xA;     * @see Soundbank&#xA;     * @see #active&#xA;     * @see MidiChannel#programChange(int, int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="program">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The program number of the instrument that this voice is currently using.&#xA;     * The value ranges from 0 to 127 if the voice is active, and is&#xA;     * unspecified if the voice is inactive.&#xA;     *&#xA;     * @see MidiChannel#getProgram&#xA;     * @see Patch&#xA;     * @see #active&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="note">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The MIDI note that this voice is playing.  The range for an active voice&#xA;     * is from 0 to 127 in semitones, with 60 referring to Middle C.&#xA;     * The value is unspecified if the voice is inactive.&#xA;     *&#xA;     * @see MidiChannel#noteOn&#xA;     * @see #active&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="volume">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * The current MIDI volume level for the voice.  &#xA;     * The value ranges from 0 to 127 if the voice is active, and is&#xA;     * unspecified if the voice is inactive.&#xA;     * &lt;p>&#xA;     * Note that this value does not necessarily reflect&#xA;     * the instantaneous level of the sound produced by this&#xA;     * voice; that level is the result of  many contributing&#xA;     * factors, including the current instrument and the&#xA;     * shape of the amplitude envelope it produces.&#xA;     *&#xA;     * @see #active&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A &lt;code>VoiceStatus&lt;/code> object contains information about the current &#xA; * status of one of the voices produced by a {@link Synthesizer}.  &#xA; * &lt;p>&#xA; * MIDI synthesizers are generally capable of producing some maximum number of &#xA; * simultaneous notes, also referred to as voices.  A voice is a stream&#xA; * of successive single notes, and the process of assigning incoming MIDI notes to&#xA; * specific voices is known as voice allocation.&#xA; * However, the voice-allocation algorithm and the contents of each voice are &#xA; * normally internal to a MIDI synthesizer and hidden from outside view.  One can, of &#xA; * course, learn from MIDI messages which notes the synthesizer is playing, and &#xA; * one might be able deduce something about the assignment of notes to voices.&#xA; * But MIDI itself does not provide a means to report which notes a &#xA; * synthesizer has assigned to which voice, nor even to report how many voices &#xA; * the synthesizer is capable of synthesizing.  &#xA; * &lt;p>&#xA; * In Java Sound, however, a &#xA; * &lt;code>Synthesizer&lt;/code> class can expose the contents of its voices through its &#xA; * {@link Synthesizer#getVoiceStatus() getVoiceStatus()} method.  &#xA; * This behavior is recommended but optional;&#xA; * synthesizers that don't expose their voice allocation simply return a&#xA; * zero-length array. A &lt;code>Synthesizer&lt;/code> that does report its voice status&#xA; * should maintain this information at&#xA; * all times for all of its voices, whether they are currently sounding or&#xA; * not.  In other words, a given type of &lt;code>Synthesizer&lt;/code> always has a fixed&#xA; * number of voices, equal to the maximum number of simultaneous notes it is &#xA; * capable of sounding.  &#xA; * &lt;p>&#xA; * &lt;A NAME=&quot;description_of_active&quot;>&lt;/A>&#xA; * If the voice is not currently processing a MIDI note, it&#xA; * is considered inactive.  A voice is inactive when it has&#xA; * been given no note-on commands, or when every note-on command received has&#xA; * been terminated by a corresponding note-off (or by an &quot;all notes off&quot; &#xA; * message).  For example, this happens when a synthesizer capable of playing 16&#xA; * simultaneous notes is told to play a four-note chord; only&#xA; * four voices are active in this case (assuming no earlier notes are still playing).&#xA; * Usually, a voice whose status is reported as active is producing audible sound, but this&#xA; * is not always true; it depends on the details of the instrument (that&#xA; * is, the synthesis algorithm) and how long the note has been going on.&#xA; * For example, a voice may be synthesizing the sound of a single hand-clap.  Because&#xA; * this sound dies away so quickly, it may become inaudible before a note-off&#xA; * message is received.  In such a situation, the voice is still considered active &#xA; * even though no sound is currently being produced.&#xA; * &lt;p>&#xA; * Besides its active or inactive status, the &lt;code>VoiceStatus&lt;/code> class &#xA; * provides fields that reveal the voice's current MIDI channel, bank and &#xA; * program number, MIDI note number, and MIDI volume.  All of these can&#xA; * change during the course of a voice.  While the voice is inactive, each&#xA; * of these fields has an unspecified value, so you should check the active&#xA; * field first.&#xA; * &#xA; * @see Synthesizer#getMaxPolyphony&#xA; * @see Synthesizer#getVoiceStatus&#xA; *&#xA; * @version 1.18, 12/19/03&#xA; * @author David Rivas&#xA; * @author Kara Kytle&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

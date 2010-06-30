@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/generics ../../java.ecore#/6 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="SortedMap.java">
+  <comments>/*&#xA; * @(#)SortedMap.java&#x9;1.21 04/06/28&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>java</namespaces>
+  <namespaces>util</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="SortedMap">
+    <typeParameters name="K"/>
+    <typeParameters name="V"/>
+    <members xsi:type="members:InterfaceMethod" name="comparator">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <comments>/**&#xA;     * Returns the comparator associated with this sorted map, or&#xA;     * &lt;tt>null&lt;/tt> if it uses its keys' natural ordering.&#xA;     *&#xA;     * @return the comparator associated with this sorted map, or&#xA;     * &#x9;       &lt;tt>null&lt;/tt> if it uses its keys' natural ordering.&#xA;     */</comments>
+          <typeArguments xsi:type="generics:SuperTypeArgument">
+            <superType xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </superType>
+          </typeArguments>
+          <target xsi:type="classifiers:Interface" href="Comparator.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="subMap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0">
+          <comments>/**&#xA;     * Returns a view of the portion of this sorted map whose keys range from&#xA;     * &lt;tt>fromKey&lt;/tt>, inclusive, to &lt;tt>toKey&lt;/tt>, exclusive.  (If&#xA;     * &lt;tt>fromKey&lt;/tt> and &lt;tt>toKey&lt;/tt> are equal, the returned sorted map&#xA;     * is empty.)  The returned sorted map is backed by this sorted map, so&#xA;     * changes in the returned sorted map are reflected in this sorted map,&#xA;     * and vice-versa.  The returned Map supports all optional map operations&#xA;     * that this sorted map supports.&lt;p>&#xA;     *&#xA;     * The map returned by this method will throw an&#xA;     * &lt;tt>IllegalArgumentException&lt;/tt> if the user attempts to insert a key&#xA;     * outside the specified range.&lt;p>&#xA;     *&#xA;     * Note: this method always returns a &lt;i>half-open range&lt;/i> (which&#xA;     * includes its low endpoint but not its high endpoint).  If you need a&#xA;     * &lt;i>closed range&lt;/i> (which includes both endpoints), and the key type&#xA;     * allows for calculation of the successor a given key, merely request the&#xA;     * subrange from &lt;tt>lowEndpoint&lt;/tt> to &lt;tt>successor(highEndpoint)&lt;/tt>.&#xA;     * For example, suppose that &lt;tt>m&lt;/tt> is a map whose keys are strings.&#xA;     * The following idiom obtains a view containing all of the key-value&#xA;     * mappings in &lt;tt>m&lt;/tt> whose keys are between &lt;tt>low&lt;/tt> and&#xA;     * &lt;tt>high&lt;/tt>, inclusive:&#xA;     * &#xA;     * &#x9;    &lt;pre>    Map sub = m.subMap(low, high+&quot;\0&quot;);&lt;/pre>&#xA;     * &#xA;     * A similarly technique can be used to generate an &lt;i>open range&lt;/i>&#xA;     * (which contains neither endpoint).  The following idiom obtains a&#xA;     * view containing  all of the key-value mappings in &lt;tt>m&lt;/tt> whose keys&#xA;     * are between &lt;tt>low&lt;/tt> and &lt;tt>high&lt;/tt>, exclusive:&#xA;     * &#xA;     * &#x9;    &lt;pre>    Map sub = m.subMap(low+&quot;\0&quot;, high);&lt;/pre>&#xA;     *&#xA;     * @param fromKey low endpoint (inclusive) of the subMap.&#xA;     * @param toKey high endpoint (exclusive) of the subMap.&#xA;     * @return a view of the specified range within this sorted map.&#xA;     * &#xA;     * @throws ClassCastException if &lt;tt>fromKey&lt;/tt> and &lt;tt>toKey&lt;/tt>&#xA;     *         cannot be compared to one another using this map's comparator&#xA;     *         (or, if the map has no comparator, using natural ordering).&#xA;     *         Implementations may, but are not required to, throw this&#xA;     *&#x9;       exception if &lt;tt>fromKey&lt;/tt> or &lt;tt>toKey&lt;/tt>&#xA;     *         cannot be compared to keys currently in the map.&#xA;     * @throws IllegalArgumentException if &lt;tt>fromKey&lt;/tt> is greater than&#xA;     *         &lt;tt>toKey&lt;/tt>; or if this map is itself a subMap, headMap,&#xA;     *         or tailMap, and &lt;tt>fromKey&lt;/tt> or &lt;tt>toKey&lt;/tt> are not&#xA;     *         within the specified range of the subMap, headMap, or tailMap.&#xA;     * @throws NullPointerException if &lt;tt>fromKey&lt;/tt> or &lt;tt>toKey&lt;/tt> is&#xA;     *&#x9;       &lt;tt>null&lt;/tt> and this sorted map does not tolerate&#xA;     *&#x9;       &lt;tt>null&lt;/tt> keys.&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+            </typeReference>
+          </typeArguments>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fromKey">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="toKey">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="headMap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0">
+          <comments>/**&#xA;     * Returns a view of the portion of this sorted map whose keys are&#xA;     * strictly less than toKey.  The returned sorted map is backed by this&#xA;     * sorted map, so changes in the returned sorted map are reflected in this&#xA;     * sorted map, and vice-versa.  The returned map supports all optional map&#xA;     * operations that this sorted map supports.&lt;p>&#xA;     *&#xA;     * The map returned by this method will throw an IllegalArgumentException&#xA;     * if the user attempts to insert a key outside the specified range.&lt;p>&#xA;     *&#xA;     * Note: this method always returns a view that does not contain its&#xA;     * (high) endpoint.  If you need a view that does contain this endpoint,&#xA;     * and the key type allows for calculation of the successor a given&#xA;     * key, merely request a headMap bounded by successor(highEndpoint).&#xA;     * For example, suppose that suppose that &lt;tt>m&lt;/tt> is a map whose keys&#xA;     * are strings.  The following idiom obtains a view containing all of the&#xA;     * key-value mappings in &lt;tt>m&lt;/tt> whose keys are less than or equal to&#xA;     * &lt;tt>high&lt;/tt>:&#xA;     * &#xA;     * &#x9;    &lt;pre>    Map head = m.headMap(high+&quot;\0&quot;);&lt;/pre>&#xA;     *&#xA;     * @param toKey high endpoint (exclusive) of the subMap.&#xA;     * @return a view of the specified initial range of this sorted map.&#xA;     * @throws ClassCastException if &lt;tt>toKey&lt;/tt> is not compatible&#xA;     *         with this map's comparator (or, if the map has no comparator,&#xA;     *         if &lt;tt>toKey&lt;/tt> does not implement &lt;tt>Comparable&lt;/tt>).&#xA;     *         Implementations may, but are not required to, throw this&#xA;     *&#x9;       exception if &lt;tt>toKey&lt;/tt> cannot be compared to keys&#xA;     *         currently in the map.&#xA;     * @throws IllegalArgumentException if this map is itself a subMap,&#xA;     *         headMap, or tailMap, and &lt;tt>toKey&lt;/tt> is not within the&#xA;     *         specified range of the subMap, headMap, or tailMap.&#xA;     * @throws NullPointerException if &lt;tt>toKey&lt;/tt> is &lt;tt>null&lt;/tt> and&#xA;     *&#x9;       this sorted map does not tolerate &lt;tt>null&lt;/tt> keys.&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+            </typeReference>
+          </typeArguments>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="toKey">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="tailMap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0">
+          <comments>/**&#xA;     * Returns a view of the portion of this sorted map whose keys are greater&#xA;     * than or equal to &lt;tt>fromKey&lt;/tt>.  The returned sorted map is backed&#xA;     * by this sorted map, so changes in the returned sorted map are reflected&#xA;     * in this sorted map, and vice-versa.  The returned map supports all&#xA;     * optional map operations that this sorted map supports.&lt;p>&#xA;     *&#xA;     * The map returned by this method will throw an&#xA;     * &lt;tt>IllegalArgumentException&lt;/tt> if the user attempts to insert a key&#xA;     * outside the specified range.&lt;p>&#xA;     *&#xA;     * Note: this method always returns a view that contains its (low)&#xA;     * endpoint.  If you need a view that does not contain this endpoint, and&#xA;     * the element type allows for calculation of the successor a given value,&#xA;     * merely request a tailMap bounded by &lt;tt>successor(lowEndpoint)&lt;/tt>.&#xA;     * For example, suppose that suppose that &lt;tt>m&lt;/tt> is a map whose keys&#xA;     * are strings.  The following idiom obtains a view containing all of the&#xA;     * key-value mappings in &lt;tt>m&lt;/tt> whose keys are strictly greater than&#xA;     * &lt;tt>low&lt;/tt>:&#xA;     * &#xA;     * &#x9;    &lt;pre>    Map tail = m.tailMap(low+&quot;\0&quot;);&lt;/pre>&#xA;     *&#xA;     * @param fromKey low endpoint (inclusive) of the tailMap.&#xA;     * @return a view of the specified final range of this sorted map.&#xA;     * @throws ClassCastException if &lt;tt>fromKey&lt;/tt> is not compatible&#xA;     *         with this map's comparator (or, if the map has no comparator,&#xA;     *         if &lt;tt>fromKey&lt;/tt> does not implement &lt;tt>Comparable&lt;/tt>).&#xA;     *         Implementations may, but are not required to, throw this&#xA;     *&#x9;       exception if &lt;tt>fromKey&lt;/tt> cannot be compared to keys&#xA;     *         currently in the map.&#xA;     * @throws IllegalArgumentException if this map is itself a subMap,&#xA;     *         headMap, or tailMap, and &lt;tt>fromKey&lt;/tt> is not within the&#xA;     *         specified range of the subMap, headMap, or tailMap.&#xA;     * @throws NullPointerException if &lt;tt>fromKey&lt;/tt> is &lt;tt>null&lt;/tt> and&#xA;     *&#x9;       this sorted map does not tolerate &lt;tt>null&lt;/tt> keys.&#xA;     */</comments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+            </typeReference>
+          </typeArguments>
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+            </typeReference>
+          </typeArguments>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="fromKey">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="firstKey">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.0">
+          <comments>/**&#xA;     * Returns the first (lowest) key currently in this sorted map.&#xA;     *&#xA;     * @return the first (lowest) key currently in this sorted map.&#xA;     * @throws    NoSuchElementException if this map is empty.&#xA;     */</comments>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="lastKey">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@typeParameters.0">
+          <comments>/**&#xA;     * Returns the last (highest) key currently in this sorted map.&#xA;     *&#xA;     * @return the last (highest) key currently in this sorted map.&#xA;     * @throws     NoSuchElementException if this map is empty.&#xA;     */</comments>
+        </classifierReferences>
+      </typeReference>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * A map that further guarantees that it will be in ascending key order,&#xA; * sorted according to the &lt;i>natural ordering&lt;/i> of its keys (see the&#xA; * &lt;tt>Comparable&lt;/tt> interface), or by a comparator provided at sorted map&#xA; * creation time.  This order is reflected when iterating over the sorted&#xA; * map's collection views (returned by the &lt;tt>entrySet&lt;/tt>, &lt;tt>keySet&lt;/tt>&#xA; * and &lt;tt>values&lt;/tt> methods).  Several additional operations are provided&#xA; * to take advantage of the ordering.  (This interface is the map analogue of&#xA; * the &lt;tt>SortedSet&lt;/tt> interface.)&lt;p>&#xA; *&#xA; * All keys inserted into a sorted map must implement the &lt;tt>Comparable&lt;/tt>&#xA; * interface (or be accepted by the specified comparator).  Furthermore, all&#xA; * such keys must be &lt;i>mutually comparable&lt;/i>: &lt;tt>k1.compareTo(k2)&lt;/tt> (or&#xA; * &lt;tt>comparator.compare(k1, k2)&lt;/tt>) must not throw a&#xA; * &lt;tt>ClassCastException&lt;/tt> for any elements &lt;tt>k1&lt;/tt> and &lt;tt>k2&lt;/tt> in&#xA; * the sorted map.  Attempts to violate this restriction will cause the&#xA; * offending method or constructor invocation to throw a&#xA; * &lt;tt>ClassCastException&lt;/tt>.&lt;p>&#xA; *&#xA; * Note that the ordering maintained by a sorted map (whether or not an&#xA; * explicit comparator is provided) must be &lt;i>consistent with equals&lt;/i> if&#xA; * the sorted map is to correctly implement the &lt;tt>Map&lt;/tt> interface.  (See&#xA; * the &lt;tt>Comparable&lt;/tt> interface or &lt;tt>Comparator&lt;/tt> interface for a&#xA; * precise definition of &lt;i>consistent with equals&lt;/i>.)  This is so because&#xA; * the &lt;tt>Map&lt;/tt> interface is defined in terms of the &lt;tt>equals&lt;/tt>&#xA; * operation, but a sorted map performs all key comparisons using its&#xA; * &lt;tt>compareTo&lt;/tt> (or &lt;tt>compare&lt;/tt>) method, so two keys that are&#xA; * deemed equal by this method are, from the standpoint of the sorted map,&#xA; * equal.  The behavior of a tree map &lt;i>is&lt;/i> well-defined even if its&#xA; * ordering is inconsistent with equals; it just fails to obey the general&#xA; * contract of the &lt;tt>Map&lt;/tt> interface.&lt;p>&#xA; *&#xA; * All general-purpose sorted map implementation classes should provide four&#xA; * &quot;standard&quot; constructors: 1) A void (no arguments) constructor, which&#xA; * creates an empty sorted map sorted according to the &lt;i>natural order&lt;/i> of&#xA; * its keys.  2) A constructor with a single argument of type&#xA; * &lt;tt>Comparator&lt;/tt>, which creates an empty sorted map sorted according to&#xA; * the specified comparator.  3) A constructor with a single argument of type&#xA; * &lt;tt>Map&lt;/tt>, which creates a new map with the same key-value mappings as&#xA; * its argument, sorted according to the keys' natural ordering.  4) A&#xA; * constructor with a single argument of type sorted map, which creates a new&#xA; * sorted map with the same key-value mappings and the same ordering as the&#xA; * input sorted map.  There is no way to enforce this recommendation (as&#xA; * interfaces cannot contain constructors) but the JDK implementation&#xA; * (TreeMap) complies.&lt;p>&#xA; *&#xA; * This interface is a member of the &#xA; * &lt;a href=&quot;{@docRoot}/../guide/collections/index.html&quot;>&#xA; * Java Collections Framework&lt;/a>.&#xA; *&#xA; * @author  Josh Bloch&#xA; * @version 1.21, 06/28/04&#xA; * @see Map&#xA; * @see TreeMap&#xA; * @see SortedSet&#xA; * @see Comparator&#xA; * @see Comparable&#xA; * @see Collection&#xA; * @see ClassCastException&#xA; * @since 1.2&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@typeParameters.0"/>
+          </typeReference>
+        </typeArguments>
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences target="//@classifiers.0/@typeParameters.1"/>
+          </typeReference>
+        </typeArguments>
+        <target xsi:type="classifiers:Interface" href="Map.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

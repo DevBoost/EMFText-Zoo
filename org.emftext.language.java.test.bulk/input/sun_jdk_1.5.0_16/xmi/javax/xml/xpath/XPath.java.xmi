@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="XPath.java">
+  <comments>// $Id: XPath.java,v 1.12.14.2.2.3 2004/07/01 17:49:22 ndw Exp $</comments>
+  <comments>/*&#xA; * @(#)XPath.java&#x9;1.10 04/07/26&#xA; * &#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>xml</namespaces>
+  <namespaces>xpath</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../org/xml/sax/InputSource.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>namespace</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../namespace/QName.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>namespace</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../namespace/NamespaceContext.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="XPath">
+    <members xsi:type="members:InterfaceMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9; * &lt;p>Reset this &lt;code>XPath&lt;/code> to its original configuration.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>&lt;code>XPath&lt;/code> is reset to the same state as when it was created with&#xA;&#x9; * {@link XPathFactory#newXPath()}.&#xA;&#x9; * &lt;code>reset()&lt;/code> is designed to allow the reuse of existing &lt;code>XPath&lt;/code>s&#xA;&#x9; * thus saving resources associated with the creation of new &lt;code>XPath&lt;/code>s.&lt;/p>&#xA;&#x9; * &#xA;&#x9; * &lt;p>The reset &lt;code>XPath&lt;/code> is not guaranteed to have the same {@link XPathFunctionResolver}, {@link XPathVariableResolver}&#xA;&#x9; * or {@link NamespaceContext} &lt;code>Object&lt;/code>s, e.g. {@link Object#equals(Object obj)}.&#xA;&#x9; * It is guaranteed to have a functionally equal &lt;code>XPathFunctionResolver&lt;/code>, &lt;code>XPathVariableResolver&lt;/code>&#xA;&#x9; * and &lt;code>NamespaceContext&lt;/code>.&lt;/p>&#xA;&#x9; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setXPathVariableResolver">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resolver">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="XPathVariableResolver.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Establish a variable resolver.&lt;/p>&#xA;     * &#xA;     * &lt;p>A &lt;code>NullPointerException&lt;/code> is thrown if &lt;code>resolver&lt;/code> is &lt;code>null&lt;/code>.&lt;/p>&#xA;     * &#xA;     * @param resolver Variable resolver.&#xA;     * &#xA;     *  @throws NullPointerException If &lt;code>resolver&lt;/code> is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getXPathVariableResolver">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="XPathVariableResolver.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;       * &lt;p>Return the current variable resolver.&lt;/p>&#xA;       * &#xA;       * &lt;p>&lt;code>null&lt;/code> is returned in no variable resolver is in effect.&lt;/p>&#xA;       *  &#xA;       * @return Current variable resolver.&#xA;       */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setXPathFunctionResolver">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="resolver">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="XPathFunctionResolver.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;       * &lt;p>Establish a function resolver.&lt;/p>&#xA;       * &#xA;       * &lt;p>A &lt;code>NullPointerException&lt;/code> is thrown if &lt;code>resolver&lt;/code> is &lt;code>null&lt;/code>.&lt;/p>&#xA;       * &#xA;       * @param resolver XPath function resolver.&#xA;       * &#xA;       * @throws NullPointerException If &lt;code>resolver&lt;/code> is &lt;code>null&lt;/code>.&#xA;       */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getXPathFunctionResolver">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="XPathFunctionResolver.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;       * &lt;p>Return the current function resolver.&lt;/p>&#xA;       * &#xA;       * &lt;p>&lt;code>null&lt;/code> is returned in no function resolver is in effect.&lt;/p>&#xA;       * &#xA;       * @return Current function resolver.&#xA;       */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setNamespaceContext">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nsContext">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../namespace/NamespaceContext.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;       * &lt;p>Establish a namespace context.&lt;/p>&#xA;       * &#xA;       * &lt;p>A &lt;code>NullPointerException&lt;/code> is thrown if &lt;code>nsContext&lt;/code> is &lt;code>null&lt;/code>.&lt;/p>&#xA;       * &#xA;       * @param nsContext Namespace context to use.&#xA;       * &#xA;       * @throws NullPointerException If &lt;code>nsContext&lt;/code> is &lt;code>null&lt;/code>.&#xA;       */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getNamespaceContext">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../namespace/NamespaceContext.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;       * &lt;p>Return the current namespace context.&lt;/p>&#xA;       * &#xA;       * &lt;p>&lt;code>null&lt;/code> is returned in no namespace context is in effect.&lt;/p>&#xA;       * &#xA;       * @return Current Namespace context.&#xA;       */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="compile">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="XPathExpression.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="expression">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="XPathExpressionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;       * &lt;p>Compile an XPath expression for later evaluation.&lt;/p>&#xA;       * &#xA;       * &lt;p>If &lt;code>expression&lt;/code> contains any {@link XPathFunction}s,&#xA;       * they must be available via the {@link XPathFunctionResolver}.&#xA;       * An {@link XPathExpressionException} will be thrown if the &lt;code>XPathFunction&lt;/code>&#xA;       * cannot be resovled with the &lt;code>XPathFunctionResolver&lt;/code>.&lt;/p>&#xA;       *  &#xA;       * &lt;p>If &lt;code>expression&lt;/code> is &lt;code>null&lt;/code>, a &lt;code>NullPointerException&lt;/code> is thrown.&lt;/p> &#xA;       *&#xA;       * @param expression The XPath expression.&#xA;       * &#xA;       * @return Compiled XPath expression.&#xA;    &#xA;       * @throws XPathExpressionException If &lt;code>expression&lt;/code> cannot be compiled.&#xA;       * @throws NullPointerException If &lt;code>expression&lt;/code> is &lt;code>null&lt;/code>.&#xA;       */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="evaluate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="expression">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="item">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="returnType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../namespace/QName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="XPathExpressionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Evaluate an &lt;code>XPath&lt;/code> expression in the specified context and return the result as the specified type.&lt;/p>&#xA;     *&#xA;     * &lt;p>See &lt;a href=&quot;#XPath-evaluation&quot;>Evaluation of XPath Expressions&lt;/a> for context item evaluation,&#xA;     * variable, function and &lt;code>QName&lt;/code> resolution and return type conversion.&lt;/p>&#xA;     * &#xA;     * &lt;p>If &lt;code>returnType&lt;/code> is not one of the types defined in {@link XPathConstants} (&#xA;     * {@link XPathConstants#NUMBER NUMBER},&#xA;     * {@link XPathConstants#STRING STRING},&#xA;     * {@link XPathConstants#BOOLEAN BOOLEAN},&#xA;     * {@link XPathConstants#NODE NODE} or&#xA;     * {@link XPathConstants#NODESET NODESET})&#xA;     * then an &lt;code>IllegalArgumentException&lt;/code> is thrown.&lt;/p>&#xA;     * &#xA;     * &lt;p>If a &lt;code>null&lt;/code> value is provided for &#xA;     * &lt;code>item&lt;/code>, an empty document will be used for the&#xA;     * context.&#xA;     * If &lt;code>expression&lt;/code> or &lt;code>returnType&lt;/code> is &lt;code>null&lt;/code>, then a&#xA;     * &lt;code>NullPointerException&lt;/code> is thrown.&lt;/p>&#xA;     *&#xA;     * @param expression The XPath expression.&#xA;     * @param item The starting context (node or node list, for example).&#xA;     * @param returnType The desired return type.&#xA;     * &#xA;     * @return Result of evaluating an XPath expression as an &lt;code>Object&lt;/code> of &lt;code>returnType&lt;/code>.&#xA;     * &#xA;     * @throws XPathExpressionException If &lt;code>expression&lt;/code> cannot be evaluated.&#xA;     * @throws IllegalArgumentException If &lt;code>returnType&lt;/code> is not one of the types defined in {@link XPathConstants}.&#xA;     * @throws NullPointerException If &lt;code>expression&lt;/code> or &lt;code>returnType&lt;/code> is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="evaluate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="expression">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="item">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="XPathExpressionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Evaluate an XPath expression in the specified context and return the result as a &lt;code>String&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method calls {@link #evaluate(String expression, Object item, QName returnType)} with a &lt;code>returnType&lt;/code> of&#xA;     * {@link XPathConstants#STRING}.&lt;/p>&#xA;     * &#xA;     * &lt;p>See &lt;a href=&quot;#XPath-evaluation&quot;>Evaluation of XPath Expressions&lt;/a> for context item evaluation,&#xA;     * variable, function and QName resolution and return type conversion.&lt;/p>&#xA;     *&#xA;     * &lt;p>If a &lt;code>null&lt;/code> value is provided for &#xA;     * &lt;code>item&lt;/code>, an empty document will be used for the&#xA;     * context.&#xA;     * If &lt;code>expression&lt;/code> is &lt;code>null&lt;/code>, then a &lt;code>NullPointerException&lt;/code> is thrown.&lt;/p>&#xA;     * &#xA;     * @param expression The XPath expression.&#xA;     * @param item The starting context (node or node list, for example).&#xA;     * &#xA;     * @return The &lt;code>String&lt;/code> that is the result of evaluating the expression and&#xA;     *   converting the result to a &lt;code>String&lt;/code>.&#xA;     * &#xA;     * @throws XPathExpressionException If &lt;code>expression&lt;/code> cannot be evaluated.&#xA;     * @throws NullPointerException If &lt;code>expression&lt;/code> is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="evaluate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="expression">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../org/xml/sax/InputSource.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="returnType">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../namespace/QName.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="XPathExpressionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Evaluate an XPath expression in the context of the specified &lt;code>InputSource&lt;/code>&#xA;     * and return the result as the specified type.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method builds a data model for the {@link InputSource} and calls&#xA;     * {@link #evaluate(String expression, Object item, QName returnType)} on the resulting document object.&lt;/p>&#xA;     *&#xA;     * &lt;p>See &lt;a href=&quot;#XPath-evaluation&quot;>Evaluation of XPath Expressions&lt;/a> for context item evaluation,&#xA;     * variable, function and QName resolution and return type conversion.&lt;/p>&#xA;     * &#xA;     * &lt;p>If &lt;code>returnType&lt;/code> is not one of the types defined in {@link XPathConstants},&#xA;     * then an &lt;code>IllegalArgumentException&lt;/code> is thrown.&lt;/p>&#xA;     * &#xA;     * &lt;p>If &lt;code>expression&lt;/code>, &lt;code>source&lt;/code> or &lt;code>returnType&lt;/code> is &lt;code>null&lt;/code>,&#xA;     * then a &lt;code>NullPointerException&lt;/code> is thrown.&lt;/p>&#xA;     * &#xA;     * @param expression The XPath expression.&#xA;     * @param source The input source of the document to evaluate over.&#xA;     * @param returnType The desired return type.&#xA;     * &#xA;     * @return The &lt;code>Object&lt;/code> that encapsulates the result of evaluating the expression.&#xA;     * &#xA;     * @throws XPathExpressionException If expression cannot be evaluated.&#xA;     * @throws IllegalArgumentException If &lt;code>returnType&lt;/code> is not one of the types defined in {@link XPathConstants}.&#xA;     * @throws NullPointerException If &lt;code>expression&lt;/code>, &lt;code>source&lt;/code> or &lt;code>returnType&lt;/code>&#xA;     *   is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="evaluate">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="expression">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="source">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../org/xml/sax/InputSource.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="XPathExpressionException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Evaluate an XPath expression in the context of the specified &lt;code>InputSource&lt;/code>&#xA;     * and return the result as a &lt;code>String&lt;/code>.&lt;/p>&#xA;     *&#xA;     * &lt;p>This method calls {@link #evaluate(String expression, InputSource source, QName returnType)} with a&#xA;     * &lt;code>returnType&lt;/code> of {@link XPathConstants#STRING}.&lt;/p>&#xA;     *&#xA;     * &lt;p>See &lt;a href=&quot;#XPath-evaluation&quot;>Evaluation of XPath Expressions&lt;/a> for context item evaluation,&#xA;     * variable, function and QName resolution and return type conversion.&lt;/p>&#xA;     * &#xA;     * &lt;p>If &lt;code>expression&lt;/code> or &lt;code>source&lt;/code> is &lt;code>null&lt;/code>,&#xA;     * then a &lt;code>NullPointerException&lt;/code> is thrown.&lt;/p>&#xA;     * &#xA;     * @param expression The XPath expression.&#xA;     * @param source The &lt;code>InputSource&lt;/code> of the document to evaluate over.&#xA;     * &#xA;     * @return The &lt;code>String&lt;/code> that is the result of evaluating the expression and&#xA;     *   converting the result to a &lt;code>String&lt;/code>.&#xA;     * &#xA;     * @throws XPathExpressionException If expression cannot be evaluated.&#xA;     * @throws NullPointerException If &lt;code>expression&lt;/code> or &lt;code>source&lt;/code> is &lt;code>null&lt;/code>.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>&lt;code>XPath&lt;/code> provides access to the XPath evaluation environment and expressions.&lt;/p>&#xA; *&#xA; * &lt;table id=&quot;XPath-evaluation&quot; border=&quot;1&quot; cellpadding=&quot;2&quot;>&#xA; *   &lt;thead>&#xA; *     &lt;tr>&#xA; *       &lt;th colspan=&quot;2&quot;>Evaluation of XPath Expressions.&lt;/th>&#xA; *     &lt;/tr>&#xA; *   &lt;/thead>&#xA; *   &lt;tbody>&#xA; *     &lt;tr>&#xA; *       &lt;td>context&lt;/td>&#xA; *       &lt;td>&#xA; *         If a request is made to evaluate the expression in the absence&#xA; * of a context item, an empty document node will be used for the context.&#xA; * For the purposes of evaluating XPath expressions, a DocumentFragment&#xA; * is treated like a Document node.&#xA; *      &lt;/td>&#xA; *    &lt;/tr>&#xA; *    &lt;tr>&#xA; *      &lt;td>variables&lt;/td>&#xA; *      &lt;td>&#xA; *        If the expression contains a variable reference, its value will be found through the {@link XPathVariableResolver}&#xA; *        set with {@link #setXPathVariableResolver(XPathVariableResolver resolver)}.&#xA; *        An {@link XPathExpressionException} is raised if the variable resolver is undefined or&#xA; *        the resolver returns &lt;code>null&lt;/code> for the variable.&#xA; *        The value of a variable must be immutable through the course of any single evaluation.&lt;/p>&#xA; *      &lt;/td>&#xA; *    &lt;/tr>&#xA; *    &lt;tr>&#xA; *      &lt;td>functions&lt;/td>&#xA; *      &lt;td>&#xA; *        If the expression contains a function reference, the function will be found through the {@link XPathFunctionResolver}&#xA; *        set with {@link #setXPathFunctionResolver(XPathFunctionResolver resolver)}.&#xA; *        An {@link XPathExpressionException} is raised if the function resolver is undefined or&#xA; *        the function resolver returns &lt;code>null&lt;/code> for the function.&lt;/p>&#xA; *      &lt;/td>&#xA; *    &lt;/tr>&#xA; *    &lt;tr>&#xA; *      &lt;td>QNames&lt;/td>&#xA; *      &lt;td>&#xA; *        QNames in the expression are resolved against the XPath namespace context&#xA; *        set with {@link #setNamespaceContext(NamespaceContext nsContext)}.&#xA; *      &lt;/td>&#xA; *    &lt;/tr>&#xA; *    &lt;tr>&#xA; *      &lt;td>result&lt;/td>&#xA; *      &lt;td>&#xA; *        This result of evaluating an expression is converted to an instance of the desired return type.&#xA; *        Valid return types are defined in {@link XPathConstants}.&#xA; *        Conversion to the return type follows XPath conversion rules.&lt;/p>&#xA; *      &lt;/td>&#xA; *    &lt;/tr>&#xA; * &lt;/table>&#xA; * &#xA; * @author  &lt;a href=&quot;Norman.Walsh@Sun.com&quot;>Norman Walsh&lt;/a>&#xA; * @author  &lt;a href=&quot;Jeff.Suttor@Sun.com&quot;>Jeff Suttor&lt;/a>&#xA; * @version $Revision: 1.12.14.2.2.3 $, $Date: 2004/07/01 17:49:22 $&#xA; * @see &lt;a href=&quot;http://www.w3.org/TR/xpath&quot;>XML Path Language (XPath) Version 1.0&lt;/a>&#xA; * @since 1.5&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

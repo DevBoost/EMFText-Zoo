@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/generics ../../../java.ecore#/6 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="DirObjectFactory.java">
+  <comments>/*&#xA; * @(#)DirObjectFactory.java&#x9;1.11 04/07/16&#xA; *&#xA; * Copyright 2004 Sun Microsystems, Inc. All rights reserved.&#xA; * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.&#xA; */</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>naming</namespaces>
+  <namespaces>spi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../java/util/Hashtable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:PackageImport">
+    <namespaces>javax</namespaces>
+    <namespaces>naming</namespaces>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>naming</namespaces>
+    <namespaces>directory</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../directory/Attributes.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="DirObjectFactory">
+    <members xsi:type="members:InterfaceMethod" name="getObjectInstance">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="obj">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Name.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="nameCtx">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../Context.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="environment">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+            <typeArguments xsi:type="generics:UnknownTypeArgument"/>
+            <target xsi:type="classifiers:Class" href="../../../java/util/Hashtable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attrs">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../directory/Attributes.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../java/lang/Exception.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA; * Creates an object using the location or reference information, and attributes&#xA; * specified.  &#xA; * &lt;p>&#xA; * Special requirements of this object are supplied&#xA; * using &lt;code>environment&lt;/code>.&#xA; * An example of such an environment property is user identity&#xA; * information. &#xA; *&lt;p>&#xA; * &lt;tt>DirectoryManager.getObjectInstance()&lt;/tt>&#xA; * successively loads in object factories. If it encounters a &lt;tt>DirObjectFactory&lt;/tt>,&#xA; * it will invoke &lt;tt>DirObjectFactory.getObjectInstance()&lt;/tt>; &#xA; * otherwise, it invokes&#xA; * &lt;tt>ObjectFactory.getObjectInstance()&lt;/tt>. It does this until a factory&#xA; * produces a non-null answer.  &#xA; * &lt;p> When an exception&#xA; * is thrown by an object factory, the exception is passed on to the caller&#xA; * of &lt;tt>DirectoryManager.getObjectInstance()&lt;/tt>. The search for other factories&#xA; * that may produce a non-null answer is halted. &#xA; * An object factory should only throw an exception if it is sure that&#xA; * it is the only intended factory and that no other object factories&#xA; * should be tried.&#xA; * If this factory cannot create an object using the arguments supplied,&#xA; * it should return null. &#xA;  *&lt;p>Since &lt;tt>DirObjectFactory&lt;/tt> extends &lt;tt>ObjectFactory&lt;/tt>, it &#xA;  * effectively&#xA;  * has two &lt;tt>getObjectInstance()&lt;/tt> methods, where one differs from the other by&#xA;  * the attributes argument. Given a factory that implements &lt;tt>DirObjectFactory&lt;/tt>,&#xA;  * &lt;tt>DirectoryManager.getObjectInstance()&lt;/tt> will only&#xA;  * use the method that accepts the attributes argument, while &#xA;  * &lt;tt>NamingManager.getObjectInstance()&lt;/tt> will only use the one that does not accept&#xA;  * the attributes argument.&#xA; *&lt;p>&#xA; * See &lt;tt>ObjectFactory&lt;/tt> for a description URL context factories and other&#xA; * properties of object factories that apply equally to &lt;tt>DirObjectFactory&lt;/tt>.&#xA; *&lt;p>&#xA; * The &lt;tt>name&lt;/tt>, &lt;tt>attrs&lt;/tt>, and &lt;tt>environment&lt;/tt> parameters&#xA; * are owned by the caller.&#xA; * The implementation will not modify these objects or keep references&#xA; * to them, although it may keep references to clones or copies.&#xA; *&#xA; * @param obj The possibly null object containing location or reference &#xA; * &#x9;&#x9;information that can be used in creating an object.&#xA; * @param name The name of this object relative to &lt;code>nameCtx&lt;/code>,&#xA; *&#x9;&#x9;or null if no name is specified.&#xA; * @param nameCtx The context relative to which the &lt;code>name&lt;/code>&#xA; *&#x9;&#x9;parameter is specified, or null if &lt;code>name&lt;/code> is&#xA; *&#x9;&#x9;relative to the default initial context.&#xA; * @param environment The possibly null environment that is used in&#xA; * &#x9;&#x9;creating the object.&#xA; * @param attrs The possibly null attributes containing some of &lt;tt>obj&lt;/tt>'s&#xA; * attributes. &lt;tt>attrs&lt;/tt> might not necessarily have all of &lt;tt>obj&lt;/tt>'s&#xA; * attributes. If the object factory requires more attributes, it needs&#xA; * to get it, either using &lt;tt>obj&lt;/tt>, or &lt;tt>name&lt;/tt> and &lt;tt>nameCtx&lt;/tt>.&#xA; * &#x9;The factory must not modify attrs.&#xA; * @return The object created; null if an object cannot be created.&#xA; * @exception Exception If this object factory encountered an exception&#xA; * while attempting to create an object, and no other object factories are&#xA; * to be tried.&#xA; *&#xA; * @see DirectoryManager#getObjectInstance&#xA; * @see NamingManager#getURLContext&#xA; */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA;  * This interface represents a factory for creating an object given&#xA;  * an object and attributes about the object.&#xA;  *&lt;p>&#xA;  * The JNDI framework allows for object implementations to&#xA;  * be loaded in dynamically via &lt;em>object factories&lt;/em>. See&#xA;  * &lt;tt>ObjectFactory&lt;/tt> for details.&#xA;  * &lt;p>&#xA;  * A &lt;tt>DirObjectFactory&lt;/tt> extends &lt;tt>ObjectFactory&lt;/tt> by allowing &#xA;  * an &lt;tt>Attributes&lt;/tt> instance&#xA;  * to be supplied to the &lt;tt>getObjectInstance()&lt;/tt> method.&#xA;  * &lt;tt>DirObjectFactory&lt;/tt> implementations are intended to be used by &lt;tt>DirContext&lt;/tt>&#xA;  * service providers. The service provider, in addition reading an&#xA;  * object from the directory, might already have attributes that&#xA;  * are useful for the object factory to check to see whether the&#xA;  * factory is supposed to process the object. For instance, an LDAP-style&#xA;  * service provider might have read the &quot;objectclass&quot; of the object.&#xA;  * A CORBA object factory might be interested only in LDAP entries&#xA;  * with &quot;objectclass=corbaObject&quot;. By using the attributes supplied by&#xA;  * the LDAP service provider, the CORBA object factory can quickly&#xA;  * eliminate objects that it need not worry about, and non-CORBA object&#xA;  * factories can quickly eliminate CORBA-related LDAP entries.&#xA;  *&#xA;  * @author Rosanna Lee&#xA;  * @author Scott Seligman&#xA;  * @version 1.11 04/07/16&#xA;  *&#xA;  * @see NamingManager#getObjectInstance&#xA;  * @see DirectoryManager#getObjectInstance&#xA;  * @see ObjectFactory&#xA;  * @since 1.3&#xA;  */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="ObjectFactory.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>
