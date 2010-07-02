@@ -33,18 +33,18 @@ TOKENSTYLES {
 }
 
 RULES {
-	@operator(type="binary_left_associative",weight="1", superclass="Formula")
+	@Operator(type="binary_left_associative",weight="1", superclass="Formula")
 	Or       ::= children "OR" children;
 	
-	@operator(type="binary_left_associative",weight="2", superclass="Formula")
+	@Operator(type="binary_left_associative",weight="2", superclass="Formula")
 	And      ::= children "AND" children;
 	
-	@operator(type="unary_prefix", weight="3", superclass="Formula")
+	@Operator(type="unary_prefix", weight="3", superclass="Formula")
 	Negation ::= "NOT" body;
 	
-	@operator(type="primitive", weight="4", superclass="Formula")
+	@Operator(type="primitive", weight="4", superclass="Formula")
 	Nested   ::= "(" body ")";
 
-	@operator(type="primitive", weight="4", superclass="Formula")
+	@Operator(type="primitive", weight="4", superclass="Formula")
 	Constant ::= value[];
 }
