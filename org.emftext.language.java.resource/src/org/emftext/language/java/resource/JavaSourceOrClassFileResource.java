@@ -30,7 +30,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.java.JavaClasspath;
@@ -305,7 +307,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			return;
 		}
 		
-		if(getContents().size() > 1 && getResourceSet() != null) {
+		ResourceSet resourceSetForSave = getResourceSet();
+		if (resourceSetForSave == null) {
+			resourceSetForSave = new ResourceSetImpl();
+		}
+		
+		if(getContents().size() > 1) {
 			for(EObject eObject : new BasicEList<EObject>(getContents())) {
 				if (eObject instanceof CompilationUnit) {
 					CompilationUnit cu = (CompilationUnit) eObject;
@@ -317,7 +324,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 							new String[cu.getNamespaces().size()]);
 					String   file   = cu.getClassifiers().get(0).getName();
 					
-					URI normalizedURI = getResourceSet().getURIConverter().normalize(getURI());
+					URI normalizedURI = resourceSetForSave.getURIConverter().normalize(getURI());
 					
 					URI subResourcURI = normalizedURI.trimFileExtension().trimFileExtension();
 					
@@ -334,7 +341,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 					subResourcURI = subResourcURI.appendFileExtension("java");
 					
 					Resource subResource = 
-						getResourceSet().createResource(subResourcURI);
+						resourceSetForSave.createResource(subResourcURI);
 					
 					addPackageDeclaration(cu);
 					

@@ -50,11 +50,11 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			boolean namespaceMissing = true;
 			if(container.eContainer() instanceof NamespaceClassifierReference) {
 				namespaceMissing = ((NamespaceClassifierReference)container.eContainer()).getNamespaces().isEmpty();
-			}		
-			Object fullNamesOption = container.eResource().getResourceSet().getLoadOptions().get(
-					JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);	
-			if (!(fullNamesOption instanceof Boolean)) {
-				fullNamesOption = Boolean.FALSE;
+			}
+			Object fullNamesOption = Boolean.FALSE;
+			if (container.eResource() != null && container.eResource().getResourceSet() !=null) {
+				fullNamesOption = container.eResource().getResourceSet().getLoadOptions().get(
+						JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);	
 			}
 			if (namespaceMissing && Boolean.TRUE.equals(fullNamesOption)) {
 				String packageName = "";
