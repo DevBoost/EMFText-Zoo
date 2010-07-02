@@ -24,6 +24,7 @@ import org.emftext.language.abnf.RuleReference;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfMetaInformation;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfResourceFactory;
 import org.emftext.language.abnf.resource.abnf.util.AbnfStreamUtil;
+import org.emftext.sdk.EMFTextSDKPlugin;
 
 public class AbnfPrintingTest extends TestCase {
 	
@@ -72,7 +73,10 @@ public class AbnfPrintingTest extends TestCase {
 		testPrinting("rule1=rule1 rule1\n", loadOptions);
 	}
 
-	public void testPrinting() {
+	public void testPrinting1() {
+		if (EMFTextSDKPlugin.VERSION.compareTo("1.3.0") <= 0) {
+			return;
+		}
 		testPrinting(new File("." + File.separator + "input" + File.separator + "abnf.abnf"));
 	}
 
