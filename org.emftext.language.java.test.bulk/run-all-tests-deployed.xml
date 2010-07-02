@@ -1,0 +1,71 @@
+<project basedir="." default="run-all-tests" name="JaMoPP bulk tests">
+	<property file="run-all-tests.properties"/>
+		
+	<target name="run-all-tests">
+		<path id="junit_classpath">
+			<path path="../org.emftext.language.java/bin" />
+			<path path="../org.emftext.language.java.resource/bin" />
+			<path path="../org.emftext.language.java.resource.java/bin" />
+			<path path="../org.emftext.commons.antlr3_1_1/bin" />
+			
+			<path path="../org.emftext.language.java.test/bin" />
+			<path path="../org.emftext.language.java.test.bulk/bin" />
+		
+			<fileset dir="${eclipse.home}/">
+				<include name="plugins/org.emftext.sdk.*.jar"/>
+				<include name="plugins/org.emftext.commons.*.jar"/>
+				
+				<include name="plugins/**/org.junit*/junit.jar"/>
+				<include name="plugins/**/org.hamcrest*.jar"/>
+				<include name="plugins/**/org.eclipse.core.*.jar"/>
+				<include name="plugins/**/org.eclipse.emf.*.jar"/>
+				<include name="plugins/**/org.eclipse.equinox.*.jar"/>
+				<include name="plugins/**/org.eclipse.osgi*.jar"/>
+				<include name="plugins/**/org.eclipse.jface*.jar"/>
+				<include name="plugins/org.eclipse.jdt.core*.jar"/>
+				<include name="plugins/org.eclipse.jdt.compiler.apt*.jar"/>
+				<include name="plugins/org.eclipse.jdt.compiler.tool*.jar"/>
+			</fileset>
+		</path>
+
+		<manifestclasspath property="junit_classpath_prop" jarfile="../temp_classpath.jar">
+			<classpath refid="junit_classpath" />
+		</manifestclasspath>
+		
+		<jar destfile="../temp_classpath.jar">
+			<manifest>
+				<attribute name="Class-Path" value="${junit_classpath_prop}"/>
+			</manifest>
+		</jar>
+
+		<junit printsummary="true" fork="true" maxmemory="1024m">
+			<classpath>
+				<path path="../temp_classpath.jar"/>
+			</classpath>
+			<formatter type="plain"/>
+			
+			<!-- check assertions -->
+		    <jvmarg value="-ea"/>
+			<!-- always use file encoding UTF-8 -->
+		    <jvmarg value="-Dfile.encoding=UTF-8"/>
+			
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.AndroMDATest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.ApacheCommonsMathTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.ApacheTomcat6Test"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.Eclipse341Test"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.GWTTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.JacksTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.JBossTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.JDTTestFilesTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.MantissaTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.NetbeansTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.SpringTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.StrutsTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.SunJDKTest"/>
+			<test todir="test_results" name="org.emftext.language.java.test.bulk.XercesTest"/>
+	
+		</junit>
+
+	</target>
+
+</project>
