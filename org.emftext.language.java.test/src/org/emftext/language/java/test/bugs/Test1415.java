@@ -191,7 +191,6 @@ public class Test1415 extends TestCase {
 					emptyFolder(files[i], true);
 				} else {
 					files[i].delete();
-					System.out.println(files[i]);
 				}
 			}
 		}
