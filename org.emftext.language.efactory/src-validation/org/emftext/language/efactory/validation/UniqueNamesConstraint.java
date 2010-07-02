@@ -22,7 +22,7 @@ import org.emftext.language.efactory.Factory;
 import org.emftext.language.efactory.NewObject;
 
 /**
- * A simple constraint that checks that there is no duplicate names for
+ * A simple constraint that checks that there are no duplicate names for
  * NewObjects.
  */
 public class UniqueNamesConstraint extends AbstractModelConstraint implements IModelConstraint {
@@ -56,12 +56,14 @@ public class UniqueNamesConstraint extends AbstractModelConstraint implements IM
 		if (eObject instanceof NewObject) {
 			NewObject newObject = (NewObject) eObject;
 			String name = newObject.getName();
-			Set<NewObject> newObjects = nameToNewObjectsMap.get(name);
-			if (newObjects == null) {
-				newObjects = new LinkedHashSet<NewObject>();
-				nameToNewObjectsMap.put(name, newObjects);
+			if (name != null) {
+				Set<NewObject> newObjects = nameToNewObjectsMap.get(name);
+				if (newObjects == null) {
+					newObjects = new LinkedHashSet<NewObject>();
+					nameToNewObjectsMap.put(name, newObjects);
+				}
+				newObjects.add(newObject);
 			}
-			newObjects.add(newObject);
 		}
 		for (EObject child : eObject.eContents()) {
 			fillNameMap(nameToNewObjectsMap, child);
