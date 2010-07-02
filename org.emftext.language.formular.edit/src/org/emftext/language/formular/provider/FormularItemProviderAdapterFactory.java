@@ -38,358 +38,370 @@ import org.emftext.language.formular.util.FormularAdapterFactory;
  */
 public class FormularItemProviderAdapterFactory extends FormularAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the root adapter factory that delegates to this adapter factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
+   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
+   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public FormularItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    supportedTypes.add(IEditingDomainItemProvider.class);
+    supportedTypes.add(IStructuredItemContentProvider.class);
+    supportedTypes.add(ITreeItemContentProvider.class);
+    supportedTypes.add(IItemLabelProvider.class);
+    supportedTypes.add(IItemPropertySource.class);
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Formular} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Formular} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected FormularItemProvider formularItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Formular}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Formular}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createFormularAdapter() {
-		if (formularItemProvider == null) {
-			formularItemProvider = new FormularItemProvider(this);
-		}
+    if (formularItemProvider == null)
+    {
+      formularItemProvider = new FormularItemProvider(this);
+    }
 
-		return formularItemProvider;
-	}
+    return formularItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Frage} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Frage} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected FrageItemProvider frageItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Frage}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Frage}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createFrageAdapter() {
-		if (frageItemProvider == null) {
-			frageItemProvider = new FrageItemProvider(this);
-		}
+    if (frageItemProvider == null)
+    {
+      frageItemProvider = new FrageItemProvider(this);
+    }
 
-		return frageItemProvider;
-	}
+    return frageItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Freitext} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Freitext} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected FreitextItemProvider freitextItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Freitext}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Freitext}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createFreitextAdapter() {
-		if (freitextItemProvider == null) {
-			freitextItemProvider = new FreitextItemProvider(this);
-		}
+    if (freitextItemProvider == null)
+    {
+      freitextItemProvider = new FreitextItemProvider(this);
+    }
 
-		return freitextItemProvider;
-	}
+    return freitextItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Auswahl} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Auswahl} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected AuswahlItemProvider auswahlItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Auswahl}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Auswahl}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createAuswahlAdapter() {
-		if (auswahlItemProvider == null) {
-			auswahlItemProvider = new AuswahlItemProvider(this);
-		}
+    if (auswahlItemProvider == null)
+    {
+      auswahlItemProvider = new AuswahlItemProvider(this);
+    }
 
-		return auswahlItemProvider;
-	}
+    return auswahlItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Option} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Option} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OptionItemProvider optionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Option}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Option}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createOptionAdapter() {
-		if (optionItemProvider == null) {
-			optionItemProvider = new OptionItemProvider(this);
-		}
+    if (optionItemProvider == null)
+    {
+      optionItemProvider = new OptionItemProvider(this);
+    }
 
-		return optionItemProvider;
-	}
+    return optionItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Datum} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Datum} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected DatumItemProvider datumItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Datum}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Datum}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createDatumAdapter() {
-		if (datumItemProvider == null) {
-			datumItemProvider = new DatumItemProvider(this);
-		}
+    if (datumItemProvider == null)
+    {
+      datumItemProvider = new DatumItemProvider(this);
+    }
 
-		return datumItemProvider;
-	}
+    return datumItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Zahl} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Zahl} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ZahlItemProvider zahlItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Zahl}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Zahl}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createZahlAdapter() {
-		if (zahlItemProvider == null) {
-			zahlItemProvider = new ZahlItemProvider(this);
-		}
+    if (zahlItemProvider == null)
+    {
+      zahlItemProvider = new ZahlItemProvider(this);
+    }
 
-		return zahlItemProvider;
-	}
+    return zahlItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Gruppe} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Gruppe} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected GruppeItemProvider gruppeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Gruppe}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Gruppe}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createGruppeAdapter() {
-		if (gruppeItemProvider == null) {
-			gruppeItemProvider = new GruppeItemProvider(this);
-		}
+    if (gruppeItemProvider == null)
+    {
+      gruppeItemProvider = new GruppeItemProvider(this);
+    }
 
-		return gruppeItemProvider;
-	}
+    return gruppeItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Entscheidung} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.formular.Entscheidung} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected EntscheidungItemProvider entscheidungItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.formular.Entscheidung}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.formular.Entscheidung}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createEntscheidungAdapter() {
-		if (entscheidungItemProvider == null) {
-			entscheidungItemProvider = new EntscheidungItemProvider(this);
-		}
+    if (entscheidungItemProvider == null)
+    {
+      entscheidungItemProvider = new EntscheidungItemProvider(this);
+    }
 
-		return entscheidungItemProvider;
-	}
+    return entscheidungItemProvider;
+  }
 
 	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This returns the root adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+  }
 
 	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This sets the composed adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    this.parentAdapterFactory = parentAdapterFactory;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    return supportedTypes.contains(type) || super.isFactoryForType(type);
+  }
 
 	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
+   * This implementation substitutes the factory itself as the key for the adapter.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    return super.adapt(notifier, this);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    if (isFactoryForType(type))
+    {
+      Object adapter = super.adapt(object, type);
+      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+      {
+        return adapter;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
+   * This adds a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    changeNotifier.addListener(notifyChangedListener);
+  }
 
 	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
+   * This removes a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    changeNotifier.removeListener(notifyChangedListener);
+  }
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
+   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+    if (parentAdapterFactory != null)
+    {
+      parentAdapterFactory.fireNotifyChanged(notification);
+    }
+  }
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
+   * This disposes all of the item providers created by this factory. 
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void dispose() {
-		if (formularItemProvider != null) formularItemProvider.dispose();
-		if (frageItemProvider != null) frageItemProvider.dispose();
-		if (freitextItemProvider != null) freitextItemProvider.dispose();
-		if (auswahlItemProvider != null) auswahlItemProvider.dispose();
-		if (optionItemProvider != null) optionItemProvider.dispose();
-		if (datumItemProvider != null) datumItemProvider.dispose();
-		if (zahlItemProvider != null) zahlItemProvider.dispose();
-		if (gruppeItemProvider != null) gruppeItemProvider.dispose();
-		if (entscheidungItemProvider != null) entscheidungItemProvider.dispose();
-	}
+    if (formularItemProvider != null) formularItemProvider.dispose();
+    if (frageItemProvider != null) frageItemProvider.dispose();
+    if (freitextItemProvider != null) freitextItemProvider.dispose();
+    if (auswahlItemProvider != null) auswahlItemProvider.dispose();
+    if (optionItemProvider != null) optionItemProvider.dispose();
+    if (datumItemProvider != null) datumItemProvider.dispose();
+    if (zahlItemProvider != null) zahlItemProvider.dispose();
+    if (gruppeItemProvider != null) gruppeItemProvider.dispose();
+    if (entscheidungItemProvider != null) entscheidungItemProvider.dispose();
+  }
 
 }
