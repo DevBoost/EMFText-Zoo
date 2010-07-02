@@ -1,11 +1,11 @@
 --@atlcompiler atl2006 
 module uml2java;
-create OUT : java from  IN : uml;
+create OUT : java from  IN : uml, JavaReference : java;
 
 helper context uml!Element def: correctType(outerType : Boolean) : java!Classifier = 
 	 if (self.type = OclUndefined)  then OclUndefined else
-	 if (self.upper <> 1 and outerType)  then java!Commentable.allInstances()->first().getConcreteClassifier('java.lang.List') else 	
-	 if (self.type.name = 'String') then java!Commentable.allInstances()->first().getStringClass() else
+	 if (self.upper <> 1 and outerType)  then java!CompilationUnit.allInstances()->first().getConcreteClassifier('java.util.List') else 	
+	 if (self.type.name = 'String') then java!CompilationUnit.allInstances()->first().getStringClass() else
      self.type 
 	 endif endif endif;
 
