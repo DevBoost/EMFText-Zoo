@@ -32,9 +32,21 @@ public class CSVPrintingTest extends TestCase {
 	}
 	
 	public void testBug1408() {
+		testPrinting(
+				"a,b,c" + NEW_LINE + "d,e,f", 
+				"a,b,c,new" + NEW_LINE + "d,e,f",
+				"new"
+		);
+		testPrinting(
+				"a,b,c" + NEW_LINE + "d,e,f", 
+				"a,b,c,\"ne,w\"" + NEW_LINE + "d,e,f",
+				"ne,w"
+		);
+	}
+
+	private void testPrinting(String input, String expectedResult, String newValueText) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource(URI.createURI("bug1408." + FILE_EXTENSION));
-		String input = "a,b,c" + NEW_LINE + "d,e,f";
 		try {
 			resource.load(new ByteArrayInputStream(input.getBytes()), null);
 		} catch (IOException e) {
@@ -55,7 +67,7 @@ public class CSVPrintingTest extends TestCase {
 		// modify document
 		Row firstRow = rows.get(0);
 		Value newValue = FACTORY.createValue();
-		newValue.setText("new");
+		newValue.setText(newValueText);
 		firstRow.getValues().add(newValue);
 		
 		// print document
@@ -67,6 +79,6 @@ public class CSVPrintingTest extends TestCase {
 			fail(e.getMessage());
 		}
 		String printResult = outputStream.toString();
-		assertEquals("a,b,c,new" + NEW_LINE + "d,e,f", printResult);
+		assertEquals(expectedResult, printResult);
 	}
 }
