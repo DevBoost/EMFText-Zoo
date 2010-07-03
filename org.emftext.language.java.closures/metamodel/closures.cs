@@ -26,20 +26,16 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel="true";
+
 }
 
 RULES {
-	MemberClosure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" name[] "=" "{" (parameters ("," parameters)*)? "=>" statements+  "}";
-	
-	MethodClosure ::= "{" (parameters ("," parameters)*)? "=>" statements+  "}" ".invoke" "(" (arguments ("," arguments)*)? ")" ;
+	Closure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" closureName[]? ( "=" "{" (parameters ("," parameters)*)? "=>" statements+  "}" ( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? ";" )? ;
 
-	MemberClosureCall ::= memberClosure[]? ".invoke" "(" (arguments ("," arguments)*)? ")" ;
+	ClosureCall ::= "{" closure[]? "}" "." methodName[] "(" (arguments ("," arguments)*)? ")" ";" ;
 
-	ParameterClosureCall ::= parameterClosure[]? ".call" "(" (arguments ("," arguments)*)? ")" ;
-
-	ParameterClosure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" name[] ;
-	
 	ParameterClosureAssignment ::= "{" (parameters ("," parameters)*)? "=>" statements+  "}";
+
 }
 
 

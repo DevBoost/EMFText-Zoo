@@ -1,0 +1,48 @@
+package example.closure;
+
+
+class Test {
+	private String test = "" ;
+	public int method1 (int a) {
+		System.out.print ( "test" ) ;
+		new I ( ) {
+			public int invoke (int x1 , int x2) {
+				return x1 + x2 ;
+			}
+		}.invoke ( 10 , 20 ) ;
+		return a ;
+	}
+	private int method2 () {
+		method1 ( 100 ) ;
+		int e = new GlobalClosure2 ( ) {
+			public int invoke (int x1 , int x2) {
+				return x1 + x2 ;
+			}
+		}.invoke ( 10 , 20 ) ;
+		return e ;
+	}
+	class InnerClass {
+		public void loopMethod (int times , int a , int b) {
+			for ( int i = 0 ; i < times ; i++ ) {
+				new ParameterClosure ( ) {
+					public int invoke (int a , int b) {
+						a = a + 10 ;
+						return a + b ;
+					}
+				}.invoke ( a , b ) ;
+			}
+		}
+		public void main (String [] args) {
+			loopMethod ( 5 , 10 , 20 ) ;
+		}
+		public void methodWithClosureAndAssignment (int a , int b) {
+			int d = a + b ;
+			int e = new II ( ) {
+				public int invoke (int a) {
+					return a ;
+				}
+			}.invoke ( a ) ;
+			System.out.println ( d ) ;
+		}
+	}
+}
