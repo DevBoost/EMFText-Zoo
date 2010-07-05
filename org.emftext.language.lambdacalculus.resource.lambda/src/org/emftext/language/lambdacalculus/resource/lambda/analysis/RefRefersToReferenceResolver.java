@@ -6,21 +6,38 @@
  */
 package org.emftext.language.lambdacalculus.resource.lambda.analysis;
 
-public class RefRefersToReferenceResolver implements org.emftext.language.lambdacalculus.resource.lambda.ILambdaReferenceResolver<org.emftext.language.lambdacalculus.Ref, org.emftext.language.lambdacalculus.Var> {
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.lambdacalculus.Abstr;
+import org.emftext.language.lambdacalculus.BoundVar;
+import org.emftext.language.lambdacalculus.Ref;
+import org.emftext.language.lambdacalculus.Var;
+import org.emftext.language.lambdacalculus.resource.lambda.ILambdaReferenceResolveResult;
+import org.emftext.language.lambdacalculus.resource.lambda.ILambdaReferenceResolver;
+
+public class RefRefersToReferenceResolver implements ILambdaReferenceResolver<Ref, Var> {
 	
-	private org.emftext.language.lambdacalculus.resource.lambda.analysis.LambdaDefaultResolverDelegate<org.emftext.language.lambdacalculus.Ref, org.emftext.language.lambdacalculus.Var> delegate = new org.emftext.language.lambdacalculus.resource.lambda.analysis.LambdaDefaultResolverDelegate<org.emftext.language.lambdacalculus.Ref, org.emftext.language.lambdacalculus.Var>();
-	
-	public void resolve(java.lang.String identifier, org.emftext.language.lambdacalculus.Ref container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.lambdacalculus.resource.lambda.ILambdaReferenceResolveResult<org.emftext.language.lambdacalculus.Var> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, Ref container, EReference reference, int position, boolean resolveFuzzy, final ILambdaReferenceResolveResult<Var> result) {
+		EObject parent = container;
+		while (parent != null) {
+			if (parent instanceof Abstr) {
+				Abstr abstraction = (Abstr) parent;
+				BoundVar boundVar = abstraction.getBoundVar();
+				if (boundVar.getName().equals(identifier) || resolveFuzzy) {
+					result.addMapping(boundVar.getName(), boundVar);
+					if (!resolveFuzzy) {
+						return;
+					}
+				}
+			}
+			parent = parent.eContainer();
+		}
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.lambdacalculus.Var element, org.emftext.language.lambdacalculus.Ref container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(Var element, Ref container, EReference reference) {
+		return element.getName();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend
-		// on any option
 	}
-	
 }
