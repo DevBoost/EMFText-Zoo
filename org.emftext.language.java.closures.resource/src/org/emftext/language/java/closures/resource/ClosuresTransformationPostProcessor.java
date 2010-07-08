@@ -31,10 +31,12 @@ import org.emftext.language.java.closures.resource.closure.IClosureReferenceReso
 import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessor;
 import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessorProvider;
 import org.emftext.language.java.closures.resource.closure.analysis.ClassifierReferenceTargetReferenceResolver;
+import org.emftext.language.java.closures.resource.closure.analysis.PostProcessorHelper;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
 import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
+import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.ImportsPackage;
@@ -122,38 +124,44 @@ public class ClosuresTransformationPostProcessor
 		}
 			
 		// get all closures calls
-		Collection<ClosureCall> closureCalls = 
-			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ClosuresPackage.eINSTANCE.getClosureCall());
+		Collection<IdentifierReference> identifierReferences = 
+			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ReferencesPackage.eINSTANCE.getIdentifierReference());
 
 		// get all member closures calls
 		Collection<Closure> closures = 
 			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ClosuresPackage.eINSTANCE.getClosure  ());
 
-		List<ClosureCall> memberClosureCalls = new ArrayList<ClosureCall>();
-		List<ClosureCall> parameterClosureCalls = new ArrayList<ClosureCall>();
+		Map<Closure,IdentifierReference> memberClosures = new HashMap<Closure,IdentifierReference>();
+		Map<Closure,IdentifierReference> parameterClosures = new HashMap<Closure,IdentifierReference>();
 		List<Closure> methodClosures = new ArrayList<Closure>();
-		// new!
-		List<Closure> parameterClosures = new ArrayList<Closure>();
+		List<Closure> argumentClosures = new ArrayList<Closure>();
 		
-		for(ClosureCall closureCall : closureCalls){
-			AbstractClosure aClosure = closureCall.getClosure();
-			if(aClosure instanceof Closure){
-				Closure closure = (Closure)aClosure;
+		for(IdentifierReference identifierReference : identifierReferences){
+			
+			if(identifierReference.getTarget() instanceof Closure){
+				Closure closure = (Closure)identifierReference.getTarget();
 				
-				if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
-					memberClosureCalls.add(closureCall);
-				}
-				if(closure.getValueType()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
-					parameterClosureCalls.add(closureCall);
+				if(identifierReference.getNext() instanceof MethodCall){
+					MethodCall next = (MethodCall) identifierReference.getNext();
+					
+					if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+						memberClosures.put(closure,identifierReference);
+					}
+					if(closure.getValueType()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+						parameterClosures.put(closure,identifierReference);
+					}
+					
+					closure.getArguments().addAll(next.getArguments());
+					closure.setMethodName(PostProcessorHelper.get(closure.getName()));
 				}
 			}
 		}
 		
 		// convert member closures
-		convertMemberClosureCalls(javaResource, memberClosureCalls);
+		convertMemberClosureCalls(javaResource, memberClosures);
 		
 		// convert parameter closures
-		convertParameterClosureCall(javaResource, parameterClosureCalls);
+		convertParameterClosureCall(javaResource, parameterClosures);
 		
 		for(Closure closure : closures){
 			
@@ -162,7 +170,7 @@ public class ClosuresTransformationPostProcessor
 			}
 			
 			if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
-				parameterClosures.add(closure);
+				argumentClosures.add(closure);
 			}
 		}
 		
@@ -170,24 +178,17 @@ public class ClosuresTransformationPostProcessor
 		convertMethodClosure(javaResource, methodClosures);
 		
 		//convert parameter closures
-		convertParameterClosure(javaResource, parameterClosures);
+		convertParameterClosure(javaResource, argumentClosures);
 		
 		// get all closures which still are there
 		// delete them because they are not called from any closure call
 		
-		// get all closures calls again
-		closureCalls = 
-			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ClosuresPackage.eINSTANCE.getClosureCall());
-
 		// get all member closures calls again
 		closures = 
 			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ClosuresPackage.eINSTANCE.getClosure  ());
 		
 		for(Closure closure : closures){
 			EcoreUtil.delete(closure);
-		}
-		for(ClosureCall closureCall : closureCalls){
-			EcoreUtil.delete(closureCall);
 		}
 		
 		// save java new resource
@@ -315,6 +316,7 @@ public class ClosuresTransformationPostProcessor
 	
 	private MethodCall createAnonymousClass(
 			AbstractClosureCall call,
+			IdentifierReference identifierReference,
 			String methodName,
 			String closureName, 
 			TypeReference type, 
@@ -409,19 +411,43 @@ public class ClosuresTransformationPostProcessor
 		// set anonymous class 
 		newConstructorCall.setAnonymousClass(anonymousClass);
 		
-		if(call.eContainer() instanceof LocalVariable || call.eContainer() instanceof MethodCall){
-			// replace call with new constructor call
-			EcoreUtil.replace(call, newConstructorCall);
+		if(identifierReference == null){
+		
+			if(call.eContainer() instanceof LocalVariable || 
+					call.eContainer() instanceof MethodCall ||
+					call.eContainer() instanceof AssignmentExpression){
+				// replace call with new constructor call
+				EcoreUtil.replace(call, newConstructorCall);
+			}
+			else{
+				// expression statement is necessary 		
+				ExpressionStatement expressionStatement = StatementsFactory.eINSTANCE.createExpressionStatement();
+				expressionStatement.setExpression(newConstructorCall);
+				
+				// replace with new method call
+				EcoreUtil.replace(call, expressionStatement);
+				
+				
+			}
 		}
 		else{
-			// expression statement is necessary 		
-			ExpressionStatement expressionStatement = StatementsFactory.eINSTANCE.createExpressionStatement();
-			expressionStatement.setExpression(newConstructorCall);
-			
-			// replace with new method call
-			EcoreUtil.replace(call, expressionStatement);
-			
-			
+			if(identifierReference.eContainer() instanceof ExpressionStatement){
+				
+				ExpressionStatement superExpression = 
+					(ExpressionStatement) identifierReference.eContainer();
+				
+				// expression statement is necessary 		
+				ExpressionStatement expressionStatement = StatementsFactory.eINSTANCE.createExpressionStatement();
+				expressionStatement.setExpression(newConstructorCall);
+				
+				// replace with new method call
+				EcoreUtil.replace(superExpression, expressionStatement);
+			}
+			if(identifierReference.eContainer() instanceof AssignmentExpression ||
+					identifierReference.eContainer() instanceof LocalVariable){
+				// replace identifier with new constructor call
+				EcoreUtil.replace(identifierReference, newConstructorCall);
+			}
 		}
 		
 		
@@ -429,44 +455,41 @@ public class ClosuresTransformationPostProcessor
 	}
 	
 	private void convertMemberClosureCalls(
-			JavaResource resource, List<ClosureCall> memberClosureCalls){
+			JavaResource resource, 
+			Map<Closure,IdentifierReference> memberClosures){
 		
-		// get all member closures calls
-//		Collection<MemberClosureCall> memberClosureCalls = 
-//			ClosureEObjectUtil.getObjectsByType(resource.getAllContents(), ClosuresPackage.eINSTANCE.getMemberClosureCall());
-
 		// convert them into method calls
-		for (ClosureCall memberClosureCall : memberClosureCalls){
+		for (Closure memberClosure : memberClosures.keySet()){
 			
-			if(memberClosureCall.getClosure() instanceof Closure){
-			
-				Closure memberClosure = (Closure)memberClosureCall.getClosure();
-				
-				createAnonymousClass(
-						memberClosureCall, 
-						memberClosureCall.getMethodName(), 
-						memberClosure.getName(), 
-						memberClosure.getValueType(), 
-						memberClosure, 
-						resource,
-						true);			
-			
-				EcoreUtil.delete(memberClosure);
-			}
+			IdentifierReference identifierReference = 
+				memberClosures.get(memberClosure);
+		
+			createAnonymousClass(
+					memberClosure,
+					identifierReference,
+					memberClosure.getMethodName(), 
+					memberClosure.getName(), 
+					memberClosure.getValueType(), 
+					memberClosure, 
+					resource,
+					true);			
+		
+			EcoreUtil.delete(memberClosure);
 		}
+
 	}
 	
-	private void convertMethodClosure(JavaResource resource, List<Closure> methodClosures){
-		
-		// get all method closures
-//		Collection<MethodClosure> methodClosures = 
-//			ClosureEObjectUtil.getObjectsByType(resource.getAllContents(), ClosuresPackage.eINSTANCE.getMethodClosure());
+	private void convertMethodClosure(
+			JavaResource resource,
+			List<Closure> methodClosures){
 
+		
 		int iCounter = 1;
 		
 		for (Closure methodClosure : methodClosures){
 			
 			String defaultName = "";
+			
 			if(methodClosure.getName() == null){
 				
 				for(int i = iCounter; i>0;i--){
@@ -477,26 +500,10 @@ public class ClosuresTransformationPostProcessor
 			else
 				defaultName = methodClosure.getName();
 			
-			
-			// get class java.lang.Object
-//			JavaClasspath javaClasspath = JavaClasspath.get(); 
-//			EList<EObject> object = javaClasspath.getClassifiers("java.lang.", "Object");
-//			
-//			NamespaceClassifierReference namespaceClassifierReference = null;
-//			
-//			// create namespace classifier reference to Object
-//			if(object.size() == 1){
-//				namespaceClassifierReference =
-//					TypesFactory.eINSTANCE.createNamespaceClassifierReference();
-//				ClassifierReference classifierReference =
-//					TypesFactory.eINSTANCE.createClassifierReference();
-//				
-//				classifierReference.setTarget((Classifier)object.get(0));
-//				namespaceClassifierReference.getClassifierReferences().add(classifierReference);
-//			}
-			
+		
 			createAnonymousClass(
 					methodClosure,
+					null,
 					methodClosure.getMethodName(),
 					defaultName, 
 					methodClosure.getValueType(), 
@@ -512,6 +519,7 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 			
 			createAnonymousClass(
 					parameterClosure,
+					null,
 					parameterClosure.getMethodName(),
 					parameterClosure.getName(), 
 					parameterClosure.getValueType(), 
@@ -522,124 +530,120 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 	}
 	
 	private void convertParameterClosureCall(
-			JavaResource resource, List<ClosureCall> parameterClosureCalls){
+			JavaResource resource, 
+			Map<Closure,IdentifierReference> parameterClosures){
 		
-		// get all method closures
-//		Collection<ParameterClosureCall> parameterClosureCalls = 
-//			ClosureEObjectUtil.getObjectsByType(resource.getAllContents(), ClosuresPackage.eINSTANCE.getParameterClosureCall());
+		// convert them into method calls
+		for (Closure parameterClosure : parameterClosures.keySet()){
+			
+			IdentifierReference identifierReference = 
+				parameterClosures.get(parameterClosure);
+			
+			
+			// get super class method of parameter closure
+			EObject object = parameterClosure.eContainer();
+			ClassMethod classMethod = null;
+			
+			if(object instanceof ClassMethod){
+				classMethod = (ClassMethod)object;
+			}
+			
+			if(classMethod == null)
+				continue;
+			
+			int parameterCounter = 0;
+			
+			// search in parameters of class method the parameter closure
+			for(Parameter parameter : classMethod.getParameters()){
+				if(parameter.equals(parameterClosure))
+					break;
+				else
+					parameterCounter++;
+			}
+			
+			// find parameter closure assignment for this method in a method call
+			Closure parameterClosureAssignment = null;
+						
+			Collection<MethodCall> methodCalls = 
+				JavaEObjectUtil.getObjectsByType(resource.getAllContents(), ReferencesPackage.eINSTANCE.getMethodCall());
 
-		for (ClosureCall parameterClosureCall : parameterClosureCalls){
+			MethodCall methodCall = null;
 			
-			if(parameterClosureCall.getClosure() instanceof Closure){
-			
-			
-				// get referenced parameter closure from parameters of method
-				Closure parameterClosure = (Closure)parameterClosureCall.getClosure();
-	
-				// get super class method of parameter closure
-				EObject object = parameterClosure.eContainer();
-				ClassMethod classMethod = null;
+			// search not only for a parameter closure assignment
+			// also the place on the parameter list in method call must be equal
+			for(MethodCall mc : methodCalls){
+				try{
 				
-				if(object instanceof ClassMethod){
-					classMethod = (ClassMethod)object;
-				}
-				
-				if(classMethod == null)
-					continue;
-				
-				int parameterCounter = 0;
-				
-				// search in parameters of class method the parameter closure
-				for(Parameter parameter : classMethod.getParameters()){
-					if(parameter.equals(parameterClosure))
-						break;
-					else
-						parameterCounter++;
-				}
-				
-				// find parameter closure assignment for this method in a method call
-				Closure parameterClosureAssignment = null;
-							
-				Collection<MethodCall> methodCalls = 
-					JavaEObjectUtil.getObjectsByType(resource.getAllContents(), ReferencesPackage.eINSTANCE.getMethodCall());
-	
-				MethodCall methodCall = null;
-				
-				// search not only for a parameter closure assignment
-				// also the place on the parameter list in method call must be equal
-				for(MethodCall mc : methodCalls){
-					try{
-					
-						if(mc.getTarget().getName().equals(classMethod.getName())){
-							methodCall = mc;
-							int iCounter = 0;
-							for(Expression argument : methodCall.getArguments()){
-								if(argument instanceof Closure && iCounter == parameterCounter){
-									parameterClosureAssignment =
-										(Closure) argument;
-								}
-								else{
-									iCounter++;
-								}
+					if(mc.getTarget().getName().equals(classMethod.getName())){
+						methodCall = mc;
+						int iCounter = 0;
+						for(Expression argument : methodCall.getArguments()){
+							if(argument instanceof Closure && iCounter == parameterCounter){
+								parameterClosureAssignment =
+									(Closure) argument;
+							}
+							else{
+								iCounter++;
 							}
 						}
 					}
-					catch(Exception e){}
 				}
-				
-				if(parameterClosureAssignment == null)
-					continue;
-				
-				// set statements from parameter closure assignment into parameter closure
-				parameterClosure.getStatements().addAll(parameterClosureAssignment.getStatements());
-				
-				// set parameters from parameter closure assignment into parameter closure
-				for(Parameter parameter : parameterClosureAssignment.getParameters()){
-					Parameter parameterCopy = EcoreUtil.copy(parameter);
-					parameterClosure.getParameters().add(parameterCopy);
-				}
-			
-				// create the anonymous class with his interface
-				MethodCall innerMethodCall = createAnonymousClass(
-						parameterClosureCall, 
-						parameterClosureCall.getMethodName(),
-						parameterClosure.getName(), 
-						parameterClosure.getValueType(), 
-						parameterClosure, 
-						resource,
-						true);
-				
-				if(innerMethodCall == null)
-					continue;
-				
-				// still something to do...
-				
-				// set parameters of parameter closure assignment also into super class method
-				for(Parameter parameter : parameterClosureAssignment.getParameters()){
-					Parameter parameterCopy = EcoreUtil.copy(parameter);
-					classMethod.getParameters().add(parameterCopy);
-				}
-	
-				// delete parameter closure in parameters list of super class method
-				EcoreUtil.delete(parameterClosure);
-				
-				// set arguments in method call of super class method
-				methodCall.getArguments().addAll(parameterClosureCall.getArguments());
-				
-				// set in inner method call of invoke class method of anonymous class
-				// identifier references to the parameters of the super class method
-				innerMethodCall.getArguments().clear();
-	
-				for(Parameter parameter : parameterClosureAssignment.getParameters()){
-					IdentifierReference identifierReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
-					identifierReference.setTarget(parameter);
-					innerMethodCall.getArguments().add(identifierReference);
-				}
-				
-				// delete 
-				EcoreUtil.delete(parameterClosureAssignment);	
-			
+				catch(Exception e){}
 			}
+			
+			if(parameterClosureAssignment == null)
+				continue;
+			
+			// set statements from parameter closure assignment into parameter closure
+			parameterClosure.getStatements().addAll(parameterClosureAssignment.getStatements());
+			
+			// set parameters from parameter closure assignment into parameter closure
+			for(Parameter parameter : parameterClosureAssignment.getParameters()){
+				Parameter parameterCopy = EcoreUtil.copy(parameter);
+				parameterClosure.getParameters().add(parameterCopy);
+			}
+		
+			// create the anonymous class with his interface
+			MethodCall innerMethodCall = createAnonymousClass(
+					parameterClosure,
+					identifierReference,
+					parameterClosure.getMethodName(),
+					parameterClosure.getName(), 
+					parameterClosure.getValueType(), 
+					parameterClosure, 
+					resource,
+					true);
+			
+			if(innerMethodCall == null)
+				continue;
+			
+			// still something to do...
+			
+			// set parameters of parameter closure assignment also into super class method
+			for(Parameter parameter : parameterClosureAssignment.getParameters()){
+				Parameter parameterCopy = EcoreUtil.copy(parameter);
+				classMethod.getParameters().add(parameterCopy);
+			}
+
+			// delete parameter closure in parameters list of super class method
+			EcoreUtil.delete(parameterClosure);
+			
+			// set arguments in method call of super class method
+			methodCall.getArguments().addAll(parameterClosure.getArguments());
+			
+			// set in inner method call of invoke class method of anonymous class
+			// identifier references to the parameters of the super class method
+			innerMethodCall.getArguments().clear();
+
+			for(Parameter parameter : parameterClosureAssignment.getParameters()){
+				IdentifierReference identifierReference2 = ReferencesFactory.eINSTANCE.createIdentifierReference();
+				identifierReference2.setTarget(parameter);
+				innerMethodCall.getArguments().add(identifierReference2);
+			}
+			
+			// delete 
+			EcoreUtil.delete(parameterClosureAssignment);	
+
 		}
 	}
 	

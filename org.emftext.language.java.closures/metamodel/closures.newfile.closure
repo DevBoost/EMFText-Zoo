@@ -6,67 +6,67 @@ import java.awt.Color;
 import javax.swing.JComponent;
 
 
-class Test{ 
+class Test{  
 
 
 	private String test = "";
 
 
 	
-	{ int, int => int } globalClosure2 = { int x1, int x2 => x1 + x2; }   
+	{ int, int => int } : globalClosure2 = { int x1, int x2 => x1 + x2; };    
 	
-	{ int, int => int } globalClosure1 = { int x1, int x2 => x1 + x2; }  
+	{ int, int => int } : globalClosure1 = { int x1, int x2 => x1 + x2; };  
 
-	{ => void } globalClosure3 = { => System.out.println("Hallo Welt"); };
+	{ => void } : globalClosure3 = { => System.out.println("Hallo Welt"); };
 	
 	public int method1 (int a){
 	
-		 System.out.print("test") ;
+		 System.out.print("test") ; 
 		 
-		 { int, int => int } globalClosure4 = { int x1, int x2 => x1 + x2; } 
+		 { int, int => int } :localClosure = { int x1, int x2 => x1 + x2; }; 
 		 
-		{ int, int => int } = { int x1, int x2 => x1 + x2; }.invoke(10,20)  
+		{ int, int => int } : = { int x1, int x2 => x1 + x2; }.invoke(10,20);  
 		
-		{globalClosue4}.invoke(12,12)
+		a = localClosure.invoke(12,12); 
 		
 		return a;
 	}
 	
-	private int method2(){   
+	private int method2(){  
 	
 		method1(100);
-		int e = { globalClosure2 }.invoke(10,20);     
+		int e = globalClosure2.invoke(10,20);       
 		return e;
 	}
 	
 	class InnerClass {
 	
-		 public void loopMethod( int times, {int, int => int } parameterClosure ){
+		 public void loopMethod( int times, {int, int => int } : parameterClosure ){
 		    
-		    for ( int i = 0; i < times; i++ ) {
-		      { parameterClosure }.invoke(10,20)   
+		    for ( int i = 0; i < times; i++ ) { 
+		        parameterClosure.invoke(10,20);      
 		    }
 		  }  
 	
-		 public void main( String[] args ){
+		 public void main( String[] args ){ 
 		 	
-		 	loopMethod( 5, {int, int => int } parameterClosure = { int a, int b => a=a+10; a + b;  } );    
+		 	loopMethod( 5, {int, int => int } : = { int a, int b => a=a+10; a + b;  } ;);      
 		 }
 		 
-		 public void methodWithClosureAndAssignment(int a, int b){  
+		 public void methodWithClosureAndAssignment(int a, int b){ 
 			
 			int d = a+b;
-			int e = { int => int } = { int a => a; }.invoke(a); 
+			int e = { int => int } : = { int a => a; }.invoke(a);;   
     		System.out.println(d); 
 		 	
 		 }
 	}
 	
-	class JFrameExtend extends JFrame{     
+	class JFrameExtend extends JFrame{        
 		
 		public JFrameExtend(){  
 		
-			getContentPane().add({Graphics => void} JComponent = {Graphics g => Color farbe = Color.gray;g.setColor(farbe);}.paintComponent());
+			getContentPane().add({Graphics => void} JComponent: = {Graphics g => Color farbe = Color.gray;g.setColor(farbe);}.paintComponent(););
 		}
 	}
    

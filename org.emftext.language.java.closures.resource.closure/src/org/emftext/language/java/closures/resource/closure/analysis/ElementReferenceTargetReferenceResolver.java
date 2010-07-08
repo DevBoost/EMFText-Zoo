@@ -110,7 +110,9 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 							((IdentifierReference)container.eContainer()).getTarget();
 						
 						if(referencableElement instanceof Closure){
-							result.addMapping(identifier, (Closure) referencableElement);
+							Closure closure = (Closure) referencableElement;
+							PostProcessorHelper.add(closure.getName(), identifier);
+							result.addMapping(identifier, closure);
 						}
 					}
 				}
