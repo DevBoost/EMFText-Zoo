@@ -32,6 +32,8 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
 		
+		// workaround necessary to resolve the parameters of a method call
+		// who is one parameter a closure
 		if(container instanceof MethodCall){
 			
 			EObject root = ClosureEObjectUtil.findRootContainer(container);
@@ -42,6 +44,7 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 				Collection<ClassMethod> methods = 
 					JavaEObjectUtil.getObjectsByType(resource.getAllContents(), MembersPackage.eINSTANCE.getClassMethod());
 
+				// local methods
 				for(ClassMethod method : methods){
 					if(method.getName().equals(identifier)){
 						result.addMapping(identifier, method);

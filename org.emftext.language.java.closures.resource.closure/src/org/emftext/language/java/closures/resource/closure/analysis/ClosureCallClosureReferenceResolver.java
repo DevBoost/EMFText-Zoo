@@ -30,8 +30,8 @@ public class ClosureCallClosureReferenceResolver implements org.emftext.language
 				ClosureEObjectUtil.getObjectsByType(resource.getAllContents(), ClosuresPackage.eINSTANCE.getAbstractClosure());
 
 			for(AbstractClosure closure : closures){
-				if(closure.getClosureName() != null){
-					if(closure.getClosureName().equals(identifier)){
+				if(closure.getName() != null){
+					if(closure.getName().equals(identifier)){
 						result.addMapping(identifier, closure);
 						break;
 					}
