@@ -85,7 +85,6 @@ public class ClosuresTransformationPostProcessor
 		});
 		
 		workerThread.start();
-		
 	}
 
 	private void convert(ClosureResource resource){
@@ -141,10 +140,10 @@ public class ClosuresTransformationPostProcessor
 			if(aClosure instanceof Closure){
 				Closure closure = (Closure)aClosure;
 				
-				if(closure.getTypeReference()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+				if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
 					memberClosureCalls.add(closureCall);
 				}
-				if(closure.getTypeReference()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+				if(closure.getValueType()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
 					parameterClosureCalls.add(closureCall);
 				}
 			}
@@ -158,11 +157,11 @@ public class ClosuresTransformationPostProcessor
 		
 		for(Closure closure : closures){
 			
-			if(closure.getTypeReference()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null && !closure.getArguments().isEmpty()){
+			if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null && !closure.getArguments().isEmpty()){
 				methodClosures.add(closure);
 			}
 			
-			if(closure.getTypeReference()!= null && !closure.getStatements().isEmpty() && closure.getName()!=null && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
+			if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
 				parameterClosures.add(closure);
 			}
 		}
@@ -219,13 +218,6 @@ public class ClosuresTransformationPostProcessor
 			TypeReference valueType){
 		
 			String interfaceName = firstToUpper(closureName);
-		
-			// not necessary to build a new interface, it's already there and imported
-			// TODO other possibility to get on the classifier without searching in the imports ?
-			ClassifierImport classifierImport = getNecessaryImport(interfaceName, resource);
-			if(classifierImport != null)
-				return classifierImport.getClassifier();
-			
 			
 			// new resource for interface
 			URI interfaceURI = resource.getURI().trimFileExtension().trimSegments(1);
@@ -330,17 +322,35 @@ public class ClosuresTransformationPostProcessor
 			Resource resource,
 			boolean isMethodCall){
 		
+		if(closureName == null && closure.getTypeReference() == null)
+			return null;
+		
 		// create a interface for anonymous class
-		Classifier _interface = createInterface(closure ,resource, methodName, closureName, type);
+		Classifier _interface = null;
+		
+		if(closureName == null){
+			try {
+				closureName = closure.getTypeReference().getTarget().getContainingConcreteClassifier().getName();
+			} catch (Exception e) {}
+			// not necessary to build a new interface, it's already there 
+			if(closureName != null)
+				_interface = closure.getTypeReference().getTarget().getContainingConcreteClassifier();
+		}	
+		else{
+			// we need a new interface, no interface or abstract class in classpath
+			_interface = createInterface(closure, resource, methodName, closureName, type);
+		}
+		
+		// set reference to interface
+		if(_interface == null)
+				return null;
 		
 		// create constructor call for interface
 		NewConstructorCall newConstructorCall = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
 		NamespaceClassifierReference namespaceClassifierReference = TypesFactory.eINSTANCE.createNamespaceClassifierReference();
 		ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 		
-		// set reference to interface
-		if(_interface == null)
-				return null;
+	
 		classifierReference.setTarget(_interface);
 		namespaceClassifierReference.getClassifierReferences().add(classifierReference);
 		newConstructorCall.setTypeReference(namespaceClassifierReference);
@@ -436,7 +446,7 @@ public class ClosuresTransformationPostProcessor
 						memberClosureCall, 
 						memberClosureCall.getMethodName(), 
 						memberClosure.getName(), 
-						memberClosure.getTypeReference(), 
+						memberClosure.getValueType(), 
 						memberClosure, 
 						resource,
 						true);			
@@ -489,7 +499,7 @@ public class ClosuresTransformationPostProcessor
 					methodClosure,
 					methodClosure.getMethodName(),
 					defaultName, 
-					methodClosure.getTypeReference(), 
+					methodClosure.getValueType(), 
 					methodClosure, 
 					resource,
 					true);
@@ -504,7 +514,7 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 					parameterClosure,
 					parameterClosure.getMethodName(),
 					parameterClosure.getName(), 
-					parameterClosure.getTypeReference(), 
+					parameterClosure.getValueType(), 
 					parameterClosure, 
 					resource,
 					false);
@@ -594,7 +604,7 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 						parameterClosureCall, 
 						parameterClosureCall.getMethodName(),
 						parameterClosure.getName(), 
-						parameterClosure.getTypeReference(), 
+						parameterClosure.getValueType(), 
 						parameterClosure, 
 						resource,
 						true);
