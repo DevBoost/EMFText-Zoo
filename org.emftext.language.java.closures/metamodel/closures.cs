@@ -30,9 +30,12 @@ OPTIONS {
 }
 
 RULES {
- 	Closure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" typeReference  "}" name[]? ( "=" "{" (parameters ("," parameters)*)? "=>" statements+  "}" ( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? )? ";" ;
+ 	Closure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" 
+ 				(typeReference)? ":" name[]? ( "=" 
+ 				"{" (parameters ("," parameters)*)? "=>" statements+  "}" 
+ 				( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? ";" )?  ;
 
-	ClosureCall ::= "{" closure[]? "}" "." methodName[] "(" (arguments ("," arguments)*)? ")" ";" ;
+//	ClosureCall ::= closure[] "." methodName[] "(" (arguments ("," arguments)*)? ")" ";" ;
 
 }
 
