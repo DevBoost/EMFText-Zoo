@@ -24,15 +24,15 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
-	reloadGeneratorModel = "true";
-	generateCodeFromGeneratorModel="true";
+	reloadGeneratorModel = "false" ;
+//	generateCodeFromGeneratorModel="true";
 
 }
 
 RULES {
- 	Closure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" typeReference  "}" name[]? ( "=" "{" (parameters ("," parameters)*)? "=>" statements+  "}" ( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? )? ;
+ 	Closure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" typeReference  "}" name[]? ( "=" "{" (parameters ("," parameters)*)? "=>" statements+  "}" ( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? )? ";" ;
 
-	ClosureCall ::= "{" closure[]? "}" "." methodName[] "(" (arguments ("," arguments)*)? ")" ;
+	ClosureCall ::= "{" closure[]? "}" "." methodName[] "(" (arguments ("," arguments)*)? ")" ";" ;
 
 }
 
