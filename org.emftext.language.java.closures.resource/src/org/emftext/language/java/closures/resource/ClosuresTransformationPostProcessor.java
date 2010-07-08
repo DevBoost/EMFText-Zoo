@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.AnonymousClass;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.closures.AbstractClosure;
@@ -22,16 +24,20 @@ import org.emftext.language.java.closures.AbstractClosureCall;
 import org.emftext.language.java.closures.Closure;
 import org.emftext.language.java.closures.ClosureCall;
 import org.emftext.language.java.closures.ClosuresPackage;
-import org.emftext.language.java.closures.ParameterClosureAssignment;
 import org.emftext.language.java.closures.resource.closure.IClosureOptionProvider;
 import org.emftext.language.java.closures.resource.closure.IClosureOptions;
+import org.emftext.language.java.closures.resource.closure.IClosureReferenceMapping;
+import org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult;
 import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessor;
 import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessorProvider;
+import org.emftext.language.java.closures.resource.closure.analysis.ClassifierReferenceTargetReferenceResolver;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
 import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.ImportsPackage;
 import org.emftext.language.java.instantiations.InstantiationsFactory;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.ClassMethod;
@@ -51,6 +57,7 @@ import org.emftext.language.java.statements.Return;
 import org.emftext.language.java.statements.StatementsFactory;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
+import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.variables.LocalVariable;
@@ -104,10 +111,12 @@ public class ClosuresTransformationPostProcessor
 			if (next instanceof EObject) {
 				InternalEObject nextElement = (InternalEObject) next;
 				for (EObject crElement : nextElement.eCrossReferences()) {
-					crElement = EcoreUtil.resolve(crElement, javaResource.getResourceSet());
-					if (crElement.eIsProxy()) {
-						System.out.println("Can not find referenced element in classpath: "
-								+ ((InternalEObject) crElement).eProxyURI());
+					if(crElement.eIsProxy()){
+						crElement = EcoreUtil.resolve(crElement, javaResource);
+						if (crElement.eIsProxy()) {
+							System.out.println("Can not find referenced element in classpath: "
+									+ ((InternalEObject) crElement).eProxyURI());
+						}
 					}
 				}	
 			}
@@ -124,16 +133,18 @@ public class ClosuresTransformationPostProcessor
 		List<ClosureCall> memberClosureCalls = new ArrayList<ClosureCall>();
 		List<ClosureCall> parameterClosureCalls = new ArrayList<ClosureCall>();
 		List<Closure> methodClosures = new ArrayList<Closure>();
+		// new!
+		List<Closure> parameterClosures = new ArrayList<Closure>();
 		
 		for(ClosureCall closureCall : closureCalls){
 			AbstractClosure aClosure = closureCall.getClosure();
 			if(aClosure instanceof Closure){
 				Closure closure = (Closure)aClosure;
 				
-				if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+				if(closure.getTypeReference()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
 					memberClosureCalls.add(closureCall);
 				}
-				if(closure.getValueType()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+				if(closure.getTypeReference()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
 					parameterClosureCalls.add(closureCall);
 				}
 			}
@@ -147,13 +158,20 @@ public class ClosuresTransformationPostProcessor
 		
 		for(Closure closure : closures){
 			
-			if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && !closure.getArguments().isEmpty()){
+			if(closure.getTypeReference()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null && !closure.getArguments().isEmpty()){
 				methodClosures.add(closure);
+			}
+			
+			if(closure.getTypeReference()!= null && !closure.getStatements().isEmpty() && closure.getName()!=null && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
+				parameterClosures.add(closure);
 			}
 		}
 		
 		// convert method closures
 		convertMethodClosure(javaResource, methodClosures);
+		
+		//convert parameter closures
+		convertParameterClosure(javaResource, parameterClosures);
 		
 		// get all closures which still are there
 		// delete them because they are not called from any closure call
@@ -193,49 +211,70 @@ public class ClosuresTransformationPostProcessor
 			return string.substring(0, 1).toUpperCase().concat(string.substring(1));
 	}
 	
-	private Resource createInterface(
+	private Classifier createInterface(
 			AbstractClosure memberClosure, 
 			Resource resource,
 			String methodName, 
 			String closureName, 
 			TypeReference valueType){
 		
+			String interfaceName = firstToUpper(closureName);
+		
+			// not necessary to build a new interface, it's already there and imported
+			// TODO other possibility to get on the classifier without searching in the imports ?
+			ClassifierImport classifierImport = getNecessaryImport(interfaceName, resource);
+			if(classifierImport != null)
+				return classifierImport.getClassifier();
+			
+			
 			// new resource for interface
 			URI interfaceURI = resource.getURI().trimFileExtension().trimSegments(1);
-			interfaceURI = interfaceURI.appendSegment(firstToUpper(closureName)).appendFileExtension("java");
+			interfaceURI = interfaceURI.appendSegment(interfaceName).appendFileExtension("java");
 			Resource interfaceResource = resource.getResourceSet().createResource(interfaceURI);
 			
 			try {
 				interfaceResource.load(null);
-			} catch (IOException e1) {}
+			} catch (Exception e) {}
 			
 			// new interface
 			Interface _interface = ClassifiersFactory.eINSTANCE.createInterface();
-			_interface.setName(firstToUpper(closureName));
+			_interface.setName(interfaceName);
 			_interface.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
+			
+			List<ClassifierImport> imports = new ArrayList<ClassifierImport>();
 			
 			// method for interface
 			InterfaceMethod interfaceMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
 			for(Parameter parameter : memberClosure.getParameters()){
 				Parameter parameterCopy = EcoreUtil.copy(parameter);
 				interfaceMethod.getParameters().add(parameterCopy);
+				// import
+				ClassifierImport _import = getNecessaryImport(parameterCopy.getTypeReference(), resource);
+				if (_import != null)
+					imports.add(_import);
 			}
 			interfaceMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
 			interfaceMethod.setName(methodName);
 			interfaceMethod.setTypeReference(valueType);
+			// import
+			ClassifierImport _import = getNecessaryImport(valueType, resource);
+			if (_import != null)
+				imports.add(_import);
 			
 			// set method into interface
 			_interface.getMembers().add(interfaceMethod);
 			
 			// set interface into resource
 			CompilationUnit compilationUnit = ContainersFactory.eINSTANCE.createCompilationUnit();
-			compilationUnit.setName(firstToUpper(closureName));
+			compilationUnit.setName(interfaceName);
 			compilationUnit.getClassifiers().add(_interface);
 			interfaceResource.getContents().clear();
 			interfaceResource.getContents().add(compilationUnit);
 			
-			//namespace
+			// namespace
 			compilationUnit.getNamespaces().addAll(((CompilationUnit)resource.getContents().get(0)).getNamespaces());
+			// imports
+			compilationUnit.getImports().addAll(imports);
 			
 			// save
 			try {
@@ -244,8 +283,42 @@ public class ClosuresTransformationPostProcessor
 				e.printStackTrace();
 			}
 			
-			return interfaceResource;
+			return _interface;
 			
+	}
+	
+	private ClassifierImport getNecessaryImport(TypeReference typeReference, Resource resource){
+		
+		if(typeReference instanceof PrimitiveType)
+			return null;
+		
+		// get all imports
+		Collection<ClassifierImport> imports = 
+			JavaEObjectUtil.getObjectsByType(resource.getAllContents(), ImportsPackage.eINSTANCE.getClassifierImport());
+		for(ClassifierImport _import : imports){
+			if(_import.getClassifier().equals(typeReference.getTarget().getContainingConcreteClassifier())){
+				return EcoreUtil.copy(_import);
+			}
+		}
+		
+		return null;
+	}
+	
+	private ClassifierImport getNecessaryImport(String name, Resource resource){
+		
+		if(name == null)
+			return null;
+		
+		// get all imports
+		Collection<ClassifierImport> imports = 
+			JavaEObjectUtil.getObjectsByType(resource.getAllContents(), ImportsPackage.eINSTANCE.getClassifierImport());
+		for(ClassifierImport _import : imports){
+			if(_import.getClassifier().getName().equals(name)){
+				return EcoreUtil.copy(_import);
+			}
+		}
+		
+		return null;
 	}
 	
 	private MethodCall createAnonymousClass(
@@ -254,10 +327,11 @@ public class ClosuresTransformationPostProcessor
 			String closureName, 
 			TypeReference type, 
 			AbstractClosure closure, 
-			Resource resource){
+			Resource resource,
+			boolean isMethodCall){
 		
 		// create a interface for anonymous class
-		Resource interfaceResource = createInterface(closure ,resource, methodName, closureName, type);
+		Classifier _interface = createInterface(closure ,resource, methodName, closureName, type);
 		
 		// create constructor call for interface
 		NewConstructorCall newConstructorCall = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
@@ -265,9 +339,9 @@ public class ClosuresTransformationPostProcessor
 		ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 		
 		// set reference to interface
-		if(interfaceResource.getContents().isEmpty())
+		if(_interface == null)
 				return null;
-		classifierReference.setTarget(((CompilationUnit)interfaceResource.getContents().get(0)).getClassifiers().get(0));
+		classifierReference.setTarget(_interface);
 		namespaceClassifierReference.getClassifierReferences().add(classifierReference);
 		newConstructorCall.setTypeReference(namespaceClassifierReference);
 		
@@ -306,21 +380,26 @@ public class ClosuresTransformationPostProcessor
 		
 		// set invoke class method into anonymous class
 		anonymousClass.getMembers().add(classMethod);
+		MethodCall methodCall = null;
 		
-		// method call of inner invoke class method
-		MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
-		methodCall.setTarget(classMethod);
-		
-		for(Expression expression : call.getArguments()){
-			Expression expressionCopy = EcoreUtil.copy(expression);
-			methodCall.getArguments().add(expressionCopy);
+		if(isMethodCall){
+			
+			// method call of inner invoke class method
+			methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
+			methodCall.setTarget(classMethod);
+			
+			for(Expression expression : call.getArguments()){
+				Expression expressionCopy = EcoreUtil.copy(expression);
+				methodCall.getArguments().add(expressionCopy);
+			}
+			
+			// call of the inner invoke method
+			newConstructorCall.setNext(methodCall);
 		}
-		
-		// set anonymous class and a call of the inner invoke method
+		// set anonymous class 
 		newConstructorCall.setAnonymousClass(anonymousClass);
-		newConstructorCall.setNext(methodCall);
-	
-		if(call.eContainer() instanceof LocalVariable){
+		
+		if(call.eContainer() instanceof LocalVariable || call.eContainer() instanceof MethodCall){
 			// replace call with new constructor call
 			EcoreUtil.replace(call, newConstructorCall);
 		}
@@ -356,10 +435,11 @@ public class ClosuresTransformationPostProcessor
 				createAnonymousClass(
 						memberClosureCall, 
 						memberClosureCall.getMethodName(), 
-						memberClosure.getClosureName(), 
-						memberClosure.getValueType(), 
+						memberClosure.getName(), 
+						memberClosure.getTypeReference(), 
 						memberClosure, 
-						resource);			
+						resource,
+						true);			
 			
 				EcoreUtil.delete(memberClosure);
 			}
@@ -377,7 +457,7 @@ public class ClosuresTransformationPostProcessor
 		for (Closure methodClosure : methodClosures){
 			
 			String defaultName = "";
-			if(methodClosure.getClosureName() == null){
+			if(methodClosure.getName() == null){
 				
 				for(int i = iCounter; i>0;i--){
 					defaultName += "I";
@@ -385,7 +465,7 @@ public class ClosuresTransformationPostProcessor
 				iCounter++;
 			}
 			else
-				defaultName = methodClosure.getClosureName();
+				defaultName = methodClosure.getName();
 			
 			
 			// get class java.lang.Object
@@ -409,8 +489,25 @@ public class ClosuresTransformationPostProcessor
 					methodClosure,
 					methodClosure.getMethodName(),
 					defaultName, 
-					methodClosure.getValueType(), 
-					methodClosure, resource);
+					methodClosure.getTypeReference(), 
+					methodClosure, 
+					resource,
+					true);
+		}
+	}
+	
+private void convertParameterClosure(JavaResource resource, List<Closure> parameterClosures){
+		
+		for (Closure parameterClosure : parameterClosures){
+			
+			createAnonymousClass(
+					parameterClosure,
+					parameterClosure.getMethodName(),
+					parameterClosure.getName(), 
+					parameterClosure.getTypeReference(), 
+					parameterClosure, 
+					resource,
+					false);
 		}
 	}
 	
@@ -451,7 +548,7 @@ public class ClosuresTransformationPostProcessor
 				}
 				
 				// find parameter closure assignment for this method in a method call
-				ParameterClosureAssignment parameterClosureAssignment = null;
+				Closure parameterClosureAssignment = null;
 							
 				Collection<MethodCall> methodCalls = 
 					JavaEObjectUtil.getObjectsByType(resource.getAllContents(), ReferencesPackage.eINSTANCE.getMethodCall());
@@ -461,19 +558,23 @@ public class ClosuresTransformationPostProcessor
 				// search not only for a parameter closure assignment
 				// also the place on the parameter list in method call must be equal
 				for(MethodCall mc : methodCalls){
-					if(mc.getTarget().getName().equals(classMethod.getName())){
-						methodCall = mc;
-						int iCounter = 0;
-						for(Expression argument : methodCall.getArguments()){
-							if(argument instanceof ParameterClosureAssignment && iCounter == parameterCounter){
-								parameterClosureAssignment =
-									(ParameterClosureAssignment) argument;
-							}
-							else{
-								iCounter++;
+					try{
+					
+						if(mc.getTarget().getName().equals(classMethod.getName())){
+							methodCall = mc;
+							int iCounter = 0;
+							for(Expression argument : methodCall.getArguments()){
+								if(argument instanceof Closure && iCounter == parameterCounter){
+									parameterClosureAssignment =
+										(Closure) argument;
+								}
+								else{
+									iCounter++;
+								}
 							}
 						}
 					}
+					catch(Exception e){}
 				}
 				
 				if(parameterClosureAssignment == null)
@@ -492,10 +593,14 @@ public class ClosuresTransformationPostProcessor
 				MethodCall innerMethodCall = createAnonymousClass(
 						parameterClosureCall, 
 						parameterClosureCall.getMethodName(),
-						parameterClosure.getClosureName(), 
-						parameterClosure.getValueType(), 
+						parameterClosure.getName(), 
+						parameterClosure.getTypeReference(), 
 						parameterClosure, 
-						resource);
+						resource,
+						true);
+				
+				if(innerMethodCall == null)
+					continue;
 				
 				// still something to do...
 				
