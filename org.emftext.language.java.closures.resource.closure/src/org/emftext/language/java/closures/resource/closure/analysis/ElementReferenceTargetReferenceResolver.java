@@ -18,44 +18,25 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.closures.Closure;
+import org.emftext.language.java.closures.ClosuresPackage;
 import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersPackage;
-import org.emftext.language.java.members.Method;
+import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.MethodCall;
+import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
 
 public class ElementReferenceTargetReferenceResolver implements org.emftext.language.java.closures.resource.closure.IClosureReferenceResolver<org.emftext.language.java.references.ElementReference, org.emftext.language.java.references.ReferenceableElement> {
 	
 	private org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver();
-	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
 		
-		// workaround necessary to resolve the parameters of a method call
-		// who is one parameter a closure
-		if(container instanceof MethodCall){
-			
-			EObject root = ClosureEObjectUtil.findRootContainer(container);
-			if(root instanceof CompilationUnit){
-				CompilationUnit compilationUnit = (CompilationUnit)root;
-				Resource resource = compilationUnit.eResource();
+	public synchronized void resolve(final java.lang.String identifier, final org.emftext.language.java.references.ElementReference container, final org.eclipse.emf.ecore.EReference reference, final int position, final boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
+		
 				
-				Collection<ClassMethod> methods = 
-					JavaEObjectUtil.getObjectsByType(resource.getAllContents(), MembersPackage.eINSTANCE.getClassMethod());
-
-				// local methods
-				for(ClassMethod method : methods){
-					if(method.getName().equals(identifier)){
-						result.addMapping(identifier, method);
-						break;
-					}
-				}
-			}
-		}
-		
-		if(result.getMappings() == null){
-		
+		try{
 			delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement>() {
 				
 				public boolean wasResolvedUniquely() {
@@ -97,7 +78,63 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 				public void addMapping(String identifier, org.emftext.language.java.references.ReferenceableElement target, String warning) {
 					result.addMapping(identifier, target, warning);
 				}
-			});
+			});						
+		}
+		catch(Exception e){}
+		
+		if(result.getMappings() == null){
+		
+			// workaround necessary to resolve the parameters of a method call
+			// who is one parameter a closure
+			if(container instanceof MethodCall){
+				
+				EObject root = ClosureEObjectUtil.findRootContainer(container);
+				if(root instanceof CompilationUnit){
+					CompilationUnit compilationUnit = (CompilationUnit)root;
+					Resource resource = compilationUnit.eResource();
+					
+					Collection<ClassMethod> methods = 
+						JavaEObjectUtil.getObjectsByType(resource.getAllContents(), MembersPackage.eINSTANCE.getClassMethod());
+	
+					// local methods
+					for(ClassMethod method : methods){
+						if(method.getName().equals(identifier)){
+							result.addMapping(identifier, method);
+							break;
+						}
+					}
+					
+					if(container.eContainer() instanceof IdentifierReference){
+						
+						ReferenceableElement referencableElement = 
+							((IdentifierReference)container.eContainer()).getTarget();
+						
+						if(referencableElement instanceof Closure){
+							result.addMapping(identifier, (Closure) referencableElement);
+						}
+					}
+				}
+			}
+		
+			if(container instanceof IdentifierReference){
+				
+				EObject root = ClosureEObjectUtil.findRootContainer(container);
+				if(root instanceof CompilationUnit){
+					CompilationUnit compilationUnit = (CompilationUnit)root;
+					Resource resource = compilationUnit.eResource();
+					
+					Collection<Closure> closures = 
+						JavaEObjectUtil.getObjectsByType(resource.getAllContents(), ClosuresPackage.eINSTANCE.getClosure());
+	
+					// local methods
+					for(Closure closure : closures){
+						if(closure.getName().equals(identifier)){
+							result.addMapping(identifier, closure);
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 	
