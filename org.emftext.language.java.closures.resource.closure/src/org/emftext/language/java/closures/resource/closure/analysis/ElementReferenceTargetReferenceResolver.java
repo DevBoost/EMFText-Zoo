@@ -82,6 +82,7 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 		}
 		catch(Exception e){}
 		
+		// resolve local method call with closures as parameter in it
 		if(result.getMappings() == null){
 		
 			// workaround necessary to resolve the parameters of a method call
@@ -104,6 +105,8 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 						}
 					}
 					
+					// identifiers is local method which has to be called in closure
+					// save this method name
 					if(container.eContainer() instanceof IdentifierReference){
 						
 						ReferenceableElement referencableElement = 
@@ -117,7 +120,8 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 					}
 				}
 			}
-		
+			
+			// call of the inner method of a closure
 			if(container instanceof IdentifierReference){
 				
 				EObject root = ClosureEObjectUtil.findRootContainer(container);
@@ -130,9 +134,11 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 	
 					// local methods
 					for(Closure closure : closures){
-						if(closure.getName().equals(identifier)){
-							result.addMapping(identifier, closure);
-							break;
+						if(closure.getName() != null){
+							if(closure.getName().equals(identifier)){
+								result.addMapping(identifier, closure);
+								break;
+							}
 						}
 					}
 				}

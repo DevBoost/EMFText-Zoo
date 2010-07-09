@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
@@ -22,15 +21,11 @@ import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.closures.AbstractClosure;
 import org.emftext.language.java.closures.AbstractClosureCall;
 import org.emftext.language.java.closures.Closure;
-import org.emftext.language.java.closures.ClosureCall;
 import org.emftext.language.java.closures.ClosuresPackage;
 import org.emftext.language.java.closures.resource.closure.IClosureOptionProvider;
 import org.emftext.language.java.closures.resource.closure.IClosureOptions;
-import org.emftext.language.java.closures.resource.closure.IClosureReferenceMapping;
-import org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult;
 import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessor;
 import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessorProvider;
-import org.emftext.language.java.closures.resource.closure.analysis.ClassifierReferenceTargetReferenceResolver;
 import org.emftext.language.java.closures.resource.closure.analysis.PostProcessorHelper;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
 import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
@@ -56,6 +51,7 @@ import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
 import org.emftext.language.java.resource.util.JavaPostProcessor;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Return;
+import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.statements.StatementsFactory;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
@@ -127,14 +123,14 @@ public class ClosuresTransformationPostProcessor
 		Collection<IdentifierReference> identifierReferences = 
 			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ReferencesPackage.eINSTANCE.getIdentifierReference());
 
-		// get all member closures calls
-		Collection<Closure> closures = 
-			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ClosuresPackage.eINSTANCE.getClosure  ());
-
+		
 		Map<Closure,IdentifierReference> memberClosures = new HashMap<Closure,IdentifierReference>();
 		Map<Closure,IdentifierReference> parameterClosures = new HashMap<Closure,IdentifierReference>();
 		List<Closure> methodClosures = new ArrayList<Closure>();
 		List<Closure> argumentClosures = new ArrayList<Closure>();
+		
+		// at first it's important to replace all identifier references on closures
+		// and remove this closures from resource
 		
 		for(IdentifierReference identifierReference : identifierReferences){
 			
@@ -163,13 +159,28 @@ public class ClosuresTransformationPostProcessor
 		// convert parameter closures
 		convertParameterClosureCall(javaResource, parameterClosures);
 		
+		// get all member closures calls
+		Collection<Closure> closures = 
+			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ClosuresPackage.eINSTANCE.getClosure  ());
+
+		
 		for(Closure closure : closures){
 			
-			if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null && !closure.getArguments().isEmpty()){
+//	1.		if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null && !closure.getArguments().isEmpty()){
+//	2.		if(closure.eContainer() instanceof AssignmentExpression || 
+//				closure.eContainer() instanceof LocalVariable || 
+//				closure.eContainer() instanceof Return ||
+//				closure.eContainer() instanceof ClassMethod){
+			if(closure.eContainer() instanceof org.emftext.language.java.classifiers.Class)
+				continue;
+			
+			if(closure.getTypeReference() == null){	
 				methodClosures.add(closure);
 			}
 			
-			if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
+//	1.		if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
+//	2.		if(closure.eContainer() instanceof MethodCall){	
+			else{
 				argumentClosures.add(closure);
 			}
 		}
@@ -384,6 +395,9 @@ public class ClosuresTransformationPostProcessor
 							(ExpressionStatement)closure.getStatements().get(i);
 						_return.setReturnValue(expression.getExpression()); 
 					}
+					if(closure.getStatements().get(i) instanceof Statement){
+						classMethod.getStatements().add(closure.getStatements().get(i));
+					}
 					
 					classMethod.getStatements().add(_return);
 				}
@@ -415,7 +429,9 @@ public class ClosuresTransformationPostProcessor
 		
 			if(call.eContainer() instanceof LocalVariable || 
 					call.eContainer() instanceof MethodCall ||
-					call.eContainer() instanceof AssignmentExpression){
+					call.eContainer() instanceof AssignmentExpression ||
+					call.eContainer() instanceof Return){
+				
 				// replace call with new constructor call
 				EcoreUtil.replace(call, newConstructorCall);
 			}
