@@ -40,7 +40,11 @@ import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.members.MembersFactory;
+import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.ModifiersFactory;
+import org.emftext.language.java.modifiers.Private;
+import org.emftext.language.java.modifiers.Protected;
+import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.MethodCall;
@@ -124,8 +128,8 @@ public class ClosuresTransformationPostProcessor
 			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ReferencesPackage.eINSTANCE.getIdentifierReference());
 
 		
-		Map<Closure,IdentifierReference> memberClosures = new HashMap<Closure,IdentifierReference>();
-		Map<Closure,IdentifierReference> parameterClosures = new HashMap<Closure,IdentifierReference>();
+		Map<IdentifierReference,Closure> memberClosures = new HashMap<IdentifierReference,Closure>();
+		Map<IdentifierReference,Closure> parameterClosures = new HashMap<IdentifierReference,Closure>();
 		List<Closure> methodClosures = new ArrayList<Closure>();
 		List<Closure> argumentClosures = new ArrayList<Closure>();
 		
@@ -141,10 +145,10 @@ public class ClosuresTransformationPostProcessor
 					MethodCall next = (MethodCall) identifierReference.getNext();
 					
 					if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
-						memberClosures.put(closure,identifierReference);
+						memberClosures.put(identifierReference,closure);
 					}
 					if(closure.getValueType()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
-						parameterClosures.put(closure,identifierReference);
+						parameterClosures.put(identifierReference,closure);
 					}
 					
 					closure.getArguments().addAll(next.getArguments());
@@ -243,12 +247,16 @@ public class ClosuresTransformationPostProcessor
 			// new interface
 			Interface _interface = ClassifiersFactory.eINSTANCE.createInterface();
 			_interface.setName(interfaceName);
+			
+			// modifier
 			_interface.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
 			
 			List<ClassifierImport> imports = new ArrayList<ClassifierImport>();
 			
 			// method for interface
 			InterfaceMethod interfaceMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
+			
+			// parameters
 			for(Parameter parameter : memberClosure.getParameters()){
 				Parameter parameterCopy = EcoreUtil.copy(parameter);
 				interfaceMethod.getParameters().add(parameterCopy);
@@ -257,9 +265,37 @@ public class ClosuresTransformationPostProcessor
 				if (_import != null)
 					imports.add(_import);
 			}
-			interfaceMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
+			
+			// name
 			interfaceMethod.setName(methodName);
-			interfaceMethod.setTypeReference(valueType);
+			
+			// type reference
+			interfaceMethod.setTypeReference(EcoreUtil.copy(valueType));
+			
+			// set modifiers
+			if(memberClosure.getAnnotationsAndModifiers()!=null){
+				
+				boolean publicFound = false;
+				boolean privateFound = false;
+				boolean protectedFound = false;
+				
+				for(AnnotationInstanceOrModifier modifier : memberClosure.getAnnotationsAndModifiers()){
+					
+					if(modifier instanceof Public)
+						publicFound = true;
+					if(modifier instanceof Private)
+						privateFound = true;
+					if(modifier instanceof Protected)
+						protectedFound = true;
+					
+					interfaceMethod.getAnnotationsAndModifiers().add(EcoreUtil.copy(modifier));
+					
+				}
+				if(!publicFound && !privateFound && !protectedFound)
+					interfaceMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
+			
+			}
+			
 			// import
 			ClassifierImport _import = getNecessaryImport(valueType, resource);
 			if (_import != null)
@@ -371,13 +407,40 @@ public class ClosuresTransformationPostProcessor
 		// create anonymous class with a invoke class method
 		AnonymousClass anonymousClass = ClassifiersFactory.eINSTANCE.createAnonymousClass();
 		ClassMethod classMethod = MembersFactory.eINSTANCE.createClassMethod();
+		
+		// set parameters
 		for(Parameter parameter : closure.getParameters()){
 			Parameter parameterCopy = EcoreUtil.copy(parameter);
 			classMethod.getParameters().add(parameterCopy);
 		}
-		classMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
+		
+		// set modifiers
+		if(closure.getAnnotationsAndModifiers()!=null){
+			
+			boolean publicFound = false;
+			boolean privateFound = false;
+			boolean protectedFound = false;
+			
+			for(AnnotationInstanceOrModifier modifier : closure.getAnnotationsAndModifiers()){
+				
+				if(modifier instanceof Public)
+					publicFound = true;
+				if(modifier instanceof Private)
+					privateFound = true;
+				if(modifier instanceof Protected)
+					protectedFound = true;
+				
+				classMethod.getAnnotationsAndModifiers().add(EcoreUtil.copy(modifier));
+				
+			}
+			if(!publicFound && !privateFound && !protectedFound)
+				classMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
+		
+		}
+		// name
 		classMethod.setName(methodName);
-		classMethod.setTypeReference(type);
+		// type reference
+		classMethod.setTypeReference(EcoreUtil.copy(type));
 		
 		// set all statements of closure into new method
 		// attention to a return type, put return into method when necessary
@@ -393,10 +456,11 @@ public class ClosuresTransformationPostProcessor
 					if(closure.getStatements().get(i) instanceof ExpressionStatement){
 						ExpressionStatement expression = 
 							(ExpressionStatement)closure.getStatements().get(i);
-						_return.setReturnValue(expression.getExpression()); 
+						_return.setReturnValue(EcoreUtil.copy(expression.getExpression())); 
 					}
+					else
 					if(closure.getStatements().get(i) instanceof Statement){
-						classMethod.getStatements().add(closure.getStatements().get(i));
+						classMethod.getStatements().add(EcoreUtil.copy(closure.getStatements().get(i)));
 					}
 					
 					classMethod.getStatements().add(_return);
@@ -406,6 +470,8 @@ public class ClosuresTransformationPostProcessor
 		
 		// set invoke class method into anonymous class
 		anonymousClass.getMembers().add(classMethod);
+		
+		// method call of inner method
 		MethodCall methodCall = null;
 		
 		if(isMethodCall){
@@ -422,6 +488,12 @@ public class ClosuresTransformationPostProcessor
 			// call of the inner invoke method
 			newConstructorCall.setNext(methodCall);
 		}
+		
+		// call of new method in invoke method
+		if(closure.getNext() != null){
+			methodCall.setNext(EcoreUtil.copy(closure.getNext()));
+		}
+		
 		// set anonymous class 
 		newConstructorCall.setAnonymousClass(anonymousClass);
 		
@@ -472,13 +544,14 @@ public class ClosuresTransformationPostProcessor
 	
 	private void convertMemberClosureCalls(
 			JavaResource resource, 
-			Map<Closure,IdentifierReference> memberClosures){
+			Map<IdentifierReference,Closure> memberClosures){
+		
+		List<Closure> oldClosures = new ArrayList<Closure>();
 		
 		// convert them into method calls
-		for (Closure memberClosure : memberClosures.keySet()){
+		for (IdentifierReference identifierReference : memberClosures.keySet()){
 			
-			IdentifierReference identifierReference = 
-				memberClosures.get(memberClosure);
+			Closure memberClosure = memberClosures.get(identifierReference);
 		
 			createAnonymousClass(
 					memberClosure,
@@ -490,7 +563,11 @@ public class ClosuresTransformationPostProcessor
 					resource,
 					true);			
 		
-			EcoreUtil.delete(memberClosure);
+			oldClosures.add(memberClosure); //TODO
+		}
+		
+		for(Closure closure : oldClosures){
+			EcoreUtil.delete(closure);
 		}
 
 	}
@@ -547,14 +624,14 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 	
 	private void convertParameterClosureCall(
 			JavaResource resource, 
-			Map<Closure,IdentifierReference> parameterClosures){
+			Map<IdentifierReference,Closure> memberClosures){
+		
+		List<Closure> oldClosures = new ArrayList<Closure>();
 		
 		// convert them into method calls
-		for (Closure parameterClosure : parameterClosures.keySet()){
+		for (IdentifierReference identifierReference : memberClosures.keySet()){
 			
-			IdentifierReference identifierReference = 
-				parameterClosures.get(parameterClosure);
-			
+			Closure parameterClosure = memberClosures.get(identifierReference);
 			
 			// get super class method of parameter closure
 			EObject object = parameterClosure.eContainer();
@@ -611,7 +688,9 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 				continue;
 			
 			// set statements from parameter closure assignment into parameter closure
-			parameterClosure.getStatements().addAll(parameterClosureAssignment.getStatements());
+			for(Statement statement : parameterClosureAssignment.getStatements()){
+				parameterClosure.getStatements().add(EcoreUtil.copy(statement));
+			}
 			
 			// set parameters from parameter closure assignment into parameter closure
 			for(Parameter parameter : parameterClosureAssignment.getParameters()){
@@ -642,10 +721,12 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 			}
 
 			// delete parameter closure in parameters list of super class method
-			EcoreUtil.delete(parameterClosure);
+//			EcoreUtil.delete(parameterClosure); //TODO
 			
 			// set arguments in method call of super class method
-			methodCall.getArguments().addAll(parameterClosure.getArguments());
+			for(Expression argument : parameterClosure.getArguments()){
+				methodCall.getArguments().add(EcoreUtil.copy(argument));
+			}
 			
 			// set in inner method call of invoke class method of anonymous class
 			// identifier references to the parameters of the super class method
@@ -657,9 +738,12 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 				innerMethodCall.getArguments().add(identifierReference2);
 			}
 			
-			// delete 
-			EcoreUtil.delete(parameterClosureAssignment);	
-
+			oldClosures.add(parameterClosure); //TODO
+			oldClosures.add(parameterClosureAssignment);
+		}
+		
+		for(Closure closure : oldClosures){
+			EcoreUtil.delete(closure);
 		}
 	}
 	

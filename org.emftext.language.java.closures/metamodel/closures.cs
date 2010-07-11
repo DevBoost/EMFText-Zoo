@@ -30,10 +30,12 @@ OPTIONS {
 }
 
 RULES {
- 	Closure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" 
+ 	Closure ::= ( annotationsAndModifiers )* 
+ 				"{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" 
  				(typeReference)? ":" name[]? ( "=" 
  				"{" (parameters ("," parameters)*)? "=>" statements+  "}" 
- 				( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? ";" )?  ;
+ 				( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? 
+ 				( "." next )? ";" )?  ;
 
 //	ClosureCall ::= closure[] "." methodName[] "(" (arguments ("," arguments)*)? ")" ";" ;
 
