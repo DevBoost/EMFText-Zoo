@@ -20,7 +20,9 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
@@ -51,7 +53,8 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 
 	public void process(EjavaResource resource) {
 		EjavaResource eJavaResource = (EjavaResource) resource;
-		if (!resource.getContents().isEmpty()) {
+		EList<EObject> contents = resource.getContents();
+		if (!contents.isEmpty()) {
 			try {
 				JavaClasspath cp = JavaClasspath.get(resource);
 				File emfEcoreJarLocation  = FileLocator.getBundleFile(Platform.getBundle("org.eclipse.emf.ecore"));
@@ -63,8 +66,8 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-
-			EPackageWrapper ePackageWrapper = (EPackageWrapper) resource.getContents().get(0);
+			
+			EPackageWrapper ePackageWrapper = (EPackageWrapper) contents.get(0);
 			EcoreWrapper.wrap(ePackageWrapper);
 			validate(ePackageWrapper, eJavaResource);
 		}
