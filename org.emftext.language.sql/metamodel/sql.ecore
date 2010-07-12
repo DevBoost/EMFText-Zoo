@@ -16,7 +16,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Double" eSuperTypes="#//sqlDataTypes/DataType"/>
   </eSubpackages>
   <eSubpackages name="select" nsURI="http://www.emftext.org/language/sql/select" nsPrefix="select">
-    <eClassifiers xsi:type="ecore:EClass" name="SelectExpression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="SelectExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" eType="#//select/SelectParameter"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
@@ -29,12 +29,15 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="having" eType="#//select/HavingExpression"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="union" eType="#//select/UnionExpression"
+          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="orderBy" eType="#//select/OrderByExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="limit" eType="#//select/LimitExpression"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SelectParameter"/>
-    <eClassifiers xsi:type="ecore:EClass" name="AbstractExpression" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ColumnExpression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="ColumnExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="columnExpressions" lowerBound="1"
           upperBound="-1" eType="#//select/SingleColumnExpression" containment="true"/>
     </eClassifiers>
@@ -44,22 +47,24 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//select/ColumnOperation"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="count" eType="#//select/StarExpression"
-          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//select/SelectParameter"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ColumnOperation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="StarExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="FromExpression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="FromExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="tables" lowerBound="1"
           upperBound="-1" eType="#//select/TableListExpression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TableExpression">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="selectExpression" eType="#//select/SelectExpression"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//select/Table"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Table">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TableListExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="table" lowerBound="1"
@@ -76,12 +81,11 @@
           eType="#//select/Expression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="JoinOperation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="WhereExpression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="WhereExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           eType="#//select/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OrderByExpression" abstract="true"
-        eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="OrderByExpression" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//select/OrderByParameter"
           containment="true"/>
     </eClassifiers>
@@ -98,15 +102,16 @@
           eType="#//select/SelectExpression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OrderByParameter"/>
-    <eClassifiers xsi:type="ecore:EClass" name="GroupByExpression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="GroupByExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           upperBound="-1" eType="#//select/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HavingExpression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="HavingExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           eType="#//select/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//select/AbstractExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleExpression" eSuperTypes="#//select/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="2"
           eType="#//select/ExpressionOperation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="2"
@@ -155,12 +160,31 @@
     <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanTerm" eSuperTypes="#//select/Term"/>
     <eClassifiers xsi:type="ecore:EClass" name="ColumnTerm" eSuperTypes="#//select/Term">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="column" lowerBound="1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//select/Table"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="column" lowerBound="1"
+          eType="#//select/Column" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Column">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedTerm" eSuperTypes="#//select/Term">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CountStartTerm" eSuperTypes="#//select/Term"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnionExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="selectExpression" lowerBound="1"
+          eType="#//select/SelectExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unionOperation" lowerBound="1"
+          eType="#//select/UnionOperation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnionOperation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="selectParameter" eType="#//select/SelectParameter"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LimitExpression">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
