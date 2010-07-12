@@ -35,6 +35,7 @@ TOKENS{
 	DEFINE STRING_LITERAL $'"'('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|'\\'('0'..'7')|~('\\'|'"'))*'"'$;
 	DEFINE WHITESPACE $(' '| '\t'| '\f')$;
 	DEFINE DECIMAL_INTEGER_LITERAL $('0'|'1'..'9''0'..'9'*)$;
+	DEFINE DECIMAL_FLOAT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+)? ('f'|'F') | ('.' ('0'..'9')+ (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+)?) ('f'|'F') | (('0'..'9')+ (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+) ('f'|'F') | ('0'..'9')+ ('f'|'F'))$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 			
@@ -80,7 +81,9 @@ TOKENS{
 		"INTERSECT" COLOR #7F0055, BOLD;
 		"LIMIT" COLOR #7F0055, BOLD;
 		"OFFSET" COLOR #7F0055, BOLD;
-		"COUNT(*)" COLOR #7F0055, BOLD;
+		"DECIMAL_INTEGER_LITERAL" COLOR #2A00FF;
+		"DECIMAL_FLOAT_LITERAL" COLOR #2A00FF;
+		"IDENTIFIER" COLOR #000000;
 	}
 
 RULES {
@@ -169,7 +172,7 @@ RULES {
 	
 	select.ValueOperation ::= ( "+" | "-" | "*" | "/" | "||" ) ;
 	
-	select.NamedTerm ::= ( value[] | value[STRING_LITERAL] | value[DECIMAL_INTEGER_LITERAL] |  value['\'','\'']) ;
+	select.SimpleTerm ::= ( value[STRING_LITERAL] | value[DECIMAL_FLOAT_LITERAL] | value[DECIMAL_INTEGER_LITERAL] |  value['\'','\'']) ;
 	
 	select.BooleanTerm ::= ("TRUE" | "FALSE" | "NULL")  ;
 	
