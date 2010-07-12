@@ -44,13 +44,13 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//select/ColumnOperation"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="count" eType="#//select/CountExpression"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="count" eType="#//select/StarExpression"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//select/SelectParameter"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ColumnOperation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CountExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StarExpression"/>
     <eClassifiers xsi:type="ecore:EClass" name="FromExpression" eSuperTypes="#//select/AbstractExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="tables" lowerBound="1"
           upperBound="-1" eType="#//select/TableListExpression" containment="true"/>
@@ -115,37 +115,24 @@
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionOperation"/>
     <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="SimpleCondition" eSuperTypes="#//select/Condition">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
-          eType="#//select/Value" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="1"
+          upperBound="-1" eType="#//select/Value" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OperationCondition" eSuperTypes="#//select/Condition">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="2"
-          upperBound="2" eType="#//select/Value" containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="OperationCondition" eSuperTypes="#//select/SimpleCondition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
           eType="#//select/ConditionOperation" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="IsNullCondition" eSuperTypes="#//select/Condition">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
-          eType="#//select/Value" containment="true"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IsNullCondition" eSuperTypes="#//select/SimpleCondition"/>
     <eClassifiers xsi:type="ecore:EClass" name="ExistsCondition" eSuperTypes="#//select/Condition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="selectExpression" lowerBound="1"
           eType="#//select/SelectExpression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="BetweenCondition" eSuperTypes="#//select/Condition">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="3"
-          upperBound="3" eType="#//select/Value" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="InCondition" eSuperTypes="#//select/Condition">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="3"
-          upperBound="-1" eType="#//select/Value" containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BetweenCondition" eSuperTypes="#//select/SimpleCondition"/>
+    <eClassifiers xsi:type="ecore:EClass" name="InCondition" eSuperTypes="#//select/SimpleCondition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="selectExpression" eType="#//select/SelectExpression"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LikeCondition" eSuperTypes="#//select/Condition">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="2"
-          upperBound="2" eType="#//select/Value" containment="true"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LikeCondition" eSuperTypes="#//select/SimpleCondition"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionOperation"/>
     <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ValueOperation"/>
@@ -159,8 +146,19 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
           eType="#//select/Condition" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionValue" eSuperTypes="#//select/Value">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+          eType="#//select/Value" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanTerm" eSuperTypes="#//select/Term"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ColumnTerm" eSuperTypes="#//select/Term">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="column" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedTerm" eSuperTypes="#//select/Term">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>

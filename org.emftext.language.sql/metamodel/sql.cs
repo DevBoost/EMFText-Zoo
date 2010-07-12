@@ -82,7 +82,7 @@ RULES {
 									( "WHERE" where )?
 									( "GROUP" "BY" groupBy )?
 									( "HAVING" having )?
-									( "ORDER" "BY" orderBy )? ; 
+									( "ORDER" "BY" orderBy )? ";" ; 
 	
 	select.SelectParameter ::= ("ALL" | "DISTINCT" ) ;
 	
@@ -90,7 +90,7 @@ RULES {
 	
 	select.SingleColumnExpression ::= ( column | count | operation "(" parameter? column ")" ) (("AS")? alias[] )? ;
 	
-	select.CountExpression ::= "COUNT(*)" ;
+	select.StarExpression ::=( "COUNT(*)" | "*") ;
 	
 	select.ColumnOperation ::= ("COUNT" | "MIN" | "MAX" | "SUM" | "AVG" | "SUM" | "EVERY" ) ;
 	
@@ -122,11 +122,9 @@ RULES {
 	
 	select.ExpressionOperation ::= ( "NOT" | "AND" | "OR" ) ;
 	
-	select.SimpleCondition ::= value ;
-	
 	select.OperationCondition ::= values operation values ;
 	
-	select.IsNullCondition ::= value "IS" ("NOT")? "NULL" ;
+	select.IsNullCondition ::= values "IS" ("NOT")? "NULL" ;
 	
 	select.ExistsCondition ::= "EXISTS" "(" selectExpression ")" ;
 	
@@ -136,17 +134,23 @@ RULES {
 	
 	select.LikeCondition ::= values ("NOT")? "LIKE" values ;
 	
+	select.SimpleCondition ::= values ;
+	
 	select.ConditionOperation ::=  ("=" | "<" | "<=" | ">" | ">=" | "<>" | "!=" ) ;
 	
-	select.SimpleValue ::= operations? terms (operations terms)? ;
+	select.SimpleValue ::= ( operations? terms) ;
 	
 	select.ConditionValue ::= "(" condition ")" ;
 	
+	select.FunctionValue ::= functionName[TEXT] "(" parameters ("," parameters ) ")" ;
+	
 	select.ValueOperation ::= ( "+" | "-" | "*" | "/" | "||" ) ;
 	
-	select.NamedTerm ::= ( value[TEXT] | value[INTEGER] | value[FLOAT] |  value['"','"']  ) ;
+	select.NamedTerm ::= ( value[TEXT] | value[INTEGER] | value[FLOAT] |  value['"','"']  |  value['\'','\'']) ;
 	
 	select.BooleanTerm ::= ("TRUE" | "FALSE" | "NULL")  ;
+	
+	select.ColumnTerm ::= (table[TEXT] #0 "." #0 )? column[TEXT] ;
 	
 	 
 	
