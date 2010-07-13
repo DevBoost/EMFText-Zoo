@@ -12,10 +12,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.rolecore.Import;
 import org.emftext.language.rolecore.RCPackage;
 
-public class ImportRcPackageReferenceResolver
-		implements
-		org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.emftext.language.rolecore.Import, org.emftext.language.rolecore.RCPackage> {
-
+public class ImportImportedPackageReferenceResolver implements org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.emftext.language.rolecore.Import, org.emftext.language.rolecore.RCPackage> {
+	
 	private org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.emftext.language.rolecore.Import, org.emftext.language.rolecore.RCPackage> delegate = new org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.emftext.language.rolecore.Import, org.emftext.language.rolecore.RCPackage>();
 
 	public void resolve(

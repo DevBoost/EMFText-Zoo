@@ -15,8 +15,8 @@ package org.emftext.language.rolecore.resource.rolecore.analysis;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
-import org.emftext.language.rolecore.CoreClass;
 import org.emftext.language.rolecore.Import;
+import org.emftext.language.rolecore.NaturalType;
 import org.emftext.language.rolecore.RCPackage;
 
 public class ETypedElementETypeReferenceResolver
@@ -50,7 +50,7 @@ public class ETypedElementETypeReferenceResolver
 			String type = identifier.substring(arrowPos+2, identifier.length());
 			for (Import importPackage : rcPackage.getImports()){
 				if (importPackage.getPrefix().equals(prefix)){
-					for (CoreClass coreClass : importPackage.getRcPackage().getCoreClasses()) {
+					for (NaturalType coreClass : importPackage.getImportedPackage().getNaturals()) {
 						if (coreClass.getName().equals(type)){
 							result.addMapping(coreClass.getName(), coreClass);
 							return;

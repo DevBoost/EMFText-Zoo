@@ -11,17 +11,17 @@
 //   Software Technology Group - TU Dresden, Germany 
 //      - initial API and implementation
 // ******************************************************************************/
-
+@SuppressWarnings(featureWithoutSyntax)
 SYNTAXDEF rolecore
 FOR <http://www.emftext.org/language/rolecore>
 START RCPackage
 
-OPTIONS {	
+OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
-	//reloadGeneratorModel = "true";
-	generateCodeFromGeneratorModel = "true";
 	overrideBuilder = "false";
-	additionalDependencies = "org.emftext.language.rolecore.ecore_compiler";
+	//additionalDependencies = "org.emftext.language.rolecore.ecore_compiler";
+	usePredefinedTokens = "false";
+	defaultTokenName = "IDENTIFIER";
 }
 
 TOKENS {
@@ -39,16 +39,36 @@ TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	
 	DEFINE REFTYPE $'type:'(('A'..'Z'|'a'..'z'|'0'..'9'|'_')+'->')?('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'_')+$;
-	
+
+	DEFINE INTEGER $('0'..'9')+|'*'$;
+	DEFINE IDENTIFIER $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')*('.'('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')+)*$;
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
 }
 
 TOKENSTYLES {
-	"RCPackage" COLOR #00A000, BOLD;
-	"CoreClass" COLOR #600000, BOLD;
-	"Role" COLOR #00A000, BOLD;
-	"is" COLOR #00A000, BOLD;
-	"played" COLOR #00A000, BOLD;
-	"by" COLOR #00A000, BOLD;
+	// keywords
+	"RCPackage" COLOR #00b4dd, BOLD;
+	"Natural" COLOR #00b4dd, BOLD;
+	"Role" COLOR #00b4dd, BOLD;
+	"is" COLOR #00b4dd, BOLD;
+	"played" COLOR #00b4dd, BOLD;
+	"by" COLOR #00b4dd, BOLD;
+
+	// boolean modifiers
+	"T_ABSTRACT" COLOR #00b4dd, BOLD;
+	"T_DERIVED" COLOR #00b4dd, BOLD;
+	"T_VOLATILE" COLOR #00b4dd, BOLD;
+	"T_UNIQUE" COLOR #00b4dd, BOLD;
+	"T_ORDERED" COLOR #00b4dd, BOLD;
+	"T_UNSETTABLE" COLOR #00b4dd, BOLD;
+	"T_CHANGEABLE" COLOR #00b4dd, BOLD;
+	"T_TRANSIENT" COLOR #00b4dd, BOLD;
+	"T_ID" COLOR #00b4dd, BOLD;
+	"T_CONTAINMENT" COLOR #00b4dd, BOLD;
+	"T_RESOLVEPROXIES" COLOR #00b4dd, BOLD;
+
+	"QUOTED_34_34" COLOR #9d9d9d;
 	"COMMENT" COLOR #008000;
 }
 
@@ -58,20 +78,20 @@ RULES {
 		(#1 nsPrefix[])? (#1 nsURI['"', '"'])? !0
 		("Imports" "{" !0 (imports)+ !0	"}")? #1
 		"{"
-			coreClasses* 
+			naturals* 
 			roles*
 		"}";
 	
-	Import ::= "prefix" ":" prefix[] #1 rcPackage['<','>'] ( #1 rcPackageLocationHint['<','>'])?;
+	Import ::= "prefix" ":" prefix[] #1 importedPackage['<','>'] ( #1 rcPackageLocationHint['<','>'])?;
 	
 	@Foldable
-	Role      ::= 
-		"Role" name[] "is" "played" "by" playedBy[] ( "(" lowerBound[] ".." upperBound[] ")" )?
+	RoleType      ::= 
+		"Role" name[] "is" "played" "by" playedBy[] ( "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")" )?
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 	
 	@Foldable	
-	CoreClass ::= 
-		"CoreClass" name[] (#1 "extends" #1 (rcPackage[] ".")? super[])? #1
+	NaturalType ::= 
+		"Natural" name[] (#1 "extends" #1 eSuperTypes[] )? #1
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 
 	EAttribute ::= 
@@ -85,14 +105,14 @@ RULES {
 			transient[T_TRANSIENT] | 
 			iD[T_ID] 
 		#1)* 
-		"attribute" #1 eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
+		"attribute" #1 eType[] #1 name[] ( #1 "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")" )? ";";
 	
 	EParameter ::= 
 		//(eAnnotations)* 
 		(
 			ordered[T_ORDERED] |
 			unique[T_UNIQUE]
-		#1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
+		#1)* eType[] #1 name[] ( #1 "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")" )? ;
 	
 	EReference ::= 
 		(
@@ -107,15 +127,15 @@ RULES {
 			resolveProxies[T_RESOLVEPROXIES]
 		)* 
 		"reference" #1 eType[REFTYPE] #1 name[] 
-		( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])? ";";
+		( #1 "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")" )?  (#1 "opposite" #1 eOpposite[])? ";";
 	
 	EOperation ::=
 		(
 			ordered[T_ORDERED] |
 			unique[T_UNIQUE]
-		#1 )* 
+		#1 )*  
 		"operation" #1 ("void" | eType[]) 
-		( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 
+		( #1 "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")" )? #1 
 		//("<" eTypeParameters ("," eTypeParameters)* ">")? 
 		name[] #1 
 		"(" (eParameters ("," #1 eParameters)* )? ")"
