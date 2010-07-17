@@ -22,27 +22,36 @@
     <nestedGenPackages prefix="Select" basePackage="org.emftext.language.sql" disposableProviderFactory="true"
         ecorePackage="sql.ecore#//select">
       <genClasses ecoreClass="sql.ecore#//select/SelectExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/parameters"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/parameter"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/columns"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/from"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/where"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/groupBy"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/having"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/union"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/set"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/orderBy"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SelectExpression/limit"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/SelectParameter"/>
+      <genClasses ecoreClass="sql.ecore#//select/SelectParameterAll"/>
+      <genClasses ecoreClass="sql.ecore#//select/SelectParameterDistinct"/>
       <genClasses ecoreClass="sql.ecore#//select/ColumnExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/ColumnExpression/columnExpressions"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/SingleColumnExpression">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sql.ecore#//select/SingleColumnExpression/alias"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SingleColumnExpression/column"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SingleColumnExpression/expression"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SingleColumnExpression/operation"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SingleColumnExpression/parameter"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/ColumnOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationCount"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationMin"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationMax"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationSum"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationAvg"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationEvery"/>
+      <genClasses ecoreClass="sql.ecore#//select/ColumnOperationSome"/>
       <genClasses ecoreClass="sql.ecore#//select/FromExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/FromExpression/tables"/>
       </genClasses>
@@ -64,6 +73,10 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/JoinTableExpression/expression"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/JoinOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/JoinOperationInner"/>
+      <genClasses ecoreClass="sql.ecore#//select/JoinOperationLeft"/>
+      <genClasses ecoreClass="sql.ecore#//select/JoinOperationRight"/>
+      <genClasses ecoreClass="sql.ecore#//select/JoinOperationOuter"/>
       <genClasses ecoreClass="sql.ecore#//select/WhereExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/WhereExpression/expression"/>
       </genClasses>
@@ -71,7 +84,8 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/OrderByExpression/parameter"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/OrderByColumnExpression">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sql.ecore#//select/OrderByColumnExpression/column"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/OrderByColumnExpression/columnReference"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/OrderByAliasExpression">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sql.ecore#//select/OrderByAliasExpression/alias"/>
@@ -80,6 +94,8 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/OrderBySelectExpression/selectExpression"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/OrderByParameter"/>
+      <genClasses ecoreClass="sql.ecore#//select/OrderByParameterAsc"/>
+      <genClasses ecoreClass="sql.ecore#//select/OrderByParameterDesc"/>
       <genClasses ecoreClass="sql.ecore#//select/GroupByExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/GroupByExpression/expression"/>
       </genClasses>
@@ -90,8 +106,12 @@
       <genClasses ecoreClass="sql.ecore#//select/SimpleExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SimpleExpression/operations"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SimpleExpression/conditions"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SimpleExpression/notOperation"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/ExpressionOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/ExpressionOperationNot"/>
+      <genClasses ecoreClass="sql.ecore#//select/ExpressionOperationAnd"/>
+      <genClasses ecoreClass="sql.ecore#//select/ExpressionOperationOr"/>
       <genClasses image="false" ecoreClass="sql.ecore#//select/Condition"/>
       <genClasses ecoreClass="sql.ecore#//select/SimpleCondition">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SimpleCondition/values"/>
@@ -99,21 +119,46 @@
       <genClasses ecoreClass="sql.ecore#//select/OperationCondition">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/OperationCondition/operation"/>
       </genClasses>
-      <genClasses ecoreClass="sql.ecore#//select/IsNullCondition"/>
+      <genClasses ecoreClass="sql.ecore#//select/IsNullCondition">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/IsNullCondition/operationNot"/>
+      </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/ExistsCondition">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/ExistsCondition/selectExpression"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/BetweenCondition"/>
       <genClasses ecoreClass="sql.ecore#//select/InCondition">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/InCondition/selectExpression"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/InCondition/operationNot"/>
       </genClasses>
-      <genClasses ecoreClass="sql.ecore#//select/LikeCondition"/>
+      <genClasses ecoreClass="sql.ecore#//select/LikeCondition">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/LikeCondition/operationNot"/>
+      </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/ConditionOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationEqual"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationLesser"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationLessEqual"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationGreater"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationGreatEqual"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationUnEqual"/>
+      <genClasses ecoreClass="sql.ecore#//select/ConditionOperationUnEqual2"/>
       <genClasses image="false" ecoreClass="sql.ecore#//select/Value"/>
+      <genClasses image="false" ecoreClass="sql.ecore#//select/ValueFrontOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueFrontOperationPlus"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueFrontOperationMinus"/>
       <genClasses ecoreClass="sql.ecore#//select/ValueOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueOperationPlus"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueOperationMinus"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueOperationMultiply"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueOperationDivide"/>
+      <genClasses ecoreClass="sql.ecore#//select/ValueOperationParallel"/>
       <genClasses ecoreClass="sql.ecore#//select/SimpleValue">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SimpleValue/terms"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SimpleValue/operations"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/SimpleValue/frontOperation"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/ConditionValue">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/ConditionValue/condition"/>
@@ -124,9 +169,15 @@
       </genClasses>
       <genClasses image="false" ecoreClass="sql.ecore#//select/Term"/>
       <genClasses ecoreClass="sql.ecore#//select/BooleanTerm"/>
+      <genClasses ecoreClass="sql.ecore#//select/BooleanTermTrue"/>
+      <genClasses ecoreClass="sql.ecore#//select/BooleanTermFalse"/>
+      <genClasses ecoreClass="sql.ecore#//select/NullTerm"/>
       <genClasses ecoreClass="sql.ecore#//select/ColumnTerm">
-        <genFeatures createChild="false" ecoreFeature="ecore:EReference sql.ecore#//select/ColumnTerm/table"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/ColumnTerm/tableReference"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EReference sql.ecore#//select/ColumnTerm/column"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference sql.ecore#//select/ColumnTerm/columnReference"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/Column">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sql.ecore#//select/Column/name"/>
@@ -134,13 +185,28 @@
       <genClasses ecoreClass="sql.ecore#//select/SimpleTerm">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sql.ecore#//select/SimpleTerm/value"/>
       </genClasses>
-      <genClasses ecoreClass="sql.ecore#//select/CountStartTerm"/>
-      <genClasses ecoreClass="sql.ecore#//select/UnionExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/UnionExpression/selectExpression"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/UnionExpression/unionOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/SimpleTermString"/>
+      <genClasses ecoreClass="sql.ecore#//select/SimpleTermFloat"/>
+      <genClasses ecoreClass="sql.ecore#//select/SimpleTermInteger"/>
+      <genClasses ecoreClass="sql.ecore#//select/SimpleTermChar"/>
+      <genClasses ecoreClass="sql.ecore#//select/CountStarTerm"/>
+      <genClasses ecoreClass="sql.ecore#//select/StarTerm"/>
+      <genClasses ecoreClass="sql.ecore#//select/SetExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SetExpression/selectExpression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SetExpression/setOperation"/>
       </genClasses>
-      <genClasses ecoreClass="sql.ecore#//select/UnionOperation">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/UnionOperation/selectParameter"/>
+      <genClasses image="false" ecoreClass="sql.ecore#//select/SetOperation"/>
+      <genClasses ecoreClass="sql.ecore#//select/SetOperationUnion">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SetOperationUnion/selectParameter"/>
+      </genClasses>
+      <genClasses ecoreClass="sql.ecore#//select/SetOperationMinus">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SetOperationMinus/selectParameter"/>
+      </genClasses>
+      <genClasses ecoreClass="sql.ecore#//select/SetOperationExcept">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SetOperationExcept/selectParameter"/>
+      </genClasses>
+      <genClasses ecoreClass="sql.ecore#//select/SetOperationIntersect">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sql.ecore#//select/SetOperationIntersect/selectParameter"/>
       </genClasses>
       <genClasses ecoreClass="sql.ecore#//select/LimitExpression">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sql.ecore#//select/LimitExpression/limit"/>

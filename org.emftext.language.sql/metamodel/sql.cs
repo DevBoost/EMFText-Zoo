@@ -57,11 +57,10 @@ TOKENS{
 		"AVG" COLOR #7F0055, BOLD;
 		"EVERY" COLOR #7F0055, BOLD;
 		"ON" COLOR #7F0055, BOLD;
-		"INNER" COLOR #7F0055, BOLD;
-		"LEFT" COLOR #7F0055, BOLD;
-		"RIGHT" COLOR #7F0055, BOLD;
-		"OUTER" COLOR #7F0055, BOLD;
-		"JOIN" COLOR #7F0055, BOLD;
+		"INNER JOIN" COLOR #7F0055, BOLD;
+		"LEFT OUTER JOIN" COLOR #7F0055, BOLD;
+		"RIGHT OUTER JOIN" COLOR #7F0055, BOLD;
+		"OUTER JOIN" COLOR #7F0055, BOLD;
 		"ASC" COLOR #7F0055, BOLD;
 		"DESC" COLOR #7F0055, BOLD;
 		"NOT" COLOR #7F0055, BOLD;
@@ -100,94 +99,161 @@ RULES {
 	
 	
 	select.SelectExpression ::= "SELECT" 
-									(parameters)?
+									(parameter)?
 									columns
 									"FROM" from
 									( "WHERE" where )?
 									( "GROUP" "BY" groupBy )?
 									( "HAVING" having )?
-									( union )?
+									( set )?
 									( "ORDER" "BY" orderBy )? 
 									( "LIMIT" limit )? ";" ; 
+	 
+	select.SelectParameterAll ::= "ALL";
 	
-	select.SelectParameter ::= ("ALL" | "DISTINCT" ) ;
+	select.SelectParameterDistinct ::= "DISTINCT";
 	
 	select.ColumnExpression ::= columnExpressions ("," columnExpressions)* ;
 	
-	select.SingleColumnExpression ::= ( column | operation "(" parameter? column ")" ) (("AS")? alias[IDENTIFIER] )? ;
+	select.SingleColumnExpression ::= ( expression | operation "(" parameter? expression ")" ) (("AS")? alias[IDENTIFIER] )? ;
 	
-	select.ColumnOperation ::= ("COUNT" | "MIN" | "MAX" | "SUM" | "AVG" | "SUM" | "EVERY" ) ;
+	select.ColumnOperationCount ::= "COUNT";
+	
+	select.ColumnOperationMin ::= "MIN";
+	
+	select.ColumnOperationMax ::= "MAX";
+	
+	select.ColumnOperationSum ::= "SUM";
+	
+	select.ColumnOperationAvg ::= "AVG";
+	
+	select.ColumnOperationEvery ::= "EVERY";
+	
+	select.ColumnOperationSome ::= "SOME";
 	
 	select.FromExpression ::= tables ("," tables)* ;
 	
 	select.TableListExpression ::= table joinTable? ;
 	
-	select.TableExpression ::= (selectExpression (("AS")? label[])? | table ) ;
+	select.TableExpression ::= (selectExpression ("AS" label[])? | table ) ;
 	
 	select.Table ::= name[];
 	
 	select.JoinTableExpression ::= join joinTable "ON" expression ;
 	
-	select.JoinOperation ::= ("INNER" | ("LEFT" | "RIGHT" ) "OUTER" ) "JOIN" ; 
+	select.JoinOperationInner ::= "INNER JOIN" ;
 	
+	select.JoinOperationLeft ::= "LEFT OUTER JOIN" ;
+	
+	select.JoinOperationRight ::= "RIGHT OUTER JOIN" ;
+	
+	select.JoinOperationOuter ::= "OUTER JOIN" ;
+
 	select.WhereExpression ::= expression ;
 	
-	select.OrderByColumnExpression ::= column[] parameter? ; 
+	select.OrderByColumnExpression ::= columnReference[] parameter? ; 
 	
 	select.OrderByAliasExpression ::= alias[] parameter? ; 
 	
 	select.OrderBySelectExpression ::= selectExpression parameter? ; 
+
+	select.OrderByParameterAsc ::= "ASC" ;
 	
-	select.OrderByParameter ::= ("ASC" | "DESC" ) ;
+	select.OrderByParameterDesc ::= "DESC" ;
 	
 	select.GroupByExpression ::= expression ("," expression )? ; 
 	
 	select.HavingExpression ::= expression ;
 	
-	select.SimpleExpression ::= (operations)? conditions (operations conditions )? ;
+	select.SimpleExpression ::= (notOperation)? conditions (operations conditions )? ;
 	
-	select.ExpressionOperation ::= ( "NOT" | "AND" | "OR" ) ;
+	select.ExpressionOperationNot ::= "NOT" ;
+	
+	select.ExpressionOperationAnd ::= "AND" ;
+	
+	select.ExpressionOperationOr ::= "OR" ;
 	
 	select.OperationCondition ::= values operation values ;
 	
-	select.IsNullCondition ::= values "IS" ("NOT")? "NULL" ;
+	select.IsNullCondition ::= values "IS" ( operationNot )? "NULL" ;
 	
 	select.ExistsCondition ::= "EXISTS" "(" selectExpression ")" ;
 	
 	select.BetweenCondition ::= values "BETWEEN" values "AND" values ;
 	
-	select.InCondition ::= values ("NOT")? "IN" ( values ("," values )| selectExpression ) ;
+	select.InCondition ::= values ( operationNot )? "IN" ( values ("," values )* | selectExpression ) ;
 	
-	select.LikeCondition ::= values ("NOT")? "LIKE" values ;
+	select.LikeCondition ::= values ( operationNot )? "LIKE" values ;
 	
 	select.SimpleCondition ::= values ;
 	
-	select.ConditionOperation ::=  ("=" | "<" | "<=" | ">" | ">=" | "<>" | "!=" ) ;
+	select.ConditionOperationEqual ::= "=" ;
 	
-	select.SimpleValue ::=  operations? ( terms (operations terms)? )? ;
+	select.ConditionOperationLesser ::= "<" ;
+	
+	select.ConditionOperationLessEqual ::= "<=" ;
+
+	select.ConditionOperationGreater ::= ">" ;
+	
+	select.ConditionOperationGreatEqual ::= ">=" ;
+	
+	select.ConditionOperationUnEqual ::= "<>" ;
+	
+	select.ConditionOperationUnEqual2 ::= "!=" ;
+	
+	select.SimpleValue ::=  frontOperation? terms (operations terms)? ;
+	
+	select.ValueFrontOperationPlus ::= "+" ;
+	
+	select.ValueFrontOperationMinus ::= "-" ;
 	
 	select.ConditionValue ::= "(" condition ")" ;
 	
 	select.FunctionValue ::= functionName[] "(" parameters ("," parameters ) ")" ;
 	
-	select.ValueOperation ::= ( "+" | "-" | "*" | "/" | "||" ) ;
+	select.ValueOperationPlus ::= "+" ;
 	
-	select.SimpleTerm ::= ( value[STRING_LITERAL] | value[DECIMAL_FLOAT_LITERAL] | value[DECIMAL_INTEGER_LITERAL] |  value['\'','\'']) ;
+	select.ValueOperationMinus ::= "-" ;
 	
-	select.BooleanTerm ::= ("TRUE" | "FALSE" | "NULL")  ;
+	select.ValueOperationMultiply ::= "*" ;
 	
-	select.ColumnTerm ::= (table[] #0 "." #0 )? column ;
+	select.ValueOperationDivide ::= "/" ;
+	
+	select.ValueOperationParallel ::= "||" ;   
+	 
+	select.SimpleTermString ::= value[STRING_LITERAL] ;
+	
+	select.SimpleTermFloat ::= value[DECIMAL_FLOAT_LITERAL];
+	
+	select.SimpleTermInteger ::= value[DECIMAL_INTEGER_LITERAL];
+	
+	select.SimpleTermChar ::= value['\'','\''] ;
+	
+	select.BooleanTermTrue ::= "TRUE" ;
+	
+	select.BooleanTermFalse ::= "FALSE" ;
+	
+	select.NullTerm ::= "NULL" ;
+	
+	select.ColumnTerm ::= (tableReference[] #0 "." #0 )? ( column | columnReference[] ) ; //TODO this is not the best solution
 	
 	select.Column ::= name[] ;
 	
-	select.CountStartTerm ::= "COUNT(*)" ;
+	select.CountStarTerm ::= "COUNT(*)" ;
 	
-	select.UnionExpression ::= unionOperation  selectExpression ;
+	select.StarTerm ::= "*" ; 
 	
-	select.UnionOperation ::= ( "UNION" | "MINUS"  | "EXCEPT"  | "INTERSECT" ) selectParameter? ;
+	select.SetExpression ::= setOperation  selectExpression ; 
+	
+	select.SetOperationUnion ::= "UNION" selectParameter? ;
+	
+	select.SetOperationMinus ::= "MINUS" selectParameter? ;
+	
+	select.SetOperationExcept ::= "EXCEPT" selectParameter? ;
+	
+	select.SetOperationIntersect ::= "INTERSECT" selectParameter? ;
 	
 	select.LimitExpression ::= limit[DECIMAL_INTEGER_LITERAL] ( "OFFSET" offset[DECIMAL_INTEGER_LITERAL] )? ;
-	
-	 									
+ 									
 	
 }
