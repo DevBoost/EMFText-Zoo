@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
@@ -34,6 +35,8 @@ import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.ImportsFactory;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.Method;
+import org.emftext.language.java.operators.OperatorsFactory;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.MethodCall;
@@ -47,6 +50,7 @@ import org.emftext.language.java.resource.java.analysis.ClassifierImportClassifi
 import org.emftext.language.java.resource.java.analysis.ClassifierReferenceTargetReferenceResolver;
 import org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
 import org.emftext.language.java.sqljava.Connection;
 import org.emftext.language.java.sqljava.Query;
 import org.emftext.language.java.sqljava.RegisterDriver;
@@ -65,75 +69,88 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesFactory;
-import org.emftext.language.sql.select.BetweenCondition;
-import org.emftext.language.sql.select.ColumnOperation;
-import org.emftext.language.sql.select.ColumnOperationAvg;
-import org.emftext.language.sql.select.ColumnOperationCount;
-import org.emftext.language.sql.select.ColumnOperationEvery;
-import org.emftext.language.sql.select.ColumnOperationMax;
-import org.emftext.language.sql.select.ColumnOperationMin;
-import org.emftext.language.sql.select.ColumnOperationSome;
-import org.emftext.language.sql.select.ColumnOperationSum;
-import org.emftext.language.sql.select.Condition;
-import org.emftext.language.sql.select.ConditionOperation;
-import org.emftext.language.sql.select.ConditionOperationEqual;
-import org.emftext.language.sql.select.ConditionOperationGreatEqual;
-import org.emftext.language.sql.select.ConditionOperationGreater;
-import org.emftext.language.sql.select.ConditionOperationLessEqual;
-import org.emftext.language.sql.select.ConditionOperationLesser;
-import org.emftext.language.sql.select.ConditionOperationUnEqual;
-import org.emftext.language.sql.select.ConditionOperationUnEqual2;
-import org.emftext.language.sql.select.ConditionValue;
-import org.emftext.language.sql.select.ExistsCondition;
-import org.emftext.language.sql.select.Expression;
-import org.emftext.language.sql.select.ExpressionOperation;
-import org.emftext.language.sql.select.ExpressionOperationAnd;
-import org.emftext.language.sql.select.ExpressionOperationNot;
-import org.emftext.language.sql.select.ExpressionOperationOr;
-import org.emftext.language.sql.select.FunctionValue;
-import org.emftext.language.sql.select.InCondition;
-import org.emftext.language.sql.select.IsNullCondition;
-import org.emftext.language.sql.select.JoinOperation;
-import org.emftext.language.sql.select.JoinOperationInner;
-import org.emftext.language.sql.select.JoinOperationLeft;
-import org.emftext.language.sql.select.JoinOperationOuter;
-import org.emftext.language.sql.select.JoinOperationRight;
-import org.emftext.language.sql.select.JoinTableExpression;
-import org.emftext.language.sql.select.LikeCondition;
-import org.emftext.language.sql.select.LimitExpression;
-import org.emftext.language.sql.select.OperationCondition;
-import org.emftext.language.sql.select.OrderByAliasExpression;
-import org.emftext.language.sql.select.OrderByColumnExpression;
-import org.emftext.language.sql.select.OrderByParameter;
-import org.emftext.language.sql.select.OrderByParameterAsc;
-import org.emftext.language.sql.select.OrderByParameterDesc;
-import org.emftext.language.sql.select.OrderBySelectExpression;
+import org.emftext.language.java.variables.VariablesPackage;
 import org.emftext.language.sql.select.SelectExpression;
-import org.emftext.language.sql.select.SelectParameter;
-import org.emftext.language.sql.select.SelectParameterAll;
-import org.emftext.language.sql.select.SelectParameterDistinct;
-import org.emftext.language.sql.select.SetExpression;
-import org.emftext.language.sql.select.SetOperation;
-import org.emftext.language.sql.select.SetOperationExcept;
-import org.emftext.language.sql.select.SetOperationIntersect;
-import org.emftext.language.sql.select.SetOperationMinus;
-import org.emftext.language.sql.select.SetOperationUnion;
-import org.emftext.language.sql.select.SimpleCondition;
-import org.emftext.language.sql.select.SimpleExpression;
-import org.emftext.language.sql.select.SimpleValue;
-import org.emftext.language.sql.select.SingleColumnExpression;
-import org.emftext.language.sql.select.TableExpression;
-import org.emftext.language.sql.select.TableListExpression;
-import org.emftext.language.sql.select.Value;
-import org.emftext.language.sql.select.ValueOperation;
-import org.emftext.language.sql.select.ValueOperationDivide;
-import org.emftext.language.sql.select.ValueOperationMinus;
-import org.emftext.language.sql.select.ValueOperationMultiply;
-import org.emftext.language.sql.select.ValueOperationParallel;
-import org.emftext.language.sql.select.ValueOperationPlus;
+import org.emftext.language.sql.select.column.ColumnOperation;
+import org.emftext.language.sql.select.column.ColumnOperationAvg;
+import org.emftext.language.sql.select.column.ColumnOperationCount;
+import org.emftext.language.sql.select.column.ColumnOperationEvery;
+import org.emftext.language.sql.select.column.ColumnOperationMax;
+import org.emftext.language.sql.select.column.ColumnOperationMin;
+import org.emftext.language.sql.select.column.ColumnOperationSome;
+import org.emftext.language.sql.select.column.ColumnOperationSum;
+import org.emftext.language.sql.select.column.SingleColumnExpression;
+import org.emftext.language.sql.select.condition.BetweenCondition;
+import org.emftext.language.sql.select.condition.Condition;
+import org.emftext.language.sql.select.condition.ConditionOperation;
+import org.emftext.language.sql.select.condition.ConditionOperationEqual;
+import org.emftext.language.sql.select.condition.ConditionOperationGreatEqual;
+import org.emftext.language.sql.select.condition.ConditionOperationGreater;
+import org.emftext.language.sql.select.condition.ConditionOperationLessEqual;
+import org.emftext.language.sql.select.condition.ConditionOperationLesser;
+import org.emftext.language.sql.select.condition.ConditionOperationUnEqual;
+import org.emftext.language.sql.select.condition.ConditionOperationUnEqual2;
+import org.emftext.language.sql.select.condition.ExistsCondition;
+import org.emftext.language.sql.select.condition.InCondition;
+import org.emftext.language.sql.select.condition.IsNullCondition;
+import org.emftext.language.sql.select.condition.LikeCondition;
+import org.emftext.language.sql.select.condition.OperationCondition;
+import org.emftext.language.sql.select.condition.SimpleCondition;
+import org.emftext.language.sql.select.expression.Expression;
+import org.emftext.language.sql.select.expression.ExpressionOperation;
+import org.emftext.language.sql.select.expression.ExpressionOperationAnd;
+import org.emftext.language.sql.select.expression.ExpressionOperationNot;
+import org.emftext.language.sql.select.expression.ExpressionOperationOr;
+import org.emftext.language.sql.select.expression.SimpleExpression;
+import org.emftext.language.sql.select.from.JoinOperation;
+import org.emftext.language.sql.select.from.JoinOperationInner;
+import org.emftext.language.sql.select.from.JoinOperationLeft;
+import org.emftext.language.sql.select.from.JoinOperationOuter;
+import org.emftext.language.sql.select.from.JoinOperationRight;
+import org.emftext.language.sql.select.from.JoinTableExpression;
+import org.emftext.language.sql.select.from.TableExpression;
+import org.emftext.language.sql.select.from.TableListExpression;
+import org.emftext.language.sql.select.limit.LimitExpression;
+import org.emftext.language.sql.select.orderBy.OrderByAliasExpression;
+import org.emftext.language.sql.select.orderBy.OrderByColumnExpression;
+import org.emftext.language.sql.select.orderBy.OrderByParameter;
+import org.emftext.language.sql.select.orderBy.OrderByParameterAsc;
+import org.emftext.language.sql.select.orderBy.OrderByParameterDesc;
+import org.emftext.language.sql.select.orderBy.OrderBySelectExpression;
+import org.emftext.language.sql.select.parameter.SelectParameter;
+import org.emftext.language.sql.select.parameter.SelectParameterAll;
+import org.emftext.language.sql.select.parameter.SelectParameterDistinct;
+import org.emftext.language.sql.select.set.SetExpression;
+import org.emftext.language.sql.select.set.SetOperation;
+import org.emftext.language.sql.select.set.SetOperationExcept;
+import org.emftext.language.sql.select.set.SetOperationIntersect;
+import org.emftext.language.sql.select.set.SetOperationMinus;
+import org.emftext.language.sql.select.set.SetOperationUnion;
+import org.emftext.language.sql.select.term.BooleanTerm;
+import org.emftext.language.sql.select.term.BooleanTermFalse;
+import org.emftext.language.sql.select.term.BooleanTermTrue;
+import org.emftext.language.sql.select.term.ColumnTerm;
+import org.emftext.language.sql.select.term.CountStarTerm;
+import org.emftext.language.sql.select.term.NullTerm;
+import org.emftext.language.sql.select.term.SimpleTerm;
+import org.emftext.language.sql.select.term.SimpleTermChar;
+import org.emftext.language.sql.select.term.SimpleTermString;
+import org.emftext.language.sql.select.term.StarTerm;
+import org.emftext.language.sql.select.term.Term;
+import org.emftext.language.sql.select.value.ConditionValue;
+import org.emftext.language.sql.select.value.FunctionValue;
+import org.emftext.language.sql.select.value.SimpleValue;
+import org.emftext.language.sql.select.value.Value;
+import org.emftext.language.sql.select.value.ValueFrontOperationMinus;
+import org.emftext.language.sql.select.value.ValueFrontOperationPlus;
+import org.emftext.language.sql.select.value.ValueOperation;
+import org.emftext.language.sql.select.value.ValueOperationDivide;
+import org.emftext.language.sql.select.value.ValueOperationMultiply;
+import org.emftext.language.sql.select.value.ValueOperationParallel;
+
 
 /**
- * Post processor that performs 
+ * Post processor that performs
  * <i>cast repair</i>,
  * <i>expression simplification</i> and 
  * <i>java model completion</i>
@@ -142,10 +159,11 @@ import org.emftext.language.sql.select.ValueOperationPlus;
 public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, ISqljavaResourcePostProcessor, ISqljavaResourcePostProcessorProvider {
 	
 	LocalVariable connection = null;
+	SqljavaResource resource = null;
 	
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(ISqljavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+		map.put(ISqljavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this); 
 		return map;
 	}
 
@@ -167,14 +185,16 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 	
 	private void convert(SqljavaResource resource){
 		
+		this.resource = resource;
+		
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		JavaResource javaResource = (JavaResource)resource.getResourceSet().createResource(javaURI);
 		
 		//--
 		
-		convertRegisterDriver(resource);
-		convertConnection(resource);
-		convertQuery(resource);
+		convertRegisterDriver();
+		convertConnection();
+		convertQuery();
 		//--
 		
 		javaResource.getContents().addAll(resource.getContents());
@@ -255,7 +275,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			classifierImport.setClassifier(concreteClassifier);
 	}
 	
-	protected void convertRegisterDriver(SqljavaResource resource){
+	protected void convertRegisterDriver(){
 		
 		Collection<RegisterDriver> drivers = 
 			SqljavaEObjectUtil.getObjectsByType(resource.getAllContents(), SqljavaPackage.eINSTANCE.getRegisterDriver());
@@ -293,7 +313,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		}
 	}
 	
-	protected void convertConnection(SqljavaResource resource){
+	protected void convertConnection(){
 		
 		Collection<Connection> connections = 
 			SqljavaEObjectUtil.getObjectsByType(resource.getAllContents(), SqljavaPackage.eINSTANCE.getConnection());
@@ -344,8 +364,8 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		
 	}
 	
-	protected void convertQuery(SqljavaResource resource){
-		
+	protected void convertQuery(){
+		// TODO
 		Collection<Query> queries = 
 			SqljavaEObjectUtil.getObjectsByType(resource.getAllContents(), SqljavaPackage.eINSTANCE.getQuery());
 	
@@ -357,19 +377,28 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
 			identifierReference.setNext(methodCall);
 			
-			ClassMethod createStatement = (ClassMethod)getResolvedElement("createStatement", methodCall);
+			Method createStatement = (Method)getResolvedElement("createStatement", methodCall);
 			methodCall.setTarget(createStatement);
 			
 			MethodCall methodCall2 = ReferencesFactory.eINSTANCE.createMethodCall();
 			methodCall.setNext(methodCall2);
 			
-			ClassMethod executeQuery = (ClassMethod)getResolvedElement("executeQuery", methodCall);
-			methodCall2.setTarget(createStatement);
+			getResolvedImport(Arrays.asList("java","sql"), "Statement", resource);
+			EObject test = JavaClasspath.get(resource).getClassifier("executeQuery");
+			Method executeQuery = (Method)getResolvedElement("executeQuery", methodCall);
+			methodCall2.setTarget(executeQuery);
 			
 			AdditiveExpression additiveExpression = ExpressionsFactory.eINSTANCE.createAdditiveExpression();
 			methodCall2.getArguments().add(additiveExpression);
 			
 			List<Reference> references = convertSelectExpression(query.getSqlString());
+			additiveExpression.getChildren().addAll(references);
+			for(int i=0;i<references.size()-1;i++){
+				additiveExpression.getAdditiveOperators().add(
+						OperatorsFactory.eINSTANCE.createAddition());
+			}
+			
+			additiveExpression.getChildren().addAll(references);
 
 		}
 	}
@@ -388,9 +417,8 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		
 		List<Reference> references = new ArrayList<Reference>();
 		
-		StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
-		stringReference.setValue("SELECT");
-		references.add(stringReference);
+		
+		references.add(getNewStringReference("SELECT"));
 		
 		// parameter
 		if(selectExpression.getParameter() != null)
@@ -403,6 +431,8 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		}
 		references.remove(references.size()-1); // delete last ','
 		
+		references.add(getNewStringReference("FROM"));
+		
 		// from
 		for(TableListExpression tableListExpression : selectExpression.getFrom().getTables()){
 			references.addAll(convertTableListExpression(tableListExpression));
@@ -411,13 +441,15 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		references.remove(references.size()-1); // delete last ','
 		
 		// where
-		if(selectExpression.getWhere() != null)
+		if(selectExpression.getWhere() != null){
+			references.add(getNewStringReference("WHERE"));
 			references.addAll(convertExpression(selectExpression.getWhere().getExpression()));
-		
+		}
 		// group by
 		if(selectExpression.getGroupBy() != null){
+			references.add(getNewStringReference("GROUP BY"));
 			for(Expression expression : selectExpression.getGroupBy().getExpression()){
-				references.addAll(convertExpression(expression);
+				references.addAll(convertExpression(expression));
 				references.add(getNewStringReference(","));
 			}
 			references.remove(references.size()-1); // delete last ','
@@ -425,6 +457,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 
 		// having
 		if(selectExpression.getHaving() != null){
+			references.add(getNewStringReference("HAVING"));
 			references.addAll(convertExpression(selectExpression.getHaving().getExpression()));
 		}
 		
@@ -435,15 +468,18 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 
 		// order by
 		if(selectExpression.getOrderBy() != null){
+			references.add(getNewStringReference("ORDER BY"));
 			references.addAll(convertOrderByExpression(selectExpression.getOrderBy().getParameter()));
 		}
 		
 		// limit
 		if(selectExpression.getLimit() != null){
+			references.add(getNewStringReference("LINIT"));
 			references.addAll(convertLimitExpression(selectExpression.getLimit()));
 		}
 		
-		// TODO
+		references.add(getNewStringReference(";"));
+
 		return references;
 	}
 
@@ -537,6 +573,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		references.addAll(convertTableExpression(joinTableExpression.getJoinTable()));
 		references.add(getNewStringReference("ON"));
 		references.addAll(convertExpression(joinTableExpression.getExpression()));
+		return references;
 	}
 	
 	private Reference convertJoinOperation(JoinOperation joinOperation){
@@ -594,18 +631,19 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		if(orderByParameter instanceof OrderByColumnExpression){
 			references.add(getNewStringReference(
 					((OrderByColumnExpression)orderByParameter).getColumnReference().getName()));
-			references.add(convertOrderByParameter(orderByParameter.getParameter()));
+			references.add(convertOrderByParameter(((OrderByColumnExpression) orderByParameter).getParameter()));
 		}
 		if(orderByParameter instanceof OrderByAliasExpression){
 			references.add(getNewStringReference(
 					((OrderByAliasExpression)orderByParameter).getAlias()));
-			references.add(convertOrderByParameter(orderByParameter.getParameter()));
+			references.add(convertOrderByParameter(((OrderByAliasExpression) orderByParameter).getParameter()));
 		}
 		if(orderByParameter instanceof OrderBySelectExpression){
 			references.addAll(convertSelectExpression(
 					((OrderBySelectExpression)orderByParameter).getSelectExpression()));
-			references.add(convertOrderByParameter(orderByParameter.getParameter()));
+			references.add(convertOrderByParameter(((OrderBySelectExpression) orderByParameter).getParameter()));
 		}
+		return references;
 	}
 	
 	private Reference convertOrderByParameter(OrderByParameter orderByParameter){
@@ -635,7 +673,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		
 		List<Reference> references = new ArrayList<Reference>();
 		
-		if(expression instanceof SimpleExpression){
+		if(((SimpleExpression)expression).getNotOperation() != null){
 			references.add(convertExpressionOperation(((SimpleExpression)expression).getNotOperation()));
 		}
 		
@@ -647,6 +685,8 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		else{
 			references.addAll(convertCondition(((SimpleExpression)expression).getConditions().get(0)));
 		}
+		
+		return references;
 	}
 	
 	private Reference convertExpressionOperation(ExpressionOperation expressionOperation){
@@ -678,7 +718,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
 		}
 		if(condition instanceof IsNullCondition){
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.addAll(convertValue(((IsNullCondition)condition).getValues().get(0)));
 			references.add(getNewStringReference("IS"));
 			if(((IsNullCondition)condition).getOperationNot() != null)
 				references.add(convertExpressionOperation(((IsNullCondition)condition).getOperationNot()));
@@ -691,15 +731,15 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			references.add(getNewStringReference(")"));
 		}
 		if(condition instanceof BetweenCondition){
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(0)));
 			references.add(getNewStringReference("BETWEEN"));
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(2)));
+			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(1)));
+			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(2)));
 			references.add(getNewStringReference("AND"));
 		}
 		if(condition instanceof InCondition){
 			
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.addAll(convertValue(((InCondition)condition).getValues().get(0)));
 			if(((InCondition)condition).getOperationNot() != null)
 				references.add(convertExpressionOperation(((InCondition)condition).getOperationNot()));
 			references.add(getNewStringReference("IN"));
@@ -718,11 +758,11 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			}
 		}
 		if(condition instanceof LikeCondition){
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.addAll(convertValue(((LikeCondition)condition).getValues().get(0)));
 			if(((LikeCondition)condition).getOperationNot() != null)
 				references.add(convertExpressionOperation(((LikeCondition)condition).getOperationNot()));
 			references.add(getNewStringReference("LIKE"));
-			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
+			references.addAll(convertValue(((LikeCondition)condition).getValues().get(1)));
 		}
 		return references;
 		
@@ -780,15 +820,99 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			}
 			references.remove(references.size()-1); // delete last ','
 			references.add(getNewStringReference(")"));
-		}	
+		}
+		
+		return references;
 		
 	}
 	
+	private List<Reference> convertTerm(Term term){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(term instanceof BooleanTerm){
+			references.add(convertBooleanTerm((BooleanTerm)term));
+		}
+		if(term instanceof NullTerm){
+			references.add(getNewStringReference("NULL"));
+		}
+		if(term instanceof ColumnTerm){
+			references.addAll(convertColumnTerm((ColumnTerm)term));
+		}
+		if(term instanceof SimpleTerm){
+			references.add(convertSimpleTerm((SimpleTerm)term));
+		}
+		if(term instanceof CountStarTerm){
+			references.add(getNewStringReference("COUNT(*)"));
+		}
+		if(term instanceof StarTerm){
+			references.add(getNewStringReference("*"));
+		}
+		return references;
+	}
+	
+	private Reference convertBooleanTerm(BooleanTerm booleanTerm){
+		
+		if(booleanTerm instanceof BooleanTermTrue){
+			return getNewStringReference("TRUE");
+		}
+		if(booleanTerm instanceof BooleanTermFalse){
+			return getNewStringReference("FALSE");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertColumnTerm(ColumnTerm columnTerm){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(columnTerm.getTableReference() != null){
+			references.add(getNewStringReference(columnTerm.getTableReference().getName()));
+			references.add(getNewStringReference("."));
+		}
+		if(columnTerm.getColumn() != null){
+			//TODO
+
+			Collection<LocalVariable> localVariables =
+				JavaEObjectUtil.getObjectsByType(resource.getAllContents(), VariablesPackage.eINSTANCE.getLocalVariable());
+			boolean found = false;
+			for(LocalVariable localVariable : localVariables){
+				if(localVariable.getName().equals(columnTerm.getColumn().getName())){
+					found = true;
+					references.add(getNewIdentifierReference(localVariable));
+					break;
+				}
+					
+			}
+			if(!found)
+				references.add(getNewStringReference(columnTerm.getColumn().getName())); 
+		}
+		else{
+			references.add(getNewStringReference(columnTerm.getColumnReference().getName()));
+		}
+		
+		return references;
+	}
+	
+	private Reference convertSimpleTerm(SimpleTerm simpleTerm){
+		
+		if(simpleTerm instanceof SimpleTermString){
+			return getNewStringReference("\""+simpleTerm.getValue()+"\"");
+		}
+		if(simpleTerm instanceof SimpleTermChar){
+			return getNewStringReference("'"+simpleTerm.getValue()+"'");
+		}
+		else{
+			return getNewStringReference(simpleTerm.getValue());
+		}
+	}
+	
+	
 	private Reference convertValueOperation(ValueOperation valueOperation){
-		if(valueOperation instanceof ValueOperationPlus){
+		if(valueOperation instanceof ValueFrontOperationPlus){
 			return getNewStringReference("+");
 		}
-		if(valueOperation instanceof ValueOperationMinus){
+		if(valueOperation instanceof ValueFrontOperationMinus){
 			return getNewStringReference("-");
 		}
 		if(valueOperation instanceof ValueOperationMultiply){
@@ -919,6 +1043,13 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
 		stringReference.setValue(value);
 		return stringReference;
+	}
+	
+	private IdentifierReference getNewIdentifierReference(ReferenceableElement element){
+		
+		IdentifierReference identifierReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
+		identifierReference.setTarget(element);
+		return identifierReference;
 	}
 
 }
