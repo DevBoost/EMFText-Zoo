@@ -65,9 +65,72 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesFactory;
-import org.emftext.language.sql.select.ColumnExpression;
+import org.emftext.language.sql.select.BetweenCondition;
+import org.emftext.language.sql.select.ColumnOperation;
+import org.emftext.language.sql.select.ColumnOperationAvg;
+import org.emftext.language.sql.select.ColumnOperationCount;
+import org.emftext.language.sql.select.ColumnOperationEvery;
+import org.emftext.language.sql.select.ColumnOperationMax;
+import org.emftext.language.sql.select.ColumnOperationMin;
+import org.emftext.language.sql.select.ColumnOperationSome;
+import org.emftext.language.sql.select.ColumnOperationSum;
+import org.emftext.language.sql.select.Condition;
+import org.emftext.language.sql.select.ConditionOperation;
+import org.emftext.language.sql.select.ConditionOperationEqual;
+import org.emftext.language.sql.select.ConditionOperationGreatEqual;
+import org.emftext.language.sql.select.ConditionOperationGreater;
+import org.emftext.language.sql.select.ConditionOperationLessEqual;
+import org.emftext.language.sql.select.ConditionOperationLesser;
+import org.emftext.language.sql.select.ConditionOperationUnEqual;
+import org.emftext.language.sql.select.ConditionOperationUnEqual2;
+import org.emftext.language.sql.select.ConditionValue;
+import org.emftext.language.sql.select.ExistsCondition;
+import org.emftext.language.sql.select.Expression;
+import org.emftext.language.sql.select.ExpressionOperation;
+import org.emftext.language.sql.select.ExpressionOperationAnd;
+import org.emftext.language.sql.select.ExpressionOperationNot;
+import org.emftext.language.sql.select.ExpressionOperationOr;
+import org.emftext.language.sql.select.FunctionValue;
+import org.emftext.language.sql.select.InCondition;
+import org.emftext.language.sql.select.IsNullCondition;
+import org.emftext.language.sql.select.JoinOperation;
+import org.emftext.language.sql.select.JoinOperationInner;
+import org.emftext.language.sql.select.JoinOperationLeft;
+import org.emftext.language.sql.select.JoinOperationOuter;
+import org.emftext.language.sql.select.JoinOperationRight;
+import org.emftext.language.sql.select.JoinTableExpression;
+import org.emftext.language.sql.select.LikeCondition;
+import org.emftext.language.sql.select.LimitExpression;
+import org.emftext.language.sql.select.OperationCondition;
+import org.emftext.language.sql.select.OrderByAliasExpression;
+import org.emftext.language.sql.select.OrderByColumnExpression;
+import org.emftext.language.sql.select.OrderByParameter;
+import org.emftext.language.sql.select.OrderByParameterAsc;
+import org.emftext.language.sql.select.OrderByParameterDesc;
+import org.emftext.language.sql.select.OrderBySelectExpression;
 import org.emftext.language.sql.select.SelectExpression;
+import org.emftext.language.sql.select.SelectParameter;
+import org.emftext.language.sql.select.SelectParameterAll;
+import org.emftext.language.sql.select.SelectParameterDistinct;
+import org.emftext.language.sql.select.SetExpression;
+import org.emftext.language.sql.select.SetOperation;
+import org.emftext.language.sql.select.SetOperationExcept;
+import org.emftext.language.sql.select.SetOperationIntersect;
+import org.emftext.language.sql.select.SetOperationMinus;
+import org.emftext.language.sql.select.SetOperationUnion;
+import org.emftext.language.sql.select.SimpleCondition;
+import org.emftext.language.sql.select.SimpleExpression;
+import org.emftext.language.sql.select.SimpleValue;
 import org.emftext.language.sql.select.SingleColumnExpression;
+import org.emftext.language.sql.select.TableExpression;
+import org.emftext.language.sql.select.TableListExpression;
+import org.emftext.language.sql.select.Value;
+import org.emftext.language.sql.select.ValueOperation;
+import org.emftext.language.sql.select.ValueOperationDivide;
+import org.emftext.language.sql.select.ValueOperationMinus;
+import org.emftext.language.sql.select.ValueOperationMultiply;
+import org.emftext.language.sql.select.ValueOperationParallel;
+import org.emftext.language.sql.select.ValueOperationPlus;
 
 /**
  * Post processor that performs 
@@ -225,9 +288,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			
 			identifierReference.setNext(methodCall);
 			
-			StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
-			stringReference.setValue(driver.getDriver());
-			methodCall.getArguments().add(stringReference);
+			methodCall.getArguments().add(getNewStringReference(driver.getDriver()));
 			
 		}
 	}
@@ -278,9 +339,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			ClassMethod method = getClassMethod(driverManager, "getConnection");
 			methodCall.setTarget(method);
 			
-			StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
-			stringReference.setValue(connection.getConnectionString());
-			methodCall.getArguments().add(stringReference);
+			methodCall.getArguments().add(getNewStringReference(connection.getConnectionString()));
 		}
 		
 	}
@@ -310,28 +369,441 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			AdditiveExpression additiveExpression = ExpressionsFactory.eINSTANCE.createAdditiveExpression();
 			methodCall2.getArguments().add(additiveExpression);
 			
-			SelectExpression selectExpression = query.getSqlString();
-			
-			StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
-			stringReference.setValue("SELECT");
-			additiveExpression.getChildren().add(stringReference);
-			
-			selectExpression.getColumns().getColumnExpressions()
-			
-			selectExpression.getFrom().getTables()
-			
+			List<Reference> references = convertSelectExpression(query.getSqlString());
+
 		}
 	}
 	
-	private List<Reference> convertColumnExpression(ColumnExpression columnExpression){
+	private Reference convertSelectParameter(SelectParameter selectParameter){
+		if(selectParameter instanceof SelectParameterAll){
+			return getNewStringReference("ALL");
+		}
+		if(selectParameter instanceof SelectParameterDistinct){
+			return getNewStringReference("DISTINCT");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertSelectExpression(SelectExpression selectExpression){
 		
 		List<Reference> references = new ArrayList<Reference>();
-		for(SingleColumnExpression singeColumnExpression : 
-			columnExpression.getColumnExpressions()){
-			singeColumnExpression.s
+		
+		StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
+		stringReference.setValue("SELECT");
+		references.add(stringReference);
+		
+		// parameter
+		if(selectExpression.getParameter() != null)
+			references.add(convertSelectParameter(selectExpression.getParameter()));
+		
+		// columns
+		for(SingleColumnExpression singleColumnExpression : selectExpression.getColumns().getColumnExpressions()){
+			references.addAll(convertColumnExpression(singleColumnExpression));
+			references.add(getNewStringReference(","));
+		}
+		references.remove(references.size()-1); // delete last ','
+		
+		// from
+		for(TableListExpression tableListExpression : selectExpression.getFrom().getTables()){
+			references.addAll(convertTableListExpression(tableListExpression));
+			references.add(getNewStringReference(","));
+		}
+		references.remove(references.size()-1); // delete last ','
+		
+		// where
+		if(selectExpression.getWhere() != null)
+			references.addAll(convertExpression(selectExpression.getWhere().getExpression()));
+		
+		// group by
+		if(selectExpression.getGroupBy() != null){
+			for(Expression expression : selectExpression.getGroupBy().getExpression()){
+				references.addAll(convertExpression(expression);
+				references.add(getNewStringReference(","));
+			}
+			references.remove(references.size()-1); // delete last ','
+		}
+
+		// having
+		if(selectExpression.getHaving() != null){
+			references.addAll(convertExpression(selectExpression.getHaving().getExpression()));
+		}
+		
+		// set
+		if(selectExpression.getSet() != null){
+			references.addAll(convertSetExpression(selectExpression.getSet()));
+		}
+
+		// order by
+		if(selectExpression.getOrderBy() != null){
+			references.addAll(convertOrderByExpression(selectExpression.getOrderBy().getParameter()));
+		}
+		
+		// limit
+		if(selectExpression.getLimit() != null){
+			references.addAll(convertLimitExpression(selectExpression.getLimit()));
+		}
+		
+		// TODO
+		return references;
+	}
+
+	private List<Reference> convertColumnExpression(SingleColumnExpression singleColumnExpression){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		if(singleColumnExpression.getOperation() != null){
+			references.add(convertColumnOperation(singleColumnExpression.getOperation()));
+			
+			references.add(getNewStringReference("("));
+			
+			if(singleColumnExpression.getParameter() != null)
+				references.add(convertSelectParameter(singleColumnExpression.getParameter()));
+				
+			if(singleColumnExpression.getExpression() != null)
+				references.addAll(convertExpression(singleColumnExpression.getExpression()));
+			
+			references.add(getNewStringReference(")"));
+		}
+		else{
+			if(singleColumnExpression.getExpression() != null)
+				references.addAll(convertExpression(singleColumnExpression.getExpression()));
+		}
+		
+		if(singleColumnExpression.getAlias() != null){
+			references.add(getNewStringReference("AS"));
+			references.add(getNewStringReference(singleColumnExpression.getAlias()));
+		}
+		
+		return references;
+	}
+	
+	private Reference convertColumnOperation(ColumnOperation columnOperation){
+		
+		if(columnOperation instanceof ColumnOperationCount){
+			return getNewStringReference("COUNT");
+		}
+		if(columnOperation instanceof ColumnOperationMin){
+			return getNewStringReference("MIN");
+		}
+		if(columnOperation instanceof ColumnOperationMax){
+			return getNewStringReference("MAX");
+		}
+		if(columnOperation instanceof ColumnOperationSum){
+			return getNewStringReference("SUM");
+		}
+		if(columnOperation instanceof ColumnOperationAvg){
+			return getNewStringReference("AVG");
+		}
+		if(columnOperation instanceof ColumnOperationEvery){
+			return getNewStringReference("EVERY");
+		}
+		if(columnOperation instanceof ColumnOperationSome){
+			return getNewStringReference("SOME");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertTableListExpression(TableListExpression tableListExpression){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		references.addAll(convertTableExpression(tableListExpression.getTable()));
+		
+		if(tableListExpression.getJoinTable() != null){
+			references.addAll(convertJoinTableExpression(tableListExpression.getJoinTable()));
+		}
+		
+		return references;
+	}
+	
+	private List<Reference> convertTableExpression(TableExpression tableExpression){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		if(tableExpression.getSelectExpression() != null){
+			references.addAll(convertSelectExpression(tableExpression.getSelectExpression()));
+			if(tableExpression.getLabel() != null){
+				references.add(getNewStringReference("AS"));
+				references.add(getNewStringReference(tableExpression.getLabel()));
+			}
+		}
+		else{
+			references.add(getNewStringReference(tableExpression.getTable().getName()));
+		}
+		return references;
+	}
+	
+	private List<Reference> convertJoinTableExpression(JoinTableExpression joinTableExpression){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		references.add(convertJoinOperation(joinTableExpression.getJoin()));
+		references.addAll(convertTableExpression(joinTableExpression.getJoinTable()));
+		references.add(getNewStringReference("ON"));
+		references.addAll(convertExpression(joinTableExpression.getExpression()));
+	}
+	
+	private Reference convertJoinOperation(JoinOperation joinOperation){
+		
+		if(joinOperation instanceof JoinOperationInner){
+			return getNewStringReference("INNER JOIN");
+		}
+		if(joinOperation instanceof JoinOperationLeft){
+			return getNewStringReference("LEFT OUTER JOIN");
+		}
+		if(joinOperation instanceof JoinOperationRight){
+			return getNewStringReference("RIGHT OUTER JOIN");
+		}
+		if(joinOperation instanceof JoinOperationOuter){
+			return getNewStringReference("OUTER JOIN");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertSetExpression(SetExpression setExpression){
+
+		List<Reference> references = new ArrayList<Reference>();
+		references.addAll(convertSetOperation(setExpression.getSetOperation()));
+		references.addAll(convertSelectExpression(setExpression.getSelectExpression()));
+		return references;
+	}
+	
+	private List<Reference> convertSetOperation(SetOperation setOperation){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(setOperation instanceof SetOperationUnion){
+			references.add(getNewStringReference("UNION"));
+			references.add(convertSelectParameter(((SetOperationUnion)setOperation).getSelectParameter()));
+		}
+		if(setOperation instanceof SetOperationMinus){
+			references.add(getNewStringReference("MINUS"));
+			references.add(convertSelectParameter(((SetOperationUnion)setOperation).getSelectParameter()));
+		}
+		if(setOperation instanceof SetOperationExcept){
+			references.add(getNewStringReference("EXCEPT"));
+			references.add(convertSelectParameter(((SetOperationUnion)setOperation).getSelectParameter()));
+		}
+		if(setOperation instanceof SetOperationIntersect){
+			references.add(getNewStringReference("INTERSECT"));
+			references.add(convertSelectParameter(((SetOperationUnion)setOperation).getSelectParameter()));
+		}
+		return null;
+	}
+	
+	private List<Reference> convertOrderByExpression(OrderByParameter orderByParameter){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(orderByParameter instanceof OrderByColumnExpression){
+			references.add(getNewStringReference(
+					((OrderByColumnExpression)orderByParameter).getColumnReference().getName()));
+			references.add(convertOrderByParameter(orderByParameter.getParameter()));
+		}
+		if(orderByParameter instanceof OrderByAliasExpression){
+			references.add(getNewStringReference(
+					((OrderByAliasExpression)orderByParameter).getAlias()));
+			references.add(convertOrderByParameter(orderByParameter.getParameter()));
+		}
+		if(orderByParameter instanceof OrderBySelectExpression){
+			references.addAll(convertSelectExpression(
+					((OrderBySelectExpression)orderByParameter).getSelectExpression()));
+			references.add(convertOrderByParameter(orderByParameter.getParameter()));
 		}
 	}
 	
+	private Reference convertOrderByParameter(OrderByParameter orderByParameter){
+		
+		if(orderByParameter instanceof OrderByParameterAsc){
+			return getNewStringReference("ASC");
+		}
+		if(orderByParameter instanceof OrderByParameterDesc){
+			return getNewStringReference("DESC");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertLimitExpression(LimitExpression limitExpression) {
+		
+		List<Reference> references = new ArrayList<Reference>();
+		references.add(getNewStringReference(limitExpression.getLimit()));
+		
+		if(limitExpression.getOffset() != null){
+			references.add(getNewStringReference("OFFSET"));
+			references.add(getNewStringReference(limitExpression.getOffset()));
+		}
+		return references;
+	}
+	
+	private List<Reference> convertExpression(Expression expression){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(expression instanceof SimpleExpression){
+			references.add(convertExpressionOperation(((SimpleExpression)expression).getNotOperation()));
+		}
+		
+		if(((SimpleExpression)expression).getOperations() != null){
+			references.addAll(convertCondition(((SimpleExpression)expression).getConditions().get(0)));
+			references.add(convertExpressionOperation(((SimpleExpression)expression).getOperations()));
+			references.addAll(convertCondition(((SimpleExpression)expression).getConditions().get(1)));
+		}
+		else{
+			references.addAll(convertCondition(((SimpleExpression)expression).getConditions().get(0)));
+		}
+	}
+	
+	private Reference convertExpressionOperation(ExpressionOperation expressionOperation){
+		
+		if(expressionOperation instanceof ExpressionOperationNot){
+			return getNewStringReference("NOT");
+		}
+		if(expressionOperation instanceof ExpressionOperationAnd){
+			return getNewStringReference("AND");
+		}
+		if(expressionOperation instanceof ExpressionOperationOr){
+			return getNewStringReference("OR");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertCondition(Condition condition){
+	
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(condition instanceof SimpleCondition){
+			for(Value value : ((SimpleCondition)condition).getValues()){
+				references.addAll(convertValue(value));
+			}
+		}
+		if(condition instanceof OperationCondition){
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.add(convertConditionOperation(((OperationCondition)condition).getOperation()));
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
+		}
+		if(condition instanceof IsNullCondition){
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.add(getNewStringReference("IS"));
+			if(((IsNullCondition)condition).getOperationNot() != null)
+				references.add(convertExpressionOperation(((IsNullCondition)condition).getOperationNot()));
+			references.add(getNewStringReference("NULL"));
+		}
+		if(condition instanceof ExistsCondition){
+			references.add(getNewStringReference("EXISTS"));
+			references.add(getNewStringReference("("));
+			references.addAll(convertSelectExpression((((ExistsCondition)condition).getSelectExpression())));
+			references.add(getNewStringReference(")"));
+		}
+		if(condition instanceof BetweenCondition){
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			references.add(getNewStringReference("BETWEEN"));
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(2)));
+			references.add(getNewStringReference("AND"));
+		}
+		if(condition instanceof InCondition){
+			
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			if(((InCondition)condition).getOperationNot() != null)
+				references.add(convertExpressionOperation(((InCondition)condition).getOperationNot()));
+			references.add(getNewStringReference("IN"));
+			
+			if(((InCondition)condition).getSelectExpression() != null){
+				references.addAll(convertSelectExpression(((InCondition)condition).getSelectExpression()));
+			}
+			else{
+				boolean wasFirst = false;
+				for(Value value : ((OperationCondition)condition).getValues()){
+					if(wasFirst){
+						references.addAll(convertValue(value));
+						wasFirst = true;
+					}
+				}
+			}
+		}
+		if(condition instanceof LikeCondition){
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
+			if(((LikeCondition)condition).getOperationNot() != null)
+				references.add(convertExpressionOperation(((LikeCondition)condition).getOperationNot()));
+			references.add(getNewStringReference("LIKE"));
+			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
+		}
+		return references;
+		
+	}
+	
+	private Reference convertConditionOperation(ConditionOperation conditionOperation){
+		if(conditionOperation instanceof ConditionOperationEqual){
+			return getNewStringReference("=");
+		}
+		if(conditionOperation instanceof ConditionOperationLesser){
+			return getNewStringReference("<");
+		}
+		if(conditionOperation instanceof ConditionOperationLessEqual){
+			return getNewStringReference("<=");
+		}
+		if(conditionOperation instanceof ConditionOperationGreater){
+			return getNewStringReference(">");
+		}
+		if(conditionOperation instanceof ConditionOperationGreatEqual){
+			return getNewStringReference(">=");
+		}
+		if(conditionOperation instanceof ConditionOperationUnEqual){
+			return getNewStringReference("<>");
+		}
+		if(conditionOperation instanceof ConditionOperationUnEqual2){
+			return getNewStringReference("!=");
+		}
+		return null;
+	}
+	
+	private List<Reference> convertValue(Value value){
+		
+		List<Reference> references = new ArrayList<Reference>();
+		
+		if(value instanceof SimpleValue){
+			if(((SimpleValue)value).getFrontOperation() != null)
+				references.add(convertValueOperation(((SimpleValue)value).getFrontOperation()));
+			references.addAll(convertTerm(((SimpleValue)value).getTerms().get(0)));
+			if(((SimpleValue)value).getOperations() != null){
+				references.add(convertValueOperation(((SimpleValue)value).getOperations()));
+				references.addAll(convertTerm(((SimpleValue)value).getTerms().get(1)));
+			}
+		}
+		if(value instanceof ConditionValue){
+			references.add(getNewStringReference("("));
+			references.addAll(convertCondition(((ConditionValue)value).getCondition()));
+			references.add(getNewStringReference(")"));
+		}
+		if(value instanceof FunctionValue){
+			references.add(getNewStringReference(((FunctionValue)value).getFunctionName()));
+			references.add(getNewStringReference("("));
+			for(Value parameter : ((FunctionValue)value).getParameters()){
+				references.addAll(convertValue(parameter));
+				references.add(getNewStringReference(","));
+			}
+			references.remove(references.size()-1); // delete last ','
+			references.add(getNewStringReference(")"));
+		}	
+		
+	}
+	
+	private Reference convertValueOperation(ValueOperation valueOperation){
+		if(valueOperation instanceof ValueOperationPlus){
+			return getNewStringReference("+");
+		}
+		if(valueOperation instanceof ValueOperationMinus){
+			return getNewStringReference("-");
+		}
+		if(valueOperation instanceof ValueOperationMultiply){
+			return getNewStringReference("*");
+		}
+		if(valueOperation instanceof ValueOperationDivide){
+			return getNewStringReference("/");
+		}
+		if(valueOperation instanceof ValueOperationParallel){
+			return getNewStringReference("||");
+		}
+		return null;
+	}
+	
+	// -----------
 	private class JavaReferenceMapping<ReferenceType> implements IJavaReferenceMapping<ReferenceType>{
 
 		URI uri;
@@ -440,6 +912,13 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			new ClassifierImportClassifierReferenceResolver();
 		
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	}
+	
+	private StringReference getNewStringReference(String value){
+		
+		StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
+		stringReference.setValue(value);
+		return stringReference;
 	}
 
 }
