@@ -1,4 +1,4 @@
-SYNTAXDEF sqljava 
+SYNTAXDEF sqljava  
 FOR <http://www.emftext.org/language/sqljava> 
 START java.Containers.CompilationUnit
 
@@ -11,7 +11,7 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	usePredefinedTokens = "false";
-	generateCodeFromGeneratorModel = "false";
+	generateCodeFromGeneratorModel = "false"; 
 	defaultTokenName = "IDENTIFIER";
 	tokenspace = "1"; 
 }
