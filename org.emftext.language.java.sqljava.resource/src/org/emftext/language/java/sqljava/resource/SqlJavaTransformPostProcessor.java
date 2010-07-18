@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
@@ -30,12 +29,16 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.AdditiveExpression;
+import org.emftext.language.java.expressions.AdditiveExpressionChild;
 import org.emftext.language.java.expressions.ExpressionsFactory;
+import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.ImportsFactory;
-import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.operators.Addition;
+import org.emftext.language.java.operators.AdditiveOperator;
 import org.emftext.language.java.operators.OperatorsFactory;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
@@ -52,8 +55,10 @@ import org.emftext.language.java.resource.java.analysis.ElementReferenceTargetRe
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
 import org.emftext.language.java.sqljava.Connection;
+import org.emftext.language.java.sqljava.EmbeddedExpression;
 import org.emftext.language.java.sqljava.Query;
 import org.emftext.language.java.sqljava.RegisterDriver;
+import org.emftext.language.java.sqljava.SqlExpression;
 import org.emftext.language.java.sqljava.SqljavaPackage;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaOptionProvider;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaOptions;
@@ -194,6 +199,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		
 		convertRegisterDriver();
 		convertConnection();
+		convertSqlExpression();
 		convertQuery();
 		//--
 		
@@ -246,11 +252,11 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		
 	} 
 	
-	private ClassMethod getClassMethod(ConcreteClassifier concreteClassifier, String methodName ){
+	private Method getMethod(ConcreteClassifier concreteClassifier, String methodName ){
 		for(Member member : concreteClassifier.getMembers()){
-			if(member instanceof ClassMethod){
+			if(member instanceof Method){
 				if(member.getName().equals(methodName))
-					return (ClassMethod)member;
+					return (Method)member;
 			}
 		}
 		return null;
@@ -261,6 +267,18 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 		CompilationUnit complationUnit = 
 			(CompilationUnit)SqljavaEObjectUtil.findRootContainer(resource.getContents().get(0));
 		
+		boolean found = false;
+		
+		for(Import _import : complationUnit.getImports()){
+			if(_import instanceof ClassifierImport){
+				if(((ClassifierImport)_import).getClassifier().getName().equals(className)){
+					found = true;
+					break;
+				}
+			}
+		}
+		if(found)
+			return;
 		
 		ClassifierImport classifierImport = ImportsFactory.eINSTANCE.createClassifierImport();
 		complationUnit.getImports().add(classifierImport);
@@ -303,7 +321,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			identifierReference.setTarget(concreteClassifier);
 			
 			MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
-			ClassMethod method = getClassMethod(concreteClassifier, "forName");
+			Method method = getMethod(concreteClassifier, "forName");
 			methodCall.setTarget(method);
 			
 			identifierReference.setNext(methodCall);
@@ -356,7 +374,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
 			identifierReference.setNext(methodCall);
 			
-			ClassMethod method = getClassMethod(driverManager, "getConnection");
+			Method method = getMethod(driverManager, "getConnection");
 			methodCall.setTarget(method);
 			
 			methodCall.getArguments().add(getNewStringReference(connection.getConnectionString()));
@@ -365,7 +383,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 	}
 	
 	protected void convertQuery(){
-		// TODO
+		
 		Collection<Query> queries = 
 			SqljavaEObjectUtil.getObjectsByType(resource.getAllContents(), SqljavaPackage.eINSTANCE.getQuery());
 	
@@ -376,7 +394,6 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			
 			MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
 			identifierReference.setNext(methodCall);
-			
 			Method createStatement = (Method)getResolvedElement("createStatement", methodCall);
 			methodCall.setTarget(createStatement);
 			
@@ -384,11 +401,14 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			methodCall.setNext(methodCall2);
 			
 			getResolvedImport(Arrays.asList("java","sql"), "Statement", resource);
-			EObject test = JavaClasspath.get(resource).getClassifier("executeQuery");
-			Method executeQuery = (Method)getResolvedElement("executeQuery", methodCall);
+			ReferenceableElement tempReferenceableElement = 
+				getResolvedElement("Statement", identifierReference);
+			Method executeQuery = getMethod(
+					(ConcreteClassifier)tempReferenceableElement, "executeQuery");
 			methodCall2.setTarget(executeQuery);
 			
-			AdditiveExpression additiveExpression = ExpressionsFactory.eINSTANCE.createAdditiveExpression();
+			AdditiveExpression additiveExpression = 
+				ExpressionsFactory.eINSTANCE.createAdditiveExpression();
 			methodCall2.getArguments().add(additiveExpression);
 			
 			List<Reference> references = convertSelectExpression(query.getSqlString());
@@ -400,6 +420,51 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			
 			additiveExpression.getChildren().addAll(references);
 
+		}
+	}
+	
+	private void convertSqlExpression(){
+		//TODO
+		Collection<SqlExpression> sqlExpressions = 
+			SqljavaEObjectUtil.getObjectsByType(resource.getAllContents(), SqljavaPackage.eINSTANCE.getSqlExpression());
+	
+		for(SqlExpression sqlExpression : sqlExpressions){
+			
+			LocalVariableStatement localVariableStatement =
+				StatementsFactory.eINSTANCE.createLocalVariableStatement();
+			EcoreUtil.replace(sqlExpression,localVariableStatement);
+			
+			LocalVariable localVariable =
+				VariablesFactory.eINSTANCE.createLocalVariable();
+			localVariable.setName(sqlExpression.getName());
+			localVariableStatement.setVariable(localVariable);
+			
+			NamespaceClassifierReference namespaceReference = TypesFactory.eINSTANCE.createNamespaceClassifierReference();
+			localVariable.setTypeReference(namespaceReference);
+			
+			ClassifierReference reference = TypesFactory.eINSTANCE.createClassifierReference();
+			namespaceReference.getClassifierReferences().add(reference);
+	
+			ConcreteClassifier string =
+				getResolvedClassifier("String", reference);
+			if(string == null)
+				continue;
+			reference.setTarget(string);
+			
+			AdditiveExpression additiveExpression = 
+				ExpressionsFactory.eINSTANCE.createAdditiveExpression();
+			localVariable.setInitialValue(additiveExpression);
+			
+			List<Reference> references = convertExpression(sqlExpression.getExpression());
+			additiveExpression.getChildren().addAll(references);
+			for(int i=0;i<references.size()-1;i++){
+				additiveExpression.getAdditiveOperators().add(
+						OperatorsFactory.eINSTANCE.createAddition());
+			}
+			
+			additiveExpression.getChildren().addAll(references);
+			
+			
 		}
 	}
 	
@@ -707,15 +772,11 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 	
 		List<Reference> references = new ArrayList<Reference>();
 		
-		if(condition instanceof SimpleCondition){
-			for(Value value : ((SimpleCondition)condition).getValues()){
-				references.addAll(convertValue(value));
-			}
-		}
 		if(condition instanceof OperationCondition){
 			references.addAll(convertValue(((OperationCondition)condition).getValues().get(0)));
 			references.add(convertConditionOperation(((OperationCondition)condition).getOperation()));
 			references.addAll(convertValue(((OperationCondition)condition).getValues().get(1)));
+			return references;
 		}
 		if(condition instanceof IsNullCondition){
 			references.addAll(convertValue(((IsNullCondition)condition).getValues().get(0)));
@@ -723,19 +784,22 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			if(((IsNullCondition)condition).getOperationNot() != null)
 				references.add(convertExpressionOperation(((IsNullCondition)condition).getOperationNot()));
 			references.add(getNewStringReference("NULL"));
+			return references;
 		}
 		if(condition instanceof ExistsCondition){
 			references.add(getNewStringReference("EXISTS"));
 			references.add(getNewStringReference("("));
 			references.addAll(convertSelectExpression((((ExistsCondition)condition).getSelectExpression())));
 			references.add(getNewStringReference(")"));
+			return references;
 		}
 		if(condition instanceof BetweenCondition){
 			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(0)));
 			references.add(getNewStringReference("BETWEEN"));
 			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(1)));
-			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(2)));
 			references.add(getNewStringReference("AND"));
+			references.addAll(convertValue(((BetweenCondition)condition).getValues().get(2)));
+			return references;
 		}
 		if(condition instanceof InCondition){
 			
@@ -756,6 +820,7 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 					}
 				}
 			}
+			return references;
 		}
 		if(condition instanceof LikeCondition){
 			references.addAll(convertValue(((LikeCondition)condition).getValues().get(0)));
@@ -763,7 +828,16 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 				references.add(convertExpressionOperation(((LikeCondition)condition).getOperationNot()));
 			references.add(getNewStringReference("LIKE"));
 			references.addAll(convertValue(((LikeCondition)condition).getValues().get(1)));
+			return references;
 		}
+		if(condition instanceof SimpleCondition){
+			for(Value value : ((SimpleCondition)condition).getValues()){
+				references.addAll(convertValue(value));
+			}
+		}
+//		if(condition instanceof SqlExpression){
+//			
+//		}
 		return references;
 		
 	}
@@ -821,9 +895,40 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			references.remove(references.size()-1); // delete last ','
 			references.add(getNewStringReference(")"));
 		}
+		if(value instanceof EmbeddedExpression){
+			org.emftext.language.java.expressions.Expression expression = 
+				((EmbeddedExpression)value).getExpression();
+			references.addAll(convertJavaExpression(expression));
+		}
 		
 		return references;
 		
+	}
+	
+	private List<Reference> convertJavaExpression(org.emftext.language.java.expressions.Expression expression){
+		
+		List<Reference> references = new ArrayList<Reference>(); 
+	
+		if(expression instanceof NestedExpression){
+			if(((NestedExpression)expression).getExpression() instanceof AdditiveExpression){
+				AdditiveExpression additiveExpression =
+					(AdditiveExpression)((NestedExpression)expression).getExpression();
+				int i=0;
+				for(AdditiveExpressionChild child : additiveExpression.getChildren()){
+					if(child instanceof StringReference)
+						references.add((StringReference)child);
+					if(i<additiveExpression.getAdditiveOperators().size()){
+						AdditiveOperator additiveOperator = 
+							additiveExpression.getAdditiveOperators().get(i);
+						if(additiveOperator instanceof Addition)
+							references.add(getNewStringReference("+"));
+					}
+					i++;
+				}
+			}
+		}
+		
+		return references;
 	}
 	
 	private List<Reference> convertTerm(Term term){

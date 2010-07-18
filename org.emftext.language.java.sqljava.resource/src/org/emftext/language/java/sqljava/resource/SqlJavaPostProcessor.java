@@ -22,6 +22,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.resource.java.mopp.JavaContextDependentURIFragmentFactory;
+import org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaOptionProvider;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaOptions;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaResourcePostProcessor;
@@ -53,8 +56,8 @@ public class SqlJavaPostProcessor implements ISqljavaOptionProvider, ISqljavaRes
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
-				((SqljavaResource)resource).registerContextDependentProxy(
-						new SqljavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new SqljavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
+				((JavaResource)resource).registerContextDependentProxy(
+						new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
@@ -62,7 +65,6 @@ public class SqlJavaPostProcessor implements ISqljavaOptionProvider, ISqljavaRes
 			}
 		}.repair(resource);
 		
-		JavaModelCompletion.complete(resource);
 		JavaModelCompletion.complete(resource);
 	}
 
