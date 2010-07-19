@@ -15,8 +15,7 @@ public class DocumentationDocumentedPackageReferenceResolver implements org.emft
 	}
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EPackage element, org.emftext.language.ecoredoc.Documentation container, org.eclipse.emf.ecore.EReference reference) {
-		// TODO implements
-		return delegate.deResolve(element, container, reference);
+		return element.eResource().getURI().toString();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

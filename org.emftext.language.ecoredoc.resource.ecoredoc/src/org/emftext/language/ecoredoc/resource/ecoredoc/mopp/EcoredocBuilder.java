@@ -37,6 +37,9 @@ public class EcoredocBuilder implements org.emftext.language.ecoredoc.resource.e
 		}
 		// save Ecore model
 		EPackage documentedPackage = documentation.getDocumentedPackage();
+		if (documentedPackage == null) {
+			return org.eclipse.core.runtime.Status.OK_STATUS;
+		}
 		try {
 			documentedPackage.eResource().save(null);
 			return org.eclipse.core.runtime.Status.OK_STATUS;

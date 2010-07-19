@@ -22,8 +22,8 @@ TOKENSTYLES {
 
 RULES {
 	Documentation ::= 
-		"documentation" "for" documentedPackage['<','>']
-		documentationElements*;
+		"documentation" "for" #1 documentedPackage['<','>']
+		(!0 !0 documentationElements)*;
 	
-	DocumentationElement ::= documentedElement[ID] ":" text['"','"'];
+	DocumentationElement ::= documentedElement[ID] #1 ":" #1 text['"','"','\\'];
 }

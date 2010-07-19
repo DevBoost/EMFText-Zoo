@@ -7,6 +7,7 @@
 package org.emftext.language.ecoredoc.resource.ecoredoc.analysis;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -16,9 +17,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.emftext.language.ecoredoc.DocumentationElement;
 import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocReferenceResolveResult;
+import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocReferenceResolver;
 import org.emftext.language.ecoredoc.resource.ecoredoc.util.EcoredocEObjectUtil;
 
-public class DocumentationElementDocumentedElementReferenceResolver implements org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocReferenceResolver<org.emftext.language.ecoredoc.DocumentationElement, org.eclipse.emf.ecore.EModelElement> {
+public class DocumentationElementDocumentedElementReferenceResolver implements IEcoredocReferenceResolver<DocumentationElement, EModelElement> {
 	
 	public void resolve(String identifier, DocumentationElement container, EReference reference, int position, boolean resolveFuzzy, final IEcoredocReferenceResolveResult<EModelElement> result) {
 		EPackage documentedPackage = container.getDocumentation().getDocumentedPackage();
@@ -30,11 +32,17 @@ public class DocumentationElementDocumentedElementReferenceResolver implements o
 			}
 			if (resolveFuzzy || identifier.equals(path)) {
 				result.addMapping(path, element);
+				if (!resolveFuzzy) {
+					return;
+				}
 			}
 		}
 	}
 	
 	private String getPath(EObject element) {
+		if (element == null) {
+			return null;
+		}
 		if (element instanceof EPackage) {
 			return null;
 		}
@@ -54,9 +62,8 @@ public class DocumentationElementDocumentedElementReferenceResolver implements o
 		return getPath(element);
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
+	public void setOptions(Map<?,?> options) {
 		// save options in a field or leave method empty if this resolver does not depend
 		// on any option
 	}
-	
 }
