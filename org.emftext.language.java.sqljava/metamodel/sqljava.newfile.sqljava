@@ -1,32 +1,32 @@
 package test;
 
-import java.sql.ResultSet;
+import java.sql.ResultSet; 
 
-class Test{
+class example{ 
 
 	public void testMethod(){
 
-		register driver "com.mysql.jdbc.Driver" ;
-		connection c = "jdbc:mysql://db.domain.com/db..";
+		register driver "com.mysql.jdbc.Driver" ;             
+		connection c = "jdbc:mysql://db.domain.com/db..";                 
 		import table person [ VARCHAR firstName ,
 			VARCHAR lastName, INTEGER age ] ;
 		
-		ResultSet rs = using c query {
-			SELECT last name FROM person WHERE
+		ResultSet rs = using c query { 
+			SELECT lastName FROM person WHERE   
 			firstName LIKE "derek"; };
 		String s = "derek" ;
 		int i = 4 ;
-		rs = using c query { SELECT firstName
+		rs = using c query { SELECT firstName 
 			FROM person WHERE firstName LIKE s; };
 		rs = using c query { SELECT firstName
 			FROM person WHERE age > i ;} ;
-		rs = using c query { SELECT firstName FROM person
+		rs = using c query { SELECT firstName FROM person 
 			WHERE firstName LIKE $(("der" + "ek")) ;};
 		
 		sqlExpr e1 = sqlExpr {person.firstName LIKE s};
 		sqlExpr e2 = sqlExpr {e1 AND lastName LIKE "bodin"};
 		
-		rs = using c query { SELECT firstName FROM person WHERE e2 ;};
-
+		rs = using c query { SELECT firstName FROM person WHERE e2 ;};  
+		
 	}
 }
