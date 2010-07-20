@@ -12,8 +12,8 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
-SYNTAXDEF closure
-FOR <http://emftext.org/language/closures>
+SYNTAXDEF closure 
+FOR <http://www.emftext.org/language/java/closures>
 START java.Containers.CompilationUnit, java.Containers.EmptyModel
  
 IMPORTS {

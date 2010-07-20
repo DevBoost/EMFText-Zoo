@@ -1,17 +1,21 @@
 package example.closure2;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 class Example{ 
 
 	public class One {
   
 	    public void test(String[] args) {
-	      // function with no arguments; return value is always 42
+	      // function with no arguments; return value is always 42  
 	      int answer = {=> int} : = { => 42; }.invoke();;
 	      System.out.println(answer);
 	    }
 	    
-	    /*static*/ { => int } : answer2 = { => 42; }; // Closures mit modifier für innere methode
+	    static { => int } : answer2 = { => 42; }; // Closures mit modifier für innere methode
 	    
   		 public void test2(String[] args) {
       		int i = answer2.invoke();  
@@ -28,7 +32,7 @@ class Example{
 	}
    
    	public class Three {
-		public void test (String [] args) {
+		public void test (String [] args) { 
 			int half = {int => int} : ={ 
 				    int x => 
 				    if (x % 2 != 0) {System.out.printf("%d is odd%n", x); x / 2;}   
@@ -56,6 +60,7 @@ class Example{
 	
 	public class Six {
 		public void test (String [] args) {
+			
 			{=> void} Runnable : = { => System.out.println("hi from Prague");}.run(); 
 		
 			{=> Runnable} := { => new Runnable() {
@@ -63,7 +68,8 @@ class Example{
 								        System.out.println("hi from Prague");
 								      }
 		   						  };
-		  					 }.invoke();//.run() -- Closure von Method Call Erben mit next() als reference auf run?
+		  					 }.invoke().run(); //-- Closure von Method Call Erben mit next() als reference auf run?
+		
 		}
 	}
 	
@@ -90,13 +96,13 @@ class Example{
   		}
   		
   		public void test(String[] args) {
-    		doTwice({ => void } : = { => System.out.println("deja vu"); };);
+    		doTwice({ => void } : = { => System.out.println("deja vu"); };); 
   		}
 	}
 	
 	public class Ten {
 	
-  		/*static*/ boolean makeCond() {
+  		boolean makeCond() {
 		    return {=>boolean} := { => Math.random() < 0.8; }.invoke();;
 		  }
   
@@ -108,6 +114,68 @@ class Example{
 		  }
   		
   	}
+  	
+  	public class Eleven{
+  	
+  	  void perform(int[] values, { int => void } : action) { 
+	    for (int n: values) {
+	      action.invoke(n);
+	    }
+	  }
+  
+	  public void test(String[] args) {
+	    int[] v = { 2, 3, 5, 7, 11 };
+	    perform(v, { int => void } := { int x => System.out.println(x); };);
+	  }
+	}
+
+	public class Twelfth{
+	
+		  <T> List<T> select(List<T> values, { T => boolean } : cond) {
+		    List<T> selected = new ArrayList<T>();
+		    for (T t: values) {
+		      cond.invoke(t);
+		      //if (true) { selected.add(t); }
+		    }
+		    
+		    
+		    
+		    return selected;
+		  }
+		  
+		  public void test(String[] args) {
+		    List<String> cities =
+		      Arrays.asList("London", "New York", "Prague", "San Francisco");
+		    List<String> shortCities = 
+		      select(cities, { String => boolean } :={ String s => s.length() <= 6; };);
+		    System.out.println(shortCities);
+		  }
+
+	}
+	
+	public class Thirdteen{
+		
+		 public void test(String[] args) {
+		    int x = 4;
+		    { => void } : printX = 
+		      { => System.out.println(x); };  // x is a free variable here
+		    x++;
+		    printX.invoke();  // will print 5
+  		}
+		
+	}
+	
+	public class Fourteen{
+		
+		public void test(String[] args) {
+			  int x = 100;
+			  { => int } Integer : nextX = { => ++x; };
+			  nextX.invoke();  // will print 101
+			  nextX.invoke();  // will print 102 
+			  
+		}
+		
+	}
 	
 }
 
