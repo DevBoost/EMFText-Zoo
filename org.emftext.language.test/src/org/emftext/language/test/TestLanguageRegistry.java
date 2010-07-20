@@ -55,6 +55,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.efactory.resource.efactory.mopp.EfactoryMetaInformation());
 		metaInformations.add(
+				new org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.featherweightjava.resource.fj.mopp.FjMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation());
