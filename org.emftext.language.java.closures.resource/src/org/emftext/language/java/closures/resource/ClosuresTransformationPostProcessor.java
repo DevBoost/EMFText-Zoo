@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
@@ -40,6 +37,7 @@ import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.members.MembersFactory;
+import org.emftext.language.java.members.Method;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.modifiers.Private;
@@ -87,16 +85,13 @@ public class ClosuresTransformationPostProcessor
 		});
 		
 		workerThread.start();
+		
 	}
 
 	private void convert(ClosureResource resource){
 		
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		JavaResource javaResource = (JavaResource)resource.getResourceSet().createResource(javaURI);
-		
-//		try {
-//			javaResource.load(null);
-//		} catch (IOException e) {}
 		
 		javaResource.getContents().clear();
 		
@@ -106,23 +101,7 @@ public class ClosuresTransformationPostProcessor
 		// do normal Java post processing
 		JavaPostProcessor jpp = new JavaPostProcessor();
 		jpp.processBasic(javaResource);
-		
-		for (Iterator<EObject> i = javaResource.getAllContents(); i.hasNext(); ) {
-			Notifier next = i.next();
-			if (next instanceof EObject) {
-				InternalEObject nextElement = (InternalEObject) next;
-				for (EObject crElement : nextElement.eCrossReferences()) {
-					if(crElement.eIsProxy()){
-						crElement = EcoreUtil.resolve(crElement, javaResource);
-						if (crElement.eIsProxy()) {
-							System.out.println("Can not find referenced element in classpath: "
-									+ ((InternalEObject) crElement).eProxyURI());
-						}
-					}
-				}	
-			}
-		}
-			
+	
 		// get all closures calls
 		Collection<IdentifierReference> identifierReferences = 
 			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ReferencesPackage.eINSTANCE.getIdentifierReference());
@@ -143,11 +122,20 @@ public class ClosuresTransformationPostProcessor
 				
 				if(identifierReference.getNext() instanceof MethodCall){
 					MethodCall next = (MethodCall) identifierReference.getNext();
+			
 					
-					if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+					if(closure.getValueType()!= null && 
+							!closure.getStatements().isEmpty() && 
+							closure.getMethodName() == null &&
+							closure.getArguments().isEmpty()){
+						
 						memberClosures.put(identifierReference,closure);
 					}
-					if(closure.getValueType()!= null && closure.getStatements().isEmpty() && closure.getArguments().isEmpty()){
+					if(closure.getValueType()!= null && 
+							closure.getStatements().isEmpty() &&
+							closure.getMethodName() == null &&
+							closure.getArguments().isEmpty()){
+						
 						parameterClosures.put(identifierReference,closure);
 					}
 					
@@ -169,23 +157,24 @@ public class ClosuresTransformationPostProcessor
 
 		
 		for(Closure closure : closures){
-			
-//	1.		if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null && !closure.getArguments().isEmpty()){
-//	2.		if(closure.eContainer() instanceof AssignmentExpression || 
-//				closure.eContainer() instanceof LocalVariable || 
-//				closure.eContainer() instanceof Return ||
-//				closure.eContainer() instanceof ClassMethod){
-			if(closure.eContainer() instanceof org.emftext.language.java.classifiers.Class)
-				continue;
-			
-			if(closure.getTypeReference() == null){	
-				methodClosures.add(closure);
+	
+			if(closure.getValueType() != null && 
+					!closure.getStatements().isEmpty() && 
+					closure.getMethodName() !=null &&  
+					closure.getArguments().isEmpty() &&
+					(closure.eContainer() instanceof MethodCall ||
+							closure.eContainer() instanceof NewConstructorCall)){
+				
+				argumentClosures.add(closure);
 			}
 			
-//	1.		if(closure.getValueType()!= null && !closure.getStatements().isEmpty() && closure.getMethodName()!=null &&  closure.getArguments().isEmpty()){
-//	2.		if(closure.eContainer() instanceof MethodCall){	
-			else{
-				argumentClosures.add(closure);
+			if(closure.getValueType() != null && 
+					!closure.getStatements().isEmpty() && 
+					closure.getMethodName() !=null &&
+					!(closure.eContainer() instanceof MethodCall ||
+							closure.eContainer() instanceof NewConstructorCall)){
+				
+				methodClosures.add(closure);
 			}
 		}
 		
@@ -377,7 +366,7 @@ public class ClosuresTransformationPostProcessor
 		// create a interface for anonymous class
 		Classifier _interface = null;
 		
-		if(closureName == null){
+		if(closure.getTypeReference() != null){
 			try {
 				closureName = closure.getTypeReference().getTarget().getContainingConcreteClassifier().getName();
 			} catch (Exception e) {}
@@ -489,9 +478,13 @@ public class ClosuresTransformationPostProcessor
 			newConstructorCall.setNext(methodCall);
 		}
 		
-		// call of new method in invoke method
+		// call of new inner method
 		if(closure.getNext() != null){
-			methodCall.setNext(EcoreUtil.copy(closure.getNext()));
+			if(isMethodCall)
+				methodCall.setNext(EcoreUtil.copy(closure.getNext()));
+			else if(_interface != null && classMethod != null){
+				newConstructorCall.setNext(EcoreUtil.copy(closure.getNext()));
+			}
 		}
 		
 		// set anonymous class 
@@ -499,24 +492,35 @@ public class ClosuresTransformationPostProcessor
 		
 		if(identifierReference == null){
 		
-			if(call.eContainer() instanceof LocalVariable || 
-					call.eContainer() instanceof MethodCall ||
-					call.eContainer() instanceof AssignmentExpression ||
-					call.eContainer() instanceof Return){
-				
-				// replace call with new constructor call
-				EcoreUtil.replace(call, newConstructorCall);
-			}
-			else{
+			if(call.eContainer() instanceof Method){
 				// expression statement is necessary 		
 				ExpressionStatement expressionStatement = StatementsFactory.eINSTANCE.createExpressionStatement();
 				expressionStatement.setExpression(newConstructorCall);
 				
 				// replace with new method call
 				EcoreUtil.replace(call, expressionStatement);
-				
-				
 			}
+			else{
+				// replace call with new constructor call
+				EcoreUtil.replace(call, newConstructorCall);
+			}
+			
+//			if(call.eContainer() instanceof LocalVariable || 
+//					call.eContainer() instanceof MethodCall ||
+//					call.eContainer() instanceof AssignmentExpression ||
+//					call.eContainer() instanceof Return){
+//				
+//				// replace call with new constructor call
+//				EcoreUtil.replace(call, newConstructorCall);
+//			}
+//			else{
+//				// expression statement is necessary 		
+//				ExpressionStatement expressionStatement = StatementsFactory.eINSTANCE.createExpressionStatement();
+//				expressionStatement.setExpression(newConstructorCall);
+//				
+//				// replace with new method call
+//				EcoreUtil.replace(call, expressionStatement);
+//			}
 		}
 		else{
 			if(identifierReference.eContainer() instanceof ExpressionStatement){
