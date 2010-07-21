@@ -25,7 +25,6 @@ OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "false" ;
-//	generateCodeFromGeneratorModel="true"; 
 
 }
 
@@ -37,9 +36,6 @@ RULES {
  				( "." methodName[] "(" (arguments ("," arguments)*)? ")" )? 
  				( "." next )? ";" )?  ;
 
-//	ClosureCall ::= closure[] "." methodName[] "(" (arguments ("," arguments)*)? ")" ";" ;
 
 }
 
-
-//{ => System.out.println("Hallo Welt"); }.invoke(); 
