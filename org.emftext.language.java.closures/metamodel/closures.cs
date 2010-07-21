@@ -25,12 +25,12 @@ OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "false" ;
-//	generateCodeFromGeneratorModel="true";
+//	generateCodeFromGeneratorModel="true"; 
 
 }
 
 RULES {
- 	Closure ::= ( annotationsAndModifiers )* 
+ 	Closure ::= ( annotationsAndModifiers )*  
  				"{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" 
  				(typeReference)? ":" name[]? ( "=" 
  				"{" (parameters ("," parameters)*)? "=>" statements+  "}" 

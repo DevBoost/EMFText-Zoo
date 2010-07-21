@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -55,6 +56,7 @@ import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Return;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.statements.StatementsFactory;
+import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
@@ -107,13 +109,18 @@ public class ClosuresTransformationPostProcessor
 			ClosureEObjectUtil.getObjectsByType(javaResource.getAllContents(), ReferencesPackage.eINSTANCE.getIdentifierReference());
 
 		
-		Map<IdentifierReference,Closure> memberClosures = new HashMap<IdentifierReference,Closure>();
-		Map<IdentifierReference,Closure> parameterClosures = new HashMap<IdentifierReference,Closure>();
+		Map<IdentifierReference,Closure> memberClosures = 
+			new HashMap<IdentifierReference,Closure>();
+		Map<IdentifierReference,Closure> parameterClosures = 
+			new HashMap<IdentifierReference,Closure>();
 		List<Closure> methodClosures = new ArrayList<Closure>();
 		List<Closure> argumentClosures = new ArrayList<Closure>();
 		
 		// at first it's important to replace all identifier references on closures
 		// and remove this closures from resource
+		
+		Map<IdentifierReference,MethodCall> temporaries = 
+			new HashMap<IdentifierReference,MethodCall>();
 		
 		for(IdentifierReference identifierReference : identifierReferences){
 			
@@ -123,12 +130,14 @@ public class ClosuresTransformationPostProcessor
 				if(identifierReference.getNext() instanceof MethodCall){
 					MethodCall next = (MethodCall) identifierReference.getNext();
 			
+					boolean found = false;
 					
 					if(closure.getValueType()!= null && 
 							!closure.getStatements().isEmpty() && 
 							closure.getMethodName() == null &&
 							closure.getArguments().isEmpty()){
 						
+						found = true;
 						memberClosures.put(identifierReference,closure);
 					}
 					if(closure.getValueType()!= null && 
@@ -136,14 +145,35 @@ public class ClosuresTransformationPostProcessor
 							closure.getMethodName() == null &&
 							closure.getArguments().isEmpty()){
 						
+						found = true;
 						parameterClosures.put(identifierReference,closure);
 					}
 					
-					closure.getArguments().addAll(next.getArguments());
-					closure.setMethodName(PostProcessorHelper.get(closure.getName()));
+					// first only save the necessary method calls
+					// do not set already the attributes into the closure
+					// because an error would occur when a closure is called twice or more
+					if(found)
+						temporaries.put(identifierReference, next);
+
 				}
 			}
 		}
+		
+		// after the search set the necessary parameters from the method calls
+		// into the closures, now there is no problem after that
+		for(IdentifierReference identifierReference : temporaries.keySet()){
+			
+			MethodCall methodCall = temporaries.get(identifierReference);
+			
+			Closure closure = memberClosures.get(identifierReference);
+			if(closure == null)
+				closure = parameterClosures.get(identifierReference);
+			
+			closure.getArguments().addAll(methodCall.getArguments());
+			closure.setMethodName(PostProcessorHelper.get(closure.getName()));
+		}
+		
+		
 		
 		// convert member closures
 		convertMemberClosureCalls(javaResource, memberClosures);
@@ -437,23 +467,34 @@ public class ClosuresTransformationPostProcessor
 			classMethod.getStatements().addAll(closure.getStatements());
 		}
 		else{
-			for(int i=0;i<closure.getStatements().size();i++){
-				if(i<closure.getStatements().size()-1)
-					classMethod.getStatements().add(EcoreUtil.copy(closure.getStatements().get(i)));
-				else{
-					Return _return = StatementsFactory.eINSTANCE.createReturn();
-					if(closure.getStatements().get(i) instanceof ExpressionStatement){
-						ExpressionStatement expression = 
-							(ExpressionStatement)closure.getStatements().get(i);
-						_return.setReturnValue(EcoreUtil.copy(expression.getExpression())); 
-					}
-					else
-					if(closure.getStatements().get(i) instanceof Statement){
+
+			Collection<Return> returns =
+				ClosureEObjectUtil.getObjectsByType(
+						EcoreUtil.getAllContents(closure.getStatements()), StatementsPackage.eINSTANCE.getReturn());
+			
+			// perhaps one or more returns already set in the statements of the closure ?
+			if(returns.isEmpty()){
+				for(int i=0;i<closure.getStatements().size();i++){
+					if(i<closure.getStatements().size()-1)
 						classMethod.getStatements().add(EcoreUtil.copy(closure.getStatements().get(i)));
+					else{
+						Return _return = StatementsFactory.eINSTANCE.createReturn();
+						if(closure.getStatements().get(i) instanceof ExpressionStatement){
+							ExpressionStatement expression = 
+								(ExpressionStatement)closure.getStatements().get(i);
+							_return.setReturnValue(EcoreUtil.copy(expression.getExpression())); 
+						}
+						else
+						if(closure.getStatements().get(i) instanceof Statement){
+							classMethod.getStatements().add(EcoreUtil.copy(closure.getStatements().get(i)));
+						}
+						
+						classMethod.getStatements().add(_return);
 					}
-					
-					classMethod.getStatements().add(_return);
 				}
+			}
+			else{
+				classMethod.getStatements().addAll(closure.getStatements());
 			}
 		}
 		
