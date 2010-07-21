@@ -11,6 +11,22 @@ transformation Java2Closure(inout java : CLOSURES);
 
 main() {
 	java.objects()[JAVA::members::ClassMethod]->map Members_ClassMethod();
+	java.objects()[JAVA::_references::MethodCall]->map References_MethodCall();
+}
+
+mapping inout JAVA::_references::MethodCall::References_MethodCall(){
+	
+	self.arguments->forEach(a){
+		if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
+			let closure : CLOSURES::Closure =
+				map Closures_Closure(a.oclAsType(JAVA::instantiations::NewConstructorCall)) in
+			if closure <> null then
+				self.arguments := self.arguments->append(closure)->
+				asOrderedSet()->
+				excluding(a)
+			endif
+		endif
+	}
 }
 
 mapping inout JAVA::members::ClassMethod::Members_ClassMethod(){
@@ -35,9 +51,6 @@ mapping inout JAVA::members::ClassMethod::Members_ClassMethod(){
 								}
 					endif
 		endif 
-						
-		
-		
 	}
 }
 
