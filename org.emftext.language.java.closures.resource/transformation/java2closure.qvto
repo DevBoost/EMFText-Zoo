@@ -10,9 +10,12 @@ modeltype JAVA uses "http://www.emftext.org/java";
 transformation Java2Closure(inout java : CLOSURES);
 
 main() {
-	java.objects()[JAVA::members::ClassMethod]->map Members_ClassMethod();
+	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
+	java.objects()[JAVA::instantiations::NewConstructorCall]->map Instantiations_NewConstructorCall();
 	java.objects()[JAVA::_references::MethodCall]->map References_MethodCall();
 }
+
+mapping inout JAVA::classifiers::Class::Classifiers_Class(){}
 
 mapping inout JAVA::_references::MethodCall::References_MethodCall(){
 	
@@ -29,29 +32,20 @@ mapping inout JAVA::_references::MethodCall::References_MethodCall(){
 	}
 }
 
-mapping inout JAVA::members::ClassMethod::Members_ClassMethod(){
+mapping inout JAVA::instantiations::NewConstructorCall::Instantiations_NewConstructorCall(){
 	
-	self.statements->forEach(s){
-		if s.oclIsTypeOf(JAVA::statements::ExpressionStatement) then
-			let ex : JAVA::statements::ExpressionStatement =
-				s.oclAsType(JAVA::statements::ExpressionStatement) in
-					if ex.expression.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-						let ncc : JAVA::instantiations::NewConstructorCall =
-							ex.expression.oclAsType(JAVA::instantiations::NewConstructorCall) in
-								ncc.arguments->forEach(a){
-									if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-										let closure : CLOSURES::Closure =
-											map Closures_Closure(a.oclAsType(JAVA::instantiations::NewConstructorCall)) in
-										if closure <> null then
-											ncc.arguments := ncc.arguments->append(closure)->
-											asOrderedSet()->
-											excluding(a)
-										endif
-									endif
-								}
-					endif
-		endif 
+	self.arguments->forEach(a){
+		if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
+			let closure : CLOSURES::Closure =
+				map Closures_Closure(a.oclAsType(JAVA::instantiations::NewConstructorCall)) in
+			if closure <> null then
+				self.arguments := self.arguments->append(closure)->
+				asOrderedSet()->
+				excluding(a)
+			endif
+		endif
 	}
+
 }
 
 mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
@@ -68,7 +62,7 @@ mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstr
 		var method : JAVA::members::ClassMethod := newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
 		annotationsAndModifiers := method.annotationsAndModifiers;
 		method.parameters->forEach(p){
-			parameterTypes := parameterTypes->append(p.typeReference.clone().oclAsType(JAVA::types::TypeReference))
+			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference))
 		};
 		valueType := method.typeReference;
 		typeReference := newConstructorCall.typeReference;
@@ -77,5 +71,34 @@ mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstr
 		statements := method.statements;
 		methodName := method.name;
 	}
-
-
+/*
+query copyTypeReference(typeReference : JAVA::types::TypeReference) : JAVA::types::TypeReference
+	{
+	var _return : JAVA::types::TypeReference;
+	var new_ncr : JAVA::types::NamespaceClassifierReference;
+	var new_c : JAVA::classifiers::Classifier;
+	var new_cr : JAVA::types::ClassifierReference;
+	
+	if typeReference.oclIsTypeOf(JAVA::types::PrimitiveType) then
+		_return := typeReference.clone().oclAsType(JAVA::types::TypeReference)
+	else
+		if typeReference.oclIsTypeOf(JAVA::types::NamespaceClassifierReference) then
+			new_ncr := typeReference.oclAsType(JAVA::types::NamespaceClassifierReference)
+		endif
+	endif;
+	if new_ncr <> null then
+		let ncr : JAVA::types::NamespaceClassifierReference =
+			typeReference.oclAsType(JAVA::types::NamespaceClassifierReference) in
+		if ncr.classifierReferences->at(1).oclIsTypeOf(JAVA::types::ClassifierReference) then
+			new_cr := ncr.classifierReferences->at(1).oclAsType(JAVA::types::ClassifierReference)
+		endif
+	endif;
+	if new_cr <> null then
+		let cr : JAVA::types::ClassifierReference =
+			ncr.classifierReferences->at(1).oclIsTypeOf(JAVA::types::ClassifierReference).oclAsType(JAVA::types::ClassifierReference) in
+		if ncr.classifierReferences->at(1).oclIsTypeOf(JAVA::types::ClassifierReference) then
+			new_cr := ncr.classifierReferences->at(1).oclAsType(JAVA::types::ClassifierReference)
+		endif
+	endif; 
+	return _return
+	}*/

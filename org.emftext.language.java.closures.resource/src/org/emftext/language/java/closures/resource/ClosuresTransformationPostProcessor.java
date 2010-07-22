@@ -92,6 +92,9 @@ public class ClosuresTransformationPostProcessor
 
 	private void convert(ClosureResource resource){
 		
+		if(resource.getURI().toString().contains("transformed"))
+			return;
+		
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		JavaResource javaResource = (JavaResource)resource.getResourceSet().createResource(javaURI);
 		
@@ -255,12 +258,12 @@ public class ClosuresTransformationPostProcessor
 			String interfaceName = firstToUpper(closureName);
 			
 			// new resource for interface
-			URI interfaceURI = resource.getURI().trimFileExtension().trimSegments(1);
-			interfaceURI = interfaceURI.appendSegment(interfaceName).appendFileExtension("java");
-			Resource interfaceResource = resource.getResourceSet().createResource(interfaceURI);
+			URI javaResourceURI = resource.getURI().trimFileExtension().trimSegments(1);
+			javaResourceURI = javaResourceURI.appendSegment(interfaceName).appendFileExtension("java");
+			Resource javaResource = resource.getResourceSet().createResource(javaResourceURI);
 			
 			try {
-				interfaceResource.load(null);
+				javaResource.load(null);
 			} catch (Exception e) {}
 			
 			// new interface
@@ -327,8 +330,8 @@ public class ClosuresTransformationPostProcessor
 			CompilationUnit compilationUnit = ContainersFactory.eINSTANCE.createCompilationUnit();
 			compilationUnit.setName(interfaceName);
 			compilationUnit.getClassifiers().add(_interface);
-			interfaceResource.getContents().clear();
-			interfaceResource.getContents().add(compilationUnit);
+			javaResource.getContents().clear();
+			javaResource.getContents().add(compilationUnit);
 			
 			// namespace
 			compilationUnit.getNamespaces().addAll(((CompilationUnit)resource.getContents().get(0)).getNamespaces());
@@ -336,10 +339,12 @@ public class ClosuresTransformationPostProcessor
 			compilationUnit.getImports().addAll(imports);
 			
 			// save
-			try {
-				interfaceResource.save(null);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(!javaResource.getContents().isEmpty()){
+				try {
+					javaResource.save(null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			return _interface;
