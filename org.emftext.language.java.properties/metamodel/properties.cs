@@ -24,6 +24,7 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
+	overrideBuilder = "false";
 }
 
 TOKENS {
@@ -35,5 +36,5 @@ TOKENSTYLES {
 }
 
 RULES {
-	Property ::= ( readonly[T_READONLY] )? "property" typeReference name[];
+	Property ::= ( readonly[T_READONLY] )? "property" typeReference name[] ";" ;
 }
