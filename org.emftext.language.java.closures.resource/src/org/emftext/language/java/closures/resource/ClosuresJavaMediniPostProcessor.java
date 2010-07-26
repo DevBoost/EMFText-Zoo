@@ -24,13 +24,15 @@ import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaResourcePostProcessor;
 import org.emftext.language.java.resource.java.IJavaResourcePostProcessorProvider;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.mapping.mediniqvt.test.MediniQVTStarter;
 import org.emftext.language.mapping.qvto.test.QVTOStarter;
 
-public class ClosuresJavaPostProcessor implements IJavaOptionProvider,
-		IJavaResourcePostProcessor, IJavaResourcePostProcessorProvider {
+public class ClosuresJavaMediniPostProcessor implements
+		IJavaOptionProvider, IJavaResourcePostProcessor,
+		IJavaResourcePostProcessorProvider {
 
 	private static Stack<Thread> threads = new Stack<Thread>();
-	private static int timeout = 300000; //TODO
+	private static int timeout = 3000000; //TODO
 	private static int maxActiveThreads = 1;
 	
 	@Override
@@ -137,14 +139,14 @@ public class ClosuresJavaPostProcessor implements IJavaOptionProvider,
 				.trimSegments(resource.getURI().segmentCount()-2)
 				.appendSegment("transformations")
 				.appendSegment("java2closure")
-				.appendFileExtension("qvto");
+				.appendFileExtension("qvt");
 		
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IWorkspaceRoot root = workspace.getRoot();
 		IPath rootPath = root.getLocation();
-		File file = rootPath.toFile();
+		File rootPathFile = rootPath.toFile();
 		String transformationFileURIString = 
-			file.toString().concat(transformationFileURI.toPlatformString(true));
+			rootPathFile.toString().concat(transformationFileURI.toPlatformString(true));
 //		transformationFileURIString =
 //			transformationFileURIString.replaceAll("\\\\", "/").concat("file:/");
 		
@@ -157,15 +159,19 @@ public class ClosuresJavaPostProcessor implements IJavaOptionProvider,
 
 			try {
 				xmiResource.save(null);
-			} catch (IOException e) {}
+			} catch (IOException e) {
+				System.out.println(e);
+			}
 
-			QVTOStarter starter = new QVTOStarter(
-					xmiSourceURI,
+			MediniQVTStarter starter = new MediniQVTStarter(
+					xmiSourceURI, 
 					xmiTargetURI,
-					transformationFileURI,
-					file.toString().concat(xmiSourceURI.toPlatformString(true)),
-					true,
-					"ClosureStatisticUtil",
+					rootPathFile.toString(),
+					transformationFileURIString, 
+					rootPathFile.toString().concat(xmiSourceURI.toPlatformString(true)), 
+					"copy", 
+					"CLOSURES", 
+					"ClosureMediniStatisticUtil", 
 					Arrays.asList("Closures_Closure"));
 			
 			if(starter.isHandledInterestingRules()){
@@ -174,17 +180,21 @@ public class ClosuresJavaPostProcessor implements IJavaOptionProvider,
 					(ClosureResource)resource.getResourceSet().createResource(closureResourceURI);
 			
 				XMIResource xmiResourceTransformed = 
-					(XMIResource)resource.getResourceSet().createResource(xmiSourceURI);
+					(XMIResource)resource.getResourceSet().createResource(xmiTargetURI);
 				
 				try {
 					xmiResourceTransformed.load(null);
-				} catch (IOException e1) {}
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 				
 				closureResource.getContents().addAll(xmiResourceTransformed.getContents());
 								
 				try {
 					closureResource.save(null);
-				} catch (IOException e) {}
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 			}
 			
 			//TODO
@@ -203,7 +213,5 @@ public class ClosuresJavaPostProcessor implements IJavaOptionProvider,
 		
 		
 	}
-
-	
 
 }

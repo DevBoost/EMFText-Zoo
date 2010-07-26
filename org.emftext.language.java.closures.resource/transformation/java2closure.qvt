@@ -691,13 +691,26 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			or
 			References_Reference_NewConstructorCall(s_s_e,t_s_e) or
 			References_Reference_IdentifierReference(s_s_e,t_s_e) or
-			References_Reference_MethodCall(s_s_e,t_s_e);
+			References_Reference_MethodCall(s_s_e,t_s_e)
+			or
+			 TypedElement_TypeReference_NamespaceClassifierReference(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Int(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Void(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Boolean(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Byte(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Double(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Float(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Long(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Short(s_s_e,t_s_e) or
+			 TypedElement_TypeReference_Char(s_s_e,t_s_e);
+			
 		}
 	}
 	
 	relation Statements_StatementListContainer_MethodCall {
 
 		targetElement : java::references::ReferenceableElement;
+		
 
 		enforce domain JAVA s : java::statements::StatementListContainer  {
 			statements = s_s : java::statements::ExpressionStatement{
@@ -717,11 +730,28 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		where{
 			References_Argumentable(s_s_e,t_s_e) 
 			or
+		--	References_MethodCall_Arguments(s_s_e,t_s_e)
+		--	or
 			References_Reference_NewConstructorCall(s_s_e,t_s_e) or
 			References_Reference_IdentifierReference(s_s_e,t_s_e) or
-			References_Reference_MethodCall(s_s_e,t_s_e);
+			References_Reference_MethodCall(s_s_e,t_s_e)
+			;
 		}
 	}
+	
+	relation References_MethodCall_Arguments {
+
+		agumentElements : OrderedSet(java::expressions::Expression);
+
+		enforce domain JAVA s: java::references::MethodCall  {
+			arguments = agumentElements
+		};
+
+		enforce domain CLOSURES t: java::references::MethodCall  {
+			arguments = agumentElements
+		};
+	}
+
 	
 	relation Statements_StatementListContainer_SelfReference {
 
@@ -790,7 +820,19 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n)
 			or
 			References_Argumentable(s_n,t_n)
-			or true;
+			or 
+			 TypedElement_TypeReference_NamespaceClassifierReference(s_n,t_n) or
+			 TypedElement_TypeReference_Int(s_n,t_n) or
+			 TypedElement_TypeReference_Void(s_n,t_n) or
+			 TypedElement_TypeReference_Boolean(s_n,t_n) or
+			 TypedElement_TypeReference_Byte(s_n,t_n) or
+			 TypedElement_TypeReference_Double(s_n,t_n) or
+			 TypedElement_TypeReference_Float(s_n,t_n) or
+			 TypedElement_TypeReference_Long(s_n,t_n) or
+			 TypedElement_TypeReference_Short(s_n,t_n) or
+			 TypedElement_TypeReference_Char(s_n,t_n)
+			 or
+			 true;
 		}
 		
 	
@@ -801,7 +843,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	relation References_Reference_MethodCall {
 
 		targetElement : java::references::ReferenceableElement;
-
+		
 		enforce domain JAVA s : java::references::Reference {
 			next = s_n : java::references::MethodCall{
 				target = targetElement
@@ -819,6 +861,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n)
 			or
 			References_Argumentable(s_n,t_n)
+		--	or
+		--	References_MethodCall_Arguments(s_n,t_n)
 			or true;
 		}
 	
