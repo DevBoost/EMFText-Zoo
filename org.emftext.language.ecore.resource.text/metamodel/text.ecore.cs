@@ -38,13 +38,13 @@ TOKENS {
 	DEFINE T_ABSTRACT $'abstract'$;
 	DEFINE T_DERIVED $'derived'$;
 	DEFINE T_VOLATILE $'volatile'$;
-	DEFINE T_UNIQUE $'unique'$;
-	DEFINE T_ORDERED $'ordered'$;
+	DEFINE T_UNUNIQUE $'ununique'$;
+	DEFINE T_UNORDERED $'unordered'$;
 	DEFINE T_UNSETTABLE $'unsettable'$;
 	DEFINE T_UNCHANGEABLE $'unchangeable'$;
 	DEFINE T_TRANSIENT $'transient'$;
 	DEFINE T_ID $'iD'$;
-	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
+	DEFINE T_NOTRESOLVEPROXIES $'notResolveProxies'$;
 	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
 	DEFINE T_SERIALIZABLE $'serializable'$;
 	DEFINE T_CONTAINMENT $'containment'$;
@@ -93,20 +93,20 @@ RULES {
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
-	EAttribute ::= !2 (eAnnotations)* (( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
+	EAttribute ::= !2 (eAnnotations)* (( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNUNIQUE]|ordered[T_UNORDERED]|
 					unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID]) #1)* 
 				"attribute" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"'])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
-	EParameter ::= (eAnnotations)* ((ordered[T_ORDERED]|unique[T_UNIQUE]) #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
+	EParameter ::= (eAnnotations)* ((ordered[T_UNORDERED]|unique[T_UNUNIQUE]) #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
 	EReference ::= (eAnnotations)* !2 (( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
-							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
-							|unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|resolveProxies[T_RESOLVEPROXIES]) #1)* 
+							|volatile[T_VOLATILE]|unique[T_UNUNIQUE]|ordered[T_UNORDERED]
+							|unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|resolveProxies[T_NOTRESOLVEPROXIES]) #1)* 
 					"reference" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"']) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
 	EOperation ::=  (eAnnotations)* !2
-				(( ordered[T_ORDERED]|unique[T_UNIQUE]) #1)* 
+				(( ordered[T_UNORDERED]|unique[T_UNUNIQUE]) #1)* 
 				"operation" #1  ("void" | eType[]) 
 				( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 
