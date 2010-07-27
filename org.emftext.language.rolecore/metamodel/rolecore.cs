@@ -38,7 +38,7 @@ TOKENS {
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	
-	DEFINE REFTYPE $'type:'(('A'..'Z'|'a'..'z'|'0'..'9'|'_')+'->')?('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'_')+$;
+	//DEFINE REFTYPE $'type:'(('A'..'Z'|'a'..'z'|'0'..'9'|'_')+'->')?('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'_')+$;
 
 	DEFINE INTEGER $('0'..'9')+|'*'$;
 	DEFINE IDENTIFIER $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')*('.'('A'..'Z'|'a'..'z'|'_'|'-'|'0'..'9')+)*$;
@@ -48,24 +48,20 @@ TOKENS {
 
 TOKENSTYLES {
 	// keywords
-	"RCPackage" COLOR #00b4dd, BOLD;
-	"Natural" COLOR #00b4dd, BOLD;
-	"Role" COLOR #00b4dd, BOLD;
-	"is" COLOR #00b4dd, BOLD;
-	"played" COLOR #00b4dd, BOLD;
-	"by" COLOR #00b4dd, BOLD;
+	"RCPackage", "Natural", "Role",
+	"reference", "extends", "attribute", "operation", "void", "opposite", "throws",
 
 	// boolean modifiers
-	"T_ABSTRACT" COLOR #00b4dd, BOLD;
-	"T_DERIVED" COLOR #00b4dd, BOLD;
-	"T_VOLATILE" COLOR #00b4dd, BOLD;
-	"T_UNIQUE" COLOR #00b4dd, BOLD;
-	"T_ORDERED" COLOR #00b4dd, BOLD;
-	"T_UNSETTABLE" COLOR #00b4dd, BOLD;
-	"T_CHANGEABLE" COLOR #00b4dd, BOLD;
-	"T_TRANSIENT" COLOR #00b4dd, BOLD;
-	"T_ID" COLOR #00b4dd, BOLD;
-	"T_CONTAINMENT" COLOR #00b4dd, BOLD;
+	"T_ABSTRACT",
+	"T_DERIVED",
+	"T_VOLATILE",
+	"T_UNIQUE",
+	"T_ORDERED",
+	"T_UNSETTABLE",
+	"T_CHANGEABLE",
+	"T_TRANSIENT",
+	"T_ID",
+	"T_CONTAINMENT",
 	"T_RESOLVEPROXIES" COLOR #00b4dd, BOLD;
 
 	"QUOTED_34_34" COLOR #9d9d9d;
@@ -126,7 +122,7 @@ RULES {
 			changeable[T_CHANGEABLE] |
 			resolveProxies[T_RESOLVEPROXIES]
 		)* 
-		"reference" #1 eType[REFTYPE] #1 name[] 
+		"reference" #1 eType[] name[]  
 		( #1 "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")" )?  (#1 "opposite" #1 eOpposite[])? ";";
 	
 	EOperation ::=
