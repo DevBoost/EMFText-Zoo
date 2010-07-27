@@ -90,7 +90,6 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		
 		Thread workerThread = new Thread(new Runnable(){
 
-			@Override
 			public void run() {
 				convert(resource);
 			}
