@@ -624,7 +624,7 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 					resource,
 					true);			
 		
-			oldClosures.add(memberClosure); //TODO
+			oldClosures.add(memberClosure); 
 		}
 		
 		for(Closure closure : oldClosures){
@@ -782,7 +782,7 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 			}
 
 			// delete parameter closure in parameters list of super class method
-//			EcoreUtil.delete(parameterClosure); //TODO
+//			EcoreUtil.delete(parameterClosure); 
 			
 			// set arguments in method call of super class method
 			for(Expression argument : parameterClosure.getArguments()){
@@ -799,7 +799,7 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 				innerMethodCall.getArguments().add(identifierReference2);
 			}
 			
-			oldClosures.add(parameterClosure); //TODO
+			oldClosures.add(parameterClosure); 
 			oldClosures.add(parameterClosureAssignment);
 		}
 		
