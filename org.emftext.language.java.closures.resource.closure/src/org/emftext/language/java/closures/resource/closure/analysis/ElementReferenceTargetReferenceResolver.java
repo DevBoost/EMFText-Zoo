@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.closures.Closure;
 import org.emftext.language.java.closures.ClosuresPackage;
+import org.emftext.language.java.closures.resource.closure.mopp.ClosureBuilderHelper;
 import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.ClassMethod;
@@ -33,7 +34,7 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 	
 	private org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver();
 		
-	public synchronized void resolve(final java.lang.String identifier, final org.emftext.language.java.references.ElementReference container, final org.eclipse.emf.ecore.EReference reference, final int position, final boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
+	public void resolve(final java.lang.String identifier, final org.emftext.language.java.references.ElementReference container, final org.eclipse.emf.ecore.EReference reference, final int position, final boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
 		
 				
 		try{
@@ -83,7 +84,7 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 		catch(Exception e){}
 		
 		// resolve local method call with closures as parameter in it
-		if(result.getMappings() == null){
+		if(!result.wasResolved()){
 		
 			// workaround necessary to resolve the parameters of a method call
 			// who is one parameter a closure
@@ -114,7 +115,7 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 						
 						if(referencableElement instanceof Closure){
 							Closure closure = (Closure) referencableElement;
-							PostProcessorHelper.add(closure.getName(), identifier);
+							ClosureBuilderHelper.add(closure.getName(), identifier);
 							result.addMapping(identifier, closure);
 						}
 					}

@@ -1,9 +1,9 @@
-package org.emftext.language.java.closures.resource.closure.analysis;
+package org.emftext.language.java.closures.resource.closure.mopp;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostProcessorHelper {
+public class ClosureBuilderHelper {
 
 	static Map<String, String> methodNameMap = new HashMap<String,String>();
 	
