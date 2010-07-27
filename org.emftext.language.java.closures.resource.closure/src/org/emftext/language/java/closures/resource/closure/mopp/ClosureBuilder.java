@@ -15,7 +15,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
@@ -45,10 +44,8 @@ import org.emftext.language.java.modifiers.Private;
 import org.emftext.language.java.modifiers.Protected;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.parameters.Parameter;
-import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.MethodCall;
-import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
@@ -63,8 +60,6 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.util.JavaModelCompletion;
-import org.emftext.language.java.util.JavaModelRepairer;
 import org.emftext.language.java.variables.LocalVariable;
 
 public class ClosureBuilder implements org.emftext.language.java.closures.resource.closure.IClosureBuilder {
