@@ -295,6 +295,10 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 			// type reference
 			interfaceMethod.setTypeReference(EcoreUtil.copy(valueType));
 			
+			// type reference array dimension
+			interfaceMethod.getArrayDimensionsBefore().addAll(
+					EcoreUtil.copyAll(memberClosure.getValueTypeArrayDimension()));
+			
 			// set modifiers
 			if(memberClosure.getAnnotationsAndModifiers()!=null){
 				
@@ -464,8 +468,14 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		}
 		// name
 		classMethod.setName(methodName);
+		
 		// type reference
 		classMethod.setTypeReference(EcoreUtil.copy(type));
+		
+		// type reference array dimension
+		classMethod.getArrayDimensionsBefore().addAll(
+				EcoreUtil.copyAll(closure.getValueTypeArrayDimension()));
+		
 		
 		// set all statements of closure into new method
 		// attention to a return type, put return into method when necessary
