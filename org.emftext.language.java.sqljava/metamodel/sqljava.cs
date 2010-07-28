@@ -13,11 +13,12 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	generateCodeFromGeneratorModel = "false"; 
 	defaultTokenName = "IDENTIFIER";
-	tokenspace = "1"; 
+	tokenspace = "1";
+	overrideBuilder = "false" ; 
 }
 	
 			
-	TOKENSTYLES {
+	TOKENSTYLES { 
 		"register" COLOR #7F0055, BOLD;
 		"driver" COLOR #7F0055, BOLD;
 		"connection" COLOR #7F0055, BOLD;
