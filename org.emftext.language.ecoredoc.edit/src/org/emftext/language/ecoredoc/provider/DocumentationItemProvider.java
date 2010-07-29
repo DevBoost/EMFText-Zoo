@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -124,6 +125,17 @@ public class DocumentationItemProvider
 	}
 
 	/**
+	 * This returns Documentation.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Documentation"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,8 +146,8 @@ public class DocumentationItemProvider
 		String additionalText = "";
 		if (object instanceof Documentation) {
 			Documentation documentation = (Documentation) object;
-			int classCoverage = documentation.getClassCoverage();
-			int totalCoverage = documentation.getTotalCoverage();
+			int classCoverage = documentation.getCoverage(EcorePackage.eINSTANCE.getEClass());
+			int totalCoverage = documentation.getCoverage(EcorePackage.eINSTANCE.getEModelElement());
 			additionalText = " " + classCoverage + "%" + ", " + totalCoverage + "%";
 		}
 		return getString("_UI_Documentation_type") + additionalText;

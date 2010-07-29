@@ -15,6 +15,8 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -152,14 +154,25 @@ public class DocumentationElementItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DocumentationElement)object).getText();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DocumentationElement_type") :
-			getString("_UI_DocumentationElement_type") + " " + label;
+		String label = "";
+		DocumentationElement documentationElement = (DocumentationElement)object;
+		EModelElement documentedElement = documentationElement.getDocumentedElement();
+		if (documentedElement != null) {
+			if (documentedElement instanceof ENamedElement) {
+				ENamedElement namedElement = (ENamedElement) documentedElement;
+				label = namedElement.getName();
+			} else {
+				label = documentedElement.eClass().getName();
+			}
+			label += ": ";
+		}
+		String text = documentationElement.getText();
+		label += text == null ? "" : text.trim();
+		return label;
 	}
 
 	/**
