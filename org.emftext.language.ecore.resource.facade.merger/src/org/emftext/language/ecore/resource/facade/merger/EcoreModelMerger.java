@@ -30,6 +30,7 @@ import org.emftext.language.ecore.resource.facade.FacadeEcoreEProblemType;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreOptionProvider;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreOptions;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreProblem;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreQuickFix;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreResourcePostProcessor;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreResourcePostProcessorProvider;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreTextResource;
@@ -110,6 +111,10 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 			
 			public String getMessage() {
 				return message;
+			}
+
+			public IFacadeEcoreQuickFix getQuickFix() {
+				return null;
 			}
 		}, cause);
 	}
