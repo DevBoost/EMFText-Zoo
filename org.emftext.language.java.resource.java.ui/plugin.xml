@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.java.resource.java.ui.JavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="java" icon="icons/editor_icon.gif" id="org.emftext.language.java.resource.java.ui.JavaEditor" name="EMFText java Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.java.resource.java"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java.resource.java.ui.JavaNewFileWizard" id="org.emftext.language.java.resource.java.ui.JavaNewFileWizard" name="EMFText .java file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.java.resource.java.ui.JavaAnnotationModelFactory" extensions="java" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.java.resource.java" name=".java File" base-type="org.eclipse.core.runtime.text" file-extensions="java"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="java" id="org.emftext.language.java.resource.java.ui.provider" />
 	</extension>
 	
 </plugin>

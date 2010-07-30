@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.aterms.resource.aterms.ui.AtermsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="aterms" icon="icons/editor_icon.gif" id="org.emftext.language.aterms.resource.aterms.ui.AtermsEditor" name="EMFText aterms Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.aterms.resource.aterms"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.aterms.resource.aterms.ui.AtermsNewFileWizard" id="org.emftext.language.aterms.resource.aterms.ui.AtermsNewFileWizard" name="EMFText .aterms file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.aterms.resource.aterms.ui.AtermsAnnotationModelFactory" extensions="aterms" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.aterms.resource.aterms" name=".aterms File" base-type="org.eclipse.core.runtime.text" file-extensions="aterms"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="aterms" id="org.emftext.language.aterms.resource.aterms.ui.provider" />
 	</extension>
 	
 </plugin>

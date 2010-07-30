@@ -146,6 +146,7 @@ public class AbstractClosureItemProvider
       childrenFeatures.add(ReferencesPackage.Literals.REFERENCE__ARRAY_SELECTORS);
       childrenFeatures.add(ClosuresPackage.Literals.ABSTRACT_CLOSURE__PARAMETER_TYPES);
       childrenFeatures.add(ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE);
+      childrenFeatures.add(ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE_ARRAY_DIMENSION);
     }
     return childrenFeatures;
   }
@@ -200,6 +201,7 @@ public class AbstractClosureItemProvider
       case ClosuresPackage.ABSTRACT_CLOSURE__ARRAY_SELECTORS:
       case ClosuresPackage.ABSTRACT_CLOSURE__PARAMETER_TYPES:
       case ClosuresPackage.ABSTRACT_CLOSURE__VALUE_TYPE:
+      case ClosuresPackage.ABSTRACT_CLOSURE__VALUE_TYPE_ARRAY_DIMENSION:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
         return;
     }
@@ -611,6 +613,11 @@ public class AbstractClosureItemProvider
       (createChildParameter
         (ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE,
          TypesFactory.eINSTANCE.createVoid()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE_ARRAY_DIMENSION,
+         ArraysFactory.eINSTANCE.createArrayDimension()));
   }
 
 	/**
@@ -630,6 +637,7 @@ public class AbstractClosureItemProvider
       childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE ||
       childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_BEFORE ||
       childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_AFTER ||
+      childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE_ARRAY_DIMENSION ||
       childFeature == StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS ||
       childFeature == ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS ||
       childFeature == ReferencesPackage.Literals.REFERENCE__NEXT;

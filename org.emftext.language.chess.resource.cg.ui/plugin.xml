@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.chess.resource.cg.ui.CgEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="cg" icon="icons/editor_icon.gif" id="org.emftext.language.chess.resource.cg.ui.CgEditor" name="EMFText cg Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.chess.resource.cg"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.chess.resource.cg.ui.CgNewFileWizard" id="org.emftext.language.chess.resource.cg.ui.CgNewFileWizard" name="EMFText .cg file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.chess.resource.cg.ui.CgAnnotationModelFactory" extensions="cg" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.chess.resource.cg" name=".cg File" base-type="org.eclipse.core.runtime.text" file-extensions="cg"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="cg" id="org.emftext.language.chess.resource.cg.ui.provider" />
 	</extension>
 	
 </plugin>

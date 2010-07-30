@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="regexp_antlr" icon="icons/editor_icon.gif" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrEditor" name="EMFText regexp_antlr Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.regexp.resource.regexp_antlr"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrNewFileWizard" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrNewFileWizard" name="EMFText .regexp_antlr file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrAnnotationModelFactory" extensions="regexp_antlr" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.regexp.resource.regexp_antlr" name=".regexp_antlr File" base-type="org.eclipse.core.runtime.text" file-extensions="regexp_antlr"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="regexp_antlr" id="org.emftext.language.regexp.resource.regexp_antlr.ui.provider" />
 	</extension>
 	
 </plugin>

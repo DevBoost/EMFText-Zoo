@@ -34,6 +34,7 @@ import org.emftext.language.java.ejava.resource.ejava.EjavaEProblemType;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaOptionProvider;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaOptions;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaProblem;
+import org.emftext.language.java.ejava.resource.ejava.IEjavaQuickFix;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaResourcePostProcessor;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaResourcePostProcessorProvider;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
@@ -111,6 +112,10 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 					return "Not declared in Ecore model: " + ((NamespaceAwareElement)element).getNamespaces();
 				}
 				return "Not declared in Ecore model: " + element.getName();
+			}
+
+			public IEjavaQuickFix getQuickFix() {
+				return null;
 			}
 		}, element);
 	}

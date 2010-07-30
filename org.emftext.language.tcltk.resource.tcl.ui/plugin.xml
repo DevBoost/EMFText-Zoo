@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.tcltk.resource.tcl.ui.TclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="tcl" icon="icons/editor_icon.gif" id="org.emftext.language.tcltk.resource.tcl.ui.TclEditor" name="EMFText tcl Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.tcltk.resource.tcl"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.tcltk.resource.tcl.ui.TclNewFileWizard" id="org.emftext.language.tcltk.resource.tcl.ui.TclNewFileWizard" name="EMFText .tcl file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.tcltk.resource.tcl.ui.TclAnnotationModelFactory" extensions="tcl" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.tcltk.resource.tcl" name=".tcl File" base-type="org.eclipse.core.runtime.text" file-extensions="tcl"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="tcl" id="org.emftext.language.tcltk.resource.tcl.ui.provider" />
 	</extension>
 	
 </plugin>

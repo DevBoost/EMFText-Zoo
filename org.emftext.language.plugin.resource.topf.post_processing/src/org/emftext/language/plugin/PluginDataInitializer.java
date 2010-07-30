@@ -27,6 +27,7 @@ import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.ModelEntry;
 import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.emftext.language.plugin.resource.topf.ITopfProblem;
+import org.emftext.language.plugin.resource.topf.ITopfQuickFix;
 import org.emftext.language.plugin.resource.topf.ITopfResourcePostProcessor;
 import org.emftext.language.plugin.resource.topf.ITopfResourcePostProcessorProvider;
 import org.emftext.language.plugin.resource.topf.TopfEProblemType;
@@ -129,6 +130,10 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 									return "The plug-in " + contributorName + " extends the families extension point " + ep.getExtensionPointId() + " and " +
 										"should be considered as plug-in of the tool product family.";
 								}
+
+								public ITopfQuickFix getQuickFix() {
+									return null;
+								}
 							}, plugin);
 						}
 						
@@ -150,6 +155,10 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 				
 				public String getMessage() {
 					return "Plug-In was not found";
+				}
+
+				public ITopfQuickFix getQuickFix() {
+					return null;
 				}
 			}, plugin);
 		}

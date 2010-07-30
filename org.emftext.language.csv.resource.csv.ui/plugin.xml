@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.csv.resource.csv.ui.CsvEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="csv" icon="icons/editor_icon.gif" id="org.emftext.language.csv.resource.csv.ui.CsvEditor" name="EMFText csv Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.csv.resource.csv"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.csv.resource.csv.ui.CsvNewFileWizard" id="org.emftext.language.csv.resource.csv.ui.CsvNewFileWizard" name="EMFText .csv file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.csv.resource.csv.ui.CsvAnnotationModelFactory" extensions="csv" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.csv.resource.csv" name=".csv File" base-type="org.eclipse.core.runtime.text" file-extensions="csv"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="csv" id="org.emftext.language.csv.resource.csv.ui.provider" />
 	</extension>
 	
 </plugin>

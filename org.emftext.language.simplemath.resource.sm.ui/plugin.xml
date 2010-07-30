@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.simplemath.resource.sm.ui.SmEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="sm" icon="icons/editor_icon.gif" id="org.emftext.language.simplemath.resource.sm.ui.SmEditor" name="EMFText sm Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.simplemath.resource.sm"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.simplemath.resource.sm.ui.SmNewFileWizard" id="org.emftext.language.simplemath.resource.sm.ui.SmNewFileWizard" name="EMFText .sm file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.simplemath.resource.sm.ui.SmAnnotationModelFactory" extensions="sm" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.simplemath.resource.sm" name=".sm File" base-type="org.eclipse.core.runtime.text" file-extensions="sm"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="sm" id="org.emftext.language.simplemath.resource.sm.ui.provider" />
 	</extension>
 	
 </plugin>

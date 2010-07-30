@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ucinv" icon="icons/editor_icon.gif" id="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvEditor" name="EMFText ucinv Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.usecaseinvariant.resource.ucinv"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvNewFileWizard" id="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvNewFileWizard" name="EMFText .ucinv file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvAnnotationModelFactory" extensions="ucinv" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.usecaseinvariant.resource.ucinv" name=".ucinv File" base-type="org.eclipse.core.runtime.text" file-extensions="ucinv"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="ucinv" id="org.emftext.language.usecaseinvariant.resource.ucinv.ui.provider" />
 	</extension>
 	
 </plugin>

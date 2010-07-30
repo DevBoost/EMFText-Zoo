@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.filesystem.resource.fs.ui.FsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="fs" icon="icons/editor_icon.gif" id="org.emftext.language.filesystem.resource.fs.ui.FsEditor" name="EMFText fs Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.filesystem.resource.fs"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.filesystem.resource.fs.ui.FsNewFileWizard" id="org.emftext.language.filesystem.resource.fs.ui.FsNewFileWizard" name="EMFText .fs file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.filesystem.resource.fs.ui.FsAnnotationModelFactory" extensions="fs" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.filesystem.resource.fs" name=".fs File" base-type="org.eclipse.core.runtime.text" file-extensions="fs"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="fs" id="org.emftext.language.filesystem.resource.fs.ui.provider" />
 	</extension>
 	
 </plugin>

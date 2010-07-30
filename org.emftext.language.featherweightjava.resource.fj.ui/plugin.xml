@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.featherweightjava.resource.fj.ui.FjEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="fj" icon="icons/editor_icon.gif" id="org.emftext.language.featherweightjava.resource.fj.ui.FjEditor" name="EMFText fj Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.featherweightjava.resource.fj"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.featherweightjava.resource.fj.ui.FjNewFileWizard" id="org.emftext.language.featherweightjava.resource.fj.ui.FjNewFileWizard" name="EMFText .fj file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.featherweightjava.resource.fj.ui.FjAnnotationModelFactory" extensions="fj" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.featherweightjava.resource.fj" name=".fj File" base-type="org.eclipse.core.runtime.text" file-extensions="fj"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="fj" id="org.emftext.language.featherweightjava.resource.fj.ui.provider" />
 	</extension>
 	
 </plugin>

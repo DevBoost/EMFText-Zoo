@@ -25,6 +25,7 @@ import org.emftext.language.chess.resource.cg.CgEProblemType;
 import org.emftext.language.chess.resource.cg.ICgOptionProvider;
 import org.emftext.language.chess.resource.cg.ICgOptions;
 import org.emftext.language.chess.resource.cg.ICgProblem;
+import org.emftext.language.chess.resource.cg.ICgQuickFix;
 import org.emftext.language.chess.resource.cg.ICgResourcePostProcessor;
 import org.emftext.language.chess.resource.cg.ICgResourcePostProcessorProvider;
 import org.emftext.language.chess.resource.cg.mopp.CgResource;
@@ -83,6 +84,10 @@ public class MoveChecker implements ICgResourcePostProcessor,
 				public String getMessage() {
 					return "There is no piece at this location.";
 				}
+
+				public ICgQuickFix getQuickFix() {
+					return null;
+				}
 			}, move);
 			return;
 		}
@@ -126,6 +131,10 @@ public class MoveChecker implements ICgResourcePostProcessor,
 				
 				public String getMessage() {
 					return "This is not a legal move for a " + square.getPiece().getName() + ".";
+				}
+
+				public ICgQuickFix getQuickFix() {
+					return null;
 				}
 			}, move);
 		}

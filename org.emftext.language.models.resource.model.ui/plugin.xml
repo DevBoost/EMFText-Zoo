@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.models.resource.model.ui.ModelEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="model" icon="icons/editor_icon.gif" id="org.emftext.language.models.resource.model.ui.ModelEditor" name="EMFText model Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.models.resource.model"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.models.resource.model.ui.ModelNewFileWizard" id="org.emftext.language.models.resource.model.ui.ModelNewFileWizard" name="EMFText .model file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.models.resource.model.ui.ModelAnnotationModelFactory" extensions="model" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.models.resource.model" name=".model File" base-type="org.eclipse.core.runtime.text" file-extensions="model"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="model" id="org.emftext.language.models.resource.model.ui.provider" />
 	</extension>
 	
 </plugin>

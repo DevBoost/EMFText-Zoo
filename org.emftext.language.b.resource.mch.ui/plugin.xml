@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.b.resource.mch.ui.MchEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="mch" icon="icons/editor_icon.gif" id="org.emftext.language.b.resource.mch.ui.MchEditor" name="EMFText mch Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.b.resource.mch"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.b.resource.mch.ui.MchNewFileWizard" id="org.emftext.language.b.resource.mch.ui.MchNewFileWizard" name="EMFText .mch file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.b.resource.mch.ui.MchAnnotationModelFactory" extensions="mch" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.b.resource.mch" name=".mch File" base-type="org.eclipse.core.runtime.text" file-extensions="mch"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="mch" id="org.emftext.language.b.resource.mch.ui.provider" />
 	</extension>
 	
 </plugin>

@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.xml.resource.xml.ui.XmlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="xml" icon="icons/editor_icon.gif" id="org.emftext.language.xml.resource.xml.ui.XmlEditor" name="EMFText xml Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.xml.resource.xml"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.xml.resource.xml.ui.XmlNewFileWizard" id="org.emftext.language.xml.resource.xml.ui.XmlNewFileWizard" name="EMFText .xml file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.xml.resource.xml.ui.XmlAnnotationModelFactory" extensions="xml" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.xml.resource.xml" name=".xml File" base-type="org.eclipse.core.runtime.text" file-extensions="xml"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="xml" id="org.emftext.language.xml.resource.xml.ui.provider" />
 	</extension>
 	
 </plugin>

@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="statemachine" icon="icons/editor_icon.gif" id="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineEditor" name="EMFText statemachine Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.statemachine.resource.statemachine"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineNewFileWizard" id="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineNewFileWizard" name="EMFText .statemachine file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineAnnotationModelFactory" extensions="statemachine" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.statemachine.resource.statemachine" name=".statemachine File" base-type="org.eclipse.core.runtime.text" file-extensions="statemachine"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="statemachine" id="org.emftext.language.statemachine.resource.statemachine.ui.provider" />
 	</extension>
 	
 </plugin>

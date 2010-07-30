@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.quickuml.resource.quml.ui.QumlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="quml" icon="icons/editor_icon.gif" id="org.emftext.language.quickuml.resource.quml.ui.QumlEditor" name="EMFText quml Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.quickuml.resource.quml"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.quickuml.resource.quml.ui.QumlNewFileWizard" id="org.emftext.language.quickuml.resource.quml.ui.QumlNewFileWizard" name="EMFText .quml file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.quickuml.resource.quml.ui.QumlAnnotationModelFactory" extensions="quml" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.quickuml.resource.quml" name=".quml File" base-type="org.eclipse.core.runtime.text" file-extensions="quml"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="quml" id="org.emftext.language.quickuml.resource.quml.ui.provider" />
 	</extension>
 	
 </plugin>

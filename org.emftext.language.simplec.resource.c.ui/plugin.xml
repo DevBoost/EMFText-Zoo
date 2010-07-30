@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.simplec.resource.c.ui.CEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="c" icon="icons/editor_icon.gif" id="org.emftext.language.simplec.resource.c.ui.CEditor" name="EMFText c Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.simplec.resource.c"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.simplec.resource.c.ui.CNewFileWizard" id="org.emftext.language.simplec.resource.c.ui.CNewFileWizard" name="EMFText .c file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.simplec.resource.c.ui.CAnnotationModelFactory" extensions="c" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.simplec.resource.c" name=".c File" base-type="org.eclipse.core.runtime.text" file-extensions="c"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="c" id="org.emftext.language.simplec.resource.c.ui.provider" />
 	</extension>
 	
 </plugin>

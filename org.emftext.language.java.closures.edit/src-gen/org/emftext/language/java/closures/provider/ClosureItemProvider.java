@@ -435,6 +435,7 @@ public class ClosureItemProvider
       childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE ||
       childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_BEFORE ||
       childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_AFTER ||
+      childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE_ARRAY_DIMENSION ||
       childFeature == StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS ||
       childFeature == ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS ||
       childFeature == ReferencesPackage.Literals.REFERENCE__NEXT ||

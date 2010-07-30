@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.abnf.resource.abnf.ui.AbnfEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="abnf" icon="icons/editor_icon.gif" id="org.emftext.language.abnf.resource.abnf.ui.AbnfEditor" name="EMFText abnf Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.abnf.resource.abnf"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.abnf.resource.abnf.ui.AbnfNewFileWizard" id="org.emftext.language.abnf.resource.abnf.ui.AbnfNewFileWizard" name="EMFText .abnf file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.abnf.resource.abnf.ui.AbnfAnnotationModelFactory" extensions="abnf" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.abnf.resource.abnf" name=".abnf File" base-type="org.eclipse.core.runtime.text" file-extensions="abnf"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="abnf" id="org.emftext.language.abnf.resource.abnf.ui.provider" />
 	</extension>
 	
 </plugin>

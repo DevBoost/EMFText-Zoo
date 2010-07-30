@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.feature.resource.feature.ui.FeatureEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="feature" icon="icons/editor_icon.gif" id="org.emftext.language.feature.resource.feature.ui.FeatureEditor" name="EMFText feature Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.feature.resource.feature"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.feature.resource.feature.ui.FeatureNewFileWizard" id="org.emftext.language.feature.resource.feature.ui.FeatureNewFileWizard" name="EMFText .feature file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.feature.resource.feature.ui.FeatureAnnotationModelFactory" extensions="feature" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.feature.resource.feature" name=".feature File" base-type="org.eclipse.core.runtime.text" file-extensions="feature"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="feature" id="org.emftext.language.feature.resource.feature.ui.provider" />
 	</extension>
 	
 </plugin>

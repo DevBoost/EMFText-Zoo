@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.bool.resource.bool.ui.BoolEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="bool" icon="icons/editor_icon.gif" id="org.emftext.language.bool.resource.bool.ui.BoolEditor" name="EMFText bool Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.bool.resource.bool"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.bool.resource.bool.ui.BoolNewFileWizard" id="org.emftext.language.bool.resource.bool.ui.BoolNewFileWizard" name="EMFText .bool file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.bool.resource.bool.ui.BoolAnnotationModelFactory" extensions="bool" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.bool.resource.bool" name=".bool File" base-type="org.eclipse.core.runtime.text" file-extensions="bool"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="bool" id="org.emftext.language.bool.resource.bool.ui.provider" />
 	</extension>
 	
 </plugin>

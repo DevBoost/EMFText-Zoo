@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="petrinet" icon="icons/editor_icon.gif" id="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetEditor" name="EMFText petrinet Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.petrinet.resource.petrinet"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetNewFileWizard" id="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetNewFileWizard" name="EMFText .petrinet file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetAnnotationModelFactory" extensions="petrinet" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.petrinet.resource.petrinet" name=".petrinet File" base-type="org.eclipse.core.runtime.text" file-extensions="petrinet"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="petrinet" id="org.emftext.language.petrinet.resource.petrinet.ui.provider" />
 	</extension>
 	
 </plugin>

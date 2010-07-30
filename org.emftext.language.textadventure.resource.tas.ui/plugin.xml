@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.textadventure.resource.tas.ui.TasEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="tas" icon="icons/editor_icon.gif" id="org.emftext.language.textadventure.resource.tas.ui.TasEditor" name="EMFText tas Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.textadventure.resource.tas"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.textadventure.resource.tas.ui.TasNewFileWizard" id="org.emftext.language.textadventure.resource.tas.ui.TasNewFileWizard" name="EMFText .tas file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.textadventure.resource.tas.ui.TasAnnotationModelFactory" extensions="tas" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.textadventure.resource.tas" name=".tas File" base-type="org.eclipse.core.runtime.text" file-extensions="tas"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="tas" id="org.emftext.language.textadventure.resource.tas.ui.provider" />
 	</extension>
 	
 </plugin>

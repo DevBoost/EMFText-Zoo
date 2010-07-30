@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.dot.resource.dot.ui.DotEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="dot" icon="icons/editor_icon.gif" id="org.emftext.language.dot.resource.dot.ui.DotEditor" name="EMFText dot Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.dot.resource.dot"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.dot.resource.dot.ui.DotNewFileWizard" id="org.emftext.language.dot.resource.dot.ui.DotNewFileWizard" name="EMFText .dot file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.dot.resource.dot.ui.DotAnnotationModelFactory" extensions="dot" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.dot.resource.dot" name=".dot File" base-type="org.eclipse.core.runtime.text" file-extensions="dot"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="dot" id="org.emftext.language.dot.resource.dot.ui.provider" />
 	</extension>
 	
 </plugin>

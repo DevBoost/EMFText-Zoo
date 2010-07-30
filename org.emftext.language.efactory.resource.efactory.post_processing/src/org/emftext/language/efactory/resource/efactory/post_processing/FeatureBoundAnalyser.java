@@ -7,6 +7,7 @@ import org.emftext.language.efactory.EfactoryPackage;
 import org.emftext.language.efactory.Feature;
 import org.emftext.language.efactory.resource.efactory.EfactoryEProblemType;
 import org.emftext.language.efactory.resource.efactory.IEfactoryProblem;
+import org.emftext.language.efactory.resource.efactory.IEfactoryQuickFix;
 import org.emftext.language.efactory.resource.efactory.IEfactoryResourcePostProcessor;
 import org.emftext.language.efactory.resource.efactory.mopp.EfactoryResource;
 import org.emftext.language.efactory.resource.efactory.util.EfactoryEObjectUtil;
@@ -30,6 +31,10 @@ public class FeatureBoundAnalyser implements IEfactoryResourcePostProcessor {
 						
 						public String getMessage() {
 							return "Feature " + eFeature.getName() + " is not multiple.";
+						}
+
+						public IEfactoryQuickFix getQuickFix() {
+							return null;
 						}
 					}, feature);
 				}

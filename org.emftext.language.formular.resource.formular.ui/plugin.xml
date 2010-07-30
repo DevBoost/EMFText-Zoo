@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.formular.resource.formular.ui.FormularEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="formular" icon="icons/editor_icon.gif" id="org.emftext.language.formular.resource.formular.ui.FormularEditor" name="EMFText formular Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.formular.resource.formular"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.formular.resource.formular.ui.FormularNewFileWizard" id="org.emftext.language.formular.resource.formular.ui.FormularNewFileWizard" name="EMFText .formular file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.formular.resource.formular.ui.FormularAnnotationModelFactory" extensions="formular" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.formular.resource.formular" name=".formular File" base-type="org.eclipse.core.runtime.text" file-extensions="formular"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="formular" id="org.emftext.language.formular.resource.formular.ui.provider" />
 	</extension>
 	
 </plugin>

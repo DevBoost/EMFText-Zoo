@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="propjava" icon="icons/editor_icon.gif" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaEditor" name="EMFText propjava Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.java.properties.resource.propjava"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaNewFileWizard" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaNewFileWizard" name="EMFText .propjava file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaAnnotationModelFactory" extensions="propjava" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.java.properties.resource.propjava" name=".propjava File" base-type="org.eclipse.core.runtime.text" file-extensions="propjava"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="propjava" id="org.emftext.language.java.properties.resource.propjava.ui.provider" />
 	</extension>
 	
 </plugin>

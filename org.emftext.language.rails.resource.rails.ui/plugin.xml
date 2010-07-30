@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.rails.resource.rails.ui.RailsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rails" icon="icons/editor_icon.gif" id="org.emftext.language.rails.resource.rails.ui.RailsEditor" name="EMFText rails Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.rails.resource.rails"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.rails.resource.rails.ui.RailsNewFileWizard" id="org.emftext.language.rails.resource.rails.ui.RailsNewFileWizard" name="EMFText .rails file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.rails.resource.rails.ui.RailsAnnotationModelFactory" extensions="rails" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.rails.resource.rails" name=".rails File" base-type="org.eclipse.core.runtime.text" file-extensions="rails"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="rails" id="org.emftext.language.rails.resource.rails.ui.provider" />
 	</extension>
 	
 </plugin>

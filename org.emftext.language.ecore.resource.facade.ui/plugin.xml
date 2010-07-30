@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.ecore.resource.facade.ui.FacadeEcoreEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ecore" icon="icons/editor_icon.gif" id="org.emftext.language.ecore.resource.facade.ui.FacadeEcoreEditor" name="EMFText facade.ecore Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.ecore.resource.facade"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.ecore.resource.facade.ui.FacadeEcoreNewFileWizard" id="org.emftext.language.ecore.resource.facade.ui.FacadeEcoreNewFileWizard" name="EMFText .facade.ecore file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.ecore.resource.facade.ui.FacadeEcoreAnnotationModelFactory" extensions="ecore" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.ecore.resource.facade" name=".ecore File" base-type="org.eclipse.core.runtime.text" file-extensions="ecore"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="ecore" id="org.emftext.language.ecore.resource.facade.ui.provider" />
 	</extension>
 	
 </plugin>

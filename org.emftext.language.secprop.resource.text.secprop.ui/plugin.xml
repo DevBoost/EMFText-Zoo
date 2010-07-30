@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="secprop" icon="icons/editor_icon.gif" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropEditor" name="EMFText text.secprop Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.secprop.resource.text.secprop"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropNewFileWizard" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropNewFileWizard" name="EMFText .text.secprop file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropAnnotationModelFactory" extensions="secprop" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.secprop.resource.text.secprop" name=".secprop File" base-type="org.eclipse.core.runtime.text" file-extensions="secprop"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="secprop" id="org.emftext.language.secprop.resource.text.secprop.ui.provider" />
 	</extension>
 	
 </plugin>

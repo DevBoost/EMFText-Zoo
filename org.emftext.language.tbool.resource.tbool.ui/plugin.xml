@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.tbool.resource.tbool.ui.TboolEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="tbool" icon="icons/editor_icon.gif" id="org.emftext.language.tbool.resource.tbool.ui.TboolEditor" name="EMFText tbool Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.tbool.resource.tbool"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.tbool.resource.tbool.ui.TboolNewFileWizard" id="org.emftext.language.tbool.resource.tbool.ui.TboolNewFileWizard" name="EMFText .tbool file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.tbool.resource.tbool.ui.TboolAnnotationModelFactory" extensions="tbool" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.tbool.resource.tbool" name=".tbool File" base-type="org.eclipse.core.runtime.text" file-extensions="tbool"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="tbool" id="org.emftext.language.tbool.resource.tbool.ui.provider" />
 	</extension>
 	
 </plugin>

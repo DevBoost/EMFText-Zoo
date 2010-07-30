@@ -8,6 +8,7 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.efactory.resource.efactory.ui.EfactoryEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="efactory" icon="icons/editor_icon.gif" id="org.emftext.language.efactory.resource.efactory.ui.EfactoryEditor" name="EMFText efactory Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.efactory.resource.efactory"/>
 		</editor>
 	</extension>
 	
@@ -41,6 +42,18 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.efactory.resource.efactory.ui.EfactoryNewFileWizard" id="org.emftext.language.efactory.resource.efactory.ui.EfactoryNewFileWizard" name="EMFText .efactory file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.efactory.resource.efactory.ui.EfactoryAnnotationModelFactory" extensions="efactory" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.efactory.resource.efactory" name=".efactory File" base-type="org.eclipse.core.runtime.text" file-extensions="efactory"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="efactory" id="org.emftext.language.efactory.resource.efactory.ui.provider" />
 	</extension>
 	
 </plugin>
