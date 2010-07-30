@@ -15,9 +15,7 @@ package org.emftext.language.ecore.resource.text.analysis;
 
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
 import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
 import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolver;
 import org.emftext.language.ecore.resource.text.analysis.helper.EMFTypesResolver;

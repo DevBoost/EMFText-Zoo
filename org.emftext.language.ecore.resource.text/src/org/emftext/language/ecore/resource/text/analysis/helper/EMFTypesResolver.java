@@ -112,6 +112,7 @@ public class EMFTypesResolver {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void addResults(String identifier, String className, List<EClassifier> candidates,
 			EClass typeToResolve, boolean resolveFuzzy, ITextEcoreReferenceResolveResult result) {
 		for (EClassifier next : candidates) {
