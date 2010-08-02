@@ -62,6 +62,16 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			endif; 
 		}
 		where{
+			 Closure_ParameterType_NamespaceClassifierReference(s_ac_m,t) or
+			 Closure_ParameterType_Integer(s_ac_m,t) or
+			 Closure_ParameterType_Long(s_ac_m,t) or
+			 Closure_ParameterType_Double(s_ac_m,t) or
+			 Closure_ParameterType_Short(s_ac_m,t) or
+			 Closure_ParameterType_Float(s_ac_m,t) or
+			 Closure_ParameterType_Boolean(s_ac_m,t) or
+			 Closure_ParameterType_Char(s_ac_m,t) or
+			 Closure_ParameterType_Byte(s_ac_m,t)
+			 or
 			 AnnotableAndModifiable_Modifier_Private(s_ac_m,t) or 
 			 AnnotableAndModifiable_Modifier_Public(s_ac_m,t) or
 			 AnnotableAndModifiable_Modifier_Static(s_ac_m,t) or
@@ -78,18 +88,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			 TypedElement_TypeReference_Long(s,t) or
 			 TypedElement_TypeReference_Short(s,t) or
 			 TypedElement_TypeReference_Char(s,t)
-			 or
-		--	 Parametrizable_Parameter(s_ac_m,t)
-		--	 or
-			 Closure_ParameterType_NamespaceClassifierReference(s_ac_m,t) or
-			 Closure_ParameterType_Integer(s_ac_m,t) or
-			 Closure_ParameterType_Long(s_ac_m,t) or
-			 Closure_ParameterType_Double(s_ac_m,t) or
-			 Closure_ParameterType_Short(s_ac_m,t) or
-			 Closure_ParameterType_Float(s_ac_m,t) or
-			 Closure_ParameterType_Boolean(s_ac_m,t) or
-			 Closure_ParameterType_Char(s_ac_m,t) or
-			 Closure_ParameterType_Byte(s_ac_m,t)
 			 ;
 			
 		}
@@ -98,13 +96,15 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	relation Closure_ParameterType_NamespaceClassifierReference {
 
 		targetElement : java::classifiers::Classifier;
+		targetElement2 : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
 			parameters = s_p : java::parameters::OrdinaryParameter {
 				typeReference = s_p_tr : java::types::NamespaceClassifierReference {
 					classifierReferences = s_p_tr_cr : java::types::ClassifierReference {
-						target = targetElement
+						target = targetElement,
+						target = targetElement2
 					}
 				},
 				name = parameterName
@@ -119,10 +119,11 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 					}
 				},
 				name = parameterName
-			},
+			}
+			,
 			parameterTypes = t_pt : java::types::NamespaceClassifierReference {
 				classifierReferences = t_pt_cr : java::types::ClassifierReference {
-					target = targetElement
+					target = targetElement2
 				}
 			}
 		};
@@ -130,7 +131,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Integer {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -151,7 +151,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Boolean {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -172,7 +171,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Float {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -193,7 +191,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 
 	relation Closure_ParameterType_Long {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -214,7 +211,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Byte {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -235,7 +231,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Double {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -256,7 +251,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Char {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -277,7 +271,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation Closure_ParameterType_Short {
 
-		targetElement : java::classifiers::Classifier;
 		parameterName : String;
 		
 		enforce domain JAVA s : java::members::ClassMethod{
@@ -611,16 +604,19 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	relation Members_Field {
 
 		varName : String;
-
+		initialValueVar : java::expressions::Expression;
+		
 		enforce domain JAVA s_c2 : java::members::MemberContainer  {
 			members =  s_cm : java::members::Field {
-				name = varName
+				name = varName,
+				initialValue =  initialValueVar
 			}
 		};
 
 		enforce domain CLOSURES t_c2 : java::members::MemberContainer  {
 			members = t_cm : java::members::Field {
-				name = varName
+				name = varName,
+				initialValue =  initialValueVar
 			}
 		};
 		
@@ -730,8 +726,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		where{
 			References_Argumentable(s_s_e,t_s_e) 
 			or
-		--	References_MethodCall_Arguments(s_s_e,t_s_e)
-		--	or
+			References_MethodCall_Arguments(s_s_e,t_s_e)
+			or
 			References_Reference_NewConstructorCall(s_s_e,t_s_e) or
 			References_Reference_IdentifierReference(s_s_e,t_s_e) or
 			References_Reference_MethodCall(s_s_e,t_s_e)
@@ -861,8 +857,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n)
 			or
 			References_Argumentable(s_n,t_n)
-		--	or
-		--	References_MethodCall_Arguments(s_n,t_n)
+			or
+			References_MethodCall_Arguments(s_n,t_n)
 			or true;
 		}
 	

@@ -1,8 +1,10 @@
 package org.emftext.language.java.closures.java2dsl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -22,16 +24,19 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
+import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTDirectionEnum;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTStarter;
 import org.emftext.language.java.resource.java.IJavaBuilder;
 import org.emftext.language.java.resource.java.mopp.JavaBuilderAdapter;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.sdk.util.StreamUtil;
 
 public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJavaBuilder {
 
 	private static Stack<Thread> threads = new Stack<Thread>();
-	private static int timeout = 3000000; //TODO
+	private static int timeout = 30000000; //TODO
 	private static int maxActiveThreads = 1;
+	private static Map<URI,Thread> semaphoreMap = new HashMap<URI,Thread>();
 	
 	public boolean isBuildingNeeded(URI uri) {
 		
@@ -39,7 +44,13 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 			if(segment.toLowerCase().equals("bin"))
 				return false;
 		}
-
+		
+		if(uri.segment(uri.segmentCount()-1).contains("_transformed"))
+			return false;
+		
+		if(semaphoreMap.containsKey(uri))
+			return false;
+		
 		return true;
 	}
 	
@@ -58,7 +69,10 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 			}
 			
 		},"RootThread");
+		
+		semaphoreMap.put(resource.getURI(), root);
 		root.start();
+		semaphoreMap.remove(resource.getURI());
 		
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
@@ -123,18 +137,10 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 			resource.getURI().appendFileExtension("xmi");
 		
 		URI closureResourceURI =
-			resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
-					resource.getURI().trimFileExtension().segment(
-							resource.getURI().segmentCount()-1)
-							.concat("_transformed")).appendFileExtension("closure");
+			resource.getURI().trimFileExtension().appendFileExtension("closure");
 		
 		URI xmiTargetURI = 
-			resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
-				resource.getURI().trimFileExtension().segment(
-						resource.getURI().segmentCount()-1)
-						.concat("_transformed")).appendFileExtension("java.xmi");
-	//		resource.getURI().trimFileExtension().trimSegments(
-	//				resource.getURI().segmentCount()-2);
+			resource.getURI().trimFileExtension().appendFileExtension("closure.xmi");
 	
 		URI transformationFileURI = 
 			resource.getURI().trimFileExtension()
@@ -174,7 +180,8 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 					"copy", 
 					"CLOSURES", 
 					"ClosureMediniStatisticUtil", 
-					Arrays.asList("Closures_Closure"));
+					Arrays.asList("Closures_Closure"),
+					MediniQVTDirectionEnum.JAVA2DSL);
 			
 			if(starter.isHandledInterestingRules()){
 			
@@ -190,13 +197,55 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 					System.out.println(e);
 				}
 				
-				closureResource.getContents().addAll(xmiResourceTransformed.getContents());
-								
+				closureResource.getContents().addAll(
+						EcoreUtil.copyAll(
+								xmiResourceTransformed.getContents()));
+				
+				//TODO only save when necessary
+				
+				URI closureTempResourceURI =
+					resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
+							resource.getURI().trimFileExtension().segment(
+									resource.getURI().segmentCount()-1)
+									.concat("_transformed")).appendFileExtension("closure");
+				ClosureResource closureResourceTemp = 
+					(ClosureResource)resource.getResourceSet().createResource(closureTempResourceURI);
+			
+				closureResourceTemp.getContents().addAll(
+						EcoreUtil.copyAll(xmiResourceTransformed.getContents()));
 				try {
-					closureResource.save(null);
+					closureResourceTemp.save(null);
 				} catch (IOException e) {
-					System.out.println(e);
+					e.printStackTrace();
 				}
+				
+				File closureResourceTempFile = new File(
+					rootPathFile.toString().concat(closureTempResourceURI.toPlatformString(true)));
+				File closureResourceFile = new File(
+						rootPathFile.toString().concat(closureResourceURI.toPlatformString(true)));
+					
+				boolean hasContentChanged = false;
+				
+				try {
+					ByteArrayInputStream closureResourceTempFileBytes =
+						 new ByteArrayInputStream(StreamUtil.getContent(closureResourceTempFile));
+						
+					hasContentChanged = 
+						StreamUtil.storeContentIfChanged(
+								closureResourceFile, closureResourceTempFileBytes);
+					if(hasContentChanged)
+						System.out.println(closureResourceURI + " content was changed!");
+				
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				try {
+					closureResourceTemp.delete(null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 			}
 			
 			//TODO

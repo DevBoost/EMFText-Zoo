@@ -71,7 +71,7 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 				return false;
 		}
 
-		return true;
+		return false;
 	}
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.closures.resource.closure.mopp.ClosureResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		// set option overrideBuilder to 'false' and then perform build here

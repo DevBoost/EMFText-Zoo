@@ -106,10 +106,16 @@ public class QVTOStarter extends AbstractStarter{
 		
 		if (args.length < 3) {
 			System.out.println(
-					"Usage: QVTOStarter <source folder path> " +
-					"<target folder path> <qvto file path> " +
-					"<debug=true>  <timeout> <maxActiveThreads> " +
-					"<inPlace=true> <statisticUtilClassName>");
+					"Usage: " +
+					"QVTOStarter " +
+					"<source folder path> " +
+					"<target folder path> " +
+					"<qvto file path> " +
+					"<debug=true>  " +
+					"<timeout> " +
+					"<maxActiveThreads> " +
+					"<inPlace=true> " +
+					"<statisticUtilClassName>");
 			return;
 		}
 				

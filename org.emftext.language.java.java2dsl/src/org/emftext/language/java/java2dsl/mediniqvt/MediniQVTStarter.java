@@ -44,7 +44,7 @@ public class MediniQVTStarter extends AbstractStarter{
 	private static String qvtRuleFilePath;
 	private static boolean debug = false;
 	private static boolean onlyOneFile = false;
-	
+	private static MediniQVTDirectionEnum directionEnum;
 	private List<String> interestingRules;
 	private static String statisticUtilClassName = "";
 	
@@ -103,7 +103,8 @@ public class MediniQVTStarter extends AbstractStarter{
 			String transformationName, 
 			String direction,
 			String statisticUtilClassName,
-			List<String> interestingRules){
+			List<String> interestingRules,
+			MediniQVTDirectionEnum directionEnum){
 		
 		super(5*60*1000,1);
 		
@@ -114,6 +115,7 @@ public class MediniQVTStarter extends AbstractStarter{
 		MediniQVTStarter.transformation = transformationName;
 		MediniQVTStarter.statisticUtilClassName = statisticUtilClassName;
 		MediniQVTStarter.onlyOneFile = true;
+		MediniQVTStarter.directionEnum = directionEnum;
 		this.interestingRules = interestingRules;
 		
 		inputFolder = new File(rootPathFileString);
@@ -230,14 +232,14 @@ public class MediniQVTStarter extends AbstractStarter{
 		Collection<Trace> traces = null;
 		try {
 			traces = processorImpl.evaluateQVT(
-									qvtFileReader, 
-									transformation, 
-									true, 
-									direction, 
-									new Object[]{modelResources.get(0).get(0), 
-											modelResources.get(1).get(0)}, 
-									null, 
-									this.logger);
+						qvtFileReader, 
+						transformation, 
+						true, 
+						direction, 
+						new Object[]{modelResources.get(0).get(0), 
+								modelResources.get(1).get(0)}, 
+						null, 
+						this.logger);
 		} catch (Exception e) {
 			System.out.println(e);
 			e.printStackTrace();
@@ -259,13 +261,23 @@ public class MediniQVTStarter extends AbstractStarter{
 	 * Example usage of the class {@link MediniQVTStarter}.
 	 * 
 	 * @param args
-	 *            are ignored here!
+	 *            
 	 */
 	public static void main(String[] args) throws IOException{
 		
 		if (args.length < 3) {
 			System.out.println(
-					"Usage: MediniQVTStarter <source folder path> <target folder path> <rule path> <debug=true> <timeout> <maxActiveThreads> <save=true>");
+					"Usage: " +
+					"MediniQVTStarter " +
+					"<source folder path> " +
+					"<target folder path> " +
+					"<rule path> " +
+					"<debug=true> " +
+					"<timeout> " +
+					"<maxActiveThreads> " +
+					"<transformation name>" +
+					"<direction>" +
+					"<statistic util class name>");
 			return;
 		}
 		
@@ -357,9 +369,21 @@ public class MediniQVTStarter extends AbstractStarter{
 
 		
 		// create resources
-		Resource inputResource = 
-			MetamodelUtil.getResource(
-					sourceFile.getAbsolutePath(),super.getResourceSet());
+		Resource inputResource = null;
+		if(onlyOneFile){
+			inputResource = 
+				super.getResourceSet().createResource(inputURI);
+		}
+		else{
+			inputResource = MetamodelUtil.getResource(
+				sourceFile.getAbsolutePath(),super.getResourceSet());
+		}
+		
+		try {
+			inputResource.load(null);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
 		URI outFileURI = null;
 		if(onlyOneFile){
@@ -377,8 +401,16 @@ public class MediniQVTStarter extends AbstractStarter{
 			}
 		}
 		
-		Resource outputResource = super.getResourceSet().createResource(outFileURI);
+		Resource outputResource = 
+			super.getResourceSet().createResource(outFileURI);
 
+		try {
+			outputResource.load(null);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		outputResource.getContents().clear();
+		
 		// Collect the models, which should participate in the transformation.
 		// You can provide a list of models for each direction.
 		// The models must be added in the same order as defined in your transformation!
@@ -388,8 +420,21 @@ public class MediniQVTStarter extends AbstractStarter{
 		
 		modelResources.add(firstSetOfModels);
 		modelResources.add(secondSetOfModels);
-		firstSetOfModels.add(inputResource);
-		secondSetOfModels.add(outputResource);
+		
+		if(directionEnum != null){
+			if(directionEnum.equals(MediniQVTDirectionEnum.JAVA2DSL)){
+				firstSetOfModels.add(inputResource);
+				secondSetOfModels.add(outputResource);
+			}
+			else{
+				firstSetOfModels.add(outputResource);
+				secondSetOfModels.add(inputResource);
+			}
+		}
+		else{
+			firstSetOfModels.add(inputResource);
+			secondSetOfModels.add(outputResource);
+		}
 
 		EMFQvtProcessorImpl processorImpl = new EMFQvtProcessorImpl(this.logger);
 		
@@ -416,7 +461,7 @@ public class MediniQVTStarter extends AbstractStarter{
 		// transformation.
 		// You have to take care on this.
 		try {
-			outputResource.save(Collections.EMPTY_MAP);
+			outputResource.save(null);
 		} catch (IOException e) {
 			System.out.println(e);
 		}

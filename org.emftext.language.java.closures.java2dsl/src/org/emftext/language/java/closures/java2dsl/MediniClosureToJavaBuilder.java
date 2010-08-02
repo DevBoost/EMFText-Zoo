@@ -1,8 +1,10 @@
 package org.emftext.language.java.closures.java2dsl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -24,14 +26,17 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.closures.resource.closure.IClosureBuilder;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureBuilderAdapter;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
+import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTDirectionEnum;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTStarter;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.sdk.util.StreamUtil;
 
 public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements IClosureBuilder {
 
 	private static Stack<Thread> threads = new Stack<Thread>();
-	private static int timeout = 3000000; //TODO
+	private static int timeout = 30000000; //TODO
 	private static int maxActiveThreads = 1;
+	private static Map<URI,Thread> semaphoreMap = new HashMap<URI,Thread>();
 	
 	public boolean isBuildingNeeded(URI uri) {
 		
@@ -39,6 +44,12 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 			if(segment.toLowerCase().equals("bin"))
 				return false;
 		}
+		
+		if(uri.segment(uri.segmentCount()-1).contains("_transformed"))
+			return false;
+		
+		if(semaphoreMap.containsKey(uri))
+			return false;
 
 		return true;
 	}
@@ -58,7 +69,10 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 			}
 			
 		},"RootThread");
+		
+		semaphoreMap.put(resource.getURI(), root);
 		root.start();
+		semaphoreMap.remove(resource.getURI());
 		
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
@@ -123,18 +137,10 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 			resource.getURI().appendFileExtension("xmi");
 		
 		URI javaResourceURI =
-			resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
-					resource.getURI().trimFileExtension().segment(
-							resource.getURI().segmentCount()-1)
-							.concat("_transformed")).appendFileExtension("java");
+			resource.getURI().trimFileExtension().appendFileExtension("java");
 		
 		URI xmiTargetURI = 
-			resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
-				resource.getURI().trimFileExtension().segment(
-						resource.getURI().segmentCount()-1)
-						.concat("_transformed")).appendFileExtension("closure.xmi");
-	//		resource.getURI().trimFileExtension().trimSegments(
-	//				resource.getURI().segmentCount()-2);
+			resource.getURI().trimFileExtension().appendFileExtension("java.xmi");
 	
 		URI transformationFileURI = 
 			resource.getURI().trimFileExtension()
@@ -149,8 +155,6 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 		File rootPathFile = rootPath.toFile();
 		String transformationFileURIString = 
 			rootPathFile.toString().concat(transformationFileURI.toPlatformString(true));
-	//	transformationFileURIString =
-	//		transformationFileURIString.replaceAll("\\\\", "/").concat("file:/");
 		
 		if(new File(transformationFileURIString).exists()){
 		
@@ -164,8 +168,10 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 			} catch (IOException e) {
 				System.out.println(e);
 			}
+
 	
 			MediniQVTStarter starter = new MediniQVTStarter(
+					
 					xmiSourceURI, 
 					xmiTargetURI,
 					rootPathFile.toString(),
@@ -174,12 +180,13 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 					"copy", 
 					"JAVA", 
 					"ClosureMediniStatisticUtil", 
-					Arrays.asList("Closures_Closure"));
+					Arrays.asList("Closures_Closure"),
+					MediniQVTDirectionEnum.DSL2JAVA);
 			
 			if(starter.isHandledInterestingRules()){
 			
-				ClosureResource closureResource = 
-					(ClosureResource)resource.getResourceSet().createResource(javaResourceURI);
+				JavaResource javaResource = 
+					(JavaResource)resource.getResourceSet().createResource(javaResourceURI);
 			
 				XMIResource xmiResourceTransformed = 
 					(XMIResource)resource.getResourceSet().createResource(xmiTargetURI);
@@ -190,13 +197,55 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 					System.out.println(e);
 				}
 				
-				closureResource.getContents().addAll(xmiResourceTransformed.getContents());
+				javaResource.getContents().addAll(
+						EcoreUtil.copyAll(
+								xmiResourceTransformed.getContents()));
 								
+				// TODO neu
+				
+				URI javaTempResourceURI =
+					resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
+							resource.getURI().trimFileExtension().segment(
+									resource.getURI().segmentCount()-1)
+									.concat("_transformed")).appendFileExtension("java");
+				JavaResource javaResourceTemp = 
+					(JavaResource)resource.getResourceSet().createResource(javaTempResourceURI);
+			
+				javaResourceTemp.getContents().addAll(
+						EcoreUtil.copyAll(xmiResourceTransformed.getContents()));
 				try {
-					closureResource.save(null);
+					javaResourceTemp.save(null);
 				} catch (IOException e) {
-					System.out.println(e);
+					e.printStackTrace();
 				}
+				
+				File javaResourceTempFile = new File(
+					rootPathFile.toString().concat(javaTempResourceURI.toPlatformString(true)));
+				File javaResourceFile = new File(
+						rootPathFile.toString().concat(javaResourceURI.toPlatformString(true)));
+					
+				boolean hasContentChanged = false;
+				
+				try {
+					ByteArrayInputStream closureResourceTempFileBytes =
+						 new ByteArrayInputStream(StreamUtil.getContent(javaResourceTempFile));
+						
+					hasContentChanged = 
+						StreamUtil.storeContentIfChanged(
+								javaResourceFile, closureResourceTempFileBytes);
+					if(hasContentChanged)
+						System.out.println(javaResourceURI + " content was changed!");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				try {
+					javaResourceTemp.delete(null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				
 			}
 			
 			//TODO
