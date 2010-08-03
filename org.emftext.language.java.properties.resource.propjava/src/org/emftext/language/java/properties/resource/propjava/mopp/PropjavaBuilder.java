@@ -38,7 +38,12 @@ public class PropjavaBuilder implements org.emftext.language.java.properties.res
 	
 	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
 		// change this to return true to enable building of all resources
-		return true;
+		for(String segment : uri.segmentsList()){
+			if(segment.toLowerCase().equals("bin"))
+				return false;
+		}
+
+		return false;
 	}
 	
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.properties.resource.propjava.mopp.PropjavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {

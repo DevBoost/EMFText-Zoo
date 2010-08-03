@@ -3,7 +3,7 @@ package org.emftext.language.java.java2dsl.util;
 import java.util.Arrays;
 
 
-public class PropertyStatisticUtil extends AbstractStatisticUtil{
+public class PropertyMediniStatisticUtil extends AbstractStatisticUtil{
 
 	private int countProperties = 0;
 	private int countPropertiesReadonly = 0;
@@ -57,13 +57,14 @@ public class PropertyStatisticUtil extends AbstractStatisticUtil{
 	@Override
 	public void init(){
 		
-		getRuleNames().put("Member_Property", Arrays.asList("addProperty","addField"));
-		getRuleNames().put("Member_Property_ReadOnly", Arrays.asList("addPropertyReadOnly","addField"));
-		getRuleNames().put("Member_Field", Arrays.asList("addField"));
-		getRuleNames().put("Classifiers_Class", Arrays.asList("addClass"));
-		getRuleNames().put("Classifiers_Interface", Arrays.asList("addInterface"));
-		getRuleNames().put("Classifiers_Enumeration", Arrays.asList("addEnumeration"));
-		getRuleNames().put("Classifiers_Annotation", Arrays.asList("addAnnotation"));
+		getRuleNames().put("Members_Property", Arrays.asList("addProperty","addField"));
+		getRuleNames().put("Members_PropertyReadOnly", Arrays.asList("addPropertyReadOnly","addField"));
+		getRuleNames().put("Members_Field", Arrays.asList("addField"));
+		getRuleNames().put("Members_Class", Arrays.asList("addClass"));
+		getRuleNames().put("CompilationUnit_Class", Arrays.asList("addClass"));
+		getRuleNames().put("CompilationUnit_Interface", Arrays.asList("addInterface"));
+		getRuleNames().put("CompilationUnit_Enumeration", Arrays.asList("addEnumeration"));
+		getRuleNames().put("CompilationUnit_Annotation", Arrays.asList("addAnnotation"));
 		
 	}
 }

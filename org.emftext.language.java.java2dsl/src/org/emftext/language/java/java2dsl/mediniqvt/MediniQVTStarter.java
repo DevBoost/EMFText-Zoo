@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.java2dsl.AbstractStarter;
 import org.emftext.language.java.java2dsl.qvto.QVTOStarter;
 import org.emftext.language.java.java2dsl.util.MetamodelUtil;
-import org.emftext.language.java.java2dsl.util.PropertyStatisticUtil;
+import org.emftext.language.java.java2dsl.util.PropertyQVTOStatisticUtil;
 //import org.junit.experimental.theories.PotentialAssignment;
 
 import uk.ac.kent.cs.kmf.util.ILog;
