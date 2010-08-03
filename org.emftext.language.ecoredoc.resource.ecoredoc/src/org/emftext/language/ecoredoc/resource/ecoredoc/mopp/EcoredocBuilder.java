@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.ecoredoc.Documentation;
 import org.emftext.language.ecoredoc.DocumentationElement;
@@ -41,7 +42,11 @@ public class EcoredocBuilder implements org.emftext.language.ecoredoc.resource.e
 			return org.eclipse.core.runtime.Status.OK_STATUS;
 		}
 		try {
-			documentedPackage.eResource().save(null);
+			Resource eResource = documentedPackage.eResource();
+			if (eResource == null) {
+				return org.eclipse.core.runtime.Status.OK_STATUS;
+			}
+			eResource.save(null);
 			return org.eclipse.core.runtime.Status.OK_STATUS;
 		} catch (IOException e) {
 			return new Status(IStatus.ERROR, EcoredocPlugin.PLUGIN_ID, "Exception while adding documentation to Ecore model.");
