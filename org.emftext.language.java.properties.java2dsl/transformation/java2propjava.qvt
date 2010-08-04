@@ -50,8 +50,10 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		where{
 			-- is necessary to get a TRUE in this OCL constraint 
-			Class_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl) or
-			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) or
+			Class_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
+			or
+			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
+			or
 			Members_Property(s_cl,t_cl) or
 			Members_PropertyReadOnly(s_cl,t_cl) or
 			Members_Constructor(s_cl,t_cl) or
@@ -180,31 +182,25 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 				name = 'set'.concat(varName.firstToUpper()),
 				typeReference =  set_type : java::types::Void {},
 				annotationsAndModifiers = set_mod : java::modifiers::Public {}
-				
 			}
 		};
 
 		enforce domain PROPJAVA t_c1 : java::classifiers::Class  {
 			members = property : properties::Property {
 				name = varName,
-				readonly = false	
+				readonly = false
 			}
 		};
 		when{
 			if getter.oclIsUndefined() or setter.oclIsUndefined() or field.oclIsUndefined() then
 				true
 			else 
-				getter.name = 'get'.concat(field.name.firstToUpper())
-				and
-				setter.name = 'set'.concat(field.name.firstToUpper())
-				and
 				isCorrectGetter(field,getter)
 				and
 				isCorrectSetter(field,setter)
 			endif;
 		}
 		where{
-		--	fieldAndMethods2Property(field1,m1,m2,property1);
 			Mem2Prop_TypeReference_NamespaceClassifierReference(field,getter,setter,property) or
 			Mem2Prop_TypeReference_Int(field,getter,setter,property) or
 			Mem2Prop_TypeReference_Boolean(field,getter,setter,property) or
@@ -248,15 +244,12 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			if getter.oclIsUndefined() or field.oclIsUndefined() then
 				true
 			else 
-				getter.name = 'get'.concat(field.name.firstToUpper())
-				and
 				isCorrectGetter(field,getter)
 				and 
 				not existsACorrespondingSetter(field)
 			endif;
 		}
 		where{
-		--	fieldAndMethods2PropertyReadOnly(field2,m3,property2);
 			Mem2PropReadOnly_TypeReference_NamespaceClassifierReference(field,getter,property) or
 			Mem2PropReadOnly_TypeReference_Int(field,getter,property) or
 			Mem2PropReadOnly_TypeReference_Boolean(field,getter,property) or
@@ -408,11 +401,12 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			}
 		};
 		when{
-			if s_cm.oclIsUndefined() then
-				not existsACorrespondingGetter(t_cm)
-			else
-				not existsACorrespondingGetter(s_cm)
-			endif;
+		--	if s_cm.oclIsUndefined() then
+		--		not existsACorrespondingGetter(t_cm)
+		--	else
+		--		not existsACorrespondingGetter(s_cm)
+		--	endif;
+		false;
 		}
 		where{
 			ArrayTypeable_ArrayDimension(s_cm,t_cm) or
@@ -454,8 +448,10 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		where{
 			-- is necessary to get a TRUE in this OCL constraint 
-			Class_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl) or
-			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) or
+			Class_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
+			or
+			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
+			or
 			Members_Property(s_cl,t_cl) or
 			Members_PropertyReadOnly(s_cl,t_cl) or
 			Members_Constructor(s_cl,t_cl) or
@@ -485,19 +481,20 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			}
 		};
 		when{
-			if s_cm.oclIsUndefined() then
-				not java::members::Field.allInstances()->exists( f |
-	               isCorrectGetter(f, t_cm)
-	               or
-	               isCorrectSetter(f, t_cm)
-		        )
-			else
-				not java::members::Field.allInstances()->exists( f |
-	               isCorrectGetter(f, s_cm)
-	               or
-	               isCorrectSetter(f, s_cm)
-		        )
-		    endif;
+			false;
+		--	if s_cm.oclIsUndefined() then
+		--		not java::members::Field.allInstances()->exists( f |
+	    --           isCorrectGetter(f, t_cm)
+	    --           or
+	    --           isCorrectSetter(f, t_cm)
+		--        )
+		--	else
+		--		not java::members::Field.allInstances()->exists( f |
+	    --           isCorrectGetter(f, s_cm)
+	    --           or
+	    --           isCorrectSetter(f, s_cm)
+		--        )
+		--    endif;
 		}
 		where{
 			ArrayTypeable_ArrayDimension(s_cm,t_cm) 
@@ -876,7 +873,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 	
 	relation Mem2Prop_TypeReference_NamespaceClassifierReference {
 
-		varClass : java::classifiers::Classifier;
+		varClass,varClass2,varClass3 : java::classifiers::Classifier;
+		varName : String;
 				
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_ncType : java::types::NamespaceClassifierReference {
@@ -889,7 +887,7 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain JAVA getter: java::members::ClassMethod  {
 			typeReference = getter_ncType : java::types::NamespaceClassifierReference {
 				classifierReferences = getter_references : java::types::ClassifierReference {
-					target = varClass
+					target = varClass2
 				}
 			}
 		};
@@ -897,9 +895,10 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			parameters = set_para : java::parameters::OrdinaryParameter {
 				typeReference = param_type : java::types::NamespaceClassifierReference {
 					classifierReferences = para_references : java::types::ClassifierReference {
-						target = varClass
+						target = varClass3
 					}
-				}
+				},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -920,13 +919,18 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_ncType : java::types::NamespaceClassifierReference {
 				classifierReferences = prop_ref : java::types::ClassifierReference {
-					target = varClass
+					target = varClass,
+					target = varClass2,
+					target = varClass3
 				}
-			}
+			},
+			name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Int {
+
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Int{}
@@ -937,7 +941,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Int{}
+				typeReference = set : java::types::Int{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -956,11 +961,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Int{}
+			typeReference = prop_i : java::types::Int{},
+			name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Byte {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Byte{}
@@ -971,7 +979,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Byte{}
+				typeReference = set : java::types::Byte{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -990,11 +999,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Byte{}
+			typeReference = prop_i : java::types::Byte{},
+				name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Char {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Char{}
@@ -1005,7 +1017,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Char{}
+				typeReference = set : java::types::Char{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -1024,11 +1037,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Char{}
+			typeReference = prop_i : java::types::Char{},
+				name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Double {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Double{}
@@ -1039,7 +1055,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Double{}
+				typeReference = set : java::types::Double{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -1058,11 +1075,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Double{}
+			typeReference = prop_i : java::types::Double{},
+				name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Float {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Float{}
@@ -1073,7 +1093,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Float{}
+				typeReference = set : java::types::Float{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -1092,11 +1113,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Float{}
+			typeReference = prop_i : java::types::Float{},
+				name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Long {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Long{}
@@ -1107,7 +1131,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Long{}
+				typeReference = set : java::types::Long{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -1126,11 +1151,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Long{}
+			typeReference = prop_i : java::types::Long{},
+				name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Short {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Short{}
@@ -1141,7 +1169,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Short{}
+				typeReference = set : java::types::Short{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -1160,11 +1189,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Short{}
+			typeReference = prop_i : java::types::Short{},
+				name = varName
 		};
 	}
 	
 	relation Mem2Prop_TypeReference_Boolean {
+		
+		varName : String;
 
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_i : java::types::Boolean{}
@@ -1175,7 +1207,8 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		enforce domain JAVA setter: java::members::ClassMethod  {
 			parameters = set_para : java::parameters::OrdinaryParameter {
-				typeReference = set : java::types::Boolean{}
+				typeReference = set : java::types::Boolean{},
+				name = varName
 			},
 			statements = set_stat : java::statements::ExpressionStatement {
 				expression = set_expr : java::expressions::AssignmentExpression {
@@ -1194,13 +1227,15 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		
 		enforce domain PROPJAVA property: properties::Property {
-			typeReference = prop_i : java::types::Boolean{}
+			typeReference = prop_i : java::types::Boolean{},
+				name = varName
 		};
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_NamespaceClassifierReference {
 
 		varClass : java::classifiers::Classifier;
+		varClass2 : java::classifiers::Classifier;
 				
 		enforce domain JAVA field: java::members::Field  {
 			typeReference = field_ncType : java::types::NamespaceClassifierReference {
@@ -1213,14 +1248,15 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain JAVA getter: java::members::ClassMethod  {
 			typeReference = getter_ncType : java::types::NamespaceClassifierReference {
 				classifierReferences = getter_references : java::types::ClassifierReference {
-					target = varClass
+					target = varClass2
 				}
 			}
 		};
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_ncType : java::types::NamespaceClassifierReference {
 				classifierReferences = prop_ref : java::types::ClassifierReference {
-					target = varClass
+					target = varClass,
+					target = varClass2
 				}
 			}
 		};
@@ -1447,9 +1483,13 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			let selfClassifierReference : java::types::ClassifierReference = 
 				selfNamespaceReference.classifierReferences->first() in
 			
-	--		if name.oclIsUndefined() ...
-			classifierReference.target.name = selfClassifierReference.target.name
-		
+			if classifierReference.target.name.oclIsUndefined() or
+				selfClassifierReference.target.name.oclIsUndefined() then
+				true
+			else
+				classifierReference.target.name = selfClassifierReference.target.name
+			endif
+			
 		else if t1.oclIsTypeOf(java::types::Int) and 
 				t2.oclIsTypeOf(java::types::Int) then
 			true

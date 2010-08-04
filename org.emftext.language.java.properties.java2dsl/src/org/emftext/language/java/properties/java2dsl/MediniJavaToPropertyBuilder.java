@@ -138,7 +138,7 @@ public class MediniJavaToPropertyBuilder
 		URI xmiSourceURI = 
 			resource.getURI().appendFileExtension("xmi");
 		
-		URI closureResourceURI =
+		URI propertyResourceURI =
 			resource.getURI().trimFileExtension().appendFileExtension("propjava");
 		
 		URI xmiTargetURI = 
@@ -187,8 +187,8 @@ public class MediniJavaToPropertyBuilder
 			
 			if(starter.isHandledInterestingRules()){
 			
-				PropjavaResource closureResource = 
-					(PropjavaResource)resource.getResourceSet().createResource(closureResourceURI);
+				PropjavaResource propertyResource = 
+					(PropjavaResource)resource.getResourceSet().createResource(propertyResourceURI);
 			
 				XMIResource xmiResourceTransformed = 
 					(XMIResource)resource.getResourceSet().createResource(xmiTargetURI);
@@ -199,51 +199,51 @@ public class MediniJavaToPropertyBuilder
 					System.out.println(e);
 				}
 				
-				closureResource.getContents().addAll(
+				propertyResource.getContents().addAll(
 						EcoreUtil.copyAll(
 								xmiResourceTransformed.getContents()));
 				
 				//TODO only save when necessary
 				
-				URI closureTempResourceURI =
+				URI propertyTempResourceURI =
 					resource.getURI().trimFileExtension().trimSegments(1).appendSegment(
 							resource.getURI().trimFileExtension().segment(
 									resource.getURI().segmentCount()-1)
-									.concat("_transformed")).appendFileExtension("closure");
-				PropjavaResource closureResourceTemp = 
-					(PropjavaResource)resource.getResourceSet().createResource(closureTempResourceURI);
+									.concat("_transformed")).appendFileExtension("propjava");
+				PropjavaResource propertyResourceTemp = 
+					(PropjavaResource)resource.getResourceSet().createResource(propertyTempResourceURI);
 			
-				closureResourceTemp.getContents().addAll(
+				propertyResourceTemp.getContents().addAll(
 						EcoreUtil.copyAll(xmiResourceTransformed.getContents()));
 				try {
-					closureResourceTemp.save(null);
+					propertyResourceTemp.save(null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				
-				File closureResourceTempFile = new File(
-					rootPathFile.toString().concat(closureTempResourceURI.toPlatformString(true)));
-				File closureResourceFile = new File(
-						rootPathFile.toString().concat(closureResourceURI.toPlatformString(true)));
+				File propertyResourceTempFile = new File(
+					rootPathFile.toString().concat(propertyTempResourceURI.toPlatformString(true)));
+				File propertyResourceFile = new File(
+						rootPathFile.toString().concat(propertyResourceURI.toPlatformString(true)));
 					
 				boolean hasContentChanged = false;
 				
 				try {
-					ByteArrayInputStream closureResourceTempFileBytes =
-						 new ByteArrayInputStream(StreamUtil.getContent(closureResourceTempFile));
+					ByteArrayInputStream propertyResourceTempFileBytes =
+						 new ByteArrayInputStream(StreamUtil.getContent(propertyResourceTempFile));
 						
 					hasContentChanged = 
 						StreamUtil.storeContentIfChanged(
-								closureResourceFile, closureResourceTempFileBytes);
+								propertyResourceFile, propertyResourceTempFileBytes);
 					if(hasContentChanged)
-						System.out.println(closureResourceURI + " content was changed!");
+						System.out.println(propertyResourceURI + " content was changed!");
 				
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				
 				try {
-					closureResourceTemp.delete(null);
+					propertyResourceTemp.delete(null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
