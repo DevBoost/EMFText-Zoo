@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.ecoredoc.resource.ecoredoc.analysis;
+package org.emftext.language.emfdoc.resource.emfdoc.analysis;
 
 public class EmfdocQUOTED_34_34_92TokenResolver implements org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocTokenResolver {
 	

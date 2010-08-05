@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.ecoredoc.resource.ecoredoc.mopp;
+package org.emftext.language.emfdoc.resource.emfdoc.mopp;
 
 import java.io.IOException;
 

@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.ecoredoc.resource.ecoredoc.analysis;
+package org.emftext.language.emfdoc.resource.emfdoc.analysis;
 
 public class EmfdocIDTokenResolver implements org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocTokenResolver {
 	

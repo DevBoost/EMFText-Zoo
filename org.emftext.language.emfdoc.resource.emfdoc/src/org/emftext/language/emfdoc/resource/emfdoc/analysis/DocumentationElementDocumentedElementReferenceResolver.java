@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.ecoredoc.resource.ecoredoc.analysis;
+package org.emftext.language.emfdoc.resource.emfdoc.analysis;
 
 import java.util.Collection;
 import java.util.Map;
