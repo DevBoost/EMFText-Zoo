@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocMetaInformation;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocPlugin;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocMetaInformation;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocPlugin;
 
 public class ExtractDocumentationAction implements IObjectActionDelegate {
     
@@ -47,7 +47,7 @@ public class ExtractDocumentationAction implements IObjectActionDelegate {
         try {                 
         	
     		URI ecoreURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-    		URI ecoreDocURI = ecoreURI.trimFileExtension().appendFileExtension(new EcoredocMetaInformation().getSyntaxName());
+    		URI ecoreDocURI = ecoreURI.trimFileExtension().appendFileExtension(new EmfdocMetaInformation().getSyntaxName());
 			
 			if (ecoreDocURI != null && ecoreDocURI.isPlatform()) {
 				IResource workspaceMember = ResourcesPlugin.getWorkspace().getRoot().findMember(ecoreDocURI.toPlatformString(true));
@@ -68,13 +68,13 @@ public class ExtractDocumentationAction implements IObjectActionDelegate {
         	e.printStackTrace();
         	Shell shell = new Shell();
 			MessageDialog.openInformation(shell, e.getClass().getName(), e.getMessage());
-        	EcoredocPlugin.logError("Exception while extracting documentation.", e);
+        	EmfdocPlugin.logError("Exception while extracting documentation.", e);
         }
         catch (InterruptedException e) {
         	e.printStackTrace();
         	Shell shell = new Shell();
 			MessageDialog.openInformation(shell, e.getClass().getName(), e.getMessage());
-			EcoredocPlugin.logError("Exception while extracting documentation.", e);
+			EmfdocPlugin.logError("Exception while extracting documentation.", e);
         }
     }
     

@@ -16,15 +16,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.ecoredoc.Documentation;
-import org.emftext.language.ecoredoc.DocumentationElement;
+import org.emftext.language.emfdoc.Documentation;
+import org.emftext.language.emfdoc.DocumentationElement;
 
-public class EmfdocBuilder implements org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocBuilder {
+public class EmfdocBuilder implements org.emftext.language.emfdoc.resource.emfdoc.IEmfdocBuilder {
 	
 	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
 		return true;
 	}
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public org.eclipse.core.runtime.IStatus build(org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		EList<EObject> contents = resource.getContents();
 		if (contents.isEmpty()) {
 			return org.eclipse.core.runtime.Status.OK_STATUS;
@@ -49,7 +49,7 @@ public class EmfdocBuilder implements org.emftext.language.ecoredoc.resource.eco
 			eResource.save(null);
 			return org.eclipse.core.runtime.Status.OK_STATUS;
 		} catch (IOException e) {
-			return new Status(IStatus.ERROR, EcoredocPlugin.PLUGIN_ID, "Exception while adding documentation to Ecore model.");
+			return new Status(IStatus.ERROR, EmfdocPlugin.PLUGIN_ID, "Exception while adding documentation to Ecore model.");
 		}
 	}
 }

@@ -8,37 +8,37 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.ecoredoc.DocumentationElement;
-import org.emftext.language.ecoredoc.ecoredocPackage;
-import org.emftext.language.ecoredoc.resource.ecoredoc.EcoredocEProblemType;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocProblem;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocQuickFix;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocResourcePostProcessor;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocProblem;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocQuickFix;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocResource;
-import org.emftext.language.ecoredoc.resource.ecoredoc.util.EcoredocEObjectUtil;
+import org.emftext.language.emfdoc.DocumentationElement;
+import org.emftext.language.emfdoc.EmfdocPackage;
+import org.emftext.language.emfdoc.resource.emfdoc.EmfdocEProblemType;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocProblem;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocQuickFix;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocResourcePostProcessor;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocProblem;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocQuickFix;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocResource;
+import org.emftext.language.emfdoc.resource.emfdoc.util.EmfdocEObjectUtil;
 
-public class DuplicateDocumentationElementChecker implements IEcoredocResourcePostProcessor {
+public class DuplicateDocumentationElementChecker implements IEmfdocResourcePostProcessor {
 
-	public void process(EcoredocResource resource) {
+	public void process(EmfdocResource resource) {
 		Set<EModelElement> documentedElements = new LinkedHashSet<EModelElement>();
 		EList<EObject> contents = resource.getContents();
 		for (EObject content : contents) {
-			Collection<DocumentationElement> documentationElements = EcoredocEObjectUtil.getObjectsByType(content.eAllContents(), ecoredocPackage.eINSTANCE.getDocumentationElement());
+			Collection<DocumentationElement> documentationElements = EmfdocEObjectUtil.getObjectsByType(content.eAllContents(), EmfdocPackage.eINSTANCE.getDocumentationElement());
 			for (final DocumentationElement documentationElement : documentationElements) {
 				EModelElement documentedElement = documentationElement.getDocumentedElement();
 				if (documentedElements.contains(documentedElement)) {
-					IEcoredocQuickFix quickFix = new EcoredocQuickFix("Remove documentation", "IMG_ELCL_REMOVE", documentationElement) {
+					IEmfdocQuickFix quickFix = new EmfdocQuickFix("Remove documentation", "IMG_ELCL_REMOVE", documentationElement) {
 						
 						@Override
 						public void applyChanges() {
 							EcoreUtil.remove(documentationElement);
 						}
 					};
-					IEcoredocProblem problem = new EcoredocProblem(
+					IEmfdocProblem problem = new EmfdocProblem(
 							"Found duplicate documentation", 
-							EcoredocEProblemType.ERROR, 
+							EmfdocEProblemType.ERROR, 
 							quickFix
 					);
 					resource.addProblem(

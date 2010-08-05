@@ -1,11 +1,11 @@
 package org.emftext.language.emfdoc.constraints;
 
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocResourcePostProcessor;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocResource;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocResourcePostProcessor;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocResource;
 
-public class EMFDocConstraintChecker implements IEcoredocResourcePostProcessor {
+public class EMFDocConstraintChecker implements IEmfdocResourcePostProcessor {
 
-	public void process(EcoredocResource resource) {
+	public void process(EmfdocResource resource) {
 		new DuplicateDocumentationElementChecker().process(resource);
 	}
 }

@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.emftext.language.ecoredoc.Documentation;
-import org.emftext.language.ecoredoc.DocumentationElement;
-import org.emftext.language.ecoredoc.ecoredocFactory;
-import org.emftext.language.ecoredoc.resource.ecoredoc.mopp.EcoredocPlugin;
-import org.emftext.language.ecoredoc.resource.ecoredoc.util.EcoredocEObjectUtil;
+import org.emftext.language.emfdoc.Documentation;
+import org.emftext.language.emfdoc.DocumentationElement;
+import org.emftext.language.emfdoc.EmfdocFactory;
+import org.emftext.language.emfdoc.resource.emfdoc.mopp.EmfdocPlugin;
+import org.emftext.language.emfdoc.resource.emfdoc.util.EmfdocEObjectUtil;
 
 public class ExtractDocumentationProcess implements IRunnableWithProgress {
 	
@@ -51,7 +51,7 @@ public class ExtractDocumentationProcess implements IRunnableWithProgress {
 		Documentation existingDoc = null;
 		EList<EObject> docContents = ecoreDocResource.getContents();
 		if (docContents.isEmpty()) {
-			Documentation newDocumentation = ecoredocFactory.eINSTANCE.createDocumentation();
+			Documentation newDocumentation = EmfdocFactory.eINSTANCE.createDocumentation();
 			docContents.add(newDocumentation);
 		}
 		existingDoc = (Documentation) docContents.get(0);
@@ -61,7 +61,7 @@ public class ExtractDocumentationProcess implements IRunnableWithProgress {
 			if (existingDoc.getDocumentedPackage() == null) {
 				existingDoc.setDocumentedPackage(ePackage);
 			}
-			Collection<EModelElement> elements = EcoredocEObjectUtil.getObjectsByType(ePackage.eAllContents(), EcorePackage.eINSTANCE.getEModelElement());
+			Collection<EModelElement> elements = EmfdocEObjectUtil.getObjectsByType(ePackage.eAllContents(), EcorePackage.eINSTANCE.getEModelElement());
 			for (EModelElement element : elements) {
 				String documentation = EcoreUtil.getDocumentation(element);
 				String existingDocumentation = findExistingDocumentation(existingDoc, element);
@@ -69,7 +69,7 @@ public class ExtractDocumentationProcess implements IRunnableWithProgress {
 					// found some documentation
 				} else {
 					if (documentation != null && documentation.trim().length() != 0) {
-						DocumentationElement newDocElement = ecoredocFactory.eINSTANCE.createDocumentationElement();
+						DocumentationElement newDocElement = EmfdocFactory.eINSTANCE.createDocumentationElement();
 						newDocElement.setDocumentedElement(element);
 						newDocElement.setText(documentation);
 						existingDoc.getDocumentationElements().add(newDocElement);
@@ -80,7 +80,7 @@ public class ExtractDocumentationProcess implements IRunnableWithProgress {
 		try {
 			ecoreDocResource.save(null);
 		} catch (IOException e) {
-			EcoredocPlugin.logError("Exception while saving ecore documentation.", e);
+			EmfdocPlugin.logError("Exception while saving ecore documentation.", e);
 		}
 	}
 

@@ -15,16 +15,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.emftext.language.ecoredoc.DocumentationElement;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocReferenceResolveResult;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocReferenceResolver;
-import org.emftext.language.ecoredoc.resource.ecoredoc.util.EcoredocEObjectUtil;
+import org.emftext.language.emfdoc.DocumentationElement;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocReferenceResolveResult;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocReferenceResolver;
+import org.emftext.language.emfdoc.resource.emfdoc.util.EmfdocEObjectUtil;
 
-public class DocumentationElementDocumentedElementReferenceResolver implements IEcoredocReferenceResolver<DocumentationElement, EModelElement> {
+public class DocumentationElementDocumentedElementReferenceResolver implements IEmfdocReferenceResolver<DocumentationElement, EModelElement> {
 	
-	public void resolve(String identifier, DocumentationElement container, EReference reference, int position, boolean resolveFuzzy, final IEcoredocReferenceResolveResult<EModelElement> result) {
+	public void resolve(String identifier, DocumentationElement container, EReference reference, int position, boolean resolveFuzzy, final IEmfdocReferenceResolveResult<EModelElement> result) {
 		EPackage documentedPackage = container.getDocumentation().getDocumentedPackage();
-		Collection<EModelElement> elements = EcoredocEObjectUtil.getObjectsByType(documentedPackage.eAllContents(), EcorePackage.eINSTANCE.getEModelElement());
+		Collection<EModelElement> elements = EmfdocEObjectUtil.getObjectsByType(documentedPackage.eAllContents(), EcorePackage.eINSTANCE.getEModelElement());
 		for (EModelElement element : elements) {
 			String path = getPath(element);
 			if (path == null) {

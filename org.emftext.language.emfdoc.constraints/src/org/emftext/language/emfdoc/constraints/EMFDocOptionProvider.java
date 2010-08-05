@@ -3,18 +3,18 @@ package org.emftext.language.emfdoc.constraints;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocOptionProvider;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocOptions;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocResourcePostProcessor;
-import org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocResourcePostProcessorProvider;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocOptionProvider;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocOptions;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocResourcePostProcessor;
+import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocResourcePostProcessorProvider;
 
-public class EMFDocOptionProvider implements IEcoredocOptionProvider, IEcoredocResourcePostProcessorProvider {
+public class EMFDocOptionProvider implements IEmfdocOptionProvider, IEmfdocResourcePostProcessorProvider {
 
 	public Map<?, ?> getOptions() {
-		return Collections.singletonMap(IEcoredocOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+		return Collections.singletonMap(IEmfdocOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 	}
 
-	public IEcoredocResourcePostProcessor getResourcePostProcessor() {
+	public IEmfdocResourcePostProcessor getResourcePostProcessor() {
 		return new EMFDocConstraintChecker();
 	}
 }
