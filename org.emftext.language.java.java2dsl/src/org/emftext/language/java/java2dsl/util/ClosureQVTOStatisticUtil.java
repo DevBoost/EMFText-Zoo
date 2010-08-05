@@ -39,7 +39,7 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 	public void writeStatistic() {
 		
 		System.out.println("Klassen: "+countClasses);
-		System.out.println("Methoden: "+countNewConstructorCall);
+		System.out.println("ConstructorCalls: "+countNewConstructorCall);
 		System.out.println("MethodCalls: "+countMethodCalls);
 		System.out.println("Closures: "+countClosures);
 

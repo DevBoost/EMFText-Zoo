@@ -242,7 +242,6 @@ public class MediniQVTStarter extends AbstractStarter{
 						this.logger);
 		} catch (Exception e) {
 			System.out.println(e);
-			e.printStackTrace();
 		}
 		
 		if(debug){

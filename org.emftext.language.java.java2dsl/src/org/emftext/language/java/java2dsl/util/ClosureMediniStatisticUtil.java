@@ -51,9 +51,12 @@ public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 	public void writeStatistic() {
 		
 		System.out.println("Klassen: "+countClasses);
-		System.out.println("Methoden: "+countNewConstructorCall);
 		System.out.println("MethodCalls: "+countMethodCalls);
 		System.out.println("Closures: "+countClosures);
+		System.out.println("NewConstructorCall: "+countNewConstructorCall);
+		System.out.println("Interfaces: "+countInterface);
+		System.out.println("Enumerations: "+countEnumeration);
+		System.out.println("Annotations: "+countAnnotation);
 
 	}
 

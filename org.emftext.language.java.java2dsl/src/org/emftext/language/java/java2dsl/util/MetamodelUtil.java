@@ -28,8 +28,6 @@ public class MetamodelUtil {
 		metaPackages.add(PropertiesPackage.eINSTANCE);
 		metaPackages.add(ClosuresPackage.eINSTANCE);
 		
-		System.out.println(metaPackages);
-		
 		return metaPackages;
 		
 	}
