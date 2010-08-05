@@ -1,4 +1,4 @@
-package org.emftext.language.ecoredoc.ui;
+package org.emftext.language.emfdoc.ui;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
