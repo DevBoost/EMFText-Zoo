@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.ecoredoc.provider;
+package org.emftext.language.emfdoc.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 
@@ -18,14 +18,14 @@ import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public final class ecoredocEditPlugin extends EMFPlugin {
+public final class EmfdocEditPlugin extends EMFPlugin {
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final ecoredocEditPlugin INSTANCE = new ecoredocEditPlugin();
+	public static final EmfdocEditPlugin INSTANCE = new EmfdocEditPlugin();
 
 	/**
 	 * Keep track of the singleton.
@@ -41,7 +41,7 @@ public final class ecoredocEditPlugin extends EMFPlugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ecoredocEditPlugin() {
+	public EmfdocEditPlugin() {
 		super
 		  (new ResourceLocator [] {
 		     EcoreEditPlugin.INSTANCE,

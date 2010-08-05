@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.ecoredoc.provider;
+package org.emftext.language.emfdoc.provider;
 
 
 import java.util.Collection;
@@ -15,8 +15,9 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,20 +25,20 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.ecoredoc.DocumentationElement;
+import org.emftext.language.ecoredoc.Documentation;
+import org.emftext.language.ecoredoc.ecoredocFactory;
 import org.emftext.language.ecoredoc.ecoredocPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.ecoredoc.DocumentationElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.ecoredoc.Documentation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DocumentationElementItemProvider
+public class DocumentationItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -51,7 +52,7 @@ public class DocumentationElementItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DocumentationElementItemProvider(AdapterFactory adapterFactory) {
+	public DocumentationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -66,49 +67,25 @@ public class DocumentationElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addDocumentationPropertyDescriptor(object);
-			addDocumentedElementPropertyDescriptor(object);
-			addTextPropertyDescriptor(object);
+			addDocumentedPackagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Documentation feature.
+	 * This adds a property descriptor for the Documented Package feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDocumentationPropertyDescriptor(Object object) {
+	protected void addDocumentedPackagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DocumentationElement_documentation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentationElement_documentation_feature", "_UI_DocumentationElement_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION_ELEMENT__DOCUMENTATION,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Documented Element feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDocumentedElementPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DocumentationElement_documentedElement_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentationElement_documentedElement_feature", "_UI_DocumentationElement_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION_ELEMENT__DOCUMENTED_ELEMENT,
+				 getString("_UI_Documentation_documentedPackage_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Documentation_documentedPackage_feature", "_UI_Documentation_type"),
+				 ecoredocPackage.Literals.DOCUMENTATION__DOCUMENTED_PACKAGE,
 				 true,
 				 false,
 				 true,
@@ -118,36 +95,44 @@ public class DocumentationElementItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Text feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTextPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DocumentationElement_text_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentationElement_text_feature", "_UI_DocumentationElement_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION_ELEMENT__TEXT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(ecoredocPackage.Literals.DOCUMENTATION__DOCUMENTATION_ELEMENTS);
+		}
+		return childrenFeatures;
 	}
 
 	/**
-	 * This returns DocumentationElement.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns Documentation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DocumentationElement"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Documentation"));
 	}
 
 	/**
@@ -158,21 +143,14 @@ public class DocumentationElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = "";
-		DocumentationElement documentationElement = (DocumentationElement)object;
-		EModelElement documentedElement = documentationElement.getDocumentedElement();
-		if (documentedElement != null) {
-			if (documentedElement instanceof ENamedElement) {
-				ENamedElement namedElement = (ENamedElement) documentedElement;
-				label = namedElement.getName();
-			} else {
-				label = documentedElement.eClass().getName();
-			}
-			label += ": ";
+		String additionalText = "";
+		if (object instanceof Documentation) {
+			Documentation documentation = (Documentation) object;
+			int classCoverage = documentation.getCoverage(EcorePackage.eINSTANCE.getEClass());
+			int totalCoverage = documentation.getCoverage(EcorePackage.eINSTANCE.getEModelElement());
+			additionalText = " " + classCoverage + "%" + ", " + totalCoverage + "%";
 		}
-		String text = documentationElement.getText();
-		label += text == null ? "" : text.trim();
-		return label;
+		return getString("_UI_Documentation_type") + additionalText;
 	}
 
 	/**
@@ -186,10 +164,9 @@ public class DocumentationElementItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DocumentationElement.class)) {
-			case ecoredocPackage.DOCUMENTATION_ELEMENT__DOCUMENTATION:
-			case ecoredocPackage.DOCUMENTATION_ELEMENT__TEXT:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+		switch (notification.getFeatureID(Documentation.class)) {
+			case ecoredocPackage.DOCUMENTATION__DOCUMENTATION_ELEMENTS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -205,6 +182,11 @@ public class DocumentationElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ecoredocPackage.Literals.DOCUMENTATION__DOCUMENTATION_ELEMENTS,
+				 ecoredocFactory.eINSTANCE.createDocumentationElement()));
 	}
 
 	/**
@@ -215,7 +197,7 @@ public class DocumentationElementItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return ecoredocEditPlugin.INSTANCE;
+		return EmfdocEditPlugin.INSTANCE;
 	}
 
 }

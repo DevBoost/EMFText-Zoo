@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.ecoredoc.provider;
+package org.emftext.language.emfdoc.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +36,7 @@ import org.emftext.language.ecoredoc.util.ecoredocAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ecoredocItemProviderAdapterFactory extends ecoredocAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class EmfdocItemProviderAdapterFactory extends ecoredocAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class ecoredocItemProviderAdapterFactory extends ecoredocAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ecoredocItemProviderAdapterFactory() {
+	public EmfdocItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
