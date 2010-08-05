@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.ecoredoc.Documentation;
 import org.emftext.language.ecoredoc.DocumentationElement;
 
-public class EcoredocBuilder implements org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocBuilder {
+public class EmfdocBuilder implements org.emftext.language.ecoredoc.resource.ecoredoc.IEcoredocBuilder {
 	
 	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
 		return true;
