@@ -12,12 +12,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -27,13 +24,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.emftext.language.ecoredoc.Documentation;
-import org.emftext.language.ecoredoc.ecoredocFactory;
-import org.emftext.language.ecoredoc.ecoredocPackage;
+import org.emftext.language.emfdoc.Documentation;
+import org.emftext.language.emfdoc.EmfdocFactory;
+import org.emftext.language.emfdoc.EmfdocPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.ecoredoc.Documentation} object.
+ * This is the item provider adapter for a {@link org.emftext.language.emfdoc.Documentation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -85,7 +81,7 @@ public class DocumentationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Documentation_documentedPackage_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Documentation_documentedPackage_feature", "_UI_Documentation_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION__DOCUMENTED_PACKAGE,
+				 EmfdocPackage.Literals.DOCUMENTATION__DOCUMENTED_PACKAGE,
 				 true,
 				 false,
 				 true,
@@ -106,7 +102,7 @@ public class DocumentationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ecoredocPackage.Literals.DOCUMENTATION__DOCUMENTATION_ELEMENTS);
+			childrenFeatures.add(EmfdocPackage.Literals.DOCUMENTATION__DOCUMENTATION_ELEMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -165,7 +161,7 @@ public class DocumentationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Documentation.class)) {
-			case ecoredocPackage.DOCUMENTATION__DOCUMENTATION_ELEMENTS:
+			case EmfdocPackage.DOCUMENTATION__DOCUMENTATION_ELEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -185,8 +181,8 @@ public class DocumentationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ecoredocPackage.Literals.DOCUMENTATION__DOCUMENTATION_ELEMENTS,
-				 ecoredocFactory.eINSTANCE.createDocumentationElement()));
+				(EmfdocPackage.Literals.DOCUMENTATION__DOCUMENTATION_ELEMENTS,
+				 EmfdocFactory.eINSTANCE.createDocumentationElement()));
 	}
 
 	/**

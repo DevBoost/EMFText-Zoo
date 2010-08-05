@@ -12,7 +12,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -24,8 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.emftext.language.ecoredoc.util.ecoredocAdapterFactory;
+import org.emftext.language.emfdoc.util.EmfdocAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -36,7 +34,7 @@ import org.emftext.language.ecoredoc.util.ecoredocAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EmfdocItemProviderAdapterFactory extends ecoredocAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class EmfdocItemProviderAdapterFactory extends EmfdocAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -76,7 +74,7 @@ public class EmfdocItemProviderAdapterFactory extends ecoredocAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.ecoredoc.Documentation} instances.
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.emfdoc.Documentation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -84,7 +82,7 @@ public class EmfdocItemProviderAdapterFactory extends ecoredocAdapterFactory imp
 	protected DocumentationItemProvider documentationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.ecoredoc.Documentation}.
+	 * This creates an adapter for a {@link org.emftext.language.emfdoc.Documentation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -99,7 +97,7 @@ public class EmfdocItemProviderAdapterFactory extends ecoredocAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.ecoredoc.DocumentationElement} instances.
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.emfdoc.DocumentationElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -107,7 +105,7 @@ public class EmfdocItemProviderAdapterFactory extends ecoredocAdapterFactory imp
 	protected DocumentationElementItemProvider documentationElementItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.ecoredoc.DocumentationElement}.
+	 * This creates an adapter for a {@link org.emftext.language.emfdoc.DocumentationElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

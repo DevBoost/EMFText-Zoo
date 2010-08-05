@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -27,12 +25,11 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.emftext.language.ecoredoc.DocumentationElement;
-import org.emftext.language.ecoredoc.ecoredocPackage;
+import org.emftext.language.emfdoc.DocumentationElement;
+import org.emftext.language.emfdoc.EmfdocPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.ecoredoc.DocumentationElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.emfdoc.DocumentationElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -66,33 +63,10 @@ public class DocumentationElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addDocumentationPropertyDescriptor(object);
 			addDocumentedElementPropertyDescriptor(object);
 			addTextPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Documentation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDocumentationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DocumentationElement_documentation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentationElement_documentation_feature", "_UI_DocumentationElement_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION_ELEMENT__DOCUMENTATION,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -108,7 +82,7 @@ public class DocumentationElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DocumentationElement_documentedElement_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentationElement_documentedElement_feature", "_UI_DocumentationElement_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION_ELEMENT__DOCUMENTED_ELEMENT,
+				 EmfdocPackage.Literals.DOCUMENTATION_ELEMENT__DOCUMENTED_ELEMENT,
 				 true,
 				 false,
 				 true,
@@ -130,7 +104,7 @@ public class DocumentationElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_DocumentationElement_text_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentationElement_text_feature", "_UI_DocumentationElement_type"),
-				 ecoredocPackage.Literals.DOCUMENTATION_ELEMENT__TEXT,
+				 EmfdocPackage.Literals.DOCUMENTATION_ELEMENT__TEXT,
 				 true,
 				 false,
 				 false,
@@ -187,8 +161,7 @@ public class DocumentationElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(DocumentationElement.class)) {
-			case ecoredocPackage.DOCUMENTATION_ELEMENT__DOCUMENTATION:
-			case ecoredocPackage.DOCUMENTATION_ELEMENT__TEXT:
+			case EmfdocPackage.DOCUMENTATION_ELEMENT__TEXT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
