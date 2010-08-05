@@ -1,5 +1,5 @@
-SYNTAXDEF ecoredoc
-FOR <http://www.emftext.org/language/ecoredoc>
+SYNTAXDEF emfdoc
+FOR <http://www.emftext.org/language/emfdoc>
 START Documentation
 
 OPTIONS {
