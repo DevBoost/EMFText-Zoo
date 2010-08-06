@@ -1,0 +1,195 @@
+--modeltype CLOSURES uses 'http://www.emftext.org/language/java/closures';  
+--modeltype CLOSURES uses 'platform:/resource/org.emftext.language.java.closures/model/closures.ecore';
+modeltype JAVA uses "http://www.emftext.org/java";
+
+-- in place transformation funktioniert nun auch
+-- 'inout' ist entscheidend
+-- grundsätzlich werden alle methoden und attribute übernommen,
+-- sie müssen manuell entfernt werden per 'exclude()' methode' 
+
+transformation Java2Closure(inout java : JAVA);
+
+main() {
+	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
+	java.objects()[JAVA::statements::StatementListContainer]->map Statements_StatementListContainer();
+	java.objects()[JAVA::statements::StatementContainer]->map Statements_StatementContainer();
+--	java.objects()[JAVA::_references::MethodCall]->map References_MethodCall();
+--	java.objects()[JAVA::statements::ExpressionStatement]->map Expressions_ExpressionStatement();
+}
+
+mapping JAVA::classifiers::Class::Classifiers_Class(){}
+
+mapping inout JAVA::statements::StatementListContainer::Statements_StatementListContainer(){
+	
+	self.statements->forEach(s){
+		
+		var condition : JAVA::statements::Condition; 
+		var locVarStat : JAVA::statements::LocalVariableStatement;
+		var ret : JAVA::statements::Return;
+		
+		if s.oclIsTypeOf(JAVA::statements::Condition) then
+			condition := s.oclAsType(JAVA::statements::Condition)
+		endif;
+		if not condition.oclIsUndefined() then
+			if condition.statement.oclIsTypeOf(JAVA::statements::ExpressionStatement) and
+				condition.statement.oclAsType(
+					JAVA::statements::ExpressionStatement).expression.
+					oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
+				locVarStat := map Condition2CondExpr_LocVarStat(condition)
+			else if condition.statement.oclIsTypeOf(JAVA::statements::Return) then
+				ret := map Condition2CondExpr_Return(condition)
+			endif endif
+		endif;
+--		if not locVarStat.oclIsUndefined() then
+--			self.map variables_LocalVariable(locVarStat.variable)
+--		endif;
+		if not locVarStat.oclIsUndefined() then
+			self.statements := 
+				self.statements->
+					append(locVarStat)->
+					excluding(s)
+		endif;
+		if not ret.oclIsUndefined() then
+			self.statements := 
+				self.statements->append(ret)->excluding(s)
+		endif;
+	}
+}
+
+mapping inout JAVA::statements::StatementContainer::Statements_StatementContainer(){
+	
+
+	var condition : JAVA::statements::Condition; 
+	var locVarStat : JAVA::statements::LocalVariableStatement;
+	var ret : JAVA::statements::Return;
+	
+	if self.oclIsTypeOf(JAVA::statements::Condition) then
+		condition := self.oclAsType(JAVA::statements::Condition)
+	endif;
+	if not condition.oclIsUndefined() then
+		if condition.statement.oclIsTypeOf(JAVA::statements::ExpressionStatement) and
+			condition.statement.oclAsType(
+				JAVA::statements::ExpressionStatement).expression.
+				oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
+			locVarStat := map Condition2CondExpr_LocVarStat(condition)
+		else if condition.statement.oclIsTypeOf(JAVA::statements::Return) then
+			ret := map Condition2CondExpr_Return(condition)
+		endif endif
+	endif;
+	if not locVarStat.oclIsUndefined() then
+		self.statement := locVarStat
+	endif;
+	if not ret.oclIsUndefined() then
+		self.statement := ret
+	endif;
+
+}
+
+mapping Condition2CondExpr_Return (in c : JAVA::statements::Condition) : 
+	JAVA::statements::Return{
+	
+	returnValue := map expressions_ConditionalExpression(c);
+}
+
+mapping Condition2CondExpr_LocVarStat (in c : JAVA::statements::Condition) : 
+	JAVA::statements::LocalVariableStatement{
+	
+	var condExpr : JAVA::expressions::ConditionalExpression;
+	var localVariable : JAVA::variables::LocalVariable;
+
+	condExpr := map expressions_ConditionalExpression(c);
+	
+	if not condExpr.expressionIf.oclIsUndefined() and
+		not condExpr.expressionElse.oclIsUndefined() then
+			
+		localVariable := 
+			variables_LocalVariable(c)
+	endif;
+	if not localVariable.oclIsUndefined() then
+		localVariable.map set_initialValue(condExpr)
+	endif;
+	if not localVariable.oclIsUndefined() then
+		variable := localVariable
+	endif;
+}
+
+query variables_LocalVariable(c : JAVA::statements::Condition) : 
+	JAVA::variables::LocalVariable {
+	
+	return	java.objects()[JAVA::variables::LocalVariable]->selectOne(l|
+			l.name = 
+			c.statement.oclAsType(
+			JAVA::statements::ExpressionStatement).expression.
+			oclAsType(JAVA::expressions::AssignmentExpression).child.
+			oclAsType(JAVA::_references::IdentifierReference).target.name).
+			clone().oclAsType(JAVA::variables::LocalVariable);
+}
+
+mapping inout JAVA::statements::StatementListContainer::variables_LocalVariable(
+	lv : JAVA::variables::LocalVariable) {
+	
+	self.statements->forEach(s){
+		
+		if s.oclIsTypeOf(JAVA::statements::LocalVariableStatement) then
+			let lvs : JAVA::statements::LocalVariableStatement =
+			s.oclAsType(JAVA::statements::LocalVariableStatement) in
+			if lvs.variable.name = lv.name then
+				self.statements := self.statements->excluding(lvs)
+			endif
+		endif;
+	}
+}
+
+mapping inout JAVA::variables::LocalVariable::set_initialValue(
+	in ce : JAVA::expressions::ConditionalExpression){
+		
+		self.initialValue := ce
+	}
+
+
+
+mapping expressions_ConditionalExpression(in c : JAVA::statements::Condition) : 
+	JAVA::expressions::ConditionalExpression{
+		
+		-- condition
+	child := c.condition.oclAsType(
+		JAVA::expressions::ConditionalExpressionChild);
+
+	-- if expression
+	if c.statement.oclIsTypeOf(JAVA::statements::ExpressionStatement) then
+		if c.statement.oclAsType(
+			JAVA::statements::ExpressionStatement).expression.
+			oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
+			
+		expressionIf := 
+		c.statement.oclAsType(
+			JAVA::statements::ExpressionStatement).expression.
+			oclAsType(JAVA::expressions::AssignmentExpression).value
+		endif
+	else if c.statement.oclIsTypeOf(JAVA::statements::Return) then
+		
+		expressionIf := 
+		c.statement.oclAsType(
+			JAVA::statements::Return).returnValue
+	endif endif;	
+
+	-- else expression
+	if c.elseStatement.oclIsTypeOf(JAVA::statements::ExpressionStatement) then
+		if c.elseStatement.oclAsType(
+			JAVA::statements::ExpressionStatement).expression.
+			oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
+			
+		expressionElse := 
+		c.elseStatement.oclAsType(
+			JAVA::statements::ExpressionStatement).expression.
+			oclAsType(JAVA::expressions::AssignmentExpression).value.
+			oclAsType(JAVA::expressions::AssignmentExpressionChild)
+		endif
+	else if c.elseStatement.oclIsTypeOf(JAVA::statements::Return) then
+		
+		expressionElse := 
+		c.elseStatement.oclAsType(
+			JAVA::statements::Return).returnValue.
+			oclAsType(JAVA::expressions::AssignmentExpressionChild)
+	endif endif;	
+	}  

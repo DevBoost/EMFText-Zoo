@@ -2,36 +2,15 @@ package org.emftext.language.java.java2dsl.util;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.emftext.language.java.JavaPackage;
-import org.emftext.language.java.closures.ClosuresPackage;
-import org.emftext.language.java.properties.PropertiesPackage;
 
 public class MetamodelUtil {
 
 	private static final String extendString = "_transformed";
-	
-	/**
-	 * Collect necessary meta model packages.
-	 * 
-	 * @return
-	 */
-	public static Collection<EPackage> collectMetaModels() {
-		
-		Collection<EPackage> metaPackages = new ArrayList<EPackage>();
-		metaPackages.add(JavaPackage.eINSTANCE);
-		metaPackages.add(PropertiesPackage.eINSTANCE);
-		metaPackages.add(ClosuresPackage.eINSTANCE);
-		
-		return metaPackages;
-		
-	}
-	
+
 	/**
 	 * Helper for XMI loading. Does lazy loading.
 	 * Load a Resource with a name with the help of a ResourceSet.

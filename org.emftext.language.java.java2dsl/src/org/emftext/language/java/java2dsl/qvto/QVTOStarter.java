@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
@@ -11,12 +12,17 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.internal.qvt.oml.trace.TraceRecord;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.emftext.language.java.JavaPackage;
+import org.emftext.language.java.closures.ClosuresPackage;
 import org.emftext.language.java.java2dsl.AbstractStarter;
+import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.java2dsl.util.MetamodelUtil;
+import org.emftext.language.java.properties.PropertiesPackage;
 
 public class QVTOStarter extends AbstractStarter{
 
@@ -28,6 +34,7 @@ public class QVTOStarter extends AbstractStarter{
 	private static boolean debug = false;
 	private static boolean isInPlace = false;
 	private static boolean onlyOneFile = false;
+	private static String metamodelName = "";
 	
 	private static String statisticUtilClassName = "";
 	
@@ -65,10 +72,14 @@ public class QVTOStarter extends AbstractStarter{
 		writeEndTime();
 	}
 	
-	public QVTOStarter(URI inputURI, URI outputURI, 
-						URI transformationFileUri, String inputFolderString,
-						boolean isInPlace, String statisticUtilClassName,
-						List<String> interestingRules){
+	public QVTOStarter(URI inputURI, 
+						URI outputURI, 
+						URI transformationFileUri, 
+						String inputFolderString,
+						boolean isInPlace, 
+						String statisticUtilClassName,
+						List<String> interestingRules,
+						MetaModelName metamodelName){
 		
 		super(5*60*1000,1);
 		
@@ -78,6 +89,7 @@ public class QVTOStarter extends AbstractStarter{
 		QVTOStarter.isInPlace = isInPlace;
 		QVTOStarter.statisticUtilClassName = statisticUtilClassName;
 		QVTOStarter.onlyOneFile = true;
+		QVTOStarter.metamodelName = metamodelName.toString();
 		
 		this.interestingRules = interestingRules;
 		
@@ -115,7 +127,8 @@ public class QVTOStarter extends AbstractStarter{
 					"<timeout> " +
 					"<maxActiveThreads> " +
 					"<inPlace=true> " +
-					"<statisticUtilClassName>");
+					"<statisticUtilClassName>"+
+					"<metamodel name>");
 			return;
 		}
 				
@@ -185,6 +198,15 @@ public class QVTOStarter extends AbstractStarter{
 			return;
 		}
 		
+		// statistic Util ClassName
+		if(args.length > 8){
+			metamodelName = args[8];
+		}
+		else{
+			System.out.println("metamodel name not found");
+			return;
+		}
+		
 		// new constructor
 		new QVTOStarter(timeout, maxActiveThreads);
 		
@@ -205,6 +227,25 @@ public class QVTOStarter extends AbstractStarter{
 	
 	private void writeEndTime(){
 		super.getStatisticUtil().writeEndTime(Calendar.getInstance().getTimeInMillis());
+	}
+	
+	/**
+	 * Collect necessary meta model packages.
+	 * 
+	 * @return
+	 */
+	public Collection<EPackage> collectMetaModels() {
+		
+		Collection<EPackage> metaPackages = new ArrayList<EPackage>();
+		metaPackages.add(JavaPackage.eINSTANCE);
+		
+		if(metamodelName.equals(MetaModelName.CLOSURE.toString()))
+			metaPackages.add(ClosuresPackage.eINSTANCE);
+		if(metamodelName.equals(MetaModelName.PROPERTY.toString()))
+			metaPackages.add(PropertiesPackage.eINSTANCE);
+		
+		return metaPackages;
+		
 	}
 	
 	@Override

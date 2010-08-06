@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTDirectionEnum;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTStarter;
+import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.resource.java.IJavaBuilder;
 import org.emftext.language.java.resource.java.mopp.JavaBuilderAdapter;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
@@ -181,7 +182,8 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 					"CLOSURES", 
 					"ClosureMediniStatisticUtil", 
 					Arrays.asList("Closures_Closure"),
-					MediniQVTDirectionEnum.JAVA2DSL);
+					MediniQVTDirectionEnum.JAVA2DSL,
+					MetaModelName.CLOSURE);
 			
 			if(starter.isHandledInterestingRules()){
 			

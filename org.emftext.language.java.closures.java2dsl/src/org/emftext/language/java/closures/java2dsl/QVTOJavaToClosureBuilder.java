@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
 import org.emftext.language.java.java2dsl.qvto.QVTOStarter;
+import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.resource.java.IJavaBuilder;
 import org.emftext.language.java.resource.java.mopp.JavaBuilderAdapter;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
@@ -173,7 +174,8 @@ public class QVTOJavaToClosureBuilder extends JavaBuilderAdapter implements IJav
 					file.toString().concat(xmiSourceURI.toPlatformString(true)),
 					true,
 					"ClosureQVTOStatisticUtil",
-					Arrays.asList("Closures_Closure"));
+					Arrays.asList("Closures_Closure"),
+					MetaModelName.CLOSURE);
 			
 			if(starter.isHandledInterestingRules()){
 			

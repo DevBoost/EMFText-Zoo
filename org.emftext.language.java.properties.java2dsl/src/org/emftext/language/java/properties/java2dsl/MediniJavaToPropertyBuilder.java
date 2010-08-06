@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTDirectionEnum;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTStarter;
+import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.properties.resource.propjava.mopp.PropjavaResource;
 import org.emftext.language.java.resource.java.IJavaBuilder;
 import org.emftext.language.java.resource.java.mopp.JavaBuilderAdapter;
@@ -183,7 +184,8 @@ public class MediniJavaToPropertyBuilder
 					"PROPJAVA", 
 					"PropertyMediniStatisticUtil", 
 					Arrays.asList("Members_Property","Members_PropertyReadOnly"),
-					MediniQVTDirectionEnum.JAVA2DSL);
+					MediniQVTDirectionEnum.JAVA2DSL,
+					MetaModelName.PROPERTY);
 			
 			if(starter.isHandledInterestingRules()){
 			

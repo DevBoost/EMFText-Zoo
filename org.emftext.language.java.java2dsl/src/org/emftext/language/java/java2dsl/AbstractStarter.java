@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.java2dsl.util.AbstractStatisticUtil;
-import org.emftext.language.java.java2dsl.util.MetamodelUtil;
 
 public abstract class AbstractStarter {
 
@@ -78,7 +77,7 @@ public abstract class AbstractStarter {
 		
 		metaPackages = new ArrayList<EPackage>();
 		
-		for(EPackage _package : MetamodelUtil.collectMetaModels()){
+		for(EPackage _package : collectMetaModels()){
 			registry.put(_package.getNsURI(), _package);
 			metaPackages.add(_package);
 		}
@@ -116,6 +115,8 @@ public abstract class AbstractStarter {
 	}
 	
 	public abstract void launch(File file) throws Exception;
+	
+	public abstract Collection<EPackage> collectMetaModels();
 	
 	public abstract void addStatistics(Object object);
 	

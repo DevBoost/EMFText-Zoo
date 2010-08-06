@@ -28,6 +28,7 @@ import org.emftext.language.java.closures.resource.closure.mopp.ClosureBuilderAd
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTDirectionEnum;
 import org.emftext.language.java.java2dsl.mediniqvt.MediniQVTStarter;
+import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.sdk.util.StreamUtil;
 
@@ -181,7 +182,8 @@ public class MediniClosureToJavaBuilder extends ClosureBuilderAdapter implements
 					"JAVA", 
 					"ClosureMediniStatisticUtil", 
 					Arrays.asList("Closures_Closure"),
-					MediniQVTDirectionEnum.DSL2JAVA);
+					MediniQVTDirectionEnum.DSL2JAVA,
+					MetaModelName.CLOSURE);
 			
 			if(starter.isHandledInterestingRules()){
 			

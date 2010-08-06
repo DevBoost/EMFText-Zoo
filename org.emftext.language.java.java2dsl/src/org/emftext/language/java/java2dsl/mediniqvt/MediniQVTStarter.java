@@ -6,25 +6,21 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.emftext.language.java.JavaPackage;
+import org.emftext.language.java.closures.ClosuresPackage;
 import org.emftext.language.java.java2dsl.AbstractStarter;
-import org.emftext.language.java.java2dsl.qvto.QVTOStarter;
+import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.java2dsl.util.MetamodelUtil;
-import org.emftext.language.java.java2dsl.util.PropertyQVTOStatisticUtil;
-//import org.junit.experimental.theories.PotentialAssignment;
+import org.emftext.language.java.properties.PropertiesPackage;
 
 import uk.ac.kent.cs.kmf.util.ILog;
 import uk.ac.kent.cs.kmf.util.OutputStreamLog;
@@ -47,6 +43,7 @@ public class MediniQVTStarter extends AbstractStarter{
 	private static MediniQVTDirectionEnum directionEnum;
 	private List<String> interestingRules;
 	private static String statisticUtilClassName = "";
+	private static String metamodelName = "";
 	
 	/**
 	 * Initializes the QVT processor
@@ -104,7 +101,8 @@ public class MediniQVTStarter extends AbstractStarter{
 			String direction,
 			String statisticUtilClassName,
 			List<String> interestingRules,
-			MediniQVTDirectionEnum directionEnum){
+			MediniQVTDirectionEnum directionEnum,
+			MetaModelName metamodelName){
 		
 		super(5*60*1000,1);
 		
@@ -116,7 +114,9 @@ public class MediniQVTStarter extends AbstractStarter{
 		MediniQVTStarter.statisticUtilClassName = statisticUtilClassName;
 		MediniQVTStarter.onlyOneFile = true;
 		MediniQVTStarter.directionEnum = directionEnum;
+		MediniQVTStarter.metamodelName = metamodelName.toString();
 		this.interestingRules = interestingRules;
+		
 		
 		inputFolder = new File(rootPathFileString);
 		if (!inputFolder.exists()) {
@@ -229,6 +229,8 @@ public class MediniQVTStarter extends AbstractStarter{
 		if(debug)
 			System.out.println("start transformation");
 		
+		processorImpl.setModels(modelResources);
+		
 		Collection<Trace> traces = null;
 		try {
 			traces = processorImpl.evaluateQVT(
@@ -236,8 +238,7 @@ public class MediniQVTStarter extends AbstractStarter{
 						transformation, 
 						true, 
 						direction, 
-						new Object[]{modelResources.get(0).get(0), 
-								modelResources.get(1).get(0)}, 
+						new Object[0], 
 						null, 
 						this.logger);
 		} catch (Exception e) {
@@ -276,7 +277,8 @@ public class MediniQVTStarter extends AbstractStarter{
 					"<maxActiveThreads> " +
 					"<transformation name>" +
 					"<direction>" +
-					"<statistic util class name>");
+					"<statistic util class name>"+
+					"<metamodel name>");
 			return;
 		}
 		
@@ -325,6 +327,15 @@ public class MediniQVTStarter extends AbstractStarter{
 		}
 		else{
 			System.out.println("statistic util class name not found");
+			return;
+		}
+		
+		// statistic Util ClassName
+		if(args.length > 9){
+			metamodelName = args[9];
+		}
+		else{
+			System.out.println("metamodel name not found");
 			return;
 		}
 		
@@ -381,7 +392,8 @@ public class MediniQVTStarter extends AbstractStarter{
 		try {
 			inputResource.load(null);
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			if(debug)
+				e1.printStackTrace();
 		}
 		
 		URI outFileURI = null;
@@ -406,7 +418,8 @@ public class MediniQVTStarter extends AbstractStarter{
 		try {
 			outputResource.load(null);
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			if(debug)
+				e1.printStackTrace();
 		}
 		outputResource.getContents().clear();
 		
@@ -441,10 +454,13 @@ public class MediniQVTStarter extends AbstractStarter{
 		while (iterator.hasNext()) {
 			processorImpl.addMetaModel(iterator.next());
 		}
-		
+		//TODO
 		// set directory for trace file
 		processorImpl.setWorkingLocation(outputURI);
 		processorImpl.setModels(modelResources);
+//		processorImpl.setDebug(false);
+//		processorImpl.setTargetModelIndex(1);
+//		processorImpl.setCleanMode(false);
 		
 		System.out.println("input file: " + sourceFile);
 		// tell the QVT engine, which transformation to execute - there might be more than one in
@@ -466,6 +482,25 @@ public class MediniQVTStarter extends AbstractStarter{
 		}
 	}
 
+	/**
+	 * Collect necessary meta model packages.
+	 * 
+	 * @return
+	 */
+	public Collection<EPackage> collectMetaModels() {
+		
+		Collection<EPackage> metaPackages = new ArrayList<EPackage>();
+		metaPackages.add(JavaPackage.eINSTANCE);
+		
+		if(metamodelName.equals(MetaModelName.CLOSURE.toString()))
+			metaPackages.add(ClosuresPackage.eINSTANCE);
+		if(metamodelName.equals(MetaModelName.PROPERTY.toString()))
+			metaPackages.add(PropertiesPackage.eINSTANCE);
+		
+		return metaPackages;
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void addStatistics(Object object) {
