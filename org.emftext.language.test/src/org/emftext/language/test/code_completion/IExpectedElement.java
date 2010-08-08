@@ -1,4 +1,4 @@
-package org.emftext.sdk.codegen.generators.code_completion.helpers;
+package org.emftext.language.test.code_completion;
 
 /**
  * An empty interface for {@link ExpectedKeyword} and

@@ -1,4 +1,4 @@
-package org.emftext.sdk.codegen.generators.code_completion.helpers;
+package org.emftext.language.test.code_completion;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;

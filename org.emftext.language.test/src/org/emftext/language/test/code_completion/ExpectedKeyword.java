@@ -1,4 +1,4 @@
-package org.emftext.sdk.codegen.generators.code_completion.helpers;
+package org.emftext.language.test.code_completion;
 
 /**
  * ExpectedKeywords are used to denote that a follow set of

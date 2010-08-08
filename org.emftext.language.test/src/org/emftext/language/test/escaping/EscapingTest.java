@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.test.escaping;
+package org.emftext.language.test.escaping;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,6 +21,8 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.test.escaping.DoubleQuote;
+import org.emftext.test.escaping.EscapingFactory;
 import org.emftext.test.escaping.resource.escaping.mopp.EscapingResource;
 
 public class EscapingTest extends TestCase {
