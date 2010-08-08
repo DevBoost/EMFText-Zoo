@@ -15,6 +15,7 @@ package org.emftext.language.java.ejava.resource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -114,7 +115,7 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 				return "Not declared in Ecore model: " + element.getName();
 			}
 
-			public IEjavaQuickFix getQuickFix() {
+			public Collection<IEjavaQuickFix> getQuickFixes() {
 				return null;
 			}
 		}, element);

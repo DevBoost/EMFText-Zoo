@@ -33,7 +33,7 @@ public class FeatureBoundAnalyser implements IEfactoryResourcePostProcessor {
 							return "Feature " + eFeature.getName() + " is not multiple.";
 						}
 
-						public IEfactoryQuickFix getQuickFix() {
+						public Collection<IEfactoryQuickFix> getQuickFixes() {
 							return null;
 						}
 					}, feature);

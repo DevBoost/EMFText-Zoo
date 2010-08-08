@@ -13,6 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.ecore.resource.facade.merger;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -113,7 +114,7 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 				return message;
 			}
 
-			public IFacadeEcoreQuickFix getQuickFix() {
+			public Collection<IFacadeEcoreQuickFix> getQuickFixes() {
 				return null;
 			}
 		}, cause);

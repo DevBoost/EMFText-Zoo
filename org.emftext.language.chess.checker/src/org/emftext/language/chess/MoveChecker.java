@@ -13,6 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.chess;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,7 +86,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 					return "There is no piece at this location.";
 				}
 
-				public ICgQuickFix getQuickFix() {
+				public Collection<ICgQuickFix> getQuickFixes() {
 					return null;
 				}
 			}, move);
@@ -133,7 +134,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 					return "This is not a legal move for a " + square.getPiece().getName() + ".";
 				}
 
-				public ICgQuickFix getQuickFix() {
+				public Collection<ICgQuickFix> getQuickFixes() {
 					return null;
 				}
 			}, move);

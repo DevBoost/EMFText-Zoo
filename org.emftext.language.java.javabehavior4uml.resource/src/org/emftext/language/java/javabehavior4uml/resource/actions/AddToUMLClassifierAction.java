@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -49,8 +48,7 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.javabehavior4uml.JavaMethodBehavior;
 import org.emftext.language.java.javabehavior4uml.Javabehavior4umlFactory;
-import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorPlugin;
-import org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorMarkerHelper;
+import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorMarkerHelper;
 import org.emftext.language.java.javabehavior4uml.util.UML2JavaWrapper;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersFactory;
@@ -167,11 +165,7 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 						e.printStackTrace();
 					}
 				}
-				try {
-					JavabehaviorMarkerHelper.unmark(behaviorResource);
-				} catch (CoreException e) {
-					JavabehaviorPlugin.logError("Error: ", e);
-				}
+				JavabehaviorMarkerHelper.unmark(behaviorResource);
 			}
 		}
 	}

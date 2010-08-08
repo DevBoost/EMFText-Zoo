@@ -13,6 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.plugin;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -131,7 +132,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 										"should be considered as plug-in of the tool product family.";
 								}
 
-								public ITopfQuickFix getQuickFix() {
+								public Collection<ITopfQuickFix> getQuickFixes() {
 									return null;
 								}
 							}, plugin);
@@ -157,7 +158,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 					return "Plug-In was not found";
 				}
 
-				public ITopfQuickFix getQuickFix() {
+				public Collection<ITopfQuickFix> getQuickFixes() {
 					return null;
 				}
 			}, plugin);
