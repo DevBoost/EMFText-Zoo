@@ -49,7 +49,10 @@ mapping inout JAVA::statements::StatementContainer::Statements_StatementContaine
 
 mapping inout JAVA::statements::StatementListContainer::Statements_StatementListContainer(){
 	
+	var tempStatements : OrderedSet(JAVA::statements::Statement);
+	
 	self.statements->forEach(s){
+	
 		var localVar : JAVA::variables::LocalVariable;
 		var lvCondition : JAVA::statements::Condition;
 		var rCondition : JAVA::statements::Condition;
@@ -70,17 +73,27 @@ mapping inout JAVA::statements::StatementListContainer::Statements_StatementList
 		endif;
 		
 		if not lvCondition.oclIsUndefined() then
-			self.statements := 
-				self.statements->append(lvCondition)
+			tempStatements := 
+				tempStatements->append(lvCondition)
 		endif;
 		if not lvCondition.oclIsUndefined() then
 			localVar.initialValue := null
 		endif;
 		
 		if not rCondition.oclIsUndefined() then
-			self.statements := 
-				self.statements->append(rCondition)->excluding(ret)
+			tempStatements := 
+				tempStatements->append(rCondition)
 		endif;
+		if not rCondition.oclIsUndefined() then
+			self.statements := 
+				self.statements->excluding(ret)
+		endif;
+		
+	};
+	
+	tempStatements->forEach(s){
+		self.statements := 
+			self.statements->append(s)
 	}
 }
 

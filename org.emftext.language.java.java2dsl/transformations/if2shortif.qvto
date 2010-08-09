@@ -13,18 +13,18 @@ main() {
 	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
 	java.objects()[JAVA::statements::StatementListContainer]->map Statements_StatementListContainer();
 	java.objects()[JAVA::statements::StatementContainer]->map Statements_StatementContainer();
---	java.objects()[JAVA::_references::MethodCall]->map References_MethodCall();
---	java.objects()[JAVA::statements::ExpressionStatement]->map Expressions_ExpressionStatement();
 }
 
 mapping JAVA::classifiers::Class::Classifiers_Class(){}
 
 mapping inout JAVA::statements::StatementListContainer::Statements_StatementListContainer(){
 	
+	var tempStatements : OrderedSet(JAVA::statements::Statement);
+	
 	self.statements->forEach(s){
 		
 		var condition : JAVA::statements::Condition; 
-		var locVarStat : JAVA::statements::LocalVariableStatement;
+		var condExpr : JAVA::expressions::ConditionalExpression;
 		var ret : JAVA::statements::Return;
 		
 		if s.oclIsTypeOf(JAVA::statements::Condition) then
@@ -35,24 +35,40 @@ mapping inout JAVA::statements::StatementListContainer::Statements_StatementList
 				condition.statement.oclAsType(
 					JAVA::statements::ExpressionStatement).expression.
 					oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
-				locVarStat := map Condition2CondExpr_LocVarStat(condition)
+				condExpr := map expressions_ConditionalExpression(condition)
 			else if condition.statement.oclIsTypeOf(JAVA::statements::Return) then
 				ret := map Condition2CondExpr_Return(condition)
 			endif endif
 		endif;
---		if not locVarStat.oclIsUndefined() then
---			self.map variables_LocalVariable(locVarStat.variable)
---		endif;
-		if not locVarStat.oclIsUndefined() then
+	--	if not locVarStat.oclIsUndefined() then
+	--		self.statements := 
+	--			self.statements->excluding(
+	--				statements_LocalVariableStatement(condition))
+	--	endif;
+		if not condExpr.oclIsUndefined() then
 			self.statements := 
-				self.statements->
-					append(locVarStat)->
-					excluding(s)
+				self.statements->excluding(s)
+		endif;
+	--	if not locVarStat.oclIsUndefined() then
+	--		tempStatements := 
+	--			tempStatements->append(locVarStat)
+	--	endif;
+		if not condExpr.oclIsUndefined() then
+			variables_LocalVariable(condition).map set_initialValue(condExpr)
 		endif;
 		if not ret.oclIsUndefined() then
 			self.statements := 
-				self.statements->append(ret)->excluding(s)
+				self.statements->excluding(s)
 		endif;
+		if not ret.oclIsUndefined() then
+			tempStatements := 
+				tempStatements->append(ret)
+		endif;
+	};
+	
+	tempStatements->forEach(s){
+		self.statements := 
+			self.statements->append(s)
 	}
 }
 
@@ -60,7 +76,7 @@ mapping inout JAVA::statements::StatementContainer::Statements_StatementContaine
 	
 
 	var condition : JAVA::statements::Condition; 
-	var locVarStat : JAVA::statements::LocalVariableStatement;
+	var condExpr : JAVA::expressions::ConditionalExpression;
 	var ret : JAVA::statements::Return;
 	
 	if self.oclIsTypeOf(JAVA::statements::Condition) then
@@ -71,13 +87,13 @@ mapping inout JAVA::statements::StatementContainer::Statements_StatementContaine
 			condition.statement.oclAsType(
 				JAVA::statements::ExpressionStatement).expression.
 				oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
-			locVarStat := map Condition2CondExpr_LocVarStat(condition)
+			condExpr := map expressions_ConditionalExpression(condition)
 		else if condition.statement.oclIsTypeOf(JAVA::statements::Return) then
 			ret := map Condition2CondExpr_Return(condition)
 		endif endif
 	endif;
-	if not locVarStat.oclIsUndefined() then
-		self.statement := locVarStat
+	if not condExpr.oclIsUndefined() then
+		variables_LocalVariable(condition).map set_initialValue(condExpr)
 	endif;
 	if not ret.oclIsUndefined() then
 		self.statement := ret
@@ -121,23 +137,20 @@ query variables_LocalVariable(c : JAVA::statements::Condition) :
 			c.statement.oclAsType(
 			JAVA::statements::ExpressionStatement).expression.
 			oclAsType(JAVA::expressions::AssignmentExpression).child.
-			oclAsType(JAVA::_references::IdentifierReference).target.name).
-			clone().oclAsType(JAVA::variables::LocalVariable);
+			oclAsType(JAVA::_references::IdentifierReference).target.name)
+		--	.clone().oclAsType(JAVA::variables::LocalVariable)
+			;
 }
 
-mapping inout JAVA::statements::StatementListContainer::variables_LocalVariable(
-	lv : JAVA::variables::LocalVariable) {
+query statements_LocalVariableStatement(c : JAVA::statements::Condition) : 
+	JAVA::statements::LocalVariableStatement {
 	
-	self.statements->forEach(s){
-		
-		if s.oclIsTypeOf(JAVA::statements::LocalVariableStatement) then
-			let lvs : JAVA::statements::LocalVariableStatement =
-			s.oclAsType(JAVA::statements::LocalVariableStatement) in
-			if lvs.variable.name = lv.name then
-				self.statements := self.statements->excluding(lvs)
-			endif
-		endif;
-	}
+	return	java.objects()[JAVA::statements::LocalVariableStatement]->selectOne(lvs|
+			lvs.variable.name = 
+			c.statement.oclAsType(
+			JAVA::statements::ExpressionStatement).expression.
+			oclAsType(JAVA::expressions::AssignmentExpression).child.
+			oclAsType(JAVA::_references::IdentifierReference).target.name);
 }
 
 mapping inout JAVA::variables::LocalVariable::set_initialValue(
