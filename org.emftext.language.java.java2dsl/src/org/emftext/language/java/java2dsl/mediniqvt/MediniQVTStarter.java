@@ -25,6 +25,7 @@ import org.emftext.language.java.properties.PropertiesPackage;
 import uk.ac.kent.cs.kmf.util.ILog;
 import uk.ac.kent.cs.kmf.util.OutputStreamLog;
 import de.ikv.emf.qvt.EMFQvtProcessorImpl;
+import de.ikv.medini.qvt.QVTProcessorConsts;
 import de.ikv.medini.qvt.Trace;
 
 public class MediniQVTStarter extends AbstractStarter{
@@ -458,9 +459,11 @@ public class MediniQVTStarter extends AbstractStarter{
 		// set directory for trace file
 		processorImpl.setWorkingLocation(outputURI);
 		processorImpl.setModels(modelResources);
-//		processorImpl.setDebug(false);
-//		processorImpl.setTargetModelIndex(1);
-//		processorImpl.setCleanMode(false);
+		processorImpl.setProperty(QVTProcessorConsts.PROP_DEBUG, "true");
+		processorImpl.setProperty(QVTProcessorConsts.PROP_CLEAR_TRACES, "true");
+		processorImpl.setProperty(QVTProcessorConsts.PROP_DEBUG_TASKS, "true");
+//		processorImpl.setProperty(QVTProcessorConsts.PROP_TRANSFORMATION_PATH, qvtRuleFilePath);
+		
 		
 		System.out.println("input file: " + sourceFile);
 		// tell the QVT engine, which transformation to execute - there might be more than one in
