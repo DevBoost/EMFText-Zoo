@@ -429,6 +429,7 @@ public class ClosureItemProvider
     Object childFeature = feature;
     Object childObject = child;
 
+
     boolean qualify =
       childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_REFERENCE ||
       childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__PARAMETER_TYPES ||
@@ -440,6 +441,7 @@ public class ClosureItemProvider
       childFeature == ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS ||
       childFeature == ReferencesPackage.Literals.REFERENCE__NEXT ||
       childFeature == ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS;
+
 
     if (qualify)
     {

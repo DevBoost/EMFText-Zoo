@@ -133,6 +133,7 @@ public class AbstractClosureItemProvider
    */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+
     if (childrenFeatures == null)
     {
       super.getChildrenFeatures(object);
@@ -150,6 +151,7 @@ public class AbstractClosureItemProvider
     }
     return childrenFeatures;
   }
+
 
 	/**
    * <!-- begin-user-doc -->
@@ -189,6 +191,7 @@ public class AbstractClosureItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
+
     switch (notification.getFeatureID(AbstractClosure.class))
     {
       case ClosuresPackage.ABSTRACT_CLOSURE__TYPE_REFERENCE:
@@ -207,6 +210,7 @@ public class AbstractClosureItemProvider
     }
     super.notifyChanged(notification);
   }
+
 
 	/**
    * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
@@ -620,6 +624,7 @@ public class AbstractClosureItemProvider
          ArraysFactory.eINSTANCE.createArrayDimension()));
   }
 
+
 	/**
    * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
    * <!-- begin-user-doc -->
@@ -631,6 +636,7 @@ public class AbstractClosureItemProvider
     Object childFeature = feature;
     Object childObject = child;
 
+
     boolean qualify =
       childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_REFERENCE ||
       childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__PARAMETER_TYPES ||
@@ -641,6 +647,7 @@ public class AbstractClosureItemProvider
       childFeature == StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS ||
       childFeature == ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS ||
       childFeature == ReferencesPackage.Literals.REFERENCE__NEXT;
+
 
     if (qualify)
     {
