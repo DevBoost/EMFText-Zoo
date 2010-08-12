@@ -1,86 +1,42 @@
-package example.closure;
+package example.closure2;
 
-import javax.swing.JFrame;
-import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import java.lang.Thread;
+import java.util.ArrayList;
 
 
-class Test{  
-
-
-	private String test = "";
-
-
+public class Test extends JFrame{
 	
-	{ int, int => int } : globalClosure2 = { int x1, int x2 => x1 + x2; };    
+	public Test(){
 	
-	{ int, int => int } : globalClosure1 = { int x1, int x2 => x1 + x2; };  
-
-	{ => void } : globalClosure3 = { => System.out.println("Hallo Welt"); };
+		getContentPane().add(
+			public {Graphics=>void}	JComponent:=
+			{Graphics g=> Color farbe=Color.gray; g.setColor(farbe);}
+			.paintComponent(););
 	
-	public int method1 (int a){
-	
-		 System.out.print("test") ; 
-		 
-		 { int, int => int } :localClosure = { int x1, int x2 => x1 + x2; }; 
-		 
-		{ int, int => int } : = { int x1, int x2 => x1 + x2; }.invoke(10,20);  
-		
-		a = localClosure.invoke(12,12); 
-		
-		return a;
-	}
-	
-	private int method2(){  
-	
-		method1(100);
-		int e = globalClosure2.invoke(10,20);       
-		return e;
-	}
-	
-	class InnerClass {
-	
-		 public int loopMethod( int times, {int, int => int } : parameterClosure ){
-		    
-		    for ( int i = 0; i < times; i++ ) { 
-		        parameterClosure.invoke(10,20);       
-		    }
-		    
-		    return 10;
-		  }  
-	
-		 public int test( String[] args ){ 
-		 	
-		 	return loopMethod( 5, {int, int => int } : = { int a, int b => a=a+10; a + b;  } ;);      
-		 }
-		 
-		 public void methodWithClosureAndAssignment(int a, int b){ 
-			
-			int d = a+b;
-			d = { int => int } : = { int a => a; }.invoke(a);;      
-    		System.out.println(d); 
-		 	
-		 }
-	}
-	
-	public Test(){  
-		getContentPane().add({Graphics=>void} JComponent : =  
-			{Graphics g => Color farbe = Color.gray; g.setColor(farbe);}
-			.paintComponent();
-		); 
-		
-		addWindowListener({WindowEvent=>void} WindowAdapter : = 
-			{WindowEvent e => System.exit(0);}
-			.windowClosing();); 
+		addWindowListener(
+			public {WindowEvent=>void} WindowAdapter:=
+			{WindowEvent e=> System.exit(0);}
+			.windowClosing(););
 	}
 	
 	public void test(){
-	
-		new Thread({=> void} Runnable : = 
-			{ => System.out.println("Hallo");}.run();).start();
+		new Thread(
+			public {=>void} Runnable:=
+			{=> System.out.println("Hallo");}
+			.run();)
+		.start();
 	}
-   
+	
+	public void test2(){
+		if(1==2)System.exit(0);
+		System.out.println("ja");
+	}
+	
+	
 }
-
-

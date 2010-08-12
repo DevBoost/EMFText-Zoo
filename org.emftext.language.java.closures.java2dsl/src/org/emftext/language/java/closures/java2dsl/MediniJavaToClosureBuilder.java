@@ -134,6 +134,8 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 		
 		init(resource.getResourceSet());
 		
+		EcoreUtil.resolveAll(resource);
+		
 		URI xmiSourceURI = 
 			resource.getURI().appendFileExtension("xmi");
 		
@@ -166,6 +168,8 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 			
 			xmiResource.getContents().addAll(EcoreUtil.copyAll(resource.getContents()));
 	
+			EcoreUtil.resolveAll(xmiResource);
+			
 			try {
 				xmiResource.save(null);
 			} catch (IOException e) {
@@ -199,9 +203,13 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 					System.out.println(e);
 				}
 				
+				EcoreUtil.resolveAll(xmiResourceTransformed);
+				
 				closureResource.getContents().addAll(
 						EcoreUtil.copyAll(
 								xmiResourceTransformed.getContents()));
+				
+				EcoreUtil.resolveAll(closureResource);
 				
 				//TODO only save when necessary
 				
@@ -224,7 +232,7 @@ public class MediniJavaToClosureBuilder extends JavaBuilderAdapter implements IJ
 				File closureResourceTempFile = new File(
 					rootPathFile.toString().concat(closureTempResourceURI.toPlatformString(true)));
 				File closureResourceFile = new File(
-						rootPathFile.toString().concat(closureResourceURI.toPlatformString(true)));
+					rootPathFile.toString().concat(closureResourceURI.toPlatformString(true)));
 					
 				boolean hasContentChanged = false;
 				

@@ -25,26 +25,182 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 
 	}
 	
+	relation AssignmentExpression_Value_Closure {
+
+		enforce domain JAVA s : java::expressions::AssignmentExpression {
+			value = s_a : java::instantiations::NewConstructorCall{}
+		};
+
+		enforce domain CLOSURES t : java::expressions::AssignmentExpression {
+			value = t_a : closures::Closure{}
+		};
+		when{
+			if not s_a.oclIsUndefined() then 
+				not s_a.anonymousClass.oclIsUndefined()
+			else
+				true
+			endif;
+		}
+		where {
+			Closures_Closure(s_a,t_a);
+		}
+
+	}
+	
+	relation LocalVariable_InitialValue_Closure {
+		
+		enforce domain JAVA s : java::variables::LocalVariable {
+			initialValue = s_a : java::instantiations::NewConstructorCall {}
+		};
+
+		enforce domain CLOSURES t : java::variables::LocalVariable {
+			initialValue = t_a : closures::Closure{}
+		};
+		when{
+			if not s_a.oclIsUndefined() then 
+				not s_a.anonymousClass.oclIsUndefined()
+			else
+				true
+			endif;
+		}
+		where {
+			Closures_Closure(s_a,t_a);
+		}
+	}
+	
+	relation Return_ReturnValue_Closure {
+		
+		enforce domain JAVA s : java::statements::Return {
+			returnValue = s_a : java::instantiations::NewConstructorCall {}
+		};
+
+		enforce domain CLOSURES t : java::statements::Return {
+			returnValue = t_a : closures::Closure{}
+		};
+		when{
+			if not s_a.oclIsUndefined() then 
+				not s_a.anonymousClass.oclIsUndefined()
+			else
+				true
+			endif;
+		}
+		where {
+			Closures_Closure(s_a,t_a);
+		}
+	}
+	
+	relation AssignmentExpression_Value_Expression {
+
+		varValue : java::expressions::Expression;
+
+		enforce domain JAVA s : java::expressions::AssignmentExpression {
+			value =  varValue
+		};
+
+		enforce domain CLOSURES t : java::expressions::AssignmentExpression {
+			value =  varValue
+		};
+		when{
+			if not s.value.oclIsUndefined() then
+				if not s.value.oclIsTypeOf(java::instantiations::NewConstructorCall) then
+					true
+				else
+					s.value.oclAsType(java::instantiations::NewConstructorCall).
+						anonymousClass.oclIsUndefined()
+				endif
+			else
+				if not t.value.oclIsTypeOf(closures::Closure) then
+					true
+				else
+					false
+				endif
+			endif;
+		}
+	}
+	
+	relation LocalVariable_InitialValue_Expression {
+		
+		varValue : java::expressions::Expression;
+		
+		enforce domain JAVA s : java::variables::LocalVariable {
+			initialValue = varValue
+		};
+		enforce domain CLOSURES t : java::variables::LocalVariable {
+			initialValue = varValue
+		};
+		when{
+			if not s.initialValue.oclIsUndefined() then
+				if not s.initialValue.oclIsTypeOf(java::instantiations::NewConstructorCall) then
+					true
+				else
+					s.initialValue.oclAsType(java::instantiations::NewConstructorCall).
+						anonymousClass.oclIsUndefined()
+				endif
+			else
+				if t.initialValue.oclIsUndefined() then
+					true
+				else
+					if not t.initialValue.oclIsTypeOf(closures::Closure) then
+						true
+					else
+						false
+					endif
+				endif
+			endif;
+		}
+	}
+	
+	relation Return_ReturnValue_Expression {
+
+		varValue : java::expressions::Expression;
+
+		enforce domain JAVA s : java::statements::Return {
+			returnValue =  varValue
+		};
+
+		enforce domain CLOSURES t : java::statements::Return {
+			returnValue =  varValue
+		};
+		when{
+			if not s.returnValue.oclIsUndefined() then 
+				if not s.returnValue.oclIsTypeOf(java::instantiations::NewConstructorCall) then
+					true
+				else
+					s.returnValue.oclAsType(java::instantiations::NewConstructorCall).
+						anonymousClass.oclIsUndefined()
+				endif
+			else
+				if not t.returnValue.oclIsTypeOf(closures::Closure) then
+					true
+				else
+					false
+				endif
+			endif;
+		}
+	}
+	
 	relation References_Argumentable_NewConstructorCall {
 
+		varTypRef : java::types::TypeReference;
+
 		enforce domain JAVA s: java::references::Argumentable  {
-			arguments = s_n : java::instantiations::NewConstructorCall{}
+			arguments = s_n : java::instantiations::NewConstructorCall{
+				typeReference =  varTypRef
+			}
 		};
 
 		enforce domain CLOSURES t: java::references::Argumentable  {
-			arguments = t_n : java::instantiations::NewConstructorCall{}
+			arguments = t_n : java::instantiations::NewConstructorCall{
+				typeReference =  varTypRef
+			}
 		};
 		when{
-			if not s.oclIsUndefined() then
-				s_n.anonymousClass.members->size() <> 1
-				or
-				not s_n.anonymousClass.members->at(1).oclIsTypeOf(java::members::ClassMethod)
-				or
-				s_n.anonymousClass.members->at(1).
-					oclAsType(java::members::ClassMethod).typeReference.oclIsUndefined()
-				or
-				s_n.anonymousClass.members->at(1).
-					oclAsType(java::members::ClassMethod).statements->isEmpty()
+			if not s_n.oclIsUndefined() then
+				if not s_n.anonymousClass.oclIsUndefined() then
+					s_n.anonymousClass.members->size() <> 1
+				else
+					true
+				endif
 			else
 				true
 			endif;
@@ -80,12 +236,18 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation References_Argumentable_MethodCall {
 
+		targetElement : java::references::ReferenceableElement;
+
 		enforce domain JAVA s: java::references::Argumentable  {
-			arguments = s_n : java::references::MethodCall{}
+			arguments = s_n : java::references::MethodCall{
+				target = targetElement
+			}
 		};
 
 		enforce domain CLOSURES t: java::references::Argumentable  {
-			arguments = t_n : java::references::MethodCall{}
+			arguments = t_n : java::references::MethodCall{
+				target = targetElement
+			}
 		};
 		where{
 			References_Reference_NewConstructorCall(s_n,t_n) or
@@ -107,12 +269,18 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 	
 	relation References_Argumentable_IdentifierReference {
 
-		enforce domain JAVA s: java::references::Argumentable  {
-			arguments = s_n : java::references::IdentifierReference{}
+		varTypRef : java::references::ReferenceableElement;
+
+		enforce domain JAVA s: java::references::Argumentable{
+			arguments = s_n : java::references::IdentifierReference{
+				target =  varTypRef
+			}
 		};
 
-		enforce domain CLOSURES t: java::references::Argumentable  {
-			arguments = t_n : java::references::IdentifierReference{}
+		enforce domain CLOSURES t: java::references::Argumentable{
+			arguments = t_n : java::references::IdentifierReference{
+				target =  varTypRef
+			}
 		};
 		where{
 			References_Reference_NewConstructorCall(s_n,t_n) or
@@ -222,9 +390,9 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 		when{
 			if s.typeReference.oclIsUndefined()
-					and
-					s.anonymousClass.oclIsUndefined() then
-				true
+				and
+				s.anonymousClass.oclIsUndefined() then
+					true
 			else
 				s_ac.members->size() = 1
 				and
@@ -321,6 +489,25 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			},
 			parameterTypes = t_pt : java::types::Int{}
 		};
+		when{
+			if t_p.oclIsUndefined() then
+				true
+			else
+				if t.parameters->size() <> t.parameterTypes->size() then
+					false
+				else
+			--	if s.parameters->size() >= t.parameters->size() then
+			--		false
+			--	else
+				if s.parameters->forAll(p|
+					p.name <> t_p.name) then
+					true
+				else
+					false
+				endif endif 
+			--	endif
+			endif;
+		}
 	}
 	
 	relation Closure_ParameterType_Boolean {
@@ -467,18 +654,21 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		
 		varName : String;
 		varNamespace : Sequence(String);
+		varImport : OrderedSet(java::imports::Import);
 				
 		enforce domain JAVA s_cu : java::containers::CompilationUnit {
 			name = varName,
-			namespaces = varNamespace
+			namespaces = varNamespace,
+			imports =  varImport
 		};
 		
 		enforce domain CLOSURES t_cu : java::containers::CompilationUnit {
 			name = varName,
-			namespaces = varNamespace
+			namespaces = varNamespace,
+			imports =  varImport
 		};
 		where{
-			CompilationUnit_Import(s_cu,t_cu) or
+	--		CompilationUnit_Import(s_cu,t_cu) or
 			CompilationUnit_Class(s_cu,t_cu)or
 			CompilationUnit_Interface(s_cu,t_cu) or
 			CompilationUnit_Annotation(s_cu,t_cu) or
@@ -647,8 +837,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			AnnotableAndModifiable_Modifier_Static(s_cm,t_cm) or
 			AnnotableAndModifiable_Modifier_Abstract(s_cm,t_cm)
 			or
-			Statements_StatementListContainer_NewConstructorCall(s_cm,t_cm) or
-			Statements_StatementListContainer_MethodCall(s_cm,t_cm) or
+			Statements_StatementListContainer_Return(s_cm,t_cm) or
 			Statements_StatementListContainer_IdentifierReference(s_cm,t_cm) or
 			Statements_StatementListContainer_SelfReference(s_cm,t_cm) or
 			Statements_StatementListContainer_StringReference(s_cm,t_cm) or
@@ -660,11 +849,13 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			Statements_StatementListContainer_WhileLoop(s_cm,t_cm) or
 			Statements_StatementListContainer_ForEachLoop(s_cm,t_cm) or
 			Statements_StatementListContainer_ForLoop(s_cm,t_cm) or
-			Statements_StatementListContainer_LocalVariableStatement(s_cm,t_cm) or
-			Statements_StatementListContainer_Return(s_cm,t_cm) or
 			Statements_StatementListContainer_Switch(s_cm,t_cm) or
 			Statements_StatementListContainer_SynchronizedBlock(s_cm,t_cm) or
-			Statements_StatementListContainer_TryBlock(s_cm,t_cm)
+			Statements_StatementListContainer_TryBlock(s_cm,t_cm) or
+			Statements_StatementListContainer_NewConstructorCall(s_cm,t_cm) or
+			Statements_StatementListContainer_MethodCall(s_cm,t_cm) or
+			Statements_StatementListContainer_AssignmentExpression(s_cm,t_cm)or
+			Statements_StatementListContainer_LocalVariableStatement(s_cm,t_cm)
 			;
 		}
 		
@@ -764,8 +955,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			AnnotableAndModifiable_Modifier_Public(s_mem,t_mem) or
 			AnnotableAndModifiable_Modifier_Private(s_mem,t_mem)
 			or
-			Statements_StatementListContainer_NewConstructorCall(s_mem,t_mem) or
-			Statements_StatementListContainer_MethodCall(s_mem,t_mem) or
 			Statements_StatementListContainer_IdentifierReference(s_mem,t_mem) or
 			Statements_StatementListContainer_SelfReference(s_mem,t_mem) or
 			Statements_StatementListContainer_StringReference(s_mem,t_mem) or
@@ -777,11 +966,13 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			Statements_StatementListContainer_WhileLoop(s_mem,t_mem) or
 			Statements_StatementListContainer_ForEachLoop(s_mem,t_mem) or
 			Statements_StatementListContainer_ForLoop(s_mem,t_mem) or
-			Statements_StatementListContainer_LocalVariableStatement(s_mem,t_mem) or
-			Statements_StatementListContainer_Return(s_mem,t_mem) or
 			Statements_StatementListContainer_Switch(s_mem,t_mem) or
 			Statements_StatementListContainer_SynchronizedBlock(s_mem,t_mem) or
-			Statements_StatementListContainer_TryBlock(s_mem,t_mem)
+			Statements_StatementListContainer_TryBlock(s_mem,t_mem) or
+			Statements_StatementListContainer_NewConstructorCall(s_mem,t_mem) or
+			Statements_StatementListContainer_MethodCall(s_mem,t_mem) or
+			Statements_StatementListContainer_AssignmentExpression(s_mem,t_mem) or
+			Statements_StatementListContainer_LocalVariableStatement(s_mem,t_mem)
 			or
 			true; --when modifier is empty
 
@@ -897,7 +1088,12 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Argumentable_IdentifierReference(s_s_e,t_s_e) or
 			References_Argumentable_StringReference(s_s_e,t_s_e) or
 			References_Argumentable_SelfReference(s_s_e,t_s_e) or
-			References_Argumentable_PrimitiveTypeReference(s_s_e,t_s_e)
+			References_Argumentable_PrimitiveTypeReference(s_s_e,t_s_e)or
+			References_Argumentable_BooleanLiteral(s_s_e,t_s_e)or
+			References_Argumentable_DecimalDoubleLiteral(s_s_e,t_s_e)or
+			References_Argumentable_DecimalFloatLiteral(s_s_e,t_s_e)or
+			References_Argumentable_NullLiteral(s_s_e,t_s_e)or
+			References_Argumentable_Expression(s_s_e,t_s_e)
 			or
 			References_Reference_NewConstructorCall(s_s_e,t_s_e) or
 			References_Reference_IdentifierReference(s_s_e,t_s_e) or
@@ -945,7 +1141,12 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Argumentable_IdentifierReference(s_s_e,t_s_e) or
 			References_Argumentable_StringReference(s_s_e,t_s_e) or
 			References_Argumentable_SelfReference(s_s_e,t_s_e) or
-			References_Argumentable_PrimitiveTypeReference(s_s_e,t_s_e)
+			References_Argumentable_PrimitiveTypeReference(s_s_e,t_s_e) or
+			References_Argumentable_BooleanLiteral(s_s_e,t_s_e)or
+			References_Argumentable_DecimalDoubleLiteral(s_s_e,t_s_e)or
+			References_Argumentable_DecimalFloatLiteral(s_s_e,t_s_e)or
+			References_Argumentable_NullLiteral(s_s_e,t_s_e)or
+			References_Argumentable_Expression(s_s_e,t_s_e)
 			or
 			References_Reference_NewConstructorCall(s_s_e,t_s_e) or
 			References_Reference_IdentifierReference(s_s_e,t_s_e) or
@@ -954,6 +1155,76 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			;
 		}
 	}
+	
+	relation Statements_StatementListContainer_AssignmentExpression {
+	
+		varChild : java::expressions::AssignmentExpressionChild;
+		varAssOp : java::operators::AssignmentOperator;
+		
+		enforce domain JAVA s : java::statements::StatementListContainer  {
+			statements = s_s : java::statements::ExpressionStatement{
+				expression = s_s_e : java::expressions::AssignmentExpression {
+					child = varChild,
+					assignmentOperator = varAssOp
+				}
+			}
+		};
+		
+		enforce domain CLOSURES t : java::statements::StatementListContainer  {
+			statements = t_s : java::statements::ExpressionStatement{
+				expression = t_s_e : java::expressions::AssignmentExpression {
+					child = varChild,
+					assignmentOperator = varAssOp
+				}
+			}
+		};
+		where{
+			AssignmentExpression_Value_Closure(s_s_e,t_s_e) or
+			AssignmentExpression_Value_Expression(s_s_e,t_s_e);
+		}
+	}
+	
+	relation Statements_StatementListContainer_LocalVariableStatement {
+	
+		varName : String;
+		varTypRef :  java::types::TypeReference;
+	
+		enforce domain JAVA s : java::statements::StatementListContainer  {
+			statements = s_s : java::statements::LocalVariableStatement{
+				variable = s_s_v : java::variables::LocalVariable {
+					name = varName,
+					typeReference = varTypRef
+				}
+			}
+		};
+		
+		enforce domain CLOSURES t : java::statements::StatementListContainer  {
+			statements = t_s : java::statements::LocalVariableStatement{
+				variable = t_s_v : java::variables::LocalVariable {
+					name = varName,
+					typeReference = varTypRef
+				}
+			}
+		};
+		where{
+			LocalVariable_InitialValue_Closure(s_s_v,t_s_v) or
+			LocalVariable_InitialValue_Expression(s_s_v,t_s_v);
+		}
+	}
+	
+	relation Statements_StatementListContainer_Return {
+		
+		enforce domain JAVA s : java::statements::StatementListContainer  {
+			statements = s_s : java::statements::Return{}
+		};
+		enforce domain CLOSURES t : java::statements::StatementListContainer  {
+			statements = t_s : java::statements::Return{}
+		};
+		where{
+			Return_ReturnValue_Closure(s_s,t_s) or
+			Return_ReturnValue_Expression(s_s,t_s);
+		}
+	}	
 	
 	relation Statements_StatementListContainer_SelfReference {
 
@@ -1213,46 +1484,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 
 	}
 	
-	relation Statements_StatementListContainer_LocalVariableStatement {
-
-		localVariableVar : java::variables::LocalVariable;
-		
-		enforce domain JAVA s : java::statements::StatementListContainer  {
-			statements = s_s : java::statements::LocalVariableStatement   {
-			variable = localVariableVar
-		}
-		};
-		
-		
-
-		enforce domain CLOSURES t : java::statements::StatementListContainer  {
-			statements = t_s : java::statements::LocalVariableStatement   {
-			variable = localVariableVar
-			}
-		};
-
-	}
-	
-	relation Statements_StatementListContainer_Return {
-
-		returnValueVar : java::expressions::Expression;
-		
-		enforce domain JAVA s : java::statements::StatementListContainer  {
-			statements = s_s : java::statements::Return   {
-			returnValue = returnValueVar
-		}
-		};
-		
-		
-
-		enforce domain CLOSURES t : java::statements::StatementListContainer  {
-			statements = t_s : java::statements::Return   {
-			returnValue = returnValueVar
-			}
-		};
-
-	}
-	
 	relation Statements_StatementListContainer_Switch {
 
 		casesVar : OrderedSet(java::statements::SwitchCase);
@@ -1363,7 +1594,12 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Argumentable_IdentifierReference(s_n,t_n) or
 			References_Argumentable_StringReference(s_n,t_n) or
 			References_Argumentable_SelfReference(s_n,t_n) or
-			References_Argumentable_PrimitiveTypeReference(s_n,t_n)
+			References_Argumentable_PrimitiveTypeReference(s_n,t_n) or
+			References_Argumentable_BooleanLiteral(s_n,t_n) or
+			References_Argumentable_DecimalDoubleLiteral(s_n,t_n)or
+			References_Argumentable_DecimalFloatLiteral(s_n,t_n)or
+			References_Argumentable_NullLiteral(s_n,t_n)or
+			References_Argumentable_Expression(s_n,t_n)
 			or 
 			 TypedElement_TypeReference_NamespaceClassifierReference(s_n,t_n) or
 			 TypedElement_TypeReference_Int(s_n,t_n) or
@@ -1411,7 +1647,12 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Argumentable_IdentifierReference(s_n,t_n) or
 			References_Argumentable_StringReference(s_n,t_n) or
 			References_Argumentable_SelfReference(s_n,t_n) or
-			References_Argumentable_PrimitiveTypeReference(s_n,t_n)
+			References_Argumentable_PrimitiveTypeReference(s_n,t_n) or
+			References_Argumentable_BooleanLiteral(s_n,t_n) or
+			References_Argumentable_DecimalDoubleLiteral(s_n,t_n)or
+			References_Argumentable_DecimalFloatLiteral(s_n,t_n)or
+			References_Argumentable_NullLiteral(s_n,t_n)or
+			References_Argumentable_Expression(s_n,t_n)
 			or 
 			true;
 		}
@@ -1806,6 +2047,98 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 				}
 			}
 		};
+	}
+	
+	relation References_Argumentable_BooleanLiteral {
+		
+		valValue : Boolean;
+		
+		enforce domain JAVA s: java::references::Argumentable  {
+			arguments = s_a : java::literals::BooleanLiteral  {
+				value = valValue
+			}
+		};
+
+		enforce domain CLOSURES t: java::references::Argumentable  {
+			arguments = t_a : java::literals::BooleanLiteral  {
+				value = valValue
+			}
+		};
+	}
+	
+	relation References_Argumentable_DecimalDoubleLiteral {
+		
+		valValue : Real;
+		
+		enforce domain JAVA s: java::references::Argumentable  {
+			arguments = s_a : java::literals::DecimalDoubleLiteral  {
+				decimalValue = valValue
+			}
+		};
+
+		enforce domain CLOSURES t: java::references::Argumentable  {
+			arguments = t_a : java::literals::DecimalDoubleLiteral  {
+				decimalValue = valValue
+			}
+		};
+	}
+	
+	relation References_Argumentable_DecimalFloatLiteral {
+		
+		valValue : Real;
+		
+		enforce domain JAVA s: java::references::Argumentable  {
+			arguments = s_a : java::literals::DecimalFloatLiteral  {
+				decimalValue = valValue
+			}
+		};
+
+		enforce domain CLOSURES t: java::references::Argumentable  {
+			arguments = t_a : java::literals::DecimalFloatLiteral  {
+				decimalValue = valValue
+			}
+		};
+	}
+
+	relation References_Argumentable_NullLiteral {
+		
+		enforce domain JAVA s: java::references::Argumentable  {
+			arguments = s_a : java::literals::NullLiteral  {}
+		};
+
+		enforce domain CLOSURES t: java::references::Argumentable  {
+			arguments = t_a : java::literals::NullLiteral  {}
+		};
+	}
+	
+	relation References_Argumentable_Expression {
+		
+		varArg : OrderedSet(java::expressions::Expression);
+		
+		enforce domain JAVA s: java::references::Argumentable  {
+			arguments = varArg
+		};
+
+		enforce domain CLOSURES t: java::references::Argumentable  {
+			arguments = varArg
+		};
+		when{
+			if s.arguments->size()>0 then
+				not s.arguments->forAll(a|
+					not a.oclIsTypeOf(java::literals::DecimalLongLiteral)
+					and
+					not a.oclIsTypeOf(java::literals::DecimalIntegerLiteral)
+					and
+					not a.oclIsTypeOf(java::literals::CharacterLiteral))
+			else
+				not t.arguments->forAll(a|
+					not a.oclIsTypeOf(java::literals::DecimalLongLiteral)
+					and
+					not a.oclIsTypeOf(java::literals::DecimalIntegerLiteral)
+					and
+					not a.oclIsTypeOf(java::literals::CharacterLiteral))
+			endif;
+		}
 	}
 
 }

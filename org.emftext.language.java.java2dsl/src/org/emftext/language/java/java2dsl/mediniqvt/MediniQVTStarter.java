@@ -455,15 +455,16 @@ public class MediniQVTStarter extends AbstractStarter{
 		while (iterator.hasNext()) {
 			processorImpl.addMetaModel(iterator.next());
 		}
-		//TODO
-		// set directory for trace file
+
+		// set directory for trace file and some parameters
 		processorImpl.setWorkingLocation(outputURI);
 		processorImpl.setModels(modelResources);
-		processorImpl.setProperty(QVTProcessorConsts.PROP_DEBUG, "true");
-		processorImpl.setProperty(QVTProcessorConsts.PROP_CLEAR_TRACES, "true");
-		processorImpl.setProperty(QVTProcessorConsts.PROP_DEBUG_TASKS, "true");
-//		processorImpl.setProperty(QVTProcessorConsts.PROP_TRANSFORMATION_PATH, qvtRuleFilePath);
 		
+		processorImpl.setProperty(QVTProcessorConsts.PROP_CLEAR_TRACES, "true");
+		if(debug){
+			processorImpl.setProperty(QVTProcessorConsts.PROP_DEBUG, "true");
+			processorImpl.setProperty(QVTProcessorConsts.PROP_DEBUG_TASKS, "true");
+		}
 		
 		System.out.println("input file: " + sourceFile);
 		// tell the QVT engine, which transformation to execute - there might be more than one in

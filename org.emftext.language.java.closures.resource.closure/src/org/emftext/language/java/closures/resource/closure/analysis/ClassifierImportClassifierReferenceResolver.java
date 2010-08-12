@@ -14,6 +14,15 @@
 
 package org.emftext.language.java.closures.resource.closure.analysis;
 
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
+import org.emftext.language.java.containers.CompilationUnit;
+
 public class ClassifierImportClassifierReferenceResolver implements org.emftext.language.java.closures.resource.closure.IClosureReferenceResolver<org.emftext.language.java.imports.ClassifierImport, org.emftext.language.java.classifiers.ConcreteClassifier> {
 	
 	private org.emftext.language.java.resource.java.analysis.ClassifierImportClassifierReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.ClassifierImportClassifierReferenceResolver();
@@ -62,6 +71,35 @@ public class ClassifierImportClassifierReferenceResolver implements org.emftext.
 			}
 		});
 		
+		if(!result.wasResolved()){
+			
+			EObject root = ClosureEObjectUtil.findRootContainer(container);
+			Resource resource = root.eResource();
+			URI resourceUri = resource.getURI();
+			
+			URI importResourceUri = 
+				resourceUri.trimFileExtension().trimSegments(1).
+				appendSegment(identifier).appendFileExtension("java");
+			
+			Resource importResource = 
+				resource.getResourceSet().createResource(importResourceUri);
+			
+			try {
+				importResource.load(null);
+			} catch (IOException e) {}
+			
+			if(!importResource.getContents().isEmpty()){
+				
+				ConcreteClassifier cc = null;
+				try {
+					cc = ((CompilationUnit)importResource.getContents().get(0)).getClassifiers().get(0);
+				} catch (Exception e) {}
+			
+				if(cc != null)
+					result.addMapping(identifier, cc);
+			}
+			
+		}
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.java.classifiers.ConcreteClassifier element, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
