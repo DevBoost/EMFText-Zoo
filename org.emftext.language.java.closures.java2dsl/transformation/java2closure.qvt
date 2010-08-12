@@ -9,7 +9,7 @@
 -- TODO: eigene Regeln für jeden Expressiontyp um zu unterscheiden ob StatementExpression oder nicht
 
 transformation copy(JAVA : java, CLOSURES : closures) {
-	
+	/*
 	relation References_Argumentable_Closure {
 
 		enforce domain JAVA s : java::references::Argumentable {
@@ -17,6 +17,36 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 
 		enforce domain CLOSURES t : java::references::Argumentable {
+			arguments = t_a : closures::Closure{}
+		};
+		where {
+			Closures_Closure(s_a,t_a);
+		}
+
+	}*/
+	
+	relation References_MethodCall_Closure {
+
+		enforce domain JAVA s : java::references::MethodCall {
+			arguments = s_a : java::instantiations::NewConstructorCall{}
+		};
+
+		enforce domain CLOSURES t : java::references::MethodCall {
+			arguments = t_a : closures::Closure{}
+		};
+		where {
+			Closures_Closure(s_a,t_a);
+		}
+
+	}
+	
+	relation Instantiations_NewConstructorCall_Closure {
+
+		enforce domain JAVA s : java::instantiations::NewConstructorCall {
+			arguments = s_a : java::instantiations::NewConstructorCall{}
+		};
+
+		enforce domain CLOSURES t : java::instantiations::NewConstructorCall {
 			arguments = t_a : closures::Closure{}
 		};
 		where {
@@ -211,7 +241,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n) or
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
-			References_Argumentable_Closure(s_n,t_n) or
+			Instantiations_NewConstructorCall_Closure(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or
@@ -255,7 +285,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n) or
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
-			References_Argumentable_Closure(s_n,t_n) or
+			References_MethodCall_Closure(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or
@@ -1082,7 +1112,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			}
 		};
 		where{
-			References_Argumentable_Closure(s_s_e,t_s_e) or
+			Instantiations_NewConstructorCall_Closure(s_s_e,t_s_e) or
 			References_Argumentable_NewConstructorCall(s_s_e,t_s_e) or
 			References_Argumentable_MethodCall(s_s_e,t_s_e) or
 			References_Argumentable_IdentifierReference(s_s_e,t_s_e) or
@@ -1109,7 +1139,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			 TypedElement_TypeReference_Float(s_s_e,t_s_e) or
 			 TypedElement_TypeReference_Long(s_s_e,t_s_e) or
 			 TypedElement_TypeReference_Short(s_s_e,t_s_e) or
-			 TypedElement_TypeReference_Char(s_s_e,t_s_e);
+			 TypedElement_TypeReference_Char(s_s_e,t_s_e)
+			 or true;
 			
 		}
 	}
@@ -1135,7 +1166,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			}
 		};
 		where{
-			References_Argumentable_Closure(s_s_e,t_s_e) or
+			References_MethodCall_Closure(s_s_e,t_s_e) or
 			References_Argumentable_NewConstructorCall(s_s_e,t_s_e) or
 			References_Argumentable_MethodCall(s_s_e,t_s_e) or
 			References_Argumentable_IdentifierReference(s_s_e,t_s_e) or
@@ -1152,7 +1183,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_IdentifierReference(s_s_e,t_s_e) or
 			References_Reference_MethodCall(s_s_e,t_s_e) or
 			References_Reference_ReflectiveClassReference(s_s_e,t_s_e)
-			;
+			or true;
 		}
 	}
 	
@@ -1588,7 +1619,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n) or
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
-			References_Argumentable_Closure(s_n,t_n) or
+			Instantiations_NewConstructorCall_Closure(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or
@@ -1641,7 +1672,7 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_MethodCall(s_n,t_n) or
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
-			References_Argumentable_Closure(s_n,t_n) or
+			References_MethodCall_Closure(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or

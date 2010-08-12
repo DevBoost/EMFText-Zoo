@@ -7,61 +7,135 @@ modeltype JAVA uses "http://www.emftext.org/java";
 -- grundsätzlich werden alle methoden und attribute übernommen,
 -- sie müssen manuell entfernt werden per 'exclude()' methode' 
 
-transformation Java2Closure(inout java : CLOSURES);
+transformation Java2Closure(inout java : CLOSURES); 
 
 main() {
-	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
+	java.objects()[JAVA::classifiers::Class]->map Count_Classifiers_Class();
+//	java.objects()[JAVA::instantiations::NewConstructorCall]->map Count_Instantiations_NewConstructorCall();
+//	java.objects()[JAVA::_references::MethodCall]->map Count_References_MethodCall();
+	
 	java.objects()[JAVA::instantiations::NewConstructorCall]->map Instantiations_NewConstructorCall();
 	java.objects()[JAVA::_references::MethodCall]->map References_MethodCall();
 	java.objects()[JAVA::statements::ExpressionStatement]->map Expressions_ExpressionStatement();
+	java.objects()[JAVA::expressions::AssignmentExpression]->map Expressions_AssignmentExpression();
+	java.objects()[JAVA::variables::LocalVariable]->map Variables_LocalVariable();
+	java.objects()[JAVA::statements::Return]->map Statements_Return();
 }
 
-mapping inout JAVA::classifiers::Class::Classifiers_Class(){}
+mapping inout JAVA::classifiers::Class::Count_Classifiers_Class(){}
+//mapping inout JAVA::instantiations::NewConstructorCall::Count_Instantiations_NewConstructorCall(){}
+//mapping inout JAVA::_references::MethodCall::Count_References_MethodCall(){}
 
+mapping inout JAVA::statements::Return::Statements_Return(){
+	
+	var closure : CLOSURES::Closure := null;
+	
+	if returnValue.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
+		closure := map Closures_Closure_Return(returnValue.oclAsType(JAVA::instantiations::NewConstructorCall))
+	endif;
+	if closure <> null then
+			returnValue := closure
+	endif
+
+}
+
+mapping inout JAVA::variables::LocalVariable::Variables_LocalVariable(){
+	
+	var closure : CLOSURES::Closure := null;
+	
+	if initialValue.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
+		closure := map Closures_Closure_LocalVariable(initialValue.oclAsType(JAVA::instantiations::NewConstructorCall))
+	endif;
+	if closure <> null then
+			initialValue := closure
+	endif
+
+}
+
+mapping inout JAVA::expressions::AssignmentExpression::Expressions_AssignmentExpression(){
+	
+	var closure : CLOSURES::Closure := null;
+	
+	if value.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
+		closure := map Closures_Closure_AssignmentExpression(value.oclAsType(JAVA::instantiations::NewConstructorCall))
+	endif;
+	if closure <> null then
+			value := closure
+	endif
+
+}
+
+-- Argument von MethodCall
 mapping inout JAVA::_references::MethodCall::References_MethodCall(){
 	
+	var closure : CLOSURES::Closure := null;
+	
 	self.arguments->forEach(a){
 		if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-			let closure : CLOSURES::Closure =
-				map Closures_Closure(a.oclAsType(JAVA::instantiations::NewConstructorCall)) in
-			if closure <> null then
+			closure := map Closures_Closure_MethodCall(a.oclAsType(JAVA::instantiations::NewConstructorCall))
+	endif;
+	if closure <> null then
 				self.arguments := self.arguments->append(closure)->
 				asOrderedSet()->
 				excluding(a)
-			endif
 		endif
 	}
 }
 
+-- Argument von NewConstructorCall
 mapping inout JAVA::instantiations::NewConstructorCall::Instantiations_NewConstructorCall(){
 	
+	var closure : CLOSURES::Closure := null;
+	
 	self.arguments->forEach(a){
 		if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-			let closure : CLOSURES::Closure =
-				map Closures_Closure(a.oclAsType(JAVA::instantiations::NewConstructorCall)) in
-			if closure <> null then
+			closure := map Closures_Closure_NewConstructorCall(a.oclAsType(JAVA::instantiations::NewConstructorCall))
+	endif;
+	if closure <> null then
 				self.arguments := self.arguments->append(closure)->
 				asOrderedSet()->
 				excluding(a)
-			endif
 		endif
 	}
 
 }
 
+-- NewConstructorCall in einer StatementExpression
 mapping inout JAVA::statements::ExpressionStatement::Expressions_ExpressionStatement(){
 	
+	var closure : CLOSURES::Closure := null;
+	
 	if self.expression.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-		let closure : CLOSURES::Closure =
-			map Closures_Closure(self.expression.oclAsType(JAVA::instantiations::NewConstructorCall)) in
-		if closure <> null then
+		closure := map Closures_Closure_NewConstructorCall(self.expression.oclAsType(JAVA::instantiations::NewConstructorCall))
+	endif;
+	if closure <> null then
 			self.expression := closure
-		endif
 	endif
 	
 }
+/*
+query Closures_Closure_NewConstructorCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
+	
+	return map Closures_Closure(newConstructorCall);
 
-mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
+query Closures_Closure_MethodCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
+	
+	return map Closures_Closure(newConstructorCall);
+	
+query Closures_Closure_Return(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
+	
+	return map Closures_Closure(newConstructorCall);
+	
+query Closures_Closure_LocalVariable(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
+	
+	return map Closures_Closure(newConstructorCall);
+	
+query Closures_Closure_AssignmentExpression(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
+	
+	return map Closures_Closure(newConstructorCall);
+*/
+
+mapping Closures_Closure_NewConstructorCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
 	when{
 		newConstructorCall.typeReference <> null
 		and
@@ -72,8 +146,10 @@ mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstr
 		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
 	}
 	{
-		var innerMethod : JAVA::members::ClassMethod := newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
-		var methodCall : JAVA::_references::MethodCall := newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
 		
 		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
 		innerMethod.parameters->forEach(p){
@@ -91,34 +167,199 @@ mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstr
 			arguments := methodCall.arguments
 		endif
 	}
-/*
-query copyTypeReference(typeReference : JAVA::types::TypeReference) : JAVA::types::TypeReference
+
+mapping Closures_Closure_MethodCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
+	when{
+		newConstructorCall.typeReference <> null
+		and
+		newConstructorCall.anonymousClass <> null
+		and
+		newConstructorCall.anonymousClass.members->size() = 1
+		and
+		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
+	}
 	{
-	var _return : JAVA::types::TypeReference;
-	var new_ncr : JAVA::types::NamespaceClassifierReference;
-	var new_c : JAVA::classifiers::Classifier;
-	var new_cr : JAVA::types::ClassifierReference;
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		
+		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
+		innerMethod.parameters->forEach(p){
+			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
+			arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
+		};
+		valueType := innerMethod.typeReference;
+		valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
+		typeReference := newConstructorCall.typeReference;
+		name := "";
+		parameters := innerMethod.parameters;
+		statements := innerMethod.statements;
+		methodName := innerMethod.name;
+		if methodCall <> null then
+			arguments := methodCall.arguments
+		endif
+	}
+
+mapping Closures_Closure_AssignmentExpression(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
+	when{
+		newConstructorCall.typeReference <> null
+		and
+		newConstructorCall.anonymousClass <> null
+		and
+		newConstructorCall.anonymousClass.members->size() = 1
+		and
+		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
+	}
+	{
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		
+		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
+		innerMethod.parameters->forEach(p){
+			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
+			arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
+		};
+		valueType := innerMethod.typeReference;
+		valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
+		typeReference := newConstructorCall.typeReference;
+		name := "";
+		parameters := innerMethod.parameters;
+		statements := innerMethod.statements;
+		methodName := innerMethod.name;
+		if methodCall <> null then
+			arguments := methodCall.arguments
+		endif
+	}
+
+mapping Closures_Closure_LocalVariable(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
+	when{
+		newConstructorCall.typeReference <> null
+		and
+		newConstructorCall.anonymousClass <> null
+		and
+		newConstructorCall.anonymousClass.members->size() = 1
+		and
+		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
+	}
+	{
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		
+		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
+		innerMethod.parameters->forEach(p){
+			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
+			arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
+		};
+		valueType := innerMethod.typeReference;
+		valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
+		typeReference := newConstructorCall.typeReference;
+		name := "";
+		parameters := innerMethod.parameters;
+		statements := innerMethod.statements;
+		methodName := innerMethod.name;
+		if methodCall <> null then
+			arguments := methodCall.arguments
+		endif
+	}
+
+mapping Closures_Closure_Return(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
+	when{
+		newConstructorCall.typeReference <> null
+		and
+		newConstructorCall.anonymousClass <> null
+		and
+		newConstructorCall.anonymousClass.members->size() = 1
+		and
+		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
+	}
+	{
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		
+		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
+		innerMethod.parameters->forEach(p){
+			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
+			arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
+		};
+		valueType := innerMethod.typeReference;
+		valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
+		typeReference := newConstructorCall.typeReference;
+		name := "";
+		parameters := innerMethod.parameters;
+		statements := innerMethod.statements;
+		methodName := innerMethod.name;
+		if methodCall <> null then
+			arguments := methodCall.arguments
+		endif
+	}
+
+/*
+query Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure{
 	
-	if typeReference.oclIsTypeOf(JAVA::types::PrimitiveType) then
-		_return := typeReference.clone().oclAsType(JAVA::types::TypeReference)
-	else
-		if typeReference.oclIsTypeOf(JAVA::types::NamespaceClassifierReference) then
-			new_ncr := typeReference.oclAsType(JAVA::types::NamespaceClassifierReference)
+		var closure : CLOSURES::Closure := object CLOSURES::Closure{};
+	
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		
+		closure.annotationsAndModifiers := innerMethod.annotationsAndModifiers;
+		innerMethod.parameters->forEach(p){
+			closure.parameterTypes := closure.parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
+			closure.arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
+		};
+		closure.valueType := innerMethod.typeReference;
+		closure.valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
+		closure.typeReference := newConstructorCall.typeReference;
+		closure.name := "";
+		closure.parameters := innerMethod.parameters;
+		closure.statements := innerMethod.statements;
+		closure.methodName := innerMethod.name;
+		if methodCall <> null then
+			closure.arguments := methodCall.arguments
+		endif;
+		
+		return closure
+}
+*/
+/*	
+mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
+	when{
+		newConstructorCall.typeReference <> null
+		and
+		newConstructorCall.anonymousClass <> null
+		and
+		newConstructorCall.anonymousClass.members->size() = 1
+		and
+		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
+	}
+	{
+		var innerMethod : JAVA::members::ClassMethod := 
+			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
+		var methodCall : JAVA::_references::MethodCall := 
+			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
+		
+		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
+		innerMethod.parameters->forEach(p){
+			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
+			arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
+		};
+		valueType := innerMethod.typeReference;
+		valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
+		typeReference := newConstructorCall.typeReference;
+		name := "";
+		parameters := innerMethod.parameters;
+		statements := innerMethod.statements;
+		methodName := innerMethod.name;
+		if methodCall <> null then
+			arguments := methodCall.arguments
 		endif
-	endif;
-	if new_ncr <> null then
-		let ncr : JAVA::types::NamespaceClassifierReference =
-			typeReference.oclAsType(JAVA::types::NamespaceClassifierReference) in
-		if ncr.classifierReferences->at(1).oclIsTypeOf(JAVA::types::ClassifierReference) then
-			new_cr := ncr.classifierReferences->at(1).oclAsType(JAVA::types::ClassifierReference)
-		endif
-	endif;
-	if new_cr <> null then
-		let cr : JAVA::types::ClassifierReference =
-			ncr.classifierReferences->at(1).oclIsTypeOf(JAVA::types::ClassifierReference).oclAsType(JAVA::types::ClassifierReference) in
-		if ncr.classifierReferences->at(1).oclIsTypeOf(JAVA::types::ClassifierReference) then
-			new_cr := ncr.classifierReferences->at(1).oclAsType(JAVA::types::ClassifierReference)
-		endif
-	endif; 
-	return _return
-	}*/
+	}
+*/

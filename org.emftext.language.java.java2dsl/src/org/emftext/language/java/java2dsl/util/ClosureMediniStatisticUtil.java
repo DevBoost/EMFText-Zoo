@@ -4,16 +4,43 @@ import java.util.Arrays;
 
 public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 
-	private int countClosures = 0;
+	private int countNewConstructorCallClosures = 0;
 	private int countNewConstructorCall = 0;
+	
+	private int countMethodCallsClosures = 0;
 	private int countMethodCalls = 0;
+	
 	private int countClasses = 0;
+	
+	private int countAssignmentExpressionClosures = 0;
 	private int countAssignmentExpression = 0;
+	
+	private int countLocalVariableClosures = 0;
 	private int countLocalVariable = 0;
+	
+	private int countReturnClosures = 0;
 	private int countReturn = 0;
 	
-	public void setCountClosures(int countClosures) {
-		this.countClosures += countClosures;
+	public void setCountNewConstructorCallClosures(
+			int countNewConstructorCallClosures) {
+		this.countNewConstructorCallClosures += countNewConstructorCallClosures;
+	}
+
+	public void setCountMethodCallsClosures(int countMethodCallsClosures) {
+		this.countMethodCallsClosures += countMethodCallsClosures;
+	}
+
+	public void setCountAssignmentExpressionClosures(
+			int countAssignmentExpressionClosures) {
+		this.countAssignmentExpressionClosures += countAssignmentExpressionClosures;
+	}
+
+	public void setCountLocalVariableClosures(int countLocalVariableClosures) {
+		this.countLocalVariableClosures += countLocalVariableClosures;
+	}
+
+	public void setCountReturnClosures(int countReturnClosures) {
+		this.countReturnClosures += countReturnClosures;
 	}
 
 	public void setCountNewConstructorCall(int countNewConstructorCall) {
@@ -44,40 +71,49 @@ public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 	public void writeStatistic() {
 		
 		System.out.println("Klassen: "+countClasses);
+		
 		System.out.println("NewConstructorCall: "+countNewConstructorCall);
+		System.out.println("NewConstructorCallClosures: "+countNewConstructorCallClosures);
+		
 		System.out.println("MethodCalls: "+countMethodCalls);
-		System.out.println("Closures: "+countClosures);
+		System.out.println("MethodCallsClosures: "+countMethodCallsClosures);
+		
 		System.out.println("AssignmentExpression: "+countAssignmentExpression);
+		System.out.println("AssignmentExpressionClosures: "+countAssignmentExpressionClosures);
+		
 		System.out.println("LocalVariable: "+countLocalVariable);
+		System.out.println("LocalVariableClosures: "+countLocalVariableClosures);
+		
 		System.out.println("Return: "+countReturn);
+		System.out.println("ReturnClosures: "+countReturnClosures);
 	}
+
 
 	@Override
 	public void init(){
 		
-		getRuleNames().put("Closures_Closure", Arrays.asList("setCountClosures"));
+		getRuleNames().put("CompilationUnit_Class", Arrays.asList("setCountClasses"));
+		getRuleNames().put("Members_Class", Arrays.asList("setCountClasses"));
 		
+		getRuleNames().put("Instantiations_NewConstructorCall_Closure", Arrays.asList("setCountNewConstructorCallClosures"));
 		getRuleNames().put("Statements_StatementListContainer_NewConstructorCall", Arrays.asList("setCountNewConstructorCall"));
 		getRuleNames().put("References_Reference_NewConstructorCall", Arrays.asList("setCountNewConstructorCall"));
 		getRuleNames().put("References_Argumentable_NewConstructorCall", Arrays.asList("setCountNewConstructorCall"));
 		
+		getRuleNames().put("References_MethodCall_Closure", Arrays.asList("setCountMethodCallsClosures"));
 		getRuleNames().put("Statements_StatementListContainer_MethodCall", Arrays.asList("setCountMethodCalls"));
 		getRuleNames().put("References_Reference_MethodCall", Arrays.asList("setCountMethodCalls"));
 		getRuleNames().put("References_Argumentable_MethodCall", Arrays.asList("setCountMethodCalls"));
+				
+		getRuleNames().put("Return_ReturnValue_Closure", Arrays.asList("setCountReturnClosures"));
+		getRuleNames().put("Return_ReturnValue_Expression", Arrays.asList("setCountReturn"));
 		
-		getRuleNames().put("CompilationUnit_Class", Arrays.asList("setCountClasses"));
-		getRuleNames().put("Members_Class", Arrays.asList("setCountClasses"));
-		
-		getRuleNames().put("LocalVariable_InitialValue_Closure", Arrays.asList("setCountLocalVariable"));
 		getRuleNames().put("LocalVariable_InitialValue_Expression", Arrays.asList("setCountLocalVariable"));
+		getRuleNames().put("LocalVariable_InitialValue_Closure", Arrays.asList("setCountLocalVariableClosures"));
 		
-		getRuleNames().put("AssignmentExpression_Value_Closure", Arrays.asList("setCountAssignmentExpression"));
+		getRuleNames().put("AssignmentExpression_Value_Closure", Arrays.asList("setCountAssignmentExpressionClosures"));
 		getRuleNames().put("AssignmentExpression_Value_Expression", Arrays.asList("setCountAssignmentExpression"));
 		
-		getRuleNames().put("Return_ReturnValue_Closure", Arrays.asList("setCountReturn"));
-		getRuleNames().put("Return_ReturnValue_Expression", Arrays.asList("setCountReturn"));
 	}
-
-
 
 }
