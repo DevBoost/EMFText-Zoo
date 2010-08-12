@@ -24,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.filesystem.resource.fs.ui.FsBracketPreferencePage" class="org.emftext.language.filesystem.resource.fs.ui.FsBracketPreferencePage" category="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.filesystem.resource.fs.ui.FsOccurrencePreferencePage" class="org.emftext.language.filesystem.resource.fs.ui.FsOccurrencePreferencePage" category="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,6 +47,16 @@
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="fs" id="org.emftext.language.filesystem.resource.fs.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.filesystem.resource.fs.ui.occurences" />
+		<type name="org.emftext.language.filesystem.resource.fs.ui.occurences.declaration" super="org.emftext.language.filesystem.resource.fs.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.filesystem.resource.fs.ui.occurences" label="Occurrences (in .fs files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="fs.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="fs.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="fs.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="fs.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="fs.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="fs.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="fs.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="fs.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="fs.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.filesystem.resource.fs.ui.occurences.declaration" label="Declarations (in .fs files)" textPreferenceKey="fs.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="fs.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="fs.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="fs.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="fs.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="fs.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>

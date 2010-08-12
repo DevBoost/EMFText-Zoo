@@ -133,7 +133,6 @@ public class AbstractClosureItemProvider
    */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-
     if (childrenFeatures == null)
     {
       super.getChildrenFeatures(object);
@@ -190,7 +189,6 @@ public class AbstractClosureItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
-
 
     switch (notification.getFeatureID(AbstractClosure.class))
     {
@@ -636,7 +634,6 @@ public class AbstractClosureItemProvider
     Object childFeature = feature;
     Object childObject = child;
 
-
     boolean qualify =
       childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_REFERENCE ||
       childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__PARAMETER_TYPES ||
@@ -647,7 +644,6 @@ public class AbstractClosureItemProvider
       childFeature == StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS ||
       childFeature == ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS ||
       childFeature == ReferencesPackage.Literals.REFERENCE__NEXT;
-
 
     if (qualify)
     {

@@ -24,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.java.resource.java.ui.JavaBracketPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaBracketPreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.java.resource.java.ui.JavaOccurrencePreferencePage" class="org.emftext.language.java.resource.java.ui.JavaOccurrencePreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,6 +47,16 @@
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="java" id="org.emftext.language.java.resource.java.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.java.resource.java.ui.occurences" />
+		<type name="org.emftext.language.java.resource.java.ui.occurences.declaration" super="org.emftext.language.java.resource.java.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.java.resource.java.ui.occurences" label="Occurrences (in .java files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="java.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="java.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="java.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="java.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="java.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="java.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="java.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="java.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="java.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.java.resource.java.ui.occurences.declaration" label="Declarations (in .java files)" textPreferenceKey="java.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="java.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="java.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="java.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="java.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="java.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>

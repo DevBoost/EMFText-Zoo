@@ -24,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.simplec.resource.c.ui.CBracketPreferencePage" class="org.emftext.language.simplec.resource.c.ui.CBracketPreferencePage" category="org.emftext.language.simplec.resource.c.ui.CPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.simplec.resource.c.ui.COccurrencePreferencePage" class="org.emftext.language.simplec.resource.c.ui.COccurrencePreferencePage" category="org.emftext.language.simplec.resource.c.ui.CPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,6 +47,16 @@
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="c" id="org.emftext.language.simplec.resource.c.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.simplec.resource.c.ui.occurences" />
+		<type name="org.emftext.language.simplec.resource.c.ui.occurences.declaration" super="org.emftext.language.simplec.resource.c.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.simplec.resource.c.ui.occurences" label="Occurrences (in .c files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="c.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="c.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="c.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="c.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="c.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="c.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="c.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="c.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="c.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.simplec.resource.c.ui.occurences.declaration" label="Declarations (in .c files)" textPreferenceKey="c.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="c.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="c.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="c.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="c.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="c.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>

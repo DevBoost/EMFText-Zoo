@@ -24,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.xml.resource.xml.ui.XmlBracketPreferencePage" class="org.emftext.language.xml.resource.xml.ui.XmlBracketPreferencePage" category="org.emftext.language.xml.resource.xml.ui.XmlPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.xml.resource.xml.ui.XmlOccurrencePreferencePage" class="org.emftext.language.xml.resource.xml.ui.XmlOccurrencePreferencePage" category="org.emftext.language.xml.resource.xml.ui.XmlPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,6 +47,16 @@
 	
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="xml" id="org.emftext.language.xml.resource.xml.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.xml.resource.xml.ui.occurences" />
+		<type name="org.emftext.language.xml.resource.xml.ui.occurences.declaration" super="org.emftext.language.xml.resource.xml.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.xml.resource.xml.ui.occurences" label="Occurrences (in .xml files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="xml.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="xml.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="xml.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="xml.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="xml.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="xml.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="xml.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="xml.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="xml.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.xml.resource.xml.ui.occurences.declaration" label="Declarations (in .xml files)" textPreferenceKey="xml.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="xml.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="xml.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="xml.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="xml.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="xml.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>
