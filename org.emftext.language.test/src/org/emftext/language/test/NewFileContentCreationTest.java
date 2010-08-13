@@ -186,7 +186,8 @@ public class NewFileContentCreationTest extends TestCase {
 
 		public void runTest() {
 			String[] excludes = new String[] {
-					".*/org/emftext/test/.*", 
+					".*/org/emftext/test/.*",
+					".*/org/emftext/sdk/concretesyntax/tokenhandling/.*",
 					".*/sandwich_simple.cs",	
 					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",	
 			};

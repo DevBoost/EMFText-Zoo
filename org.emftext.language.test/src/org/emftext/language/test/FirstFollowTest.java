@@ -56,7 +56,9 @@ public class FirstFollowTest extends TestCase {
 			".*/text.secprop.cs",
 			".*/rolemapping.cs",
 			".*/theater.cs",
-			".*/Properties.cs"
+			".*/Properties.cs",
+			".*/emfdoc.cs",
+			".*/tokenhandling/.*.cs"
 	};
 	private ExpectationComputer computer;
 
