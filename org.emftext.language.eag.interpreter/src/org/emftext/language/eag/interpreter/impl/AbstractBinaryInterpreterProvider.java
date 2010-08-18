@@ -1,0 +1,64 @@
+package org.emftext.language.eag.interpreter.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.emftext.language.eag.interpreter.IOperationProvider;
+import org.emftext.language.eag.interpreter.ITypeConverter;
+import org.emftext.language.eag.interpreter.numbers.NumberConverter;
+
+public abstract class AbstractBinaryInterpreterProvider {
+
+	public ITypeConverter[] typeProviders = new ITypeConverter[] {
+		new NumberConverter()
+	};
+
+	
+	public <OperatorType> IReference interpretWithConversion(IOperationProvider<OperatorType>[] providers,
+			OperatorType operator, Object left, Object right) {
+		IReference result = interpretInternal(providers, operator, left, right);
+		if (result != null) {
+			return result;
+		}
+		// no operation found, try converting types
+		List<Object> leftConversions = findConversions(left);
+		List<Object> rightConversions = findConversions(right);
+		for (Object leftConverted : leftConversions) {
+			for (Object rightConverted : rightConversions) {
+				result = interpretInternal(providers, operator, leftConverted, rightConverted);
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		throw new RuntimeException("Can't find provider to handle binary expression " + operator + " on " + left + ", " + right);
+	}
+	
+	public <OperatorType> IReference interpretInternal(IOperationProvider<OperatorType>[] providers, OperatorType operator, Object left,
+			Object right) {
+		System.out.println("interpretInternal(" + left + ", " + right + ")");
+		for (IOperationProvider<OperatorType> nextProvider : providers) {
+			if (nextProvider.canHandle(operator, left.getClass(), right.getClass())) {
+				Object result = nextProvider.interpret(operator, left, right);
+				if (result != null) {
+					return ReferenceFactory.INSTANCE.createReference(result);
+				}
+			}
+		}
+		return null;
+	}
+
+	public List<Object> findConversions(Object object) {
+		List<Object> conversions = new ArrayList<Object>();
+		for (ITypeConverter typeConverter : typeProviders) {
+			Class<?>[] availableConversions = typeConverter.getAvailableConversions(object.getClass());
+			if (availableConversions != null) {
+				for (Class<?> targetType : availableConversions) {
+					Object converted = typeConverter.convertTo(object, targetType);
+					conversions.add(converted);
+				}
+			}
+		}
+		return conversions;
+	}
+}

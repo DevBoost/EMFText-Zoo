@@ -5,13 +5,16 @@ import java.util.Collection;
 import org.emftext.language.eag.Assignment;
 import org.emftext.language.eag.AssignmentOperator;
 
-public class AssignmentInterpreterProvider {
+public class AssignmentInterpreterProvider extends AbstractBinaryInterpreterProvider {
 
 	public static final AssignmentInterpreterProvider INSTANCE = new AssignmentInterpreterProvider();
 
 	public void interpret(Assignment assigment, IReference left, IReference right) {
 		Object elementToAdd = right.getTarget();
 		Object leftTarget = left.getTarget();
+		
+		AssignmentOperator operator = assigment.getOperator();
+		// TODO move this code to provider classes
 		if (assigment.getOperator() == AssignmentOperator.EQUALS && leftTarget instanceof Collection) {
 			assert leftTarget instanceof Collection;
 			addToCollection(leftTarget, elementToAdd);
@@ -26,7 +29,7 @@ public class AssignmentInterpreterProvider {
 			addToCollection(leftTarget, elementToAdd);
 			return;
 		}
-		throw new RuntimeException("Can't find provider to handle assigment " + assigment.getOperator() + " on " + left + ", " + right);
+		throw new RuntimeException("Can't find provider to handle assignment " + operator + " on " + left + ", " + right);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -29,6 +29,8 @@ public class SimpleMathTest extends AbstractInterpreterTest {
 		testInterpretation("1+1", 2);
 		testInterpretation("2*3", 6);
 		testInterpretation("1+2*5", 11);
+		testInterpretation("1+2*5.0", 11.0f);
+		testInterpretation("11.1", 11.1f);
 	}
 
 	private void testInterpretation(String text, Object expected) {
