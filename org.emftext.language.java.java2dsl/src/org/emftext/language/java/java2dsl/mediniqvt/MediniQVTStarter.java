@@ -376,7 +376,7 @@ public class MediniQVTStarter extends AbstractStarter{
 	}
 	
 	@Override
-	public void launch(File sourceFile) {
+	public synchronized void launch(File sourceFile) {
 
 		
 		// create resources

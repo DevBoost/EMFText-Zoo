@@ -19,7 +19,7 @@ public class MetamodelUtil {
 	 *            file name to load
 	 * @return the EMF resource
 	 */
-	public static Resource getResource(String xmlFileName, ResourceSet rs) {
+	public static synchronized Resource getResource(String xmlFileName, ResourceSet rs) {
 		URI uri = URI.createFileURI(xmlFileName);
 		Resource resource = null;
 		try {
@@ -30,7 +30,7 @@ public class MetamodelUtil {
 		return resource;
 	}
 	
-	public static Resource getResource(URI fileURI, ResourceSet rs) {
+	public static synchronized Resource getResource(URI fileURI, ResourceSet rs) {
 		
 		Resource resource = null;
 		try {

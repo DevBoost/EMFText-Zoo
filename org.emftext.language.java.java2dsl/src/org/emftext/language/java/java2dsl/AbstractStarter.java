@@ -110,7 +110,9 @@ public abstract class AbstractStarter {
 			try {
 				method = statisticUtilClass.getMethod(methodName, int.class);
 				method.invoke(statisticUtil,value);
-			} catch (Exception e) {}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -144,7 +146,7 @@ public abstract class AbstractStarter {
 					try {
 						launch(file);
 					} catch (Exception e) {
-						System.out.println(e);
+						e.printStackTrace();
 					}
 					threads.remove(Thread.currentThread());
 				}
@@ -171,8 +173,8 @@ public abstract class AbstractStarter {
 							System.out.println("Run was interrupted by timeout.");
 						}
 					}
-					catch (Exception e1) {
-						System.out.println(e1);
+					catch (Exception e) {
+						e.printStackTrace();
 					}
 					threads.remove(workerThread);
 				}

@@ -265,7 +265,7 @@ public class QVTOStarter extends AbstractStarter{
 		// set logger
 		if(debug){
 			PrintWriter printWriter = new PrintWriter(System.out);
-			printWriter.flush();
+//			printWriter.flush();
 			context.setLog(new WriterLog(printWriter));
 		}
 		
