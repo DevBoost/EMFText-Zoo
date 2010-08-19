@@ -10,16 +10,6 @@ public class PlainObjectReference extends AbstractObjectReference {
 	}
 
 	@Override
-	public Object get(EStructuralFeature feature) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void set(EStructuralFeature feature, Object value) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public AbstractObjectReference getReference(EStructuralFeature feature) {
 		throw new UnsupportedOperationException();
 	}

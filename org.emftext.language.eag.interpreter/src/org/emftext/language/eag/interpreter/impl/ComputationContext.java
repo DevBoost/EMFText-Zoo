@@ -7,6 +7,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.eag.AttributeGrammar;
 import org.emftext.language.eag.Variable;
 
+/**
+ * A context that is passed on during the interpretation of attribute
+ * grammars. It contains references to the grammar models, the result
+ * of the current computation, the model element that is subject to
+ * interpretation and a map of all active variables.
+ */
 public class ComputationContext {
 
 	private EObject object;

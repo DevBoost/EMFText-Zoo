@@ -10,12 +10,11 @@ import org.emftext.language.eag.interpreter.impl.references.IReference;
 import org.emftext.language.eag.interpreter.impl.references.ReferenceFactory;
 import org.emftext.language.eag.interpreter.numbers.NumberConverter;
 
-public abstract class AbstractBinaryInterpreterProvider {
+public abstract class AbstractInterpreterProvider {
 
-	public ITypeConverter[] typeProviders = new ITypeConverter[] {
+	public ITypeConverter[] typeConverters = new ITypeConverter[] {
 		new NumberConverter()
 	};
-
 	
 	public <OperatorType> IReference interpretWithConversion(Collection<IOperationProvider<OperatorType>> providers,
 			OperatorType operator, Object left, Object right) {
@@ -53,7 +52,7 @@ public abstract class AbstractBinaryInterpreterProvider {
 
 	public List<Object> findConversions(Object object) {
 		List<Object> conversions = new ArrayList<Object>();
-		for (ITypeConverter typeConverter : typeProviders) {
+		for (ITypeConverter typeConverter : typeConverters) {
 			Class<?>[] availableConversions = typeConverter.getAvailableConversions(object.getClass());
 			if (availableConversions != null) {
 				for (Class<?> targetType : availableConversions) {

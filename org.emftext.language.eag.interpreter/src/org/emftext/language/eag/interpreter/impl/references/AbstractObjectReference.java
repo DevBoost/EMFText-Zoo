@@ -19,8 +19,5 @@ public abstract class AbstractObjectReference implements IReference {
 		throw new UnsupportedOperationException();
 	}
 
-	public abstract Object get(EStructuralFeature feature);
-	public abstract void set(EStructuralFeature feature, Object value);
-
 	public abstract IReference getReference(EStructuralFeature feature);
 }

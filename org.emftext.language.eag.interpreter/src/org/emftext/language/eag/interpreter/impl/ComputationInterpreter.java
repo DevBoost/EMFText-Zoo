@@ -25,7 +25,6 @@ import org.emftext.language.eag.Variable;
 import org.emftext.language.eag.interpreter.impl.providers.AssignmentInterpreterProvider;
 import org.emftext.language.eag.interpreter.impl.providers.BinaryExpressionInterpreterProvider;
 import org.emftext.language.eag.interpreter.impl.providers.BooleanExpressionInterpreterProvider;
-import org.emftext.language.eag.interpreter.impl.references.AbstractObjectReference;
 import org.emftext.language.eag.interpreter.impl.references.EObjectReference;
 import org.emftext.language.eag.interpreter.impl.references.IReference;
 import org.emftext.language.eag.interpreter.impl.references.ReferenceFactory;
@@ -103,7 +102,7 @@ public class ComputationInterpreter extends AbstractEagInterpreter<IReference, C
 		assert leftValue instanceof IReference;
 		IReference right = (IReference) rightValue;
 		IReference left = (IReference) leftValue;
-		AssignmentInterpreterProvider.INSTANCE.interpret(assignment, left, right);
+		AssignmentInterpreterProvider.INSTANCE.interpret(assignment.getOperator(), left, right);
 		return null;
 	}
 
@@ -117,13 +116,13 @@ public class ComputationInterpreter extends AbstractEagInterpreter<IReference, C
 		Object right = interprete(expression.getRight(), context);
 		log("BinaryExpression() left = " + left);
 		log("BinaryExpression() right = " + right);
-		assert left instanceof AbstractObjectReference;
-		assert right instanceof AbstractObjectReference;
-		AbstractObjectReference leftRef = (AbstractObjectReference) left;
-		AbstractObjectReference rightRef = (AbstractObjectReference) right;
+		assert left instanceof IReference;
+		assert right instanceof IReference;
+		IReference leftRef = (IReference) left;
+		IReference rightRef = (IReference) right;
 		log("BinaryExpression() leftRef = " + leftRef.getTarget());
 		log("BinaryExpression() rightRef = " + rightRef.getTarget());
-		return BinaryExpressionInterpreterProvider.INSTANCE.interpret(expression, leftRef, rightRef);
+		return BinaryExpressionInterpreterProvider.INSTANCE.interpret(expression.getOperator(), leftRef, rightRef);
 	}
 	
 	@Override
@@ -131,10 +130,10 @@ public class ComputationInterpreter extends AbstractEagInterpreter<IReference, C
 			BooleanExpression expression, ComputationContext context) {
 		Object left = interprete(expression.getLeft(), context);
 		Object right = interprete(expression.getRight(), context);
-		assert left instanceof AbstractObjectReference;
-		assert right instanceof AbstractObjectReference;
-		AbstractObjectReference leftRef = (AbstractObjectReference) left;
-		AbstractObjectReference rightRef = (AbstractObjectReference) right;
+		assert left instanceof IReference;
+		assert right instanceof IReference;
+		IReference leftRef = (IReference) left;
+		IReference rightRef = (IReference) right;
 		return BooleanExpressionInterpreterProvider.INSTANCE.interpret(expression, leftRef, rightRef);
 	}
 
@@ -147,12 +146,12 @@ public class ComputationInterpreter extends AbstractEagInterpreter<IReference, C
 		log("AttributeValue() " + attribute.getName());
 		IReference expressionResult = interprete(attributeValue.getExpression(), context);
 		log("AttributeValue() " + expressionResult);
-		assert expressionResult instanceof AbstractObjectReference;
+		assert expressionResult instanceof IReference;
 		
 		//Object expressionValue = expressionResult.getValue();
 		//assert expressionValue instanceof ObjectReference;
 		
-		AbstractObjectReference expressionReference = (AbstractObjectReference) expressionResult;
+		IReference expressionReference = (IReference) expressionResult;
 		// evaluate attribute on the result of interpreting object.getExpression()
 		Object result = new EAGInterpreter().interpret((EObject) expressionReference.getTarget(), context.getGrammar(), attribute);
 		return ReferenceFactory.INSTANCE.createReference(result);
@@ -209,7 +208,7 @@ public class ComputationInterpreter extends AbstractEagInterpreter<IReference, C
 			ThisReference thisRef,
 			ComputationContext context) {
 		EObject thisObject = context.getObject();
-		AbstractObjectReference referenceToThisObject = new EObjectReference(thisObject);
+		IReference referenceToThisObject = new EObjectReference(thisObject);
 		lastResultInReferenceChain = referenceToThisObject;
 		return referenceToThisObject;
 	}

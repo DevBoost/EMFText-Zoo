@@ -13,16 +13,6 @@ public class EObjectReference extends AbstractObjectReference {
 	}
 
 	@Override
-	public Object get(EStructuralFeature feature) {
-		return object.eGet(feature);
-	}
-
-	@Override
-	public void set(EStructuralFeature feature, Object value) {
-		object.eSet(feature, value);
-	}
-
-	@Override
 	public IReference getReference(EStructuralFeature feature) {
 		return ReferenceFactory.INSTANCE.createReference(object.eGet(feature));
 	}
