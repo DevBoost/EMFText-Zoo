@@ -1,9 +1,10 @@
-package org.emftext.language.eag.interpreter.impl;
+package org.emftext.language.eag.interpreter.impl.references;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.language.eag.interpreter.impl.ComputationContext;
 
-public class ValueReference implements IComplexReference {
+public class ValueReference implements IReference {
 	
 	private ComputationContext context;
 
@@ -20,7 +21,7 @@ public class ValueReference implements IComplexReference {
 		return context.getResult();
 	}
 
-	public ObjectReference getReference(EStructuralFeature feature) {
+	public IReference getReference(EStructuralFeature feature) {
 		Object result = context.getResult();
 		assert result != null;
 		assert result instanceof EObject;

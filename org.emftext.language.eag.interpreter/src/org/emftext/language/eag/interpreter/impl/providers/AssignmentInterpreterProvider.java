@@ -1,9 +1,10 @@
-package org.emftext.language.eag.interpreter.impl;
+package org.emftext.language.eag.interpreter.impl.providers;
 
 import java.util.Collection;
 
 import org.emftext.language.eag.Assignment;
 import org.emftext.language.eag.AssignmentOperator;
+import org.emftext.language.eag.interpreter.impl.references.IReference;
 
 public class AssignmentInterpreterProvider extends AbstractBinaryInterpreterProvider {
 

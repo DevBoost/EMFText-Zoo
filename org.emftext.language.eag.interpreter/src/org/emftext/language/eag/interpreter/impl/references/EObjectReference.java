@@ -1,9 +1,9 @@
-package org.emftext.language.eag.interpreter.impl;
+package org.emftext.language.eag.interpreter.impl.references;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-public class EObjectReference extends ObjectReference {
+public class EObjectReference extends AbstractObjectReference {
 
 	private EObject object;
 
@@ -23,7 +23,7 @@ public class EObjectReference extends ObjectReference {
 	}
 
 	@Override
-	public ObjectReference getReference(EStructuralFeature feature) {
+	public IReference getReference(EStructuralFeature feature) {
 		return ReferenceFactory.INSTANCE.createReference(object.eGet(feature));
 	}
 }

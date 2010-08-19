@@ -1,12 +1,12 @@
-package org.emftext.language.eag.interpreter.impl;
+package org.emftext.language.eag.interpreter.impl.references;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-public abstract class ObjectReference implements IComplexReference {
+public abstract class AbstractObjectReference implements IReference {
 
 	private Object object;
 
-	public ObjectReference(Object object) {
+	public AbstractObjectReference(Object object) {
 		super();
 		this.object = object;
 	}
@@ -22,5 +22,5 @@ public abstract class ObjectReference implements IComplexReference {
 	public abstract Object get(EStructuralFeature feature);
 	public abstract void set(EStructuralFeature feature, Object value);
 
-	public abstract ObjectReference getReference(EStructuralFeature feature);
+	public abstract IReference getReference(EStructuralFeature feature);
 }

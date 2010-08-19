@@ -11,6 +11,7 @@ import org.emftext.language.eag.Attribute;
 import org.emftext.language.eag.AttributeGrammar;
 import org.emftext.language.eag.AttributeKind;
 import org.emftext.language.eag.Computation;
+import org.emftext.language.eag.interpreter.impl.references.IReference;
 
 public class EAGInterpreter {
 

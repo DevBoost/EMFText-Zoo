@@ -1,8 +1,8 @@
-package org.emftext.language.eag.interpreter.impl;
+package org.emftext.language.eag.interpreter.impl.references;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-public class PlainObjectReference extends ObjectReference {
+public class PlainObjectReference extends AbstractObjectReference {
 
 	public PlainObjectReference(Object object) {
 		super(object);
@@ -20,7 +20,7 @@ public class PlainObjectReference extends ObjectReference {
 	}
 
 	@Override
-	public ObjectReference getReference(EStructuralFeature feature) {
+	public AbstractObjectReference getReference(EStructuralFeature feature) {
 		throw new UnsupportedOperationException();
 	}
 }

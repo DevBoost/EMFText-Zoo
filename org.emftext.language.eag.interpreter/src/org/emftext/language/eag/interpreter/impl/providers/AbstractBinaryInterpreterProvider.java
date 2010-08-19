@@ -1,4 +1,4 @@
-package org.emftext.language.eag.interpreter.impl;
+package org.emftext.language.eag.interpreter.impl.providers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.emftext.language.eag.interpreter.IOperationProvider;
 import org.emftext.language.eag.interpreter.ITypeConverter;
+import org.emftext.language.eag.interpreter.impl.references.IReference;
+import org.emftext.language.eag.interpreter.impl.references.ReferenceFactory;
 import org.emftext.language.eag.interpreter.numbers.NumberConverter;
 
 public abstract class AbstractBinaryInterpreterProvider {
