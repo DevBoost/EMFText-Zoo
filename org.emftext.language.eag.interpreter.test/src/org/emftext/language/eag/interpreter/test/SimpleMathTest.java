@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.eag.AttributeGrammar;
+import org.emftext.language.simplemath.SimplemathPackage;
 import org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation;
 import org.emftext.language.simplemath.resource.sm.mopp.SmResourceFactory;
 import org.junit.Before;
@@ -16,6 +17,8 @@ public class SimpleMathTest extends AbstractInterpreterTest {
 
 	private static final String SM_FILE_EXTENSION = new SmMetaInformation().getSyntaxName();
 
+	private AttributeGrammar grammar;
+	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -23,11 +26,26 @@ public class SimpleMathTest extends AbstractInterpreterTest {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				SM_FILE_EXTENSION,
 				new SmResourceFactory());
+		SimplemathPackage.eINSTANCE.getAdditive();
+		grammar = loadGrammar("input" + File.separator + "simplemath.eag");
 	}
 
+	/*
+	public void testSimpleMathAG100() {
+		for (int i = 0; i < 10000; i++) {
+			if (i % 50 == 0) {
+				System.out.println("SimpleMathTest.testSimpleMathAG100() " + i);
+			}
+			testSimpleMathAG();
+		}
+	}
+	*/
+	
 	public void testSimpleMathAG() {
 		testInterpretation("1+1", 2);
 		testInterpretation("2*3", 6);
+		testInterpretation("6/2", 3);
+		testInterpretation("6-2", 4);
 		testInterpretation("1+2*5", 11);
 		testInterpretation("1+2*5.0", 11.0f);
 		testInterpretation("11.1", 11.1f);
@@ -36,7 +54,6 @@ public class SimpleMathTest extends AbstractInterpreterTest {
 	private void testInterpretation(String text, Object expected) {
 		EObject root = loadModel(text);
 		//EObject root = loadModel("1*5");
-		AttributeGrammar grammar = loadGrammar("input" + File.separator + "simplemath.eag");
 		String attribute = "Value";
 		assertInterpretation(expected, root, grammar, attribute);
 	}

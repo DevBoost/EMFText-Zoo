@@ -1,6 +1,7 @@
 package org.emftext.language.eag.interpreter.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.emftext.language.eag.interpreter.IOperationProvider;
@@ -14,7 +15,7 @@ public abstract class AbstractBinaryInterpreterProvider {
 	};
 
 	
-	public <OperatorType> IReference interpretWithConversion(IOperationProvider<OperatorType>[] providers,
+	public <OperatorType> IReference interpretWithConversion(Collection<IOperationProvider<OperatorType>> providers,
 			OperatorType operator, Object left, Object right) {
 		IReference result = interpretInternal(providers, operator, left, right);
 		if (result != null) {
@@ -34,9 +35,9 @@ public abstract class AbstractBinaryInterpreterProvider {
 		throw new RuntimeException("Can't find provider to handle binary expression " + operator + " on " + left + ", " + right);
 	}
 	
-	public <OperatorType> IReference interpretInternal(IOperationProvider<OperatorType>[] providers, OperatorType operator, Object left,
+	public <OperatorType> IReference interpretInternal(Collection<IOperationProvider<OperatorType>> providers, OperatorType operator, Object left,
 			Object right) {
-		System.out.println("interpretInternal(" + left + ", " + right + ")");
+		log("interpretInternal(" + left + ", " + right + ")");
 		for (IOperationProvider<OperatorType> nextProvider : providers) {
 			if (nextProvider.canHandle(operator, left.getClass(), right.getClass())) {
 				Object result = nextProvider.interpret(operator, left, right);
@@ -60,5 +61,8 @@ public abstract class AbstractBinaryInterpreterProvider {
 			}
 		}
 		return conversions;
+	}
+
+	protected void log(String string) {
 	}
 }

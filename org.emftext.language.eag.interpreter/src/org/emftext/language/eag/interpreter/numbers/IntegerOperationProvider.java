@@ -1,9 +1,9 @@
 package org.emftext.language.eag.interpreter.numbers;
 
 import org.emftext.language.eag.BinaryOperator;
-import org.emftext.language.eag.interpreter.IBinaryOperationProvider;
+import org.emftext.language.eag.interpreter.IOperationProvider;
 
-public class IntegerOperationProvider implements IBinaryOperationProvider {
+public class IntegerOperationProvider implements IOperationProvider<BinaryOperator> {
 
 	public boolean canHandle(
 			BinaryOperator operator, 

@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.eag.AttributeGrammar;
 import org.emftext.language.pl0.Program;
-import org.emftext.language.pl0.attributes.AttributesFactory;
 import org.emftext.language.pl0.attributes.StringSet;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation;
 import org.emftext.language.pl0.resource.pl0.mopp.Pl0ResourceFactory;

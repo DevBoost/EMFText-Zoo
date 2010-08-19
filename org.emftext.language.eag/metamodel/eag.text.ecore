@@ -47,6 +47,12 @@ package eag // this is the package name
 		containment reference Statement body (1..1);
 	}
 
+	class IfElse extends Statement {
+		containment reference Expression condition (1..1);
+		containment reference Statement ifBody (1..1);
+		containment reference Statement elseBody (0..1);
+	}
+
 	abstract interface TypedElement {
 		operation EClass (0..1) getType();
 	}
@@ -61,7 +67,6 @@ package eag // this is the package name
 	class ExpressionChain extends Expression {
 		containment reference Expression previous (1..1);
 		containment reference Expression next (1..1);
-		//containment reference FeatureReference next (0..-1);
 	}
 
 	class Reference extends Expression {
@@ -86,6 +91,24 @@ package eag // this is the package name
 		containment reference Expression left (1..1);
 		attribute BinaryOperator operator (1..1);
 		containment reference Expression right (1..1);
+	}
+	
+	class BooleanExpression extends Expression {
+		containment reference Expression left (1..1);
+		attribute BooleanOperator operator (1..1);
+		containment reference Expression right (1..1);
+	}
+	
+	class StringLiteral extends Expression {
+		attribute EString value (1..1);
+	}
+
+	class IntegerLiteral extends Expression {
+		attribute EInt value (1..1);
+	}
+
+	serializable enum BooleanOperator {
+		0 : EQUALS = "=="; 
 	}
 
 	serializable enum BinaryOperator {

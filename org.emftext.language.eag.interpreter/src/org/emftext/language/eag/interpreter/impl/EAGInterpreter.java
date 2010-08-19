@@ -15,7 +15,7 @@ import org.emftext.language.eag.Computation;
 public class EAGInterpreter {
 
 	public Object interpret(EObject object, AttributeGrammar grammar, Attribute attribute) {
-		System.out.println("EAGInterpreter.interpret(" + attribute.getName() + ") " + object);
+		log("EAGInterpreter.interpret(" + attribute.getName() + ") " + object);
 		// find the computations for the attribute
 		EList<Computation> computations = grammar.getComputations();
 		List<Computation> computationsForAttribute = new ArrayList<Computation>();
@@ -30,7 +30,7 @@ public class EAGInterpreter {
 		// TODO find most special computation
 		if (computationsForAttribute.isEmpty()) {
 			// no computation found
-			System.out.println("EAGInterpreter.interpret() no computation found");
+			log("EAGInterpreter.interpret() no computation found");
 			if (attribute.getKind() == AttributeKind.SYNTHESIZED) {
 				// use child for computation
 				EList<EObject> children = object.eContents();
@@ -57,8 +57,11 @@ public class EAGInterpreter {
 			
 			interpreter.addObjectToInterprete(computation);
 			IReference result = interpreter.interprete(context);
-			System.out.println("EAGInterpreter.interpret(" + attribute.getName() + ") result = " + result);
+			log("EAGInterpreter.interpret(" + attribute.getName() + ") result = " + result);
 			return context.getResult();
 		}
+	}
+
+	private void log(String string) {
 	}
 }

@@ -1,5 +1,5 @@
 import <http://www.emftext.org/language/simplemath>
-	
+
 synthesized attribute EDoubleObject Value
 
 computation IntegerLiteralExp :: Value {
@@ -11,9 +11,17 @@ computation RealLiteralExp :: Value {
 }
 
 computation Additive :: Value {
-	value = Value(this.left) + Value(this.right);
+	if (this.operator == "+") {
+		value = Value(this.left) + Value(this.right);
+	} else {
+		value = Value(this.left) - Value(this.right);
+	}
 }
 
 computation Multiplicative :: Value {
-	value = Value(this.left) * Value(this.right);
+	if (this.operator == "*") {
+		value = Value(this.left) * Value(this.right);
+	} else {
+		value = Value(this.left) / Value(this.right);
+	}
 }

@@ -6,7 +6,7 @@
  */
 package org.emftext.language.eag.resource.eag.analysis;
 
-public class EagTEXTTokenResolver implements org.emftext.language.eag.resource.eag.IEagTokenResolver {
+public class EagINTEGERTokenResolver implements org.emftext.language.eag.resource.eag.IEagTokenResolver {
 	
 	private org.emftext.language.eag.resource.eag.analysis.EagDefaultTokenResolver defaultTokenResolver = new org.emftext.language.eag.resource.eag.analysis.EagDefaultTokenResolver();
 	

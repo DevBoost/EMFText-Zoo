@@ -63,7 +63,6 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			EObject next = eAllContents.next();
 			EList<EObject> eCrossReferences = next.eCrossReferences();
 			for (EObject reference : eCrossReferences) {
-				System.out.println("loadGrammar() " + reference);
 				if (reference.eIsProxy()) {
 					fail("loadGrammar() found unresolved proxy: " + reference + " in " + next);
 				}

@@ -16,7 +16,6 @@ public class ComputationContext {
 
 	public ComputationContext(AttributeGrammar grammar, EObject object, EObject result) {
 		super();
-		System.out.println("ComputationContext.ComputationContext() result = " + result);
 		this.grammar = grammar;
 		this.object = object;
 		this.result = result;
