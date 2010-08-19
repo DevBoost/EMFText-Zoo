@@ -25,9 +25,10 @@ query JAVA::statements::Statement::StatementToReturn() : JAVA::statements::Retur
 	endif;
 	
 	if not condition.oclIsUndefined() then
-		--Condition
-		if condition.statement.oclIsTypeOf(JAVA::statements::Return) then
-			ret := map Condition2CondExpr_Return(condition)
+		if condition.statement.oclIsTypeOf(JAVA::statements::Return) 
+			and
+			condition.elseStatement.oclIsTypeOf(JAVA::statements::Return) then
+				ret := map Condition2CondExpr_Return(condition)
 		endif
 	endif;
 	
@@ -44,9 +45,13 @@ query JAVA::statements::Statement::StatementToCondExpr() : JAVA::expressions::Co
 	endif;
 	
 	if not condition.oclIsUndefined() then
-		--Condition
 		if condition.statement.oclIsTypeOf(JAVA::statements::ExpressionStatement) and
 			condition.statement.oclAsType(
+				JAVA::statements::ExpressionStatement).expression.
+				oclIsTypeOf(JAVA::expressions::AssignmentExpression)
+		   and
+		   condition.elseStatement.oclIsTypeOf(JAVA::statements::ExpressionStatement) and
+			condition.elseStatement.oclAsType(
 				JAVA::statements::ExpressionStatement).expression.
 				oclIsTypeOf(JAVA::expressions::AssignmentExpression) then
 			condExpr := map expressions_ConditionalExpression(condition)
@@ -179,7 +184,7 @@ mapping Condition2CondExpr_Return (in c : JAVA::statements::Condition) :
 	
 	returnValue := map expressions_ConditionalExpression(c);
 }
-
+/*
 mapping Condition2CondExpr_LocVarStat (in c : JAVA::statements::Condition) : 
 	JAVA::statements::LocalVariableStatement{
 	
@@ -201,7 +206,7 @@ mapping Condition2CondExpr_LocVarStat (in c : JAVA::statements::Condition) :
 		variable := localVariable
 	endif;
 }
-
+*/
 query variables_LocalVariable(c : JAVA::statements::Condition) : 
 	JAVA::variables::LocalVariable {
 	

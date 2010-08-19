@@ -171,7 +171,7 @@ public class IfToShortIfBuilder extends JavaBuilderAdapter implements IJavaBuild
 					file.toString().concat(xmiSourceURI.toPlatformString(true)),
 					true,
 					"If2ShortIfQVTOStatisticUtil",
-					Arrays.asList("Condition2CondExpr_Return","Condition2CondExpr_LocVarStat"),
+					Arrays.asList("expressions_ConditionalExpression"),
 					MetaModelName.JAVA);
 			
 			if(starter.isHandledInterestingRules()){
