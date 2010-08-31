@@ -16,7 +16,7 @@ public class PropertiesVALUETokenResolver implements IPropertiesTokenResolver {
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		assert value instanceof String;
 		// TODO escape backslash characters
-		return (String) value;
+		return "= " + (String) value + "\n";
 	}
 	
 	public void resolve(String lexem, EStructuralFeature feature, IPropertiesTokenResolveResult result) {
