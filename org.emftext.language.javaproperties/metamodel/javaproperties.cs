@@ -9,13 +9,10 @@ OPTIONS {
 TOKENS {
 	DEFINE COMMENT1 $'#'(~('\n'|'\r'|'\uffff'))*('\r\n'|'\r'|'\n')$;
 	DEFINE COMMENT2 $'!'(~('\n'|'\r'|'\uffff'))*('\r\n'|'\r'|'\n')$;
-	//DEFINE WHITESPACE $(' '|'\t'|'\f')+$;
-	//DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
-	DEFINE KEY $(~(' '|'\t'|'\f'|'='|':'))+$;
-	// Regex	('a')(('\\''b')|('\\''\\')|~('b'|'\\'))*('b')
-	//DEFINE VALUE $((' '|'\t'|'\f'|'='|':')+)~('\r\n'|'\r'|'\n')+$;
-	
-	DEFINE VALUE $((' '|'\t'|'\f'|'='|':')+)(('\\'('\r\n'|'\r'|'\n'))|('\\''\\')|~('\r\n'|'\r'|'\n'|'\\'))*('\r\n'|'\r'|'\n')$;
+	DEFINE KEY $(~(' '|'\t'|'\f'|'='|':'|'#'|'\r\n'|'\r'|'\n'))+$;
+	DEFINE VALUE $(('='|':')+)(('\\'('\r\n'|'\r'|'\n'))|('\\''\\')|~('\r\n'|'\r'|'\n'|'\\'))*('\r\n'|'\r'|'\n')$;
+	DEFINE WHITESPACE $(' '|'\t'|'f')$;
+	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
 }
 
 TOKENSTYLES {
