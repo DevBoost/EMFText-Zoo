@@ -80,7 +80,7 @@ public class RegExpTest extends AbstractTestCase {
 	}
 
 	private void extractExpressionsFromCSFilesToInputFile() throws IOException {
-		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), EXCLUDES);
+		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(EXCLUDES);
 		System.out.println(RegExpTest.class.getSimpleName() + ".testExpsFromGrammars() found " + grammars.size() + " grammar files.");
 		// make sure all grammars are found
 		assertTrue(grammars.size() > 168);
