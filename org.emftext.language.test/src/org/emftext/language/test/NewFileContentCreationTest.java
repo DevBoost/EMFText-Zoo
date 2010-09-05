@@ -191,7 +191,7 @@ public class NewFileContentCreationTest extends TestCase {
 					".*/sandwich_simple.cs",	
 					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",	
 			};
-			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), excludes);
+			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(excludes);
 			for (String grammar : grammars) {
 				boolean foundTest = false;
 				for (IMetaInformation metaInformation : metaInformations) {

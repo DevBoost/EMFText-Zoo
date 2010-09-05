@@ -68,9 +68,7 @@ public class FirstFollowTest extends TestCase {
 	}
 
 	public void testFirstAndFollowComputations() {
-		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), new String[] {
-			//".*/org/emftext/test/bug674/.*"
-		});
+		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars();
 		for (String grammar : grammars) {
 			if (isExcluded(grammar)) {
 				continue;
