@@ -70,6 +70,7 @@ import org.emftext.language.usecaseinvariant.resource.ucinv.mopp.UcinvMetaInform
 import org.emftext.language.valueflow.resource.valueflow.mopp.TextValueflowMetaInformation;
 import org.emftext.language.xml.resource.xml.mopp.XmlMetaInformation;
 import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsMetaInformation;
+import org.emftext.test.booleanterminal.resource.booleanterminal.mopp.BooleanterminalMetaInformation;
 import org.emftext.test.bug1154.resource.bug1154.mopp.Bug1154MetaInformation;
 import org.emftext.test.bug1233.resource.bug1233.mopp.Bug1233MetaInformation;
 import org.emftext.test.bug933.resource.bug933.mopp.Bug933MetaInformation;
@@ -189,6 +190,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new Cct4MetaInformation());
 		metaInformations.add(new EscapingMetaInformation());
 		metaInformations.add(new Grammar_featuresMetaInformation());
+		metaInformations.add(new BooleanterminalMetaInformation());
 		metaInformations.add(new Bug933MetaInformation());
 		metaInformations.add(new Bug1154MetaInformation());
 		metaInformations.add(new Bug1233MetaInformation());
