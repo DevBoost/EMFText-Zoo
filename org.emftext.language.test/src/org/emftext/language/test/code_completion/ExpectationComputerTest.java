@@ -1,39 +1,26 @@
 package org.emftext.language.test.code_completion;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.sdk.codegen.resource.generators.code_completion.helpers.Expectation;
 import org.emftext.sdk.codegen.resource.generators.code_completion.helpers.ExpectationComputer;
-import org.emftext.sdk.concretesyntax.CompoundDefinition;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
-import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
-import org.emftext.sdk.concretesyntax.Containment;
 import org.emftext.sdk.concretesyntax.CsString;
 import org.emftext.sdk.concretesyntax.Placeholder;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
-import org.emftext.sdk.concretesyntax.Terminal;
-import org.emftext.sdk.util.EObjectUtil;
 import org.emftext.test.ConcreteSyntaxTestHelper;
+import org.emftext.test.expectationcomputer.AbstractExpectationComputerTest;
 
-public class ExpectationComputerTest extends TestCase {
+public class ExpectationComputerTest extends AbstractExpectationComputerTest {
 
 	private ConcreteSyntax cct2Syntax;
 	private ConcreteSyntax cct3Syntax;
 	private ConcreteSyntax anonymousFeatureSyntax;
-	private ExpectationComputer computer;
 
 	public void setUp() {
 		ConcreteSyntaxTestHelper.registerResourceFactories();
@@ -42,21 +29,8 @@ public class ExpectationComputerTest extends TestCase {
 		cct2Syntax = loadSyntax("../org.emftext.test.cct2/metamodel/cct2.cs");
 		cct3Syntax = loadSyntax("../org.emftext.test.cct3/metamodel/cct3.cs");
 		anonymousFeatureSyntax = loadSyntax("../org.emftext.test/src/org/emftext/test/anonymous_features/anonymous_feature1.cs");
-
-		computer = new ExpectationComputer();
 	}
 
-	private ConcreteSyntax loadSyntax(String pathName) {
-		File csFile = new File(pathName).getAbsoluteFile();
-		Resource r = ConcreteSyntaxTestHelper.getConcreteSyntaxResource(URI.createFileURI(csFile.getAbsolutePath()));
-		EList<EObject> contents = r.getContents();
-		EcoreUtil.resolveAll(r);
-		assertTrue(!contents.isEmpty());
-		EObject root = contents.get(0);
-		assertTrue(root instanceof ConcreteSyntax);
-		return (ConcreteSyntax) root;
-	}
-	
 	public void testComputeCct2FirstSets() {
 		assertFirstSet(
 				findKeyword(cct2Syntax, "a"),
@@ -212,38 +186,6 @@ public class ExpectationComputerTest extends TestCase {
 			);
 	}
 	
-	public void assertFollowSet(SyntaxElement syntaxElement, EObject... expectedFollow) {
-		ConcreteSyntax syntax = syntaxElement.getContainingRule().getSyntax();
-		Set<Expectation> followSet = computer.computeFollowSet(syntax, syntaxElement);
-		printAndCompareSets("follow", syntaxElement, followSet, expectedFollow);
-	}
-
-	public void assertFirstSet(SyntaxElement syntaxElement, EObject... expectedFirst) {
-		ConcreteSyntax syntax = syntaxElement.getContainingRule().getSyntax();
-		Set<Expectation> firstSet = computer.computeFirstSet(syntax, syntaxElement);
-		firstSet.remove(ExpectationComputer.EPSILON);
-		printAndCompareSets("first", syntaxElement, firstSet, expectedFirst);
-	}
-
-	private void printAndCompareSets(String typeOfSet, EObject element, Set<Expectation> actualSet,
-			EObject... expectedSet) {
-		System.out.println("-> Comparing " + typeOfSet + " for " + element);
-		for (Expectation nextExp : actualSet) {
-			EObject next = nextExp.getExpectedElement();
-			System.out.println("Actual " + typeOfSet + ":   " + next);
-		}
-		for (EObject next : expectedSet) {
-			System.out.println("Expected " + typeOfSet + ": " + next);
-		}
-		assertEquals(expectedSet.length, actualSet.size());
-		int i = 0;
-		for (Expectation nextExp : actualSet) {
-			EObject next = nextExp.getExpectedElement();
-			assertEquals(next, expectedSet[i]);
-			i++;
-		}
-	}
-	
 	public void testExpectations() {
 		assertExpectations(
 				findKeyword(cct2Syntax, "a"),
@@ -365,36 +307,5 @@ public class ExpectationComputerTest extends TestCase {
 		for (IExpectedElement iExpectedElement : toRemove) {
 			expectations.remove(iExpectedElement);
 		}
-	}
-
-	public List<CompoundDefinition> findCompounds(ConcreteSyntax syntax, String metaClassName) {
-		List<CompoundDefinition> compoundsInRule = new ArrayList<CompoundDefinition>();
-		Collection<CompoundDefinition> allCompounds = EObjectUtil.getObjectsByType(syntax.eAllContents(), ConcretesyntaxPackage.eINSTANCE.getCompoundDefinition());
-		for (CompoundDefinition compoundDefinition : allCompounds) {
-			if (metaClassName.equals(compoundDefinition.getContainingRule().getMetaclass().getName())) {
-				compoundsInRule.add(compoundDefinition);
-			}
-		}
-		return compoundsInRule;
-	}
-
-	public CsString findKeyword(ConcreteSyntax syntax, String keyword) {
-		Collection<CsString> keywords = EObjectUtil.getObjectsByType(syntax.eAllContents(), ConcretesyntaxPackage.eINSTANCE.getCsString());
-		for (CsString nextKeyword : keywords) {
-			if (keyword.equals(nextKeyword.getValue())) {
-				return nextKeyword;
-			}
-		}
-		return null;
-	}
-
-	public List<Terminal> findTerminals(ConcreteSyntax syntax) {
-		Collection<Terminal> terminals = EObjectUtil.getObjectsByType(syntax.eAllContents(), ConcretesyntaxPackage.eINSTANCE.getTerminal());
-		return new ArrayList<Terminal>(terminals);
-	}
-
-	public List<Containment> findContainments(ConcreteSyntax syntax) {
-		Collection<Containment> containments = EObjectUtil.getObjectsByType(syntax.eAllContents(), ConcretesyntaxPackage.eINSTANCE.getContainment());
-		return new ArrayList<Containment>(containments);
 	}
 }
