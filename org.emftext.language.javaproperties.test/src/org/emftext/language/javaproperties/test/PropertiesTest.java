@@ -11,9 +11,11 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.javaproperties.KeyValuePair;
@@ -80,6 +82,11 @@ public class PropertiesTest extends TestCase {
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
+		EList<Diagnostic> errors = resource.getErrors();
+		for (Diagnostic diagnostic : errors) {
+			System.out.println("PropertiesTest.loadAsEcoreModel() " + diagnostic);
+		}
+		assertTrue("Resource must not contain errors.", errors.isEmpty());
 		List<EObject> contents = resource.getContents();
 		assertEquals(1, contents.size());
 		EObject root = contents.get(0);
