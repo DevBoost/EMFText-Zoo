@@ -22,13 +22,13 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.Collection;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrResourceFactory;
 import org.emftext.language.regexp.test.AbstractTestCase;
 import org.emftext.sdk.concretesyntax.CompleteTokenDefinition;
+import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
+import org.emftext.sdk.concretesyntax.resource.cs.util.CsEObjectUtil;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -89,17 +89,13 @@ public class RegExpTest extends AbstractTestCase {
 		for (String grammar : grammars) {
 			Resource resource = ConcreteSyntaxTestHelper.loadCsResource(grammar);
 
-			TreeIterator<EObject> contents = resource.getAllContents();
-			while (contents.hasNext()) {
-				EObject object = (EObject) contents.next();
-				if (object instanceof CompleteTokenDefinition) {
-					CompleteTokenDefinition td = (CompleteTokenDefinition) object;
-					String regex = td.getRegex();
-					regex = regex.replace("\n", "");
-					regex = regex.replace("\r", "");
-					System.out.println(regex);
-					expressions.append(regex + System.getProperty("line.separator"));
-				}
+			Collection<CompleteTokenDefinition> definitions = CsEObjectUtil.getObjectsByType(resource.getAllContents(), ConcretesyntaxPackage.eINSTANCE.getCompleteTokenDefinition());
+			for (CompleteTokenDefinition definition : definitions) {
+				String regex = definition.getRegex();
+				regex = regex.replace("\n", "");
+				regex = regex.replace("\r", "");
+				System.out.println(regex);
+				expressions.append(regex + System.getProperty("line.separator"));
 			}
 		}
 		FileWriter writer = new FileWriter(new File(INPUT_FILE_PATH));
