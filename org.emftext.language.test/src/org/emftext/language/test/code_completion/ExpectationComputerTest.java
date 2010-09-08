@@ -23,6 +23,7 @@ public class ExpectationComputerTest extends AbstractExpectationComputerTest {
 	private ConcreteSyntax anonymousFeatureSyntax;
 
 	public void setUp() {
+		super.setUp();
 		ConcreteSyntaxTestHelper.registerResourceFactories();
 		// we need to use the absolute path because the resolution of
 		// the Ecore model does not work when the relative one is used
