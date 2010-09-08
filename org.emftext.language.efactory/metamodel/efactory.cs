@@ -38,16 +38,16 @@ TOKENSTYLES {
 RULES {
 	Factory ::= epackages+ imports* annotations* root;
 
-	PackageImport::= "use" ePackage[STRING] ("as" alias[IDENTIFIER])?;
+	PackageImport::= "use" #1 ePackage[STRING] (#1 "as" #1 alias[IDENTIFIER])? !0;
 
-	Import ::= "import" importURI[STRING];
+	Import ::= "import" #1 importURI[STRING] !0;
 
-	GlobalNameMapping ::= "@Name" "{" nameFeature[IDENTIFIER] "}";
-	CustomNameMapping ::= "@Name" "{" eClass[IDENTIFIER] "=" nameFeature[IDENTIFIER] "}";
+	GlobalNameMapping ::= "@Name" "{" #1 nameFeature[IDENTIFIER] #1 "}";
+	CustomNameMapping ::= "@Name" "{" #1 eClass[IDENTIFIER] #1 "=" #1 nameFeature[IDENTIFIER] #1 "}";
 	
-	Feature ::= eFeature[IDENTIFIER] (isMany[PLUS_EQUALS] | isMany[EQUALS]) value;
+	Feature ::= eFeature[IDENTIFIER] (#1 isMany[PLUS_EQUALS] |#0isMany[EQUALS]) #1 value !0;
 	
-	NewObject ::= "new" eClass[IDENTIFIER] (name[IDENTIFIER])? ("{" features* "}")?;
+	NewObject ::= "new" #1 eClass[IDENTIFIER] #1 (name[IDENTIFIER])? ("{" !1 features*"}"!0)?;
 	
 	Reference ::= value[IDENTIFIER];
 	Containment ::= value;
