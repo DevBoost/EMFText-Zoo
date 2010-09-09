@@ -44,6 +44,7 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "false";
 	memoize = "true";
 	usePredefinedTokens = "false";
+	resolveProxyElementsAfterParsing = "false";
 }
 
 TOKENS {

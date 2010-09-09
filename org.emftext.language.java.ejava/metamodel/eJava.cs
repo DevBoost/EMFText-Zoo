@@ -26,6 +26,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	
 	overrideBuilder = "false";
+	resolveProxyElementsAfterParsing = "false";
 }
 
 RULES {

@@ -26,7 +26,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "false" ;
 	overrideBuilder="false";
-
+	resolveProxyElementsAfterParsing = "false";
 }
 
 RULES { 

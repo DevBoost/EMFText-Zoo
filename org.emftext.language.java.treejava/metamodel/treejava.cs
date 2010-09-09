@@ -24,6 +24,7 @@ OPTIONS {
 	licenceHeader = "platform:/resource/org.reuseware/licence.txt";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
+	resolveProxyElementsAfterParsing = "false";
 }
 
 RULES {

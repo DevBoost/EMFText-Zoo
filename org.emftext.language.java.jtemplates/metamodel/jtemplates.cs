@@ -24,6 +24,7 @@ IMPORTS {
 OPTIONS {	
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
+	resolveProxyElementsAfterParsing = "false";
 }
 
 TOKENSTYLES {

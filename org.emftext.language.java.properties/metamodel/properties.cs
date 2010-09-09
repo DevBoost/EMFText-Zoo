@@ -25,6 +25,7 @@ OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
+	resolveProxyElementsAfterParsing = "false";
 }
 
 TOKENS {
