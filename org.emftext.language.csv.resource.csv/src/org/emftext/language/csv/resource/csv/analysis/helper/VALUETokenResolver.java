@@ -11,14 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.csv.resource.csv.analysis;
+package org.emftext.language.csv.resource.csv.analysis.helper;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.csv.resource.csv.ICsvTokenResolveResult;
 import org.emftext.language.csv.resource.csv.ICsvTokenResolver;
 
-public class CsvT_VALUETokenResolver implements ICsvTokenResolver {
+public abstract class VALUETokenResolver implements ICsvTokenResolver {
 	
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		assert value instanceof String;
@@ -29,16 +29,13 @@ public class CsvT_VALUETokenResolver implements ICsvTokenResolver {
 			// escape if the value contains a comma
 			String escapedValue = valueAsString.replace("\\", "\\\\");
 			escapedValue = escapedValue.replace("\"", "\\\"");
-			return "," + "\"" + escapedValue + "\"";
+			return "\"" + escapedValue + "\"";
 		} else {
-			return "," + valueAsString;
+			return valueAsString;
 		}
 	}
 	
 	public void resolve(String lexem, EStructuralFeature feature, ICsvTokenResolveResult result) {
-		if (lexem.startsWith(",")) {
-			lexem = lexem.substring(1);
-		}
 		if (lexem.startsWith("\"")) {
 			assert lexem.endsWith("\"");
 			// remove quotes
