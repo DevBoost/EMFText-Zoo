@@ -4,13 +4,14 @@ START PropertySet
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	overrideDynamicTokenStyler = "false";
 }
 
 TOKENS {
 	DEFINE COMMENT1 $'#'(~('\n'|'\r'|'\uffff'))*('\r\n'|'\r'|'\n')$;
 	DEFINE COMMENT2 $'!'(~('\n'|'\r'|'\uffff'))*('\r\n'|'\r'|'\n')$;
-	DEFINE KEY $(~(' '|'\t'|'\f'|'='|':'|'#'|'\r\n'|'\r'|'\n'))+$;
-	DEFINE VALUE $(('='|':')+)(('\\'('\r\n'|'\r'|'\n'))|('\\''\\')|~('\r\n'|'\u001C'|'\r'|'\n'|'\\'))*('\r\n'|'\r'|'\n'|'\u001C')$;
+	DEFINE KEY $('a'..'z'|'A'..'Z'|'0'..'9')(~(' '|'\t'|'\f'|'='|':'|'#'|'\r\n'|'\r'|'\n'))+$;
+	DEFINE VALUE $(('='|':'|' '|'\t'|'\f')+)(('\\'('\r\n'|'\r'|'\n'))|('\\''\\')|~('\r\n'|'\u001C'|'\r'|'\n'|'\\'))*('\r\n'|'\r'|'\n'|'\u001C')$;
 	DEFINE WHITESPACE $(' '|'\t'|'f')$;
 	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
 }
@@ -24,5 +25,5 @@ TOKENSTYLES {
 
 RULES {
 	PropertySet  ::= properties*;
-	KeyValuePair ::= key[KEY] #1 value[VALUE];
+	KeyValuePair ::= key[KEY] (#1 value[VALUE])? | key[VALUE];
 }
