@@ -60,7 +60,6 @@ import org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation;
 import org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation;
 import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation;
 import org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation;
-import org.emftext.language.tcltk.resource.tcl.mopp.TclMetaInformation;
 import org.emftext.language.templateconcepts.call.resource.templatecall.mopp.TemplatecallMetaInformation;
 import org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation;
 import org.emftext.language.theater.resource.theater.mopp.TheaterMetaInformation;
@@ -149,7 +148,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(new StatemachineMetaInformation());
 		metaInformations.add(new RqMetaInformation());
 		metaInformations.add(new TboolMetaInformation());
-		metaInformations.add(new TclMetaInformation());
+		// removed temporarily until bug 1496 (TclTk - Fix token definitions) is fixed
+		//metaInformations.add(new TclMetaInformation());
 		metaInformations.add(new TemplatecallMetaInformation());
 		metaInformations.add(new TasMetaInformation());
 		metaInformations.add(new TheaterMetaInformation());
