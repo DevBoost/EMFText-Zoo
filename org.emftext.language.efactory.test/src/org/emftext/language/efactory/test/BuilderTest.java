@@ -6,6 +6,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
@@ -15,6 +16,7 @@ import org.eclipse.emf.compare.match.service.MatchService;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.efactory.Factory;
 import org.emftext.language.efactory.builder.Builder;
@@ -78,6 +80,11 @@ public class BuilderTest extends TestCase {
 		String absolutePath = inputFile.getAbsolutePath();
 		Resource resource = rs.getResource(URI.createFileURI(absolutePath), true);
 		assertNotNull(resource);
+		EList<Diagnostic> errors = resource.getErrors();
+		for (Diagnostic error : errors) {
+			System.out.println("Error in resource: " + error);
+		}
+		assertTrue("Resource must not contain errors.", errors.isEmpty());
 		List<EObject> contents = resource.getContents();
 		assertEquals(1, contents.size());
 		EObject root = contents.get(0);
