@@ -9,6 +9,8 @@ IMPORTS {
 OPTIONS {
 	reloadGeneratorModel = "true";
 	usePredefinedTokens = "false";
+	overrideTextResource = "false";
+	overrideManifest = "false";
 }
 
 TOKENS {
@@ -75,7 +77,7 @@ TOKENSTYLES {
 }
  
 RULES {
-	OclAnnotation ::= "#" invariantsOrDefinitions "#";
+	OclAnnotation ::= "#" invariantsOrDefinitions+ "#";
 
 	// these are copied from text.ecore.cs
 	EPackage ::= (eAnnotations)* "package" #1 name[SIMPLE_NAME] (#1 nsPrefix[SIMPLE_NAME])? (#1 nsURI['"', '"'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
