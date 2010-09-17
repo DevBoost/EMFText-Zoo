@@ -38,370 +38,358 @@ import org.emftext.language.forms.util.FormsAdapterFactory;
  */
 public class FormsItemProviderAdapterFactory extends FormsAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-   * This keeps track of the root adapter factory that delegates to this adapter factory.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-   * <!-- begin-user-doc -->
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-   * <!-- begin-user-doc -->
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
-   * This constructs an instance.
-   * <!-- begin-user-doc -->
+	 * This constructs an instance.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public FormsItemProviderAdapterFactory() {
-    supportedTypes.add(IEditingDomainItemProvider.class);
-    supportedTypes.add(IStructuredItemContentProvider.class);
-    supportedTypes.add(ITreeItemContentProvider.class);
-    supportedTypes.add(IItemLabelProvider.class);
-    supportedTypes.add(IItemPropertySource.class);
-  }
+		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class);
+		supportedTypes.add(ITreeItemContentProvider.class);
+		supportedTypes.add(IItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Form} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Form} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected FormItemProvider formItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Form}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Form}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createFormAdapter() {
-    if (formItemProvider == null)
-    {
-      formItemProvider = new FormItemProvider(this);
-    }
+		if (formItemProvider == null) {
+			formItemProvider = new FormItemProvider(this);
+		}
 
-    return formItemProvider;
-  }
+		return formItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Item} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Item} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ItemItemProvider itemItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Item}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Item}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createItemAdapter() {
-    if (itemItemProvider == null)
-    {
-      itemItemProvider = new ItemItemProvider(this);
-    }
+		if (itemItemProvider == null) {
+			itemItemProvider = new ItemItemProvider(this);
+		}
 
-    return itemItemProvider;
-  }
+		return itemItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.FreeText} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.FreeText} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected FreeTextItemProvider freeTextItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.FreeText}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.FreeText}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createFreeTextAdapter() {
-    if (freeTextItemProvider == null)
-    {
-      freeTextItemProvider = new FreeTextItemProvider(this);
-    }
+		if (freeTextItemProvider == null) {
+			freeTextItemProvider = new FreeTextItemProvider(this);
+		}
 
-    return freeTextItemProvider;
-  }
+		return freeTextItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Choice} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Choice} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ChoiceItemProvider choiceItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Choice}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Choice}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createChoiceAdapter() {
-    if (choiceItemProvider == null)
-    {
-      choiceItemProvider = new ChoiceItemProvider(this);
-    }
+		if (choiceItemProvider == null) {
+			choiceItemProvider = new ChoiceItemProvider(this);
+		}
 
-    return choiceItemProvider;
-  }
+		return choiceItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Option} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Option} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected OptionItemProvider optionItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Option}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Option}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createOptionAdapter() {
-    if (optionItemProvider == null)
-    {
-      optionItemProvider = new OptionItemProvider(this);
-    }
+		if (optionItemProvider == null) {
+			optionItemProvider = new OptionItemProvider(this);
+		}
 
-    return optionItemProvider;
-  }
+		return optionItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Date} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Date} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected DateItemProvider dateItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Date}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Date}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createDateAdapter() {
-    if (dateItemProvider == null)
-    {
-      dateItemProvider = new DateItemProvider(this);
-    }
+		if (dateItemProvider == null) {
+			dateItemProvider = new DateItemProvider(this);
+		}
 
-    return dateItemProvider;
-  }
+		return dateItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Number} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Number} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected NumberItemProvider numberItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Number}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Number}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createNumberAdapter() {
-    if (numberItemProvider == null)
-    {
-      numberItemProvider = new NumberItemProvider(this);
-    }
+		if (numberItemProvider == null) {
+			numberItemProvider = new NumberItemProvider(this);
+		}
 
-    return numberItemProvider;
-  }
+		return numberItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Group} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Group} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected GroupItemProvider groupItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Group}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Group}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createGroupAdapter() {
-    if (groupItemProvider == null)
-    {
-      groupItemProvider = new GroupItemProvider(this);
-    }
+		if (groupItemProvider == null) {
+			groupItemProvider = new GroupItemProvider(this);
+		}
 
-    return groupItemProvider;
-  }
+		return groupItemProvider;
+	}
 
 	/**
-   * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Decision} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.forms.Decision} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected DecisionItemProvider decisionItemProvider;
 
 	/**
-   * This creates an adapter for a {@link org.emftext.language.forms.Decision}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.emftext.language.forms.Decision}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter createDecisionAdapter() {
-    if (decisionItemProvider == null)
-    {
-      decisionItemProvider = new DecisionItemProvider(this);
-    }
+		if (decisionItemProvider == null) {
+			decisionItemProvider = new DecisionItemProvider(this);
+		}
 
-    return decisionItemProvider;
-  }
+		return decisionItemProvider;
+	}
 
 	/**
-   * This returns the root adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-  }
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+	}
 
 	/**
-   * This sets the composed adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-    this.parentAdapterFactory = parentAdapterFactory;
-  }
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean isFactoryForType(Object type) {
-    return supportedTypes.contains(type) || super.isFactoryForType(type);
-  }
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
 
 	/**
-   * This implementation substitutes the factory itself as the key for the adapter.
-   * <!-- begin-user-doc -->
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-    return super.adapt(notifier, this);
-  }
+		return super.adapt(notifier, this);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-    if (isFactoryForType(type))
-    {
-      Object adapter = super.adapt(object, type);
-      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
-      {
-        return adapter;
-      }
-    }
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
 
-    return null;
-  }
+		return null;
+	}
 
 	/**
-   * This adds a listener.
-   * <!-- begin-user-doc -->
+	 * This adds a listener.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-    changeNotifier.addListener(notifyChangedListener);
-  }
+		changeNotifier.addListener(notifyChangedListener);
+	}
 
 	/**
-   * This removes a listener.
-   * <!-- begin-user-doc -->
+	 * This removes a listener.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-    changeNotifier.removeListener(notifyChangedListener);
-  }
+		changeNotifier.removeListener(notifyChangedListener);
+	}
 
 	/**
-   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-   * <!-- begin-user-doc -->
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void fireNotifyChanged(Notification notification) {
-    changeNotifier.fireNotifyChanged(notification);
+		changeNotifier.fireNotifyChanged(notification);
 
-    if (parentAdapterFactory != null)
-    {
-      parentAdapterFactory.fireNotifyChanged(notification);
-    }
-  }
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
 
 	/**
-   * This disposes all of the item providers created by this factory. 
-   * <!-- begin-user-doc -->
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void dispose() {
-    if (formItemProvider != null) formItemProvider.dispose();
-    if (itemItemProvider != null) itemItemProvider.dispose();
-    if (freeTextItemProvider != null) freeTextItemProvider.dispose();
-    if (choiceItemProvider != null) choiceItemProvider.dispose();
-    if (optionItemProvider != null) optionItemProvider.dispose();
-    if (dateItemProvider != null) dateItemProvider.dispose();
-    if (numberItemProvider != null) numberItemProvider.dispose();
-    if (groupItemProvider != null) groupItemProvider.dispose();
-    if (decisionItemProvider != null) decisionItemProvider.dispose();
-  }
+		if (formItemProvider != null) formItemProvider.dispose();
+		if (itemItemProvider != null) itemItemProvider.dispose();
+		if (freeTextItemProvider != null) freeTextItemProvider.dispose();
+		if (choiceItemProvider != null) choiceItemProvider.dispose();
+		if (optionItemProvider != null) optionItemProvider.dispose();
+		if (dateItemProvider != null) dateItemProvider.dispose();
+		if (numberItemProvider != null) numberItemProvider.dispose();
+		if (groupItemProvider != null) groupItemProvider.dispose();
+		if (decisionItemProvider != null) decisionItemProvider.dispose();
+	}
 
 }

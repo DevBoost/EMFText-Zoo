@@ -8,8 +8,16 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.forms.resource.forms.ui.FormsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="forms" icon="icons/editor_icon.gif" id="org.emftext.language.forms.resource.forms.ui.FormsEditor" name="EMFText forms Editor">
-			<contentTypeBinding contentTypeId="org.emftext.language.forms.resource.forms"/>
 		</editor>
+	</extension>
+	
+	<extension id="org.emftext.language.forms.resource.forms.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -24,6 +32,8 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.forms.resource.forms.ui.FormsBracketPreferencePage" class="org.emftext.language.forms.resource.forms.ui.FormsBracketPreferencePage" category="org.emftext.language.forms.resource.forms.ui.FormsPreferencePage">
 		</page>
+		<page name="Occurrence" id="org.emftext.language.forms.resource.forms.ui.FormsOccurrencePreferencePage" class="org.emftext.language.forms.resource.forms.ui.FormsOccurrencePreferencePage" category="org.emftext.language.forms.resource.forms.ui.FormsPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -31,32 +41,6 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.forms.resource.forms.ui.FormsNewFileWizard" id="org.emftext.language.forms.resource.forms.ui.FormsNewFileWizard" name="EMFText .forms file">
 		</wizard>
-	</extension>
-	
-	<extension point="org.eclipse.ui.ide.markerResolution">
-		<markerResolutionGenerator class="org.emftext.language.forms.resource.forms.ui.FormsMarkerResolutionGenerator" markerType="org.emftext.language.forms.resource.forms.problem" />
-	</extension>
-	
-	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
-		<factory class="org.emftext.language.forms.resource.forms.ui.FormsAnnotationModelFactory" extensions="forms" />
-	</extension>
-	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.emftext.language.forms.resource.forms" name=".forms File" base-type="org.eclipse.core.runtime.text" file-extensions="forms"/>
-	</extension>
-	
-	<extension point="org.eclipse.ui.editors.documentProviders">
-		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="forms" id="org.emftext.language.forms.resource.forms.ui.provider" />
-	</extension>
-	
-	<extension point="org.eclipse.ui.editors.annotationTypes">
-		<type name="org.emftext.language.forms.resource.forms.ui.occurences" />
-		<type name="org.emftext.language.forms.resource.forms.ui.occurences.declaration" super="org.emftext.language.forms.resource.forms.ui.occurences" />
-	</extension>
-	
-	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
-		<specification annotationType="org.emftext.language.forms.resource.forms.ui.occurences" label="Occurrences (in .forms files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="forms.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="forms.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="forms.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="forms.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="forms.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="forms.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="forms.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="forms.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="forms.occurrenceTextStyle" textStylePreferenceValue="NONE" />
-		<specification annotationType="org.emftext.language.forms.resource.forms.ui.occurences.declaration" label="Declarations (in .forms files)" textPreferenceKey="forms.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="forms.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="forms.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="forms.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="forms.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="forms.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>
