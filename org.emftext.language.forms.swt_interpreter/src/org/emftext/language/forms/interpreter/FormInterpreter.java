@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jface.wizard.WizardPage;
@@ -18,14 +19,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
+import org.emftext.language.forms.Form;
 
 public class FormInterpreter {
-	private static final String[] FORM = { "Formular", "Form" };
+	private static final Object[] FORM = { "Formular", "Form", Form.class };
 	private static final String[] FORM_GROUPS = { "gruppen", "groups" };
 	private static final String[] FORM_TITLE = { "title", "titel" };
 	private static final String[] GROUP_NAME = { "name" };
@@ -76,7 +80,35 @@ public class FormInterpreter {
 		}
 	}
 
+	public class FormApplicationWindow extends ApplicationWindow {
+		
+		public FormApplicationWindow() {
+			super(null);
+		}
+
+		private EObject form;
+
+		public void run(final EObject form) {
+			this.form = form;
+			// Don't return from open() until window closes
+			setBlockOnOpen(true);
+			// Open the main window
+			open();
+			// Dispose the display
+			Display.getCurrent().dispose();
+		}
+		
+		public Control createContents(Composite parent) {
+			createWizard(form);
+			return null;
+		}
+	};
+
 	private void interpreteForm(final EObject form) {
+		new FormApplicationWindow().run(form);
+	}
+
+	private void createWizard(final EObject form) {
 		Wizard wizard = new Wizard() {
 
 			@Override
@@ -224,13 +256,20 @@ public class FormInterpreter {
 		return valueList;
 	}
 
-	private boolean isA(EObject eObject, String[] formClassNames) {
+	private boolean isA(EObject eObject, Object[] formClassNames) {
 		if (eObject == null) {
 			return false;
 		}
-		for (String formClassName : formClassNames) {
-			if (eObject.eClass().getName().equalsIgnoreCase(formClassName)) {
-				return true;
+		for (Object formClassName : formClassNames) {
+			if (formClassName instanceof String) {
+				if (eObject.eClass().getName().equalsIgnoreCase((String) formClassName)) {
+					return true;
+				}
+			}
+			if (formClassName instanceof Class) {
+				if (((Class<?>) formClassName).isInstance(eObject)) {
+					return true;
+				}
 			}
 		}
 		return false;
