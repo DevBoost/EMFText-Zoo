@@ -1,4 +1,4 @@
-package org.emftext.language.formular.interpreter;
+package org.emftext.language.forms.interpreter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,9 +41,9 @@ public class FormInterpreter {
 	private static final String[] CHOICE_NAME = { "text" };
 	private static final String[] CHOICE_MULTIPLE = { "multiple", "mehrfach" };
 
-	public EObject load(String formUri) {
-		Resource resource = new ResourceSetImpl().createResource(URI
-				.createFileURI(formUri));
+	public EObject load(String formUri) throws InterpreterException {
+		URI fileURI = URI.createFileURI(formUri);
+		Resource resource = new ResourceSetImpl().createResource(fileURI);
 		if (resource != null) {
 			try {
 				resource.load(null);
@@ -53,12 +53,13 @@ public class FormInterpreter {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
+				throw new InterpreterException("Can't load form from " + fileURI.toString());
 			}
 		}
-		return null;
+		throw new InterpreterException("Can't create resource for URI " + fileURI.toString());
 	}
 
-	public void interprete(String formUri) {
+	public void interprete(String formUri) throws InterpreterException {
 		EObject root = load(formUri);
 		new FormInterpreter().interprete(root);
 	}
