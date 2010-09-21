@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 import org.emftext.language.forms.Form;
@@ -46,8 +45,12 @@ public class FormInterpreter {
 	private static final String[] CHOICE_MULTIPLE = { "multiple", "mehrfach" };
 
 	public EObject load(String formUri) throws InterpreterException {
-		URI fileURI = URI.createFileURI(formUri);
-		Resource resource = new ResourceSetImpl().createResource(fileURI);
+		URI fileURI = URI.createURI(formUri);
+		return load(fileURI);
+	}
+
+	private EObject load(URI uri) {
+		Resource resource = new ResourceSetImpl().createResource(uri);
 		if (resource != null) {
 			try {
 				resource.load(null);
@@ -57,10 +60,10 @@ public class FormInterpreter {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new InterpreterException("Can't load form from " + fileURI.toString());
+				throw new InterpreterException("Can't load form from " + uri.toString());
 			}
 		}
-		throw new InterpreterException("Can't create resource for URI " + fileURI.toString());
+		throw new InterpreterException("Can't create resource for URI " + uri.toString());
 	}
 
 	public void interprete(String formUri) throws InterpreterException {
@@ -74,7 +77,7 @@ public class FormInterpreter {
 		}
 	}
 
-	private void interprete(EObject eObject) {
+	public void interprete(EObject eObject) {
 		if (isA(eObject, FORM)) {
 			interpreteForm(eObject);
 		}
