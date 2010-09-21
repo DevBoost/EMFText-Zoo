@@ -1,7 +1,7 @@
 package org.emftext.language.java.resource.util;
 
 import java.io.File;
-import java.io.FilenameFilter;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -180,10 +180,8 @@ public class JDTConnector {
 				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 					// path is source folder
 					// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
-					registerResourceInClasspath(folder, "java", classPath);
+					registerResourceTreeInClasspath(folder, "java", classPath);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
-					// TODO check whether path is inside or outside of the workspace
-					IResource member = root.findMember(path);
 					if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
 						// path is jar
 						// System.out.println("registerFileInClasspath for ClassPathEntry library: " + entry);
@@ -193,10 +191,12 @@ public class JDTConnector {
 						}
 						registerFileInClasspath(path, classPath);
 					} else {
+						// check whether path is inside or outside of the workspace
+						IResource member = root.findMember(path);
 						if (member != null) {
 							// path is binary folder in workspace
 							System.out.println("registerResourceInClasspath for ClassPathEntry library (folder): " + entry + " -> " + path);
-							registerResourceInClasspath(folder, "class", classPath);
+							registerResourceTreeInClasspath(folder, "class", classPath);
 						} else {
 							// path is binary folder outside of workspace
 							String osPath = path.toOSString();
@@ -225,11 +225,10 @@ public class JDTConnector {
 	
 	private void registerExternalDirectoryInClasspath(File osFile,
 			final String filter, ResourceSet classPath) {
-		File[] files = osFile.listFiles(new FilenameFilter() {
+		File[] files = osFile.listFiles(new FileFilter() {
 			
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith("." + filter);
+			public boolean accept(File file) {
+				return file.getName().endsWith("." + filter) || file.isDirectory();
 			}
 		});
 		for (File file : files) {
@@ -237,12 +236,13 @@ public class JDTConnector {
 				registerExternalDirectoryInClasspath(file, filter, classPath);
 			} else {
 				IPath filePath = new Path(file.getAbsolutePath());
-				registerFileInClasspath(filePath, classPath);
+				URI fileURI = URI.createFileURI(filePath.toOSString());
+				registerResourceInClassPath(filePath, classPath, fileURI);
 			}
 		}
 	}
 
-	private void registerResourceInClasspath(IResource resource, final String filter, final ResourceSet classPath) {
+	private void registerResourceTreeInClasspath(IResource resource, final String filter, final ResourceSet classPath) {
     	try {
 			resource.accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) {
@@ -272,6 +272,11 @@ public class JDTConnector {
 			// unknown file extension
 			return;
 		}
+		registerResourceInClassPath(file, classPath, resourceUri);
+	}
+
+	private void registerResourceInClassPath(IPath file, ResourceSet classPath, URI resourceUri) {
+		String fileExtension = file.getFileExtension();
 		if (resourceUri == null || (! classPath.getURIConverter().exists(resourceUri, null))) {
 			System.err.println("Resource for " + file + " does not exist (uri=" + resourceUri + ")");
 			return;
