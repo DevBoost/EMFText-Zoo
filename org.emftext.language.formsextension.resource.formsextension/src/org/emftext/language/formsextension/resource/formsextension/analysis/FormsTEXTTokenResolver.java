@@ -6,9 +6,9 @@
  */
 package org.emftext.language.formsextension.resource.formsextension.analysis;
 
-public class FormsSTRING_LITERALTokenResolver implements org.emftext.language.formsextension.resource.formsextension.IFormsextensionTokenResolver {
+public class FormsTEXTTokenResolver implements org.emftext.language.formsextension.resource.formsextension.IFormsextensionTokenResolver {
 	
-	private org.emftext.language.forms.resource.forms.analysis.FormsSTRING_LITERALTokenResolver importedResolver = new org.emftext.language.forms.resource.forms.analysis.FormsSTRING_LITERALTokenResolver();
+	private org.emftext.language.forms.resource.forms.analysis.FormsTEXTTokenResolver importedResolver = new org.emftext.language.forms.resource.forms.analysis.FormsTEXTTokenResolver();
 	
 	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		String result = importedResolver.deResolve(value, feature, container);

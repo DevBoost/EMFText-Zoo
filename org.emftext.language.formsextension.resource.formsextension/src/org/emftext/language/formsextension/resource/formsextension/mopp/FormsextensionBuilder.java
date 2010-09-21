@@ -55,7 +55,7 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 			ClassifierReference classifierRef = TypesFactory.eINSTANCE.createClassifierReference();
 			
 			Class clazz = ClassifiersFactory.eINSTANCE.createClass();
-			clazz.setFullName("org.emftext.language.formular.interpreter.FormInterpreter");
+			clazz.setFullName("org.emftext.language.forms.interpreter.FormInterpreter");
 			classifierRef.setTarget(clazz);
 			constructorCall.setTypeReference(classifierRef);
 			
