@@ -26,6 +26,7 @@ import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
+import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.statements.StatementsFactory;
@@ -40,6 +41,11 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 	}
 	
 	public IStatus build(FormsextensionResource resource, IProgressMonitor monitor) {
+		URI uri = resource.getURI();
+		if (isInBinFolder(uri)) {
+			return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
+		}
+		JDTConnector.getInstance().initializeResourceSet(resource.getResourceSet(), uri);
 		
 		if (resource.getWarnings().size() + resource.getErrors().size() > 0) {
 			return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
@@ -49,7 +55,7 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		if (root instanceof ExtendedForm) {
 			ExtendedForm eform = (ExtendedForm) root;
 			ClassMethod javaMethod = eform.getJavaMethod();
-			if (javaMethod == null) {
+			if (javaMethod == null || javaMethod.eIsProxy()) {
 				return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
 			}
 			fillMethodWithInterpreterCall(resource, javaMethod);
@@ -63,6 +69,15 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		}
 		
 		return org.eclipse.core.runtime.Status.OK_STATUS;
+	}
+
+	private boolean isInBinFolder(URI uri) {
+		for (String segment : uri.segments()) {
+			if ("bin".equals(segment)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void fillMethodWithInterpreterCall(FormsextensionResource resource,
