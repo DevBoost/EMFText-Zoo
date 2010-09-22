@@ -49,31 +49,10 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		if (root instanceof ExtendedForm) {
 			ExtendedForm eform = (ExtendedForm) root;
 			ClassMethod javaMethod = eform.getJavaMethod();
-			EList<Statement> body = javaMethod.getStatements();
-			
-			NewConstructorCall constructorCall = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
-			ClassifierReference classifierRef = TypesFactory.eINSTANCE.createClassifierReference();
-			
-			Class clazz = ClassifiersFactory.eINSTANCE.createClass();
-			clazz.setFullName("org.emftext.language.forms.interpreter.FormInterpreter");
-			classifierRef.setTarget(clazz);
-			constructorCall.setTypeReference(classifierRef);
-			
-			ExpressionStatement statement = StatementsFactory.eINSTANCE.createExpressionStatement();
-			statement.setExpression(constructorCall);
-			body.clear();
-			body.add(statement);
-			MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
-			ClassMethod callMethod = MembersFactory.eINSTANCE.createClassMethod();
-			callMethod.setName("interprete");
-			methodCall.setTarget(callMethod);
-			StringReference stringExpression = ReferencesFactory.eINSTANCE.createStringReference();
-			IFile file = WorkspaceSynchronizer.getFile(resource);
-			String uri = file.getProjectRelativePath().toString();
-			stringExpression.setValue(uri);
-			methodCall.getArguments().add(stringExpression);
-			
-			constructorCall.setNext(methodCall);
+			if (javaMethod == null) {
+				return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
+			}
+			fillMethodWithInterpreterCall(resource, javaMethod);
 			
 			try {
 				javaMethod.eResource().save(Collections.EMPTY_MAP);
@@ -84,5 +63,34 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		}
 		
 		return org.eclipse.core.runtime.Status.OK_STATUS;
+	}
+
+	private void fillMethodWithInterpreterCall(FormsextensionResource resource,
+			ClassMethod javaMethod) {
+		EList<Statement> body = javaMethod.getStatements();
+		
+		NewConstructorCall constructorCall = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
+		ClassifierReference classifierRef = TypesFactory.eINSTANCE.createClassifierReference();
+		
+		Class clazz = ClassifiersFactory.eINSTANCE.createClass();
+		clazz.setFullName("org.emftext.language.forms.interpreter.FormInterpreter");
+		classifierRef.setTarget(clazz);
+		constructorCall.setTypeReference(classifierRef);
+		
+		ExpressionStatement statement = StatementsFactory.eINSTANCE.createExpressionStatement();
+		statement.setExpression(constructorCall);
+		body.clear();
+		body.add(statement);
+		MethodCall methodCall = ReferencesFactory.eINSTANCE.createMethodCall();
+		ClassMethod callMethod = MembersFactory.eINSTANCE.createClassMethod();
+		callMethod.setName("interprete");
+		methodCall.setTarget(callMethod);
+		StringReference stringExpression = ReferencesFactory.eINSTANCE.createStringReference();
+		IFile file = WorkspaceSynchronizer.getFile(resource);
+		String uri = file.getProjectRelativePath().toString();
+		stringExpression.setValue(uri);
+		methodCall.getArguments().add(stringExpression);
+		
+		constructorCall.setNext(methodCall);
 	}
 }
