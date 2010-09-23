@@ -1,0 +1,90 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.emftext.org/language/forms','http://www.emftext.org/language/javaforms/codegen')/]
+[import javaforms /]
+
+[template public generate(f : Form, classname : String, packageName : String, printer : JavaPrinter)]
+	
+	[comment @main /]
+	[file (classname + '.java', false, 'UTF-8')]
+package [packageName/];	
+
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.jface.wizard.WizardPage;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+
+public class [classname/] extends Wizard {
+
+	@Override
+	public boolean performFinish() {
+		return true;
+	}
+
+	@Override
+	public void addPages() {
+		[for (g : Group | f.groups)]
+		[for (item : Item | g.items)]
+		addPage(new WizardPage([g.name/], [g.name/], null) {
+
+			public void createControl(Composite parent) {
+				GridData gd = new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1);
+				GridData gd2 = new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1);
+	
+				Composite composite = new Composite(parent, SWT.NONE);
+				// create the desired layout for this wizard page
+				GridLayout gl = new GridLayout();
+				gl.numColumns = 2;
+				composite.setLayout(gl);
+	
+				Label question = new Label(composite, NONE);
+				question.setText([item.text/]);
+
+				[comment let itemType : EObject = item.itemType/]
+				[if (item.oclIsKindOf(FreeText))]
+					Text text = new Text(composite, SWT.SINGLE);
+					text.setLayoutData(gd);
+					question.setLayoutData(gd);
+				[/if]
+				[if (item.oclIsKindOf(Choice) or i.oclIsKindOf(Decision))]
+					int type = SWT.RADIO;
+					if (getBoolean(itemType, CHOICE_MULTIPLE)) {
+						type = SWT.CHECK;
+					}
+					List<EObject> options = getList(itemType,
+							CHOICE_OPTIONS);
+					for (EObject option : options) {
+						Button radioButton = new Button(composite, type);
+						radioButton.setLayoutData(gd2);
+						String optionName = getString(option,
+								CHOICE_NAME);
+						if (optionName == null) {
+							optionName = "";
+						}
+						radioButton.setText(optionName);
+					}
+					question.setLayoutData(gd2);
+				[/if]
+				[if (item.oclIsKindOf(Number))]
+					Spinner spinner = new Spinner(composite, SWT.NONE);
+					spinner.setLayoutData(gd);
+					question.setLayoutData(gd);
+				[/if]
+				[if (item.oclIsKindOf(Date))]
+					DateTime dateTime = new DateTime(composite, SWT.NONE);
+					dateTime.setLayoutData(gd);
+					question.setLayoutData(gd2);
+				[/if]
+				[handleItem(item, printer)/]
+				setControl(composite);
+			}
+		});
+		[/for]
+		[/for]
+	}
+}[/file]
+	
+[/template]
