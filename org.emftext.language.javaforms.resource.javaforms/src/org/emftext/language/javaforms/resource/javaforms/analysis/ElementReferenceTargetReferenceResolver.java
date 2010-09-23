@@ -6,11 +6,30 @@
  */
 package org.emftext.language.javaforms.resource.javaforms.analysis;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.javaforms.ConditionalItem;
+import org.emftext.language.javaforms.JavaformsPackage;
+import org.emftext.language.javaforms.resource.javaforms.util.JavaformsEObjectUtil;
+
 public class ElementReferenceTargetReferenceResolver implements org.emftext.language.javaforms.resource.javaforms.IJavaformsReferenceResolver<org.emftext.language.java.references.ElementReference, org.emftext.language.java.references.ReferenceableElement> {
 	
 	private org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver();
 	
 	public void resolve(String identifier, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.javaforms.resource.javaforms.IJavaformsReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
+		TreeIterator<EObject> allContents = container.eResource().getAllContents();
+		Collection<ConditionalItem> items = JavaformsEObjectUtil.getObjectsByType(allContents, JavaformsPackage.eINSTANCE.getConditionalItem());
+		for (ConditionalItem item : items) {
+			String itemName = item.getName();
+			if (resolveFuzzy || identifier.equals(itemName)) {
+				result.addMapping(itemName, item);
+				if (!resolveFuzzy) {
+					return;
+				}
+			}
+		}
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement>() {
 			
 			public boolean wasResolvedUniquely() {
