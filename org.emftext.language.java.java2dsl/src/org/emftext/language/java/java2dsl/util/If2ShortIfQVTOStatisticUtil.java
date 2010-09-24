@@ -7,6 +7,8 @@ public class If2ShortIfQVTOStatisticUtil extends AbstractStatisticUtil {
 	private int if2shortIf = 0;
 	private int shortIf2if = 0;
 	private int countClasses = 0;
+	private int countIfs = 0;
+	private int countShortIfs = 0;
 	
 	public void setCountClasses(int countClasses) {
 		this.countClasses += countClasses;
@@ -20,10 +22,20 @@ public class If2ShortIfQVTOStatisticUtil extends AbstractStatisticUtil {
 		this.shortIf2if += shortIf2if;
 	}
 	
+	public void setCountIfs(int countIfs) {
+		this.countIfs += countIfs;
+	}
+
+	public void setCountShortIfs(int countShortIfs) {
+		this.countShortIfs += countShortIfs;
+	}
+	
 	@Override
 	public void writeStatistic() {
 		
 		System.out.println("Klassen: "+countClasses);
+		System.out.println("Ifs: "+countIfs);
+		System.out.println("ShortIfs: "+countShortIfs);
 		System.out.println("If->ShortIf: "+if2shortIf);
 		System.out.println("If<-ShortIf: "+shortIf2if);
 
@@ -35,8 +47,9 @@ public class If2ShortIfQVTOStatisticUtil extends AbstractStatisticUtil {
 		getRuleNames().put("expressions_ConditionalExpression", Arrays.asList("setIf2shortIf"));
 		getRuleNames().put("CondExpr2Cond", Arrays.asList("setShortIf2if"));
 		getRuleNames().put("Classifiers_Class", Arrays.asList("setCountClasses"));
+		getRuleNames().put("Statements_Condition", Arrays.asList("setCountIfs"));
+		getRuleNames().put("Expressions_ConditionalExpression", Arrays.asList("setCountShortIfs"));
 		
 	}
-
 
 }

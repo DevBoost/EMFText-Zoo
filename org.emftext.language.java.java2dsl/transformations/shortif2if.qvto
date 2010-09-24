@@ -3,14 +3,16 @@ modeltype JAVA uses "http://www.emftext.org/java";
 transformation Java2Closure(inout java : JAVA);
 
 main() {
+	java.objects()[JAVA::expressions::ConditionalExpression]->map Expressions_ConditionalExpression();
 	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
 	java.objects()[JAVA::statements::StatementListContainer]->map Statements_StatementListContainer();
 	java.objects()[JAVA::statements::StatementContainer]->map Statements_StatementContainer();
---	java.objects()[JAVA::statements::Return]->map Statements_Return();
+	
 --	java.objects()[JAVA::_references::MethodCall]->map References_MethodCall();
 --	java.objects()[JAVA::statements::ExpressionStatement]->map Expressions_ExpressionStatement();
 }
 
+// wandelt conditions in conditionalExpressions um
 query JAVA::statements::Statement::StatementToCondition() : JAVA::statements::Condition {
 	
 	var localVar : JAVA::variables::LocalVariable;
@@ -65,8 +67,13 @@ query JAVA::statements::Statement::StatementToCondition() : JAVA::statements::Co
 	endif;
 }
 
-mapping JAVA::classifiers::Class::Classifiers_Class(){}
+// nur zum zählen
+mapping inout JAVA::classifiers::Class::Classifiers_Class(){}
 
+// nur zum zählen
+mapping inout JAVA::expressions::ConditionalExpression::Expressions_ConditionalExpression(){}
+
+// untersuche ob statement korrekt
 mapping inout JAVA::statements::StatementContainer::Statements_StatementContainer(){
 	
 	/*
@@ -124,12 +131,13 @@ mapping inout JAVA::statements::StatementContainer::Statements_StatementContaine
 	
 	var condition : JAVA::statements::Condition :=
 		self.statement.StatementToCondition();
-		
+
 	if condition <> null then
 		self.statement := condition
 	endif;
 }
 
+//durchsuche alle statements und wandle in conditionalExpressions um
 mapping inout JAVA::statements::StatementListContainer::Statements_StatementListContainer(){
 	
 	var tempStatements : OrderedSet(JAVA::statements::Statement);
@@ -193,6 +201,7 @@ mapping inout JAVA::statements::StatementListContainer::Statements_StatementList
 	}
 }
 
+// wandle conditionalExpression in condition um
 mapping CondExpr2Cond(in ae : JAVA::expressions::AssignmentExpression) : 
 	JAVA::statements::Condition 
 	when {
@@ -212,6 +221,7 @@ mapping CondExpr2Cond(in ae : JAVA::expressions::AssignmentExpression) :
 	elseStatement := map statements_ExpressionStatement(condExpr.expressionElse,refEle);
 }
 
+// wandle conditionalExpression in condition um
 mapping CondExpr2Cond(in lv : JAVA::variables::LocalVariable) : 
 	JAVA::statements::Condition 
 	when {
@@ -227,6 +237,7 @@ mapping CondExpr2Cond(in lv : JAVA::variables::LocalVariable) :
 	elseStatement := map statements_ExpressionStatement(condExpr.expressionElse,lv);
 }
 
+// wandle conditionalExpression in condition um
 mapping CondExpr2Cond(in r : JAVA::statements::Return) : 
 	JAVA::statements::Condition 
 	when {
