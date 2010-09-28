@@ -45,5 +45,5 @@ RULES {
 	Date     ::= "DATE";
 	FreeText ::= "FREETEXT";
 	Number   ::= "NUMBER";
-	Decision ::=  "DECISION" "(" options "," options ")"; 
+	Decision ::= "DECISION" "(" options "," options ")"; 
 }
