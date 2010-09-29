@@ -1,5 +1,8 @@
 [comment encoding = UTF-8 /]
-[module javaforms('/org.emftext.language.javaforms/metamodel/javaforms.ecore','http://www.emftext.org/language/javaforms/codegen')/]
+[module javaforms(
+	'http://www.emftext.org/language/javaforms',
+	'http://www.emftext.org/language/javaforms/codegen')
+/]
 
 [template public handleItem(e : OclAny, printer : JavaPrinter)]
 [if (e.oclIsTypeOf(ConditionalItem))]
@@ -9,6 +12,10 @@
 
 [template public handleConditionalItem(item : ConditionalItem, printer : JavaPrinter)]
 // TODO handle conditional item
-if ([ printer.print(item.condition.oclAsType(EObject)) /]) {
+boolean isEnabled = true;
+[if (not item.condition.oclIsInvalid() and not item.condition.oclIsUndefined())]
+isEnabled = [ printer.print(item.condition.oclAsType(EObject)) /];
+[/if]
+if (isEnabled) {
 }
 [/template]

@@ -17,24 +17,29 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.javaforms.codegen.Generate;
+import org.emftext.language.javaforms.resource.javaforms.IJavaformsBuilder;
 import org.emftext.language.javaforms.resource.javaforms.IJavaformsTextPrinter;
 import org.emftext.language.javaforms.resource.javaforms.IJavaformsTextResource;
 import org.emftext.language.javaformscodegen.impl.JavaPrinterImpl;
 
-public class JavaformsBuilder implements org.emftext.language.javaforms.resource.javaforms.IJavaformsBuilder {
+public class JavaformsBuilder implements IJavaformsBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		return true;
 	}
 
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.javaforms.resource.javaforms.mopp.JavaformsResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus build(JavaformsResource resource, IProgressMonitor monitor) {
 		if (resource.getErrors().size() > 0) {
 			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
 		}
+		JDTConnector.getInstance().initializeResourceSet(resource.getResourceSet(), resource.getURI());
 		EcoreUtil.resolveAll(resource);
 		
 		URI model = resource.getURI();
@@ -49,6 +54,9 @@ public class JavaformsBuilder implements org.emftext.language.javaforms.resource
 
 				@Override
 				public String print(EObject object) {
+					if (object == null) {
+						return "true";
+					}
 					OutputStream outputStream = new ByteArrayOutputStream();
 					try {
 						IJavaformsTextPrinter printer = new JavaformsMetaInformation().createPrinter(outputStream, (IJavaformsTextResource) object.eResource());

@@ -1,5 +1,11 @@
 [comment encoding = UTF-8 /]
-[module generate('/org.emftext.language.forms/metamodel/forms.ecore','http://www.emftext.org/language/javaforms/codegen')/]
+[module generate(
+	'/org.emftext.language.forms/metamodel/forms.ecore',
+	'http://www.emftext.org/java',
+	'http://www.emftext.org/java/variables',
+	'http://www.emftext.org/language/javaforms',
+	'http://www.emftext.org/language/javaforms/codegen'
+)/]
 [import javaforms /]
 
 [template public generate(f : Form, classname : String, packageName : String, printer : JavaPrinter)]
@@ -14,10 +20,38 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 
 public class [classname/] extends Wizard {
+
+	[for (g : Group | f.groups)]
+	[for (item : Item | g.items)]
+	[if (item.oclIsKindOf(Variable))]
+	[let condItem : Variable = item]
+	[if (not condItem.name.oclIsUndefined())]
+	[if (item.itemType.oclIsTypeOf(FreeText))]
+	private String [condItem.name/];
+	[/if]
+	[if (item.itemType.oclIsTypeOf(Number))]
+	private int [condItem.name/];
+	[/if]
+	[if (item.itemType.oclIsTypeOf(Date))]
+	private Data [condItem.name/];
+	[/if]
+	[if (item.itemType.oclIsTypeOf(Choice))]
+	private int [condItem.name/];
+	[/if]
+	[/if]
+	[/let]
+	[/if]
+	[/for]
+	[/for]
 
 	@Override
 	public boolean performFinish() {
@@ -43,40 +77,39 @@ public class [classname/] extends Wizard {
 				Label question = new Label(composite, NONE);
 				question.setText([item.text/]);
 
-				[comment let itemType : EObject = item.itemType/]
-				[if (item.oclIsKindOf(FreeText))]
-					Text text = new Text(composite, SWT.SINGLE);
-					text.setLayoutData(gd);
-					question.setLayoutData(gd);
+				[let itemType : ItemType = item.itemType/]
+				[if (itemType.oclIsKindOf(FreeText))]
+				Text text = new Text(composite, SWT.SINGLE);
+				text.setLayoutData(gd);
+				question.setLayoutData(gd);
 				[/if]
-				[if (item.oclIsKindOf(Choice) or i.oclIsKindOf(Decision))]
-					int type = SWT.RADIO;
-					if (getBoolean(itemType, CHOICE_MULTIPLE)) {
-						type = SWT.CHECK;
+				[if (itemType.oclIsKindOf(Choice) or itemType.oclIsKindOf(Decision))]
+				int type = SWT.RADIO;
+				[if itemType.oclAsType(Choice).multiple ]
+					type = SWT.CHECK;
+				[/if]
+				[for (option : Option | itemType.oclAsType(Choice).options)]
+				{
+					Button radioButton = new Button(composite, type);
+					radioButton.setLayoutData(gd2);
+					String optionName = [ option.text /];
+					if (optionName == null) {
+						optionName = "";
 					}
-					List<EObject> options = getList(itemType,
-							CHOICE_OPTIONS);
-					for (EObject option : options) {
-						Button radioButton = new Button(composite, type);
-						radioButton.setLayoutData(gd2);
-						String optionName = getString(option,
-								CHOICE_NAME);
-						if (optionName == null) {
-							optionName = "";
-						}
-						radioButton.setText(optionName);
-					}
-					question.setLayoutData(gd2);
+					radioButton.setText(optionName);
+				}
+				[/for]
+				question.setLayoutData(gd2);
 				[/if]
-				[if (item.oclIsKindOf(Number))]
-					Spinner spinner = new Spinner(composite, SWT.NONE);
-					spinner.setLayoutData(gd);
-					question.setLayoutData(gd);
+				[if (itemType.oclIsKindOf(Number))]
+				Spinner spinner = new Spinner(composite, SWT.NONE);
+				spinner.setLayoutData(gd);
+				question.setLayoutData(gd);
 				[/if]
-				[if (item.oclIsKindOf(Date))]
-					DateTime dateTime = new DateTime(composite, SWT.NONE);
-					dateTime.setLayoutData(gd);
-					question.setLayoutData(gd2);
+				[if (itemType.oclIsKindOf(Date))]
+				DateTime dateTime = new DateTime(composite, SWT.NONE);
+				dateTime.setLayoutData(gd);
+				question.setLayoutData(gd2);
 				[/if]
 				[handleItem(item, printer)/]
 				setControl(composite);

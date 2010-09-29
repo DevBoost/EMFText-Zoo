@@ -17,7 +17,7 @@ OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	tokenspace = "1";
 	overrideBuilder = "false" ;
-	additionalDependencies = "org.emftext.language.javaforms.codegen";
+	additionalDependencies = "org.emftext.language.javaforms.codegen,org.emftext.language.java.resource";
 }
 
 TOKENS {
