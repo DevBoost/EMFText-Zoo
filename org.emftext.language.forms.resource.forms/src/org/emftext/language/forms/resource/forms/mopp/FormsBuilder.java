@@ -20,6 +20,9 @@ import org.emftext.language.forms.resource.forms.custom.FormsGenerator;
 public class FormsBuilder implements org.emftext.language.forms.resource.forms.IFormsBuilder {
 	
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.forms.resource.forms.mopp.FormsResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+		if (!resource.getErrors().isEmpty()) {
+			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+		}
 		new FormsGenerator().process(resource.getContents());
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}

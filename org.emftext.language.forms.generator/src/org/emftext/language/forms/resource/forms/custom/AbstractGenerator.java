@@ -13,6 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.forms.resource.forms.custom;
 
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.forms.Form;
 import org.emftext.language.forms.Group;
 import org.emftext.language.forms.Item;
@@ -39,7 +40,9 @@ public abstract class AbstractGenerator implements IGenerator {
 	}
 	
 	protected String generateItemText(Option option) {
-		Item item = (Item) option.eContainer().eContainer();
+		EObject parent = option.eContainer();
+		EObject parentOfParent = parent.eContainer();
+		Item item = (Item) parentOfParent;
 		return item.getText();
 	}
 	
