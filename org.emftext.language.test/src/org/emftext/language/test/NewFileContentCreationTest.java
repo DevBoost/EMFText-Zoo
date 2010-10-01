@@ -190,6 +190,9 @@ public class NewFileContentCreationTest extends TestCase {
 					".*/org/emftext/sdk/concretesyntax/tokenhandling/.*",
 					".*/sandwich_simple.cs",	
 					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",	
+					".*/formsembedded.cs",
+					".*/formsextension.cs",
+					".*/javaforms.cs",
 			};
 			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(excludes);
 			for (String grammar : grammars) {
