@@ -1,4 +1,3 @@
-@SuppressWarnings(unusedResolverClass)
 SYNTAXDEF formsembedded
 FOR <http://www.emftext.org/language/formsembedded>
 START java.Containers.CompilationUnit
@@ -10,7 +9,6 @@ IMPORTS {
 
 OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
-	reloadGeneratorModel = "true";
 	usePredefinedTokens = "false";
 	generateCodeFromGeneratorModel = "false"; 
 	defaultTokenName = "IDENTIFIER";
