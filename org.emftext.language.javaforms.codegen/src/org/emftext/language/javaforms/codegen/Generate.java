@@ -249,25 +249,6 @@ public class Generate extends AbstractAcceleoGenerator {
 	@Override
 	public void registerPackages(ResourceSet resourceSet) {
     super.registerPackages(resourceSet);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.JavaPackage.eINSTANCE.getNsURI(), org.emftext.language.java.JavaPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.annotations.AnnotationsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.annotations.AnnotationsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.arrays.ArraysPackage.eINSTANCE.getNsURI(), org.emftext.language.java.arrays.ArraysPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.classifiers.ClassifiersPackage.eINSTANCE.getNsURI(), org.emftext.language.java.classifiers.ClassifiersPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.commons.CommonsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.commons.CommonsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getNsURI(), org.emftext.language.java.containers.ContainersPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.expressions.ExpressionsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.expressions.ExpressionsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.generics.GenericsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.generics.GenericsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.imports.ImportsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.imports.ImportsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.instantiations.InstantiationsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.instantiations.InstantiationsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.literals.LiteralsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.literals.LiteralsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.members.MembersPackage.eINSTANCE.getNsURI(), org.emftext.language.java.members.MembersPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.modifiers.ModifiersPackage.eINSTANCE.getNsURI(), org.emftext.language.java.modifiers.ModifiersPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.operators.OperatorsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.operators.OperatorsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.parameters.ParametersPackage.eINSTANCE.getNsURI(), org.emftext.language.java.parameters.ParametersPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.references.ReferencesPackage.eINSTANCE.getNsURI(), org.emftext.language.java.references.ReferencesPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.statements.StatementsPackage.eINSTANCE.getNsURI(), org.emftext.language.java.statements.StatementsPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.types.TypesPackage.eINSTANCE.getNsURI(), org.emftext.language.java.types.TypesPackage.eINSTANCE);
-    resourceSet.getPackageRegistry().put(org.emftext.language.java.variables.VariablesPackage.eINSTANCE.getNsURI(), org.emftext.language.java.variables.VariablesPackage.eINSTANCE);
     // TODO If you need additional package registrations, do them here. The following line is an example for UML.
     // resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
   }
