@@ -45,7 +45,7 @@ public class FormInterpreter {
 	private static final String[] CHOICE_MULTIPLE = { "multiple", "mehrfach" };
 
 	public EObject load(String formUri) throws InterpreterException {
-		URI fileURI = URI.createURI(formUri);
+		URI fileURI = URI.createFileURI(formUri);
 		return load(fileURI);
 	}
 
