@@ -11,12 +11,10 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package de .tudresden .contact_management .impl ; 
+package de.tudresden.contact_management.impl;
 
-
-class Relationship { 
-	protected String role ; 
-	protected Contact source ; 
-	protected Contact target ; 
-} 
-
+class Relationship {
+	protected String role;
+	protected Contact source;
+	protected Contact target;
+}

@@ -11,12 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package de .tudresden .contact_management .impl ; 
+package de.tudresden.contact_management.impl;
 
+class Person extends Contact {
+	protected String forename;
+	protected String surname;
 
-class Person extends Contact { 
-	protected String forename ; 
-	protected String surname ; 
-	public void print () { System .out .println ( surname ) ; System .out .println ( forename ) ; } 
-} 
-
+	public void print() {
+		System.out.println(surname);
+		System.out.println(forename);
+	}
+}

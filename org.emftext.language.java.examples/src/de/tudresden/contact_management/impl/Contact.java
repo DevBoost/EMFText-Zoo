@@ -11,15 +11,13 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package de .tudresden .contact_management .impl ; 
+package de.tudresden.contact_management.impl;
 
-
-class Contact { 
-	protected String name ; 
-	protected Address address ; 
-	protected java .util .LinkedList < Relationship > targetOf ; 
-	protected java .util .LinkedList < Relationship > sourceOf ; 
-	protected ContactList list ; 
-	protected Group source ; 
-} 
-
+class Contact {
+	protected String name;
+	protected Address address;
+	protected java.util.LinkedList<Relationship> targetOf;
+	protected java.util.LinkedList<Relationship> sourceOf;
+	protected ContactList list;
+	protected Group source;
+}
