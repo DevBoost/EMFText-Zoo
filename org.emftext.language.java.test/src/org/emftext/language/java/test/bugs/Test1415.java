@@ -4,16 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
@@ -21,36 +16,17 @@ import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
-import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.junit.Test;
 
-public class Test1415 extends TestCase {
+public class Test1415 extends AbstractTest {
 
 	private static String OUT_FOLDER = "./output";
 	
 	public Test1415() {
 		super();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"java", new JavaSourceOrClassFileResourceFactoryImpl());	
 		emptyFolder(new File(OUT_FOLDER), false);
-	}
-	
-	protected Map<?, ?> getLoadOptions() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
-		return map;
-	}
-
-	protected ResourceSet getResourceSet() {
-		ResourceSet rs = new ResourceSetImpl();
-		rs.getLoadOptions().putAll(getLoadOptions());
-		return rs;
 	}
 	
 	@Test
