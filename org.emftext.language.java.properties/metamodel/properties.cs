@@ -17,7 +17,8 @@ FOR <http://www.emftext.org/language/java/properties>
 START java.Containers.CompilationUnit
 
 IMPORTS {
-	java : <http://www.emftext.org/java> WITH SYNTAX java <../../org.emftext.language.java/metamodel/java.cs>
+	java : <http://www.emftext.org/java> WITH SYNTAX 
+	java <../../org.emftext.language.java/metamodel/java.cs>
 }
 
 OPTIONS {	
@@ -27,15 +28,12 @@ OPTIONS {
 	overrideBuilder = "false";
 	resolveProxyElementsAfterParsing = "false";
 }
-
 TOKENS {
 	DEFINE T_READONLY $'readonly'$;
 }
-
 TOKENSTYLES {
 	"T_READONLY" COLOR #7F0055, BOLD;
 }
-
 RULES {
-	Property ::= ( readonly[T_READONLY] )? "property" typeReference name[] ";" ;
+	Property ::= (readonly[T_READONLY])? "property" typeReference arrayDimensionsBefore* name[] ";" ;
 }
