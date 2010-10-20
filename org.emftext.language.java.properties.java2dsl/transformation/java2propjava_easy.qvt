@@ -6,7 +6,7 @@
 
 -- !!! NEUESTE VERSION !!!
 -- zahlreiche Interfaces verwendet, dadurch wurden viele Relationen gespart
--- Modellsynchronisation möglich !!! Run: java2propjava_v2 und propjava2java  
+-- Modellsynchronisation möglich !!! Run: java2propjava_v2 und propjava2java 
 
 transformation copy(JAVA : java, PROPJAVA : properties) {
 	
@@ -26,10 +26,7 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 		where{
 			CompilationUnit_Import(s_cu,t_cu) or
-			CompilationUnit_Class(s_cu,t_cu)or
-			CompilationUnit_Interface(s_cu,t_cu) or
-			CompilationUnit_Annotation(s_cu,t_cu) or
-			CompilationUnit_Enumeration(s_cu,t_cu);
+			CompilationUnit_Class(s_cu,t_cu);
 		}
 	}
 	
@@ -57,81 +54,11 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			Members_Property(s_cl,t_cl) or
 			Members_PropertyReadOnly(s_cl,t_cl) or
 			Members_Constructor(s_cl,t_cl) or
-			Members_EmptyMember(s_cl,t_cl) or
 			Members_Field(s_cl,t_cl) or
 			Members_ClassMethod(s_cl,t_cl) or
-			Members_Class(s_cl,t_cl) or
 			AnnotableAndModifiable_Modifier_Public(s_cl,t_cl);
 		}
 
-	}
-	
-	relation CompilationUnit_Interface {
-
-		varInterfaceName : String;
-
-		enforce domain JAVA s_cu : java::containers::CompilationUnit {
-			classifiers = s_cl : java::classifiers::Interface {
-				name = varInterfaceName
-			}
-		};
-
-		enforce domain PROPJAVA t_cu : java::containers::CompilationUnit {
-			classifiers = t_cl : java::classifiers::Interface  {
-				name = varInterfaceName
-			}
-		};
-		where{
-			Members_InterfaceMethod(s_cl,t_cl) or
-			Members_Field(s_cl,t_cl) or
-			AnnotableAndModifiable_Modifier_Public(s_cl,t_cl) or
-			Interface_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl);
-		}
-	}
-	
-	relation CompilationUnit_Annotation {
-
-		varInterfaceName : String;
-
-		enforce domain JAVA s_cu : java::containers::CompilationUnit {
-			classifiers = s_cl : java::classifiers::Annotation {
-				name = varInterfaceName
-			}
-		};
-
-		enforce domain PROPJAVA t_cu : java::containers::CompilationUnit {
-			classifiers = t_cl : java::classifiers::Annotation  {
-				name = varInterfaceName
-			}
-		};
-		where{
-			Members_AnnotationMethod(s_cl,t_cl) or
-			Annotation_Attribute(s_cl,t_cl) or 
-			AnnotableAndModifiable_Modifier_Public(s_cl,t_cl) or true;
-		}
-	}
-	
-	relation CompilationUnit_Enumeration {
-
-		varInterfaceName : String;
-
-		enforce domain JAVA s_cu : java::containers::CompilationUnit {
-			classifiers = s_cl : java::classifiers::Enumeration {
-				name = varInterfaceName
-			}
-		};
-
-		enforce domain PROPJAVA t_cu : java::containers::CompilationUnit {
-			classifiers = t_cl : java::classifiers::Enumeration  {
-				name = varInterfaceName
-			}
-		};
-		where{
-			Enumeration_Enum_Constant(s_cl,t_cl) or
-			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) or
-			Members_InterfaceMethod(s_cl,t_cl) or
-			AnnotableAndModifiable_Modifier_Public(s_cl,t_cl);
-		}
 	}
 	
 	relation CompilationUnit_Import {
@@ -263,79 +190,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 
 	}
 	
-	relation Members_InterfaceMethod {
-
-		varName : String;
-
-		enforce domain JAVA s_cl : java::members::MemberContainer  {
-			members =  s_cm : java::members::InterfaceMethod {
-				name = varName
-			}
-		};
-
-		enforce domain PROPJAVA t_cl : java::members::MemberContainer  {
-			members = t_cm : java::members::InterfaceMethod {
-				name = varName
-			}
-		};
-		where{
-			TypedElement_TypeReference_NamespaceClassifierReference(s_cm,t_cm) or
-			TypedElement_TypeReference_Int(s_cm,t_cm) or
-			TypedElement_TypeReference_Void(s_cm,t_cm) or
-			TypedElement_TypeReference_Boolean(s_cm,t_cm) or
-			TypedElement_TypeReference_Byte(s_cm,t_cm) or
-			TypedElement_TypeReference_Double(s_cm,t_cm) or
-			TypedElement_TypeReference_Float(s_cm,t_cm) or
-			TypedElement_TypeReference_Long(s_cm,t_cm) or
-			TypedElement_TypeReference_Short(s_cm,t_cm) or
-			TypedElement_TypeReference_Char(s_cm,t_cm) 
-			or
-			AnnotableAndModifiable_Modifier_Abstract(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Public(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Private(s_cm,t_cm)
-			or
-			Parametrizable_Parameter(s_cm,t_cm)
-			or
-			ArrayTypeable_ArrayDimension(s_cm,t_cm);
-		}
-	}
-	
-	relation Members_AnnotationMethod {
-
-		varName : String;
-
-		enforce domain JAVA s_cl : java::classifiers::Annotation  {
-			members =  s_cm : java::members::InterfaceMethod {
-				name = varName
-			}
-		};
-
-		enforce domain PROPJAVA t_cl : java::classifiers::Annotation  {
-			members = t_cm : java::members::InterfaceMethod {
-				name = varName
-			}
-		};
-		where{
-			(TypedElement_TypeReference_NamespaceClassifierReference(s_cm,t_cm) or
-			TypedElement_TypeReference_Int(s_cm,t_cm) or
-			TypedElement_TypeReference_Void(s_cm,t_cm) or
-			TypedElement_TypeReference_Boolean(s_cm,t_cm) or
-			TypedElement_TypeReference_Byte(s_cm,t_cm) or
-			TypedElement_TypeReference_Double(s_cm,t_cm) or
-			TypedElement_TypeReference_Float(s_cm,t_cm) or
-			TypedElement_TypeReference_Long(s_cm,t_cm) or
-			TypedElement_TypeReference_Short(s_cm,t_cm) or
-			TypedElement_TypeReference_Char(s_cm,t_cm))  
-			and
-			(AnnotableAndModifiable_Modifier_Abstract(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Public(s_cm,t_cm)) 
-			or
-			Parametrizable_Parameter(s_cm,t_cm)
-			or
-			ArrayTypeable_ArrayDimension(s_cm,t_cm);
-		}
-	}
-	
 	relation Members_Constructor {
 
 		varName : String;
@@ -362,24 +216,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			or
 			true; --when modifier is empty
 		}
-	}
-	
-	relation Members_EmptyMember {
-
-		varName : String;
-
-		enforce domain JAVA s_c2 : java::classifiers::Class  {
-			members =  s_mem : java::members::EmptyMember {
-				name = varName
-			}
-		};
-
-		enforce domain PROPJAVA t_c2 : java::classifiers::Class  {
-			members = t_mem : java::members::EmptyMember {
-				name = varName
-			}
-		};
-
 	}
 	
 	relation Members_Field {
@@ -428,6 +264,38 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		}
 	}
 	
+	relation Members_Class {
+
+		varClassName : String;
+					
+		enforce domain JAVA s_cu : java::classifiers::Class {
+			members = s_cl : java::classifiers::Class {
+				name = varClassName,
+				annotationsAndModifiers = s_aam : java::modifiers::Public {}
+			}
+		};
+
+		enforce domain PROPJAVA t_cu : java::classifiers::Class {
+			members = t_cl : java::classifiers::Class  {
+				name = varClassName,
+				annotationsAndModifiers = t_aam : java::modifiers::Public {}
+			}
+		};
+		where{
+			-- is necessary to get a TRUE in this OCL constraint 
+			Class_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
+			or
+			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
+			or
+			Members_Property(s_cl,t_cl) or
+			Members_PropertyReadOnly(s_cl,t_cl) or
+			Members_Constructor(s_cl,t_cl) or
+			Members_Field(s_cl,t_cl) or
+			Members_ClassMethod(s_cl,t_cl);
+		}
+
+	}
+	
 	relation Members_ClassMethod {
 
 		varName : String;
@@ -447,22 +315,23 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			}
 		};
 		when{
-			if s_cm.oclIsUndefined() then
-				not java::members::Field.allInstances()->exists( f |
-	               isCorrectGetter(f, t_cm)
-	               or
-	               isCorrectSetter(f, t_cm)
-		        )
-			else
-				not java::members::Field.allInstances()->exists( f |
-	               isCorrectGetter(f, s_cm)
-	               or
-	               isCorrectSetter(f, s_cm)
-		        )
-		    endif;
+			false;
+		--	if s_cm.oclIsUndefined() then
+		--		not java::members::Field.allInstances()->exists( f |
+	    --           isCorrectGetter(f, t_cm)
+	    --           or
+	    --           isCorrectSetter(f, t_cm)
+		--        )
+		--	else
+		--		not java::members::Field.allInstances()->exists( f |
+	    --           isCorrectGetter(f, s_cm)
+	    --           or
+	    --           isCorrectSetter(f, s_cm)
+		--        )
+		--    endif;
 		}
 		where{
-			ArrayTypeable_ArrayDimension(s_cm,t_cm)
+			ArrayTypeable_ArrayDimension(s_cm,t_cm) 
 			or
 			Parametrizable_Parameter(s_cm,t_cm) 
 			or
@@ -485,90 +354,7 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		}
 		
 	}
-	
-	relation Members_Class {
 
-		varClassName : String;
-					
-		enforce domain JAVA s_cu : java::classifiers::Class {
-			members = s_cl : java::classifiers::Class {
-				name = varClassName,
-				annotationsAndModifiers = s_aam : java::modifiers::Public {}
-			}
-		};
-
-		enforce domain PROPJAVA t_cu : java::classifiers::Class {
-			members = t_cl : java::classifiers::Class  {
-				name = varClassName,
-				annotationsAndModifiers = t_aam : java::modifiers::Public {}
-			}
-		};
-		where{
-			Class_Extends_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
-			or
-			Implementor_Implements_TypeReference_NamespaceClassifierReference(s_cl,t_cl) 
-			or
-			Members_Property(s_cl,t_cl) or
-			Members_PropertyReadOnly(s_cl,t_cl) or
-			Members_Constructor(s_cl,t_cl) or
-			Members_Field(s_cl,t_cl) or
-			Members_ClassMethod(s_cl,t_cl);
-		}
-
-	}
-	
-	relation Enumeration_Enum_Constant{
-
-		varName : String;
-
-		enforce domain JAVA s_c2 : java::classifiers::Enumeration  {
-			constants =  s_f : java::members::EnumConstant {
-				name = varName
-			}
-		};
-
-		enforce domain PROPJAVA t_c2 : java::classifiers::Enumeration  {
-			constants = t_f : java::members::EnumConstant {
-				name = varName
-			}
-		};
-	}
-	
-	relation Annotation_Attribute{
-
-		varName : String;
-
-		enforce domain JAVA s : java::classifiers::Annotation  {
-			members =  s_cm : java::annotations::AnnotationAttribute {
-				name = varName
-			}
-		};
-
-		enforce domain PROPJAVA t : java::classifiers::Annotation  {
-			members = t_cm : java::annotations::AnnotationAttribute {
-				name = varName
-			}
-		};
-		where{
-			(ArrayTypeable_ArrayDimension(s_cm,t_cm) or
-			TypedElement_TypeReference_NamespaceClassifierReference(s_cm,t_cm) or
-			TypedElement_TypeReference_Int(s_cm,t_cm) or
-			TypedElement_TypeReference_Void(s_cm,t_cm) or
-			TypedElement_TypeReference_Boolean(s_cm,t_cm) or
-			TypedElement_TypeReference_Byte(s_cm,t_cm) or
-			TypedElement_TypeReference_Double(s_cm,t_cm) or
-			TypedElement_TypeReference_Float(s_cm,t_cm) or
-			TypedElement_TypeReference_Long(s_cm,t_cm) or
-			TypedElement_TypeReference_Short(s_cm,t_cm) or
-			TypedElement_TypeReference_Char(s_cm,t_cm))  
-			and
-			(AnnotableAndModifiable_Modifier_Public(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Private(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Protected(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Static(s_cm,t_cm) or
-			AnnotableAndModifiable_Modifier_Final(s_cm,t_cm));
-		}
-	}
 	
 	relation AnnotableAndModifiable_Modifier_Private {
 
@@ -765,65 +551,14 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 	
 	relation ArrayTypeable_ArrayDimension {
 
-	--	varArrays : OrderedSet(java::arrays::ArrayDimension);
-
 		enforce domain JAVA s : java::arrays::ArrayTypeable {
-			arrayDimensionsBefore = s_a : java::arrays::ArrayDimension {}
+			arrayDimensionsBefore = s_adb : java::arrays::ArrayDimension {}
 		};
 
 		enforce domain PROPJAVA t : java::arrays::ArrayTypeable {
-			arrayDimensionsBefore = t_a : java::arrays::ArrayDimension {}
+			arrayDimensionsBefore = t_adb : java::arrays::ArrayDimension {}
 		};
-		when{
-			if t.oclIsUndefined() or s.oclIsUndefined() then
-				true
-			else if s.arrayDimensionsBefore->size() <> t.arrayDimensionsBefore->size() then
-				true
-			else
-				false
-			endif endif;
-		}
 
-	}
-	
-	relation ArrayTypeable_Property_ArrayDimension {
-
-		varArrays,varArrays2,varArrays3 : OrderedSet(java::arrays::ArrayDimension);
-				
-		enforce domain JAVA field: java::members::Field  {
-			arrayDimensionsBefore = varArrays
-		};
-		
-		enforce domain JAVA getter: java::members::ClassMethod  {
-			arrayDimensionsBefore = varArrays2
-		};
-		enforce domain JAVA set_para : java::parameters::OrdinaryParameter {
-			arrayDimensionsBefore = varArrays3
-		};
-		
-		enforce domain PROPJAVA property: properties::Property {
-			arrayDimensionsBefore = varArrays,
-			arrayDimensionsBefore = varArrays2,
-			arrayDimensionsBefore = varArrays3
-		};
-	}
-	
-	relation ArrayTypeable_Property_ReadOnly_ArrayDimension {
-
-		varArrays,varArrays2 : OrderedSet(java::arrays::ArrayDimension);
-				
-		enforce domain JAVA field: java::members::Field  {
-			arrayDimensionsBefore = varArrays
-		};
-		
-		enforce domain JAVA getter: java::members::ClassMethod  {
-			arrayDimensionsBefore = varArrays2
-		};
-		
-		enforce domain PROPJAVA property: properties::Property {
-			arrayDimensionsBefore = varArrays,
-			arrayDimensionsBefore = varArrays2
-		};
 	}
 	
 	relation Parametrizable_Parameter {
@@ -868,27 +603,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		};
 
 		enforce domain PROPJAVA t_cm : java::classifiers::Class  {
-			_extends = t_ex : java::types::NamespaceClassifierReference {
-				classifierReferences = t_ref : java::types::ClassifierReference {
-					target = varClassifier
-				}
-			}
-		};
-	}
-	
-	relation Interface_Extends_TypeReference_NamespaceClassifierReference {
-
-		varClassifier : java::classifiers::Classifier;
-
-		enforce domain JAVA s_cm : java::classifiers::Interface  {
-			_extends = s_ex : java::types::NamespaceClassifierReference {
-				classifierReferences = s_ref : java::types::ClassifierReference {
-					target =  varClassifier
-				}
-			}
-		};
-
-		enforce domain PROPJAVA t_cm : java::classifiers::Interface  {
 			_extends = t_ex : java::types::NamespaceClassifierReference {
 				classifierReferences = t_ref : java::types::ClassifierReference {
 					target = varClassifier
@@ -973,12 +687,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			},
 			name = varName
 		};
-		where{
-		--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Int {
@@ -1017,12 +725,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Int{},
 			name = varName
 		};
-		where{
-			--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Byte {
@@ -1061,12 +763,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Byte{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Char {
@@ -1105,12 +801,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Char{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Double {
@@ -1149,12 +839,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Double{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Float {
@@ -1193,12 +877,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Float{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Long {
@@ -1237,12 +915,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Long{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Short {
@@ -1281,12 +953,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Short{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2Prop_TypeReference_Boolean {
@@ -1325,12 +991,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 			typeReference = prop_i : java::types::Boolean{},
 				name = varName
 		};
-		where{
-				--	ArrayTypeable_Property_ArrayDimension(field,getter,set_para,property) or true;
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or
-			ArrayTypeable_ArrayDimension(set_para,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_NamespaceClassifierReference {
@@ -1361,11 +1021,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 				}
 			}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Int {
@@ -1381,11 +1036,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Int{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Boolean {
@@ -1401,11 +1051,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Boolean{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Byte {
@@ -1421,11 +1066,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Byte{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Char {
@@ -1441,11 +1081,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Char{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Double {
@@ -1461,11 +1096,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Double{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Float {
@@ -1481,11 +1111,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Float{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Long {
@@ -1501,11 +1126,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Long{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	relation Mem2PropReadOnly_TypeReference_Short {
@@ -1521,11 +1141,6 @@ transformation copy(JAVA : java, PROPJAVA : properties) {
 		enforce domain PROPJAVA property: properties::Property {
 			typeReference = prop_i : java::types::Short{}
 		};
-		where{
-		--	ArrayTypeable_Property_ReadOnly_ArrayDimension(field,getter,property);
-			ArrayTypeable_ArrayDimension(field,property) or
-			ArrayTypeable_ArrayDimension(getter,property) or true;
-		}
 	}
 	
 	query isCorrectGetter (field: java::members::Field, method : java::members::ClassMethod) : Boolean {

@@ -9,16 +9,11 @@ modeltype JAVA uses "http://www.emftext.org/java";
 transformation Java2Propjava(inout java : PROPJAVA);
 
 main() {
+
+	java.objects()[JAVA::members::Field]->map Member_Field();
 	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
 }
 
-mapping inout JAVA::containers::CompilationUnit::CompilationUnit(){
-	
-
-	classifiers := self.classifiers[JAVA::classifiers::Class]->map Classifiers_Class();
-		
-
-}
 mapping inout JAVA::classifiers::Class::Classifiers_Class() {
 	
 --	self.members->forEach(m){
@@ -31,6 +26,7 @@ mapping inout JAVA::classifiers::Class::Classifiers_Class() {
 --			members := members->append(m.oclAsType(JAVA::members::Field).map Member_Field())
 --		endif
 --	};
+
 	self.members->forEach(m){
 		if m.oclIsTypeOf(JAVA::members::Field) then
 			self.members->forEach(get){
@@ -90,6 +86,7 @@ mapping in JAVA::members::Field::Member_Property(in getter : JAVA::members::Clas
 	name := self.name;
 	typeReference := self.typeReference;
 	_readonly := false;
+	arrayDimensionsBefore := self.arrayDimensionsBefore;
 }
 
 mapping in JAVA::members::Field::Member_Property_ReadOnly(in getter : JAVA::members::ClassMethod) : PROPJAVA::Property 
@@ -104,6 +101,7 @@ mapping in JAVA::members::Field::Member_Property_ReadOnly(in getter : JAVA::memb
 	name := self.name;
 	typeReference := self.typeReference;
 	_readonly := true;
+	arrayDimensionsBefore := self.arrayDimensionsBefore;
 }
 
 mapping inout JAVA::members::ClassMethod::Member_ClassMethod()
@@ -117,12 +115,7 @@ mapping inout JAVA::members::ClassMethod::Member_ClassMethod()
 	{
 }
 
-mapping inout JAVA::members::Field::Member_Field()
-	when{
-		not existsACorrespondingGetter(self);
-			
-	}
-	{
+mapping inout JAVA::members::Field::Member_Field(){
 }
 
 -- looks for a field to a corresponding get method
