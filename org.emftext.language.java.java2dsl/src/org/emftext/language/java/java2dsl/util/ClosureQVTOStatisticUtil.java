@@ -21,6 +21,12 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 	private int countReturnClosures = 0;
 	private int countReturn = 0;
 	
+	private int countAnonymousClass = 0;
+	
+	public void setCountAnonymousClass(int countAnonymousClass) {
+		this.countAnonymousClass += countAnonymousClass;
+	}
+	
 	public void setCountNewConstructorCallClosures(
 			int countNewConstructorCallClosures) {
 		this.countNewConstructorCallClosures += countNewConstructorCallClosures;
@@ -86,13 +92,19 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 		
 		System.out.println("Return: "+countReturn);
 		System.out.println("ReturnClosures: "+countReturnClosures);
+		
+		System.out.println("ges. Closures: "+
+				(countNewConstructorCallClosures+
+				countMethodCallsClosures+
+				countAssignmentExpressionClosures+
+				countLocalVariableClosures+
+				countReturnClosures));
+		System.out.println("anonym. Klassen: "+countAnonymousClass);
 	}
 
 
 	@Override
 	public void init(){
-		
-		getRuleNames().put("Count_Classifiers_Class", Arrays.asList("setCountClasses"));
 		
 		getRuleNames().put("Instantiations_NewConstructorCall", Arrays.asList("setCountNewConstructorCall"));
 		getRuleNames().put("Closures_Closure_NewConstructorCall", Arrays.asList("setCountNewConstructorCallClosures"));
@@ -109,6 +121,8 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 		getRuleNames().put("Expressions_AssignmentExpression", Arrays.asList("setCountAssignmentExpression"));
 		getRuleNames().put("Closures_Closure_AssignmentExpression", Arrays.asList("setCountAssignmentExpressionClosures"));
 		
+		getRuleNames().put("Count_Classifiers_AnonymousClass", Arrays.asList("setCountAnonymousClass"));
+		getRuleNames().put("Count_Classifiers_Class", Arrays.asList("setCountClasses"));
 	}
 
 }

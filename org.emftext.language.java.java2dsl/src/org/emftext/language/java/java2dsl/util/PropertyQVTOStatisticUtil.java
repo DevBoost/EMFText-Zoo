@@ -7,6 +7,7 @@ public class PropertyQVTOStatisticUtil extends AbstractStatisticUtil{
 
 	private int countProperties = 0;
 	private int countPropertiesReadonly = 0;
+	private int countPropertiesSetter = 0;
 	private int countFields = 0;
 	private int countClasses = 0;
 	private int countInterface = 0;
@@ -40,7 +41,11 @@ public class PropertyQVTOStatisticUtil extends AbstractStatisticUtil{
 	public void addAnnotation(int value){
 		countAnnotation += value;
 	}
-	
+		
+	public void setCountPropertiesSetter(int countPropertiesSetter) {
+		this.countPropertiesSetter += countPropertiesSetter;
+	}
+
 	@Override
 	public void writeStatistic(){
 		
@@ -50,16 +55,25 @@ public class PropertyQVTOStatisticUtil extends AbstractStatisticUtil{
 		System.out.println("Enumerations: "+countEnumeration);
 		System.out.println("Annotations: "+countAnnotation);
 		System.out.println("gefundene Properties: "+countProperties);
-		System.out.println("gefundene readonly Properties: "+countPropertiesReadonly);
+		if(countPropertiesReadonly == 0 && countPropertiesSetter != 0)
+			System.out.println("gefundene readonly Properties: "+(countProperties-countPropertiesSetter));
+		else
+			System.out.println("gefundene readonly Properties: "+countPropertiesReadonly);
 
 	}
 	
 	@Override
 	public void init(){
 		
-		getRuleNames().put("Member_Property", Arrays.asList("addProperty","addField"));
-		getRuleNames().put("Member_Property_ReadOnly", Arrays.asList("addPropertyReadOnly","addField"));
+		getRuleNames().put("Member_Property", Arrays.asList("addProperty"));
+		getRuleNames().put("Member_PropertyToField", Arrays.asList("addProperty"));
+		
+		getRuleNames().put("Member_Property_ReadOnly", Arrays.asList("addPropertyReadOnly"));
+
+		getRuleNames().put("Member_PropertyToSetter", Arrays.asList("setCountPropertiesSetter"));
+		
 		getRuleNames().put("Member_Field", Arrays.asList("addField"));
+		
 		getRuleNames().put("Classifiers_Class", Arrays.asList("addClass"));
 		getRuleNames().put("Classifiers_Interface", Arrays.asList("addInterface"));
 		getRuleNames().put("Classifiers_Enumeration", Arrays.asList("addEnumeration"));

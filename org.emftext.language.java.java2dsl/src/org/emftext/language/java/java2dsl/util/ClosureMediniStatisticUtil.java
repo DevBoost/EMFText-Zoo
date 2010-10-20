@@ -11,6 +11,7 @@ public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 	private int countMethodCalls = 0;
 	
 	private int countClasses = 0;
+	private int countAnonymousClasses = 0;
 	
 	private int countAssignmentExpressionClosures = 0;
 	private int countAssignmentExpression = 0;
@@ -21,6 +22,10 @@ public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 	private int countReturnClosures = 0;
 	private int countReturn = 0;
 	
+	public void setCountAnonymousClasses(int anonymousClasses) {
+		this.countAnonymousClasses += anonymousClasses;
+	}
+
 	public void setCountNewConstructorCallClosures(
 			int countNewConstructorCallClosures) {
 		this.countNewConstructorCallClosures += countNewConstructorCallClosures;
@@ -86,6 +91,21 @@ public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 		
 		System.out.println("Return: "+countReturn);
 		System.out.println("ReturnClosures: "+countReturnClosures);
+		
+		System.out.println("ges. anonym. Classes: "+
+				(countAnonymousClasses+
+				countNewConstructorCallClosures+
+				countMethodCallsClosures+
+				countAssignmentExpressionClosures+
+				countLocalVariableClosures+
+				countReturnClosures));
+		
+		System.out.println("ges. Closures: "+
+				(countNewConstructorCallClosures+
+				countMethodCallsClosures+
+				countAssignmentExpressionClosures+
+				countLocalVariableClosures+
+				countReturnClosures));
 	}
 
 
@@ -113,6 +133,7 @@ public class ClosureMediniStatisticUtil extends AbstractStatisticUtil {
 		
 		getRuleNames().put("AssignmentExpression_Value_Closure", Arrays.asList("setCountAssignmentExpressionClosures"));
 		getRuleNames().put("AssignmentExpression_Value_Expression", Arrays.asList("setCountAssignmentExpression"));
+		getRuleNames().put("Instantiations_NewConstructorCall", Arrays.asList("setCountAnonymousClasses"));
 		
 	}
 
