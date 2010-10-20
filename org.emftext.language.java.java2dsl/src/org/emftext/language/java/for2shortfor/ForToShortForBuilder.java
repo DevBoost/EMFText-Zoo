@@ -1,4 +1,4 @@
-package org.emftext.language.java.if2shortif;
+package org.emftext.language.java.for2shortfor;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.emftext.language.java.if2shortif.If2ShortIfBuildAdapter;
 import org.emftext.language.java.java2dsl.qvto.QVTOStarter;
 import org.emftext.language.java.java2dsl.util.MetaModelName;
 import org.emftext.language.java.resource.java.IJavaBuilder;
@@ -28,9 +29,9 @@ import org.emftext.language.java.resource.java.mopp.JavaBuilderAdapter;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 
 
-public class IfToShortIfBuilder extends JavaBuilderAdapter implements IJavaBuilder {
+public class ForToShortForBuilder extends JavaBuilderAdapter implements IJavaBuilder {
 
-	private If2ShortIfBuildAdapter myAdapter = new If2ShortIfBuildAdapter();
+private For2ShortForBuildAdapter myAdapter = new For2ShortForBuildAdapter();
 	
 	public boolean isBuildingNeeded(URI uri) {
 		return myAdapter.isBuildingNeeded(uri);		
