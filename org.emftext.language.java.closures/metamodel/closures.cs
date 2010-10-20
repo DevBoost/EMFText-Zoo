@@ -30,7 +30,7 @@ OPTIONS {
 }
 
 RULES { 
- 	Closure ::= !1 ( annotationsAndModifiers )*  
+ 	Closure ::= ( annotationsAndModifiers )* !1 
  				"{" (parameterTypes arrayDimensionsBefore? ("," parameterTypes arrayDimensionsBefore? )*)? 
  				"=>" valueType valueTypeArrayDimension* "}" 
  				!1 typeReference? ":" name[]? ( "=" 
@@ -38,7 +38,5 @@ RULES {
  				"=>" !2 statements+ "}" 
  				( !1 "." #0 methodName[] #0 "(" (arguments ("," arguments)*)? ")" #0 )? 
  				( !1 "." #0 next )? ";" )?  ;
-
-
 }
 
