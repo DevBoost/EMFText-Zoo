@@ -10,11 +10,18 @@ modeltype JAVA uses "http://www.emftext.org/java";
 transformation Java2Closure(inout java : JAVA);
 
 main() {
-	java.objects()[JAVA::statements::Condition]->map Statements_Condition();
 	java.objects()[JAVA::classifiers::Class]->map Classifiers_Class();
+	java.objects()[JAVA::statements::Condition]->map Statements_Condition();
 	java.objects()[JAVA::statements::StatementListContainer]->map Statements_StatementListContainer();
 	java.objects()[JAVA::statements::StatementContainer]->map Statements_StatementContainer();
+	
 }
+
+// für Zähler
+mapping inout JAVA::classifiers::Class::Classifiers_Class(){}
+
+// für Zähler
+mapping inout JAVA::statements::Condition::Statements_Condition(){}
 
 // untersucht ob condition korrektes ResturnStatement enthält
 query JAVA::statements::Statement::StatementToReturn() : JAVA::statements::Return {
@@ -64,12 +71,6 @@ query JAVA::statements::Statement::StatementToCondExpr() : JAVA::expressions::Co
 	return condExpr;
 }
 
-// für Zähler
-mapping inout JAVA::classifiers::Class::Classifiers_Class(){}
-
-// für Zähler
-mapping inout JAVA::statements::Condition::Statements_Condition(){}
-
 // durchläuft alle statements
 mapping inout JAVA::statements::StatementListContainer::Statements_StatementListContainer(){
 	
@@ -108,25 +109,16 @@ mapping inout JAVA::statements::StatementListContainer::Statements_StatementList
 			endif endif
 		endif;
 
-		if condExpr <> null then
-			self.statements := 
-				self.statements->excluding(s)
+		if ret <> null then
+			tempStatements := tempStatements->append(ret)
 		endif;
 		
-		if ret <> null then
-			self.statements := 
-				self.statements->excluding(s)
-		endif;
-		if ret <> null then
-			tempStatements := 
-				tempStatements->append(ret)
-		endif;
+		if ret = null and condExpr = null then
+			tempStatements := tempStatements->append(s)
+		endif
 	};
 	
-	tempStatements->forEach(s){
-		self.statements := 
-			self.statements->append(s)
-	}
+	self.statements := tempStatements;
 }
 
 // durchläuft statement aus container
