@@ -29,6 +29,7 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
+import org.emftext.language.java.ejava.resource.ejava.IEjavaTextPrinter;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.Statement;
 
@@ -125,10 +126,11 @@ public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ej
 	}
 	
 	private String printBody(EOperationWrapper wrapper, EjavaResource resource) {
-		byte[] lineBreak = System.getProperty ("line.separator").getBytes();
+		byte[] lineBreak = System.getProperty("line.separator").getBytes();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		// TODO we should obtain the printer from the eJavaMetaInformation class
-		EjavaPrinter printer = new PlainJavaEjavaPrinter(outputStream, resource);
+		// we use a custom printer, because object instantiations need to be printed
+		// differently from what is defined in ejava.cs
+		IEjavaTextPrinter printer = new PlainJavaEjavaPrinter(outputStream, resource);
 		for (Statement statement : wrapper.getStatements()) {
 			try {
 				printer.print(statement);
