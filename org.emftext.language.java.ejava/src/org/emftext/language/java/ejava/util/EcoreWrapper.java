@@ -283,14 +283,14 @@ public class EcoreWrapper {
 		EEnumLiteralWrapper wrapper = null;
 		
 		for(EnumConstant constant : eClassifierWrapper.getConstants()) {
-			if (constant.getName().equals(eEnumLiteral.getLiteral().toUpperCase())) {
+			if (constant.getName().equals(eEnumLiteral.getName().toUpperCase())) {
 				wrapper = (EEnumLiteralWrapper) constant;
 			}
 		}
 		
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEEnumLiteralWrapper();
-			wrapper.setName(eEnumLiteral.getLiteral().toUpperCase());
+			wrapper.setName(eEnumLiteral.getName().toUpperCase());
 			eClassifierWrapper.getConstants().add(wrapper);
 		}
 		wrapper.setEEnumLiteral(eEnumLiteral);
