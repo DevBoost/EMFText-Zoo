@@ -1,19 +1,28 @@
 package org.emftext.language.modelquery.resource.modelquery.mopp;
 
+import java.lang.ref.WeakReference;
+
 import org.reuseware.sokan.IndexDelta;
 import org.reuseware.sokan.index.notify.IndexListener;
+import org.reuseware.sokan.index.util.IndexUtil;
 
 public class CustomModelqueryResourceIndexListener implements IndexListener {
 
-	CustomModelqueryResource resource = null;
+	private WeakReference<CustomModelqueryResource> resourceRef = null;
 	
 	public CustomModelqueryResourceIndexListener(
 			CustomModelqueryResource resource) {
-		this.resource = resource;
+		this.resourceRef = new WeakReference<CustomModelqueryResource>(resource);
 	}
 
 	public void indexChanged(IndexDelta delta) {
-		resource.executeQuery();
+		CustomModelqueryResource resource = resourceRef.get();
+		if (resource != null) {
+			resource.executeQuery();
+		}
+		else {
+			IndexUtil.INSTANCE.removeListener(this);
+		}
 	}
 
 }
