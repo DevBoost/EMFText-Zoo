@@ -135,6 +135,7 @@ public class CustomModelqueryResource extends ModelqueryResource {
 		
 		for(Resource toSave : modifiedResources) {
 			toSave.save(getResourceSet().getLoadOptions());
+			IndexUtil.INSTANCE.addArtifact(toSave.getURI());
 		}
 	}
 	
