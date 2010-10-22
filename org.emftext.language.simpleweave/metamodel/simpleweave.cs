@@ -7,5 +7,5 @@ RULES{
 	
 	Aspect::= "weave"  aspectID['<','>'] "{" weavings+ "}";
 	
-	Weaving ::= adviceContentID[] "into" joinPoint[];
+	Weaving ::= adviceContentID[] "into" joinPointID[];
 }
