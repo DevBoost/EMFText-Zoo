@@ -29,9 +29,6 @@ import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaOptionProvider
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaOptions;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaResourcePostProcessor;
 import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaResourcePostProcessorProvider;
-import org.emftext.language.java.sqljava.resource.sqljava.mopp.SqljavaContextDependentURIFragmentFactory;
-import org.emftext.language.java.sqljava.resource.sqljava.mopp.SqljavaReferenceResolverSwitch;
-import org.emftext.language.java.sqljava.resource.sqljava.mopp.SqljavaResource;
 import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
 

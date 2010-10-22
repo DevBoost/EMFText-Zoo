@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.AdditiveExpressionChild;
 import org.emftext.language.java.expressions.NestedExpression;
@@ -27,7 +26,6 @@ import org.emftext.language.sql.select.column.ColumnOperationMax;
 import org.emftext.language.sql.select.column.ColumnOperationMin;
 import org.emftext.language.sql.select.column.ColumnOperationSome;
 import org.emftext.language.sql.select.column.ColumnOperationSum;
-import org.emftext.language.sql.select.column.ColumnPackage;
 import org.emftext.language.sql.select.column.SingleColumnExpression;
 import org.emftext.language.sql.select.condition.BetweenCondition;
 import org.emftext.language.sql.select.condition.Condition;

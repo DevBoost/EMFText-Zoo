@@ -76,7 +76,6 @@ public class SqljavaBuilder implements org.emftext.language.java.sqljava.resourc
 			final org.emftext.language.java.sqljava.resource.sqljava.mopp.SqljavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		
 		Thread worker = new Thread(new Runnable(){
-			@Override
 			public void run() {
 				convert(resource);
 			}

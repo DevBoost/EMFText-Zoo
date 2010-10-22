@@ -108,12 +108,10 @@ public class ResolverHelper {
 			this.warning = warning;
 		}
 
-		@Override
 		public String getIdentifier() {
 			return identifier;
 		}
 
-		@Override
 		public String getWarning() {
 			return warning;
 		}
