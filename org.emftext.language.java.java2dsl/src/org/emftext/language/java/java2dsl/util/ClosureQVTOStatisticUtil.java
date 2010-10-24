@@ -10,8 +10,6 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 	private int countMethodCallsClosures = 0;
 	private int countMethodCalls = 0;
 	
-	private int countClasses = 0;
-	
 	private int countAssignmentExpressionClosures = 0;
 	private int countAssignmentExpression = 0;
 	
@@ -21,8 +19,15 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 	private int countReturnClosures = 0;
 	private int countReturn = 0;
 	
-	private int countAnonymousClass = 0;
+	private int countAllClosures = 0;
 	
+	private int countAnonymousClass = 0;
+	private int countClasses = 0;
+	
+	public void setCountAllClosures(int countAllClosures) {
+		this.countAllClosures += countAllClosures;
+	}
+
 	public void setCountAnonymousClass(int countAnonymousClass) {
 		this.countAnonymousClass += countAnonymousClass;
 	}
@@ -93,12 +98,7 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 		System.out.println("Return: "+countReturn);
 		System.out.println("ReturnClosures: "+countReturnClosures);
 		
-		System.out.println("ges. Closures: "+
-				(countNewConstructorCallClosures+
-				countMethodCallsClosures+
-				countAssignmentExpressionClosures+
-				countLocalVariableClosures+
-				countReturnClosures));
+		System.out.println("ges. Closures: "+ countAllClosures);
 		System.out.println("anonym. Klassen: "+countAnonymousClass);
 	}
 
@@ -107,22 +107,27 @@ public class ClosureQVTOStatisticUtil extends AbstractStatisticUtil {
 	public void init(){
 		
 		getRuleNames().put("Instantiations_NewConstructorCall", Arrays.asList("setCountNewConstructorCall"));
-		getRuleNames().put("Closures_Closure_NewConstructorCall", Arrays.asList("setCountNewConstructorCallClosures"));
+		getRuleNames().put("Closures_Closure_NewConstructorCall", Arrays.asList("setCountNewConstructorCallClosures","setCountAllClosures"));
 		
 		getRuleNames().put("References_MethodCall", Arrays.asList("setCountMethodCalls"));
-		getRuleNames().put("Closures_Closure_MethodCall", Arrays.asList("setCountMethodCallsClosures"));
+		getRuleNames().put("Closures_Closure_MethodCall", Arrays.asList("setCountMethodCallsClosures","setCountAllClosures"));
 		
 		getRuleNames().put("Statements_Return", Arrays.asList("setCountReturn"));
-		getRuleNames().put("Closures_Closure_Return", Arrays.asList("setCountReturnClosures"));
+		getRuleNames().put("Closures_Closure_Return", Arrays.asList("setCountReturnClosures","setCountAllClosures"));
 		
 		getRuleNames().put("Variables_LocalVariable", Arrays.asList("setCountLocalVariable"));
-		getRuleNames().put("Closures_Closure_LocalVariable", Arrays.asList("setCountLocalVariableClosures"));
+		getRuleNames().put("Closures_Closure_LocalVariable", Arrays.asList("setCountLocalVariableClosures","setCountAllClosures"));
 		
 		getRuleNames().put("Expressions_AssignmentExpression", Arrays.asList("setCountAssignmentExpression"));
-		getRuleNames().put("Closures_Closure_AssignmentExpression", Arrays.asList("setCountAssignmentExpressionClosures"));
+		getRuleNames().put("Closures_Closure_AssignmentExpression", Arrays.asList("setCountAssignmentExpressionClosures","setCountAllClosures"));
 		
 		getRuleNames().put("Count_Classifiers_AnonymousClass", Arrays.asList("setCountAnonymousClass"));
 		getRuleNames().put("Count_Classifiers_Class", Arrays.asList("setCountClasses"));
+	
+		getRuleNames().put("Closure2Ncc", Arrays.asList("setCountAllClosures"));
+//		getRuleNames().put("Closures_Closure", Arrays.asList("setCountAllClosures"));
+		
+		
 	}
 
 }
