@@ -34,37 +34,9 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		enforce domain CLOSURES t : java::references::MethodCall {
 			arguments = t_a : closures::Closure{}
 		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
 		where {
-			Closures_Closure(s_a,t_a);
-		}
-
-	}
-	
-	relation References_MethodCall_NewConstructorCall {
-
-		enforce domain JAVA s : java::references::MethodCall {
-			arguments = s_a : java::instantiations::NewConstructorCall{}
-		};
-
-		enforce domain CLOSURES t : java::references::MethodCall {
-			arguments = t_a : java::instantiations::NewConstructorCall{}
-		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
-		where {
-			Instantiations_NewConstructorCall(s_a,t_a);
+			Closures_Closure(s_a,t_a)
+			or true;
 		}
 
 	}
@@ -78,37 +50,9 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		enforce domain CLOSURES t : java::instantiations::NewConstructorCall {
 			arguments = t_a : closures::Closure{}
 		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
 		where {
-			Closures_Closure(s_a,t_a);
-		}
-
-	}
-	
-	relation Instantiations_NewConstructorCall_NewConstructorCall{
-
-		enforce domain JAVA s : java::instantiations::NewConstructorCall {
-			arguments = s_a : java::instantiations::NewConstructorCall{}
-		};
-
-		enforce domain CLOSURES t : java::instantiations::NewConstructorCall {
-			arguments = t_a : java::instantiations::NewConstructorCall{}
-		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
-		where {
-			Instantiations_NewConstructorCall(s_a,t_a);
+			Closures_Closure(s_a,t_a)
+			or true;
 		}
 
 	}
@@ -130,29 +74,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			endif;
 		}
 		where {
-			Closures_Closure(s_a,t_a);
-		}
-
-	}
-	
-	relation AssignmentExpression_Value_NewConstructorCall {
-
-		enforce domain JAVA s : java::expressions::AssignmentExpression {
-			value = s_a : java::instantiations::NewConstructorCall{}
-		};
-
-		enforce domain CLOSURES t : java::expressions::AssignmentExpression {
-			value = t_a : java::instantiations::NewConstructorCall{}
-		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
-		where {
-			Instantiations_NewConstructorCall(s_a,t_a);
+			Closures_Closure(s_a,t_a)
+			or true;
 		}
 
 	}
@@ -174,28 +97,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			endif;
 		}
 		where {
-			Closures_Closure(s_a,t_a);
-		}
-	}
-	
-	relation LocalVariable_InitialValue_NewConstructorCall {
-		
-		enforce domain JAVA s : java::variables::LocalVariable {
-			initialValue = s_a : java::instantiations::NewConstructorCall {}
-		};
-
-		enforce domain CLOSURES t : java::variables::LocalVariable {
-			initialValue = t_a : java::instantiations::NewConstructorCall {}
-		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
-		where {
-			Instantiations_NewConstructorCall(s_a,t_a);
+			Closures_Closure(s_a,t_a)
+			or true;
 		}
 	}
 	
@@ -216,28 +119,8 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			endif;
 		}
 		where {
-			Closures_Closure(s_a,t_a);
-		}
-	}
-	
-	relation Return_ReturnValue_NewConstructorCall {
-		
-		enforce domain JAVA s : java::statements::Return {
-			returnValue = s_a : java::instantiations::NewConstructorCall {}
-		};
-
-		enforce domain CLOSURES t : java::statements::Return {
-			returnValue = t_a : java::instantiations::NewConstructorCall {}
-		};
-		when{
-			if not s_a.oclIsUndefined() then 
-				not s_a.anonymousClass.oclIsUndefined()
-			else
-				true
-			endif;
-		}
-		where {
-			Instantiations_NewConstructorCall(s_a,t_a);
+			Closures_Closure(s_a,t_a)
+			or true;
 		}
 	}
 	
@@ -364,7 +247,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
 			Instantiations_NewConstructorCall_Closure(s_n,t_n) or
-			Instantiations_NewConstructorCall_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or
@@ -409,7 +291,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
 			References_MethodCall_Closure(s_n,t_n) or
-			References_MethodCall_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or
@@ -516,42 +397,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			or true;
 		}
 	}
-	
-	relation Instantiations_NewConstructorCall {
-
-		enforce domain JAVA s : java::instantiations::NewConstructorCall {
-			anonymousClass = s_ac : java::classifiers::AnonymousClass {
-				
-			}
-		};
-
-		enforce domain CLOSURES t : java::instantiations::NewConstructorCall {
-			anonymousClass = t_ac : java::classifiers::AnonymousClass {
-				
-			}
-		};
-		when{
-			if not
-				if s.typeReference.oclIsUndefined()
-					and
-					s.anonymousClass.oclIsUndefined() then
-						false
-				else
-					s_ac.members->size() = 1
-					and
-					s_ac.members->at(1).oclIsTypeOf(java::members::ClassMethod)
-					and
-					not s_ac.members->at(1).oclAsType(java::members::ClassMethod).typeReference.oclIsUndefined()
-					and 
-					not s_ac.members->at(1).oclAsType(java::members::ClassMethod).statements->isEmpty()
-				endif
-			then
-				true
-			else
-				false
-			endif;
-		}
-	}
 
 	relation Closures_Closure {
 
@@ -559,30 +404,36 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		statementElements : OrderedSet(java::statements::Statement);
 		valueTypeElement : java::types::TypeReference;
 		
+		modifiers : OrderedSet(java::modifiers::AnnotationInstanceOrModifier);
+		typRef : java::types::TypeReference;
+		paraTypRef : OrderedSet(java::types::TypeReference);
+		
 		enforce domain JAVA s : java::instantiations::NewConstructorCall {
 			anonymousClass = s_ac : java::classifiers::AnonymousClass {
 				members = s_ac_m : java::members::ClassMethod {
 					statements = statementElements,
 					name = methodName,
-					typeReference = valueTypeElement
-					-- modifier
+					typeReference = valueTypeElement,
+					annotationsAndModifiers = modifiers
 				}
-			}
-			-- typeReference
+			},
+			typeReference = typRef
 		};
 
 		enforce domain CLOSURES t : closures::Closure {
 			
 			valueType = valueTypeElement,
 			statements = statementElements,
-			methodName = methodName
-		--	parameterTypes = t_pt : java::types::TypeReference {}
+			methodName = methodName,
+			typeReference = typRef,
+			annotationsAndModifiers = modifiers,
+			parameterTypes = paraTypRef
 		};
 		when{
 			if s.typeReference.oclIsUndefined()
 				and
 				s.anonymousClass.oclIsUndefined() then
-					false
+					true
 			else
 				s_ac.members->size() = 1
 				and
@@ -592,36 +443,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 				and 
 				not s_ac.members->at(1).oclAsType(java::members::ClassMethod).statements->isEmpty()
 			endif; 
-		}
-		where{
-			 Closure_ParameterType_NamespaceClassifierReference(s_ac_m,t) or
-			 Closure_ParameterType_Integer(s_ac_m,t) or
-			 Closure_ParameterType_Long(s_ac_m,t) or
-			 Closure_ParameterType_Double(s_ac_m,t) or
-			 Closure_ParameterType_Short(s_ac_m,t) or
-			 Closure_ParameterType_Float(s_ac_m,t) or
-			 Closure_ParameterType_Boolean(s_ac_m,t) or
-			 Closure_ParameterType_Char(s_ac_m,t) or
-			 Closure_ParameterType_Byte(s_ac_m,t)
-			 or
-			 AnnotableAndModifiable_Modifier_Private(s_ac_m,t) or 
-			 AnnotableAndModifiable_Modifier_Public(s_ac_m,t) or
-			 AnnotableAndModifiable_Modifier_Static(s_ac_m,t) or
-			 AnnotableAndModifiable_Modifier_Final(s_ac_m,t) or
-			 AnnotableAndModifiable_Modifier_Protected(s_ac_m,t)
-			 or
-			 TypedElement_TypeReference_NamespaceClassifierReference(s,t) or
-			 TypedElement_TypeReference_Int(s,t) or
-			 TypedElement_TypeReference_Void(s,t) or
-			 TypedElement_TypeReference_Boolean(s,t) or
-			 TypedElement_TypeReference_Byte(s,t) or
-			 TypedElement_TypeReference_Double(s,t) or
-			 TypedElement_TypeReference_Float(s,t) or
-			 TypedElement_TypeReference_Long(s,t) or
-			 TypedElement_TypeReference_Short(s,t) or
-			 TypedElement_TypeReference_Char(s,t)
-			or true;
-			
 		}
 	}
 	
@@ -1282,7 +1103,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 		where{
 			Instantiations_NewConstructorCall_Closure(s_s_e,t_s_e) or
-			Instantiations_NewConstructorCall_NewConstructorCall(s_s_e,t_s_e) or
 			References_Argumentable_NewConstructorCall(s_s_e,t_s_e) or
 			References_Argumentable_MethodCall(s_s_e,t_s_e) or
 			References_Argumentable_IdentifierReference(s_s_e,t_s_e) or
@@ -1337,7 +1157,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 		where{
 			References_MethodCall_Closure(s_s_e,t_s_e) or
-			References_MethodCall_NewConstructorCall(s_s_e,t_s_e) or
 			References_Argumentable_NewConstructorCall(s_s_e,t_s_e) or
 			References_Argumentable_MethodCall(s_s_e,t_s_e) or
 			References_Argumentable_IdentifierReference(s_s_e,t_s_e) or
@@ -1382,7 +1201,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 		where{
 			AssignmentExpression_Value_Closure(s_s_e,t_s_e) or
-			AssignmentExpression_Value_NewConstructorCall(s_s_e,t_s_e) or
 			AssignmentExpression_Value_Expression(s_s_e,t_s_e)
 			or true;
 		}
@@ -1412,7 +1230,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 		where{
 			LocalVariable_InitialValue_Closure(s_s_v,t_s_v) or
-			LocalVariable_InitialValue_NewConstructorCall(s_s_v,t_s_v) or
 			LocalVariable_InitialValue_Expression(s_s_v,t_s_v)
 			or true;
 		}
@@ -1428,7 +1245,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 		};
 		where{
 			Return_ReturnValue_Closure(s_s,t_s) or
-			Return_ReturnValue_NewConstructorCall(s_s,t_s) or
 			Return_ReturnValue_Expression(s_s,t_s);
 		}
 	}	
@@ -1800,7 +1616,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
 			Instantiations_NewConstructorCall_Closure(s_n,t_n) or
-			Instantiations_NewConstructorCall_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or
@@ -1854,7 +1669,6 @@ transformation copy(JAVA : java, CLOSURES : closures) {
 			References_Reference_ReflectiveClassReference(s_n,t_n)
 			or
 			References_MethodCall_Closure(s_n,t_n) or
-			References_MethodCall_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_NewConstructorCall(s_n,t_n) or
 			References_Argumentable_MethodCall(s_n,t_n) or
 			References_Argumentable_IdentifierReference(s_n,t_n) or

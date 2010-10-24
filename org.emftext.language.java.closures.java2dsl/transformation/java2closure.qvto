@@ -11,6 +11,7 @@ transformation Java2Closure(inout java : CLOSURES);
 
 main() {
 	java.objects()[JAVA::classifiers::Class]->map Count_Classifiers_Class();
+	java.objects()[JAVA::classifiers::AnonymousClass]->map Count_Classifiers_AnonymousClass();
 //	java.objects()[JAVA::instantiations::NewConstructorCall]->map Count_Instantiations_NewConstructorCall();
 //	java.objects()[JAVA::_references::MethodCall]->map Count_References_MethodCall();
 	
@@ -22,7 +23,11 @@ main() {
 	java.objects()[JAVA::statements::Return]->map Statements_Return();
 }
 
+// Zähler
 mapping inout JAVA::classifiers::Class::Count_Classifiers_Class(){}
+// Zähler
+mapping inout JAVA::classifiers::AnonymousClass::Count_Classifiers_AnonymousClass(){}
+
 //mapping inout JAVA::instantiations::NewConstructorCall::Count_Instantiations_NewConstructorCall(){}
 //mapping inout JAVA::_references::MethodCall::Count_References_MethodCall(){}
 
@@ -31,7 +36,8 @@ mapping inout JAVA::statements::Return::Statements_Return(){
 	var closure : CLOSURES::Closure := null;
 	
 	if returnValue.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-		closure := map Closures_Closure_Return(returnValue.oclAsType(JAVA::instantiations::NewConstructorCall))
+		closure := map Closures_Closure_Return(
+			returnValue.oclAsType(JAVA::instantiations::NewConstructorCall))
 	endif;
 	if closure <> null then
 			returnValue := closure
@@ -44,7 +50,8 @@ mapping inout JAVA::variables::LocalVariable::Variables_LocalVariable(){
 	var closure : CLOSURES::Closure := null;
 	
 	if initialValue.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-		closure := map Closures_Closure_LocalVariable(initialValue.oclAsType(JAVA::instantiations::NewConstructorCall))
+		closure := map Closures_Closure_LocalVariable(
+			initialValue.oclAsType(JAVA::instantiations::NewConstructorCall))
 	endif;
 	if closure <> null then
 			initialValue := closure
@@ -57,7 +64,8 @@ mapping inout JAVA::expressions::AssignmentExpression::Expressions_AssignmentExp
 	var closure : CLOSURES::Closure := null;
 	
 	if value.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-		closure := map Closures_Closure_AssignmentExpression(value.oclAsType(JAVA::instantiations::NewConstructorCall))
+		closure := map Closures_Closure_AssignmentExpression(
+			value.oclAsType(JAVA::instantiations::NewConstructorCall))
 	endif;
 	if closure <> null then
 			value := closure
@@ -69,35 +77,41 @@ mapping inout JAVA::expressions::AssignmentExpression::Expressions_AssignmentExp
 mapping inout JAVA::_references::MethodCall::References_MethodCall(){
 	
 	var closure : CLOSURES::Closure := null;
+	var tempArgs : OrderedSet(JAVA::expressions::Expression);
 	
 	self.arguments->forEach(a){
 		if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-			closure := map Closures_Closure_MethodCall(a.oclAsType(JAVA::instantiations::NewConstructorCall))
-	endif;
-	if closure <> null then
-				self.arguments := self.arguments->append(closure)->
-				asOrderedSet()->
-				excluding(a)
-		endif
-	}
+			closure := map Closures_Closure_MethodCall(
+				a.oclAsType(JAVA::instantiations::NewConstructorCall))
+		endif;
+		if closure <> null then
+			tempArgs := tempArgs->append(closure)
+		else
+			tempArgs := tempArgs->append(a)
+		endif;
+	};
+	
+	self.arguments := tempArgs;
 }
 
 -- Argument von NewConstructorCall
 mapping inout JAVA::instantiations::NewConstructorCall::Instantiations_NewConstructorCall(){
 	
 	var closure : CLOSURES::Closure := null;
+	var tempArgs : OrderedSet(JAVA::expressions::Expression);
 	
 	self.arguments->forEach(a){
 		if a.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-			closure := map Closures_Closure_NewConstructorCall(a.oclAsType(JAVA::instantiations::NewConstructorCall))
-	endif;
-	if closure <> null then
-				self.arguments := self.arguments->append(closure)->
-				asOrderedSet()->
-				excluding(a)
-		endif
-	}
-
+			closure := map Closures_Closure_NewConstructorCall(
+				a.oclAsType(JAVA::instantiations::NewConstructorCall))
+		endif;
+		if closure <> null then
+			tempArgs := tempArgs->append(closure)
+		else
+			tempArgs := tempArgs->append(a)
+		endif;
+	};
+	self.arguments := tempArgs;
 }
 
 -- NewConstructorCall in einer StatementExpression
@@ -106,37 +120,17 @@ mapping inout JAVA::statements::ExpressionStatement::Expressions_ExpressionState
 	var closure : CLOSURES::Closure := null;
 	
 	if self.expression.oclIsTypeOf(JAVA::instantiations::NewConstructorCall) then
-		closure := map Closures_Closure_NewConstructorCall(self.expression.oclAsType(JAVA::instantiations::NewConstructorCall))
+		closure := map Closures_Closure_NewConstructorCall(
+			self.expression.oclAsType(JAVA::instantiations::NewConstructorCall))
 	endif;
 	if closure <> null then
 			self.expression := closure
 	endif
 	
 }
-/*
-query Closures_Closure_NewConstructorCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
-	
-	return map Closures_Closure(newConstructorCall);
-
-query Closures_Closure_MethodCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
-	
-	return map Closures_Closure(newConstructorCall);
-	
-query Closures_Closure_Return(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
-	
-	return map Closures_Closure(newConstructorCall);
-	
-query Closures_Closure_LocalVariable(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
-	
-	return map Closures_Closure(newConstructorCall);
-	
-query Closures_Closure_AssignmentExpression(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure =
-	
-	return map Closures_Closure(newConstructorCall);
-*/
 
 mapping Closures_Closure_NewConstructorCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
-	when{
+when{
 		newConstructorCall.typeReference <> null
 		and
 		newConstructorCall.anonymousClass <> null
@@ -169,7 +163,7 @@ mapping Closures_Closure_NewConstructorCall(in newConstructorCall : JAVA::instan
 	}
 
 mapping Closures_Closure_MethodCall(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
-	when{
+when{
 		newConstructorCall.typeReference <> null
 		and
 		newConstructorCall.anonymousClass <> null
@@ -202,7 +196,7 @@ mapping Closures_Closure_MethodCall(in newConstructorCall : JAVA::instantiations
 	}
 
 mapping Closures_Closure_AssignmentExpression(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
-	when{
+when{
 		newConstructorCall.typeReference <> null
 		and
 		newConstructorCall.anonymousClass <> null
@@ -235,7 +229,7 @@ mapping Closures_Closure_AssignmentExpression(in newConstructorCall : JAVA::inst
 	}
 
 mapping Closures_Closure_LocalVariable(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
-	when{
+when{
 		newConstructorCall.typeReference <> null
 		and
 		newConstructorCall.anonymousClass <> null
@@ -268,7 +262,7 @@ mapping Closures_Closure_LocalVariable(in newConstructorCall : JAVA::instantiati
 	}
 
 mapping Closures_Closure_Return(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
-	when{
+when{
 		newConstructorCall.typeReference <> null
 		and
 		newConstructorCall.anonymousClass <> null
@@ -295,71 +289,9 @@ mapping Closures_Closure_Return(in newConstructorCall : JAVA::instantiations::Ne
 		parameters := innerMethod.parameters;
 		statements := innerMethod.statements;
 		methodName := innerMethod.name;
-		if methodCall <> null then
-			arguments := methodCall.arguments
-		endif
+	--	if methodCall <> null then
+	--		arguments := methodCall.arguments
+	--	endif
 	}
+	
 
-/*
-query Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure{
-	
-		var closure : CLOSURES::Closure := object CLOSURES::Closure{};
-	
-		var innerMethod : JAVA::members::ClassMethod := 
-			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
-		var methodCall : JAVA::_references::MethodCall := 
-			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
-		
-		closure.annotationsAndModifiers := innerMethod.annotationsAndModifiers;
-		innerMethod.parameters->forEach(p){
-			closure.parameterTypes := closure.parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
-			closure.arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
-		};
-		closure.valueType := innerMethod.typeReference;
-		closure.valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
-		closure.typeReference := newConstructorCall.typeReference;
-		closure.name := "";
-		closure.parameters := innerMethod.parameters;
-		closure.statements := innerMethod.statements;
-		closure.methodName := innerMethod.name;
-		if methodCall <> null then
-			closure.arguments := methodCall.arguments
-		endif;
-		
-		return closure
-}
-*/
-/*	
-mapping Closures_Closure(in newConstructorCall : JAVA::instantiations::NewConstructorCall) : CLOSURES::Closure
-	when{
-		newConstructorCall.typeReference <> null
-		and
-		newConstructorCall.anonymousClass <> null
-		and
-		newConstructorCall.anonymousClass.members->size() = 1
-		and
-		newConstructorCall.anonymousClass.members->at(1).oclIsTypeOf(JAVA::members::ClassMethod) 
-	}
-	{
-		var innerMethod : JAVA::members::ClassMethod := 
-			newConstructorCall.anonymousClass.members->at(1).oclAsType(JAVA::members::ClassMethod) ;
-		var methodCall : JAVA::_references::MethodCall := 
-			newConstructorCall.next.oclAsType(JAVA::_references::MethodCall) ;
-		
-		annotationsAndModifiers := innerMethod.annotationsAndModifiers;
-		innerMethod.parameters->forEach(p){
-			parameterTypes := parameterTypes->append(p.typeReference.deepclone().oclAsType(JAVA::types::TypeReference));
-			arrayDimensionsBefore := p.arrayDimensionsBefore.deepclone().oclAsType(JAVA::arrays::ArrayDimension);
-		};
-		valueType := innerMethod.typeReference;
-		valueTypeArrayDimension := innerMethod.arrayDimensionsBefore;
-		typeReference := newConstructorCall.typeReference;
-		name := "";
-		parameters := innerMethod.parameters;
-		statements := innerMethod.statements;
-		methodName := innerMethod.name;
-		if methodCall <> null then
-			arguments := methodCall.arguments
-		endif
-	}
-*/
