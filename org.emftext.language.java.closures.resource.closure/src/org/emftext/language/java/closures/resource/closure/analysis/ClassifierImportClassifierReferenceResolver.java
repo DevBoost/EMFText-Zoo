@@ -1,33 +1,16 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/**
+ * <copyright>
+ * </copyright>
+ *
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
-
+ */
 package org.emftext.language.java.closures.resource.closure.analysis;
-
-import java.io.IOException;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.java.classifiers.ConcreteClassifier;
-import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
-import org.emftext.language.java.containers.CompilationUnit;
 
 public class ClassifierImportClassifierReferenceResolver implements org.emftext.language.java.closures.resource.closure.IClosureReferenceResolver<org.emftext.language.java.imports.ClassifierImport, org.emftext.language.java.classifiers.ConcreteClassifier> {
 	
 	private org.emftext.language.java.resource.java.analysis.ClassifierImportClassifierReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.ClassifierImportClassifierReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.classifiers.ConcreteClassifier> result) {
+	public void resolve(String identifier, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.classifiers.ConcreteClassifier> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.classifiers.ConcreteClassifier>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -71,43 +54,15 @@ public class ClassifierImportClassifierReferenceResolver implements org.emftext.
 			}
 		});
 		
-		if(!result.wasResolved()){
-			
-			EObject root = ClosureEObjectUtil.findRootContainer(container);
-			Resource resource = root.eResource();
-			URI resourceUri = resource.getURI();
-			
-			URI importResourceUri = 
-				resourceUri.trimFileExtension().trimSegments(1).
-				appendSegment(identifier).appendFileExtension("java");
-			
-			Resource importResource = 
-				resource.getResourceSet().createResource(importResourceUri);
-			
-			try {
-				importResource.load(null);
-			} catch (IOException e) {}
-			
-			if(!importResource.getContents().isEmpty()){
-				
-				ConcreteClassifier cc = null;
-				try {
-					cc = ((CompilationUnit)importResource.getContents().get(0)).getClassifiers().get(0);
-				} catch (Exception e) {}
-			
-				if(cc != null)
-					result.addMapping(identifier, cc);
-			}
-			
-		}
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.java.classifiers.ConcreteClassifier element, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.java.classifiers.ConcreteClassifier element, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend
+		// on any option
 	}
 	
 }

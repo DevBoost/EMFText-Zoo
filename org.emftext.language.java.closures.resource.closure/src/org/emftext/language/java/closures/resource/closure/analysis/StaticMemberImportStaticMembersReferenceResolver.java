@@ -1,24 +1,16 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/**
+ * <copyright>
+ * </copyright>
+ *
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
-
+ */
 package org.emftext.language.java.closures.resource.closure.analysis;
 
 public class StaticMemberImportStaticMembersReferenceResolver implements org.emftext.language.java.closures.resource.closure.IClosureReferenceResolver<org.emftext.language.java.imports.StaticMemberImport, org.emftext.language.java.references.ReferenceableElement> {
 	
 	private org.emftext.language.java.resource.java.analysis.StaticMemberImportStaticMembersReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.StaticMemberImportStaticMembersReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.imports.StaticMemberImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
+	public void resolve(String identifier, org.emftext.language.java.imports.StaticMemberImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.closures.resource.closure.IClosureReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -64,12 +56,13 @@ public class StaticMemberImportStaticMembersReferenceResolver implements org.emf
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.java.references.ReferenceableElement element, org.emftext.language.java.imports.StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.java.references.ReferenceableElement element, org.emftext.language.java.imports.StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend
+		// on any option
 	}
 	
 }
