@@ -31,12 +31,12 @@ OPTIONS {
 
 RULES { 
  	Closure ::= ( annotationsAndModifiers )* !1 
- 				"{" (parameterTypes arrayDimensionsBefore? ("," parameterTypes arrayDimensionsBefore? )*)? 
- 				"=>" valueType valueTypeArrayDimension* "}" 
- 				!1 typeReference? ":" name[]? ( "=" 
- 				!1 "{" (parameters ("," parameters ?)*)? 
- 				"=>" !2 statements+ "}" 
- 				( !1 "." #0 methodName[] #0 "(" (arguments ("," arguments)*)? ")" #0 )? 
- 				( !1 "." #0 next )? ";" )?  ;
+ 			"{" (parameterTypes arrayDimensionsBefore? ("," parameterTypes arrayDimensionsBefore? )*)? 
+ 			"=>" valueType valueTypeArrayDimension* "}" 
+ 			!1 typeReference? ":" name[]? ( "=" 
+ 			!1 "{" (parameters ("," parameters ?)*)? 
+ 			"=>" !2 statements+ "}" 
+ 			( !1 "." #0 methodName[] #0 "(" (arguments ("," arguments)*)? ")" #0 )? 
+ 			( !1 "." #0 next )? ";" )?  ;
 }
 
