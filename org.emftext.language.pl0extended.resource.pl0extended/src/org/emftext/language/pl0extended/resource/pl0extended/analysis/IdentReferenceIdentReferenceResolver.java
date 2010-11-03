@@ -10,7 +10,7 @@ public class IdentReferenceIdentReferenceResolver implements org.emftext.languag
 	
 	private org.emftext.language.pl0.resource.pl0.analysis.IdentReferenceIdentReferenceResolver delegate = new org.emftext.language.pl0.resource.pl0.analysis.IdentReferenceIdentReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.pl0.IdentReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolveResult<org.emftext.language.pl0.Declaration> result) {
+	public void resolve(String identifier, org.emftext.language.pl0.IdentReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolveResult<org.emftext.language.pl0.Declaration> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.pl0.resource.pl0.IPl0ReferenceResolveResult<org.emftext.language.pl0.Declaration>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -52,16 +52,46 @@ public class IdentReferenceIdentReferenceResolver implements org.emftext.languag
 			public void addMapping(String identifier, org.emftext.language.pl0.Declaration target, String warning) {
 				result.addMapping(identifier, target, warning);
 			}
+			
+			public java.util.Collection<org.emftext.language.pl0.resource.pl0.IPl0QuickFix> getQuickFixes() {
+				return java.util.Collections.emptySet();
+			}
+			
+			public void addQuickFix(final org.emftext.language.pl0.resource.pl0.IPl0QuickFix quickFix) {
+				result.addQuickFix(new org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedQuickFix() {
+					
+					public String getImageKey() {
+						return quickFix.getImageKey();
+					}
+					
+					public String getDisplayString() {
+						return quickFix.getDisplayString();
+					}
+					
+					public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects() {
+						return quickFix.getContextObjects();
+					}
+					
+					public String getContextAsString() {
+						return quickFix.getContextAsString();
+					}
+					
+					public String apply(String currentText) {
+						return quickFix.apply(currentText);
+					}
+				});
+			}
 		});
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.pl0.Declaration element, org.emftext.language.pl0.IdentReference container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.pl0.Declaration element, org.emftext.language.pl0.IdentReference container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend
+		// on any option
 	}
 	
 }

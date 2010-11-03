@@ -1,20 +1,25 @@
-/**
- * <copyright>
- * </copyright>
- *
+/*******************************************************************************
+ * Copyright (c) 2006-2010 
+ * Software Technology Group, Dresden University of Technology
  * 
- */
-package org.emftext.language.java.sqljava.resource.sqljava.analysis;
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany 
+ *      - initial API and implementation
+ ******************************************************************************/
 
-import org.emftext.language.sql.resource.sql.ISqlReferenceMapping;
-import org.emftext.language.sql.resource.sql.ISqlReferenceResolveResult;
+package org.emftext.language.java.sqljava.resource.sqljava.analysis;
 
 public class ColumnTermTableReferenceReferenceResolver implements org.emftext.language.java.sqljava.resource.sqljava.ISqljavaReferenceResolver<org.emftext.language.sql.select.term.ColumnTerm, org.emftext.language.sql.select.from.Table> {
 	
 	private org.emftext.language.sql.resource.sql.analysis.ColumnTermTableReferenceReferenceResolver delegate = new org.emftext.language.sql.resource.sql.analysis.ColumnTermTableReferenceReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.sql.select.term.ColumnTerm container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.sqljava.resource.sqljava.ISqljavaReferenceResolveResult<org.emftext.language.sql.select.from.Table> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new ISqlReferenceResolveResult<org.emftext.language.sql.select.from.Table>() {
+	public void resolve(String identifier, org.emftext.language.sql.select.term.ColumnTerm container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.sqljava.resource.sqljava.ISqljavaReferenceResolveResult<org.emftext.language.sql.select.from.Table> result) {
+		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.sql.resource.sql.ISqlReferenceResolveResult<org.emftext.language.sql.select.from.Table>() {
 			
 			public boolean wasResolvedUniquely() {
 				return result.wasResolvedUniquely();
@@ -32,7 +37,7 @@ public class ColumnTermTableReferenceReferenceResolver implements org.emftext.la
 				result.setErrorMessage(message);
 			}
 			
-			public java.util.Collection<ISqlReferenceMapping<org.emftext.language.sql.select.from.Table>> getMappings() {
+			public java.util.Collection<org.emftext.language.sql.resource.sql.ISqlReferenceMapping<org.emftext.language.sql.select.from.Table>> getMappings() {
 				throw new UnsupportedOperationException();
 			}
 			
@@ -55,11 +60,40 @@ public class ColumnTermTableReferenceReferenceResolver implements org.emftext.la
 			public void addMapping(String identifier, org.emftext.language.sql.select.from.Table target, String warning) {
 				result.addMapping(identifier, target, warning);
 			}
+			
+			public java.util.Collection<org.emftext.language.sql.resource.sql.ISqlQuickFix> getQuickFixes() {
+				return java.util.Collections.emptySet();
+			}
+			
+			public void addQuickFix(final org.emftext.language.sql.resource.sql.ISqlQuickFix quickFix) {
+				result.addQuickFix(new org.emftext.language.java.sqljava.resource.sqljava.ISqljavaQuickFix() {
+					
+					public String getImageKey() {
+						return quickFix.getImageKey();
+					}
+					
+					public String getDisplayString() {
+						return quickFix.getDisplayString();
+					}
+					
+					public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects() {
+						return quickFix.getContextObjects();
+					}
+					
+					public String getContextAsString() {
+						return quickFix.getContextAsString();
+					}
+					
+					public String apply(String currentText) {
+						return quickFix.apply(currentText);
+					}
+				});
+			}
 		});
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.sql.select.from.Table element, org.emftext.language.sql.select.term.ColumnTerm container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.sql.select.from.Table element, org.emftext.language.sql.select.term.ColumnTerm container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

@@ -2,6 +2,7 @@ package org.emftext.language.java.sqljava.resource.sqljava.mopp.helper;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -13,6 +14,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.resource.java.IJavaQuickFix;
 import org.emftext.language.java.resource.java.IJavaReferenceMapping;
 import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
 import org.emftext.language.java.resource.java.analysis.ClassifierImportClassifierReferenceResolver;
@@ -170,6 +172,14 @@ public class ResolverHelper {
 		
 		public void addMapping(String identifier, ReferenceType target, String warning) {
 			mappings.add(new JavaReferenceMapping<ReferenceType>(null, target, identifier, warning));
+		}
+
+		public Collection<IJavaQuickFix> getQuickFixes() {
+			return Collections.emptySet();
+		}
+
+		public void addQuickFix(IJavaQuickFix quickFix) {
+			// TODO Auto-generated method stub
 		}
 	}
 	

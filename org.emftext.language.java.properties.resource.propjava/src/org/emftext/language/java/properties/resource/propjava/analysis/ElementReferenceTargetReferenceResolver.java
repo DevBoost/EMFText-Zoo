@@ -11,13 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
+
 package org.emftext.language.java.properties.resource.propjava.analysis;
 
 public class ElementReferenceTargetReferenceResolver implements org.emftext.language.java.properties.resource.propjava.IPropjavaReferenceResolver<org.emftext.language.java.references.ElementReference, org.emftext.language.java.references.ReferenceableElement> {
 	
 	private org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.ElementReferenceTargetReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.properties.resource.propjava.IPropjavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
+	public void resolve(String identifier, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.properties.resource.propjava.IPropjavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -59,16 +60,46 @@ public class ElementReferenceTargetReferenceResolver implements org.emftext.lang
 			public void addMapping(String identifier, org.emftext.language.java.references.ReferenceableElement target, String warning) {
 				result.addMapping(identifier, target, warning);
 			}
+			
+			public java.util.Collection<org.emftext.language.java.resource.java.IJavaQuickFix> getQuickFixes() {
+				return java.util.Collections.emptySet();
+			}
+			
+			public void addQuickFix(final org.emftext.language.java.resource.java.IJavaQuickFix quickFix) {
+				result.addQuickFix(new org.emftext.language.java.properties.resource.propjava.IPropjavaQuickFix() {
+					
+					public String getImageKey() {
+						return quickFix.getImageKey();
+					}
+					
+					public String getDisplayString() {
+						return quickFix.getDisplayString();
+					}
+					
+					public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects() {
+						return quickFix.getContextObjects();
+					}
+					
+					public String getContextAsString() {
+						return quickFix.getContextAsString();
+					}
+					
+					public String apply(String currentText) {
+						return quickFix.apply(currentText);
+					}
+				});
+			}
 		});
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.java.references.ReferenceableElement element, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.java.references.ReferenceableElement element, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend
+		// on any option
 	}
 	
 }

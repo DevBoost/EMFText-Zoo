@@ -11,13 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
+
 package org.emftext.language.customsandwich.resource.customsandwich.analysis;
 
 public class InstructionUsingReferenceResolver implements org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolver<org.emftext.language.sandwich.Instruction, org.emftext.language.sandwich.FeatureInstructionUsing> {
 	
 	private org.emftext.language.sandwich.resource.sandwich.analysis.InstructionUsingReferenceResolver delegate = new org.emftext.language.sandwich.resource.sandwich.analysis.InstructionUsingReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing> result) {
+	public void resolve(String identifier, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.sandwich.resource.sandwich.ISandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -59,16 +60,46 @@ public class InstructionUsingReferenceResolver implements org.emftext.language.c
 			public void addMapping(String identifier, org.emftext.language.sandwich.FeatureInstructionUsing target, String warning) {
 				result.addMapping(identifier, target, warning);
 			}
+			
+			public java.util.Collection<org.emftext.language.sandwich.resource.sandwich.ISandwichQuickFix> getQuickFixes() {
+				return java.util.Collections.emptySet();
+			}
+			
+			public void addQuickFix(final org.emftext.language.sandwich.resource.sandwich.ISandwichQuickFix quickFix) {
+				result.addQuickFix(new org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichQuickFix() {
+					
+					public String getImageKey() {
+						return quickFix.getImageKey();
+					}
+					
+					public String getDisplayString() {
+						return quickFix.getDisplayString();
+					}
+					
+					public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects() {
+						return quickFix.getContextObjects();
+					}
+					
+					public String getContextAsString() {
+						return quickFix.getContextAsString();
+					}
+					
+					public String apply(String currentText) {
+						return quickFix.apply(currentText);
+					}
+				});
+			}
 		});
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.sandwich.FeatureInstructionUsing element, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.sandwich.FeatureInstructionUsing element, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend
+		// on any option
 	}
 	
 }

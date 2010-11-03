@@ -11,13 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
+
 package org.emftext.language.tbool.resource.tbool.analysis;
 
 public class FieldTypeReferenceResolver implements org.emftext.language.tbool.resource.tbool.ITboolReferenceResolver<org.emftext.language.bool.Field, org.emftext.language.bool.FieldType> {
 	
 	private org.emftext.language.bool.resource.bool.analysis.FieldTypeReferenceResolver delegate = new org.emftext.language.bool.resource.bool.analysis.FieldTypeReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.bool.Field container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.tbool.resource.tbool.ITboolReferenceResolveResult<org.emftext.language.bool.FieldType> result) {
+	public void resolve(String identifier, org.emftext.language.bool.Field container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.tbool.resource.tbool.ITboolReferenceResolveResult<org.emftext.language.bool.FieldType> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.bool.resource.bool.IBoolReferenceResolveResult<org.emftext.language.bool.FieldType>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -59,16 +60,46 @@ public class FieldTypeReferenceResolver implements org.emftext.language.tbool.re
 			public void addMapping(String identifier, org.emftext.language.bool.FieldType target, String warning) {
 				result.addMapping(identifier, target, warning);
 			}
+			
+			public java.util.Collection<org.emftext.language.bool.resource.bool.IBoolQuickFix> getQuickFixes() {
+				return java.util.Collections.emptySet();
+			}
+			
+			public void addQuickFix(final org.emftext.language.bool.resource.bool.IBoolQuickFix quickFix) {
+				result.addQuickFix(new org.emftext.language.tbool.resource.tbool.ITboolQuickFix() {
+					
+					public String getImageKey() {
+						return quickFix.getImageKey();
+					}
+					
+					public String getDisplayString() {
+						return quickFix.getDisplayString();
+					}
+					
+					public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects() {
+						return quickFix.getContextObjects();
+					}
+					
+					public String getContextAsString() {
+						return quickFix.getContextAsString();
+					}
+					
+					public String apply(String currentText) {
+						return quickFix.apply(currentText);
+					}
+				});
+			}
 		});
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.bool.FieldType element, org.emftext.language.bool.Field container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.bool.FieldType element, org.emftext.language.bool.Field container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend
+		// on any option
 	}
 	
 }
