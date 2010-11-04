@@ -49,16 +49,19 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 
 	public void process(EjavaResource resource) {
 		new JavaModelRepairer() {
+			
 			protected void registerContextDependentProxy(
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
 				((EjavaResource)resource).registerContextDependentProxy(
 						new EjavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new EjavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

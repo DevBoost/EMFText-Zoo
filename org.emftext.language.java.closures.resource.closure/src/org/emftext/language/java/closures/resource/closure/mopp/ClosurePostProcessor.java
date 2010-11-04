@@ -54,12 +54,15 @@ public class ClosurePostProcessor implements IClosureOptionProvider, IClosureRes
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
+
 				((ClosureResource)resource).registerContextDependentProxy(
 						new ClosureContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new ClosureReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

@@ -53,12 +53,15 @@ public class ReuseJavaPostProcessor implements IReusejavaOptionProvider, IReusej
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
+
 				((ReusejavaResource)resource).registerContextDependentProxy(
 						new ReusejavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new ReusejavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

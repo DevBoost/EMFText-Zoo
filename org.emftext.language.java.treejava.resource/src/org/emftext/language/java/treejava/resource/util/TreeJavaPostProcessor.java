@@ -53,12 +53,15 @@ public class TreeJavaPostProcessor implements ITreejavaOptionProvider, ITreejava
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
+
 				((TreejavaResource)resource).registerContextDependentProxy(
 						new TreejavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new TreejavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

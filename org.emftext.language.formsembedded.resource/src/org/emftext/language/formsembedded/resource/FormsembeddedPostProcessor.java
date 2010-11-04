@@ -49,12 +49,14 @@ public class FormsembeddedPostProcessor implements IFormsembeddedOptionProvider,
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
 				((FormsembeddedResource)resource).registerContextDependentProxy(
 						new FormsembeddedContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new FormsembeddedReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

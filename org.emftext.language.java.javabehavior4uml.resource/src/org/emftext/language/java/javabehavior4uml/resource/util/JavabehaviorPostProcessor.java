@@ -53,12 +53,15 @@ public class JavabehaviorPostProcessor implements IJavabehaviorOptionProvider, I
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
+
 				((JavabehaviorResource)resource).registerContextDependentProxy(
 						new JavabehaviorContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavabehaviorReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

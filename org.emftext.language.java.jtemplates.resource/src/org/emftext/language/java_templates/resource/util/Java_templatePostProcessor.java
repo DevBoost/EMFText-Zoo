@@ -58,12 +58,15 @@ public class Java_templatePostProcessor implements IJavatemplateOptionProvider, 
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
+
 				((JavatemplateResource)resource).registerContextDependentProxy(
 						new JavatemplateContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavatemplateReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		

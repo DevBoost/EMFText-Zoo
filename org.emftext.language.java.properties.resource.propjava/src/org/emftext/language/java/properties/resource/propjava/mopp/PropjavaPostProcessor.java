@@ -51,12 +51,14 @@ public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjava
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
+				assert !targetReference.isMany();
 				((PropjavaResource)resource).registerContextDependentProxy(
 						new PropjavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new PropjavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		
