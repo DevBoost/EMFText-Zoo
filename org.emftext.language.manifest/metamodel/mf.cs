@@ -97,7 +97,7 @@ RULES{
 	PackageName::= id[ALPHANUMEXT]; //BUNDLE
 	
 	// Manifest
-	Manifest::= ("Manifest-Version:" manifestVersion[ALPHANUMEXT])? ( bundleActivationPolicy | bundleActivator | bundleCategory | bundleClassPath | bundleContactAddress | bundleCopyright | bundleDescription | bundleDocURL | bundleIcon | bundleLicense | bundleLocalization | bundleManifestVersion | bundleName | bundleNativeCode | bundleRequiredExecutionEnvironment | bundleSymbolicName | bundleUpdateLocation | bundleVendor | bundleVersion | dynamicImportPackage | exportPackage | fragmentHost | importPackage | requireBundle | eclipseLazyStart 		| importBundle | importLibrary | includeResource | moduleScope | moduleType | privatePackage | webContextPath | webDispatcherServletUrlPatterns | webFilterMappings )*;
+	Manifest::= ("Manifest-Version:" manifestVersion[ALPHANUMEXT])? ( bundleActivationPolicy | bundleActivator | bundleCategory | bundleClassPath | bundleContactAddress | bundleCopyright | bundleDescription | bundleDocURL | bundleIcon | bundleLicense | bundleLocalization | bundleManifestVersion | bundleName | bundleNativeCode | bundleRequiredExecutionEnvironment | bundleSymbolicName | bundleUpdateLocation | bundleVendor | bundleVersion | dynamicImportPackage | exportPackage | fragmentHost | importPackage | requireBundle | eclipseLazyStart 		| importBundle | importLibrary | includeResource | moduleScope | moduleType | privatePackage | webContextPath | webDispatcherServletUrlPatterns | webFilterMappings )* !0;
 													// VERSION
 	
 	// Elements
@@ -149,7 +149,7 @@ RULES{
 	DynamicDescription::= wildcardName (";" wildcardName)* (";" parameter )*;
 	WildcardName::= packageName | packageName ".*" | "*";
 	
-	ExportPackage::= "Export-Package:" export ("," export)*;
+	ExportPackage::= !0 "Export-Package:" export ("," !0 #1 export)* !0;
 	Export::= packageName (";" packageName)* (";" parameter)*;
 	
 	FragmentHost::= "Fragment-Host:" symbolicName[ALPHANUMEXT] (";" parameter)*; //BUNDLE
@@ -157,7 +157,7 @@ RULES{
 	ImportPackage::= "Import-Package:" import ("," import)*;
 	Import::= packageName (";" packageName)* (";" parameter)*;
 	
-	RequireBundle::= "Require-Bundle:" requireBundleDescription ("," requireBundleDescription)*;
+	RequireBundle::= !0 "Require-Bundle:" requireBundleDescription ("," !0 #1 requireBundleDescription)* !0;
 	RequireBundleDescription::= symbolicName[ALPHANUMEXT] (";" parameter)*; //BUNDLE
 	
 	EclipseLazyStart::= "Eclipse-LazyStart:" value[ALPHANUMEXT]; //BOOLEAN

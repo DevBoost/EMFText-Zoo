@@ -8,16 +8,8 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.manifest.resource.manifest.ui.MFEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="MF" icon="icons/editor_icon.gif" id="org.emftext.language.manifest.resource.manifest.ui.MFEditor" name="EMFText MF Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.manifest.resource.manifest"/>
 		</editor>
-	</extension>
-	
-	<extension id="org.emftext.language.manifest.resource.manifest.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -32,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.manifest.resource.manifest.ui.MFBracketPreferencePage" class="org.emftext.language.manifest.resource.manifest.ui.MFBracketPreferencePage" category="org.emftext.language.manifest.resource.manifest.ui.MFPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.manifest.resource.manifest.ui.MFOccurrencePreferencePage" class="org.emftext.language.manifest.resource.manifest.ui.MFOccurrencePreferencePage" category="org.emftext.language.manifest.resource.manifest.ui.MFPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -41,6 +31,32 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.manifest.resource.manifest.ui.MFNewFileWizard" id="org.emftext.language.manifest.resource.manifest.ui.MFNewFileWizard" name="EMFText .MF file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.manifest.resource.manifest.ui.MFMarkerResolutionGenerator" markerType="org.emftext.language.manifest.resource.manifest.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.manifest.resource.manifest.ui.MFAnnotationModelFactory" extensions="MF" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.manifest.resource.manifest" name=".MF File" base-type="org.eclipse.core.runtime.text" file-extensions="MF"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="MF" id="org.emftext.language.manifest.resource.manifest.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.manifest.resource.manifest.ui.occurences" />
+		<type name="org.emftext.language.manifest.resource.manifest.ui.occurences.declaration" super="org.emftext.language.manifest.resource.manifest.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.manifest.resource.manifest.ui.occurences" label="Occurrences (in .MF files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="MF.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="MF.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="MF.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="MF.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="MF.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="MF.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="MF.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="MF.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="MF.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.manifest.resource.manifest.ui.occurences.declaration" label="Declarations (in .MF files)" textPreferenceKey="MF.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="MF.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="MF.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="MF.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="MF.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="MF.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>
