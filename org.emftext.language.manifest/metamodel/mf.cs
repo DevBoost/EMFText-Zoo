@@ -149,7 +149,7 @@ RULES{
 	DynamicDescription::= wildcardName (";" wildcardName)* (";" parameter )*;
 	WildcardName::= packageName | packageName ".*" | "*";
 	
-	ExportPackage::= !0 "Export-Package:" export ("," !0 #1 export)* !0;
+	ExportPackage::= !0 "Export-Package:" export ("," !0 #1 export)*;
 	Export::= packageName (";" packageName)* (";" parameter)*;
 	
 	FragmentHost::= "Fragment-Host:" symbolicName[ALPHANUMEXT] (";" parameter)*; //BUNDLE
@@ -157,7 +157,7 @@ RULES{
 	ImportPackage::= "Import-Package:" import ("," import)*;
 	Import::= packageName (";" packageName)* (";" parameter)*;
 	
-	RequireBundle::= !0 "Require-Bundle:" requireBundleDescription ("," !0 #1 requireBundleDescription)* !0;
+	RequireBundle::= !0 "Require-Bundle:" requireBundleDescription ("," !0 #1 requireBundleDescription)*;
 	RequireBundleDescription::= symbolicName[ALPHANUMEXT] (";" parameter)*; //BUNDLE
 	
 	EclipseLazyStart::= "Eclipse-LazyStart:" value[ALPHANUMEXT]; //BOOLEAN
