@@ -35,6 +35,8 @@ public class FirstFollowTest extends TestCase {
 			".*/JavaBehavior4UML.cs",
 			".*/jtemplates.cs",
 			".*/owl.cs",
+			".*/owlcl.cs",
+			".*/owlTextTestLanguage.text.cs",
 			".*/plugin.cs",
 			".*/quickuml.cs",
 			".*/statemachine.cs",
