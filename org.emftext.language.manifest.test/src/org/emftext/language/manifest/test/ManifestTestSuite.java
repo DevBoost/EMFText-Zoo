@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.StringWriter;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
