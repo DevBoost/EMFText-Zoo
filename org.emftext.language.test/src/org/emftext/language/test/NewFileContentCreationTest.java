@@ -109,6 +109,7 @@ public class NewFileContentCreationTest extends TestCase {
 				// the minimal model helper if users provide template files containing 
 				// example code for new documents
 				String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("new_file");
+				assertNotNull("Content for new file must not be null.", newFileContent);
 				Resource.Factory factory = metaInformation.createResourceFactory();
 				String syntaxName = metaInformation.getSyntaxName();
 				if (!isOnUpdateSite(syntaxName)) {
