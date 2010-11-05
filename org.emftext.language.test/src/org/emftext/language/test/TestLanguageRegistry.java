@@ -34,10 +34,12 @@ import org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaMeta
 import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaMetaInformation;
 import org.emftext.language.javaproperties.resource.properties.mopp.PropertiesMetaInformation;
 import org.emftext.language.km3.resource.km3.mopp.Km3MetaInformation;
+import org.emftext.language.manifest.resource.manifest.mopp.MFMetaInformation;
 import org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.mopp.MartinfowlerdslMetaInformation;
 import org.emftext.language.models.resource.model.mopp.ModelMetaInformation;
 import org.emftext.language.office.resource.office.mopp.OfficeMetaInformation;
 import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
+import org.emftext.language.owlcl.resource.owlcl.mopp.OwlclMetaInformation;
 import org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckMetaInformation;
 import org.emftext.language.petrinet.resource.petrinet.mopp.PetrinetMetaInformation;
 import org.emftext.language.pico.resource.pico.mopp.PicoMetaInformation;
@@ -58,6 +60,7 @@ import org.emftext.language.simplec.resource.c.mopp.CMetaInformation;
 import org.emftext.language.simplegui.resource.simplegui.mopp.SimpleguiMetaInformation;
 import org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation;
 import org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation;
+import org.emftext.language.sql.resource.sql.mopp.SqlMetaInformation;
 import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation;
 import org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation;
 import org.emftext.language.templateconcepts.call.resource.templatecall.mopp.TemplatecallMetaInformation;
@@ -80,6 +83,7 @@ import org.emftext.test.cct4.resource.cct4.mopp.Cct4MetaInformation;
 import org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation;
 import org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation;
 import org.emftext.test.printing.resource.printing.mopp.PrintingMetaInformation;
+import org.emftext.test.resolving.resource.resolving.mopp.ResolvingMetaInformation;
 import org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax.mopp.CpsyntaxMetaInformation;
 import org.reuseware.coconut.compositionsystem.resource.csys.mopp.CsysMetaInformation;
 import org.reuseware.coconut.fragment.resource.fragment.mopp.FragmentMetaInformation;
@@ -129,10 +133,12 @@ public class TestLanguageRegistry {
 		metaInformations.add(new Regexp_sdfMetaInformation());
 		metaInformations.add(new JavatemplateMetaInformation());
 		metaInformations.add(new Km3MetaInformation());
+		metaInformations.add(new MFMetaInformation());
 		metaInformations.add(new MartinfowlerdslMetaInformation());
 		metaInformations.add(new ModelMetaInformation());
 		metaInformations.add(new OfficeMetaInformation());
 		metaInformations.add(new OwlMetaInformation());
+		metaInformations.add(new OwlclMetaInformation());
 		metaInformations.add(new PetrinetMetaInformation());
 		metaInformations.add(new PicoMetaInformation());
 		metaInformations.add(new TopfMetaInformation());
@@ -182,6 +188,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new BoolMetaInformation());
 		metaInformations.add(new CsharpMetaInformation());
 		metaInformations.add(new FsMetaInformation());
+		metaInformations.add(new SqlMetaInformation());
 		metaInformations.add(new XmlMetaInformation());
 		metaInformations.add(new PcheckMetaInformation());
 		metaInformations.add(new Cct1MetaInformation());
@@ -195,6 +202,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new Bug1154MetaInformation());
 		metaInformations.add(new Bug1233MetaInformation());
 		metaInformations.add(new PrintingMetaInformation());
+		metaInformations.add(new ResolvingMetaInformation());
 		metaInformations.add(new TaMetaInformation());
 		// TODO move this to getMetaInformationsForLanguageOnUpdateSite() once the automaton regex DSL is on the update site
 		metaInformations.add(new Regexp_automatonMetaInformation());
