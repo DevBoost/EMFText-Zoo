@@ -1,4 +1,4 @@
-package org.emftext.language.chess;
+package org.emftext.language.chess.test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
