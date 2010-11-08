@@ -1,10 +1,5 @@
 package org.emftext.language.manifest.test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,6 +9,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
+
+import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -25,7 +22,6 @@ import org.emftext.language.manifest.ManifestPackage;
 import org.emftext.language.manifest.resource.manifest.mopp.MFResourceFactory;
 import org.junit.Test;
 
-
 /**
  * Test suite for parsing several MANIFEST.MF files.
  * Copy MANIFEST.MF files generated from PDE into the input folder and then run the suite.
@@ -35,18 +31,18 @@ import org.junit.Test;
  * @author jreimann
  *
  */
-public class ManifestTestSuite {
+public class ManifestTest extends TestCase {
 
 	private static final String INPUT_FOLDER = "input";
 
 	private File inputFolder;
 
-	public ManifestTestSuite(){
+	public void setUp() {
 		initInputFolder();
 		registerPackages();
 	}
 
-	private static void registerPackages() {
+	private void registerPackages() {
 		EPackage.Registry.INSTANCE.put(ManifestPackage.eNS_URI, ManifestPackage.eINSTANCE);
 		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
 		extensionToFactoryMap.put("MF", new MFResourceFactory());
