@@ -104,14 +104,14 @@ public class NewFileContentCreationTest extends TestCase {
 				} catch (IOException e) {
 					fail(e.getMessage());
 				}
-				// the following code checks whether the content that is actually use for
+				// the following code checks whether the content that is actually used for
 				// new file is valid. this content may differ from the content created by
 				// the minimal model helper if users provide template files containing 
-				// example code for new documents
+				// example code for new documents.
 				String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("new_file");
-				assertNotNull("Content for new file must not be null.", newFileContent);
-				Resource.Factory factory = metaInformation.createResourceFactory();
 				String syntaxName = metaInformation.getSyntaxName();
+				assertNotNull("Content for new file (." + syntaxName + ") must not be null.", newFileContent);
+				Resource.Factory factory = metaInformation.createResourceFactory();
 				if (!isOnUpdateSite(syntaxName)) {
 					return;
 				}
