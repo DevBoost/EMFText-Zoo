@@ -36,20 +36,6 @@ TOKENS {
 
 	DEFINE STRING_LITERAL $'"'('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|'\\'('0'..'7')|~('\\'|'"'))*'"'$;
 	
-	DEFINE T_ABSTRACT $'abstract'$;
-	DEFINE T_DERIVED $'derived'$;
-	DEFINE T_VOLATILE $'volatile'$;
-	DEFINE T_UNUNIQUE $'ununique'$;
-	DEFINE T_UNORDERED $'unordered'$;
-	DEFINE T_UNSETTABLE $'unsettable'$;
-	DEFINE T_UNCHANGEABLE $'unchangeable'$;
-	DEFINE T_TRANSIENT $'transient'$;
-	DEFINE T_ID $'iD'$;
-	DEFINE T_NOTRESOLVEPROXIES $'notResolveProxies'$;
-	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
-	DEFINE T_SERIALIZABLE $'serializable'$;
-	DEFINE T_CONTAINMENT $'containment'$;
-	
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 		
@@ -59,57 +45,74 @@ TOKENS {
 TOKENSTYLES {
 	"TEXT" COLOR #000000;
 	
-	"T_ABSTRACT" COLOR #7F0055, BOLD;
-	"T_DERIVED" COLOR #7F0055, BOLD;
-	"T_VOLATILE" COLOR #7F0055, BOLD;
-	"T_UNUNIQUE" COLOR #7F0055, BOLD;
- 	"T_UNORDERED" COLOR #7F0055, BOLD;
-	"T_UNSETTABLE" COLOR #7F0055, BOLD;
-	"T_UNCHANGEABLE" COLOR #7F0055, BOLD;
-	"T_TRANSIENT" COLOR #7F0055, BOLD;
-	"T_ID" COLOR #7F0055, BOLD;
-	"T_NOTRESOLVEPROXIES" COLOR #7F0055, BOLD;
-	"T_INTERFACE_OR_CLASS" COLOR #7F0055, BOLD;
-	"T_SERIALIZABLE" COLOR #7F0055, BOLD;
-	"T_CONTAINMENT" COLOR #7F0055, BOLD;
-	"SL_COMMENT"  COLOR #00bb00;
-	"ML_COMMENT"  COLOR #00bb00;
+	"abstract", "derived", "volatile", "ununique", "unordered",
+	"unsettable", "unchangeable", "transient", "iD",
+	"notResolveProxies", "interface", "class", "serializable", 
+	"containment" COLOR #7F0055, BOLD;
+	
+	"SL_COMMENT", "ML_COMMENT" COLOR #00bb00;
 	
 	"STRING_LITERAL" COLOR #2A00FF;
 	
-	"package" COLOR #7F0055, BOLD;
-	"attribute" COLOR #7F0055, BOLD;
-	"reference" COLOR #7F0055, BOLD;
-	"operation" COLOR #7F0055, BOLD;
-	"datatype" COLOR #7F0055, BOLD;
-	"extends" COLOR #7F0055, BOLD;
-	"opposite" COLOR #7F0055, BOLD;
+	"package", "attribute", "reference", "operation",
+	"datatype", "extends", "opposite" COLOR #7F0055, BOLD;
 }
  
 RULES {
 	EPackage ::= (eAnnotations)* "package" #1 name[] (#1 nsPrefix[])? (#1 nsURI[STRING_LITERAL])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
 	
-	EClass ::=  (eAnnotations)* !1 (abstract[T_ABSTRACT] #1)? interface[T_INTERFACE_OR_CLASS] #1 
+	EClass ::=  (eAnnotations)* !1 
+				(abstract["abstract" : ""] #1)? 
+				interface["interface" : "class"] #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 
 				name[] 
 				(#1 instanceTypeName[STRING_LITERAL])? (#1 "extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
-	EAttribute ::= !2 (eAnnotations)* (( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNUNIQUE]|ordered[T_UNORDERED]|
-					unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID]) #1)* 
-				"attribute" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral[STRING_LITERAL])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
+	EAttribute ::= !2 (eAnnotations)* 
+					(
+					(derived["derived" : ""] |
+					 volatile["volatile" : ""] |
+					 unique["" : "ununique"] |
+					 ordered["" : "unordered"]|
+					 unsettable["unsettable" : ""] |
+					 changeable["" : "unchangeable"] |
+					 transient["transient" : ""] | 
+					 iD["iD" : ""]) #1
+					)* 
+					"attribute" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral[STRING_LITERAL])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
-	EParameter ::= (eAnnotations)* ((ordered[T_UNORDERED]|unique[T_UNUNIQUE]) #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
+	EParameter ::= 	(eAnnotations)*
+					(
+					(ordered["" : "unordered"] |
+					 unique["" : "ununique"]
+					) #1
+					)* 
+					eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
-	EReference ::= (eAnnotations)* !2 (( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
-							|volatile[T_VOLATILE]|unique[T_UNUNIQUE]|ordered[T_UNORDERED]
-							|unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|resolveProxies[T_NOTRESOLVEPROXIES]) #1)* 
+	EReference ::= 	(eAnnotations)* !2 
+					(
+					(containment["containment" : ""] | 
+					 derived["derived" : ""] |
+					 transient["transient" : ""] |
+					 volatile["volatile" : ""] |
+					 unique["" : "ununique"] |
+					 ordered["" : "unordered"] |
+					 unsettable["unsettable" : ""] | 
+					 changeable["" : "unchangeable"] |
+					 resolveProxies["" : "notResolveProxies"]
+					) #1
+					)* 
 					"reference" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral[STRING_LITERAL]) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
 	EOperation ::=  (eAnnotations)* !2
-				(( ordered[T_UNORDERED]|unique[T_UNUNIQUE]) #1)* 
+					(
+					(ordered["" : "unordered"] |
+					unique["" : "ununique"]
+					) #1
+					)* 
 				"operation" #1  ("void" | eType[]) 
 				( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 
@@ -117,7 +120,7 @@ RULES {
 				"(" (eParameters ("," #1 eParameters)* )? ")"
 				("throws" #1 eExceptions[] ("," #1 eExceptions[])*)? ";";
 	
-	EEnum ::=  (eAnnotations)* !2 (serializable[T_SERIALIZABLE] #1)? "enum" #1 name[] #1 instanceTypeName[STRING_LITERAL]?
+	EEnum ::=  (eAnnotations)* !2 (serializable["serializable" : ""] #1)? "enum" #1 name[] #1 instanceTypeName[STRING_LITERAL]?
 					#1 "{" (eLiterals)* !0 "}" 
 					!0 ; 
 
@@ -128,7 +131,7 @@ RULES {
 	
 	EStringToStringMapEntry ::= key[STRING_LITERAL] "=" value[STRING_LITERAL];
 	
-	EDataType ::= (eAnnotations)* (serializable[T_SERIALIZABLE])? "datatype" #1 name[] #1 instanceTypeName[STRING_LITERAL];
+	EDataType ::= (eAnnotations)* (serializable["serializable" : ""])? "datatype" #1 name[] #1 instanceTypeName[STRING_LITERAL];
 	
 	ETypeParameter ::= (eAnnotations)* name[];
 	
