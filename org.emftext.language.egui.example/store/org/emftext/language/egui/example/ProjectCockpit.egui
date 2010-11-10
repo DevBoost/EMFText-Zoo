@@ -1,0 +1,32 @@
+application App 
+
+statemodel {
+	state login show login;
+	state checklogin call <org.emftext.language.egui.example.LoginService.checkLogin>;
+	state idle show dashboard;
+	state help show help;
+	
+	event success;
+	event failure;
+	
+	login -> checklogin;
+	checklogin -(success)-> idle;
+	checklogin -(failure)-> login;
+	
+	idle -> help;
+	help -> idle;
+}
+
+screen login {
+	textfield username;
+	textfield password;
+	button login "Login";
+}
+
+screen dashboard {
+	list projects;
+	button details "Show details";
+	button help "Show help";
+}
+
+screen help {}
