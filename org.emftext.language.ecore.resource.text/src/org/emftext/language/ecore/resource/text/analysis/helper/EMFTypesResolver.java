@@ -203,7 +203,7 @@ public class EMFTypesResolver {
 				EPackage ePackage = imports.get(prefix);
 				if(classContainer.equals(ePackage)) {
 					String result = collectPackagePrefixes(classContainer, element);
-					if (!result.isEmpty()) {
+					if (result.length() > 0) {
 						result = prefix + "::" + result;
 						return result;
 					}
@@ -221,7 +221,7 @@ public class EMFTypesResolver {
 			EList<EPackage> eSubpackages = pkg.getESubpackages();
 			for (EPackage ePackage : eSubpackages) {
 				String returned = collectPackagePrefixes(ePackage, element);
-				if (!returned.isEmpty()) {
+				if (returned.length() > 0) {
 					String result = ePackage.getName() + "::" + returned;
 					return result;
 				}
