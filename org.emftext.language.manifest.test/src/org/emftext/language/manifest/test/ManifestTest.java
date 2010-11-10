@@ -1,6 +1,5 @@
 package org.emftext.language.manifest.test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,10 +19,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.manifest.Manifest;
 import org.emftext.language.manifest.ManifestPackage;
 import org.emftext.language.manifest.resource.manifest.mopp.MFResourceFactory;
+import org.emftext.language.manifest.resource.manifest.util.MFStreamUtil;
 import org.junit.Test;
 
 /**
- * Test suite for parsing several MANIFEST.MF files.
+ * Test for parsing several MANIFEST.MF files.
  * Copy MANIFEST.MF files generated from PDE into the input folder and then run the suite.
  * The suite loads all files as Manifest models and saves (prints) them. After that the content
  * as String will be compared. 
@@ -76,27 +76,25 @@ public class ManifestTest extends TestCase {
 			} catch (IOException e) {
 				fail("Error while saving model");
 			}
+			String printResult = normalizeLineBreaks(os.toString());
 			try {
-				FileInputStream fileInputStream = new FileInputStream(file);
-				byte[] data = new byte[(int) file.length()];
-				fileInputStream.read(data);
-				fileInputStream.close();
-				ByteArrayInputStream is = new ByteArrayInputStream(data);
-				byte[] buffer = new byte[is.available()];
-				ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-				int bytesRead = is.read(buffer);
-				while (bytesRead >= 0) {
-					byteOut.write(buffer, 0, bytesRead);
-					bytesRead = is.read(buffer);
-				}
-				StringBuffer original = new StringBuffer(new String(byteOut.toByteArray()));
-				StringBuffer copy = new StringBuffer(os.toString());
-				assertTrue("Files are not equal", original.equals(copy));
+				String original = MFStreamUtil.getContent(new FileInputStream(file));
+				original = normalizeLineBreaks(original);
+				
+				System.out.println("Original was ==>" + original + "<==");
+				System.out.println("Print result is ==>" + printResult + "<==");
+				assertEquals("Files are not equal", original, printResult);
 			} catch (FileNotFoundException e) {
 				fail("File not found");
 			} catch (IOException e) {
 				fail("Error while reading file");
 			}
 		}
+	}
+
+	private String normalizeLineBreaks(String text) {
+		text = text.replace("\r\n", "\n");
+		text = text.replace("\r", "\n");
+		return text;
 	}
 }
