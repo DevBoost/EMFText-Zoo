@@ -20,11 +20,11 @@ TOKENSTYLES {
 }
 
 RULES {
-	Application ::= "application" name[] statemodel screens* actionBindings*;
+	Application ::= "application" name[] statemodel screens*;
 	
 	// the state model
 	sm.StateModel ::= "statemodel" "{" states* events* transitions* "}";
-	sm.State      ::= "state" name[] ";";
+	sm.State      ::= "state" name[] action ";";
 	sm.Event      ::= "event" name[] ";";
 	sm.Transition ::= source[] "-" ("(" event[] ")-")? ">" target[] ";";
 	
@@ -37,7 +37,6 @@ RULES {
 	widget.TextField ::= "textfield" name[] ";";
 	
 	// actions
-	action.ActionBinding    ::= "at" state[] action;
 	action.ShowScreenAction ::= "show" screen[];
 	action.JavaAction       ::= "call" method['<','>'];
 }

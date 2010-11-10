@@ -31,6 +31,7 @@ public class JavaActionMethodReferenceResolver implements org.emftext.language.e
 		JDTConnector.getInstance().initializeResourceSet(resourceSet, container.eResource().getURI());
 		JavaClasspath classpath = JavaClasspath.get(container);
 		EObject classifier = classpath.getClassifier(className);
+		System.out.println("JavaActionMethodReferenceResolver.resolve()" + classpath.getURIMap());
 		if (classifier.eIsProxy()) {
 			classifier = EcoreUtil.resolve(classifier, container);
 		}

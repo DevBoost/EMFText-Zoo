@@ -5,7 +5,6 @@ package egui // this is the package name
 	class Application extends Nameable {
 		containment reference StateModel statemodel (1..1);
 		containment reference Screen screens (0..-1);
-		containment reference ActionBinding actionBindings (0..-1);
 	}
 	
 	package commons commons "http://www.emftext.org/language/egui/commons" {
@@ -23,7 +22,9 @@ package egui // this is the package name
 			containment reference Transition transitions (0..-1);
 		}
 
-		class State extends Nameable {}
+		class State extends Nameable {
+			containment reference Action action (1..1);
+		}
 		class Event extends Nameable {}
 
 		class Transition {
@@ -36,11 +37,6 @@ package egui // this is the package name
 	package actions actions "http://www.emftext.org/language/egui/actions" {
 
 		abstract class Action {}
-		
-		class ActionBinding {
-			containment reference Action action (1..1);
-			reference State state (1..1);
-		}
 		
 		class ShowScreenAction extends Action {
 			reference Screen screen (1..1);
