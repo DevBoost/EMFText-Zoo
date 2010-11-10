@@ -18,7 +18,7 @@ OPTIONS {
 	uiBasePackage = "org.emftext.language.manifest.resource.manifest.ui";
 } 
 
-TOKENS{
+TOKENS {
 //	DEFINE INTEGER$('1'..'9')('0'..'9')*|'0'$;
 //	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+$;
 	
@@ -97,7 +97,7 @@ RULES{
 	PackageName::= id[ALPHANUMEXT]; //BUNDLE
 	
 	// Manifest
-	Manifest::= ("Manifest-Version:" manifestVersion[ALPHANUMEXT])? ( bundleActivationPolicy | bundleActivator | bundleCategory | bundleClassPath | bundleContactAddress | bundleCopyright | bundleDescription | bundleDocURL | bundleIcon | bundleLicense | bundleLocalization | bundleManifestVersion | bundleName | bundleNativeCode | bundleRequiredExecutionEnvironment | bundleSymbolicName | bundleUpdateLocation | bundleVendor | bundleVersion | dynamicImportPackage | exportPackage | fragmentHost | importPackage | requireBundle | eclipseLazyStart 		| importBundle | importLibrary | includeResource | moduleScope | moduleType | privatePackage | webContextPath | webDispatcherServletUrlPatterns | webFilterMappings )* !0;
+	Manifest::= ("Manifest-Version:" manifestVersion[ALPHANUMEXT])? elements* !0;
 													// VERSION
 	
 	// Elements
