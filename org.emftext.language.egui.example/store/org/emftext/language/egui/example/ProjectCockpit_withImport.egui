@@ -1,0 +1,30 @@
+application App 
+
+statemodel {
+	state login show myOwnLogin__org_emftext_language_egui_templates_LoginScreenTemplate;
+	state checklogin call <org.emftext.language.egui.example.LoginService.checkLogin>;
+	state idle show dashboard;
+	state help show help;
+	
+	event success;
+	event failure;
+	
+	login -> checklogin;
+	checklogin -(success)-> idle;
+	checklogin -(failure)-> login;
+	
+	idle -> help;
+	help -> idle;
+}
+
+screen dashboard {
+	list projects;
+	button details "Show details";
+	button help "Show help";
+}
+
+screen myOwnLogin__org_emftext_language_egui_templates_LoginScreenTemplate {}
+
+screen help {
+	button help "Dummy"; //we should be able to define some text
+}
