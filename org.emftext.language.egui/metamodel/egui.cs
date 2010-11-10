@@ -20,24 +20,24 @@ TOKENSTYLES {
 }
 
 RULES {
-	Application ::= "application" name[] statemodel screens*;
+	Application ::= "application" name[] !0 !0 statemodel (!0 !0 screens)*;
 	
 	// the state model
-	sm.StateModel ::= "statemodel" "{" states* events* transitions* "}";
+	sm.StateModel ::= "statemodel" #1 "{" (!1 states)* (!1 events)* (!1 transitions)* !0 "}";
 	sm.State      ::= "state" name[] action ";";
 	sm.Event      ::= "event" name[] ";";
-	sm.Transition ::= source[] "-" ("(" event[] ")-")? ">" target[] ";";
+	sm.Transition ::= source[] "-" ("(" event[] ")-")? ">" #1 target[] ";";
 	
 	// the screen model
-	screen.Screen ::= "screen" name[] "{" children* "}";
+	screen.Screen ::= "screen" name[] #1 "{" (!1 children)* !0 "}";
 
 	// the widgets
-	widget.Panel     ::= "panel" name[] "{" children* "}";
-	widget.Button    ::= "button" name[] label['"','"'] ";";
+	widget.Panel     ::= "panel" name[] #1 "{" (!1 children)* !0 "}";
+	widget.Button    ::= "button" name[] #1 label['"','"'] ";";
 	widget.List      ::= "list" name[] ";";
 	widget.TextField ::= "textfield" name[] ";";
 	
 	// actions
 	action.ShowScreenAction ::= "show" screen[];
-	action.JavaAction       ::= "call" method['<','>'];
+	action.JavaAction       ::= "call" #1 method['<','>'];
 }
