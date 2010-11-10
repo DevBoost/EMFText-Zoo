@@ -31,7 +31,7 @@ public class JavaActionMethodReferenceResolver implements org.emftext.language.e
 		JDTConnector.getInstance().initializeResourceSet(resourceSet, container.eResource().getURI());
 		JavaClasspath classpath = JavaClasspath.get(container);
 		EObject classifier = classpath.getClassifier(className);
-		System.out.println("JavaActionMethodReferenceResolver.resolve()" + classpath.getURIMap());
+		//System.out.println("JavaActionMethodReferenceResolver.resolve()" + classpath.getURIMap());
 		if (classifier.eIsProxy()) {
 			classifier = EcoreUtil.resolve(classifier, container);
 		}
@@ -55,7 +55,10 @@ public class JavaActionMethodReferenceResolver implements org.emftext.language.e
 	}
 	
 	public String deResolve(org.emftext.language.java.members.Method element, org.emftext.language.egui.actions.JavaAction container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		String methodName = element.getName();
+		String className = element.getContainingConcreteClassifier().getName();
+		String packageName = element.getContainingCompilationUnit().getNamespacesAsString();
+		return packageName + className + "." + methodName;
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
