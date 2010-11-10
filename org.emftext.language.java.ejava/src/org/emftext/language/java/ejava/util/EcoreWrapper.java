@@ -389,16 +389,24 @@ public class EcoreWrapper {
 			return baseTypeRef;
 		}
 		else {
-			if (baseTypeRef instanceof PrimitiveType) {
-				baseTypeRef = TypesFactory.eINSTANCE.createClassifierReference();
-				((ClassifierReference)baseTypeRef).setTarget(((PrimitiveType)baseTypeRef).wrapPrimitiveType());
-			}
 			ClassifierReference typeRef = TypesFactory.eINSTANCE.createClassifierReference();
 			if (java.util.Map.Entry.class.getName().equals(eTypedElement.getEType().getInstanceClassName())) {
 				Classifier mapType = (Classifier) JavaClasspath.get(eTypedElement).getClassifier(EMap.class.getName());
 				typeRef.setTarget((Classifier) mapType);
 				// TODO set type arguments for map
 			} else {
+				// we need to convert primitive types to their respective wrappers, 
+				// because lists cannot have primitive types as type argument
+				PrimitiveType originalBaseTypeRef = null;
+				if (baseTypeRef instanceof PrimitiveType) {
+					originalBaseTypeRef = (PrimitiveType) baseTypeRef;
+					baseTypeRef = TypesFactory.eINSTANCE.createClassifierReference();
+					// we temporarily add 'originalBaseTypeRef' to the resource, because wrapPrimitiveType()
+					// requires the resource to work correctly
+					eTypedElement.eResource().getContents().add(originalBaseTypeRef);
+					((ClassifierReference)baseTypeRef).setTarget(((PrimitiveType)originalBaseTypeRef).wrapPrimitiveType());
+					eTypedElement.eResource().getContents().remove(originalBaseTypeRef);
+				}
 				Classifier listType;
 				listType = (Classifier) JavaClasspath.get(eTypedElement).getClassifier(EList.class.getName());
 				typeRef.setTarget((Classifier)listType);
