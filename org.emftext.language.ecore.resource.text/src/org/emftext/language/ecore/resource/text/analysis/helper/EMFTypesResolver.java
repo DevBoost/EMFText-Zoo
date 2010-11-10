@@ -17,7 +17,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -34,92 +36,93 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
 
 public class EMFTypesResolver {
-	
-	
+
 	protected Resource resource = null;
-	
-	public void doResolve(java.lang.String identifier, 
-			EObject container, 
-			org.eclipse.emf.ecore.EReference reference, 
-			EClass typeToResolve, 
+
+	public void doResolve(java.lang.String identifier, EObject container,
+			org.eclipse.emf.ecore.EReference reference, EClass typeToResolve,
 			boolean resolveFuzzy, ITextEcoreReferenceResolveResult<?> result) {
-		
-	
-		
+
 		EPackage ePackage = null;
 		String eClassName = identifier;
 		List<EClassifier> candidates = new LinkedList<EClassifier>();
 		resource = container.eResource();
 
-		if(eClassName.contains("::")) {
-			//class resides in another package
+		if (eClassName.contains("::")) {
+			// class resides in another package
 			String[] namespaces = eClassName.split("::");
 			eClassName = namespaces[namespaces.length - 1];
 			String packagePrefix = namespaces[0];
-			
-			
+
 			EObject rootContainer = EcoreUtil.getRootContainer(container);
-			if (rootContainer instanceof EPackage && 
-					((EPackage)rootContainer).getName().equals(packagePrefix)) {
-				//this package?
+			if (rootContainer instanceof EPackage
+					&& ((EPackage) rootContainer).getName().equals(
+							packagePrefix)) {
+				// this package?
 				ePackage = (EPackage) rootContainer;
 				candidates = ePackage.getEClassifiers();
-			}
-			else {
-				//import
+			} else {
+				// import
 				Map<String, EPackage> imports = new HashMap<String, EPackage>();
 				collectImports(container, imports);
 
 				ePackage = imports.get(packagePrefix);
-				
-				if(ePackage == null) {
-					result.setErrorMessage("EPackage '" + packagePrefix + "' not found");
+
+				if (ePackage == null) {
+					result.setErrorMessage("EPackage '" + packagePrefix
+							+ "' not found");
 					return;
 				}
 			}
 
-			//subpackages
-			outer : for(int i = 1; i < namespaces.length - 1; i++) {
-				for(EPackage subPackage : ePackage.getESubpackages()) {
-					if(namespaces[i].equals(subPackage.getName())) {
+			// subpackages
+			outer: for (int i = 1; i < namespaces.length - 1; i++) {
+				for (EPackage subPackage : ePackage.getESubpackages()) {
+					if (namespaces[i].equals(subPackage.getName())) {
 						ePackage = subPackage;
 						continue outer;
 					}
 				}
-				result.setErrorMessage("Nested EPackage '" + namespaces[i] + "' not found");
+				result.setErrorMessage("Nested EPackage '" + namespaces[i]
+						+ "' not found");
 				return;
 			}
 			candidates = ePackage.getEClassifiers();
-		}
-		else {
+		} else {
 			EObject parent = container;
-			while (parent.eContainer() != null /* && !(parent instanceof EPackage)*/) {
+			while (parent.eContainer() != null /*
+												 * && !(parent instanceof
+												 * EPackage)
+												 */) {
 				parent = parent.eContainer();
 			}
 			TreeIterator<EObject> allContents = parent.eAllContents();
 			while (allContents.hasNext()) {
 				EObject object = (EObject) allContents.next();
-				if (object instanceof EClassifier) candidates.add((EClassifier) object);
+				if (object instanceof EClassifier)
+					candidates.add((EClassifier) object);
 			}
 		}
-		
-		
 
-		addResults(identifier, eClassName, candidates, typeToResolve, resolveFuzzy, result);
+		addResults(identifier, eClassName, candidates, typeToResolve,
+				resolveFuzzy, result);
 		if (!result.wasResolved() && !identifier.contains("::")) {
-			//try the "default" package Ecore
-			addResults(identifier, identifier, EcorePackage.eINSTANCE.getEClassifiers(), typeToResolve, resolveFuzzy, result);
+			// try the "default" package Ecore
+			addResults(identifier, identifier,
+					EcorePackage.eINSTANCE.getEClassifiers(), typeToResolve,
+					resolveFuzzy, result);
 		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void addResults(String identifier, String className, List<EClassifier> candidates,
-			EClass typeToResolve, boolean resolveFuzzy, ITextEcoreReferenceResolveResult result) {
+	private void addResults(String identifier, String className,
+			List<EClassifier> candidates, EClass typeToResolve,
+			boolean resolveFuzzy, ITextEcoreReferenceResolveResult result) {
 		for (EClassifier next : candidates) {
 			if (typeToResolve.isInstance(next)) {
 				EClassifier classifier = (EClassifier) next;
-				
-				if (resolveFuzzy) {			
+
+				if (resolveFuzzy) {
 					if (classifier.getName().startsWith(className)) {
 						result.addMapping(classifier.getName(), classifier);
 					}
@@ -129,9 +132,10 @@ public class EMFTypesResolver {
 						return;
 					}
 				}
-				
-				//type parameter?
-				for(ETypeParameter typeParameter : classifier.getETypeParameters()) {
+
+				// type parameter?
+				for (ETypeParameter typeParameter : classifier
+						.getETypeParameters()) {
 					if (typeParameter.getName().equals(className)) {
 						result.addMapping(identifier, classifier);
 						return;
@@ -140,15 +144,17 @@ public class EMFTypesResolver {
 			}
 		}
 	}
-	
+
 	private void collectImports(EObject element, Map<String, EPackage> imports) {
 		EAnnotation importAnnotation = null;
 		if (element instanceof EModelElement) {
-			importAnnotation = ((EModelElement)element).getEAnnotation("import");
+			importAnnotation = ((EModelElement) element)
+					.getEAnnotation("import");
 			if (importAnnotation != null) {
-				for(String key : importAnnotation.getDetails().keySet()) {
+				for (String key : importAnnotation.getDetails().keySet()) {
 					if (!imports.containsKey(key)) {
-						EPackage importedEPackage = findEPackage(importAnnotation.getDetails().get(key));
+						EPackage importedEPackage = findEPackage(importAnnotation
+								.getDetails().get(key));
 						imports.put(key, importedEPackage);
 					}
 				}
@@ -158,9 +164,9 @@ public class EMFTypesResolver {
 			collectImports(element.eContainer(), imports);
 		}
 	}
-	
+
 	private EPackage findEPackage(String uriString) {
-		if(resource == null) {
+		if (resource == null) {
 			return null;
 		}
 		ResourceSet rs = resource.getResourceSet();
@@ -169,21 +175,59 @@ public class EMFTypesResolver {
 		}
 		Resource ePackageResource = null;
 		URI uri = URI.createURI(uriString);
-		uri = uri.resolve(resource.getURI()); //relative
+		uri = uri.resolve(resource.getURI()); // relative
 		try {
 			ePackageResource = rs.getResource(uri, true);
-		} catch (Exception e) {}
-		
-		if (ePackageResource.getContents().isEmpty() || 
-				!(ePackageResource.getContents().get(0) instanceof EPackage)) {
+		} catch (Exception e) {
+		}
+
+		if (ePackageResource.getContents().isEmpty()
+				|| !(ePackageResource.getContents().get(0) instanceof EPackage)) {
 			return null;
 		}
 		return (EPackage) ePackageResource.getContents().get(0);
 	}
-	
 
-	
+	public String doDeResolve(EClassifier element, EObject container) {
+		resource = container.eResource();
+		if (container.eResource().equals(element.eResource())) {
+			return element.getName();
+		}
+		else {
+			EPackage classContainer = (EPackage) element.eResource().getContents().get(0);
+			
+			Map<String, EPackage> imports = new HashMap<String, EPackage>();
+			collectImports(container, imports);
+			Set<String> importPrefixes = imports.keySet();
+			for (String prefix : importPrefixes) {
+				EPackage ePackage = imports.get(prefix);
+				if(classContainer.equals(ePackage)) {
+					String result = collectPackagePrefixes(classContainer, element);
+					if (!result.isEmpty()) {
+						result = prefix + "::" + result;
+						return result;
+					}
+				}
+			}
+		}
+		return element.getName();
+	}
+
+	private String collectPackagePrefixes(EPackage pkg, EClassifier element) {
+		if (pkg.getEClassifier(element.getName()) != null) {
+			String result = element.getName();
+			return result;
+		} else {
+			EList<EPackage> eSubpackages = pkg.getESubpackages();
+			for (EPackage ePackage : eSubpackages) {
+				String returned = collectPackagePrefixes(ePackage, element);
+				if (!returned.isEmpty()) {
+					String result = ePackage.getName() + "::" + returned;
+					return result;
+				}
+			}
+		}
+		return "";
+	}
+
 }
-
-
-	

@@ -23,7 +23,7 @@ import org.emftext.language.ecore.resource.text.analysis.helper.EMFTypesResolver
 public class EGenericTypeEClassifierReferenceResolver implements ITextEcoreReferenceResolver<org.eclipse.emf.ecore.EGenericType, org.eclipse.emf.ecore.EClassifier> {
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClassifier element, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference) {
-		return element.getName();
+		return new EMFTypesResolver().doDeResolve(element, container);
 	}
 	
 	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITextEcoreReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
