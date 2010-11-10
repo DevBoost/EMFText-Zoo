@@ -32,6 +32,7 @@ RULES {
 	screen.Screen ::= "screen" name[] "{" children* "}";
 
 	// the widgets
+	widget.Panel     ::= "panel" name[] "{" children* "}";
 	widget.Button    ::= "button" name[] label['"','"'] ";";
 	widget.List      ::= "list" name[] ";";
 	widget.TextField ::= "textfield" name[] ";";
