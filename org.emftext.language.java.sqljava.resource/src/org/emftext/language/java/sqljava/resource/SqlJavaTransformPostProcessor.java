@@ -94,7 +94,6 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 	public void process(final SqljavaResource resource) {
 		
 		Thread worker = new Thread(new Runnable(){
-			@Override
 			public void run() {
 				convert(resource);
 			}

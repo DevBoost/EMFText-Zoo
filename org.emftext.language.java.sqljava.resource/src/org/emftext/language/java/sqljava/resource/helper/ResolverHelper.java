@@ -84,12 +84,10 @@ public class ResolverHelper {
 			this.warning = warning;
 		}
 
-		@Override
 		public String getIdentifier() {
 			return identifier;
 		}
 
-		@Override
 		public String getWarning() {
 			return warning;
 		}
@@ -150,12 +148,10 @@ public class ResolverHelper {
 			mappings.add(new JavaReferenceMapping<ReferenceType>(null, target, identifier, warning));
 		}
 
-		@Override
 		public Collection<IJavaQuickFix> getQuickFixes() {
 			return Collections.emptySet();
 		}
 
-		@Override
 		public void addQuickFix(IJavaQuickFix quickFix) {
 			// TODO Auto-generated method stub
 		}
