@@ -34,7 +34,7 @@ RULES {
 	// the widgets
 	widget.Panel     ::= "panel" name[] #1 "{" (!1 children)* !0 "}";
 	widget.Button    ::= "button" name[] #1 label['"','"'] ";";
-	widget.List      ::= "list" name[] ";";
+	widget.UIList      ::= "list" name[] ";";
 	widget.TextField ::= "textfield" name[] ";";
 	
 	// actions
