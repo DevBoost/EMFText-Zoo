@@ -8,16 +8,8 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolecore" icon="icons/editor_icon.gif" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreEditor" name="EMFText rolecore Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.rolecore.resource.rolecore"/>
 		</editor>
-	</extension>
-	
-	<extension id="org.emftext.language.rolecore.resource.rolecore.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -32,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreBracketPreferencePage" class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreBracketPreferencePage" category="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreOccurrencePreferencePage" class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreOccurrencePreferencePage" category="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -41,6 +31,32 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreNewFileWizard" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreNewFileWizard" name="EMFText .rolecore file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreMarkerResolutionGenerator" markerType="org.emftext.language.rolecore.resource.rolecore.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreAnnotationModelFactory" extensions="rolecore" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.rolecore.resource.rolecore" name=".rolecore File" base-type="org.eclipse.core.runtime.text" file-extensions="rolecore"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="rolecore" id="org.emftext.language.rolecore.resource.rolecore.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.rolecore.resource.rolecore.ui.occurences" />
+		<type name="org.emftext.language.rolecore.resource.rolecore.ui.occurences.declaration" super="org.emftext.language.rolecore.resource.rolecore.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.rolecore.resource.rolecore.ui.occurences" label="Occurrences (in .rolecore files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="rolecore.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="rolecore.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="rolecore.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolecore.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolecore.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="rolecore.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="rolecore.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="rolecore.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="rolecore.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.rolecore.resource.rolecore.ui.occurences.declaration" label="Declarations (in .rolecore files)" textPreferenceKey="rolecore.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="rolecore.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="rolecore.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolecore.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolecore.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="rolecore.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>
