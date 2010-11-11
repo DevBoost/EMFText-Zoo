@@ -45,6 +45,11 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	}
 
 	@Test
+	public void testOwl() {
+		assertParse("owl.text.ecore");
+	}
+
+	@Test
 	public void testImport() {
 		assertParse("import.text.ecore");
 	}
