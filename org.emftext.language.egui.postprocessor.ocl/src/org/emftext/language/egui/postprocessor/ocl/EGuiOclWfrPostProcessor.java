@@ -183,11 +183,15 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 						for (IInterpretationResult result : results) {
 
 							if (result.getResult() instanceof OclBoolean
+									&& !result.getResult().oclIsInvalid()
+											.isTrue()
+									&& !result.getResult().oclIsUndefined()
+											.isTrue()
 									&& !((OclBoolean) result.getResult())
 											.isTrue()) {
 
 								String msg = result.getConstraint().getName();
-								
+
 								if (messages.containsKey(msg))
 									msg = messages.get(msg);
 								else
