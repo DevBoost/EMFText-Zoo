@@ -1,0 +1,29 @@
+aspect Reachability{
+	
+	eq State.isCyclic() = reachable().contains(this);
+	
+	eq StateModel.getstates(int index).successors() {	
+		EList result = new BasicEList();
+		State state = getstates(index);
+		for(int i=0;i<gettransitionsList().getNumChild();i++){
+			Transition currentTransition = gettransitionsList().getChild(i);
+			if(currentTransition.getSource()==state)
+				result.add(currentTransition.getTarget());
+		}
+		return result;
+	}
+	
+	eq State.reachable() {
+		EList result = new BasicEList();
+		result.addAll(successors());	
+		for(State successor:successors()){
+			for(State reachableState:successor.reachable()){
+				if(!result.contains(reachableState)){
+					result.add(reachableState);
+				}
+			}
+		}
+		return result;
+	}
+	
+}
