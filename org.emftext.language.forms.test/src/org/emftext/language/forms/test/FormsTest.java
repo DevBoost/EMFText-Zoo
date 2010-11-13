@@ -28,6 +28,7 @@ public class FormsTest extends TestCase {
 
 	private static final FormsFactory FACTORY = FormsFactory.eINSTANCE;
 	private static final String FILE_EXTENSION = new FormsMetaInformation().getSyntaxName();
+	private static final String LINE_BREAK = System.getProperty("line.separator");
 
 	public void setUp() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -55,7 +56,7 @@ public class FormsTest extends TestCase {
 		try {
 			printer.print(item);
 			String result = outStream.toString();
-			assertEquals("Unexpected result from printer", "ITEM\"D\":DECISION(\"e\",\"f\")", result);
+			assertEquals("Unexpected result from printer", "ITEM\"D\":DECISION(\"e\",\"f\")" + LINE_BREAK, result);
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
