@@ -159,8 +159,15 @@ public class JDTConnector {
 		if (javaClasspath != null) {
 			return javaClasspath;
 		}
-		IJavaProject javaProject = getJavaProject(project);
 		ResourceSet classPath = new ResourceSetImpl();
+		IJavaProject javaProject = getJavaProject(project);
+		registerJavaProjectInClassPath(classPath, javaProject);
+		javaClasspath = JavaClasspath.get(classPath);
+		javaClasspaths.put(projectUri, javaClasspath);
+		return javaClasspath;
+	}
+
+	private void registerJavaProjectInClassPath(ResourceSet classPath, IJavaProject javaProject) {
 		IClasspathEntry[] classpathEntries = null;
 		if (javaProject != null) {
 			try {
@@ -176,12 +183,24 @@ public class JDTConnector {
 			for (int i = 0; i < classpathEntries.length; i++) {
 				IClasspathEntry entry = classpathEntries[i];
 				IPath path = entry.getPath();
-				IFolder folder = root.getFolder(path);
-				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+				if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+					// TODO this can cause an infinite loop when there is cyclic
+					// project dependencies!
+					for (IProject nextPoject : root.getProjects()) {
+						if (nextPoject.getFullPath().equals(path)) {
+							IJavaProject importedJavaProject = getJavaProject(nextPoject);
+							if (importedJavaProject != null) {
+								registerJavaProjectInClassPath(classPath, importedJavaProject);
+							}
+						}
+					}
+				} else if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IFolder folder = root.getFolder(path);
 					// path is source folder
 					// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
 					registerResourceTreeInClasspath(folder, "java", classPath);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
+					IFolder folder = root.getFolder(path);
 					if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
 						// path is jar
 						// System.out.println("registerFileInClasspath for ClassPathEntry library: " + entry);
@@ -218,9 +237,6 @@ public class JDTConnector {
 			}
 			*/
 		}
-		javaClasspath = JavaClasspath.get(classPath);
-		javaClasspaths.put(projectUri, javaClasspath);
-		return javaClasspath;
 	}
 	
 	private void registerExternalDirectoryInClasspath(File osFile,
