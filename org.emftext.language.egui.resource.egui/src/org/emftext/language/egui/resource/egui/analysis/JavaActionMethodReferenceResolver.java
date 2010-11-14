@@ -16,8 +16,6 @@ import org.emftext.language.java.resource.util.JDTConnector;
 
 public class JavaActionMethodReferenceResolver implements org.emftext.language.egui.resource.egui.IEguiReferenceResolver<org.emftext.language.egui.actions.JavaAction, org.emftext.language.java.members.Method> {
 	
-	private org.emftext.language.egui.resource.egui.analysis.EguiDefaultResolverDelegate<org.emftext.language.egui.actions.JavaAction, org.emftext.language.java.members.Method> delegate = new org.emftext.language.egui.resource.egui.analysis.EguiDefaultResolverDelegate<org.emftext.language.egui.actions.JavaAction, org.emftext.language.java.members.Method>();
-	
 	public void resolve(String identifier, org.emftext.language.egui.actions.JavaAction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.egui.resource.egui.IEguiReferenceResolveResult<org.emftext.language.java.members.Method> result) {
 		
 		int lastDot = identifier.lastIndexOf(".");
