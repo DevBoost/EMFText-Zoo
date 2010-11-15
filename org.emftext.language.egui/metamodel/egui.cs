@@ -29,10 +29,10 @@ RULES {
 	sm.Transition ::= source[] "-" ("(" event[] ")-")? ">" #1 target[] ";";
 	
 	// the screen model
-	screen.Screen ::= "screen" name[] #1 "{" (!1 children)* !0 "}";
+	screen.Screen ::= "screen" name[] #1 "{" (!1 compounds)* !0 "}";
 
 	// the widgets
-	widget.Panel     ::= "panel" name[] #1 "{" (!1 children)* !0 "}";
+	widget.Panel     ::= "panel" name[] #1 "{" (!1 compounds)* !0 "}";
 	widget.Button    ::= "button" name[] #1 label['"','"'] ";";
 	widget.UIList      ::= "list" name[] ";";
 	widget.TextField ::= "textfield" name[] ";";
