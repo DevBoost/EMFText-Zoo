@@ -20,12 +20,19 @@ package egui // this is the package name
 			containment reference State states (0..-1);
 			containment reference Event events (0..-1);
 			containment reference Transition transitions (0..-1);
+			transient derived reference State startStates (0..-1);
+			transient derived reference State finalStates (0..-1);
 		}
 
 		class State extends Nameable {
 			transient derived reference State successors (0..-1);
+			transient derived reference State predecessors (0..-1);
 			transient derived reference State reachable (0..-1);
+			transient derived reference Transition fanIn(0..-1);
+			transient derived reference Transition fanOut(0..-1);
 			transient derived attribute EBoolean isCyclic (1..1);
+			transient derived attribute EBoolean isStartState (1..1);
+			transient derived attribute EBoolean isFinalState (1..1);
 			containment reference Action action (1..1);
 		}
 		class Event extends Nameable {}
