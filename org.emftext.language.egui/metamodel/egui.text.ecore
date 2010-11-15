@@ -81,5 +81,29 @@ package egui // this is the package name
 		}
 
 		class UIList extends Widget {}
+		
+		class Text extends Widget {
+			attribute EString text (1..1);
+		}
 	}
+	
+	// == EXTENSION FOR IMPORT MECHANISM (Reuseware) ==
+	package screenimport screenimport "http://www.emftext.org/language/egui/screenimport" {
+
+		class ScreenImport extends Screen {
+			attribute EString id (1..1);
+			containment reference ParameterSetting settings (0..-1) opposite screenImport;
+		}
+
+		class ParameterSetting {
+			reference ScreenImport screenImport opposite settings;
+			attribute EString parameter (1..1);
+			attribute EString value (1..1);
+		}
+
+		class ScreenTemplate {
+			containment reference Screen screen(1..1);
+		}
+	}
+	// ====
 }
