@@ -158,7 +158,12 @@ public class EMFTypesResolver {
 			}
 		}
 		if (element.eContainer() != null) {
-			imports.putAll(collectImports(element.eContainer()));
+			Map<String, EPackage> upperImports = collectImports(element.eContainer());
+			for (String key : upperImports.keySet()) {
+				if (!imports.containsKey(key)) {
+					imports.put(key, upperImports.get(key));
+				}
+			}
 		}
 		return imports;
 	}
@@ -173,15 +178,21 @@ public class EMFTypesResolver {
 		}
 		Resource ePackageResource = null;
 		URI uri = URI.createURI(uriString);
-		uri = uri.resolve(resource.getURI()); // relative
+		URI resourceURI = resource.getURI();
+		if (resourceURI.isRelative() || resourceURI.isHierarchical()) {
+			uri = uri.resolve(resourceURI); // relative
+		}
 		try {
 			ePackageResource = rs.getResource(uri, true);
 		} catch (Exception e) {
 		}
 
-		if (ePackageResource.getContents().isEmpty()
-				|| !(ePackageResource.getContents().get(0) instanceof EPackage)) {
-			return null;
+		if (ePackageResource == null ||
+			ePackageResource.getContents().isEmpty() || 
+			!(ePackageResource.getContents().get(0) instanceof EPackage)) {
+			// if the package cannot be found by the URI, look it up in
+			// the package registry
+			return EPackage.Registry.INSTANCE.getEPackage(uriString);
 		}
 		return (EPackage) ePackageResource.getContents().get(0);
 	}
