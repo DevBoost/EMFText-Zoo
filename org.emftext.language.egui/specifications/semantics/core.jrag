@@ -6,9 +6,18 @@
 
 aspect Reachability{
 	
-	inh lazy EList<State> State.successors();
+	inh lazy EList<Transition> State.fanOut();
+	inh lazy EList<Transition> State.fanIn();
+	inh StateModel State.stateModel();
+	syn lazy EList<State> State.successors();
+	syn lazy EList<State> State.predecessors();
 	syn lazy EList<State> State.reachable() circular [new BasicEList()];
 	syn boolean State.isCyclic();
+	syn boolean State.isStartState();
+	syn boolean State.isFinalState(); 
+	
+	coll EList<State> StateModel.startStates() [new BasicEList()] with add;
+	coll EList<State> StateModel.finalStates() [new BasicEList()] with add;
 	
 	
 	/*inh Screen ShowScreenAction.screen();
