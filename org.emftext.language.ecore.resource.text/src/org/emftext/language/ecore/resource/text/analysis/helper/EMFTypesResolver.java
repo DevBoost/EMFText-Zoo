@@ -72,10 +72,32 @@ public class EMFTypesResolver {
 		// third: add all classifiers that are defined in EcorePackage
 		addCandidates(candidates, EcorePackage.eINSTANCE, null);
 
-		// TODO result.setErrorMessage("EPackage '" + packagePrefix + "' not found");
-		// TODO result.setErrorMessage("Nested EPackage '" + namespaces[i] + "' not found");
-
+		// check all candidates and add those that match the identifier to the
+		// result set
 		addResults(identifier, candidates, typeToResolve, resolveFuzzy, result);
+		
+		// if we could not resolve the identifier, we do at least check whether
+		// the package or the classifier could not be resolved to give a more
+		// detailed error message
+		if (!result.wasResolved()) {
+			int delimiterIndex = identifier.lastIndexOf(DELIMITER);
+			if (delimiterIndex >= 0) {
+				String prefix = identifier.substring(0, delimiterIndex);
+				if (!containsPackage(candidates, prefix)) {
+					result.setErrorMessage("EPackage '" + prefix + "' not found");
+				}
+			}
+		}
+	}
+
+	private boolean containsPackage(Map<String, EClassifier> candidates,
+			String prefix) {
+		for (String identifier : candidates.keySet()) {
+			if (identifier.startsWith(prefix + DELIMITER)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void addCandidates(Map<String, EClassifier> candidates, EPackage ePackage, String prefix) {
@@ -85,10 +107,10 @@ public class EMFTypesResolver {
 			} else {
 				candidates.put(prefix + DELIMITER + next.getName(), next);
 			}
-			for (EPackage subPackage : ePackage.getESubpackages()) {
-				String newPrefix = prefix == null ? "" : (prefix + DELIMITER) + subPackage.getName();
-				addCandidates(candidates, subPackage, newPrefix);
-			}
+		}
+		for (EPackage subPackage : ePackage.getESubpackages()) {
+			String newPrefix = prefix == null ? null : (prefix + DELIMITER) + subPackage.getName();
+			addCandidates(candidates, subPackage, newPrefix);
 		}
 	}
 
