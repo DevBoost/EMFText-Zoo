@@ -15,14 +15,23 @@ location = $'out'$ {
     }
     
 	fragment role Template { 
-		egui::screenmodel::Screen if $name.contains('__')$ {
-			fragment = $name$
-			ufi = $name.substring(name.indexOf('__') + 3,name.length()).concat('.egui').split('\\_')$
+		egui::screenimport::ScreenImport {
+			fragment = $self.name$
+			ufi = $self.id.split('/')$
+		}
+	}
+	fragment role Template { 
+		egui::screenimport::ParameterSetting {
+			fragment = $screenImport.name$
+			ufi = $screenImport.id.split('/')$
+			port Contents {
+				$parameter$ = $value$
+			}
 		}
     }
     
     association import {
-    	egui::screenmodel::Screen if $name.contains('__')$ {
+    	egui::screenimport::ScreenImport {
 			fragment = $name$
 			-->
 			fragment = $'CORE'$

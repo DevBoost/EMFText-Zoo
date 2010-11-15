@@ -1,13 +1,16 @@
 application App 
 
 statemodel {
-	state login show myOwnLogin__org_emftext_language_egui_templates_LoginScreenTemplate;
+	state init show welcome;
+	state login show myLogin;
 	state checklogin call <org.emftext.language.egui.example.LoginService.checkLogin>;
 	state idle show dashboard;
 	state help show help;
 	
 	event success;
 	event failure;
+	
+	init -> login;
 	
 	login -> checklogin;
 	checklogin -(success)-> idle;
@@ -17,14 +20,20 @@ statemodel {
 	help -> idle;
 }
 
+screen welcome {
+	text t "Welcome";
+	button ok "ok";
+}
+
 screen dashboard {
 	list projects;
 	button details "Show details";
 	button help "Show help";
 }
 
-screen myOwnLogin__org_emftext_language_egui_templates_LoginScreenTemplate {}
+import <org/emftext/language/egui/templates/LoginScreenTemplate.egui> as myLogin 
+			(name="Your Name", pwd="Your Password");
 
 screen help {
-	button help "Dummy"; //we should be able to define some text
+	text help "This text should help you.";
 }
