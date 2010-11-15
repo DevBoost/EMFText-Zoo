@@ -13,7 +13,9 @@
  ******************************************************************************/
 package org.emftext.language.ecore.test;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -21,10 +23,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.ecore.resource.text.util.TextEcoreResourceUtil;
 
 public class AbstractEcoreTestCase extends TestCase {
 		
@@ -40,6 +45,7 @@ public class AbstractEcoreTestCase extends TestCase {
 				content instanceof EPackage);
 		EPackage ePackage = (EPackage) content;
 		assertNotNull(ePackage);
+		EcoreUtil.resolveAll(resource);
 		assertSuccessfulParsing(ePackage.eResource());
 		return ePackage;
 	}
@@ -48,7 +54,7 @@ public class AbstractEcoreTestCase extends TestCase {
 			String fileIdentifier) throws IOException {
 		
 		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.getResource(URI.createURI(path), true);
+		Resource resource = rs.getResource(URI.createFileURI(new File(path).getAbsolutePath()), true);
 		return resource;
 	}
 
@@ -57,6 +63,14 @@ public class AbstractEcoreTestCase extends TestCase {
 		print(resource.getWarnings());
 		assertEquals(0, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
+		
+		List<EObject> unresolvedProxies = TextEcoreResourceUtil.findUnresolvedProxies(resource);
+		for (EObject proxy : unresolvedProxies) {
+			//assertTrue(proxy.eIsProxy());
+			InternalEObject internalProxy = (InternalEObject) proxy;
+			System.out.println("Unresolved proxy " + internalProxy.eProxyURI() + " in " + resource.getURI());
+		}
+		assertEquals("There must be no unresolve proxy objects.", 0, unresolvedProxies.size());
 	}
 
 	private void print(EList<Diagnostic> diagnostics) {
