@@ -62,10 +62,10 @@ public class PrintingTest {
 		textField1.setName("testTextField1");
 		TextField textField2 = WidgetsFactory.eINSTANCE.createTextField();
 		textField2.setName("testTextField2");
-		panel.getChildren().add(textField1);
-		panel.getChildren().add(textField2);
-		screen.getChildren().add(button);
-		screen.getChildren().add(panel);
+		panel.getCompounds().add(textField1);
+		panel.getCompounds().add(textField2);
+		screen.getCompounds().add(button);
+		screen.getCompounds().add(panel);
 		ResourceSet rs = new ResourceSetImpl();
 		URI uri = URI.createURI("testApp.egui");
 		Resource importedResource = rs.createResource(uri);
