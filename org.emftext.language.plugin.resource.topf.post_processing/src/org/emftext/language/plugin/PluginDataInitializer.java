@@ -31,6 +31,7 @@ import org.emftext.language.plugin.resource.topf.ITopfProblem;
 import org.emftext.language.plugin.resource.topf.ITopfQuickFix;
 import org.emftext.language.plugin.resource.topf.ITopfResourcePostProcessor;
 import org.emftext.language.plugin.resource.topf.ITopfResourcePostProcessorProvider;
+import org.emftext.language.plugin.resource.topf.TopfEProblemSeverity;
 import org.emftext.language.plugin.resource.topf.TopfEProblemType;
 import org.emftext.language.plugin.resource.topf.mopp.TopfResource;
 
@@ -124,7 +125,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 							resource.addProblem(new ITopfProblem() {
 								
 								public TopfEProblemType getType() {
-									return TopfEProblemType.WARNING;
+									return TopfEProblemType.ANALYSIS_PROBLEM;
 								}
 								
 								public String getMessage() {
@@ -134,6 +135,10 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 
 								public Collection<ITopfQuickFix> getQuickFixes() {
 									return null;
+								}
+
+								public TopfEProblemSeverity getSeverity() {
+									return TopfEProblemSeverity.WARNING;
 								}
 							}, plugin);
 						}
@@ -151,7 +156,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 			resource.addProblem(new ITopfProblem() {
 				
 				public TopfEProblemType getType() {
-					return TopfEProblemType.ERROR;
+					return TopfEProblemType.ANALYSIS_PROBLEM;
 				}
 				
 				public String getMessage() {
@@ -160,6 +165,10 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 
 				public Collection<ITopfQuickFix> getQuickFixes() {
 					return null;
+				}
+
+				public TopfEProblemSeverity getSeverity() {
+					return TopfEProblemSeverity.ERROR;
 				}
 			}, plugin);
 		}

@@ -23,6 +23,7 @@ import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateO
 import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateOptions;
 import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateResourcePostProcessor;
 import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateResourcePostProcessorProvider;
+import org.emftext.language.java.jtemplates.resource.javatemplate.JavatemplateEProblemSeverity;
 import org.emftext.language.java.jtemplates.resource.javatemplate.JavatemplateEProblemType;
 import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateContextDependentURIFragmentFactory;
 import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateProblem;
@@ -74,7 +75,7 @@ public class Java_templatePostProcessor implements IJavatemplateOptionProvider, 
 		expressionChecker.process(resource, new ExpressionChecker.ErrorReporter() {
 			
 			public void report(EObject element, String message) {
-				resource.addProblem(new JavatemplateProblem(message, JavatemplateEProblemType.ERROR), element);			
+				resource.addProblem(new JavatemplateProblem(message, JavatemplateEProblemType.ANALYSIS_PROBLEM, JavatemplateEProblemSeverity.ERROR), element);			
 			}
 		});
 	}

@@ -22,6 +22,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.chess.resource.cg.CgEProblemSeverity;
 import org.emftext.language.chess.resource.cg.CgEProblemType;
 import org.emftext.language.chess.resource.cg.ICgOptionProvider;
 import org.emftext.language.chess.resource.cg.ICgOptions;
@@ -79,7 +80,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 			resource.addProblem(new ICgProblem() {
 				
 				public CgEProblemType getType() {
-					return CgEProblemType.ERROR;
+					return CgEProblemType.ANALYSIS_PROBLEM;
 				}
 				
 				public String getMessage() {
@@ -88,6 +89,10 @@ public class MoveChecker implements ICgResourcePostProcessor,
 
 				public Collection<ICgQuickFix> getQuickFixes() {
 					return null;
+				}
+
+				public CgEProblemSeverity getSeverity() {
+					return CgEProblemSeverity.ERROR;
 				}
 			}, move);
 			return;
@@ -127,7 +132,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 			resource.addProblem(new ICgProblem() {
 				
 				public CgEProblemType getType() {
-					return CgEProblemType.ERROR;
+					return CgEProblemType.ANALYSIS_PROBLEM;
 				}
 				
 				public String getMessage() {
@@ -136,6 +141,10 @@ public class MoveChecker implements ICgResourcePostProcessor,
 
 				public Collection<ICgQuickFix> getQuickFixes() {
 					return null;
+				}
+
+				public CgEProblemSeverity getSeverity() {
+					return CgEProblemSeverity.ERROR;
 				}
 			}, move);
 		}

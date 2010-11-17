@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.ecore.resource.facade.FacadeEcoreEProblemSeverity;
 import org.emftext.language.ecore.resource.facade.FacadeEcoreEProblemType;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreOptionProvider;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreOptions;
@@ -107,7 +108,7 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 		resource.addProblem(new IFacadeEcoreProblem() {
 			
 			public FacadeEcoreEProblemType getType() {
-				return FacadeEcoreEProblemType.ERROR;
+				return FacadeEcoreEProblemType.ANALYSIS_PROBLEM;
 			}
 			
 			public String getMessage() {
@@ -116,6 +117,10 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 
 			public Collection<IFacadeEcoreQuickFix> getQuickFixes() {
 				return null;
+			}
+
+			public FacadeEcoreEProblemSeverity getSeverity() {
+				return FacadeEcoreEProblemSeverity.ERROR;
 			}
 		}, cause);
 	}

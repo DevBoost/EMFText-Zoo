@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.efactory.EfactoryPackage;
 import org.emftext.language.efactory.Feature;
+import org.emftext.language.efactory.resource.efactory.EfactoryEProblemSeverity;
 import org.emftext.language.efactory.resource.efactory.EfactoryEProblemType;
 import org.emftext.language.efactory.resource.efactory.IEfactoryProblem;
 import org.emftext.language.efactory.resource.efactory.IEfactoryQuickFix;
@@ -26,7 +27,7 @@ public class FeatureBoundAnalyser implements IEfactoryResourcePostProcessor {
 					resource.addProblem(new IEfactoryProblem() {
 						
 						public EfactoryEProblemType getType() {
-							return EfactoryEProblemType.WARNING;
+							return EfactoryEProblemType.ANALYSIS_PROBLEM;
 						}
 						
 						public String getMessage() {
@@ -35,6 +36,10 @@ public class FeatureBoundAnalyser implements IEfactoryResourcePostProcessor {
 
 						public Collection<IEfactoryQuickFix> getQuickFixes() {
 							return null;
+						}
+
+						public EfactoryEProblemSeverity getSeverity() {
+							return EfactoryEProblemSeverity.WARNING;
 						}
 					}, feature);
 				}

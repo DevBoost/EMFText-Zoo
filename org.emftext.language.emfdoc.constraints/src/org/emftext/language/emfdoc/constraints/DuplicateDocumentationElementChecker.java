@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.emfdoc.DocumentationElement;
 import org.emftext.language.emfdoc.EmfdocPackage;
+import org.emftext.language.emfdoc.resource.emfdoc.EmfdocEProblemSeverity;
 import org.emftext.language.emfdoc.resource.emfdoc.EmfdocEProblemType;
 import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocProblem;
 import org.emftext.language.emfdoc.resource.emfdoc.IEmfdocQuickFix;
@@ -37,8 +38,9 @@ public class DuplicateDocumentationElementChecker implements IEmfdocResourcePost
 						}
 					};
 					IEmfdocProblem problem = new EmfdocProblem(
-							"Found duplicate documentation", 
-							EmfdocEProblemType.ERROR, 
+							"Found duplicate documentation",
+							EmfdocEProblemType.ANALYSIS_PROBLEM,
+							EmfdocEProblemSeverity.ERROR, 
 							quickFix
 					);
 					resource.addProblem(

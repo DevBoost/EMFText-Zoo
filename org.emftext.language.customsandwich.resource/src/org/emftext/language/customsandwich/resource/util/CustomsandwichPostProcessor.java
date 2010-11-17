@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.customsandwich.resource.customsandwich.CustomsandwichEProblemSeverity;
 import org.emftext.language.customsandwich.resource.customsandwich.CustomsandwichEProblemType;
 import org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichOptionProvider;
 import org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichOptions;
@@ -47,7 +48,7 @@ public class CustomsandwichPostProcessor implements ICustomsandwichOptionProvide
 		expressionChecker.process(resource, new ExpressionChecker.ErrorReporter() {
 			
 			public void report(EObject element, String message) {
-				resource.addProblem(new CustomsandwichProblem(message, CustomsandwichEProblemType.ERROR), element);			
+				resource.addProblem(new CustomsandwichProblem(message, CustomsandwichEProblemType.ANALYSIS_PROBLEM, CustomsandwichEProblemSeverity.ERROR), element);			
 			}
 		});
 	}

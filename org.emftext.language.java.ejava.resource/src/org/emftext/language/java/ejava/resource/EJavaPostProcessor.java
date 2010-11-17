@@ -31,6 +31,7 @@ import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
+import org.emftext.language.java.ejava.resource.ejava.EjavaEProblemSeverity;
 import org.emftext.language.java.ejava.resource.ejava.EjavaEProblemType;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaOptionProvider;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaOptions;
@@ -105,9 +106,13 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 	private void attachError(final NamedElement element, final EjavaResource resource) {
 		resource.addProblem(new IEjavaProblem() {			
 			public EjavaEProblemType getType() {
-				return EjavaEProblemType.ERROR;
+				return EjavaEProblemType.ANALYSIS_PROBLEM;
 			}
 			
+			public EjavaEProblemSeverity getSeverity() {
+				return EjavaEProblemSeverity.ERROR;
+			}
+
 			public String getMessage() {
 				if (element instanceof NamespaceAwareElement) {
 					return "Not declared in Ecore model: " + ((NamespaceAwareElement)element).getNamespaces();
