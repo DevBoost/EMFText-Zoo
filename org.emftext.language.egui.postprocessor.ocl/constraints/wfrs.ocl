@@ -1,19 +1,15 @@
 package egui::statemodel
 
-context State
-def: incomingTransitions =
-	 Transition.allInstances()->select(target = self)
-def: outgoingTransitions =
-	 Transition.allInstances()->select(source = self)
-def: isInitialState =
-	 self.incomingTransitions->size() = 0
-def: isEndState =
-	 self.outgoingTransitions->size() = 0
+context State::isStartState
+derive: StateModel.allInstances()->collect(startStates)->includes(self)
+
+context State::isFinalState
+derive: StateModel.allInstances()->collect(finalStates)->includes(self)
 
 context StateModel
 inv extactOneInitialState:
-	states->select(isInitialState)->size() = 1
+	states->select(isStartState)->size() = 1
 inv atLeastOneEndState:
-	states->select(isEndState)->size() >= 1
+	states->select(isFinalState)->size() >= 1
 
 endpackage
