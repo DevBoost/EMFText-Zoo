@@ -88,6 +88,29 @@ package egui // this is the package name
 		}
 	}
 	
+	// context used in data binding
+	package context context "http://www.emftext.org/language/egui/context" {
+	
+	class Project extends Nameable {
+		attribute EString description (0..1);
+		attribute EDate start (0..1);
+		attribute EDate end (0..1);
+		}
+
+	class User {
+		attribute EString forename(0..1);
+		attribute EString surname(0..1);
+		attribute EString login(1..1);
+		attribute EString password(1..1);
+		}
+		
+	class Context {
+		containment reference Project projects (0..-1); 
+		containment reference User users (1..-1); 
+		}	
+	}
+	
+	
 	// == EXTENSION FOR IMPORT MECHANISM (Reuseware) ==
 	package screenimport screenimport "http://www.emftext.org/language/egui/screenimport" {
 
