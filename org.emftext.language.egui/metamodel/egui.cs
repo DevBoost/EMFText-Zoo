@@ -32,7 +32,7 @@ RULES {
 	
 	// the state model
 	sm.StateModel ::= "statemodel" #1 "{" (!1 states)* (!1 events)* (!1 transitions)* !0 "}";
-	sm.State      ::= "state" name[] action ";";
+	sm.State      ::= "state" name[] (action)? ";";
 	sm.Event      ::= "event" name[] ";";
 	sm.Transition ::= source[] "-" ("(" event[] ")-")? ">" #1 target[] ";";
 	
@@ -41,7 +41,7 @@ RULES {
 
 	// the widgets
 	widget.Panel     ::= "panel" name[] #1 "{" (!1 compounds)* !0 "}";
-	widget.Button    ::= "button" name[] #1 label['"','"'] ";";
+	widget.Button    ::= "button" name[] #1 label['"','"'] #1 ("triggers" event[] )? ";";
 	widget.UIList    ::= "list" name[] ";";
 	widget.TextField ::= "textfield" name[] ";";
 	widget.Text      ::= "text" name[] #1 text['"','"'] ";";
