@@ -29,6 +29,7 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
+import org.emftext.language.java.ejava.resource.ejava.EjavaEProblemType;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaTextPrinter;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.Statement;
@@ -41,8 +42,11 @@ public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ej
 	}
 	
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+		EjavaMarkerHelper.unmark(resource,EjavaEProblemType.BUILDER_ERROR);
+
 		if (!resource.getContents().isEmpty()) {
 			createBodyAnnotations(resource);
+			
 		}
 		// set option overrideBuilder to 'false' and then perform build here
 		return org.eclipse.core.runtime.Status.OK_STATUS;

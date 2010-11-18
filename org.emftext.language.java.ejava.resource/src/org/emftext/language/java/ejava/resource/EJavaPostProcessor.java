@@ -39,6 +39,7 @@ import org.emftext.language.java.ejava.resource.ejava.IEjavaProblem;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaQuickFix;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaResourcePostProcessor;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaResourcePostProcessorProvider;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMarkerHelper;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.ejava.util.EcoreWrapper;
 import org.emftext.language.java.members.Member;
@@ -55,6 +56,8 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 	}
 
 	public void process(EjavaResource resource) {
+		EjavaMarkerHelper.unmark(resource, EjavaEProblemType.ANALYSIS_PROBLEM);
+		
 		EjavaResource eJavaResource = (EjavaResource) resource;
 		EList<EObject> contents = resource.getContents();
 		if (!contents.isEmpty()) {
