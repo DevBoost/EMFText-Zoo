@@ -13,7 +13,7 @@ statemodel {
 	event next;
 	event back;
 	event help;
-	event showDetails;
+	event details;
 	
 	initial -> login;
 	login -(next)-> checklogin;
@@ -23,7 +23,7 @@ statemodel {
 	idle -(help)-> help;
 	help -(back)-> idle;
 	
-	idle -(showDetails)-> showdetails;
+	idle -(details)-> showdetails;
 	showdetails -(back)-> idle;
 }
 
@@ -35,15 +35,16 @@ screen login {
 
 screen dashboard {
 	list projects;
-	button details "Show details";
-	button help "Show help";
+	button details "Show details" triggers details;
+	button help "Show help" triggers help; 
 }
 
 screen projectdetails {
-    text heading "ProjectDetails";
+    text heading "Project X Details";
 	panel detailPanel {
 		textfield details;
 	}
+	button backButton "back" triggers back;
 }
 
 screen help {
