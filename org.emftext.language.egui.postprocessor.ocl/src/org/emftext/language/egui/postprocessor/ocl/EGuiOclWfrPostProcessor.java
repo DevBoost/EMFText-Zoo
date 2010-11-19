@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.egui.commons.Nameable;
 import org.emftext.language.egui.resource.egui.IEguiOptionProvider;
 import org.emftext.language.egui.resource.egui.IEguiOptions;
 import org.emftext.language.egui.resource.egui.IEguiResourcePostProcessor;
@@ -35,6 +36,7 @@ import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelExce
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
 public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 		IEguiResourcePostProcessorProvider, IEguiResourcePostProcessor {
@@ -65,6 +67,9 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 				"States Models should have exactly one initial state.");
 		messages.put("atLeastOneEndState",
 				"State Models should have at least one finite state.");
+		messages.put("nameIsDefined", "Nameables should have an explicit name.");
+		messages.put("uniqueNameInStateModel", "Names of elements must be unique within a StateModel.");
+		messages.put("uniqueNameInScreen", "Names of elements must be unique within a Screen.");
 	}
 
 	/**
@@ -214,10 +219,17 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 				TreeIterator<EObject> contents = root.eAllContents();
 
 				while (contents.hasNext()) {
+					currentModelInstance.addModelInstanceElement(contents
+							.next());
+				}
+
+				contents = root.eAllContents();
+				while (contents.hasNext()) {
 
 					EObject element = contents.next();
 
-					if (element instanceof StateModel) {
+					if (element instanceof Nameable
+							|| element instanceof StateModel) {
 						IModelInstanceElement elementToBeChecked = currentModelInstance
 								.addModelInstanceElement(element);
 
@@ -228,7 +240,7 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 
 						for (IInterpretationResult result : results) {
 
-							if (result.getResult() instanceof OclBoolean
+							if (result.getConstraint().getKind() == ConstraintKind.INVARIANT
 									&& !result.getResult().oclIsInvalid()
 											.isTrue()
 									&& !result.getResult().oclIsUndefined()
@@ -238,6 +250,9 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 
 								String msg = result.getConstraint().getName();
 
+								if (msg == null || msg.length() == 0)
+									msg = result.getConstraint().toString();
+
 								if (messages.containsKey(msg))
 									msg = messages.get(msg);
 								else
@@ -246,6 +261,27 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 								resource.addError(msg, element);
 							}
 							// no else.
+
+							// this is just for testing
+//							else {
+//								String msg;
+//
+//								if (result.getConstraint().getKind() == ConstraintKind.DERIVED)
+//									msg = ((NamedElement) result
+//											.getConstraint()
+//											.getConstrainedElement().get(0))
+//											.getName();
+//
+//								else if (result.getConstraint().getKind() == ConstraintKind.DEFINITION)
+//									msg = result.getConstraint()
+//											.getDefinedFeature().getName();
+//								else
+//									msg = result.getConstraint().getName();
+//
+//								resource.addWarning(msg + " : "
+//										+ result.getResult().toString(),
+//										element);
+//							}
 						}
 						// end for.
 					}
