@@ -7,7 +7,7 @@ aspect Reachability{
 		
 	eq State.successors() {	
 		EList result = new BasicEList();
-		for(Transition transition:(List<Transition>)fanOut()){
+		for(Transition transition:(EList<Transition>)fanOut()){
 			result.add(transition.getTarget());
 		}
 		return result;
@@ -15,7 +15,7 @@ aspect Reachability{
 	
 	eq State.predecessors() {
 		EList result = new BasicEList();
-		for(Transition transition:(List<Transition>)fanIn()){
+		for(Transition transition:(EList<Transition>)fanIn()){
 			result.add(transition.getSource());
 		}
 		return result;
@@ -24,8 +24,8 @@ aspect Reachability{
 	eq State.reachable() {
 		EList result = new BasicEList();
 		result.addAll(successors());	
-		for(State successor:(List<State>)successors()){
-			for(State reachableState:(List<State>)successor.reachable()){
+		for(State successor:(EList<State>)successors()){
+			for(State reachableState:(EList<State>)successor.reachable()){
 				if(!result.contains(reachableState)){
 					result.add(reachableState);
 				}
@@ -67,7 +67,7 @@ aspect Reachability{
 	for stateModel();
 	
 	eq StateModel.canTerminate(){
-		for(State startState:(List<State>)startStates()){
+		for(State startState:(EList<State>)startStates()){
 			if(!java.util.Collections.disjoint(startState.reachable(),finalStates()))
 				return true;
 		}
