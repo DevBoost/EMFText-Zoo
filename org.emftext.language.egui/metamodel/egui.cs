@@ -4,8 +4,8 @@ START Application
 // == IMPORT ==
 , screenimport.ScreenTemplate
 // ============
-
-IMPORTS {
+  
+IMPORTS { 
 	action : <http://www.emftext.org/language/egui/actions>
 	sm : <http://www.emftext.org/language/egui/statemodel>
 	screen : <http://www.emftext.org/language/egui/screenmodel>
