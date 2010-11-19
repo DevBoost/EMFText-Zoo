@@ -315,7 +315,7 @@ public class EcoreWrapper {
 			Resource genModelResource = rs.getResource(ecoreURI, true);
 			EcoreUtil.resolveAll(genModelResource);
 		} catch(Exception e) {
-			return result;
+			throw new RuntimeException(e);
 		}
 		
 		for(Resource r : rs.getResources()) {
@@ -337,7 +337,7 @@ public class EcoreWrapper {
 			EList<String> basePackageName, EMap<EList<String>, GenPackage> result) {
 		basePackageName.add(genPackage.getPackageName());
 		result.put(ECollections.unmodifiableEList(basePackageName), genPackage);
-		for(GenPackage subGenPackage : genPackage.getSubGenPackages()) {
+		for(GenPackage subGenPackage : genPackage.getNestedGenPackages()) {
 			collectGenPackages(subGenPackage, new BasicEList<String>(basePackageName), result);
 		}
 		
