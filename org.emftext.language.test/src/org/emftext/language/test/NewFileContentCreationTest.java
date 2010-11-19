@@ -196,6 +196,7 @@ public class NewFileContentCreationTest extends TestCase {
 					".*/owlTextTestLanguage.text.cs",
 					".*/javaforms.cs",
 					".*/sqljava.cs",
+					".*/org.emftext.test/testInput/CSAbstractSyntax.cs",
 			};
 			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(excludes);
 			for (String grammar : grammars) {

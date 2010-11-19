@@ -61,6 +61,7 @@ public class FirstFollowTest extends TestCase {
 			".*/formsembedded.cs",
 			".*/formsextension.cs",
 			".*/javaforms.cs",
+			".*/org.emftext.test/testInput/CSAbstractSyntax.cs",
 	};
 	private ExpectationComputer computer;
 
