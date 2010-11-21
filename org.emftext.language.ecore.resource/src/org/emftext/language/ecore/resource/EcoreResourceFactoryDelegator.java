@@ -1,10 +1,20 @@
 package org.emftext.language.ecore.resource;
 
-public class EcoreResourceFactoryDelegator implements org.eclipse.emf.ecore.resource.Resource.Factory {
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+
+public class EcoreResourceFactoryDelegator implements Resource.Factory {
 	
-	protected java.util.Map<String, org.eclipse.emf.ecore.resource.Resource.Factory> factories = null;
+	protected Map<String, Resource.Factory> factories = null;
 	
-	public java.util.Map<String, org.eclipse.emf.ecore.resource.Resource.Factory> getResourceFactoriesMap() {
+	public Map<String, Resource.Factory> getResourceFactoriesMap() {
 		return factories;
 	}
 	
@@ -12,35 +22,35 @@ public class EcoreResourceFactoryDelegator implements org.eclipse.emf.ecore.reso
 		init();
 	}
 	
-	public org.eclipse.emf.ecore.resource.Resource.Factory getFactoryForURI(org.eclipse.emf.common.util.URI uri) {
-		org.eclipse.emf.common.util.URI trimmedURI = uri.trimFileExtension();
+	public Resource.Factory getFactoryForURI(URI uri) {
+		URI trimmedURI = uri.trimFileExtension();
 		String secondaryFileExtension = trimmedURI.fileExtension();
-		org.eclipse.emf.ecore.resource.Resource.Factory factory = factories.get(secondaryFileExtension);
+		Resource.Factory factory = factories.get(secondaryFileExtension);
 		if (factory == null) {
 			factory = factories.get("");
 		}
 		return factory;
 	}
 	
-	public org.eclipse.emf.ecore.resource.Resource createResource(org.eclipse.emf.common.util.URI uri) {
+	public Resource createResource(URI uri) {
 		return getFactoryForURI(uri).createResource(uri);
 	}
 	
 	protected void init() {
 		if (factories == null) {
-			factories = new java.util.HashMap<String, org.eclipse.emf.ecore.resource.Resource.Factory>();
+			factories = new LinkedHashMap<String, Resource.Factory>();
 		}
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
-			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
-			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(EcoreResourcePlugin.EP_ADDITIONAL_EXTENSION_PARSER_ID);
-			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
+		if (Platform.isRunning()) {
+			IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+			IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(EcoreResourcePlugin.EP_ADDITIONAL_EXTENSION_PARSER_ID);
+			for (IConfigurationElement element : configurationElements) {
 				try {
 					String type = element.getAttribute("type");
-					org.eclipse.emf.ecore.resource.Resource.Factory factory = (org.eclipse.emf.ecore.resource.Resource.Factory) element.createExecutableExtension("class");
+					Resource.Factory factory = (Resource.Factory) element.createExecutableExtension("class");
 					if (type == null) {
 						type = "";
 					}
-					org.eclipse.emf.ecore.resource.Resource.Factory otherFactory = factories.get(type);
+					Resource.Factory otherFactory = factories.get(type);
 					if (otherFactory != null) {
 						Class<?> superClass = factory.getClass().getSuperclass();
 						while(superClass != Object.class) {
@@ -54,7 +64,7 @@ public class EcoreResourceFactoryDelegator implements org.eclipse.emf.ecore.reso
 					else {
 						factories.put(type, factory);
 					}
-				} catch (org.eclipse.core.runtime.CoreException ce) {
+				} catch (CoreException ce) {
 					EcoreResourcePlugin.logError("Exception while getting default options.", ce);
 				}
 			}
