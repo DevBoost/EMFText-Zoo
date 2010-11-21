@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreUIMetaInformation" id="org.emftext.language.ecore.resource.mecore.ui.MinEcoreUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ecore" icon="icons/editor_icon.gif" id="org.emftext.language.ecore.resource.mecore.ui.MinEcoreEditor" name="EMFText min.ecore Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.ecore.resource.mecore"/>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.ecore.resource.mecore.ui.MinEcorePreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="MinEcore Text Editor" id="org.emftext.language.ecore.resource.mecore.ui.MinEcorePreferencePage" class="org.emftext.language.ecore.resource.mecore.ui.MinEcorePreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.ecore.resource.mecore.ui.MinEcoreSyntaxColoringPreferencePage" class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreSyntaxColoringPreferencePage" category="org.emftext.language.ecore.resource.mecore.ui.MinEcorePreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.ecore.resource.mecore.ui.MinEcoreBracketPreferencePage" class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreBracketPreferencePage" category="org.emftext.language.ecore.resource.mecore.ui.MinEcorePreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreNewFileWizard" id="org.emftext.language.ecore.resource.mecore.ui.MinEcoreNewFileWizard" name="EMFText .min.ecore file">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreMarkerResolutionGenerator" markerType="org.emftext.language.ecore.resource.mecore.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.ecore.resource.mecore.ui.MinEcoreAnnotationModelFactory" extensions="ecore" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.ecore.resource.mecore" name=".ecore File" base-type="org.eclipse.core.runtime.text" file-extensions="ecore"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="ecore" id="org.emftext.language.ecore.resource.mecore.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.ecore.resource.mecore.ui.occurences" />
+		<type name="org.emftext.language.ecore.resource.mecore.ui.occurences.declaration" super="org.emftext.language.ecore.resource.mecore.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.ecore.resource.mecore.ui.occurences" label="Occurrences (in .min.ecore files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="min.ecore.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="min.ecore.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="min.ecore.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="min.ecore.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="min.ecore.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="min.ecore.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="min.ecore.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="min.ecore.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="min.ecore.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.ecore.resource.mecore.ui.occurences.declaration" label="Declarations (in .min.ecore files)" textPreferenceKey="min.ecore.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="min.ecore.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="min.ecore.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="min.ecore.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="min.ecore.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="min.ecore.declarationTextStyle" textStylePreferenceValue="NONE" />
+	</extension>
+	
+</plugin>

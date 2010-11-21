@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mecore"
+    nsURI="http://www.emftext.org/language/mecore" nsPrefix="mecore">
+  <eClassifiers xsi:type="ecore:EClass" name="MModelElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MNamedElement" abstract="true" eSuperTypes="#//MModelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MType" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MPackage" eSuperTypes="#//MNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//MClassifier" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MClassifier" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MClass" eSuperTypes="#//MNamedElement #//MType #//MClassifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//MFeature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MFeature" eSuperTypes="#//MNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//MType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//MMultiplicity"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MMultiplicity" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MSimpleMultiplicity" eSuperTypes="#//MMultiplicity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="#//MSimpleMultiplicityValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MSimpleMultiplicityValue">
+    <eLiterals name="star"/>
+    <eLiterals name="plus" value="1"/>
+    <eLiterals name="optional" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MComplexMultiplicity" eSuperTypes="#//MMultiplicity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MDataType" eSuperTypes="#//MType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eDataType" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EDataType"/>
+  </eClassifiers>
+</ecore:EPackage>
