@@ -68,9 +68,9 @@
 		<echo message="||                                                                    ||"/>
 		<echo message="========================================================================"/>
 		<emftext.GenerateTextResource
-			syntax="${_basedir}/metamodel/egui.cs"
+			syntax="${_basedir}/metamodel/appflow.cs"
 			rootFolder="${_basedir}/.."
-			syntaxProjectName="org.emftext.language.egui.resource.egui"
+			syntaxProjectName="org.emftext.language.appflow.resource.appflow"
 		/>
 		<eclipse.refreshLocal depth="infinite" resource="/"/>
 	</target>
@@ -80,7 +80,7 @@
 		<echo message="======================> Generate JastAdd Semantic &lt;====================="/>
 		<jastadd
 			outdir="${_basedir}/src-gen"
-			package="org.emftext.language.egui"
+			package="org.emftext.language.appflow"
 			rewrite		= "true">
 			<fileset dir="${_basedir}/specifications">
 				<include name="model/**/*.ast"/>
@@ -95,9 +95,9 @@
 		<echo message="========================> Generate EMF Semantic &lt;======================="/>
 		<jastemf
 			generateeditcode="true"
-			genmodel="${_basedir}/metamodel/egui.genmodel"
+			genmodel="${_basedir}/metamodel/appflow.genmodel"
 			outpackage="jastemf.adaptation"
-			astpackage="org.emftext.language.egui.ast">
+			astpackage="org.emftext.language.appflow.ast">
 			<fileset dir="${_basedir}/specifications">
 				<include name="model/**/*.ast"/>
 				<include name="semantics/**/*.jrag"/>
@@ -110,7 +110,7 @@
 	<target name="Generate AST Spec">
 		<echo message="========================> Generate AST Spec &lt;======================="/>
 		<jastemf.ecore2ast
-			modelFile="${_basedir}/metamodel/egui.text.ecore"
+			modelFile="${_basedir}/metamodel/appflow.text.ecore"
 			outputDirectory="${_basedir}/specifications/model">
 		</jastemf.ecore2ast>
 	</target>
@@ -118,7 +118,7 @@
 	<target name="Generate initial Jrag Spec">
 		<echo message="========================> Generate AST Spec &lt;======================="/>
 		<jastemf.ecore2jrag
-			modelFile="${_basedir}/metamodel/egui.text.ecore"
+			modelFile="${_basedir}/metamodel/appflow.text.ecore"
 			outputDirectory="${_basedir}/specifications/semantics">
 		</jastemf.ecore2jrag>
 	</target>
