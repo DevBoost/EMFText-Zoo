@@ -1,4 +1,4 @@
-package org.emftext.language.egui.test;
+package org.emftext.language.appflow.test;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

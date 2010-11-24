@@ -1,4 +1,4 @@
-package org.emftext.language.egui.test;
+package org.emftext.language.appflow.test;
 
 import static junit.framework.Assert.fail;
 
@@ -12,22 +12,22 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.egui.Application;
-import org.emftext.language.egui.EguiFactory;
-import org.emftext.language.egui.EguiPackage;
-import org.emftext.language.egui.actions.ActionsPackage;
-import org.emftext.language.egui.commons.CommonsPackage;
-import org.emftext.language.egui.resource.egui.mopp.EguiResourceFactory;
-import org.emftext.language.egui.screenmodel.Screen;
-import org.emftext.language.egui.screenmodel.ScreenmodelFactory;
-import org.emftext.language.egui.screenmodel.ScreenmodelPackage;
-import org.emftext.language.egui.statemodel.StatemodelFactory;
-import org.emftext.language.egui.statemodel.StatemodelPackage;
-import org.emftext.language.egui.widgets.Button;
-import org.emftext.language.egui.widgets.Panel;
-import org.emftext.language.egui.widgets.TextField;
-import org.emftext.language.egui.widgets.WidgetsFactory;
-import org.emftext.language.egui.widgets.WidgetsPackage;
+import org.emftext.language.appflow.AppFlowFactory;
+import org.emftext.language.appflow.AppFlowPackage;
+import org.emftext.language.appflow.Application;
+import org.emftext.language.appflow.actions.ActionsPackage;
+import org.emftext.language.appflow.commons.CommonsPackage;
+import org.emftext.language.appflow.impl.AppFlowFactoryImpl;
+import org.emftext.language.appflow.screenmodel.Screen;
+import org.emftext.language.appflow.screenmodel.ScreenmodelFactory;
+import org.emftext.language.appflow.screenmodel.ScreenmodelPackage;
+import org.emftext.language.appflow.statemodel.StatemodelFactory;
+import org.emftext.language.appflow.statemodel.StatemodelPackage;
+import org.emftext.language.appflow.widgets.Button;
+import org.emftext.language.appflow.widgets.Panel;
+import org.emftext.language.appflow.widgets.TextField;
+import org.emftext.language.appflow.widgets.WidgetsFactory;
+import org.emftext.language.appflow.widgets.WidgetsPackage;
 import org.junit.Test;
 
 public class PrintingTest {
@@ -37,19 +37,19 @@ public class PrintingTest {
 	}
 
 	private void registerFactories() {
-		EPackage.Registry.INSTANCE.put(EguiPackage.eNS_URI, EguiPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(AppFlowPackage.eNS_URI, AppFlowPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(StatemodelPackage.eNS_URI, StatemodelPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(CommonsPackage.eNS_URI, CommonsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ActionsPackage.eNS_URI, ActionsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ScreenmodelPackage.eNS_URI, ScreenmodelPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(WidgetsPackage.eNS_URI, WidgetsPackage.eINSTANCE);
 		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-		extensionToFactoryMap.put("egui", new EguiResourceFactory());
+		extensionToFactoryMap.put("appflow", new AppFlowFactoryImpl());
 	}
 	
 	@Test
 	public void testIndentationPrinting(){
-		Application application = EguiFactory.eINSTANCE.createApplication();
+		Application application = AppFlowFactory.eINSTANCE.createApplication();
 		application.setName("TestApp");
 		application.setStatemodel(StatemodelFactory.eINSTANCE.createStateModel());
 		Screen screen = ScreenmodelFactory.eINSTANCE.createScreen();
@@ -67,14 +67,14 @@ public class PrintingTest {
 		screen.getCompounds().add(button);
 		screen.getCompounds().add(panel);
 		ResourceSet rs = new ResourceSetImpl();
-		URI uri = URI.createURI("testApp.egui");
+		URI uri = URI.createURI("testApp.appflow");
 		Resource importedResource = rs.createResource(uri);
 		importedResource.getContents().add(application);
 		OutputStream os = new ByteArrayOutputStream();
 		try {
 			importedResource.save(os, null);
-			String printedEgui = os.toString();
-			System.out.println(printedEgui);
+			String printedAF = os.toString();
+			System.out.println(printedAF);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
