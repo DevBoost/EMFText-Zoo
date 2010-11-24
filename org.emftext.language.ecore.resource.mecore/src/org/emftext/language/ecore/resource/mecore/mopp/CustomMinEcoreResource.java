@@ -28,10 +28,12 @@ public class CustomMinEcoreResource extends MinEcoreResource {
 		isWrapping = true;
 		EList<EObject> mContents = getContentsInternal();
 		if (mContents.size() != 1) {
+			isWrapping = false;
 			return createEmptyList();
 		}
 		EObject root = mContents.get(0);
 		if (!(root instanceof MPackage)) {
+			isWrapping = false;
 			return createEmptyList();
 		}
 		MPackage mPackage = (MPackage) root;

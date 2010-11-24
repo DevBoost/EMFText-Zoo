@@ -24,8 +24,8 @@ TOKENS {
 
 RULES {
 	MPackage ::= (name[LOWER])? namespace['<','>'] contents*;
-	MClass   ::= name[UPPER] ("(" features* ")")?;
-	MFeature ::= name[LOWER] ":" (type[UPPER]|type[LOWER]) multiplicity?;
+	MClass   ::= name[UPPER] ("(" features* ")")? ;
+	MFeature ::= reference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity?;
 	
 	MSimpleMultiplicity ::= value[star : "*", optional : "?", plus : "+"];
 	MComplexMultiplicity ::= "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")";

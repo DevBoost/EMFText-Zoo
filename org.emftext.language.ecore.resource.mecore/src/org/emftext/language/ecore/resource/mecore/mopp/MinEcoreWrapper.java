@@ -17,10 +17,14 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.emftext.language.ecore.resource.mecore.IMinEcoreCommand;
 import org.emftext.language.mecore.MClass;
 import org.emftext.language.mecore.MClassifier;
+import org.emftext.language.mecore.MComplexMultiplicity;
 import org.emftext.language.mecore.MDataType;
 import org.emftext.language.mecore.MFeature;
 import org.emftext.language.mecore.MModelElement;
+import org.emftext.language.mecore.MMultiplicity;
 import org.emftext.language.mecore.MPackage;
+import org.emftext.language.mecore.MSimpleMultiplicity;
+import org.emftext.language.mecore.MSimpleMultiplicityValue;
 import org.emftext.language.mecore.MType;
 
 public class MinEcoreWrapper {
@@ -92,8 +96,34 @@ public class MinEcoreWrapper {
 		} else {
 			throw new RuntimeException("Found unknown subtype of MType: " + mType.eClass().getName());
 		}
+		setMulitplicity(mFeature, eFeature);
 		mapping.put(mFeature, eFeature);
 		eFeature.setName(mFeature.getName());
 		return eFeature;
+	}
+
+	private void setMulitplicity(MFeature mFeature, EStructuralFeature eFeature) {
+		MMultiplicity multiplicity = mFeature.getMultiplicity();
+		if (multiplicity instanceof MSimpleMultiplicity) {
+			MSimpleMultiplicity simpleMultiplicity = (MSimpleMultiplicity) multiplicity;
+			MSimpleMultiplicityValue value = simpleMultiplicity.getValue();
+			if (value == MSimpleMultiplicityValue.STAR) {
+				eFeature.setLowerBound(0);
+				eFeature.setUpperBound(-1);
+			} else if (value == MSimpleMultiplicityValue.PLUS) {
+				eFeature.setLowerBound(1);
+				eFeature.setUpperBound(-1);
+			} else if (value == MSimpleMultiplicityValue.OPTIONAL) {
+				eFeature.setLowerBound(0);
+				eFeature.setUpperBound(1);
+			} else {
+				eFeature.setLowerBound(1);
+				eFeature.setUpperBound(1);
+			}
+		} else if (multiplicity instanceof MComplexMultiplicity) {
+			MComplexMultiplicity complexMultiplicity = (MComplexMultiplicity) multiplicity;
+			eFeature.setLowerBound(complexMultiplicity.getLowerBound());
+			eFeature.setUpperBound(complexMultiplicity.getUpperBound());
+		}
 	}
 }
