@@ -14,10 +14,20 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MClassifier" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MClass" eSuperTypes="#//MNamedElement #//MType #//MClassifier">
+  <eClassifiers xsi:type="ecore:EClass" name="MClassifier" abstract="true" eSuperTypes="#//MType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MClass" eSuperTypes="#//MNamedElement #//MClassifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//MFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
+        eType="#//MClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MEnum" eSuperTypes="#//MNamedElement #//MClassifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//MEnumLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MEnumLiteral" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MFeature" eSuperTypes="#//MNamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//MType"/>

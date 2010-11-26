@@ -20,11 +20,22 @@ TOKENS {
 	DEFINE LOWER $('a'..'z')('a'..'z'|'A'..'Z')*$;
 	DEFINE WHITESPACES $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAKS $('\r'|'\n')+$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 }
+
+TOKENSTYLES {
+	"UPPER" COLOR #000000, BOLD;
+	"COMMENT" COLOR #404040;
+} 
 
 RULES {
 	MPackage ::= (name[LOWER])? namespace['<','>'] contents*;
-	MClass   ::= name[UPPER] ("(" features* ")")? ;
+	MClass   ::= abstract["abstract" : ""]
+	             name[UPPER]
+	             (":" supertypes[UPPER] ("," supertypes[UPPER])* )? 
+	             ("(" features* ")")? ;
+	MEnum    ::= "enum" name[UPPER] ("(" literals* ")")?;
+	MEnumLiteral ::= name[UPPER] literal['"','"']?;
 	MFeature ::= reference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity?;
 	
 	MSimpleMultiplicity ::= value[star : "*", optional : "?", plus : "+"];
