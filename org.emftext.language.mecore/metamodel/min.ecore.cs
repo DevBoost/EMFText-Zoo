@@ -1,6 +1,6 @@
 @SuppressWarnings(tokenOverlapping)
 SYNTAXDEF min.ecore
-FOR <http://www.emftext.org/language/mecore>
+FOR <http://www.emftext.org/language/mecore> <mecore.genmodel>
 START MPackage
 
 OPTIONS {
