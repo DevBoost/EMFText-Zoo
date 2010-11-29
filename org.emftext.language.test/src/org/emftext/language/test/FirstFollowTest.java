@@ -30,6 +30,7 @@ public class FirstFollowTest extends TestCase {
 			".*/customsandwich.cs",
 			".*/facade.ecore.cs",
 			".*/text.ecore.cs",
+			".*/min.ecore.cs",
 			".*/efactory.cs",
 			".*/eJava.cs",
 			".*/JavaBehavior4UML.cs",
