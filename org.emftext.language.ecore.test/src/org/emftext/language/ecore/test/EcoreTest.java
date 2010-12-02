@@ -63,6 +63,12 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	}
 
 	@Test
+	public void testRePrint2() {
+		// this is a test for bug 1617
+		assertRePrint("reprint2.text.ecore");
+	}
+
+	@Test
 	public void testImport() {
 		assertParse("import.text.ecore");
 	}
