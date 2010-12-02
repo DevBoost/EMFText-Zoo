@@ -64,8 +64,9 @@ public class EcoreTest extends AbstractEcoreTestCase {
 
 	@Test
 	public void testRePrint2() {
-		// this is a test for bug 1617
+		// these are tests for bug 1617
 		assertRePrint("reprint2.text.ecore");
+		assertRePrint("reprint3.text.ecore");
 	}
 
 	@Test
