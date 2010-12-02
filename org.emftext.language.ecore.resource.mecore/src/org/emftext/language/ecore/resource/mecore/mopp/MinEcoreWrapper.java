@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.ecore.resource.mecore.IMinEcoreCommand;
 import org.emftext.language.mecore.MClass;
 import org.emftext.language.mecore.MClassifier;
@@ -37,7 +37,10 @@ public class MinEcoreWrapper {
 	private List<IMinEcoreCommand<Object>> commands = new ArrayList<IMinEcoreCommand<Object>>();
 
 	public EPackage wrapMPackage(MPackage mPackage) {
-		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		// We should use EcoreFactory.eINSTANCE.createEPackage(), but we
+		// need to override eResource() in order to let client thing that
+		// the EPackage is in the same resource as the MPackage
+		EPackage ePackage = createEPackage(mPackage);
 		mapping.put(mPackage, ePackage);
 		String packageName = mPackage.getName();
 		if (packageName == null) {
@@ -69,7 +72,7 @@ public class MinEcoreWrapper {
 	}
 
 	private EClassifier wrapMEnum(MEnum mEnum) {
-		EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
+		EEnum eEnum = createEEnum(mEnum);
 		eEnum.setName(mEnum.getName());
 		int count = 0;
 		for (MEnumLiteral literal : mEnum.getLiterals()) {
@@ -80,15 +83,16 @@ public class MinEcoreWrapper {
 	}
 
 	private EEnumLiteral wrapMEnumLiteral(MEnumLiteral literal, int count) {
-		EEnumLiteral eEnumLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
+		EEnumLiteral eEnumLiteral = createEEnumLiteral(literal);
 		eEnumLiteral.setName(literal.getName());
 		eEnumLiteral.setLiteral(literal.getLiteral());
 		eEnumLiteral.setValue(count);
+		mapping.put(literal, eEnumLiteral);
 		return eEnumLiteral;
 	}
 
 	private EClassifier wrapMClass(final MClass mClass) {
-		final EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		final EClass eClass = createEClass(mClass);
 		mapping.put(mClass, eClass);
 		eClass.setName(mClass.getName());
 		eClass.setAbstract(mClass.isAbstract());
@@ -129,7 +133,7 @@ public class MinEcoreWrapper {
 		}
 		if (mType instanceof MClass) {
 			// complex type, create reference
-			final EReference eReference = EcoreFactory.eINSTANCE.createEReference();
+			final EReference eReference = createEReference(mFeature);
 			commands.add(new IMinEcoreCommand<Object>() {
 
 				public boolean execute(Object context) {
@@ -142,11 +146,11 @@ public class MinEcoreWrapper {
 		} else if (mType instanceof MDataType) {
 			MDataType mDataType = (MDataType) mType;
 			// primitive type, create attribute
-			EAttribute eAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+			EAttribute eAttribute = createEAttribute(mFeature);
 			eAttribute.setEType(mDataType.getEDataType());
 			eFeature = eAttribute;
 		} else if (mType instanceof MEnum) {
-			final EAttribute eAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+			final EAttribute eAttribute = createEAttribute(mFeature);
 			commands.add(new IMinEcoreCommand<Object>() {
 
 				public boolean execute(Object context) {
@@ -190,5 +194,87 @@ public class MinEcoreWrapper {
 	private void setBounds(EStructuralFeature eFeature, int lower, int upper) {
 		eFeature.setLowerBound(lower);
 		eFeature.setUpperBound(upper);
+	}
+
+	private EPackage createEPackage(MPackage mPackage) {
+		if (mapping.containsKey(mPackage)) {
+			return (EPackage) mapping.get(mPackage);
+		}
+		final Resource resource = mPackage.eResource();
+		EPackage ePackage = new org.eclipse.emf.ecore.impl.EPackageImpl() {
+			public org.eclipse.emf.ecore.resource.Resource eResource() {
+				return resource;
+			}
+		};
+		return ePackage;
+	}
+
+	private EClass createEClass(MClass mClass) {
+		if (mapping.containsKey(mClass)) {
+			return (EClass) mapping.get(mClass);
+		}
+		final Resource resource = mClass.eResource();
+		EClass eClass = new org.eclipse.emf.ecore.impl.EClassImpl() {
+			public org.eclipse.emf.ecore.resource.Resource eResource() {
+				return resource;
+			}
+		};
+		return eClass;
+	}
+
+	private EEnum createEEnum(MEnum mEnum) {
+		if (mapping.containsKey(mEnum)) {
+			return (EEnum) mapping.get(mEnum);
+		}
+		final Resource resource = mEnum.eResource();
+		EEnum eEnum = new org.eclipse.emf.ecore.impl.EEnumImpl() {
+			public org.eclipse.emf.ecore.resource.Resource eResource() {
+				return resource;
+			}
+		};
+		return eEnum;
+	}
+
+	private EEnumLiteral createEEnumLiteral(MEnumLiteral mEnumLiteral) {
+		if (mapping.containsKey(mEnumLiteral)) {
+			return (EEnumLiteral) mapping.get(mEnumLiteral);
+		}
+		final Resource resource = mEnumLiteral.eResource();
+		EEnumLiteral eEnumLiteral = new org.eclipse.emf.ecore.impl.EEnumLiteralImpl() {
+			public org.eclipse.emf.ecore.resource.Resource eResource() {
+				return resource;
+			}
+		};
+		return eEnumLiteral;
+	}
+
+	private EAttribute createEAttribute(MFeature mFeature) {
+		if (mapping.containsKey(mFeature)) {
+			return (EAttribute) mapping.get(mFeature);
+		}
+		final Resource resource = mFeature.eResource();
+		EAttribute eAttribute = new org.eclipse.emf.ecore.impl.EAttributeImpl() {
+			public org.eclipse.emf.ecore.resource.Resource eResource() {
+				return resource;
+			}
+		};
+		return eAttribute;
+	}
+
+	private EReference createEReference(MFeature mFeature) {
+		if (mapping.containsKey(mFeature)) {
+			return (EReference) mapping.get(mFeature);
+		}
+		final Resource resource = mFeature.eResource();
+		EReference eReference = new org.eclipse.emf.ecore.impl.EReferenceImpl() {
+			public org.eclipse.emf.ecore.resource.Resource eResource() {
+				return resource;
+			}
+		};
+		return eReference;
+	}
+
+	public Map<MModelElement, EModelElement> getMapping() {
+		return mapping;
 	}
 }

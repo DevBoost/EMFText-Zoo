@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.mecore.MClass;
 import org.emftext.language.mecore.MDataType;
+import org.emftext.language.mecore.MEnum;
 import org.emftext.language.mecore.MType;
 import org.emftext.language.mecore.MecoreFactory;
 
@@ -51,7 +53,15 @@ public class MFeatureTypeReferenceResolver implements org.emftext.language.ecore
 	}
 
 	public String deResolve(org.emftext.language.mecore.MType element, org.emftext.language.mecore.MFeature container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		if (element instanceof MClass) {
+			return ((MClass) element).getName();
+		} else if (element instanceof MEnum) {
+			return ((MEnum) element).getName();
+		} else if (element instanceof MDataType) {
+			MDataType mDataType = (MDataType) element;
+			return mDataType.getEDataType().getName();
+		}
+		return null;
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

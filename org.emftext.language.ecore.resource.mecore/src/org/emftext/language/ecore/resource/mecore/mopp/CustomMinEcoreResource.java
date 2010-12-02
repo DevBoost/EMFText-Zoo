@@ -1,10 +1,14 @@
 package org.emftext.language.ecore.resource.mecore.mopp;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.BasicInternalEList;
+import org.emftext.language.mecore.MModelElement;
 import org.emftext.language.mecore.MPackage;
 
 /**
@@ -13,6 +17,8 @@ import org.emftext.language.mecore.MPackage;
  * an Ecore model.
  */
 public class CustomMinEcoreResource extends MinEcoreResource {
+
+	private MinEcoreWrapper wrapper = new MinEcoreWrapper();
 
 	private boolean isWrapping;
 
@@ -37,7 +43,7 @@ public class CustomMinEcoreResource extends MinEcoreResource {
 			return createEmptyList();
 		}
 		MPackage mPackage = (MPackage) root;
-		EPackage ePackage = new MinEcoreWrapper().wrapMPackage(mPackage);
+		EPackage ePackage = wrapper.wrapMPackage(mPackage);
 		
 		EList<EObject> result = createEmptyList();
 		result.add(ePackage);
@@ -45,8 +51,22 @@ public class CustomMinEcoreResource extends MinEcoreResource {
 		return result;
 	}
 
+	@Override
+	public String getURIFragment(EObject eObject) {
+		int index = 0;
+		Map<MModelElement, EModelElement> mapping = wrapper.getMapping();
+		for (MModelElement mElement : mapping.keySet()) {
+			if (mapping.get(mElement) == eObject) {
+				String result = "/" + index;
+				return result;
+			}
+			index++;
+		}
+		return "/-";
+	}
+
 	private EList<EObject> createEmptyList() {
-		EList<EObject> result = new BasicInternalEList<EObject>(org.eclipse.emf.ecore.EObject.class);
+		EList<EObject> result = new BasicInternalEList<EObject>(EObject.class);
 		return result;
 	}
 }
