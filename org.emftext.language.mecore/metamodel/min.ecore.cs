@@ -10,8 +10,8 @@ OPTIONS {
 	resourceUIPluginID = "org.emftext.language.ecore.resource.mecore.ui";
 	uiBasePackage = "org.emftext.language.ecore.resource.mecore.ui";
 	
-	overrideResourceFactory = "false";
 	usePredefinedTokens = "false";
+	overrideBuilder = "false";
 }
 
 TOKENS {

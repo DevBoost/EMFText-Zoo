@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.emftext.language.ecore.resource.mecore.IMinEcoreCommand;
 import org.emftext.language.mecore.MClass;
 import org.emftext.language.mecore.MClassifier;
@@ -200,12 +200,7 @@ public class MinEcoreWrapper {
 		if (mapping.containsKey(mPackage)) {
 			return (EPackage) mapping.get(mPackage);
 		}
-		final Resource resource = mPackage.eResource();
-		EPackage ePackage = new org.eclipse.emf.ecore.impl.EPackageImpl() {
-			public org.eclipse.emf.ecore.resource.Resource eResource() {
-				return resource;
-			}
-		};
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		return ePackage;
 	}
 
@@ -213,12 +208,7 @@ public class MinEcoreWrapper {
 		if (mapping.containsKey(mClass)) {
 			return (EClass) mapping.get(mClass);
 		}
-		final Resource resource = mClass.eResource();
-		EClass eClass = new org.eclipse.emf.ecore.impl.EClassImpl() {
-			public org.eclipse.emf.ecore.resource.Resource eResource() {
-				return resource;
-			}
-		};
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		return eClass;
 	}
 
@@ -226,12 +216,7 @@ public class MinEcoreWrapper {
 		if (mapping.containsKey(mEnum)) {
 			return (EEnum) mapping.get(mEnum);
 		}
-		final Resource resource = mEnum.eResource();
-		EEnum eEnum = new org.eclipse.emf.ecore.impl.EEnumImpl() {
-			public org.eclipse.emf.ecore.resource.Resource eResource() {
-				return resource;
-			}
-		};
+		EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
 		return eEnum;
 	}
 
@@ -239,12 +224,7 @@ public class MinEcoreWrapper {
 		if (mapping.containsKey(mEnumLiteral)) {
 			return (EEnumLiteral) mapping.get(mEnumLiteral);
 		}
-		final Resource resource = mEnumLiteral.eResource();
-		EEnumLiteral eEnumLiteral = new org.eclipse.emf.ecore.impl.EEnumLiteralImpl() {
-			public org.eclipse.emf.ecore.resource.Resource eResource() {
-				return resource;
-			}
-		};
+		EEnumLiteral eEnumLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
 		return eEnumLiteral;
 	}
 
@@ -252,12 +232,7 @@ public class MinEcoreWrapper {
 		if (mapping.containsKey(mFeature)) {
 			return (EAttribute) mapping.get(mFeature);
 		}
-		final Resource resource = mFeature.eResource();
-		EAttribute eAttribute = new org.eclipse.emf.ecore.impl.EAttributeImpl() {
-			public org.eclipse.emf.ecore.resource.Resource eResource() {
-				return resource;
-			}
-		};
+		EAttribute eAttribute = EcoreFactory.eINSTANCE.createEAttribute();
 		return eAttribute;
 	}
 
@@ -265,12 +240,7 @@ public class MinEcoreWrapper {
 		if (mapping.containsKey(mFeature)) {
 			return (EReference) mapping.get(mFeature);
 		}
-		final Resource resource = mFeature.eResource();
-		EReference eReference = new org.eclipse.emf.ecore.impl.EReferenceImpl() {
-			public org.eclipse.emf.ecore.resource.Resource eResource() {
-				return resource;
-			}
-		};
+		EReference eReference = EcoreFactory.eINSTANCE.createEReference();
 		return eReference;
 	}
 
