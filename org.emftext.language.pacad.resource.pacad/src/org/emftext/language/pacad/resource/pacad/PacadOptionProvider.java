@@ -28,6 +28,7 @@ import org.emftext.language.pacad.resource.pacad.util.PacadEObjectUtil;
 import org.emftext.language.pacad.util.ImageType;
 import org.emftext.language.pacad.util.PathUtil;
 
+// TODO move the check in this class to a builder
 public class PacadOptionProvider implements IPacadOptionProvider,
 		IPacadResourcePostProcessor, IPacadResourcePostProcessorProvider {
 
@@ -243,5 +244,9 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 							+ pathUtil.getSoundExtensionsString(),
 					PacadEProblemType.ANALYSIS_PROBLEM, eObject);
 		}
+	}
+
+	public void terminate() {
+		// do nothing
 	}
 }
