@@ -42,4 +42,7 @@ public class OCLPostProcessor implements IUcinvResourcePostProcessor,
 		return m;
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

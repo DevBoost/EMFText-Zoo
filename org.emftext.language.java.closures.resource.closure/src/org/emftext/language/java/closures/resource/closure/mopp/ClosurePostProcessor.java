@@ -72,4 +72,8 @@ public class ClosurePostProcessor implements IClosureOptionProvider, IClosureRes
 	public IClosureResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

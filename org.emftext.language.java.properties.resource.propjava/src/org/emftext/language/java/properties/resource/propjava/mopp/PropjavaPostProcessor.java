@@ -68,4 +68,8 @@ public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjava
 	public IPropjavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

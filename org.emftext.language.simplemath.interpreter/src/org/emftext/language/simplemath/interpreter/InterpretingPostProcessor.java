@@ -37,4 +37,8 @@ public class InterpretingPostProcessor implements ISmOptionProvider, ISmResource
 		SimpleMathContext context = new SimpleMathContext();
 		interpreter.interprete(context);
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

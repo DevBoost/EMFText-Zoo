@@ -53,4 +53,8 @@ public class DuplicateDocumentationElementChecker implements IEmfdocResourcePost
 			}
 		}
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

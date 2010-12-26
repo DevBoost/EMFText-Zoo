@@ -70,4 +70,8 @@ public class FormsembeddedPostProcessor implements IFormsembeddedOptionProvider,
 	public IFormsembeddedResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

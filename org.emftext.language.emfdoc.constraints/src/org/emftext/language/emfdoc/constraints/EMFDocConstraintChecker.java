@@ -8,4 +8,8 @@ public class EMFDocConstraintChecker implements IEmfdocResourcePostProcessor {
 	public void process(EmfdocResource resource) {
 		new DuplicateDocumentationElementChecker().process(resource);
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

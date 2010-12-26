@@ -72,4 +72,8 @@ public class SqlJavaPostProcessor implements ISqljavaOptionProvider, ISqljavaRes
 	public ISqljavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

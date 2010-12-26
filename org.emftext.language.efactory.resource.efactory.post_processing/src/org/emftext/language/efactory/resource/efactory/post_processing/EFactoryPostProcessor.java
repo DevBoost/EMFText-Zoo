@@ -42,4 +42,8 @@ public class EFactoryPostProcessor implements IEfactoryOptionProvider, IEfactory
 	public IEfactoryResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

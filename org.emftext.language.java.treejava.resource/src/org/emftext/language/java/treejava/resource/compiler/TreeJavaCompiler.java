@@ -102,5 +102,7 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 		return new TreeJavaCompiler();
 	}
 
-
+	public void terminate() {
+		// do nothing
+	}
 }

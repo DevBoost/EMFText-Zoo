@@ -51,4 +51,8 @@ public class MEcoreValidator implements IMinEcoreOptionProvider, IMinEcoreResour
 	public IMinEcoreResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

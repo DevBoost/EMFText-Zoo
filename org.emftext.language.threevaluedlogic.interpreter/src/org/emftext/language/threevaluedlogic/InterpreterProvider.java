@@ -36,4 +36,8 @@ public class InterpreterProvider implements ITvlOptionProvider, ITvlResourcePost
 		}
 		interpreter.interprete(context);
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

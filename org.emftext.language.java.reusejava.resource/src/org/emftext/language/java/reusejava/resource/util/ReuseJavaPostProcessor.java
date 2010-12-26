@@ -72,4 +72,8 @@ public class ReuseJavaPostProcessor implements IReusejavaOptionProvider, IReusej
 	public IReusejavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

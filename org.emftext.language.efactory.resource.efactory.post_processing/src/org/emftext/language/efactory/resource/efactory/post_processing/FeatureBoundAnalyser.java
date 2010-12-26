@@ -47,4 +47,7 @@ public class FeatureBoundAnalyser implements IEfactoryResourcePostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

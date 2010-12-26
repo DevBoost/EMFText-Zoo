@@ -72,4 +72,8 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 	public IEjavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

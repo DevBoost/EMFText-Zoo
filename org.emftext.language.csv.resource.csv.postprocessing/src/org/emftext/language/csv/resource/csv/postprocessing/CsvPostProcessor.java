@@ -56,4 +56,8 @@ public class CsvPostProcessor implements ICsvOptionProvider, ICsvResourcePostPro
 	public ICsvResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

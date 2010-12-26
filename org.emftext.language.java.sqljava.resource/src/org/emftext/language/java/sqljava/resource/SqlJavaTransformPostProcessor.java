@@ -483,12 +483,8 @@ public class SqlJavaTransformPostProcessor implements ISqljavaOptionProvider, IS
 			catchMethodCall.setTarget(method);
 		}
 	}
-	
-	
-	
-	// -----------
-	
-	
-	
 
+	public void terminate() {
+		// do nothing
+	}
 }

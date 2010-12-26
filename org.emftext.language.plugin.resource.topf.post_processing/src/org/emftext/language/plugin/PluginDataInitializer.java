@@ -213,4 +213,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 		return null;
 	}
 	
+	public void terminate() {
+		// do nothing
+	}
 }

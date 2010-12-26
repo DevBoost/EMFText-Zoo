@@ -129,5 +129,7 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 		return new EcoreModelMerger();
 	}
 
-
+	public void terminate() {
+		// do nothing
+	}
 }

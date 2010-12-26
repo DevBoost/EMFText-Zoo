@@ -72,4 +72,8 @@ public class JavabehaviorPostProcessor implements IJavabehaviorOptionProvider, I
 	public IJavabehaviorResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

@@ -129,4 +129,7 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 		}, element);
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

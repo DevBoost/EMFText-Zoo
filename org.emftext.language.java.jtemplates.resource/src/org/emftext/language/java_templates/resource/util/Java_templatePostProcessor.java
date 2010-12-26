@@ -83,4 +83,8 @@ public class Java_templatePostProcessor implements IJavatemplateOptionProvider, 
 	public IJavatemplateResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

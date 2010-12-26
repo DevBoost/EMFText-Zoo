@@ -129,4 +129,8 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 		}
 
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

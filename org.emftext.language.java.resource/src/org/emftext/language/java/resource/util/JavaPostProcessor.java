@@ -75,4 +75,8 @@ public class JavaPostProcessor implements IJavaOptionProvider, IJavaResourcePost
 	public IJavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

@@ -105,4 +105,8 @@ public class InterpreterExecuter implements ITemplatecallOptionProvider, ITempla
 		options.put(ITemplatecallOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 		return options;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

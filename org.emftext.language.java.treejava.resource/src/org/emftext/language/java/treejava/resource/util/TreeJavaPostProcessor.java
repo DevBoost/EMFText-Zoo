@@ -71,4 +71,8 @@ public class TreeJavaPostProcessor implements ITreejavaOptionProvider, ITreejava
 	public ITreejavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

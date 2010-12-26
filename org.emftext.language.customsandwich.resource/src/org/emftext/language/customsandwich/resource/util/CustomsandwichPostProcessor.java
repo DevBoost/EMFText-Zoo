@@ -56,4 +56,8 @@ public class CustomsandwichPostProcessor implements ICustomsandwichOptionProvide
 	public ICustomsandwichResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }

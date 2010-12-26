@@ -30,4 +30,7 @@ public class FeatureTypeAnalyser implements IEfactoryResourcePostProcessor {
 		}
 	}
 
+	public void terminate() {
+		// do nothing
+	}
 }

@@ -222,4 +222,8 @@ public class MoveChecker implements ICgResourcePostProcessor,
 	public ICgResourcePostProcessor getResourcePostProcessor() {
 		return new MoveChecker();
 	}
+
+	public void terminate() {
+		// do nothing
+	}
 }
