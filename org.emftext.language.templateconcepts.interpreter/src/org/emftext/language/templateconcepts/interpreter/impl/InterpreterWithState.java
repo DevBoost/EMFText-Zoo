@@ -310,14 +310,16 @@ public class InterpreterWithState {
 	/**
 	 * Adds 'child' to 'feature' in 'parent'.
 	 */
+	@SuppressWarnings("unchecked")
 	private void attach(EObject parent, EObject child, EStructuralFeature feature) throws InterpreterException {
 		if (feature == null) {
 			throw new InterpreterException("Placeholder must be contained by some container");
 		}
 		System.out.println("attach() " + parent.eClass().getName() + "." + feature.getName() + " <- " + child.eClass().getName());
 		//multiplicity > 1
-		if (parent.eGet(feature) instanceof List<?>) {
-			((EList<EObject>)parent.eGet(feature)).add(child);
+		Object value = parent.eGet(feature);
+		if (value instanceof List<?>) {
+			((EList<EObject>)value).add(child);
 		//multiplicity <=1
 		} else {
 			parent.eSet(feature, child);
@@ -387,9 +389,11 @@ public class InterpreterWithState {
 			}
 			//BODY (can contain multiple elements)
 			if (forBodyO instanceof List<?>) {
-				List<EObject> forBodyList = (List<EObject>)forBodyO;
-				for (EObject forBody : forBodyList) {
-					bodyElements.add(evaluate(forBody, currentTiParent, currentTiReference));
+				List<?> forBodyList = (List<?>)forBodyO;
+				for (Object forBody : forBodyList) {
+					if (forBody instanceof EObject) {
+						bodyElements.add(evaluate((EObject) forBody, currentTiParent, currentTiReference));
+					}
 				}
 			} else {
 				bodyElements.add(evaluate((EObject) forBodyO, currentTiParent, currentTiReference));
@@ -434,9 +438,11 @@ public class InterpreterWithState {
 		if (condition) {
 			//ifBody
 			if (ifBodyO instanceof List<?>) {
-				List<EObject> ifBodyList = (List<EObject>)ifBodyO;
-				for (EObject ifBody : ifBodyList) {
-					bodyElements.add(evaluate(ifBody, currentTiParent, currentTiReference));
+				List<?> ifBodyList = (List<?>)ifBodyO;
+				for (Object ifBody : ifBodyList) {
+					if (ifBody instanceof EObject) {
+						bodyElements.add(evaluate((EObject) ifBody, currentTiParent, currentTiReference));
+					}
 				}
 			} else {
 				bodyElements.add(evaluate(ifBodyO, currentTiParent, currentTiReference));
@@ -445,9 +451,11 @@ public class InterpreterWithState {
 			// elseBody can be null (this method is also used to evaluate IF statements
 			if (elseBodyO != null) {
 				if (elseBodyO instanceof List<?>) {
-					List<EObject> elseBodyList = (List<EObject>) elseBodyO;
-					for (EObject elseBody : elseBodyList) {
-						bodyElements.add(evaluate(elseBody, currentTiParent, currentTiReference));
+					List<?> elseBodyList = (List<?>) elseBodyO;
+					for (Object elseBody : elseBodyList) {
+						if (elseBody instanceof EObject) {
+							bodyElements.add(evaluate((EObject) elseBody, currentTiParent, currentTiReference));
+						}
 					}
 				} else {
 					bodyElements.add(evaluate(elseBodyO, currentTiParent, currentTiReference));
