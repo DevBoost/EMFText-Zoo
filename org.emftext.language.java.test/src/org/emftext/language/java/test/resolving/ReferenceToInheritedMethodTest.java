@@ -30,7 +30,7 @@ public class ReferenceToInheritedMethodTest extends AbstractResolverTestCase {
 		//testReferencing("ReferenceToInheritedMethod");
 	}
 
-	private void testReferencing(String typename) throws IOException, BadLocationException {
+	protected void testReferencing(String typename) throws IOException, BadLocationException {
 		String filename =  typename + ".java";
 		parseAndReprint(filename);
 	}

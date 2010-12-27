@@ -373,7 +373,8 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		return null;
 	}
 	
-	private ClassifierImport getNecessaryImport(String name, Resource resource){
+	/*
+	private ClassifierImport getNecessaryImport(String name, Resource resource) {
 		
 		if(name == null)
 			return null;
@@ -389,6 +390,7 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		
 		return null;
 	}
+	*/
 	
 	private MethodCall createAnonymousClass(
 			AbstractClosureCall call,
