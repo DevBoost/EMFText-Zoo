@@ -93,7 +93,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testArrays() throws Exception {
 		String typename = "Arrays";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 7);
 		
@@ -158,7 +158,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testClass() throws Exception {
 		String typename = "Class";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
 		assertMemberCount(cUnit, 2);
 		
@@ -175,18 +175,18 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testExpressions() throws Exception{
 		String typename = "Expressions";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 2);
 		
-		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
+		/*List<ClassMemberDeclaration> cmd = */clazz.getClassMemberDeclarations();
 		
 	}
 	
 	@Test
 	public void testLiteralsAndSimpleTypes() throws Exception {
 		String typename = "LiteralsAndSimpleTypes";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 40);
 		
@@ -409,7 +409,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testMethods() throws Exception {
 		String typename = "Methods";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 3);
 		
@@ -425,7 +425,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testModifiers() throws Exception {
 		String typename = "Modifiers";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");		
 		assertMemberCount(clazz, 9);
 		
@@ -449,7 +449,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testNamespace() throws Exception {
 		String typename = "Namespace";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
 		assertMemberCount(cUnit, 2);
 		
@@ -477,7 +477,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testStackalloc() throws Exception {
 		String typename = "Stackalloc";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 1);
 		
@@ -496,7 +496,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testUsingDirective() throws Exception {
 		String typename = "UsingDirective";
-		String filename = typename + getFileExtension();
+		//String filename = typename + getFileExtension();
 		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
 		assertMemberCount(cUnit, 6);
 		

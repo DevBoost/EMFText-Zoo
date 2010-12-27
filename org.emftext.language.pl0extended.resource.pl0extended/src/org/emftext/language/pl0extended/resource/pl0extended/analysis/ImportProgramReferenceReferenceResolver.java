@@ -14,8 +14,6 @@ import org.emftext.language.pl0.Program;
 
 public class ImportProgramReferenceReferenceResolver implements org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolver<org.emftext.language.pl0extended.Import, org.emftext.language.pl0.Program> {
 
-	private org.emftext.language.pl0extended.resource.pl0extended.analysis.Pl0extendedDefaultResolverDelegate<org.emftext.language.pl0extended.Import, org.emftext.language.pl0.Program> delegate = new org.emftext.language.pl0extended.resource.pl0extended.analysis.Pl0extendedDefaultResolverDelegate<org.emftext.language.pl0extended.Import, org.emftext.language.pl0.Program>();
-
 	public void resolve(java.lang.String identifier, org.emftext.language.pl0extended.Import container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolveResult<org.emftext.language.pl0.Program> result) {
 		try{
 			ResourceSet rs = container.eResource().getResourceSet();

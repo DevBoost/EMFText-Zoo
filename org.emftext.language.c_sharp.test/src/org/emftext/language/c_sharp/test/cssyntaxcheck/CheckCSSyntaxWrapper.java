@@ -85,10 +85,10 @@ public class CheckCSSyntaxWrapper {
 		
 		try {
 			Process checker=new ProcessBuilder(command).start();
-			InputStreamReader is=new InputStreamReader(checker.getInputStream());
+			//InputStreamReader is=new InputStreamReader(checker.getInputStream());
 			InputStreamReader es=new InputStreamReader(checker.getErrorStream());
 			
-			BufferedReader brIs=new BufferedReader(is);
+			//BufferedReader brIs=new BufferedReader(is);
 			BufferedReader brEs=new BufferedReader(es);
 			
 			String input;

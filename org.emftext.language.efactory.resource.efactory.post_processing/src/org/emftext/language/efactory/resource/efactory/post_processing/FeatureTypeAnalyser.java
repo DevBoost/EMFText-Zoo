@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.efactory.EfactoryPackage;
 import org.emftext.language.efactory.Feature;
+import org.emftext.language.efactory.resource.efactory.EfactoryEProblemType;
 import org.emftext.language.efactory.resource.efactory.IEfactoryResourcePostProcessor;
 import org.emftext.language.efactory.resource.efactory.mopp.EfactoryResource;
 import org.emftext.language.efactory.resource.efactory.util.EfactoryEObjectUtil;
@@ -25,7 +26,7 @@ public class FeatureTypeAnalyser implements IEfactoryResourcePostProcessor {
 				}
 			}
 			if (errorMessage != null) {
-				resource.addError(errorMessage, feature);
+				resource.addError(errorMessage, EfactoryEProblemType.ANALYSIS_PROBLEM, feature);
 			}
 		}
 	}

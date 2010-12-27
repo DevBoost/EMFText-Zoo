@@ -24,11 +24,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.emftext.language.dot.resource.dot.DotEProblemType;
 import org.emftext.language.dot.resource.dot.IDotResourcePostProcessor;
 import org.emftext.language.dot.resource.dot.mopp.DotResource;
 import org.emftext.language.dot.util.ExeUtil;
 import org.emftext.language.dot.util.Pair;
 
+// TODO this should rather be a builder
 public class DotPostProcessor implements IDotResourcePostProcessor {
 
 	private static final String dotExecutable = getDOTExecutable();
@@ -36,7 +38,7 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 	public void process(DotResource resource) {
 		if (!testDOT()) {
 			String path = System.getenv("PATH"); //$NON-NLS-1$
-			resource.addError("Cannot run DOT execuatble. Please make sure that it is contained in your PATH variable (" + path +").", null); //$NON-NLS-1$
+			resource.addError("Cannot run DOT execuatble. Please make sure that it is contained in your PATH variable (" + path +").", DotEProblemType.ANALYSIS_PROBLEM, null); //$NON-NLS-1$
 			return;
 		}
 
@@ -45,7 +47,7 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 				file.getProject().getLocation().toOSString());
 		
 		if (message != null) {
-			resource.addError("DOT finished with \"" + message + "\"", null); //$NON-NLS-1$
+			resource.addError("DOT finished with \"" + message + "\"", DotEProblemType.ANALYSIS_PROBLEM, null); //$NON-NLS-1$
 		} else {
 			try {
 				file.getProject().refreshLocal(IProject.DEPTH_INFINITE, new NullProgressMonitor());
