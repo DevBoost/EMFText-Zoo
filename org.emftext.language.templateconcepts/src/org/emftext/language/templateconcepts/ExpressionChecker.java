@@ -104,7 +104,9 @@ public class ExpressionChecker  {
 		} else {
 			if (concept instanceof ForEach) {
 				ForEach forEach = (ForEach) concept;
+				@SuppressWarnings("unchecked")
 				Query<EClassifier, EClass, EObject> query = (Query<EClassifier, EClass, EObject>) errorOrQuery;
+				
 				EClassifier resultType = query.getExpression().getType();
 				System.out.println("result type of (" + concept.getExpression() + ") is " + resultType);
 				if (resultType instanceof OrderedSetType) {
@@ -134,7 +136,7 @@ public class ExpressionChecker  {
 			EClass metaClass, TemplateConcept concept, String expression) {
 		Object queryOrError = createQuery(metaClass, null, expression);
 		if (queryOrError instanceof Query) {
-			Query query = (Query) queryOrError;
+			Query<?,?,?> query = (Query<?,?,?>) queryOrError;
 			
 			// first, we need the type of the expression in the placeholder
 			Object expressionType = query.getExpression().getType();
@@ -204,6 +206,7 @@ public class ExpressionChecker  {
 	}
 
 	// return the error if one was found
+	/*
 	private String parseExpression(EClass inputMetaClass, Map<String, EObject> variables, String expressionString) {
 		Object query = createQuery(inputMetaClass, variables, expressionString);
 		if (query instanceof String) {
@@ -212,7 +215,9 @@ public class ExpressionChecker  {
 			return null;
 		}
 	}
+	*/
 
+	@SuppressWarnings("unchecked")
 	public Object evaluateExpression(EClass inputMetaClass, EObject contextObject, Map<String, EObject> variables, String expressionString) {
 		if (inputMetaClass == null) {
 			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") inputMetaClass is null");
