@@ -73,32 +73,30 @@ public class ClassFileModelLoader {
 		this.javaClasspath = javaClasspath;
 	}
 	
-	public CompilationUnit parse(InputStream inputStream, String classFileName)
-			throws IOException {
-try{
-		
-		org.apache.bcel.classfile.JavaClass myClass =
-			new org.apache.bcel.classfile.ClassParser(
-					inputStream, classFileName).parse();
-		ConcreteClassifier classifier = constructClassifier(myClass);
-		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
-		cu.setName(classFileName);
-		List<String> namespace1 = Arrays.asList(myClass.getClassName().split("\\."));
-		List<String> namespace2 = Arrays.asList(namespace1.get(namespace1.size() - 1).split("\\$"));
-		cu.getNamespaces().addAll(namespace1.subList(0, namespace1.size() - 1));
-		if (myClass.getClassName().endsWith("$")) {
-			//empty class name
-			cu.getNamespaces().addAll(namespace2.subList(0, namespace2.size()));	
-		}
-		else {
-			cu.getNamespaces().addAll(namespace2.subList(0, namespace2.size() - 1));
-		}
-		cu.getClassifiers().add(classifier);
-		return cu;
-			}catch(Exception e) {
-				e.printStackTrace();
+	public CompilationUnit parse(InputStream inputStream, String classFileName) throws IOException {
+		try {
+			org.apache.bcel.classfile.ClassParser classParser = new org.apache.bcel.classfile.ClassParser(
+					inputStream, classFileName);
+			org.apache.bcel.classfile.JavaClass myClass = classParser.parse();
+			ConcreteClassifier classifier = constructClassifier(myClass);
+			CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
+			cu.setName(classFileName);
+			List<String> namespace1 = Arrays.asList(myClass.getClassName().split("\\."));
+			List<String> namespace2 = Arrays.asList(namespace1.get(namespace1.size() - 1).split("\\$"));
+			cu.getNamespaces().addAll(namespace1.subList(0, namespace1.size() - 1));
+			if (myClass.getClassName().endsWith("$")) {
+				//empty class name
+				cu.getNamespaces().addAll(namespace2.subList(0, namespace2.size()));	
 			}
-			return null;
+			else {
+				cu.getNamespaces().addAll(namespace2.subList(0, namespace2.size() - 1));
+			}
+			cu.getClassifiers().add(classifier);
+			return cu;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	protected ConcreteClassifier constructClassifier(org.apache.bcel.classfile.JavaClass clazz) {

@@ -80,6 +80,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		if (isClassFile()) {
 			JavaClasspath javaClasspath = JavaClasspath.get(this);
 			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
+			//System.out.println("JavaSourceOrClassFileResource.doLoad(" + getURI() + ")");
 			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
 			getContents().add(cu);
 			JavaModelCompletion.complete(this);
@@ -97,12 +98,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		JDTConnector.getInstance().initializeResourceSet(getResourceSet(), uri);
     	URIConverter uriConverter = getURIConverter();
     	URI normalizedURI = uriConverter.normalize(uri);
-		if(normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
+		if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
 			if (!isLoaded) {
 				loadPackageFromClasspath();
 			}
 		}
-		else if(normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+		else if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
 			//classes should have a physical resource
 			//System.out.println("[JaMoPP] Warning: " + uri.lastSegment() + " not registered in class path");
 		}
