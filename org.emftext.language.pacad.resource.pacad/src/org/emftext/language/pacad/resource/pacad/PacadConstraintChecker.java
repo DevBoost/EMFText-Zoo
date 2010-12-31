@@ -2,7 +2,6 @@ package org.emftext.language.pacad.resource.pacad;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -28,25 +27,12 @@ import org.emftext.language.pacad.resource.pacad.util.PacadEObjectUtil;
 import org.emftext.language.pacad.util.ImageType;
 import org.emftext.language.pacad.util.PathUtil;
 
-// TODO move the check in this class to a builder
-public class PacadOptionProvider implements IPacadOptionProvider,
-		IPacadResourcePostProcessor, IPacadResourcePostProcessorProvider {
+public class PacadConstraintChecker {
 
+	private static final PacadEProblemType PROBLEM_TYPE = PacadEProblemType.BUILDER_ERROR;
 	private PathUtil pathUtil = new PathUtil();
 
-	public PacadOptionProvider() {
-	}
-
-	public Map<?, ?> getOptions() {
-		return Collections.singletonMap(
-				IPacadOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
-	}
-
-	public IPacadResourcePostProcessor getResourcePostProcessor() {
-		return this;
-	}
-
-	public void process(PacadResource resource) {
+	public void check(PacadResource resource) {
 		if (resource.getContents().size() == 1) {
 			IFile file = WorkspaceSynchronizer.getFile(resource);
 			IProject project = file.getProject();
@@ -54,7 +40,6 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 			PointAndClickAdventure adventure = (PointAndClickAdventure) resource
 					.getContents().get(0);
 
-			/*
 			if (adventure.getMainScript() != null) {
 				checkThingObjectExists(adventure, resource);
 				checkNamesAreNotNull(adventure.eAllContents(), resource);
@@ -63,7 +48,6 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 				checkCommandArguments(adventure, resource);
 				checkUseCommands(adventure, resource);
 			}
-			*/
 		}
 	}
 
@@ -75,7 +59,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 				if (command.getSubjects().size() != 1) {
 					resource.addError(
 						"All commands expect USE take one argument only", 
-						PacadEProblemType.ANALYSIS_PROBLEM, 
+						PROBLEM_TYPE, 
 						command);
 				} else {
 					// number of subject is 1, which is ok
@@ -85,7 +69,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 					command.getSubjects().size() > 2) {
 					resource.addError(
 						"The commmand USE takes one or two arguments", 
-						PacadEProblemType.ANALYSIS_PROBLEM, 
+						PROBLEM_TYPE, 
 						command);
 				} else {
 					// use command with one or two arguments, which is ok
@@ -118,7 +102,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 				resource.addError(
 					"Objects must be either usable without another object, or together with other objects only. " +
 					"Please check the 'on use' actions defined for this object.",
-					PacadEProblemType.ANALYSIS_PROBLEM,
+					PROBLEM_TYPE,
 					selfUsable);
 			}
 		}
@@ -144,7 +128,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 				for (Object object : objects) {
 					resource.addError(
 							"There is already an object with id: " + id, 
-							PacadEProblemType.ANALYSIS_PROBLEM,
+							PROBLEM_TYPE,
 							object
 					);
 				}
@@ -157,7 +141,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 		if (adventure.isMain() && adventure.getThingObject() == null) {
 			resource.addError(
 					"Main adventures must have a super object with the id 'thingy'.", 
-					PacadEProblemType.ANALYSIS_PROBLEM, 
+					PROBLEM_TYPE, 
 					adventure
 			);
 		}
@@ -177,7 +161,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 			if (name == null) {
 				resource.addError(
 						"Objects must have a label (either inherited or declared).", 
-						PacadEProblemType.ANALYSIS_PROBLEM, 
+						PROBLEM_TYPE, 
 						namedElement
 				);
 			}
@@ -221,7 +205,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 							+ "' could not be found at "
 							+ path
 							+ pathUtil.getImageExtensionsString(),
-					PacadEProblemType.ANALYSIS_PROBLEM, obj);
+							PROBLEM_TYPE, obj);
 		}
 	}
 
@@ -230,7 +214,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 		if (id == null) {
 			resource.addWarning(
 					"Rooms should have a background sound.",
-					PacadEProblemType.ANALYSIS_PROBLEM, 
+					PROBLEM_TYPE, 
 					eObject);
 			return;
 		}
@@ -242,7 +226,7 @@ public class PacadOptionProvider implements IPacadOptionProvider,
 							+ "' could not be found at "
 							+ path
 							+ pathUtil.getSoundExtensionsString(),
-					PacadEProblemType.ANALYSIS_PROBLEM, eObject);
+							PROBLEM_TYPE, eObject);
 		}
 	}
 

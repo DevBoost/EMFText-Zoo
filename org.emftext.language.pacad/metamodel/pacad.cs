@@ -1,20 +1,21 @@
+@SuppressWarnings(noRuleForMetaClass)
 SYNTAXDEF pacad
 FOR <http://www.emftext.org/language/pacad>
 START PointAndClickAdventure
 
 OPTIONS {
 	usePredefinedTokens = "false";
-	overridePluginXML = "false";
 	reloadGeneratorModel = "true";
 	additionalDependencies = "org.emftext.language.pacad.util";
 	overrideDefaultResolverDelegate = "false";
-	overrideTextResource = "false";
+	overrideBuilder = "false";
 }
 
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 	DEFINE INTEGER $('0'..'9')+$;
-	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+$;
+	DEFINE HEX $'0x'('A'..'Z'|'a'..'z'|'0'..'9')+$;
+	DEFINE TEXT $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'0'..'9'|'-')+$;
 	DEFINE WHITESPACE $(' ' | '\t' | '\f')+$;
 	DEFINE LINEBREAK $('\r\n' | '\r' | '\n')$;
 }
@@ -27,7 +28,7 @@ RULES {
 	
 	PointAndClickAdventure ::= main["main" : ""] "adventure" ("initialRoom" initialRoom[] | "extends" mainScript['<','>']) colorMappings* elements*;
 	
-	ColorMapping ::= person[] "(" red[] "," green[] "," blue[] ")" ;
+	ColorMapping ::= person[] "(" red[HEX] "," green[HEX] "," blue[HEX] ")" ;
 	
 	Import ::= "import" importedAdventure['<','>'];
 	
@@ -56,11 +57,6 @@ RULES {
 
 	Hide ::= "hide" subject[];
 	Show ::= "show" subject[];
-	
-	// hide all objects in a room, but cache which objects to hide
-	//HideAll ::= "hideall";
-	// show all cached objects in a room again
-	//ShowAll ::= "showall";
 	
 	MoveAbsolute ::= "set" subject[] "to" newPositionX[INTEGER] "," newPositionY[INTEGER];
 	MoveRelative ::= "move" subject[] deltaX[INTEGER] "," deltaY[INTEGER];

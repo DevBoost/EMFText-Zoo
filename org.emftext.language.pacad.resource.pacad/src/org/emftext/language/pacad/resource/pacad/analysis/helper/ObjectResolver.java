@@ -7,7 +7,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.pacad.Object;
 import org.emftext.language.pacad.PacadPackage;
@@ -69,6 +68,7 @@ public class ObjectResolver {
 		return mapping;
 	}
 
+	/*
 	private void print(Resource eResource, EList<Object> allObjects) {
 		String objects = "";
 		for (Object object : allObjects) {
@@ -76,6 +76,7 @@ public class ObjectResolver {
 		}
 		System.out.println(eResource.getURI().path() + " : " + objects);
 	}
+	*/
 
 	public String deResolve(Object element, EObject container,
 			EReference reference) {
