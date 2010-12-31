@@ -15,6 +15,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdventureElement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//NamedElement #//AdventureElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An object is something the player can interact with."/>
+    </eAnnotations>
     <eOperations name="isUsableAlone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="&#xD;&#xA;&#x9;&#x9;// find main adventure&#xD;&#xA;&#x9;&#x9; org.emftext.language.pacad.PointAndClickAdventure adventure = getAdventure();&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;// search for a command that applied to this object&#xD;&#xA;&#x9;&#x9;for ( org.emftext.language.pacad.Command command : adventure.getAvailableCommands( org.emftext.language.pacad.CommandType.USE)) {&#xD;&#xA;&#x9;&#x9;&#x9; org.eclipse.emf.common.util.EList&lt; org.emftext.language.pacad.Object> subjects = command.getSubjects();&#xD;&#xA;&#x9;&#x9;&#x9;// if there is a command that applied and that has more than one&#xD;&#xA;&#x9;&#x9;&#x9;// argument this object cannot be used on its own&#xD;&#xA;&#x9;&#x9;&#x9;if (subjects.contains(this) &amp;&amp; subjects.size() > 1) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;return false;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;return true;&#xD;&#xA;"/>
@@ -47,6 +50,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternalObject" eSuperTypes="#//Object">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An object that does not have explicit graphics, but is rather already visible in the background of the room."/>
+    </eAnnotations>
     <eOperations name="getWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="&#xD;&#xA;&#x9;&#x9;if (getDefinedWidth() &lt;= 0 &amp;&amp; getParent() != null &amp;&amp; getParent() instanceof  org.emftext.language.pacad.InternalObject) {&#xD;&#xA;&#x9;&#x9;&#x9;return (( org.emftext.language.pacad.InternalObject) getParent()).getWidth();&#xD;&#xA;&#x9;&#x9;} else {&#xD;&#xA;&#x9;&#x9;&#x9;return getDefinedWidth();&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;"/>
@@ -65,6 +71,9 @@
         defaultValueLiteral="-1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Room" eSuperTypes="#//Object">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A room is a container for objects. It has a background image and an optional background sound."/>
+    </eAnnotations>
     <eOperations name="getBackgroundSound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="&#xD;&#xA;&#x9;&#x9; org.emftext.language.pacad.Room current = this;&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;while (current != null) {&#xD;&#xA;&#x9;&#x9;&#x9; java.lang.String declaredBackgroundSound = current.getDeclaredBackgroundSound();&#xD;&#xA;&#x9;&#x9;&#x9;if (declaredBackgroundSound != null) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;return declaredBackgroundSound;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9; org.emftext.language.pacad.Object parent = current.getParent();&#xD;&#xA;&#x9;&#x9;&#x9;if (parent instanceof  org.emftext.language.pacad.Room) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;current = ( org.emftext.language.pacad.Room) parent;&#xD;&#xA;&#x9;&#x9;&#x9;} else {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;current = null;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;return null;&#xD;&#xA;"/>
@@ -77,26 +86,78 @@
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Command" eSuperTypes="#//AdventureElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CommandType"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A concrete definition of a command that can be issued by the player."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CommandType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The type of this command."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
-        upperBound="-1" eType="#//Action" containment="true"/>
+        upperBound="-1" eType="#//Action" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The list of actions that need to be executed by the player issues this command."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subjects" lowerBound="1"
-        upperBound="-1" eType="#//Object"/>
+        upperBound="-1" eType="#//Object">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The objects that this command can be applied to. Depending on the type of this command, there can be one or two subjects."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CommandType">
-    <eLiterals name="LookAt"/>
-    <eLiterals name="Take" value="1"/>
-    <eLiterals name="Use" value="2"/>
-    <eLiterals name="TalkTo" value="3"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An enumeration of all available types of commands."/>
+    </eAnnotations>
+    <eLiterals name="LookAt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Use this command to look at object. Takes one argument."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="Take" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Use this command to put an object in the inventory. Takes one argument."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="Use" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Use this command to use objects. Takes one or two arguments."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="TalkTo" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Use this command to talk to objects/people. Takes one argument."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An abstract superclass for all actions that can be executed when a player issues a command."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Hide" eSuperTypes="#//Action">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Hides a given object."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
-        eType="#//Object"/>
+        eType="#//Object">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The object to hide."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Show" eSuperTypes="#//Action">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Shows a given object."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
-        eType="#//Object"/>
+        eType="#//Object">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The object to show."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MoveAbsolute" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
@@ -115,15 +176,32 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PlaySound" eSuperTypes="#//Action">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Plays a given sound file."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="soundfile" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The file to play."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShowText" eSuperTypes="#//Action">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="speaker" eType="#//Object"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Show a message."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="speaker" eType="#//Object">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The speaker of the message---usually a person."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PointAndClickAdventure">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The root object for all adventures."/>
+    </eAnnotations>
     <eOperations name="getThingObject" eType="#//Object">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="&#xD;&#xA;&#x9;&#x9; org.eclipse.emf.common.util.EList&lt; org.emftext.language.pacad.AdventureElement> elements = getAllElements();&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;for ( org.emftext.language.pacad.AdventureElement next : elements) {&#xD;&#xA;&#x9;&#x9;&#x9;if (next instanceof  org.emftext.language.pacad.Object) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9; org.emftext.language.pacad.Object nextObject = ( org.emftext.language.pacad.Object) next;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if (&quot;thingy&quot;.equals(nextObject.getId())) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return nextObject;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;return null;&#xD;&#xA;"/>
