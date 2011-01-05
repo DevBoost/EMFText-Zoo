@@ -60,6 +60,7 @@ import org.emftext.language.secprop.resource.text.secprop.mopp.TextSecpropMetaIn
 import org.emftext.language.simplec.resource.c.mopp.CMetaInformation;
 import org.emftext.language.simplegui.resource.simplegui.mopp.SimpleguiMetaInformation;
 import org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation;
+import org.emftext.language.simpleweave.resource.simpleweave.mopp.SimpleweaveMetaInformation;
 import org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation;
 import org.emftext.language.sql.resource.sql.mopp.SqlMetaInformation;
 import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation;
@@ -152,6 +153,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new SandwichMetaInformation());
 		metaInformations.add(new TextSecpropMetaInformation());
 		metaInformations.add(new SimpleguiMetaInformation());
+		metaInformations.add(new SimpleweaveMetaInformation());
 		metaInformations.add(new SmMetaInformation());
 		metaInformations.add(new StatemachineMetaInformation());
 		metaInformations.add(new RqMetaInformation());
