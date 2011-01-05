@@ -8,16 +8,8 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="modelquery" icon="icons/editor_icon.gif" id="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryEditor" name="EMFText modelquery Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.modelquery.resource.modelquery"/>
 		</editor>
-	</extension>
-	
-	<extension id="org.emftext.language.modelquery.resource.modelquery.ui.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
-		<persistent value="true">
-		</persistent>
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
@@ -32,8 +24,6 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryBracketPreferencePage" class="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryBracketPreferencePage" category="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryPreferencePage">
 		</page>
-		<page name="Occurrence" id="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryOccurrencePreferencePage" class="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryOccurrencePreferencePage" category="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryPreferencePage">
-		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -41,6 +31,32 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryNewFileWizard" id="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryNewFileWizard" name="EMFText .modelquery file">
 		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryMarkerResolutionGenerator" markerType="org.emftext.language.modelquery.resource.modelquery.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.modelquery.resource.modelquery.ui.ModelqueryAnnotationModelFactory" extensions="modelquery" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.modelquery.resource.modelquery" name=".modelquery File" base-type="org.eclipse.core.runtime.text" file-extensions="modelquery"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="modelquery" id="org.emftext.language.modelquery.resource.modelquery.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.modelquery.resource.modelquery.ui.occurences" />
+		<type name="org.emftext.language.modelquery.resource.modelquery.ui.occurences.declaration" super="org.emftext.language.modelquery.resource.modelquery.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.modelquery.resource.modelquery.ui.occurences" label="Occurrences (in .modelquery files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="modelquery.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="modelquery.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="modelquery.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="modelquery.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="modelquery.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="modelquery.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="modelquery.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="modelquery.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="modelquery.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="org.emftext.language.modelquery.resource.modelquery.ui.occurences.declaration" label="Declarations (in .modelquery files)" textPreferenceKey="modelquery.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="modelquery.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="modelquery.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="modelquery.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="modelquery.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="modelquery.declarationTextStyle" textStylePreferenceValue="NONE" />
 	</extension>
 	
 </plugin>

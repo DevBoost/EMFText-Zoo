@@ -37,6 +37,7 @@ import org.emftext.language.javaproperties.resource.properties.mopp.PropertiesMe
 import org.emftext.language.km3.resource.km3.mopp.Km3MetaInformation;
 import org.emftext.language.manifest.resource.manifest.mopp.MFMetaInformation;
 import org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.mopp.MartinfowlerdslMetaInformation;
+import org.emftext.language.modelquery.resource.modelquery.mopp.ModelqueryMetaInformation;
 import org.emftext.language.models.resource.model.mopp.ModelMetaInformation;
 import org.emftext.language.office.resource.office.mopp.OfficeMetaInformation;
 import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
@@ -138,6 +139,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new Km3MetaInformation());
 		metaInformations.add(new MFMetaInformation());
 		metaInformations.add(new MartinfowlerdslMetaInformation());
+		metaInformations.add(new ModelqueryMetaInformation());
 		metaInformations.add(new ModelMetaInformation());
 		metaInformations.add(new OfficeMetaInformation());
 		metaInformations.add(new OwlMetaInformation());
