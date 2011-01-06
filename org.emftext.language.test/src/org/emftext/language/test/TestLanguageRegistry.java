@@ -40,6 +40,7 @@ import org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.mopp.Martin
 import org.emftext.language.modelquery.resource.modelquery.mopp.ModelqueryMetaInformation;
 import org.emftext.language.models.resource.model.mopp.ModelMetaInformation;
 import org.emftext.language.office.resource.office.mopp.OfficeMetaInformation;
+import org.emftext.language.office2.resource.office2.mopp.Office2MetaInformation;
 import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
 import org.emftext.language.owlcl.resource.owlcl.mopp.OwlclMetaInformation;
 import org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckMetaInformation;
@@ -142,6 +143,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new ModelqueryMetaInformation());
 		metaInformations.add(new ModelMetaInformation());
 		metaInformations.add(new OfficeMetaInformation());
+		metaInformations.add(new Office2MetaInformation());
 		metaInformations.add(new OwlMetaInformation());
 		metaInformations.add(new OwlclMetaInformation());
 		metaInformations.add(new PetrinetMetaInformation());
