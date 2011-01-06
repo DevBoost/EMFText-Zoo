@@ -30,10 +30,10 @@ RULES {
 	Office ::= "office" name[];
 	
 	Employee ::= "employee" name[] 
-				 (!1 "works" "in" worksIn[])?
-				 (!1 "works" "with" 
+				 (!2 "works" "in" worksIn[])?
+				 (!2 "works" "with" 
 				 worksWith[] ("," worksWith[])*)?
-				 (!1 "currently" "in" currentlyIn[])?;
+				 (!2 "currently" "in" currentlyIn[])?;
 				 
 	LeisureRoom ::= "leisure" name[];
 

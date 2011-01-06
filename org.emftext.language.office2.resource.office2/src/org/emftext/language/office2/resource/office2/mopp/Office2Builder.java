@@ -28,6 +28,7 @@ public class Office2Builder implements org.emftext.language.office2.resource.off
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.office2.resource.office2.mopp.Office2Resource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		((OfficeModel)resource.getEObject("/")).assignToOffice();
 		((OfficeModel)resource.getEObject("/")).relocate();
+		((OfficeModel)resource.getEObject("/")).removeUnusedOffices();
 		URI origURI = resource.getURI();
 		URI completedURI = origURI.trimFileExtension().appendFileExtension("completed").appendFileExtension(origURI.fileExtension());
 		resource.setURI(completedURI);
