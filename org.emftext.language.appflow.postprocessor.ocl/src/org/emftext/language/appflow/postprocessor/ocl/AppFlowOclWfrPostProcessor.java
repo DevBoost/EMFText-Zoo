@@ -1,4 +1,4 @@
-package org.emftext.language.egui.postprocessor.ocl;
+package org.emftext.language.appflow.postprocessor.ocl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,13 +17,15 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.egui.commons.Nameable;
-import org.emftext.language.egui.resource.egui.IEguiOptionProvider;
-import org.emftext.language.egui.resource.egui.IEguiOptions;
-import org.emftext.language.egui.resource.egui.IEguiResourcePostProcessor;
-import org.emftext.language.egui.resource.egui.IEguiResourcePostProcessorProvider;
-import org.emftext.language.egui.resource.egui.mopp.EguiResource;
-import org.emftext.language.egui.statemodel.StateModel;
+import org.emftext.language.appflow.commons.Nameable;
+import org.emftext.language.appflow.resource.appflow.AppflowEProblemType;
+import org.emftext.language.appflow.resource.appflow.IAppflowOptionProvider;
+import org.emftext.language.appflow.resource.appflow.IAppflowOptions;
+import org.emftext.language.appflow.resource.appflow.IAppflowResourcePostProcessor;
+import org.emftext.language.appflow.resource.appflow.IAppflowResourcePostProcessorProvider;
+import org.emftext.language.appflow.resource.appflow.mopp.AppflowResource;
+import org.emftext.language.appflow.resource.appflow.mopp.AppflowResourcePostProcessor;
+import org.emftext.language.appflow.statemodel.StateModel;
 import org.osgi.framework.Bundle;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -38,8 +40,8 @@ import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
-public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
-		IEguiResourcePostProcessorProvider, IEguiResourcePostProcessor {
+public class AppFlowOclWfrPostProcessor implements IAppflowOptionProvider,
+		IAppflowResourcePostProcessorProvider, IAppflowResourcePostProcessor {
 
 	/** The id of the Bundle containing the metamodel. */
 	protected final static String METAMODEL_BUNDLE = "org.emftext.language.egui";
@@ -204,7 +206,7 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 	 * org.emftext.language.egui.resource.egui.IEguiResourcePostProcessor#process
 	 * (org.emftext.language.egui.resource.egui.mopp.EguiResource)
 	 */
-	public void process(EguiResource resource) {
+	public void process(AppflowResource resource) {
 
 		init();
 		EObject root = resource.getContents().get(0);
@@ -258,7 +260,7 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 								else
 									msg = "Violation of WFR " + msg + ".";
 
-								resource.addError(msg, element);
+								resource.addError(msg, AppflowEProblemType.ANALYSIS_PROBLEM, element);
 							}
 							// no else.
 
@@ -312,7 +314,7 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 	 * org.emftext.language.egui.resource.egui.IEguiResourcePostProcessorProvider
 	 * #getResourcePostProcessor()
 	 */
-	public IEguiResourcePostProcessor getResourcePostProcessor() {
+	public IAppflowResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 
@@ -324,6 +326,10 @@ public class EGuiOclWfrPostProcessor implements IEguiOptionProvider,
 	 */
 	public Map<?, ?> getOptions() {
 		return Collections.singletonMap(
-				IEguiOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+				IAppflowOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+	}
+
+	public void terminate() {
+		// 
 	}
 }
