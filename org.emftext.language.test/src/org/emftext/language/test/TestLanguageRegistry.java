@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.emftext.access.EMFTextAccessPlugin;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfMetaInformation;
+import org.emftext.language.appflow.resource.appflow.mopp.AppflowMetaInformation;
 import org.emftext.language.aterms.resource.aterms.mopp.AtermsMetaInformation;
 import org.emftext.language.b.resource.mch.mopp.MchMetaInformation;
 import org.emftext.language.bool.resource.bool.mopp.BoolMetaInformation;
@@ -143,7 +144,6 @@ public class TestLanguageRegistry {
 		metaInformations.add(new ModelqueryMetaInformation());
 		metaInformations.add(new ModelMetaInformation());
 		metaInformations.add(new OfficeMetaInformation());
-		metaInformations.add(new Office2MetaInformation());
 		metaInformations.add(new OwlMetaInformation());
 		metaInformations.add(new OwlclMetaInformation());
 		metaInformations.add(new PetrinetMetaInformation());
@@ -192,10 +192,12 @@ public class TestLanguageRegistry {
 	public Set<Object> getMetaInformationsForInternalLanguages() {
 		Set<Object> metaInformations = new LinkedHashSet<Object>();
 		metaInformations.add(new AtermsMetaInformation());
+		metaInformations.add(new AppflowMetaInformation());
 		metaInformations.add(new MchMetaInformation());
 		metaInformations.add(new BoolMetaInformation());
 		metaInformations.add(new CsharpMetaInformation());
 		metaInformations.add(new FsMetaInformation());
+		metaInformations.add(new Office2MetaInformation());
 		metaInformations.add(new SqlMetaInformation());
 		metaInformations.add(new XmlMetaInformation());
 		metaInformations.add(new PcheckMetaInformation());
