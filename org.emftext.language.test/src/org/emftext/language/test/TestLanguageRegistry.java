@@ -162,8 +162,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new StatemachineMetaInformation());
 		metaInformations.add(new RqMetaInformation());
 		metaInformations.add(new TboolMetaInformation());
-		// removed temporarily until bug 1496 (TclTk - Fix token definitions) is fixed
-		//metaInformations.add(new TclMetaInformation());
+		metaInformations.add(new TclMetaInformation());
 		metaInformations.add(new TemplatecallMetaInformation());
 		metaInformations.add(new TasMetaInformation());
 		metaInformations.add(new TheaterMetaInformation());
