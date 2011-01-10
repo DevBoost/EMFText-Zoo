@@ -68,10 +68,15 @@ public class ClosuresPostProcessor implements IClosureOptionProvider, IClosureRe
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		
 		JavaModelCompletion.complete(resource);
+	}
+
+	public void terminate() {
+		//
 	}
 }

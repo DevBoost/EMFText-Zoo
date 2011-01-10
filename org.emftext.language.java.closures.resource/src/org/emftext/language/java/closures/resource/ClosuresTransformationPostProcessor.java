@@ -58,18 +58,14 @@ public class ClosuresTransformationPostProcessor
 	implements IClosureOptionProvider,
 		IClosureResourcePostProcessor, IClosureResourcePostProcessorProvider {
 
-	
-	@Override
 	public IClosureResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
-
-	@Override
+	
 	public void process(final ClosureResource resource) {
 		
 		Thread workerThread = new Thread(new Runnable(){
 
-			@Override
 			public void run() {
 				convert(resource);
 			}
@@ -645,11 +641,15 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 		}
 	}
 	
-	@Override
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IClosureOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 		return map;
+	}
+
+	public void terminate() {
+		//
+		
 	}
 
 }
