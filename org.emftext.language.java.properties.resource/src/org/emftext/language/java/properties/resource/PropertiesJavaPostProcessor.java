@@ -164,4 +164,8 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 		options.put(IPropjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new PropertiesJavaPostProcessor());
 		return options;
 	}
+	
+	public void terminate() {
+		// do nothing
+	}
 }

@@ -58,7 +58,8 @@ public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjava
 						mainIdReference,
 						targetReference,
 						id,
-						proxy);
+						proxy,
+						-1);
 			}
 		}.repair(resource);
 		
@@ -68,5 +69,9 @@ public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjava
 
 	public IPropjavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
+	}
+	
+	public void terminate() {
+		// do nothing
 	}
 }
