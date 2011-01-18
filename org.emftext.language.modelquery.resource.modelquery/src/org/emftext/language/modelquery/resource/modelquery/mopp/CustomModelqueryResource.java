@@ -22,6 +22,7 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.emftext.language.modelquery.ModelQuery;
+import org.emftext.language.modelquery.resource.modelquery.ModelqueryEProblemType;
 import org.reuseware.sokan.ID;
 import org.reuseware.sokan.IndexRow;
 import org.reuseware.sokan.index.notify.IndexListener;
@@ -62,7 +63,9 @@ public class CustomModelqueryResource extends ModelqueryResource {
 		
 		ID myID = ResourceUtil.idFrom(getURI());
 		if (myID == null) {
-			this.addError("To save a modelquery it must reside in a Sokan store", modelQuery);
+			this.addError("To save a modelquery it must reside in a Sokan store", 
+					ModelqueryEProblemType.ANALYSIS_PROBLEM,
+					modelQuery);
 			return;
 		}
 		
@@ -156,7 +159,9 @@ public class CustomModelqueryResource extends ModelqueryResource {
 				//relative
 				ID myID = ResourceUtil.idFrom(getURI());
 				if (myID == null) {
-					this.addError("A relative modelquery must reside in a Sokan store", modelQuery);
+					this.addError("A relative modelquery must reside in a Sokan store",
+							ModelqueryEProblemType.ANALYSIS_PROBLEM,
+							modelQuery);
 					return;
 				}
 				baseString = computeBaseID(myID);
@@ -183,7 +188,9 @@ public class CustomModelqueryResource extends ModelqueryResource {
 				}
 			}
 			catch (PatternSyntaxException pse) {
-				this.addError("Not a correct query: " + queryString, modelQuery);
+				this.addError("Not a correct query: " + queryString, 
+						ModelqueryEProblemType.ANALYSIS_PROBLEM,
+						modelQuery);
 			}
 		}
 		
