@@ -68,6 +68,7 @@ import org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation;
 import org.emftext.language.sql.resource.sql.mopp.SqlMetaInformation;
 import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation;
 import org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation;
+import org.emftext.language.tcltk.resource.tcl.mopp.TclMetaInformation;
 import org.emftext.language.templateconcepts.call.resource.templatecall.mopp.TemplatecallMetaInformation;
 import org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation;
 import org.emftext.language.theater.resource.theater.mopp.TheaterMetaInformation;
