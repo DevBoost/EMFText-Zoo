@@ -15,7 +15,7 @@ package org.emftext.language.ecore.test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -64,7 +64,7 @@ public class AbstractEcoreTestCase extends TestCase {
 		assertEquals(0, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
 		
-		List<EObject> unresolvedProxies = TextEcoreResourceUtil.findUnresolvedProxies(resource);
+		Set<EObject> unresolvedProxies = TextEcoreResourceUtil.findUnresolvedProxies(resource);
 		for (EObject proxy : unresolvedProxies) {
 			//assertTrue(proxy.eIsProxy());
 			InternalEObject internalProxy = (InternalEObject) proxy;
