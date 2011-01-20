@@ -18,5 +18,6 @@ TOKENS {
 }
 
 RULES {
+	@SuppressWarnings(featureWithoutSyntax)
 	ModelQuery ::= ("query" queries['$','$'])+;
 }
