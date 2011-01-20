@@ -1,4 +1,4 @@
-package org.emftext.language.modelquery.resource.modelquery.mopp;
+package org.emftext.language.modelquery.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +23,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.emftext.language.modelquery.ModelQuery;
 import org.emftext.language.modelquery.resource.modelquery.ModelqueryEProblemType;
+import org.emftext.language.modelquery.resource.modelquery.mopp.ModelqueryResource;
 import org.reuseware.sokan.ID;
 import org.reuseware.sokan.IndexRow;
 import org.reuseware.sokan.index.notify.IndexListener;

@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.emftext.language.modelquery.resource.modelquery.mopp;
+package org.emftext.language.modelquery.resource;
 
 public class CustomModelqueryResourceFactory implements org.eclipse.emf.ecore.resource.Resource.Factory {
 	

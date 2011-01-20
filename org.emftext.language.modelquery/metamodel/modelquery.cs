@@ -4,9 +4,6 @@ START ModelQuery
 
 OPTIONS {
 	usePredefinedTokens = "false";
-	additionalDependencies = "org.reuseware.sokan.index";
-	
-	overridePluginXML = "false";
 }
 
 TOKENS {

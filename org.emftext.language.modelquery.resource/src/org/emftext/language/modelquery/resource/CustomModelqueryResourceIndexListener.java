@@ -1,4 +1,4 @@
-package org.emftext.language.modelquery.resource.modelquery.mopp;
+package org.emftext.language.modelquery.resource;
 
 import java.lang.ref.WeakReference;
 import java.util.Set;
