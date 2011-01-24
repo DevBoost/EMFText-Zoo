@@ -1,0 +1,24 @@
+package org.emftext.language.sumup;
+
+petrinet "Sumup" 
+import <../metamodel/sumup.text.ecore> <../metamodel/sumup.genmodel>;
+
+{ 
+	place "SheetStack" : Sheet
+	place "CalculationStack" : Calculation 
+	place "VariableStack" : VariableDeclaration
+	transition "initialiseCalculationStack" 
+	
+	"SheetStack" -> "initialiseCalculationStack" {
+		entry = inToken.getEntries().get(0);
+		sheet = inToken;
+	}
+	
+	"initialiseCalculationStack" -> "SheetStack" {
+		sheet.remove(entry); 
+		outToken = sheet;
+	}
+	"initialiseCalculationStack" -> "CalculationStack" {
+		outToken = entry;
+	}
+}
