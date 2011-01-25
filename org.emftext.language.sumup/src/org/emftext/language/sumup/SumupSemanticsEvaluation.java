@@ -6,7 +6,7 @@ import org.emftext.language.sumup.*;
 public class SumupSemanticsEvaluation {
 
 	private List<Sheet> _place_SheetStack = new ArrayList<Sheet>();
-	private List<Calculation> _place_CalculationStack = new ArrayList<Calculation>();
+	private List<VariableDeclaration> _place_CalculationStack = new ArrayList<VariableDeclaration>();
 	private List<VariableDeclaration> _place_VariableStack = new ArrayList<VariableDeclaration>();
 
 	public void intialisePlaces(EObject model) {
@@ -30,51 +30,55 @@ public class SumupSemanticsEvaluation {
 
 	private void transition_initialiseCalculationStack_doFire() {
 		Sheet _in_SheetStack = _place_SheetStack.remove(0);
-		UnresolvedType entry;
+		VariableDeclaration entry;
 		Sheet sheet;
 		{ // evaluate incomming arcs
 
 			Sheet inToken = _in_SheetStack;
+
+			// entry initialization 
 			Sheet __temp_1 = inToken;
 
 			// .getEntries()
 			List<VariableDeclaration> __temp_2 = __temp_1.getEntries();
-			// .null()
+			// .get()
 			int __temp_3 = 0;
-			
-			null(__temp_2, __temp_3);
-			entry = null;
+			VariableDeclaration __temp_4 = __temp_2.get(__temp_3);
+			entry = __temp_4;
 
-			Sheet __temp_4 = inToken;
+			// sheet initialization 
+			Sheet __temp_5 = inToken;
 
-			sheet = __temp_4;
-
+			sheet = __temp_5;
 		}
-		Sheet _out_SheetStack = org.emftext.language.sumup.SumupFactory.eINSTANCE.createSheet();
-		Calculation _out_CalculationStack = org.emftext.language.sumup.SumupFactory.eINSTANCE.createCalculation();
+		Sheet _out_SheetStack;
+		VariableDeclaration _out_CalculationStack;
 		{ // evaluate outgoing arcs
 
-			Sheet outToken = _out_SheetStack;
-			Sheet __temp_5 = sheet;
+			Sheet outToken;
+			Sheet __temp_6 = sheet;
 
-			// .null()
-			UnresolvedType __temp_6 = entry;
+			// .getEntries()
+			List<VariableDeclaration> __temp_7 = __temp_6.getEntries();
+			// .remove()
+			VariableDeclaration __temp_8 = entry;
 
-			
-			null(__temp_5, __temp_6);
-			Sheet __temp_7 = sheet;
+			boolean __temp_9 = __temp_7.remove(__temp_8);
 
-			outToken = __temp_7;
+			// outToken initialization 
+			Sheet __temp_10 = sheet;
 
+			outToken = __temp_10;
 			_out_SheetStack = outToken;
 		}
 		{ // evaluate outgoing arcs
 
-			Calculation outToken = _out_CalculationStack;
-			UnresolvedType __temp_8 = entry;
+			VariableDeclaration outToken;
 
-			outToken = __temp_8;
+			// outToken initialization 
+			VariableDeclaration __temp_11 = entry;
 
+			outToken = __temp_11;
 			_out_CalculationStack = outToken;
 		}
 		_place_CalculationStack.add(0, _out_CalculationStack);

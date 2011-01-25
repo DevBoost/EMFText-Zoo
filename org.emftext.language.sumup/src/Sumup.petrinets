@@ -5,7 +5,7 @@ import <../metamodel/sumup.text.ecore> <../metamodel/sumup.genmodel>;
 
 { 
 	place "SheetStack" : Sheet
-	place "CalculationStack" : Calculation 
+	place "CalculationStack" : VariableDeclaration 
 	place "VariableStack" : VariableDeclaration
 	transition "initialiseCalculationStack" 
 	
@@ -15,10 +15,12 @@ import <../metamodel/sumup.text.ecore> <../metamodel/sumup.genmodel>;
 	}
 	
 	"initialiseCalculationStack" -> "SheetStack" {
-		sheet.remove(entry); 
-		outToken = sheet;
+		sheet.getEntries().remove(entry); 
+		outToken = sheet; 
 	}
+	
 	"initialiseCalculationStack" -> "CalculationStack" {
 		outToken = entry;
+	//	outToken = new Additive(); 
 	}
 }
