@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.requirements.resource.requirements.ui.RequirementsUIMetaInformation" id="org.emftext.language.requirements.resource.requirements.ui.RequirementsUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.requirements.resource.requirements.ui.RequirementsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="requirements" icon="icons/editor_icon.gif" id="org.emftext.language.requirements.resource.requirements.ui.RequirementsEditor" name="EMFText requirements Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.requirements.resource.requirements">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.requirements.resource.requirements.ui.RequirementsPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Requirements Text Editor" id="org.emftext.language.requirements.resource.requirements.ui.RequirementsPreferencePage" class="org.emftext.language.requirements.resource.requirements.ui.RequirementsPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.requirements.resource.requirements.ui.RequirementsSyntaxColoringPreferencePage" class="org.emftext.language.requirements.resource.requirements.ui.RequirementsSyntaxColoringPreferencePage" category="org.emftext.language.requirements.resource.requirements.ui.RequirementsPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.requirements.resource.requirements.ui.RequirementsBracketPreferencePage" class="org.emftext.language.requirements.resource.requirements.ui.RequirementsBracketPreferencePage" category="org.emftext.language.requirements.resource.requirements.ui.RequirementsPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.requirements.resource.requirements.ui.RequirementsNewFileWizard" id="org.emftext.language.requirements.resource.requirements.ui.RequirementsNewFileWizard" name="EMFText .requirements file">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.requirements.resource.requirements.ui.RequirementsMarkerResolutionGenerator" markerType="org.emftext.language.requirements.resource.requirements.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.requirements.resource.requirements.ui.RequirementsAnnotationModelFactory" extensions="requirements">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.requirements.resource.requirements" name=".requirements File" base-type="org.eclipse.core.runtime.text" file-extensions="requirements">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="requirements" id="org.emftext.language.requirements.resource.requirements.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.requirements.resource.requirements.ui.occurences">
+		</type>
+		<type name="org.emftext.language.requirements.resource.requirements.ui.occurences.declaration" super="org.emftext.language.requirements.resource.requirements.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.requirements.resource.requirements.ui.occurences" label="Occurrences (in .requirements files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="requirements.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="requirements.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="requirements.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="requirements.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="requirements.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="requirements.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="requirements.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="requirements.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="requirements.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.requirements.resource.requirements.ui.occurences.declaration" label="Declarations (in .requirements files)" textPreferenceKey="requirements.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="requirements.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="requirements.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="requirements.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="requirements.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="requirements.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+</plugin>

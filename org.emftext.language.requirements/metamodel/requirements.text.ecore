@@ -1,0 +1,41 @@
+package requirements // this is the package name 
+        requirements // this is the namespace prefix
+        "http://www.emftext.org/requirements" // the namespace URI 
+	{
+
+	class RequirementsSpec {
+		attribute EString name (1..1);
+		attribute EString customer (0..1);
+		attribute EString description (0..1);
+		reference RequirementsSpec imports (0..-1);
+		containment reference Requirement requirements (0..-1);
+		containment reference Category categories (0..-1);
+		containment reference Component components (0..-1);
+	}
+	
+	class Requirement {
+		attribute EString id (1..1);
+		attribute Priority priority (1..1);
+		attribute EString name (1..1);
+		attribute EString description (1..1);
+		reference Category category (0..-1);
+		reference Component realisingComponent (0..1);
+		reference Requirement related (0..-1);
+	}
+	
+	class Category {
+		attribute EString name (1..1);
+		attribute EString description (1..1);
+	}
+	
+	class Component {
+		attribute EString name (1..1);
+		attribute EString description (1..1);
+	}
+	
+	serializable enum Priority {
+		0 : low = "LOW";
+		1 : medium = "MEDIUM";
+		2 : high = "HIGH";
+	}
+}
