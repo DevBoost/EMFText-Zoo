@@ -1,0 +1,10 @@
+import "./requirements.text.ecore"
+
+refinements: {
+ 	type UIActionCategoryReq refines Requirement : Requirement_category min 1 (Category_name value "uiAction")
+ 	type WorkflowCategoryReq refines Requirement : Requirement_category min 1 (Category_name value "workflow")
+ 	
+}
+
+Requirement message "For each requirement of category uiAction an related workflow requirement needs to be given."
+		: not UIActionCategoryReq or (Requirement_related min 1 WorkflowCategoryReq); 

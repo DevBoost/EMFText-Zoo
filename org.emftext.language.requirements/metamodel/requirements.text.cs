@@ -4,6 +4,7 @@ START RequirementsSpec
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	overrideBuilder = "false";
 }
 
 

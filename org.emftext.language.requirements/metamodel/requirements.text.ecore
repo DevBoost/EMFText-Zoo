@@ -12,6 +12,10 @@ package requirements // this is the package name
 		containment reference Category categories (0..-1);
 		containment reference Component components (0..-1);
 	}
+
+	@"OWL_CONSTRAINT"("For each requirement of category uiAction an related workflow requirement needs to be given."="not UIActionCategoryReq or ( Requirement_related min 1 WorkflowCategoryReq ) ")
+	@"OWL_DEFINITION"("UIActionCategoryReq"="Requirement_category min 1 ( Category_name value \"uiAction\" ) ")
+	@"OWL_DEFINITION"("WorkflowCategoryReq"="Requirement_category min 1 ( Category_name value \"workflow\" ) ")
 	
 	class Requirement {
 		attribute EString id (1..1);
