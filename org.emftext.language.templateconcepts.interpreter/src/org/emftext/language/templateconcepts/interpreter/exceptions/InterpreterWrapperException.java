@@ -19,7 +19,7 @@ package org.emftext.language.templateconcepts.interpreter.exceptions;
 /**
  * Just wraps the {@link InterpreterException} in case 
  * the surrounding method cannot be marked as throwing it (throws ..)
- * @author Marcel Böhme
+ * @author Marcel Boehme
  * Comment created on: 15.04.2009
  */
 public class InterpreterWrapperException extends Exception {
