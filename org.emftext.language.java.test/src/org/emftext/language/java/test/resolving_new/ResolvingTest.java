@@ -45,7 +45,7 @@ import org.emftext.language.java.test.AbstractJavaParserTestCase;
  */
 public class ResolvingTest extends TestCase {
 	
-	private static final String INPUT_FOLDER = "input" + File.separator + "resolving_new";
+	private static final String INPUT_FOLDER = src-input + File.separator + "resolving_new";
 
 	/**
 	 * A FileFilter that does not accept SVN metadata directories.

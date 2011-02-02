@@ -40,7 +40,7 @@ public class UnicodeTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected String getTestInputFolder() {
-		return "input" + File.separator + "unicode";
+		return src-input + File.separator + "unicode";
 	}
 
 }

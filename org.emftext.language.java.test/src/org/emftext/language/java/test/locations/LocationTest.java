@@ -32,7 +32,7 @@ import org.junit.Test;
  */
 public class LocationTest extends AbstractJavaParserTestCase {
 	
-	private static final String INPUT_FOLDER = "input" + File.separator + "locations" + File.separator;
+	private static final String INPUT_FOLDER = src-input + File.separator + "locations" + File.separator;
 
 	@Override
 	protected String getTestInputFolder() {

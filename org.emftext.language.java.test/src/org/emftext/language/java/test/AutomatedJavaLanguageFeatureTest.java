@@ -29,7 +29,7 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
  */
 public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	
-	protected static final String TEST_INPUT_FOLDER_NAME = "input";
+	protected static final String TEST_INPUT_FOLDER_NAME = src-input;
 	protected static final String TEST_OUTPUT_FOLDER_NAME = "output";
 	
 	public static Test suite() throws CoreException {
