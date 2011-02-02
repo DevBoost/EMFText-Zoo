@@ -57,7 +57,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		}
 	}
 
-	//Funktion die, je nach Klassenart, die beinhaltenden Member zählen soll
+	//Funktion die, je nach Klassenart, die beinhaltenden Member zaehlen soll
 	protected void assertMemberCount(
 			EObject classtyp,
 			int expectedCount) {
@@ -87,7 +87,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 				+ " member(s).", expectedCount, count);
 	}
 	
-	//setzt die Teile der Identifier zu einem vollständigen String zusammen
+	//setzt die Teile der Identifier zu einem vollstaendigen String zusammen
 	protected String namespaceOrTypeNameToString(
 			NamespaceOrTypeName identifier){
 		String puffer = "";
