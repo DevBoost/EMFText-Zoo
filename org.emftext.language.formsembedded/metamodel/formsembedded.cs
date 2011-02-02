@@ -4,7 +4,7 @@ START java.Containers.CompilationUnit
 
 IMPORTS {
 	forms : <http://www.emftext.org/language/forms> WITH SYNTAX forms <../../org.emftext.language.forms/metamodel/forms.cs>
-	java : <http://www.emftext.org/java> WITH SYNTAX java <platform:/plugin/org.emftext.language.java/metamodel/java.cs>
+	java : <http://www.emftext.org/java> WITH SYNTAX java <../../org.emftext.language.java/metamodel/java.cs>
 }
 
 OPTIONS {
