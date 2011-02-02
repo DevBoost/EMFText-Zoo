@@ -96,7 +96,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	private static final String JAVA_FILE_EXTENSION = ".java";
 
-	protected static final String TEST_INPUT_FOLDER = src-input;
+	protected static final String TEST_INPUT_FOLDER = "src-input";
 
 	// a list of files that are excluded from the reprint test, because
 	// they contain optional tokens which are lost after parsing them
