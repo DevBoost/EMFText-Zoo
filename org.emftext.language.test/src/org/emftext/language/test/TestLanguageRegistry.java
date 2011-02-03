@@ -90,9 +90,7 @@ import org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation;
 import org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation;
 import org.emftext.test.printing.resource.printing.mopp.PrintingMetaInformation;
 import org.emftext.test.resolving.resource.resolving.mopp.ResolvingMetaInformation;
-import org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax.mopp.CpsyntaxMetaInformation;
-import org.reuseware.coconut.compositionsystem.resource.csys.mopp.CsysMetaInformation;
-import org.reuseware.coconut.fragment.resource.fragment.mopp.FragmentMetaInformation;
+import org.reuseware.coconut.fracol.resource.fracol.mopp.FracolMetaInformation;
 import org.reuseware.coconut.reuseextension.resource.rex.mopp.RexMetaInformation;
 import org.reuseware.coconut.reuseextensionactivator.resource.rexactivator.mopp.Rex_activatorMetaInformation;
 
@@ -176,10 +174,8 @@ public class TestLanguageRegistry {
 		
 		//Reuseware languages
 		metaInformations.add(new RexMetaInformation());
-		metaInformations.add(new CsysMetaInformation());
-		metaInformations.add(new CpsyntaxMetaInformation());
+		metaInformations.add(new FracolMetaInformation());
 		metaInformations.add(new Rex_activatorMetaInformation());
-		metaInformations.add(new FragmentMetaInformation());
 		
 		//Refactory languages
 		metaInformations.add(new RolemappingMetaInformation());
