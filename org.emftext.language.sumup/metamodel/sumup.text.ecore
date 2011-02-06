@@ -42,6 +42,30 @@ package sumup sumup "http://www.emftext.org/language/sumup" {
 	abstract class Calculation {
 	}
 	
+	class Or extends Calculation {
+		containment reference Calculation left (1..1);
+		containment reference Calculation right (1..1);
+	}
+	
+	class And extends Calculation {
+		containment reference Calculation left (1..1);
+		containment reference Calculation right (1..1);
+	}
+	
+	class Comparison extends Calculation {
+		containment reference Calculation left (1..1);
+		attribute CompareOperator operator (1..1);
+		containment reference Calculation right (1..1);
+	}
+	
+	serializable enum CompareOperator {
+		0 : EQUALS = "=";
+		1 : LOWER = "<";
+		2 : LEQ = "<=";
+		3 : GREATER = ">";
+		4 : GEQ = ">=";
+	}
+	
 	class Additive extends Calculation {
 		containment reference Calculation left (1..1);
 		containment reference Calculation right (1..1);

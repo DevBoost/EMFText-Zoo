@@ -26,25 +26,40 @@ RULES {
 
 	Result ::= value[DECIMAL_FLOAT_LITERAL] unit;
 	
-	@Operator(type="binary_left_associative", weight="1", superclass="Calculation")
+	@Operator(type="binary_left_associative", weight="3", superclass="Calculation")
+	Or ::= left #1 "or" #1 right;
+	
+	@Operator(type="binary_left_associative", weight="4", superclass="Calculation")
+	And ::= left #1 "and" #1 right;
+	
+	@Operator(type="binary_left_associative", weight="5", superclass="Calculation")
+	Comparison ::= left #1 operator[
+		EQUALS : "=", 
+		LOWER : "<",
+		LEQ : "<=",
+		GREATER : ">",
+		GEQ : ">="
+		] #1 right;
+	
+	@Operator(type="binary_left_associative", weight="6", superclass="Calculation")
 	Additive ::= left #1 operator[PLUS : "+", MINUS : "-"] #1 right;
 	
-	@Operator(type="binary_left_associative", weight="2", superclass="Calculation")
+	@Operator(type="binary_left_associative", weight="7", superclass="Calculation")
 	Multiplicative ::= left #1 operator[TIMES : "*", DIV : "/"] #1 right;
 
-	@Operator(type="unary_prefix", weight="3", superclass="Calculation")	
+	@Operator(type="unary_prefix", weight="8", superclass="Calculation")	
 	Unary ::= minus["-":""] #1 calculation;
 	
-	@Operator(type="primitive", weight="5", superclass="Calculation")
+	@Operator(type="primitive", weight="9", superclass="Calculation")
 	Nested ::= "(" calculation ")";
 	
-	@Operator(type="primitive", weight="5", superclass="Calculation")
+	@Operator(type="primitive", weight="9", superclass="Calculation")
 	Int ::= value[DECIMAL_INTEGER_LITERAL]  unit?;
 
-	@Operator(type="primitive", weight="5", superclass="Calculation")
+	@Operator(type="primitive", weight="9", superclass="Calculation")
 	Float ::= value[DECIMAL_FLOAT_LITERAL]  unit?;
 
-	@Operator(type="primitive", weight="5", superclass="Calculation")
+	@Operator(type="primitive", weight="9", superclass="Calculation")
 	VariableRef ::= variable[IDENTIFIER];
 	
 	Unit ::= (#1 numerators[IDENTIFIER] )+ ("/" (#1 denominators[IDENTIFIER])+)?;		
