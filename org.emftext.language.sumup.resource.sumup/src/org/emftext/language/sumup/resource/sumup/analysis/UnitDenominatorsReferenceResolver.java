@@ -6,15 +6,15 @@
  */
 package org.emftext.language.sumup.resource.sumup.analysis;
 
-public class UnitDenominatorsReferenceResolver implements org.emftext.language.sumup.resource.sumup.ISumupReferenceResolver<org.emftext.language.sumup.Unit, org.emftext.language.sumup.Variable> {
+public class UnitDenominatorsReferenceResolver implements org.emftext.language.sumup.resource.sumup.ISumupReferenceResolver<org.emftext.language.sumup.Unit, org.emftext.language.sumup.UnitDeclaration> {
 	
-	private org.emftext.language.sumup.resource.sumup.analysis.SumupDefaultResolverDelegate<org.emftext.language.sumup.Unit, org.emftext.language.sumup.Variable> delegate = new org.emftext.language.sumup.resource.sumup.analysis.SumupDefaultResolverDelegate<org.emftext.language.sumup.Unit, org.emftext.language.sumup.Variable>();
+	private org.emftext.language.sumup.resource.sumup.analysis.SumupDefaultResolverDelegate<org.emftext.language.sumup.Unit, org.emftext.language.sumup.UnitDeclaration> delegate = new org.emftext.language.sumup.resource.sumup.analysis.SumupDefaultResolverDelegate<org.emftext.language.sumup.Unit, org.emftext.language.sumup.UnitDeclaration>();
 	
-	public void resolve(String identifier, org.emftext.language.sumup.Unit container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.sumup.resource.sumup.ISumupReferenceResolveResult<org.emftext.language.sumup.Variable> result) {
+	public void resolve(String identifier, org.emftext.language.sumup.Unit container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.sumup.resource.sumup.ISumupReferenceResolveResult<org.emftext.language.sumup.UnitDeclaration> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public String deResolve(org.emftext.language.sumup.Variable element, org.emftext.language.sumup.Unit container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(org.emftext.language.sumup.UnitDeclaration element, org.emftext.language.sumup.Unit container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

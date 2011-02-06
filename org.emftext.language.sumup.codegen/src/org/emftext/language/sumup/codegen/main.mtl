@@ -1,0 +1,95 @@
+[comment encoding = UTF-8 /]
+[module main('http://www.emftext.org/language/sumup')/]
+
+[template public main(sheet : Sheet, targetClass : String, targetPackage : String)]
+	
+	[comment @main /]
+	[file (targetClass.concat('.java'), false, 'UTF-8')]
+package [ targetPackage /];
+
+public class [ targetClass /] {
+
+	[for (v : InputVariable | sheet.inputs)]
+	private double [ v.name.toLowerFirst() /];
+	
+	[/for]
+	[for (v : OutputVariable | sheet.outputs)]
+	private double [ v.name.toLowerFirst() /];
+	
+	[/for]
+	[for (v : InputVariable | sheet.inputs)]
+	public double get[ v.name.toUpperFirst() /]() {
+		return this.[ v.name.toLowerFirst() /];
+	}
+	
+	public void set[ v.name.toUpperFirst() /](double newValue) {
+		this.[ v.name.toLowerFirst() /] = newValue;
+	}
+	
+	[/for]
+	[for (v : OutputVariable | sheet.outputs)]
+	public double get[ v.name.toUpperFirst() /]() {
+		return this.[ v.name.toLowerFirst() /];
+	}
+	
+	[/for]
+	public void calculate() {
+		[for (a : Assignment | sheet.computations)]
+		this.[ a.target.name.toLowerFirst() /] = [calc(a.calculation) /];
+		[/for]
+	}
+}
+	[/file]
+	
+[/template]
+
+[template public calc(c : Calculation)]
+[if (c.oclIsTypeOf(Additive))]
+[ let a : Additive = c.oclAsType(Additive) ]
+[ calc(a.left) /] [ a.operator /] [ calc(a.right) /]
+[/let]
+[/if]
+[if (c.oclIsTypeOf(Multiplicative))]
+[let m : Multiplicative = c.oclAsType(Multiplicative)]
+[ calc(m.left) /] [ m.operator /] [ calc(m.right) /]
+[/let]
+[/if]
+[if (c.oclIsTypeOf(Unary))]
+[let u : Unary = c.oclAsType(Unary)]
+[if (u.minus) ]-[/if][ calc(u.calculation) /]
+[/let]
+[/if]
+[if (c.oclIsTypeOf(Int))]
+[let p : Int = c.oclAsType(Int)]
+[ p.value /] * [ unit(p) /]
+[/let]
+[/if]
+[if (c.oclIsTypeOf(Float))]
+[let f : Float = c.oclAsType(Float)]
+[ f.value /] * [ unit(f) /]
+[/let]
+[/if]
+[if (c.oclIsTypeOf(Nested))]
+[let n : Nested = c.oclAsType(Nested)]
+([ calc(n.calculation) /])
+[/let]
+[/if]
+[if (c.oclIsTypeOf(VariableRef))]
+[let r : VariableRef = c.oclAsType(VariableRef)]
+get[ r.variable.name.toUpperFirst() /]()
+[/let]
+[/if]
+[/template]
+
+[template public unit(u : UnitValue)]
+[if (not u.unit.oclIsUndefined())]
+[for (unit : UnitDeclaration | u.unit.numerators)]
+[if (not unit.normalisation.oclIsUndefined())]
+[ calc(unit.normalisation) /]
+[/if]
+[if (unit.normalisation.oclIsUndefined())]
+1
+[/if]
+[/for]
+[/if]
+[/template]

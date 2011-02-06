@@ -6,29 +6,51 @@
  */
 package org.emftext.language.sumup.resource.sumup.mopp;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.sumup.Sheet;
+import org.emftext.language.sumup.codegen.Main;
+import org.emftext.language.sumup.resource.sumup.ISumupBuilder;
 
-public class SumupBuilder implements
-		org.emftext.language.sumup.resource.sumup.ISumupBuilder {
+public class SumupBuilder implements ISumupBuilder {
 
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
-		if (uri.toString().endsWith("evaluated.sumup")) return false;
+	public boolean isBuildingNeeded(URI uri) {
+		if (uri.toString().endsWith("evaluated.sumup") || isBinaryResource(uri)) {
+			return false;
+		}
 		return true;
 	}
 
-	public org.eclipse.core.runtime.IStatus build(
-			org.emftext.language.sumup.resource.sumup.mopp.SumupResource resource,
-			org.eclipse.core.runtime.IProgressMonitor monitor) {
+	private boolean isBinaryResource(URI uri) {
+		for (String segment : uri.segments()) {
+			if ("bin".equals(segment)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public IStatus build(SumupResource resource, IProgressMonitor monitor) {
 		// set option overrideBuilder to 'false' and then perform build here
 		if (resource.getErrors().isEmpty()
 				&& resource.getContents().size() == 1
 				&& resource.getContents().get(0) instanceof Sheet) {
-			boolean changes = evaluateSheet((Sheet) resource.getContents().get(
-					0));
+			Sheet sheet = (Sheet) resource.getContents().get(0);
+			generateJavaCode(sheet);
+			/*
+			boolean changes = evaluateSheet(sheet);
 			if (changes && resource.getErrors().isEmpty()) {
  				URI outUri = resource.getURI().trimFileExtension();
 				outUri = outUri.appendFileExtension("evaluated.sumup");
@@ -42,17 +64,68 @@ public class SumupBuilder implements
 					e.printStackTrace();
 				}
 			}
+			*/
 		}
 		return org.eclipse.core.runtime.Status.OK_STATUS;
+	}
 
+	private void generateJavaCode(Sheet sheet) {
+		try {
+			generate(sheet.eResource().getURI(), "src", new Main());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void generate(URI model, String folder, AbstractAcceleoGenerator generator) throws IOException, CoreException {
+		IResource member = getResourceInWorkspace(model);
+		if (member == null) {
+			return;
+		}
+		File targetFolder = getTargetFolder(member.getParent());
+		List<String> arguments = new ArrayList<String>();
+		arguments.add(model.trimFileExtension().lastSegment());
+		arguments.add(getTargetPackage(model));
+		generator.initialize(model, targetFolder, arguments);
+		generator.doGenerate(null);
+		member.getParent().refreshLocal(2, null);
+	}
+
+	private File getTargetFolder(IResource member) {
+		File targetFolder =  new File(member.getRawLocation().toOSString());
+		return targetFolder;
+	}
+
+	private IResource getResourceInWorkspace(URI model) {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		String platformString = model.toPlatformString(true);
+		IResource member = root.findMember(platformString);
+		return member;
+	}
+
+	private String getTargetPackage(URI model) {
+		URI folderURI = model.trimSegments(1);
+		String[] segments = folderURI.segments();
+		String targetPackage = segments[segments.length - 1];
+		for (int i = segments.length - 2; i >= 0; i--) {
+			String segment = segments[i];
+			if ("src".equals(segment)) {
+				break;
+			}
+			targetPackage = segment + "." + targetPackage;
+		}
+		return targetPackage;
 	}
 
 	private boolean evaluateSheet(Sheet sheet) {
-		if (sheet.getEntries().size() > 0) {
-			// invoke petrinets evaluation
+		if (sheet.getComputations().size() > 0) {
+			// TODO invoke petrinets evaluation
 			return true;
 		}
 		return false;
-
 	}
 }
