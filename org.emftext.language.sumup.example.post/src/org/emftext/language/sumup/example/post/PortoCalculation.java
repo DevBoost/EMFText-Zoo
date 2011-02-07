@@ -12,95 +12,342 @@ public class PortoCalculation {
 	
 	private double gewicht;
 	
-	private double gesamtSumme;
-	
 	private double einzelPreis;
 	
-	private double kiloPreis;
+	private double gesamtSumme;
 	
 	public double getSendungsAnzahl() {
 		return this.sendungsAnzahl;
 	}
 	
+	/**
+	 * Set input parameter 'SendungsAnzahl'.
+	 */
 	public void setSendungsAnzahl(double newValue) {
-		this.sendungsAnzahl = newValue;
+		this.sendungsAnzahl = newValue / (1
+		);
 	}
-	
+
 	public double getLaenge() {
 		return this.laenge;
 	}
 	
+	/**
+	 * Set input parameter 'Laenge'.
+	 * Required unit is mm.
+	 */
 	public void setLaenge(double newValue) {
-		this.laenge = newValue;
+		this.laenge = newValue / (1
+		);
 	}
-	
+
 	public double getBreite() {
 		return this.breite;
 	}
 	
+	/**
+	 * Set input parameter 'Breite'.
+	 * Required unit is mm.
+	 */
 	public void setBreite(double newValue) {
-		this.breite = newValue;
+		this.breite = newValue / (1
+		);
 	}
-	
+
 	public double getHoehe() {
 		return this.hoehe;
 	}
 	
+	/**
+	 * Set input parameter 'Hoehe'.
+	 * Required unit is mm.
+	 */
 	public void setHoehe(double newValue) {
-		this.hoehe = newValue;
+		this.hoehe = newValue / (1
+		);
 	}
-	
+
 	public double getGewicht() {
 		return this.gewicht;
 	}
 	
+	/**
+	 * Set input parameter 'Gewicht'.
+	 * Required unit is g.
+	 */
 	public void setGewicht(double newValue) {
-		this.gewicht = newValue;
+		this.gewicht = newValue / (1
+		);
 	}
-	
-	public double getGesamtSumme() {
-		return this.gesamtSumme;
-	}
-	
+
+	/**
+	 * Returns output parameter 'EinzelPreis'.
+	 * Unit is EUR.
+	 */
 	public double getEinzelPreis() {
-		return this.einzelPreis;
+		return this.einzelPreis / (((100 * 1
+		)
+		)
+		
+		);
 	}
 	
-	public double getKiloPreis() {
-		return this.kiloPreis;
+	/**
+	 * Returns output parameter 'GesamtSumme'.
+	 * Unit is EUR.
+	 */
+	public double getGesamtSumme() {
+		return this.gesamtSumme / (((100 * 1
+		)
+		)
+		
+		);
 	}
 	
 	public void calculate() {
-		this.einzelPreis = 1.49 * 100 * 1
-		
-		
-		
-		
-		
-		;
-		this.kiloPreis = 2 * 100 * 1
-		
-		
-		
-		
-		
-		;
-		this.gesamtSumme = getSendungsAnzahl()
-		
-		 * getEinzelPreis()
-		 
-		 
-		 + (getSendungsAnzahl()
-		 
-		  * getGewicht()
-		  
-		  
+		if ((((((this.laenge
+		)
+		 <= ((60 * ((10 * 1
+		 )
 		 )
 		 
-		  * getKiloPreis()
+		 )
+		 )
+		 )
+		 && ((this.breite
+		 )
+		  <= ((30 * ((10 * 1
+		  )
+		  )
 		  
+		  )
+		  )
+		  )
+		 )
+		 && ((this.hoehe
+		 )
+		  <= ((15 * ((10 * 1
+		  )
+		  )
 		  
-		 
+		  )
+		  )
+		  )
+		 )
+		 && ((this.gewicht
+		 )
+		  < ((2 * ((1000 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		) {	
+		this.einzelPreis = ((3.9 * ((100 * 1
+		)
+		)
+		
+		)
+		)
 		;
+		}
+		if ((((((this.laenge
+		)
+		 > ((60 * ((10 * 1
+		 )
+		 )
+		 
+		 )
+		 )
+		 )
+		 || ((this.breite
+		 )
+		  > ((30 * ((10 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 || ((this.hoehe
+		 )
+		  > ((15 * ((10 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 && ((this.gewicht
+		 )
+		  <= ((10 * ((1000 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		) {	
+		this.einzelPreis = ((5.9 * ((100 * 1
+		)
+		)
+		
+		)
+		)
+		;
+		}
+		if (((((((this.laenge
+		)
+		 > ((60 * ((10 * 1
+		 )
+		 )
+		 
+		 )
+		 )
+		 )
+		 || ((this.breite
+		 )
+		  > ((30 * ((10 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 || ((this.hoehe
+		 )
+		  > ((15 * ((10 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 && ((this.gewicht
+		 )
+		  > ((10 * ((1000 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 && ((this.gewicht
+		 )
+		  <= ((20 * ((1000 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		) {	
+		this.einzelPreis = ((10.9 * ((100 * 1
+		)
+		)
+		
+		)
+		)
+		;
+		}
+		if (((((((this.laenge
+		)
+		 > ((60 * ((10 * 1
+		 )
+		 )
+		 
+		 )
+		 )
+		 )
+		 || ((this.breite
+		 )
+		  > ((30 * ((10 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 || ((this.hoehe
+		 )
+		  > ((15 * ((10 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 && ((this.gewicht
+		 )
+		  > ((20 * ((1000 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		 && ((this.gewicht
+		 )
+		  <= ((31.5 * ((1000 * 1
+		  )
+		  )
+		  
+		  )
+		  )
+		  )
+		 )
+		) {	
+		this.einzelPreis = ((12.9 * ((100 * 1
+		)
+		)
+		
+		)
+		)
+		;
+		}
+		if (((this.sendungsAnzahl
+		)
+		 < ((500 * 1
+		 )
+		 )
+		 )
+		) {	
+		this.gesamtSumme = ((this.sendungsAnzahl
+		)
+		 * (this.einzelPreis
+		 )
+		 )
+		;
+		}
+		if (((this.sendungsAnzahl
+		)
+		 >= ((500 * 1
+		 )
+		 )
+		 )
+		) {	
+		this.gesamtSumme = (((this.sendungsAnzahl
+		)
+		 * (this.einzelPreis
+		 )
+		 )
+		 * ((0.8 * 1
+		 )
+		 )
+		 )
+		;
+		}
 	}
 }
