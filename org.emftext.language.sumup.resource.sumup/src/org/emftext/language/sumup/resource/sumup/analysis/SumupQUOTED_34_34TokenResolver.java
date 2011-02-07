@@ -6,14 +6,14 @@
  */
 package org.emftext.language.sumup.resource.sumup.analysis;
 
-public class SumupQUOTED_60_62TokenResolver implements org.emftext.language.sumup.resource.sumup.ISumupTokenResolver {
+public class SumupQUOTED_34_34TokenResolver implements org.emftext.language.sumup.resource.sumup.ISumupTokenResolver {
 	
 	private org.emftext.language.sumup.resource.sumup.analysis.SumupDefaultTokenResolver defaultTokenResolver = new org.emftext.language.sumup.resource.sumup.analysis.SumupDefaultTokenResolver();
 	
 	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		String result = defaultTokenResolver.deResolve(value, feature, container);
-		result += ">";
-		result = "<" + result;
+		result += "\"";
+		result = "\"" + result;
 		return result;
 	}
 	
