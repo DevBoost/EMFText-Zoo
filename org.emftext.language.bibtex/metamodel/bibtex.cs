@@ -60,7 +60,7 @@ RULES {
 
 	JournalField ::= "journal" "=" #1 "{" value[TEXT] "}";
 
-	VolumeField ::= "volume" "=" #1 "{" value[INTEGER] "}";
+	VolumeField ::= "volume" "=" #1 "{" (value[INTEGER])"}";
 
 	PageField ::= "pages" "=" #1 "{" fromPage ("--" toPage)? "}";
 	Page ::= value[INTEGER];

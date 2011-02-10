@@ -12,25 +12,21 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.bibtex.Bibliography;
 import org.emftext.language.bibtex.BibtexKeyField;
 import org.emftext.language.bibtex.Entry;
-import org.emftext.language.bibtex.Field;
 import org.emftext.language.bibtex.InProceedingsEntry;
 import org.emftext.language.bibtex.resource.bib.mopp.BibResource;
 
 public class BibtexOptionProvider implements IBibOptionProvider,
 		IBibResourcePostProcessor, IBibResourcePostProcessorProvider {
 
-	@Override
 	public IBibResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 
-	@Override
 	public Map<?, ?> getOptions() {
 		return Collections.singletonMap(
 				IBibOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 	}
 
-	@Override
 	public void process(BibResource resource) {
 //		try {
 			if (resource.getContents().size() == 1) {
@@ -115,5 +111,7 @@ public class BibtexOptionProvider implements IBibOptionProvider,
 		}
 
 	}
+
+	public void terminate() { }
 
 }
