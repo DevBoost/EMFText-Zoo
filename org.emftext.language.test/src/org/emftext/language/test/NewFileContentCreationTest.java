@@ -74,6 +74,39 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 		
 		private void test(TestItem item) {
+			testMinimalModelCreation(item);
+			testNewFileContent();
+		}
+
+		private void testNewFileContent() {
+			// the following code checks whether the content that is actually used for
+			// new file is valid. this content may differ from the content created by
+			// the minimal model helper if users provide template files containing 
+			// example code for new documents.
+			String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("new_file");
+			String syntaxName = metaInformation.getSyntaxName();
+			assertNotNull("Content for new file (." + syntaxName + ") must not be null.", newFileContent);
+			Resource.Factory factory = metaInformation.createResourceFactory();
+			if (!isOnUpdateSite(syntaxName)) {
+				return;
+			}
+			Resource resource = factory.createResource(URI.createURI("temp." + syntaxName));
+			try {
+				resource.load(new ByteArrayInputStream(newFileContent.getBytes()), null);
+			} catch (IOException e) {
+				fail(e.getMessage());
+			}
+			EList<Diagnostic> errors = resource.getErrors();
+			if (!errors.isEmpty()) {
+				System.out.println("NewFileContent(" + syntaxName + ") = \"" + newFileContent + "\"");
+			}
+			for (Diagnostic diagnostic : errors) {
+				System.out.println("Error: " + diagnostic.getMessage() + " (" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
+			}
+			assertTrue("New file content contains errors.", errors.isEmpty());
+		}
+
+		private void testMinimalModelCreation(TestItem item) {
 			Collection<EClass> availableClasses = getContainedClasses(item.getAdditionalPackages());
 
 			CsMinimalModelHelper mmh = new CsMinimalModelHelper();
@@ -104,31 +137,6 @@ public class NewFileContentCreationTest extends TestCase {
 				} catch (IOException e) {
 					fail(e.getMessage());
 				}
-				// the following code checks whether the content that is actually used for
-				// new file is valid. this content may differ from the content created by
-				// the minimal model helper if users provide template files containing 
-				// example code for new documents.
-				String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("new_file");
-				String syntaxName = metaInformation.getSyntaxName();
-				assertNotNull("Content for new file (." + syntaxName + ") must not be null.", newFileContent);
-				Resource.Factory factory = metaInformation.createResourceFactory();
-				if (!isOnUpdateSite(syntaxName)) {
-					return;
-				}
-				Resource resource = factory.createResource(URI.createURI("temp." + syntaxName));
-				try {
-					resource.load(new ByteArrayInputStream(newFileContent.getBytes()), null);
-				} catch (IOException e) {
-					fail(e.getMessage());
-				}
-				EList<Diagnostic> errors = resource.getErrors();
-				if (!errors.isEmpty()) {
-					System.out.println("NewFileContent(" + syntaxName + ") = \"" + newFileContent + "\"");
-				}
-				for (Diagnostic diagnostic : errors) {
-					System.out.println("Error: " + diagnostic.getMessage() + " (" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
-				}
-				assertTrue("New file content contains errors.", errors.isEmpty());
 			}
 		}
 
