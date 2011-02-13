@@ -25,7 +25,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE LINEBREAK $'\r\n'|'\r'|'\n'$;
+	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
 	
 	DEFINE FRAGMENT QUOTED_VALUE   $('"')(('\\''"')|('\\''\\')|~('"'|'\\'))*('"')$;
 	DEFINE FRAGMENT UNQUOTED_VALUE $(~('"'|','|'\r\n'|'\r'|'\n'))+$;
