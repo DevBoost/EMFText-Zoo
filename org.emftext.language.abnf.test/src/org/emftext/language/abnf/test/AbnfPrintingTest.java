@@ -74,7 +74,7 @@ public class AbnfPrintingTest extends TestCase {
 	}
 
 	public void testPrinting1() {
-		if (EMFTextSDKPlugin.VERSION.compareTo("1.3.3") <= 0) {
+		if (EMFTextSDKPlugin.VERSION.compareTo("1.3.4") <= 0) {
 			return;
 		}
 		testPrinting(new File("." + File.separator + "input" + File.separator + "abnf.abnf"));
