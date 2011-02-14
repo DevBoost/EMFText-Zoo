@@ -3,7 +3,6 @@ package org.emftext.language.java.resource.util;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -151,19 +150,24 @@ public class JDTConnector {
 		return getJavaClasspath(getProject(uri));
 	}
 
-	private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
+	// private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
 	
 	private JavaClasspath getJavaClasspath(IProject project) {
-		URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
-		JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
-		if (javaClasspath != null) {
-			return javaClasspath;
-		}
+		//TODO There is caching functionality here which has been deactivated.
+		//     If reactivated, the cache needs to be updated if the classpath of 
+		//     a project changes (e.g., if a new class is created, or a new library
+		//     is referenced)
+		//
+		//URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
+		//JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
+		//if (javaClasspath != null) {
+		//	return javaClasspath;
+		//}
 		ResourceSet classPath = new ResourceSetImpl();
 		IJavaProject javaProject = getJavaProject(project);
 		registerJavaProjectInClassPath(classPath, javaProject);
-		javaClasspath = JavaClasspath.get(classPath);
-		javaClasspaths.put(projectUri, javaClasspath);
+		JavaClasspath javaClasspath = JavaClasspath.get(classPath);
+		//JavaClasspath javaClasspaths.put(projectUri, javaClasspath);
 		return javaClasspath;
 	}
 
