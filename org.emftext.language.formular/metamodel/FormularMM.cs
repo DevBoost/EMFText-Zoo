@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/formular>
 START Formular
 
 OPTIONS {	
-	licenceHeader = "platform:/resource/org.reuseware/licence.txt";
+	licenceHeader = "../../org.dropsbox/licence.txt";
 	overrideBuilder = "false";
 	tokenspace = "1";
 	additionalDependencies = "org.emftext.language.formular.generator";

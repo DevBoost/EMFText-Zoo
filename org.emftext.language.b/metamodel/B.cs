@@ -17,7 +17,7 @@ FOR <http://www.computing.surrey.ac.uk/metamodels/B>
 START Machine
 
 OPTIONS {
-    licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+    licenceHeader ="../../org.dropsbox/licence.txt";
 	basePackage = "org.emftext.language.b.resource.mch";
 	resourcePluginID = "org.emftext.language.b.resource.mch";
 	uiBasePackage = "org.emftext.language.b.resource.mch.ui";

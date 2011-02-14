@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/simplec>
 START CompilationUnit
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	tokenspace = "1";
 	autofixSimpleLeftrecursion = "false";
 	tokenspace = "1";

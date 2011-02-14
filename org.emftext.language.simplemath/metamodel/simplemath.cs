@@ -17,7 +17,7 @@ FOR       <http://www.emftext.org/language/simplemath>
 START     Expression
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	forceEOF = "true";
 	tokenspace = "1";
 	usePredefinedTokens = "false";

@@ -17,7 +17,7 @@ FOR       <http://www.eclipse.org/emf/2002/Ecore>
 START     EPackage
 
 OPTIONS {
- 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+ 	licenceHeader ="../../org.dropsbox/licence.txt";
 	//memoize = "true";
 	//tokenspace = "1";
 	resourcePluginID = "org.emftext.language.ecore.resource.facade";

@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/UseCaseInvariant>
 START UseCaseModel
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 }

@@ -17,7 +17,7 @@ FOR <http://deftproject.org/parametercheck>
 START ParameterCheckModel
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	resourcePluginID = "org.emftext.language.parametercheck.resource.pcheck";
 	generateCodeFromGeneratorModel = "true";

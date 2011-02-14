@@ -17,7 +17,7 @@ FOR <http://org.emftext.languages/plugin>
 START ToolProductFamily
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	tokenspace = "1"; 
 }
 

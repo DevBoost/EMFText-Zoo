@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/petrinet>
 START PetriNet
 
 OPTIONS {
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 }
 
 TOKENS {

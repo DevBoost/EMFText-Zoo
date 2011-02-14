@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/simplegui>
 START Frame
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	tokenspace = "1";
 }
 

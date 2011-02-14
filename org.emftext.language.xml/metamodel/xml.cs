@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/xml> <./xml.genmodel>
 START Document
 
 OPTIONS {	 
- licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+ licenceHeader ="../../org.dropsbox/licence.txt";
  	tokenspace="1";
 	defaultTokenName="IDENTIFIER";
 	generateCodeFromGeneratorModel="false";

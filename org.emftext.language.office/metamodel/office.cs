@@ -17,7 +17,7 @@ FOR <http://emftext.org/office>
 START OfficeModel
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	generateCodeFromGeneratorModel = "true";
 }
 

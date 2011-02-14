@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/regexp> <./regular_expressions.genmodel>
 START RegularExpression
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 }
 

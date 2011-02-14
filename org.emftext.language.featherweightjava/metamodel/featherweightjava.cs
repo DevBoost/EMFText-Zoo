@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/featherweightjava>
 START Class
 
 OPTIONS {
- 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+ 	licenceHeader ="../../org.dropsbox/licence.txt";
 	reloadGeneratorModel = "true";
 	backtracking = "true";
 	memoize = "true";

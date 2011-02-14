@@ -4,7 +4,7 @@ START Play
 
 OPTIONS { 
 	usePredefinedTokens="false";
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";	
+	licenceHeader ="../../org.dropsbox/licence.txt";	
 }
 
 TOKENS {

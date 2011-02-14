@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/threevaluedlogic>
 START Formula
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	backtracking = "true";
 	memoize = "true";
 	reloadGeneratorModel = "true";

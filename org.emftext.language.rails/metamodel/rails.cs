@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/rails>
 START Project
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
 }

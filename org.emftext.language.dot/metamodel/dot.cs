@@ -19,7 +19,7 @@ START Graph
 // see: http://www.graphviz.org/doc/info/lang.html
 
 OPTIONS {
- 		licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+ 		licenceHeader ="../../org.dropsbox/licence.txt";
         reloadGeneratorModel = "true";
         generateCodeFromGeneratorModel = "true";
         usePredefinedTokens = "false";

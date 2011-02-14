@@ -19,7 +19,7 @@ FOR <http://www.eclipse.org/gmt/2005/KM3> <KM3.genmodel>
 START Metamodel
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	resourcePluginID = "org.emftext.language.km3.resource.km3";

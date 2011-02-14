@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/language/models>
 START Model
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	tokenspace = "1";
 }
