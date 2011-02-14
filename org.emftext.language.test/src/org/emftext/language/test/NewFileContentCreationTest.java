@@ -205,6 +205,14 @@ public class NewFileContentCreationTest extends TestCase {
 					".*/javaforms.cs",
 					".*/sqljava.cs",
 					".*/org.emftext.test/testInput/CSAbstractSyntax.cs",
+					".*/org.reuseware.air.language.abstractsyntax/metamodel/as.cs",
+					".*/org.emftext.language.bibtex/metamodel/bibtex.cs",
+					".*/org.emftext.language.pacad/metamodel/pacad.cs",
+					".*/org.emftext.language.lwc11.doc/.*",
+					".*/org.emftext.language.office2/demo/.*",
+					".*/org.reuseware.air.language.cmsl/model/cmsl.cs",
+					".*/org.emftext.refactoring.examples.screencast/.*",
+					".*/org.emftext.language.n3_turtle/.*"
 			};
 			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(excludes);
 			for (String grammar : grammars) {
