@@ -21,7 +21,7 @@ IMPORTS {
 }
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
     tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
