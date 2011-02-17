@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
@@ -49,9 +49,7 @@ public class JaMoPPC {
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 2) {
-			System.out.println(
-					"Usage: jamoppc <source folder path> <target folder path> <jar file paths>*");
-			return;
+			printUsageAndExit();
 		}
 		
 		setUp();
@@ -61,7 +59,6 @@ public class JaMoPPC {
 			System.out.println("not found: " + args[0]);
 			return;
 		}
-		File outFolder = new File(args[1]);
 
 		JavaClasspath cp = JavaClasspath.get(rs);
 		
@@ -72,7 +69,8 @@ public class JaMoPPC {
 				System.out.println("not found: " + args[i]);
 				return;
 			}
-			cp.registerClassifierJar(URI.createFileURI(jarPath.getCanonicalPath()));
+			cp.registerClassifierJar(URI.createFileURI(jarPath
+					.getCanonicalPath()));
 		}
 		
 		//load all java files into resource set 
@@ -82,15 +80,46 @@ public class JaMoPPC {
 			return;
 		}
 		
-		List<Resource> result = new ArrayList<Resource>();
-		
 		URI srcUri = URI.createFileURI(srcFolder.getCanonicalPath());
+
+		String outFileOrDir = args[1];
+		if (outFileOrDir.endsWith(".xmi")) {
+			saveToSingleXMIFile(srcUri, new File(outFileOrDir));
+		} else {
+			saveToFolder(srcUri, new File(outFileOrDir));
+		}
+
+	}
+
+	private static void saveToSingleXMIFile(URI srcUri, File file)
+			throws IOException {
+		File parentDir = file.getParentFile();
+		if (!parentDir.exists()) {
+			parentDir.mkdirs();
+		}
+		URI outUri = URI.createFileURI(file.getCanonicalPath());
+		Resource xmiResource = rs.createResource(outUri);
+		for (Resource javaResource : new ArrayList<Resource>(rs.getResources())) {
+			xmiResource.getContents().addAll(javaResource.getContents());
+		}
+
+		// save the metamodels (schemas) for dynamic loading
+		serializeMetamodel(parentDir);
+
+		saveXmiResource(xmiResource);
+	}
+
+	private static void saveToFolder(URI srcUri, File outFolder)
+			throws IOException {
+		List<Resource> result = new ArrayList<Resource>();
 		URI outUri = URI.createFileURI(outFolder.getCanonicalPath());
 		
 		for(Resource javaResource : new ArrayList<Resource>(rs.getResources())) {
 			URI srcURI = javaResource.getURI();
 			srcURI = rs.getURIConverter().normalize(srcURI);
-			URI outFileURI = outUri.appendSegments(srcURI.deresolve(srcUri.appendSegment("")).segments()).appendFileExtension("xmi");
+			URI outFileURI = outUri.appendSegments(
+					srcURI.deresolve(srcUri.appendSegment("")).segments())
+					.appendFileExtension("xmi");
 			Resource xmiResource = rs.createResource(outFileURI);
 			xmiResource.getContents().addAll(javaResource.getContents());
 			result.add(xmiResource);
@@ -100,13 +129,21 @@ public class JaMoPPC {
 		serializeMetamodel(outFolder);
 		
 		for(Resource xmiResource : result) {
+			saveXmiResource(xmiResource);
+		}
+	}
+
+	private static void saveXmiResource(Resource xmiResource)
+			throws IOException {
 			Map<Object,Object> options = new HashMap<Object, Object>();
-			options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-			//options.put(XMIResource.OPTION_PROCESS_DANGLING_HREF, XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+		// options.put(XMIResource.OPTION_PROCESS_DANGLING_HREF,
+		// XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 			Set<EObject> danglingElements = new LinkedHashSet<EObject>();
 			for(Iterator<EObject> i = xmiResource.getAllContents(); i.hasNext(); ) {
 				for(EObject crossRefElement : i.next().eCrossReferences()) {
-					if (crossRefElement.eContainer() == null && crossRefElement.eResource() == null) {
+				if ((crossRefElement.eContainer() == null)
+						&& (crossRefElement.eResource() == null)) {
 						danglingElements.add(crossRefElement);
 					}
 				}
@@ -115,6 +152,27 @@ public class JaMoPPC {
 			xmiResource.save(options);
 		}
 		
+	private static void printUsageAndExit() {
+		System.out.println("JaMoPPC Usage:");
+		System.out.println("==============");
+		System.out.println();
+		System.out
+				.println("To parse all files in a source folder and produce one model file per\n"
+						+ "parsed compilation unit in the target folder, use:");
+		System.out.println();
+		System.out
+				.println("  jamoppc <source folder path> <target folder path> <jar file paths>*");
+		System.out.println();
+		System.out
+				.println("To parse all files in a source folder and produce one XMI file\n"
+						+ "with the complete syntax graph, use:");
+		System.out.println();
+		System.out
+				.println("  jamoppc <source folder path> <target XMI file> <jar file paths>*");
+		System.out.println();
+		System.out
+				.println("In the latter case, the second parameter has to end in \".xmi\".");
+		System.exit(1);
 	}
 
 	protected static void setUp() {
@@ -125,8 +183,8 @@ public class JaMoPPC {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				Resource.Factory.Registry.DEFAULT_EXTENSION,
 				new XMIResourceFactoryImpl());
-		rs.getLoadOptions().put(
-				IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+		rs.getLoadOptions().put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER,
+				new JavaPostProcessor());
 		
 	}
 	
@@ -139,7 +197,8 @@ public class JaMoPPC {
 
 		URI javaEcoreURI = outUri.appendSegment("java.ecore");
 		Resource javaEcoreResource = rs.createResource(javaEcoreURI);
-		javaEcoreResource.getContents().addAll(JavaPackage.eINSTANCE.getESubpackages());
+		javaEcoreResource.getContents().addAll(
+				JavaPackage.eINSTANCE.getESubpackages());
 
 		ptEcoreResource.save(null);
 		javaEcoreResource.save(null);
@@ -183,8 +242,7 @@ public class JaMoPPC {
 		return !failure;
 	}
 
-	protected static void parseResource(File file)
-			throws IOException {
+	protected static void parseResource(File file) throws IOException {
 		loadResource(file.getCanonicalPath());
 	}
 
