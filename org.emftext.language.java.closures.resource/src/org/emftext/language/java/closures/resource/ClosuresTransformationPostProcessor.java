@@ -18,7 +18,6 @@ import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.closures.AbstractClosure;
 import org.emftext.language.java.closures.AbstractClosureCall;
 import org.emftext.language.java.closures.Closure;
-import org.emftext.language.java.closures.ClosureCall;
 import org.emftext.language.java.closures.ClosuresPackage;
 import org.emftext.language.java.closures.resource.closure.IClosureOptionProvider;
 import org.emftext.language.java.closures.resource.closure.IClosureOptions;
@@ -54,7 +53,7 @@ import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 
-public class ClosuresTransformationPostProcessor 
+public class ClosuresTransformationPostProcessor {/*
 	implements IClosureOptionProvider,
 		IClosureResourcePostProcessor, IClosureResourcePostProcessorProvider {
 
@@ -651,5 +650,5 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 		//
 		
 	}
-
+*/
 }
