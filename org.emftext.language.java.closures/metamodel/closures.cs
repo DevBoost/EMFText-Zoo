@@ -40,7 +40,9 @@ RULES {
  			!1 "{" (parameters ("," parameters ?)*)?
  			// function body 
  			"=>" !2 statements+ "}" 
- 			( !1 "." #0 methodName[] #0 "(" (arguments ("," arguments)*)? ")" #0 )? 
- 			( !1 "." #0 next )? ";" )?  ;
+ 			//( !1 "." #0 methodName[] #0 "(" (arguments ("," arguments)*)? ")" #0 )? 
+ 			//( !1 "." #0 next )? ";"   ;
+ 			)?
+ 			;
 }
 
