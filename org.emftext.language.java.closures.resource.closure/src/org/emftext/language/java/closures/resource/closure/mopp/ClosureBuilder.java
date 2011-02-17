@@ -82,7 +82,8 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 	}
 	
 	private void process(final ClosureResource resource) {
-		
+
+		/*
 		Thread workerThread = new Thread(new Runnable(){
 
 			public void run() {
@@ -92,9 +93,10 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		});
 		
 		workerThread.start();
-		
+		*/
 	}
 
+	/*
 	private void convert(ClosureResource resource){
 		
 		if(resource.getURI().toString().contains("transformed"))
@@ -248,7 +250,6 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		else
 			return string.substring(0, 1).toUpperCase().concat(string.substring(1));
 	}
-	
 	private Classifier createInterface(
 			AbstractClosure memberClosure, 
 			Resource resource,
@@ -390,7 +391,6 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		
 		return null;
 	}
-	*/
 	
 	private MethodCall createAnonymousClass(
 			AbstractClosureCall call,
@@ -810,4 +810,5 @@ private void convertParameterClosure(JavaResource resource, List<Closure> parame
 		}
 	}
 	
+	*/
 }
