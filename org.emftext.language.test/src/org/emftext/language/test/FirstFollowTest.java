@@ -63,7 +63,7 @@ public class FirstFollowTest extends TestCase {
 			".*/formsextension.cs",
 			".*/javaforms.cs",
 			".*/org.emftext.test/testInput/CSAbstractSyntax.cs",
-			".*/org.emftext.test/src/org/emftext/test/bug1676/.*",
+			".*/org.emftext.test/.*/org/emftext/test/bug1676/.*",
 			".*/org.reuseware.air.language.abstractsyntax/metamodel/as.cs",
 			".*/org.reuseware.coconut.reuseextensionactivator/model/rex_activator.cs",
 			".*/org.emftext.language.appflow/metamodel/appflow.cs",
