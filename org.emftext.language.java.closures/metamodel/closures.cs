@@ -30,7 +30,7 @@ OPTIONS {
 }
 
 RULES { 
- 	Closure ::= ( annotationsAndModifiers )* !1 
+ 	Closure ::= //( annotationsAndModifiers )* !1 
  			// function type declaration
  			"{" (parameterTypes arrayDimensionsBefore? ("," parameterTypes arrayDimensionsBefore? )*)? 
  			"=>" valueType valueTypeArrayDimension* "}"
