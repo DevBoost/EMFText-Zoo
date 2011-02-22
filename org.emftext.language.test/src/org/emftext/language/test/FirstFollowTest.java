@@ -67,7 +67,8 @@ public class FirstFollowTest extends TestCase {
 			".*/org.reuseware.air.language.abstractsyntax/metamodel/as.cs",
 			".*/org.reuseware.coconut.reuseextensionactivator/model/rex_activator.cs",
 			".*/org.emftext.language.appflow/metamodel/appflow.cs",
-			".*/org.emftext.language.lwc11.doc/listings/simplesyntax.cs"
+			".*/org.emftext.language.lwc11.doc/listings/simplesyntax.cs",
+			".*/org.emftext.language.swrl/metamodel/swrl.cs"
 	};
 	private ExpectationComputer computer;
 
