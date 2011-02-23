@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2011
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -27,14 +27,7 @@ TOKENS {
 }
 
 TOKENSTYLES {
-	"project" COLOR #000080, BOLD;
-	"train" COLOR #000080, BOLD;
-	"track" COLOR #000080, BOLD;
-	"switch" COLOR #000080, BOLD;
-	"connect" COLOR #000080, BOLD;
-	"out:" COLOR #000080, BOLD;
-	"in:" COLOR #000080, BOLD;
-	"->" COLOR #000080, BOLD;
+	"project", "train", "track", "switch", "connect", "out:", "in:", "->" COLOR #000080, BOLD;
 	"COMMENT" COLOR #008000;
 }
 
