@@ -13,20 +13,27 @@
  ******************************************************************************/
 package org.emftext.language.petrinet.resource.petrinet.analysis;
 
-public class ArcTargetReferenceResolver implements org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolver<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes> {
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.petrinet.Arc;
+import org.emftext.language.petrinet.Node;
+import org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolveResult;
+import org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolver;
+
+public class ArcTargetReferenceResolver implements IPetrinetReferenceResolver<Arc, Node> {
 	
-	private org.emftext.language.petrinet.resource.petrinet.analysis.PetrinetDefaultResolverDelegate<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes> delegate = new org.emftext.language.petrinet.resource.petrinet.analysis.PetrinetDefaultResolverDelegate<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes>();
+	private PetrinetDefaultResolverDelegate<Arc, Node> delegate = new PetrinetDefaultResolverDelegate<Arc, Node>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolveResult<org.emftext.language.petrinet.RefNodes> result) {
+	public void resolve(String identifier, Arc container, EReference reference, int position, boolean resolveFuzzy, IPetrinetReferenceResolveResult<Node> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.petrinet.RefNodes element, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(Node element, Arc container, EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+	public void setOptions(Map<?,?> options) {
+		// no used
 	}
-	
 }

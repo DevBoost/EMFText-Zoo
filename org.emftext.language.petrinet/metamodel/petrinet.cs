@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2011
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -42,6 +42,7 @@ RULES {
 	
 	Transition::= "transition" (name[])? ;
 	
+	@SuppressWarnings(optionalKeyword)
 	Place::= "place" (name[])? ("{" marking* "}")? ;
 	
 	Token::= "token" (name[])? ;
