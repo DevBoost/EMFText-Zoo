@@ -67,6 +67,7 @@ import org.emftext.language.simpleweave.resource.simpleweave.mopp.SimpleweaveMet
 import org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation;
 import org.emftext.language.sql.resource.sql.mopp.SqlMetaInformation;
 import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation;
+import org.emftext.language.swrl.resource.swrl.mopp.SwrlMetaInformation;
 import org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation;
 import org.emftext.language.tcltk.resource.tcl.mopp.TclMetaInformation;
 import org.emftext.language.templateconcepts.call.resource.templatecall.mopp.TemplatecallMetaInformation;
@@ -209,6 +210,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new Bug1233MetaInformation());
 		metaInformations.add(new PrintingMetaInformation());
 		metaInformations.add(new ResolvingMetaInformation());
+		metaInformations.add(new SwrlMetaInformation());
 		metaInformations.add(new TaMetaInformation());
 		// TODO move this to getMetaInformationsForLanguageOnUpdateSite() once the automaton regex DSL is on the update site
 		metaInformations.add(new Regexp_automatonMetaInformation());
