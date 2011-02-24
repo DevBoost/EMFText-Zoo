@@ -13,20 +13,27 @@
  ******************************************************************************/
 package org.emftext.language.rails.resource.rails.analysis;
 
-public class ConnectionFromReferenceResolver implements org.emftext.language.rails.resource.rails.IRailsReferenceResolver<org.emftext.language.rails.Connection, org.emftext.language.rails.Out> {
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.rails.Connection;
+import org.emftext.language.rails.Out;
+import org.emftext.language.rails.resource.rails.IRailsReferenceResolveResult;
+import org.emftext.language.rails.resource.rails.IRailsReferenceResolver;
+
+public class ConnectionFromReferenceResolver implements IRailsReferenceResolver<Connection, Out> {
 	
-	private org.emftext.language.rails.resource.rails.analysis.RailsDefaultResolverDelegate<org.emftext.language.rails.Connection, org.emftext.language.rails.Out> delegate = new org.emftext.language.rails.resource.rails.analysis.RailsDefaultResolverDelegate<org.emftext.language.rails.Connection, org.emftext.language.rails.Out>();
+	private RailsDefaultResolverDelegate<Connection, Out> delegate = new RailsDefaultResolverDelegate<Connection, Out>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.rails.Connection container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rails.resource.rails.IRailsReferenceResolveResult<org.emftext.language.rails.Out> result) {
+	public void resolve(String identifier, Connection container, EReference reference, int position, boolean resolveFuzzy, final IRailsReferenceResolveResult<Out> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.rails.Out element, org.emftext.language.rails.Connection container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(Out element, Connection container, EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+	public void setOptions(Map<?,?> options) {
+		// not used
 	}
-	
 }
