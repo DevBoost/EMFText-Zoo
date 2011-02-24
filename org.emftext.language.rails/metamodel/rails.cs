@@ -51,7 +51,7 @@ RULES {
 			trains* 
 		"}" ;
 	
-	Connection ::= "connect" (name[])? source[] "->" target[] ;
+	Connection ::= "connect" (name[])? from[] "->" to[] ;
 	
 	Out ::= "out:" (name[])? ;
 	

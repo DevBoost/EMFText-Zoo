@@ -13,7 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.rails.resource.rails.analysis;
 
-public class ConnectionTargetReferenceResolver implements org.emftext.language.rails.resource.rails.IRailsReferenceResolver<org.emftext.language.rails.Connection, org.emftext.language.rails.In> {
+public class ConnectionToReferenceResolver implements org.emftext.language.rails.resource.rails.IRailsReferenceResolver<org.emftext.language.rails.Connection, org.emftext.language.rails.In> {
 	
 	private org.emftext.language.rails.resource.rails.analysis.RailsDefaultResolverDelegate<org.emftext.language.rails.Connection, org.emftext.language.rails.In> delegate = new org.emftext.language.rails.resource.rails.analysis.RailsDefaultResolverDelegate<org.emftext.language.rails.Connection, org.emftext.language.rails.In>();
 	
