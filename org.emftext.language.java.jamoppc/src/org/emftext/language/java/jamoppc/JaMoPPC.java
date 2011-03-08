@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2010
  * Software Technology Group, Dresden University of Technology
  * 
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.jamoppc;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,9 +52,9 @@ public class JaMoPPC {
 		if (args.length < 2) {
 			printUsageAndExit();
 		}
-		
+
 		setUp();
-		
+
 		File srcFolder = new File(args[0]);
 		if (!srcFolder.exists()) {
 			System.out.println("not found: " + args[0]);
@@ -61,25 +62,41 @@ public class JaMoPPC {
 		}
 
 		JavaClasspath cp = JavaClasspath.get(rs);
-		
-		//register jar files
-		for(int i = 2; i < args.length; i++) {
+
+		// register jar files
+		for (int i = 2; i < args.length; i++) {
 			File jarPath = new File(args[i]);
 			if (!jarPath.exists()) {
 				System.out.println("not found: " + args[i]);
 				return;
 			}
+			System.out.println("Registering JAR " + jarPath.getCanonicalPath());
 			cp.registerClassifierJar(URI.createFileURI(jarPath
 					.getCanonicalPath()));
 		}
-		
-		//load all java files into resource set 
-		loadAllFilesInResourceSet(srcFolder, "java");
 
-		if(!resolveAllProxies()) {
-			return;
+		// load all java files into resource set
+		loadAllFilesInResourceSet(srcFolder, ".java");
+
+		if (!resolveAllProxies()) {
+			System.err.println("Resolution of some Proxies failed...");
+			Iterator<Notifier> it = rs.getAllContents();
+			while (it.hasNext()) {
+				Notifier next = it.next();
+				if (next instanceof EObject) {
+					EObject o = (EObject) next;
+					if (o.eIsProxy()) {
+						try {
+							it.remove();
+						} catch (UnsupportedOperationException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			// return;
 		}
-		
+
 		URI srcUri = URI.createFileURI(srcFolder.getCanonicalPath());
 
 		String outFileOrDir = args[1];
@@ -94,7 +111,9 @@ public class JaMoPPC {
 	private static void saveToSingleXMIFile(URI srcUri, File file)
 			throws IOException {
 		File parentDir = file.getParentFile();
-		if (!parentDir.exists()) {
+		if (parentDir == null) {
+			parentDir = new File(System.getProperty("user.dir"));
+		} else if (!parentDir.exists()) {
 			parentDir.mkdirs();
 		}
 		URI outUri = URI.createFileURI(file.getCanonicalPath());
@@ -113,8 +132,8 @@ public class JaMoPPC {
 			throws IOException {
 		List<Resource> result = new ArrayList<Resource>();
 		URI outUri = URI.createFileURI(outFolder.getCanonicalPath());
-		
-		for(Resource javaResource : new ArrayList<Resource>(rs.getResources())) {
+
+		for (Resource javaResource : new ArrayList<Resource>(rs.getResources())) {
 			URI srcURI = javaResource.getURI();
 			srcURI = rs.getURIConverter().normalize(srcURI);
 			URI outFileURI = outUri.appendSegments(
@@ -124,34 +143,34 @@ public class JaMoPPC {
 			xmiResource.getContents().addAll(javaResource.getContents());
 			result.add(xmiResource);
 		}
-		
-		//save the metamodels (schemas) for dynamic loading
+
+		// save the metamodels (schemas) for dynamic loading
 		serializeMetamodel(outFolder);
-		
-		for(Resource xmiResource : result) {
+
+		for (Resource xmiResource : result) {
 			saveXmiResource(xmiResource);
 		}
 	}
 
 	private static void saveXmiResource(Resource xmiResource)
 			throws IOException {
-			Map<Object,Object> options = new HashMap<Object, Object>();
+		Map<Object, Object> options = new HashMap<Object, Object>();
 		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		// options.put(XMIResource.OPTION_PROCESS_DANGLING_HREF,
 		// XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
-			Set<EObject> danglingElements = new LinkedHashSet<EObject>();
-			for(Iterator<EObject> i = xmiResource.getAllContents(); i.hasNext(); ) {
-				for(EObject crossRefElement : i.next().eCrossReferences()) {
+		Set<EObject> danglingElements = new LinkedHashSet<EObject>();
+		for (Iterator<EObject> i = xmiResource.getAllContents(); i.hasNext();) {
+			for (EObject crossRefElement : i.next().eCrossReferences()) {
 				if ((crossRefElement.eContainer() == null)
 						&& (crossRefElement.eResource() == null)) {
-						danglingElements.add(crossRefElement);
-					}
+					danglingElements.add(crossRefElement);
 				}
 			}
-			xmiResource.getContents().addAll(danglingElements);
-			xmiResource.save(options);
 		}
-		
+		xmiResource.getContents().addAll(danglingElements);
+		xmiResource.save(options);
+	}
+
 	private static void printUsageAndExit() {
 		System.out.println("JaMoPPC Usage:");
 		System.out.println("==============");
@@ -185,9 +204,8 @@ public class JaMoPPC {
 				new XMIResourceFactoryImpl());
 		rs.getLoadOptions().put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER,
 				new JavaPostProcessor());
-		
 	}
-	
+
 	protected static void serializeMetamodel(File outFolder) throws IOException {
 		URI outUri = URI.createFileURI(outFolder.getCanonicalPath());
 
@@ -209,12 +227,18 @@ public class JaMoPPC {
 		for (File member : startFolder.listFiles()) {
 			if (member.isFile()) {
 				if (member.getName().endsWith(extension)) {
+					System.out.println("Parsing " + member);
 					parseResource(member);
+				} else {
+					System.out.println("Skipping " + member);
 				}
 			}
 			if (member.isDirectory()) {
 				if (!member.getName().startsWith(".")) {
+					System.out.println("Recursing into " + member);
 					loadAllFilesInResourceSet(member, extension);
+				} else {
+					System.out.println("Skipping " + member);
 				}
 			}
 		}
@@ -222,23 +246,46 @@ public class JaMoPPC {
 
 	protected static boolean resolveAllProxies() {
 		boolean failure = false;
-		String msg = "";
-		
-		for (Iterator<Notifier> i = rs.getAllContents(); i.hasNext(); ) {
+		List<EObject> eobjects = new LinkedList<EObject>();
+		for (Iterator<Notifier> i = rs.getAllContents(); i.hasNext();) {
 			Notifier next = i.next();
 			if (next instanceof EObject) {
-				InternalEObject nextElement = (InternalEObject) next;
-				for (EObject crElement : nextElement.eCrossReferences()) {
-					crElement = EcoreUtil.resolve(crElement, rs);
-					if (crElement.eIsProxy()) {
-						msg += "\nCan not find referenced element in classpath: "
-								+ ((InternalEObject) crElement).eProxyURI();
-						failure = true;
-						System.out.println(msg);
-					}
-				}	
+				eobjects.add((EObject) next);
 			}
 		}
+
+		System.out.println("Resolving cross-references of " + eobjects.size()
+				+ " EObjects.");
+		int resolved = 0;
+		int notResolved = 0;
+		int eobjectCnt = 0;
+		for (EObject next : eobjects) {
+			eobjectCnt++;
+			if (eobjectCnt % 1000 == 0) {
+				System.out.println(eobjectCnt + "/" + eobjects.size()
+						+ " done: Resolved " + resolved + " crossrefs, "
+						+ notResolved + " crossrefs could not be resolved.");
+			}
+
+			InternalEObject nextElement = (InternalEObject) next;
+			for (EObject crElement : nextElement.eCrossReferences()) {
+				crElement = EcoreUtil.resolve(crElement, rs);
+				if (crElement.eIsProxy()) {
+					failure = true;
+					notResolved++;
+					System.out
+							.println("Can not find referenced element in classpath: "
+									+ ((InternalEObject) crElement).eProxyURI());
+				} else {
+					resolved++;
+				}
+			}
+		}
+
+		System.out.println(eobjectCnt + "/" + eobjects.size()
+				+ " done: Resolved " + resolved + " crossrefs, " + notResolved
+				+ " crossrefs could not be resolved.");
+
 		return !failure;
 	}
 
