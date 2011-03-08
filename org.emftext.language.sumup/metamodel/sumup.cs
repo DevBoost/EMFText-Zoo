@@ -69,6 +69,9 @@ RULES {
 	Nested ::= "(" calculation ")";
 	
 	@Operator(type="primitive", weight="9", superclass="Calculation")
+	Boolean ::= value["true":"false"]  unit?;
+	
+	@Operator(type="primitive", weight="9", superclass="Calculation")
 	Int ::= value[DECIMAL_INTEGER_LITERAL]  unit?;
 
 	@Operator(type="primitive", weight="9", superclass="Calculation")

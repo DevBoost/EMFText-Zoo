@@ -4,6 +4,10 @@ package sumup sumup "http://www.emftext.org/language/sumup" {
 		attribute EString name (1..1);
 	}
 	
+	abstract class Valued extends UnitValue {
+		containment reference Result result (0..1);
+	}
+	
 	// a value the has an optional unit
 	abstract class UnitValue {
 		containment reference Unit unit (0..1);
@@ -31,20 +35,19 @@ package sumup sumup "http://www.emftext.org/language/sumup" {
 		containment reference Calculation value (1..1);
 	}
 
-	class Assignment {
+	class Assignment extends Valued {
 		reference OutputVariable target (1..1);
 		containment reference Unit designatedUnit (1..1);
-		containment reference Result resultValue (0..1);
 		containment reference Calculation calculation (1..1);
 		containment reference Calculation condition (0..1);
 	}
 	
 	class Result {
-		attribute EFloat value (1..1);
+		containment reference Primitive value (1..1);
 		containment reference Unit unit (0..1);
 	}
 	
-	abstract class Calculation {
+	abstract class Calculation extends Valued {
 	}
 	
 	class Or extends Calculation {
@@ -107,6 +110,10 @@ package sumup sumup "http://www.emftext.org/language/sumup" {
 	
 	class Float extends Primitive, UnitValue {
 		attribute EFloat value (1..1);
+	}
+	
+	class Boolean extends Primitive, UnitValue {
+		attribute EBoolean value (1..1);
 	}
 	
 	class Nested extends Primitive {
