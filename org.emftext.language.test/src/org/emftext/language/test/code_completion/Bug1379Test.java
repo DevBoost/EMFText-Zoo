@@ -3,26 +3,24 @@ package org.emftext.language.test.code_completion;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.regexp.resource.regexp_antlr.IRegexp_antlrTextResource;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation;
-import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrResourceFactory;
 import org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrCodeCompletionHelper;
 import org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrCompletionProposal;
 
-import junit.framework.TestCase;
-
 public class Bug1379Test extends TestCase {
 
-	private static final String FILE_EXTENSION = new Regexp_antlrMetaInformation().getSyntaxName();
+	private static final Regexp_antlrMetaInformation REGEXP_ANTLR_META_INFORMATION = new Regexp_antlrMetaInformation();
+	private static final String FILE_EXTENSION = REGEXP_ANTLR_META_INFORMATION.getSyntaxName();
 
 	public void setUp() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				FILE_EXTENSION,
-				new Regexp_antlrResourceFactory());
+		REGEXP_ANTLR_META_INFORMATION.registerResourceFactory();
 	}
 	
 	public void testPerformance() {
