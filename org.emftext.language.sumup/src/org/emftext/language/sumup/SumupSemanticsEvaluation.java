@@ -445,7 +445,7 @@ public class SumupSemanticsEvaluation {
 		}
 	}
 
-	public void evaluatePetriNet() {
+	public void evaluateSemantics() {
 		while(this.pendingChanges.size() > 0) {
 			PendingChange pc = pendingChanges.remove(0);
 			if (pc.transitionName.equals("evaluateAssignment") ) {
