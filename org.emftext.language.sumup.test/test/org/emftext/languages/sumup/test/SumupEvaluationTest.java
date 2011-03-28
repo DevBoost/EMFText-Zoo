@@ -34,7 +34,7 @@ public class SumupEvaluationTest {
 		SumupSemanticsEvaluation sse = new SumupSemanticsEvaluation();
 		Sheet sheet = (Sheet) resource.getContents().get(0);
 		sse.intialisePlaces(sheet);
-		sse.evaluatePetriNet();
+		sse.evaluateSemantics();
 		EList<Assignment> computations = sheet.getComputations();
 		for (Assignment assignment : computations) {
 			Result result = assignment.getResult();
