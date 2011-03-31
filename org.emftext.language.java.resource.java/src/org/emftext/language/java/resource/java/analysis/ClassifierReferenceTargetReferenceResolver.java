@@ -44,7 +44,13 @@ import org.emftext.language.java.types.TypeReference;
 public class ClassifierReferenceTargetReferenceResolver implements 
 	IJavaReferenceResolver<ClassifierReference, Classifier> {
 	
+	JavaDefaultResolverDelegate<ClassifierReference, Classifier> delegate = 
+		new JavaDefaultResolverDelegate<ClassifierReference, Classifier>();
+	
 	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
+		if (classifier.eIsProxy()) {
+			return delegate.deResolve(classifier, container, reference);
+		}
 		if (classifier instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) classifier;
 			boolean namespaceMissing = true;

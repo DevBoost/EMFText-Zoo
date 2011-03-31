@@ -29,7 +29,13 @@ import org.emftext.language.java.statements.JumpLabel;
 public class JumpTargetReferenceResolver implements 
 	IJavaReferenceResolver<Jump, JumpLabel> {
 	
+	JavaDefaultResolverDelegate<Jump, JumpLabel> delegate = 
+		new JavaDefaultResolverDelegate<Jump, JumpLabel>();
+	
 	public java.lang.String deResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {
+		if (element.eIsProxy()) {
+			return delegate.deResolve(element, container, reference);
+		}
 		return element.getName();
 	}
 	

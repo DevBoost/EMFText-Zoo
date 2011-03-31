@@ -29,7 +29,13 @@ import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 public class StaticMemberImportStaticMembersReferenceResolver implements 
 	IJavaReferenceResolver<StaticMemberImport, ReferenceableElement> {
 	
+	JavaDefaultResolverDelegate<StaticMemberImport, ReferenceableElement> delegate = 
+		new JavaDefaultResolverDelegate<StaticMemberImport, ReferenceableElement>();
+	
 	public java.lang.String deResolve(ReferenceableElement element, StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
+		if (element.eIsProxy()) {
+			return delegate.deResolve(element, container, reference);
+		}
 		return element.getName();
 	}
 	

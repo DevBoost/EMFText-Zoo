@@ -24,7 +24,13 @@ import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 public class ClassifierImportClassifierReferenceResolver implements 
 	IJavaReferenceResolver<ClassifierImport, ConcreteClassifier> {
 	
+	JavaDefaultResolverDelegate<ClassifierImport, ConcreteClassifier> delegate = 
+		new JavaDefaultResolverDelegate<ClassifierImport, ConcreteClassifier>();
+	
 	public java.lang.String deResolve(ConcreteClassifier element, ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
+		if (element.eIsProxy()) {
+			return delegate.deResolve(element, container, reference);
+		}
 		return element.getName();
 	}
 	

@@ -33,7 +33,13 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 public class AnnotationInstanceAnnotationReferenceResolver implements 
 	IJavaReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
 	
+	JavaDefaultResolverDelegate<AnnotationInstance, Classifier> delegate = 
+		new JavaDefaultResolverDelegate<AnnotationInstance, Classifier>();
+	
 	public java.lang.String deResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
+		if (element.eIsProxy()) {
+			return delegate.deResolve(element, container, reference);
+		}
 		return element.getName();
 	}
 	

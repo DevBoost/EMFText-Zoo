@@ -50,7 +50,13 @@ import org.emftext.language.java.util.TemporalCompositeClassifier;
 public class ElementReferenceTargetReferenceResolver implements 
 	IJavaReferenceResolver<ElementReference, ReferenceableElement> {
 	
+	JavaDefaultResolverDelegate<ElementReference, ReferenceableElement> delegate = 
+		new JavaDefaultResolverDelegate<ElementReference, ReferenceableElement>();
+	
 	public java.lang.String deResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
+		if (element.eIsProxy()) {
+			return delegate.deResolve(element, container, reference);
+		}
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) element;
 			

@@ -29,7 +29,13 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 public class AnnotationAttributeSettingAttributeReferenceResolver implements 
 	IJavaReferenceResolver<AnnotationAttributeSetting, InterfaceMethod> {
 	
+	JavaDefaultResolverDelegate<AnnotationAttributeSetting, InterfaceMethod> delegate = 
+		new JavaDefaultResolverDelegate<AnnotationAttributeSetting, InterfaceMethod>();
+	
 	public java.lang.String deResolve(InterfaceMethod element, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference) {
+		if (element.eIsProxy()) {
+			return delegate.deResolve(element, container, reference);
+		}
 		return element.getName();
 	}
 	
