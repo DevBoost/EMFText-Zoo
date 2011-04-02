@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -31,16 +32,17 @@ import org.emftext.language.mecore.MSimpleMultiplicityValue;
 import org.emftext.language.mecore.MType;
 import org.emftext.language.mecore.resource.mecore.IMecoreCommand;
 
+/**
+ * Converts Mecore models to Ecore models.
+ */
 public class MecoreWrapper {
 	
 	private Map<MModelElement, EModelElement> mapping = new LinkedHashMap<MModelElement, EModelElement>();
 	private List<IMecoreCommand<Object>> commands = new ArrayList<IMecoreCommand<Object>>();
 
 	public EPackage wrapMPackage(MPackage mPackage) {
-		// We should use EcoreFactory.eINSTANCE.createEPackage(), but we
-		// need to override eResource() in order to let client thing that
-		// the EPackage is in the same resource as the MPackage
 		EPackage ePackage = createEPackage(mPackage);
+		addComment(ePackage, "This package was generated from an .mecore file. Do not change its contents.");
 		mapping.put(mPackage, ePackage);
 		String packageName = mPackage.getName();
 		if (packageName == null) {
@@ -60,6 +62,13 @@ public class MecoreWrapper {
 			command.execute(null);
 		}
 		return ePackage;
+	}
+
+	private void addComment(EPackage ePackage, String comment) {
+		EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+		eAnnotation.setSource(this.getClass().getName());
+		eAnnotation.getDetails().put("WARNING", comment);
+		ePackage.getEAnnotations().add(eAnnotation);
 	}
 
 	private EClassifier wrapMClassifier(MClassifier mClassifier) {
