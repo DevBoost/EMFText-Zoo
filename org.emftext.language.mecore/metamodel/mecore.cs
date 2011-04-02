@@ -1,14 +1,16 @@
 @SuppressWarnings(tokenOverlapping)
-SYNTAXDEF min.ecore
+SYNTAXDEF mecore
 FOR <http://www.emftext.org/language/mecore> <mecore.genmodel>
 START MPackage
 
 OPTIONS {
-	baseResourcePlugin = "org.emftext.language.ecore.resource";
-	resourcePluginID = "org.emftext.language.ecore.resource.mecore";
-	basePackage = "org.emftext.language.ecore.resource.mecore";
-	resourceUIPluginID = "org.emftext.language.ecore.resource.mecore.ui";
-	uiBasePackage = "org.emftext.language.ecore.resource.mecore.ui";
+	//baseResourcePlugin = "org.emftext.language.mecore.resource";
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
+	resourcePluginID = "org.emftext.language.mecore.resource.mecore";
+	basePackage = "org.emftext.language.mecore.resource.mecore";
+	resourceUIPluginID = "org.emftext.language.mecore.resource.mecore.ui";
+	uiBasePackage = "org.emftext.language.mecore.resource.mecore.ui";
 	
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
