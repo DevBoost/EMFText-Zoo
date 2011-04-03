@@ -77,6 +77,7 @@ import org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlMetaInformatio
 import org.emftext.language.timedautomata.resource.ta.mopp.TaMetaInformation;
 import org.emftext.language.usecaseinvariant.resource.ucinv.mopp.UcinvMetaInformation;
 import org.emftext.language.valueflow.resource.valueflow.mopp.TextValueflowMetaInformation;
+import org.emftext.language.webtest.resource.webtest.mopp.WebtestMetaInformation;
 import org.emftext.language.xml.resource.xml.mopp.XmlMetaInformation;
 import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsMetaInformation;
 import org.emftext.test.booleanterminal.resource.booleanterminal.mopp.BooleanterminalMetaInformation;
@@ -172,6 +173,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new CsMetaInformation());
 		metaInformations.add(new FormsMetaInformation());
 		metaInformations.add(new EjavaMetaInformation());
+		metaInformations.add(new WebtestMetaInformation());
 		
 		//Reuseware languages
 		metaInformations.add(new RexMetaInformation());
