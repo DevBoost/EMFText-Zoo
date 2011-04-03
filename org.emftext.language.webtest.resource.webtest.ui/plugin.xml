@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.webtest.resource.webtest.ui.WebtestUIMetaInformation" id="org.emftext.language.webtest.resource.webtest.ui.WebtestUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.webtest.resource.webtest.ui.WebtestEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="webtest" icon="icons/editor_icon.gif" id="org.emftext.language.webtest.resource.webtest.ui.WebtestEditor" name="EMFText webtest Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.webtest.resource.webtest">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.webtest.resource.webtest.ui.WebtestPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Webtest Text Editor" id="org.emftext.language.webtest.resource.webtest.ui.WebtestPreferencePage" class="org.emftext.language.webtest.resource.webtest.ui.WebtestPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.webtest.resource.webtest.ui.WebtestSyntaxColoringPreferencePage" class="org.emftext.language.webtest.resource.webtest.ui.WebtestSyntaxColoringPreferencePage" category="org.emftext.language.webtest.resource.webtest.ui.WebtestPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.webtest.resource.webtest.ui.WebtestBracketPreferencePage" class="org.emftext.language.webtest.resource.webtest.ui.WebtestBracketPreferencePage" category="org.emftext.language.webtest.resource.webtest.ui.WebtestPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.webtest.resource.webtest.ui.WebtestNewFileWizard" id="org.emftext.language.webtest.resource.webtest.ui.WebtestNewFileWizard" name="EMFText .webtest file">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.webtest.resource.webtest.ui.WebtestMarkerResolutionGenerator" markerType="org.emftext.language.webtest.resource.webtest.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.webtest.resource.webtest.ui.WebtestAnnotationModelFactory" extensions="webtest">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.webtest.resource.webtest" name=".webtest File" base-type="org.eclipse.core.runtime.text" file-extensions="webtest">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="webtest" id="org.emftext.language.webtest.resource.webtest.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.webtest.resource.webtest.ui.occurences">
+		</type>
+		<type name="org.emftext.language.webtest.resource.webtest.ui.occurences.declaration" super="org.emftext.language.webtest.resource.webtest.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.webtest.resource.webtest.ui.occurences" label="Occurrences (in .webtest files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="webtest.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="webtest.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="webtest.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="webtest.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="webtest.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="webtest.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="webtest.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="webtest.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="webtest.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.webtest.resource.webtest.ui.occurences.declaration" label="Declarations (in .webtest files)" textPreferenceKey="webtest.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="webtest.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="webtest.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="webtest.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="webtest.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="webtest.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+</plugin>
