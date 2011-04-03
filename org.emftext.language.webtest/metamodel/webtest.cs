@@ -22,7 +22,7 @@ TOKENS {
 RULES {
 	TestScript ::= "testScript" commands*;
 	Load ::= "load" url['<','>'];
-	Submit ::= "submit" form[];
+	Submit ::= "submit" form[] button[];
 	Input ::= "input" form[] field[] value['"','"'];
 	AssertTitle ::= "assertTitle" expected['"','"'];
 }

@@ -20,4 +20,8 @@ public class WebtestContext {
     public void setCurrentPage(String url) throws Exception {
     	currentPage = webClient.getPage(url);
     }
+
+	public void setCurrentPage(HtmlPage page) {
+		this.currentPage = page;
+	}
 }
