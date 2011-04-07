@@ -1,7 +1,6 @@
 package org.emftext.language.webtest.codegen;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IResource;
