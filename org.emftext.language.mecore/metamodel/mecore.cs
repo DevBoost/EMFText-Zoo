@@ -32,7 +32,7 @@ TOKENSTYLES {
 } 
 
 RULES {
-	MPackage ::= (name[LOWER])? namespace['<','>'] contents*;
+	MPackage ::= (name[LOWER])? namespace['<','>'] (!0 contents)*;
 	MClass   ::= abstract["abstract" : ""]
 	             name[UPPER]
 	             (":" supertypes[UPPER] ("," supertypes[UPPER])* )? 
