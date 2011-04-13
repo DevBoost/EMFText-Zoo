@@ -31,7 +31,7 @@ public class FeatureBoundAnalyser implements IEfactoryResourcePostProcessor {
 						}
 						
 						public String getMessage() {
-							return "Feature " + eFeature.getName() + " is not multiple.";
+							return "Feature " + eFeature.getName() + " has maximum cardinality 1 (remove plus).";
 						}
 
 						public Collection<IEfactoryQuickFix> getQuickFixes() {
