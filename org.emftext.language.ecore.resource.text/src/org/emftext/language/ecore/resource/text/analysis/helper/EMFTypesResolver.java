@@ -199,7 +199,7 @@ public class EMFTypesResolver {
 
 	public String doDeResolve(EClassifier element, EObject container) {
 		resource = container.eResource();
-		if (container.eResource().equals(element.eResource())) {
+		if (container.eResource().equals(element.eResource()) || element.eResource() == null) {
 			return element.getName();
 		}
 		else {
