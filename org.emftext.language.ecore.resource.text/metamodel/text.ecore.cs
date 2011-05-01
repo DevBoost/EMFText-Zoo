@@ -28,6 +28,7 @@ OPTIONS {
 	baseResourcePlugin = "org.emftext.language.ecore.resource";
 	saveChangedResourcesOnly = "true";
 	overrideManifest = "false";
+	disableLaunchSupport = "true";
 }
 
 TOKENS {
