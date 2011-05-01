@@ -37,9 +37,6 @@ public class SmLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 	public final static String ATTR_RESOURCE_URI = "uri";
 	
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
-		// Set the overrideLaunchConfigurationDelegate option to <code>false</code> to
-		// implement this method or disable launching support by setting
-		// disableLaunchSupport to <code>true</code>.
 		Expression modelRoot = getModelRoot(configuration);
 		final String message = "The value of the expression is " + modelRoot.getValue() + ".";
 		// show a message box
