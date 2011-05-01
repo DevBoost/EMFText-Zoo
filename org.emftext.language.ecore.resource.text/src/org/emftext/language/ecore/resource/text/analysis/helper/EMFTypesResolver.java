@@ -126,7 +126,7 @@ public class EMFTypesResolver {
 				if (resolveFuzzy) {
 					result.addMapping(nextIdentifier, classifier);
 				} else {
-					if (nextIdentifier.equals(identifier)) {
+					if (nextIdentifier != null && nextIdentifier.equals(identifier)) {
 						result.addMapping(identifier, classifier);
 						return;
 					}
