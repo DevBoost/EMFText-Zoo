@@ -83,7 +83,7 @@ import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsMetaInformation;
 import org.emftext.test.booleanterminal.resource.booleanterminal.mopp.BooleanterminalMetaInformation;
 import org.emftext.test.bug1154.resource.bug1154.mopp.Bug1154MetaInformation;
 import org.emftext.test.bug1233.resource.bug1233.mopp.Bug1233MetaInformation;
-import org.emftext.test.bug1709.resource.bug1709.mopp.bug1709MetaInformation;
+import org.emftext.test.bug1709.resource.bug1709.mopp.Bug1709MetaInformation;
 import org.emftext.test.bug933.resource.bug933.mopp.Bug933MetaInformation;
 import org.emftext.test.cct1.resource.cct1.mopp.Cct1MetaInformation;
 import org.emftext.test.cct2.resource.cct2.mopp.Cct2MetaInformation;
