@@ -68,4 +68,51 @@
 		</specification>
 	</extension>
 	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" delegate="org.emftext.language.simplemath.resource.sm.ui.SmLaunchConfigurationDelegate" modes="run,debug" name="sm Application" delegateName="sm Launch Tooling" delegateDescription="This will run or debug .sm files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" id="org.emftext.language.sm.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" class="org.emftext.language.simplemath.resource.sm.ui.SmLaunchConfigurationTabGroup" id="org.emftext.language.sm.launchConfigurationTabGroup" helpContextId="org.emftext.language.sm.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug sm model.">
+			</launchMode>
+			<launchMode mode="run" description="Run sm model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="sm Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.sm.launch" modes="run,debug" class="org.emftext.language.simplemath.resource.sm.ui.SmLaunchShortcut" description="Launch a sm model" id="org.emftext.language.sm.launchShortcut">
+			<description description="Run sm model" mode="run">
+			</description>
+			<description description="Debug sm model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.emftext.language.sm.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.emftext.language.sm.PropertyTester" type="java.lang.Object" namespace="org.emftext.language.sm" properties="isLaunchable" class="org.emftext.language.simplemath.resource.sm.ui.SmPropertyTester">
+		</propertyTester>
+	</extension>
+	
 </plugin>
