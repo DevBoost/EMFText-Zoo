@@ -80,7 +80,7 @@ public class EcoreTest extends AbstractEcoreTestCase {
 			replace("\t", "").
 			replace("  ", " ");
 		System.out.println("assertPrint() result is ==>" + printResult + "<==");
-		assertEquals("package test test \"http://test\" {class A {attribute _abstract (0..1);}", printResult);
+		assertEquals("package test test \"http://test\" {class A {attribute _abstract (0..1);}}", printResult);
 	}
 
 	@Test
