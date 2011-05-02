@@ -19,8 +19,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -57,6 +60,30 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	}
 
 	@Test
+	public void testPrint() {
+		// this is a test for bug 1708
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		ePackage.setName("test");
+		ePackage.setNsPrefix("test");
+		ePackage.setNsURI("http://test");
+
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName("A");
+		ePackage.getEClassifiers().add(eClass);
+		
+		EAttribute eAtt = EcoreFactory.eINSTANCE.createEAttribute();
+		eAtt.setName("abstract");
+		eClass.getEStructuralFeatures().add(eAtt);
+
+		String printResult = print(ePackage).
+			replace(System.getProperty("line.separator"), "").
+			replace("\t", "").
+			replace("  ", " ");
+		System.out.println("assertPrint() result is ==>" + printResult + "<==");
+		assertEquals("package test test \"http://test\" {class A {attribute _abstract (0..1);}", printResult);
+	}
+
+	@Test
 	public void testRePrint() {
 		// this is a test for bug 1602
 		assertRePrint("reprint.text.ecore");
@@ -67,6 +94,12 @@ public class EcoreTest extends AbstractEcoreTestCase {
 		// these are tests for bug 1617
 		assertRePrint("reprint2.text.ecore");
 		assertRePrint("reprint3.text.ecore");
+	}
+
+	@Test
+	public void testRePrint4() {
+		// these are tests for bug 1708
+		assertRePrint("reprint4.text.ecore");
 	}
 
 	@Test
