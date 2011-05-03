@@ -42,29 +42,29 @@ TOKENSTYLES {
 
 RULES {
 	
-	RuleSet ::= (rules | (__[CWSP]* __[CNL]))+;
+	RuleSet ::= (rules | (_[CWSP]* _[CNL]))+;
 	
 	Rule    ::= 
-		name[RULENAME] __[CWSP]* "="  __[CWSP]* (alternatives __[CWSP]*)* comment[CNL]; // CRLF
+		name[RULENAME] _[CWSP]* "="  _[CWSP]* (alternatives _[CWSP]*)* comment[CNL]; // CRLF
 		
 	IncrementalAlternativRule ::= 
-		name[RULENAME] __[CWSP]* "=/" __[CWSP]* (alternatives __[CWSP]*)* comment[CNL]; // CRLF
+		name[RULENAME] _[CWSP]* "=/" _[CWSP]* (alternatives _[CWSP]*)* comment[CNL]; // CRLF
 	
 	RuleReference ::= rule[RULENAME];
 	
-	Alternative ::= concatenation (__[CWSP]* "/" __[CWSP]* concatenation)*;
+	Alternative ::= concatenation (_[CWSP]* "/" _[CWSP]* concatenation)*;
 
 	//alternation    =  concatenation
     //              *(*c-wsp "/" *c-wsp concatenation)
 
-	Concatenation ::= repetition (__[CWSP]+ repetition)*;
+	Concatenation ::= repetition (_[CWSP]+ repetition)*;
 
 	Repetition ::= (repeat)? element;
 	// element        =  rulename / group / option / char-val / num-val / prose-val
 
-	OptionalSequence ::= "[" __[CWSP]* alternatives* __[CWSP]* "]";
+	OptionalSequence ::= "[" _[CWSP]* alternatives* _[CWSP]* "]";
 	
-	Group ::= "(" __[CWSP]* alternatives* __[CWSP]* ")";
+	Group ::= "(" _[CWSP]* alternatives* _[CWSP]* ")";
 	
 	BinaryTerminal      ::= "%b" value[DIGITS] tail?;
 	DecimalTerminal     ::= "%d" value[DIGITS] tail?;
