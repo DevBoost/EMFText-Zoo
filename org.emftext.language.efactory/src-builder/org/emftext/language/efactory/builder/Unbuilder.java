@@ -37,7 +37,7 @@ public class Unbuilder {
     private int uniqueNr;
 
 
-    public Factory unbuild(EObject eObject) {
+    public Factory unbuild(List<EObject> eObjectList) {
         // Start with unique number zero.
         uniqueNr = 0;
 
@@ -51,18 +51,19 @@ public class Unbuilder {
         Map<EObject, NewObject> createdObjectsMap =
                                     new LinkedHashMap<EObject, NewObject>();
 
-        // Create the model tree.
-        NewObject rootEObject = createNewObject(eObject, createdObjectsMap,
-                                                commands, packages);
-
-        // Set the cross references.
-        for (Runnable runnable : commands) {
-            runnable.run();
-        }
-
         // Create factory (result).
         Factory factory = EfactoryFactory.eINSTANCE.createFactory();
-        factory.setRoot(rootEObject);
+        
+        for(EObject eObject : eObjectList) {
+            // Create the model tree.
+            NewObject rootEObject = createNewObject(eObject, createdObjectsMap,
+                                                    commands, packages); 
+            // Set the cross references.
+            for (Runnable runnable : commands) {
+                runnable.run();
+            }
+            factory.getRoots().add(rootEObject);
+        }
 
         // Add package imports.
         List<EPackage> sortedPackages = new ArrayList<EPackage>(packages);

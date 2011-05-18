@@ -37,20 +37,24 @@ import org.emftext.language.efactory.Value;
  */
 public class Builder {
 
-	public EObject build(Factory eFactory) {
+	public List<EObject> build(Factory eFactory) {
+		List<EObject> result = new ArrayList<EObject>();
 		// stores the commands that set references after creating all objects
 		List<Runnable> commands = new ArrayList<Runnable>();
 		// stores the created objects
 		Map<NewObject, EObject> createdObjectsMap = new LinkedHashMap<NewObject, EObject>();
 		
-		NewObject root = eFactory.getRoot();
-		// create the model tree
-		EObject rootEObject = createEObject(root, createdObjectsMap, commands);
-		// set the cross references
-		for (Runnable runnable : commands) {
-			runnable.run();
+		for (NewObject root : eFactory.getRoots()) {
+			// create the model tree
+			EObject rootEObject = createEObject(root, createdObjectsMap, commands);
+			// set the cross references
+			for (Runnable runnable : commands) {
+				runnable.run();
+			}
+			result.add(rootEObject);
 		}
-		return rootEObject;
+
+		return result;
 	}
 
 	private EObject createEObject(

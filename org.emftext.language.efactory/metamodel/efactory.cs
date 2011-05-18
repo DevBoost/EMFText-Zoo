@@ -36,7 +36,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	Factory ::= epackages+ imports* annotations* root;
+	Factory ::= epackages+ imports* annotations* roots+;
 
 	PackageImport::= "use" #1 ePackage[STRING] (#1 "as" #1 alias[IDENTIFIER])? !0;
 
