@@ -92,30 +92,32 @@ public class BuilderTest extends TestCase {
 		Factory factory = (Factory) root;
 		// build model
 		Builder builder = new Builder();
-		EObject builtModel = builder.build(factory);
+		List<EObject> builtModel = builder.build(factory);
 		Resource tempResource = rs.createResource(URI.createURI("temp_resource_for_build_model.xmi"));
-		tempResource.getContents().add(builtModel);
+		tempResource.getContents().addAll(builtModel);
 		// load expected model
 		String pathToExpectedModel = absolutePath.substring(0, absolutePath.length() - EFACTORY_FILE_EXTENSION.length()) + ".xmi";
 		Resource expectedResource = rs.getResource(URI.createFileURI(pathToExpectedModel), true);
 		List<EObject> expectedContents = expectedResource.getContents();
-		assertEquals(1, expectedContents.size());
-		EObject expectedRoot = expectedContents.get(0);
+		assertEquals(builtModel.size(), expectedContents.size());
 		// compare built model and expected one
 		try {
-			compareModels(builtModel, expectedRoot);
+			compareModels(builtModel, expectedContents);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Exception while comparing models " + e.getMessage());
 		}
 	}
 
-	private void compareModels(EObject modelLeft, EObject modelRight) throws Exception {
-		MatchModel inputMatch = MatchService.doMatch(modelLeft, modelRight, null);
-		DiffModel inputDiff = DiffService.doDiff(inputMatch);
+	private void compareModels(List<EObject> modelLeft, List<EObject> modelRight) throws Exception {
+		for (int i=0; i<modelLeft.size(); i++) {
+			MatchModel inputMatch = MatchService.doMatch(
+					modelLeft.get(i), modelRight.get(i), null);
+			DiffModel inputDiff = DiffService.doDiff(inputMatch);
 
-		if (((DiffGroup) inputDiff.getOwnedElements().get(0)).getSubchanges() != 0) {
-			fail("Diff failed");
+			if (((DiffGroup) inputDiff.getOwnedElements().get(0)).getSubchanges() != 0) {
+				fail("Diff failed");
+			}	
 		}
 	}
 }

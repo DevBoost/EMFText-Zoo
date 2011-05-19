@@ -2,6 +2,7 @@ package org.emftext.language.efactory.test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -70,8 +71,8 @@ public class LoadTest extends TestCase {
 		for (EObject eObject : contents) {
 			if (eObject instanceof Factory) {
 				Factory eFactory = (Factory) eObject;
-				EObject root = builder.build(eFactory);
-				assertNotNull(root);
+				List<EObject> roots = builder.build(eFactory);
+				assertFalse(roots.isEmpty());
 			}
 		}
 	}
