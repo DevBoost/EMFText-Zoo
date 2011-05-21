@@ -9,6 +9,9 @@ OPTIONS {
 	additionalDependencies = "org.emftext.language.pacad.util";
 	overrideDefaultResolverDelegate = "false";
 	overrideBuilder = "false";
+	// TODO enable launch support and run interpreter
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

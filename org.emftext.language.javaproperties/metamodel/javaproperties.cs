@@ -5,6 +5,8 @@ START PropertySet
 OPTIONS {
 	usePredefinedTokens = "false";
 	overrideDynamicTokenStyler = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

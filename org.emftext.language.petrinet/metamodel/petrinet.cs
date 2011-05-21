@@ -18,6 +18,8 @@ START PetriNet
 
 OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

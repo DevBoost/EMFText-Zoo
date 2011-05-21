@@ -39,6 +39,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	defaultTokenName = "IDENTIFIER";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

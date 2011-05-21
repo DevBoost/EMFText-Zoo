@@ -17,6 +17,8 @@ IMPORTS {
 
 OPTIONS {
 	additionalDependencies="org.emftext.language.java.resource";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

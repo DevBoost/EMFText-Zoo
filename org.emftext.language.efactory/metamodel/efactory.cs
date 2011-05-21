@@ -9,6 +9,8 @@ IMPORTS {
 OPTIONS {
 	overrideBuilder = "false";
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

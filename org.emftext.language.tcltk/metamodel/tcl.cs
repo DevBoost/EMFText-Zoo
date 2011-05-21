@@ -12,6 +12,8 @@ OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	//reloadGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

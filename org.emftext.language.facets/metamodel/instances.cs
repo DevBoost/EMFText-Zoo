@@ -9,6 +9,8 @@ IMPORTS {
 OPTIONS {
 	basePackage = "org.emftext.language.facets.resource.facet_classification";
 	resourcePluginID = "org.emftext.language.facets.resource.facet_classification";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {

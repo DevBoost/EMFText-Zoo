@@ -19,6 +19,8 @@ START OfficeModel
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	generateCodeFromGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES { 

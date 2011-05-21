@@ -19,6 +19,8 @@ START OfficeModel
 OPTIONS {
 	licenceHeader ="licence.txt";
 	generateCodeFromGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES { 

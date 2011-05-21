@@ -45,6 +45,8 @@ OPTIONS {
 	memoize = "true";
 	usePredefinedTokens = "false";
 	resolveProxyElementsAfterParsing = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

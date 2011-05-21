@@ -22,6 +22,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	//disableTokenSorting = "true";
 	tokenspace = "0";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

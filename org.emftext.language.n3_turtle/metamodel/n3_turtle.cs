@@ -13,6 +13,8 @@ OPTIONS {
 	tokenspace = "1";
 	//memoize = "true";
 	usePredefinedTokens = "false";  
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

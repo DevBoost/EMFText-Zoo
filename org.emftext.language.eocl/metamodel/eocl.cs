@@ -11,6 +11,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	overrideTextResource = "false";
 	overrideManifest = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

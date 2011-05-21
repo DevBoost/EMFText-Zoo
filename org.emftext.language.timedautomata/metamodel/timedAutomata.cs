@@ -17,6 +17,8 @@ OPTIONS {
 	basePackage = "org.emftext.language.timedautomata.resource.ta";
 	resourceUIPluginID = "org.emftext.language.timedautomata.resource.ta.ui";
 	uiBasePackage = "org.emftext.language.timedautomata.resource.ta.ui";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

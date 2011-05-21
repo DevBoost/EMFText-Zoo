@@ -22,9 +22,11 @@ IMPORTS {
 
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
-    tokenspace = "1";
+	tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES {

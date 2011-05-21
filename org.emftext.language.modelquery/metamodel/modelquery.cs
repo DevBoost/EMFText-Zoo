@@ -4,6 +4,8 @@ START ModelQuery
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

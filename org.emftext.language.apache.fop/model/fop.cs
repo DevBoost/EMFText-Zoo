@@ -2,6 +2,10 @@ SYNTAXDEF format
 FOR <http://www.w3.org/1999/XSL/Format>
 START DocumentRoot
 
+OPTIONS {
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
+}
 
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;

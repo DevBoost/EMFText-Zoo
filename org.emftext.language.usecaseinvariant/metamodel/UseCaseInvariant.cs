@@ -20,6 +20,8 @@ OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

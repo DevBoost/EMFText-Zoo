@@ -20,6 +20,8 @@ OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	overrideBuilder = "false";
 	additionalDependencies = "org.emftext.language.forms.generator";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

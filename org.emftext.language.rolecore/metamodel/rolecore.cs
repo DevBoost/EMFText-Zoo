@@ -22,6 +22,8 @@ OPTIONS {
 	//additionalDependencies = "org.emftext.language.rolecore.ecore_compiler";
 	usePredefinedTokens = "false";
 	defaultTokenName = "IDENTIFIER";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

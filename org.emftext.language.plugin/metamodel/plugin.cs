@@ -19,12 +19,14 @@ START ToolProductFamily
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	tokenspace = "1"; 
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
-TOKENS{
-		DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
-		DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
-		DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
+TOKENS {
+	DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
+	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
+	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
 }
 
 RULES{

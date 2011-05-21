@@ -17,11 +17,13 @@ FOR <http://www.computing.surrey.ac.uk/metamodels/B>
 START Machine
 
 OPTIONS {
-    licenceHeader ="../../org.dropsbox/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	basePackage = "org.emftext.language.b.resource.mch";
 	resourcePluginID = "org.emftext.language.b.resource.mch";
 	uiBasePackage = "org.emftext.language.b.resource.mch.ui";
 	resourceUIPluginID = "org.emftext.language.b.resource.mch.ui";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

@@ -27,6 +27,8 @@ OPTIONS {
 	
 	overrideBuilder = "false";
 	resolveProxyElementsAfterParsing = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {

@@ -4,6 +4,8 @@ START SecPropModel
 
 OPTIONS {
 	baseResourcePlugin="org.emftext.language.secprop.resource";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES{

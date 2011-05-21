@@ -23,6 +23,8 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	basePackage = "org.emftext.language.parametercheck.resource.pcheck";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

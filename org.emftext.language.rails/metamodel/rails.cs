@@ -18,8 +18,10 @@ START Project
 
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
-    generateCodeFromGeneratorModel = "true";
-    reloadGeneratorModel = "true";
+	generateCodeFromGeneratorModel = "true";
+	reloadGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

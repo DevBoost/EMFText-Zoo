@@ -21,6 +21,8 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	
 	overrideBuilder = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES { 

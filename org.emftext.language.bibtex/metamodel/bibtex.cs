@@ -23,6 +23,8 @@ OPTIONS {
 	overrideDefaultResolverDelegate = "false";
 	overrideTextResource = "false";
 	//disableTokenSorting = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

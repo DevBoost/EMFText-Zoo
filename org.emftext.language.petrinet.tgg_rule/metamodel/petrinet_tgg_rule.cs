@@ -22,10 +22,12 @@ IMPORTS {
 
 OPTIONS {	
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
-    //reloadGeneratorModel = "true";
-    //generateCodeFromGeneratorModel = "true";
-    resourcePluginID = "org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule";
-    basePackage = "org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule";
+	//reloadGeneratorModel = "true";
+	//generateCodeFromGeneratorModel = "true";
+	resourcePluginID = "org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule";
+	basePackage = "org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

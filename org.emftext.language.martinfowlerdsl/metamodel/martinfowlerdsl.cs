@@ -17,7 +17,9 @@ FOR <http://www.emftext.org/language/martinfowlerdsl>
 START StateMachine
 
 OPTIONS {
-	licenceHeader ="../../org.dropsbox/licence.txt";
+	licenceHeader = "../../org.dropsbox/licence.txt";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

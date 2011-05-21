@@ -14,6 +14,8 @@ OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	tokenspace = "1";
 	overrideBuilder = "false" ;
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

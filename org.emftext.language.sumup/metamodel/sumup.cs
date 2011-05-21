@@ -6,6 +6,8 @@ OPTIONS {
 	overrideBuilder = "false";
 	additionalDependencies = "org.emftext.language.sumup.codegen";
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

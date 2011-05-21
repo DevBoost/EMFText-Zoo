@@ -38,6 +38,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

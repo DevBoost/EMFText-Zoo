@@ -14,6 +14,8 @@ OPTIONS {
 	
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

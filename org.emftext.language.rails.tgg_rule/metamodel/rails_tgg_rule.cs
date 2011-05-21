@@ -22,10 +22,12 @@ IMPORTS {
 
 OPTIONS {	
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
-    //reloadGeneratorModel = "true";
-    //generateCodeFromGeneratorModel = "true";
-    resourcePluginID = "org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule";
-    basePackage = "org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule";
+	//reloadGeneratorModel = "true";
+	//generateCodeFromGeneratorModel = "true";
+	resourcePluginID = "org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule";
+	basePackage = "org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

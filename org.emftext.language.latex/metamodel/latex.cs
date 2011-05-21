@@ -5,6 +5,8 @@ START Document
 
 OPTIONS {
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

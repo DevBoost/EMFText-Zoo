@@ -2,6 +2,11 @@ SYNTAXDEF lambda
 FOR <http://www.emftext.org/language/lambdacalculus>
 START Root
 
+OPTIONS {
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
+}
+
 TOKENSTYLES {
 	"(" COLOR #A00000, BOLD;
 	"(\\" COLOR #A00000, BOLD;

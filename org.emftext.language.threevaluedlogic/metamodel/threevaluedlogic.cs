@@ -22,6 +22,8 @@ OPTIONS {
 	memoize = "true";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES {

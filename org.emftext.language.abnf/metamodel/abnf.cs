@@ -8,6 +8,8 @@ START RuleSet
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

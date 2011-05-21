@@ -23,6 +23,8 @@ OPTIONS {
  	resourceUIPluginID = "org.emftext.language.quickuml.resource.quml.ui";
 	uiBasePackage = "org.emftext.language.quickuml.resource.quml.ui";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES {

@@ -20,6 +20,8 @@ OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

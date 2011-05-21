@@ -28,6 +28,8 @@ OPTIONS {
 	uiBasePackage = "org.emftext.language.km3.resource.km3.ui";
 	defaultTokenName ="NAME";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

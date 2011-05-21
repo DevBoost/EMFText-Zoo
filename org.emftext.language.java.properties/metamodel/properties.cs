@@ -27,7 +27,10 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
 	resolveProxyElementsAfterParsing = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
+
 TOKENS {
 	DEFINE T_READONLY $'readonly'$;
 }

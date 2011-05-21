@@ -25,6 +25,8 @@ OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
 	resolveProxyElementsAfterParsing = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {

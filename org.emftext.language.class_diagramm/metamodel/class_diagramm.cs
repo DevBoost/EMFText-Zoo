@@ -20,7 +20,9 @@ OPTIONS{
     //generateCodeFromGeneratorModel = "true";
     //reloadGeneratorModel = "true";
     //overrideManifest = "false";
-    licenceHeader ="platform:/resource/org.reuseware/licence.txt"; 
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt"; 
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

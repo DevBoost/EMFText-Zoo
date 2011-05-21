@@ -9,6 +9,8 @@ IMPORTS {
 OPTIONS {
 	basePackage = "org.emftext.language.facets.resource.facet_definition";
 	resourcePluginID = "org.emftext.language.facets.resource.facet_definition";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

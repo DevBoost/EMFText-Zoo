@@ -27,6 +27,8 @@ OPTIONS {
 	reloadGeneratorModel = "false" ;
 	overrideBuilder="false";
 	resolveProxyElementsAfterParsing = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES { 

@@ -19,9 +19,11 @@ START Database
 OPTIONS{
 	//generateCodeFromGeneratorModel = "true"; 
  	reloadGeneratorModel = "true"; 
-    //tokenspace = "1";
-    //overrideManifest = "false";  
-    licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	//tokenspace = "1";
+	//overrideManifest = "false";  
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 TOKENS{
 		DEFINE COMMENT $'//'(~('\n'|'\r'))*$; 

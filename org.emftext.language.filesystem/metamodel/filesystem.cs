@@ -19,6 +19,8 @@ START Folder
 OPTIONS {
  	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

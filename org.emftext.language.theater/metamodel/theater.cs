@@ -5,6 +5,8 @@ START Play
 OPTIONS { 
 	usePredefinedTokens="false";
 	licenceHeader ="../../org.dropsbox/licence.txt";	
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

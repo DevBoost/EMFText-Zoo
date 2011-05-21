@@ -25,6 +25,8 @@ OPTIONS {
 	resourceUIPluginID = "org.emftext.language.valueflow.resource.valueflow.ui";
 	uiBasePackage = "org.emftext.language.valueflow.resource.valueflow.ui";
 	baseResourcePlugin = "org.emftext.language.valueflow.resource";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES {

@@ -12,6 +12,8 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	additionalDependencies = "org.emftext.language.pl0.resource.pl0";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {

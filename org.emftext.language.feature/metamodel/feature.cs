@@ -23,6 +23,8 @@ OPTIONS {
 	basePackage = "org.emftext.language.feature.resource.feature";
 	resourceUIPluginID = "org.emftext.language.feature.resource.feature.ui";
 	uiBasePackage = "org.emftext.language.feature.resource.feature.ui";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

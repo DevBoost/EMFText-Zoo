@@ -5,6 +5,8 @@ START AttributeGrammar
 OPTIONS {
 	usePredefinedTokens = "false";
 	defaultTokenName = "IDENTIFIER";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

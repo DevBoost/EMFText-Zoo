@@ -12,6 +12,8 @@ OPTIONS {
 	usePredefinedTokens ="false";
 	resolveProxyElementsAfterParsing = "false";
 	additionalDependencies = "org.emftext.language.java.resource";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {

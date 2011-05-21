@@ -21,6 +21,8 @@ OPTIONS {
 	tokenspace = "1";
 	autofixSimpleLeftrecursion = "false";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

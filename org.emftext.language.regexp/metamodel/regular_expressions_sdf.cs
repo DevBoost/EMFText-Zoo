@@ -21,6 +21,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	//reloadGeneratorModel = "true";
 	tokenspace = "0";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

@@ -26,6 +26,8 @@ OPTIONS {
     //generateCodeFromGeneratorModel = "true";
     resourcePluginID = "org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule";
     basePackage = "org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

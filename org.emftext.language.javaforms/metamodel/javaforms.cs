@@ -6,7 +6,6 @@ START forms.Form
 IMPORTS {
 	forms : <http://www.emftext.org/language/forms> WITH SYNTAX forms <../../org.emftext.language.forms/metamodel/forms.cs>
 	java : <http://www.emftext.org/java> WITH SYNTAX java <../../org.emftext.language.java/metamodel/java.cs>
-
 }
 
 OPTIONS {
@@ -18,6 +17,8 @@ OPTIONS {
 	tokenspace = "1";
 	overrideBuilder = "false" ;
 	additionalDependencies = "org.emftext.language.javaforms.codegen,org.emftext.language.java.resource";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

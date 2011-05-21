@@ -21,6 +21,8 @@ OPTIONS {
 	overrideBuilder = "false";
 	tokenspace = "1";
 	additionalDependencies = "org.emftext.language.formular.generator";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES {

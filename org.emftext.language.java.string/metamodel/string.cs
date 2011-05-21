@@ -27,7 +27,8 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	//overrideBuilder = "true";
 	disableBuilder = "true";
-
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {

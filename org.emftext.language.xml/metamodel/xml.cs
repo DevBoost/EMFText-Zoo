@@ -17,7 +17,7 @@ FOR <http://www.emftext.org/xml> <./xml.genmodel>
 START Document
 
 OPTIONS {	 
- licenceHeader ="../../org.dropsbox/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
  	tokenspace="1";
 	defaultTokenName="IDENTIFIER";
 	generateCodeFromGeneratorModel="false";
@@ -28,6 +28,8 @@ OPTIONS {
 	basePackage="org.emftext.language.xml.resource.xml";
 	resourceUIPluginID="org.emftext.language.xml.resource.xml.ui";
 	uiBasePackage="org.emftext.language.xml.resource.xml.ui";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS{

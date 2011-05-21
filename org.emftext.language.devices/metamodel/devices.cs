@@ -2,6 +2,11 @@ SYNTAXDEF devices
 FOR <http://www.emftext.org/language/devices>
 START CommunicationSpec
 
+OPTIONS {
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
+}
+
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE INTEGER $'0x'('0'..'9'|'a'..'f'|'A'..'F')+$;

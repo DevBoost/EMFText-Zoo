@@ -19,6 +19,8 @@ START Frame
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

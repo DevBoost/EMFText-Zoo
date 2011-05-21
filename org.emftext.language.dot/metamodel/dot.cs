@@ -19,11 +19,13 @@ START Graph
 // see: http://www.graphviz.org/doc/info/lang.html
 
 OPTIONS {
- 		licenceHeader ="../../org.dropsbox/licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
         reloadGeneratorModel = "true";
         generateCodeFromGeneratorModel = "true";
         usePredefinedTokens = "false";
         tokenspace = "1";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

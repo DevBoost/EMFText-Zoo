@@ -21,6 +21,8 @@ OPTIONS {
 	basePackage = "org.emftext.language.statemachine.resource.statemachine";
 	resourceUIPluginID = "org.emftext.language.statemachine.resource.statemachine.ui";
 	uiBasePackage = "org.emftext.language.statemachine.resource.statemachine.ui";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

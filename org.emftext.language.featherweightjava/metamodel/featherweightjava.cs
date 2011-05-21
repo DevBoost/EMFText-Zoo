@@ -22,6 +22,8 @@ OPTIONS {
 	backtracking = "true";
 	memoize = "true";
 	generateCodeFromGeneratorModel = "true";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENSTYLES {

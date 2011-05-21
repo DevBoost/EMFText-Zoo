@@ -16,6 +16,8 @@ OPTIONS {
 	basePackage = "org.emftext.language.manifest.resource.manifest";
 	resourceUIPluginID = "org.emftext.language.manifest.resource.manifest.ui";
 	uiBasePackage = "org.emftext.language.manifest.resource.manifest.ui";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 } 
 
 TOKENS {

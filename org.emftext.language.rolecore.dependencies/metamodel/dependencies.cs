@@ -2,6 +2,11 @@ SYNTAXDEF dependencies
 FOR <http://www.emftext.org/language/rolecore/dependencies>
 START Graph
 
+OPTIONS {
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
+}
+
 TOKENS{
 	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;

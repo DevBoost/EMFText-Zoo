@@ -45,6 +45,8 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "false";
 	memoize = "true";
 	usePredefinedTokens = "false";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 TOKENS {

@@ -20,6 +20,8 @@ OPTIONS {
  	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	resourcePluginID = "org.emftext.language.ecore.change.resource.ecore_change";
 	basePackage = "org.emftext.language.ecore.change.resource.ecore_change";
+	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 }
 
 RULES {
