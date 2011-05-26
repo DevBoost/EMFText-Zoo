@@ -79,4 +79,33 @@
 	<extension-point id="org.emftext.language.simplemath.resource.sm.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
 	</extension-point>
 	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="org.emftext.language.simplemath.resource.sm.debug.SmLineBreakpoint" id="org.emftext.language.simplemath.resource.sm.debug.breakpoint" markerType="org.emftext.language.simplemath.resource.sm.debug.lineBreakpoint.marker" name="sm Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="org.emftext.language.simplemath.resource.sm.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" delegate="org.emftext.language.simplemath.resource.sm.launch.SmLaunchConfigurationDelegate" modes="run,debug" name="sm Application" sourceLocatorId="org.emftext.language.simplemath.resource.sm.ui.sourceLocator" sourcePathComputerId="org.emftext.language.simplemath.resource.sm.ui.sourcePathComputer" delegateName="sm Launch Tooling" delegateDescription="This will run or debug .sm files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="org.emftext.language.simplemath.resource.sm.debug.SmSourcePathComputerDelegate" id="org.emftext.language.simplemath.resource.sm.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="org.emftext.language.simplemath.resource.sm.ui.sourceLocator" class="org.emftext.language.simplemath.resource.sm.debug.SmSourceLocator" name="sm Source Locator">
+		</sourceLocator>
+	</extension>
+	
 </plugin>

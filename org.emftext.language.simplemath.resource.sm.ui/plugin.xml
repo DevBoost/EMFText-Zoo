@@ -68,18 +68,13 @@
 		</specification>
 	</extension>
 	
-	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
-		<launchConfigurationType id="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" delegate="org.emftext.language.simplemath.resource.sm.ui.SmLaunchConfigurationDelegate" modes="run,debug" name="sm Application" delegateName="sm Launch Tooling" delegateDescription="This will run or debug .sm files.">
-		</launchConfigurationType>
-	</extension>
-	
 	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
 		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" id="org.emftext.language.sm.launchImage">
 		</launchConfigurationTypeImage>
 	</extension>
 	
 	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
-		<launchConfigurationTabGroup type="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" class="org.emftext.language.simplemath.resource.sm.ui.SmLaunchConfigurationTabGroup" id="org.emftext.language.sm.launchConfigurationTabGroup" helpContextId="org.emftext.language.sm.launchConfigHelpContext">
+		<launchConfigurationTabGroup type="org.emftext.language.simplemath.resource.sm.ui.launchConfigurationType" class="org.emftext.language.simplemath.resource.sm.ui.launch.SmLaunchConfigurationTabGroup" id="org.emftext.language.sm.launchConfigurationTabGroup" helpContextId="org.emftext.language.sm.launchConfigHelpContext">
 			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug sm model.">
 			</launchMode>
 			<launchMode mode="run" description="Run sm model.">
@@ -88,7 +83,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.debug.ui.launchShortcuts">
-		<shortcut label="sm Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.sm.launch" modes="run,debug" class="org.emftext.language.simplemath.resource.sm.ui.SmLaunchShortcut" description="Launch a sm model" id="org.emftext.language.sm.launchShortcut">
+		<shortcut label="sm Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.sm.launch" modes="run,debug" class="org.emftext.language.simplemath.resource.sm.ui.launch.SmLaunchShortcut" description="Launch a sm model" id="org.emftext.language.sm.launchShortcut">
 			<description description="Run sm model" mode="run">
 			</description>
 			<description description="Debug sm model" mode="debug">
@@ -113,6 +108,50 @@
 	<extension point="org.eclipse.core.expressions.propertyTesters">
 		<propertyTester id="org.emftext.language.sm.PropertyTester" type="java.lang.Object" namespace="org.emftext.language.sm" properties="isLaunchable" class="org.emftext.language.simplemath.resource.sm.ui.SmPropertyTester">
 		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.simplemath.resource.sm.ui.debug.lineBreakpoint" markerType="org.emftext.language.simplemath.resource.sm.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.simplemath.resource.sm.ui.debug.lineBreakpoint" label="Breakpoints (in .sm files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.emftext.language.simplemath.resource.sm.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.emftext.language.simplemath.resource.sm.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.emftext.language.simplemath.resource.sm.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.emftext.language.simplemath.resource.sm.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.emftext.language.simplemath.resource.sm.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.emftext.language.simplemath.resource.sm.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.emftext.language.simplemath.resource.sm.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.emftext.language.simplemath.resource.sm.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.emftext.language.simplemath.resource.sm.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.emftext.language.simplemath.resource.sm.ui.SmEditor" class="org.emftext.language.simplemath.resource.sm.ui.debug.SmAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.simplemath.resource.sm.debug.SmDebugVariable" class="org.emftext.language.simplemath.resource.sm.ui.debug.SmAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.simplemath.resource.sm.debug.SmDebugVariable" class="org.emftext.language.simplemath.resource.sm.ui.debug.SmAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.emftext.language.simplemath.resource.sm.ui.RulerPopupActions" targetID="#TextRulerContext">
+			<action id="org.emftext.language.simplemath.resource.sm.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.emftext.language.simplemath.resource.sm.ui.SmEditor" id="org.emftext.language.simplemath.resource.sm.ui.BreakpointRulerActions">
+			<action id="org.emftext.language.simplemath.resource.sm.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.emftext.language.simplemath.resource.sm.debugModel" class="org.emftext.language.simplemath.resource.sm.ui.debug.SmDebugModelPresentation">
+		</debugModelPresentation>
 	</extension>
 	
 </plugin>
