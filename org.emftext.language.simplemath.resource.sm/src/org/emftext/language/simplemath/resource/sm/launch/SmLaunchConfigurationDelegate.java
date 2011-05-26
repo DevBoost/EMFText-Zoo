@@ -12,7 +12,7 @@
  *      - initial API and implementation
  ******************************************************************************/
 
-package org.emftext.language.simplemath.resource.sm.ui;
+package org.emftext.language.simplemath.resource.sm.launch;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;

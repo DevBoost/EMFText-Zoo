@@ -22,6 +22,7 @@ OPTIONS {
 	tokenspace = "1";
 	usePredefinedTokens = "false";
 	overrideLaunchConfigurationDelegate = "false";
+	additionalDependencies = "org.eclipse.swt";
 }
 
 TOKENS {
