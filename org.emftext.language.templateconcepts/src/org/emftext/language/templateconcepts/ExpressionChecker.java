@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.templateconcepts;
@@ -47,21 +47,21 @@ import org.emftext.language.templateconcepts.TemplateconceptsPackage;
 
 
 /**
- * An ExpressionChecker can be used to check and evaluate OCL queries 
+ * An ExpressionChecker can be used to check and evaluate OCL queries
  * in templates. Examples for such queries are conditions (in IF elements),
  * collectionSelectors (in FOR loops) and the expressions in placeholders.
- * 
+ *
  * TODO when checking (and evaluating) OCL queries inside of (potentially
  * nested) loops, the context class is different. Instead of using the meta
  * class of the input model root element, we must use the type returned by
  * the collection that contains the expression.
- * 
+ *
  * TODO adjust this checking to the one done in the interpreter
- * 
+ *
  * TODO clean this mess up
  */
 public class ExpressionChecker  {
-	
+
 	public static interface ErrorReporter {
 		void report(EObject element, String message);
 	}
@@ -77,7 +77,7 @@ public class ExpressionChecker  {
 		if (metaClass == null) {
 			return;
 		}
-		
+
 		Map<String, EObject> variables = new HashMap<String, EObject>();
 		List<EObject> contents = template.eContents();
 		check(errorReporter, metaClass, contents, variables);
@@ -106,7 +106,7 @@ public class ExpressionChecker  {
 				ForEach forEach = (ForEach) concept;
 				@SuppressWarnings("unchecked")
 				Query<EClassifier, EClass, EObject> query = (Query<EClassifier, EClass, EObject>) errorOrQuery;
-				
+
 				EClassifier resultType = query.getExpression().getType();
 				System.out.println("result type of (" + concept.getExpression() + ") is " + resultType);
 				if (resultType instanceof OrderedSetType) {
@@ -132,12 +132,12 @@ public class ExpressionChecker  {
 		}
 	}
 
-	private void checkPlaceholderExpressionType(ErrorReporter errorReporter, 
+	private void checkPlaceholderExpressionType(ErrorReporter errorReporter,
 			EClass metaClass, TemplateConcept concept, String expression) {
 		Object queryOrError = createQuery(metaClass, null, expression);
 		if (queryOrError instanceof Query) {
 			Query<?,?,?> query = (Query<?,?,?>) queryOrError;
-			
+
 			// first, we need the type of the expression in the placeholder
 			Object expressionType = query.getExpression().getType();
 			//System.out.println("placeholder expression type = " + expressionType);
@@ -146,28 +146,28 @@ public class ExpressionChecker  {
 			// type inherits
 			final Object placeHolderExpressionPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(expressionType);
 			//System.out.println("placeholder expression primitive type = " + placeHolderExpressionPrimitiveType);
-			
+
 			// now that we know about the primitive type of the expression, we
 			// must obtain the type of the target of the placeholder. therefore,
 			// we take the type of the reference that holds the placeholder
 			EClassifier placeholderReferenceType = concept.eContainingFeature().getEType();
 			//System.out.println("placeholder reference type = " + placeholderReferenceType);
-			
+
 			// since the type of the reference is always abstract, we must search for
 			// the one subclass that is used in the object language to hold attribute
 			// values
 			EClass boxedAttributeType = getBoxedAttributeType(placeholderReferenceType);
 			//System.out.println("placeholder boxed attribute type = " + boxedAttributeType);
-			
+
 			// once we have the concrete class that holds the attribute we must figure out
 			// the primitive type, i.e., the superclass from the primitive types package
 			final Object placeHolderTargetPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(boxedAttributeType);
 			//System.out.println("placeholder target has primitive type = " + placeHolderTargetPrimitiveType);
-			
+
 			// now we have both the primitive type of the expression and the target of the
 			// placeholder. lets compare them...
 			if (placeHolderExpressionPrimitiveType == null || !placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
-				errorReporter.report(concept, 
+				errorReporter.report(concept,
 						"The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")");
 			}
 		} else {
@@ -194,7 +194,7 @@ public class ExpressionChecker  {
 
 	private List<EObject> getObjectsByType(Resource resource, EClass metaClass) {
 		List<EObject> foundObjects = new ArrayList<EObject>();
-		
+
 		TreeIterator<EObject> contents = resource.getAllContents();
 		while (contents.hasNext()) {
 			EObject next = contents.next();
@@ -236,17 +236,17 @@ public class ExpressionChecker  {
 	private Object createQuery(EClass inputMetaClass, Map<String, EObject> variables, String expressionString) {
 		OCL<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
 			ocl = org.eclipse.ocl.ecore.OCL.newInstance();
-		
+
 		OCLExpression<EClassifier> expression;
 		try {
 			addVariables(variables, ocl);
-			
+
 			OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
 			helper.setContext(inputMetaClass);
 
 			expression = helper.createQuery(expressionString);
 			Query<EClassifier, EClass, EObject> query = ocl.createQuery(expression);
-			
+
 			addVariableValues(variables, query);
 
 			return query;
@@ -262,7 +262,7 @@ public class ExpressionChecker  {
 			return;
 		}
 		for (String variableName : variables.keySet()) {
-			Variable<EClassifier, EParameter> v = 
+			Variable<EClassifier, EParameter> v =
 				ocl.getEnvironment().getOCLFactory().createVariable();
 			v.setName(variableName);
 			v.setType(variables.get(variableName).eClass());

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.rolecore.riehle97;
@@ -29,11 +29,11 @@ public class RiehleTest extends TestCase {
 //		// add a role
 //		Borrower fredsBorrowerRole = Riehle97Factory.eINSTANCE.createBorrower();
 //		fred.addRole(fredsBorrowerRole);
-//		
+//
 //		// check that the role is still there
 //		isBorrower = fred.hasRole(Borrower.class);
 //		assertTrue(isBorrower);
-//		
+//
 //		// get the role object
 //		Borrower fredPlayingBorrower = fred.getRole(Borrower.class);
 //		assertNotNull(fredPlayingBorrower);

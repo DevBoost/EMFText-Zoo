@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
@@ -47,24 +47,24 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.util.TemporalCompositeClassifier;
 
-public class ElementReferenceTargetReferenceResolver implements 
+public class ElementReferenceTargetReferenceResolver implements
 	IJavaReferenceResolver<ElementReference, ReferenceableElement> {
-	
-	JavaDefaultResolverDelegate<ElementReference, ReferenceableElement> delegate = 
+
+	JavaDefaultResolverDelegate<ElementReference, ReferenceableElement> delegate =
 		new JavaDefaultResolverDelegate<ElementReference, ReferenceableElement>();
-	
+
 	public java.lang.String deResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (element.eIsProxy()) {
 			return delegate.deResolve(element, container, reference);
 		}
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) element;
-			
+
 			Object fullNamesOption = container.eResource().getResourceSet().getLoadOptions().get(
-					JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);	
+					JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);
 			if (!(fullNamesOption instanceof Boolean)) {
 				fullNamesOption = Boolean.FALSE;
-			}		
+			}
 			if (container.getPrevious() == null && Boolean.TRUE.equals(fullNamesOption)) {
 				String packageName = "";
 				String fullClassName = concreteClassifier.getName();
@@ -79,20 +79,20 @@ public class ElementReferenceTargetReferenceResolver implements
 				}
 				return packageName + fullClassName;
 			}
-			
+
 			if(concreteClassifier.getFullName() != null) {
 				return concreteClassifier.getFullName();
 			}
 		}
 		return element.getName();
 	}
-	
+
 	public void resolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<ReferenceableElement> result) {
 		EObject startingPoint = null;
 		EObject alternativeStartingPoint = null;
 		EObject target = null;
 		Reference parentReference = null;
-		
+
 		if(container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			//a follow up reference: different scope
 			parentReference = (Reference) container.eContainer();
@@ -106,7 +106,7 @@ public class ElementReferenceTargetReferenceResolver implements
 					alternativeStartingPoint = ((NestedExpression) parentReference
 							).getExpression().getAlternativeType();
 				}
-			
+
 				//do not search on primitive types but their class representation
 				if (startingPoint instanceof PrimitiveType) {
 					startingPoint = ((PrimitiveType) startingPoint).wrapPrimitiveType();
@@ -115,12 +115,12 @@ public class ElementReferenceTargetReferenceResolver implements
 				if (parentReference instanceof NestedExpression) {
 					startingPoint = (((NestedExpression)parentReference).getExpression()).getType();
 				}
-				
+
 				//special case: anonymous class in constructor call
 				while (parentReference instanceof NestedExpression) {
 					Expression nestedExpression = ((NestedExpression)parentReference).getExpression();
 					if (nestedExpression instanceof Reference) {
-						parentReference = (Reference) nestedExpression; 
+						parentReference = (Reference) nestedExpression;
 					}
 					else {
 						parentReference = null;
@@ -130,13 +130,13 @@ public class ElementReferenceTargetReferenceResolver implements
 						((NewConstructorCall)parentReference).getAnonymousClass() != null) {
 					startingPoint = ((NewConstructorCall)parentReference).getAnonymousClass();
 				}
-				
+
 			}
 		}
 		else {
 			startingPoint = container;
 		}
-		
+
 		if(target == null) {
 			if(startingPoint instanceof TemporalCompositeClassifier) {
 				for(EObject superType : ((TemporalCompositeClassifier)startingPoint).getSuperTypes()) {
@@ -149,14 +149,14 @@ public class ElementReferenceTargetReferenceResolver implements
 			}
 			else {
 				target = searchFromStartingPoint(identifier, container, reference,
-						startingPoint);	
+						startingPoint);
 			}
 		}
 		if(target == null && alternativeStartingPoint != null && !alternativeStartingPoint.equals(startingPoint)) {
 			target = searchFromStartingPoint(identifier, container, reference,
 					alternativeStartingPoint);
 		}
-		
+
 		if (target != null) {
 			result.addMapping(identifier, (ReferenceableElement) target);
 		}
@@ -171,14 +171,14 @@ public class ElementReferenceTargetReferenceResolver implements
 		deciderList.add(new LocalVariableDecider());
 		deciderList.add(new ParameterDecider());
 		deciderList.add(new MethodDecider());
-		
+
 		deciderList.add(new ConcreteClassifierDecider());
 		deciderList.add(new TypeParameterDecider());
-		
+
 		deciderList.add(new PackageDecider());
-		
+
 		ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-		
+
 		return treeWalker.walk(startingPoint, identifier, container, reference);
 	}
 

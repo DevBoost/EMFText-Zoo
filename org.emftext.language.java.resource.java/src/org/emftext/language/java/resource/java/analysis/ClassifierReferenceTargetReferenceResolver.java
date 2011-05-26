@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
@@ -41,12 +41,12 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 
-public class ClassifierReferenceTargetReferenceResolver implements 
+public class ClassifierReferenceTargetReferenceResolver implements
 	IJavaReferenceResolver<ClassifierReference, Classifier> {
-	
-	JavaDefaultResolverDelegate<ClassifierReference, Classifier> delegate = 
+
+	JavaDefaultResolverDelegate<ClassifierReference, Classifier> delegate =
 		new JavaDefaultResolverDelegate<ClassifierReference, Classifier>();
-	
+
 	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (classifier.eIsProxy()) {
 			return delegate.deResolve(classifier, container, reference);
@@ -60,7 +60,7 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			Object fullNamesOption = Boolean.FALSE;
 			if (container.eResource() != null && container.eResource().getResourceSet() !=null) {
 				fullNamesOption = container.eResource().getResourceSet().getLoadOptions().get(
-						JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);	
+						JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);
 			}
 			if (namespaceMissing && Boolean.TRUE.equals(fullNamesOption)) {
 				String packageName = "";
@@ -76,21 +76,21 @@ public class ClassifierReferenceTargetReferenceResolver implements
 				}
 				return packageName + fullClassName;
 			}
-			
+
 			if(concreteClassifier.getFullName() != null) {
 				return concreteClassifier.getFullName();
 			}
 		}
 		return classifier.getName();
-	}	
+	}
 
 	public void resolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<Classifier> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
-		
+
 		EObject startingPoint = null;
 		EObject target = null;
 		boolean hasNamespace = false;
-		
+
 		if (container.eContainer() instanceof NamespaceClassifierReference) {
 			NamespaceClassifierReference ncr = (NamespaceClassifierReference) container.eContainer();
 			int idx = ncr.getClassifierReferences().indexOf(container);
@@ -113,14 +113,14 @@ public class ClassifierReferenceTargetReferenceResolver implements
 				}
 			}
 		}
-		
+
 		if (target == null) {
 			//new constructor call can be part of reference chain
 			if (startingPoint == null && container.eContainer().eContainer() instanceof NewConstructorCall) {
 				NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
 				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 					startingPoint = ((Reference) ncc.eContainer()).getReferencedType();
-					
+
 					//a ncc can be encapsulated in nested expressions
 					EObject outerContainer = ncc.eContainer();
 					while (outerContainer instanceof NestedExpression) {
@@ -132,7 +132,7 @@ public class ClassifierReferenceTargetReferenceResolver implements
 							break;
 						}
 					}
-					
+
 					if (outerContainer instanceof NewConstructorCall) {
 						NewConstructorCall outerNcc = (NewConstructorCall) outerContainer;
 						if (outerNcc.getAnonymousClass() != null) {
@@ -144,11 +144,11 @@ public class ClassifierReferenceTargetReferenceResolver implements
 					}
 				}
 			}
-			
+
 			if (startingPoint == null) {
 				startingPoint = container;
 			}
-			
+
 			if (hasNamespace) {
 				if (startingPoint instanceof ConcreteClassifier) {
 					for(ConcreteClassifier cand : ((ConcreteClassifier)startingPoint).getAllInnerClassifiers()) {
@@ -174,22 +174,22 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			else {
 				deciderList.add(new ConcreteClassifierDecider());
 				deciderList.add(new TypeParameterDecider());
-				
+
 				ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-				
+
 				target = treeWalker.walk(startingPoint, identifier, container, reference);
 			}
 
 		}
-		
+
 		if (target != null) {
 			result.addMapping(identifier, (Classifier) target);
 		}
 	}
-	
+
 	private EObject resolveFullQualifiedTypeReferences(String identifier,
 			NamespaceClassifierReference ncr, EObject container, EReference reference) {
-		
+
 		int idx = ncr.getClassifierReferences().indexOf(container);
 		if(ncr.getNamespaces().size() > 0 && idx == 0) {
 			EObject target = null;
@@ -218,9 +218,9 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			return target;
 		}
 		return null;
-		
+
 	}
-	
+
 	public void setOptions(Map<?, ?> options) {
 	}
 }

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.analysis;
@@ -28,12 +28,12 @@ public class JavaCHARACTER_LITERALTokenResolverTest {
 	@Test
 	public void testUnicodeEscaping() {
 		JavaCHARACTER_LITERALTokenResolver resolver = new JavaCHARACTER_LITERALTokenResolver();
-		
-		//String character = "\t";	
+
+		//String character = "\t";
 		//System.out.println("ORIG: " + character);
 		//System.out.println("RES:  " + resolve(resolver, character));
 		//System.out.println("DRES: " + resolver.deResolve(resolve(resolver, character), null,null));
-		
+
 		assertEquals('\\', resolve(resolver, "\\\\"));
 		assertEquals('\n', resolve(resolver, "\\n"));
 		assertEquals('\b', resolve(resolver, "\\b"));

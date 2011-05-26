@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.plugin;
@@ -75,8 +75,8 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 				es.setExtensionId(extension.getUniqueIdentifier());
 				es.setName(extension.getLabel());
 				plugin.getExtensions().add(es);
-			
-			
+
+
 				String extensionPointUniqueIdentifier = extension.getExtensionPointUniqueIdentifier();
 				IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(extensionPointUniqueIdentifier);
 				IContributor contributor = extensionPoint.getContributor();
@@ -90,11 +90,11 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 					initialiseExtensions(imported, family);
 				}
 				es.setBinds(lookupExtensionPoint(extensionPointUniqueIdentifier));
-			}	
+			}
 		}
 	}
 
-	
+
 	private ExtensionPoint lookupExtensionPoint(
 			String extensionPointUniqueIdentifier) {
 		return ids2eps.get(extensionPointUniqueIdentifier);
@@ -113,9 +113,9 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 				ep.setExtensionPointId(extensionPoint.getUniqueIdentifier());
 				ep.setSchema(extensionPoint.getSchemaReference());
 				plugin.getExtensionPoints().add(ep);
-				
+
 				ids2eps.put(ep.getExtensionPointId(), ep);
-			
+
 				if (family.getPlugins().contains(plugin)) {
 					IExtension[] pointsExtensions = extensionPoint.getExtensions();
 					for (IExtension extension : pointsExtensions) {
@@ -123,11 +123,11 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 						if (getPlugin(contributor.getName(), family) == null) {
 							final String contributorName = contributor.getName();
 							resource.addProblem(new ITopfProblem() {
-								
+
 								public TopfEProblemType getType() {
 									return TopfEProblemType.ANALYSIS_PROBLEM;
 								}
-								
+
 								public String getMessage() {
 									return "The plug-in " + contributorName + " extends the families extension point " + ep.getExtensionPointId() + " and " +
 										"should be considered as plug-in of the tool product family.";
@@ -142,23 +142,23 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 								}
 							}, plugin);
 						}
-						
+
 					}
 				}
-			}			
+			}
 		}
 	}
 
 	private void initialisePluginInformation(Plugin plugin, ToolProductFamily family) {
-		
+
 		ModelEntry entry = PluginRegistry.findEntry(plugin.getPluginId()) ;
 		if (entry == null) {
 			resource.addProblem(new ITopfProblem() {
-				
+
 				public TopfEProblemType getType() {
 					return TopfEProblemType.ANALYSIS_PROBLEM;
 				}
-				
+
 				public String getMessage() {
 					return "Plug-In was not found";
 				}
@@ -172,11 +172,11 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 				}
 			}, plugin);
 		}
-		IPluginModelBase model = entry.getModel();		
+		IPluginModelBase model = entry.getModel();
 		plugin.setName(model.getBundleDescription().getName());
 		plugin.setVersion(model.getBundleDescription().getVersion().toString());
 
-		
+
 	}
 
 	public ITopfResourcePostProcessor getResourcePostProcessor() {
@@ -201,7 +201,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 		return false;
 	}
 
-	
+
 	private Plugin getPlugin(String name, ToolProductFamily family) {
 		for (Plugin p : family.getPlugins()) {
 			if (p.getPluginId() != null && p.getPluginId().equals(name)) return p;
@@ -212,7 +212,7 @@ public class PluginDataInitializer implements ITopfResourcePostProcessorProvider
 
 		return null;
 	}
-	
+
 	public void terminate() {
 		// do nothing
 	}

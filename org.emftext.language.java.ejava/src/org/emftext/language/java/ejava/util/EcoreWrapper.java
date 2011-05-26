@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.ejava.util;
@@ -69,18 +69,18 @@ import org.emftext.language.java.types.TypesPackage;
 import org.emftext.language.java.types.Void;
 
 /**
- * Wraps an Ecore model in an eJava model. This way, the Ecore types can be interpreted as 
+ * Wraps an Ecore model in an eJava model. This way, the Ecore types can be interpreted as
  * Java types by JaMoPP.
  */
 public class EcoreWrapper {
-	
+
 	public static void wrap(EPackageWrapper mainEPackageWrapper) {
 		EMap<EList<String>, GenPackage> ePackages = findGenPackagesInScope(mainEPackageWrapper);
-		
+
 		for(EList<String> namespaces : ePackages.keySet()) {
 			wrapEPackage(ePackages.get(namespaces), namespaces, mainEPackageWrapper);
 		}
-		
+
 	}
 
 	public static void wrapEPackage(GenPackage genPackage, EList<String> namespaces, EPackageWrapper mainEPackageWrapper) {
@@ -89,14 +89,14 @@ public class EcoreWrapper {
 		JavaClasspath cp = JavaClasspath.get(mainEPackageWrapper);
 		String packageName = "";
 		for(String s : namespaces) { packageName += s + "."; }
-		
+
 		if (mainEPackageWrapper.getNamespaces().equals(namespaces)) {
 			wrapper = mainEPackageWrapper;
 			wrapperResource = mainEPackageWrapper.eResource();
 			wrapper.setGenPackage(genPackage);
 			wrapper.setEPackage(genPackage.getEcorePackage());
 		}
-		
+
 		for(EClassifier eClassifier : genPackage.getEcorePackage().getEClassifiers()) {
 			if (wrapper == null) {
 				URI uri = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + eClassifier.getName());
@@ -122,7 +122,7 @@ public class EcoreWrapper {
 
 	public static void wrapEClassifier(EClassifier eClassifier, EPackageWrapper ePackageWrapper)  {
 		EClassifierWrapper wrapper = (EClassifierWrapper) ePackageWrapper.getContainedClassifier(eClassifier.getName());
-		
+
 		if (wrapper == null) {
 			if (eClassifier instanceof EClass) {
 				wrapper = EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper();
@@ -142,14 +142,14 @@ public class EcoreWrapper {
 			EClass eClass = (EClass)eClassifier;
 			EList<TypeReference> superTypeList = null;
 			if (wrapper instanceof EClassifierInterfaceWrapper) {
-				superTypeList = 
+				superTypeList =
 					((EClassifierInterfaceWrapper)wrapper).getExtends();
 			}
 			else /*wrapper instanceof EClassifierClassWrapper*/ {
-				superTypeList = 
+				superTypeList =
 					((EClassifierClassWrapper)wrapper).getImplements();
 			}
-			
+
 			for(EClass extendedEClass : eClass.getESuperTypes()) {
 				superTypeList.add(createTypeReferenceForEClassifier(extendedEClass));
 			}
@@ -184,7 +184,7 @@ public class EcoreWrapper {
 	 * the given EClass but that are not declared in the meta model.
 	 * This is needed because the classes from the EMF GenModel package
 	 * do contain methods that are not declared in the meta model.
-	 * 
+	 *
 	 * @param eClass
 	 * @return
 	 */
@@ -220,7 +220,7 @@ public class EcoreWrapper {
 			return;
 		}
 		EStructuralFeatureGetWrapper wrapper = (EStructuralFeatureGetWrapper) method;
-		
+
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper();
 			eClassifierWrapper.getMembers().add(wrapper);
@@ -229,9 +229,9 @@ public class EcoreWrapper {
 		wrapper.setEStructuralFeature(eStructuralFeature);
 		wrapper.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
 	}
-	
+
 	public static void wrapEStructuralFeatureForSet(
-			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {		
+			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
 		String setterName = "set" + firstToUpperCase(eStructuralFeature.getName());
 		Method method = eClassifierWrapper.getContainedMethod(setterName);
 		if (method != null && !(method instanceof EStructuralFeatureGetWrapper)) {
@@ -239,27 +239,27 @@ public class EcoreWrapper {
 			return;
 		}
 		EStructuralFeatureSetWrapper wrapper = (EStructuralFeatureSetWrapper) method;
-		
+
 		if(wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper();
 			eClassifierWrapper.getMembers().add(wrapper);
 			wrapper.setName(setterName);
-			
+
 			Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
 			parameter.setName("value");
 			parameter.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
 			wrapper.getParameters().add(parameter);
 		}
-		
+
 		wrapper.setEStructuralFeature(eStructuralFeature);
 		wrapper.setTypeReference(TypesFactory.eINSTANCE.createVoid());
 	}
-	
+
 	public static void wrapEOperation(
-			EOperation eOperation, EClassifierWrapper eClassifierWrapper) { 
+			EOperation eOperation, EClassifierWrapper eClassifierWrapper) {
 		EOperationWrapper wrapper = (EOperationWrapper)
 				eClassifierWrapper.getContainedMethod(eOperation.getName());
-		
+
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEOperationWrapper();
 			wrapper.setName(eOperation.getName());
@@ -267,7 +267,7 @@ public class EcoreWrapper {
 		}
 		wrapper.setEOperation(eOperation);
 		wrapper.setTypeReference(createTypeReferenceForETypedElement(eOperation));
-		
+
 		if (wrapper.getParameters().isEmpty()) {
 			for(EParameter eParameter : eOperation.getEParameters()) {
 				Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
@@ -277,17 +277,17 @@ public class EcoreWrapper {
 			}
 		}
 	}
-	
+
 	public static void wrapEEnumLiteral(
-			EEnumLiteral eEnumLiteral, EClassifierEnumerationWrapper eClassifierWrapper) { 
+			EEnumLiteral eEnumLiteral, EClassifierEnumerationWrapper eClassifierWrapper) {
 		EEnumLiteralWrapper wrapper = null;
-		
+
 		for(EnumConstant constant : eClassifierWrapper.getConstants()) {
 			if (constant.getName().equals(eEnumLiteral.getName().toUpperCase())) {
 				wrapper = (EEnumLiteralWrapper) constant;
 			}
 		}
-		
+
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEEnumLiteralWrapper();
 			wrapper.setName(eEnumLiteral.getName().toUpperCase());
@@ -295,9 +295,9 @@ public class EcoreWrapper {
 		}
 		wrapper.setEEnumLiteral(eEnumLiteral);
 	}
-	
+
 	private static EMap<EList<String>, GenPackage> findGenPackagesInScope(EPackageWrapper context) {
-		
+
 		Resource eJavaResource = context.eResource();
 		if (eJavaResource == null) {
 			return ECollections.emptyEMap();
@@ -306,7 +306,7 @@ public class EcoreWrapper {
 		if (rs == null) {
 			return ECollections.emptyEMap();
 		}
-		
+
 		EMap<EList<String>, GenPackage> result = new BasicEMap<EList<String>, GenPackage>();
 		String fileName = context.getNamespaces().get(0) + ".genmodel";
 		URI ecoreURI = eJavaResource.getURI().trimSegments(
@@ -317,7 +317,7 @@ public class EcoreWrapper {
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+
 		for(Resource r : rs.getResources()) {
 			if (!r.getContents().isEmpty() && r.getContents().get(0) instanceof GenModel) {
 				GenModel genModel = (GenModel)r.getContents().get(0);
@@ -329,7 +329,7 @@ public class EcoreWrapper {
 				}
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -340,14 +340,14 @@ public class EcoreWrapper {
 		for(GenPackage subGenPackage : genPackage.getNestedGenPackages()) {
 			collectGenPackages(subGenPackage, new BasicEList<String>(basePackageName), result);
 		}
-		
+
 	}
-	
+
 	private static Type getType(EClassifier eClassifier)  {
 		if (eClassifier == null) {
 			return TypesFactory.eINSTANCE.createVoid();
 		}
-		
+
 		String javaTypeName = null;
 		if (eClassifier instanceof EClass) {
 			javaTypeName = getFullPackageName(eClassifier.getEPackage()) + "." + eClassifier.getName();
@@ -363,12 +363,12 @@ public class EcoreWrapper {
 						(EClass) TypesPackage.eINSTANCE.getEClassifier(
 								firstToUpperCase(javaTypeName)));
 			}
-			
+
 		}
 		JavaClasspath cp = JavaClasspath.get(eClassifier);
 		return (Type) cp.getClassifier(javaTypeName);
 	}
-	
+
 	private static TypeReference createTypeReferenceForEClassifier(EClassifier eClassifier) {
 		Type type = getType(eClassifier);
 		if (type instanceof TypeReference) {
@@ -378,9 +378,9 @@ public class EcoreWrapper {
 		ref.setTarget((Classifier)type);
 		return ref;
 	}
-	
+
 	private static TypeReference createTypeReferenceForETypedElement(ETypedElement eTypedElement) {
-		
+
 		TypeReference baseTypeRef = createTypeReferenceForEClassifier(eTypedElement.getEType());
 		if (baseTypeRef instanceof Void) {
 			return baseTypeRef;
@@ -395,7 +395,7 @@ public class EcoreWrapper {
 				typeRef.setTarget((Classifier) mapType);
 				// TODO set type arguments for map
 			} else {
-				// we need to convert primitive types to their respective wrappers, 
+				// we need to convert primitive types to their respective wrappers,
 				// because lists cannot have primitive types as type argument
 				PrimitiveType originalBaseTypeRef = null;
 				if (baseTypeRef instanceof PrimitiveType) {
@@ -417,7 +417,7 @@ public class EcoreWrapper {
 			return typeRef;
 		}
 	}
-	
+
 	private static String getFullPackageName(EPackage ePackage) {
 		String s = ePackage.getName();
 		while (ePackage.getESuperPackage() != null) {
@@ -426,7 +426,7 @@ public class EcoreWrapper {
 		}
 		return s;
 	}
-	
+
 	private static String firstToUpperCase(String s) {
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
 	}

@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2006-2010
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
@@ -38,9 +38,9 @@ public class OfficeModelImpl extends NamedElement
       Office newOffice = null;
 
       // story pattern storypatternwiththis
-      try 
+      try
       {
-         fujaba__Success = false; 
+         fujaba__Success = false;
 
          // iterate to-many link elements from this to employeeWithoutOffice
          fujaba__Success = false;
@@ -99,9 +99,9 @@ public class OfficeModelImpl extends NamedElement
       Office myOffice = null;
 
       // story pattern storypatternwiththis
-      try 
+      try
       {
-         fujaba__Success = false; 
+         fujaba__Success = false;
 
          // attribute condition
          if (!( this.getCurrentTime () < 12.30 )) {throw new Exception("SDMException");};
@@ -119,9 +119,9 @@ public class OfficeModelImpl extends NamedElement
       if (fujaba__Success)
       {
          // story pattern storypatternwiththis
-         try 
+         try
          {
-            fujaba__Success = false; 
+            fujaba__Success = false;
 
             // iterate to-many link elements from this to lunchPlace
             fujaba__Success = false;
@@ -188,9 +188,9 @@ public class OfficeModelImpl extends NamedElement
       else
       {
          // story pattern storypatternwiththis
-         try 
+         try
          {
-            fujaba__Success = false; 
+            fujaba__Success = false;
 
             // iterate to-many link elements from this to someEmployee
             fujaba__Success = false;

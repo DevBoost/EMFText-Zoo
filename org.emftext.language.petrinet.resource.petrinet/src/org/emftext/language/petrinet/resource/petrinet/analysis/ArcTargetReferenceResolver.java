@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.petrinet.resource.petrinet.analysis;
@@ -22,17 +22,17 @@ import org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolve
 import org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolver;
 
 public class ArcTargetReferenceResolver implements IPetrinetReferenceResolver<Arc, Node> {
-	
+
 	private PetrinetDefaultResolverDelegate<Arc, Node> delegate = new PetrinetDefaultResolverDelegate<Arc, Node>();
-	
+
 	public void resolve(String identifier, Arc container, EReference reference, int position, boolean resolveFuzzy, IPetrinetReferenceResolveResult<Node> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
-	
+
 	public String deResolve(Node element, Arc container, EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
-	
+
 	public void setOptions(Map<?,?> options) {
 		// no used
 	}

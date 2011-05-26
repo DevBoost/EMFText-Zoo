@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.sandwich.resource.sandwich.analysis;
@@ -20,7 +20,7 @@ import org.emftext.language.sandwich.IngredientName;
 import org.emftext.language.sandwich.Recipe;
 
 public class InstructionUsingReferenceResolver implements org.emftext.language.sandwich.resource.sandwich.ISandwichReferenceResolver<org.emftext.language.sandwich.Instruction, org.emftext.language.sandwich.FeatureInstructionUsing> {
-	
+
 	public void resolve(java.lang.String identifier, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.sandwich.resource.sandwich.ISandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing> result) {
 		Recipe recipe = (Recipe) container.eContainer();
 		for(FeatureRecipeIngredients ingredient : recipe.getIngredients()) {
@@ -35,7 +35,7 @@ public class InstructionUsingReferenceResolver implements org.emftext.language.s
 			}
 		}
 	}
-	
+
 	public java.lang.String deResolve(org.emftext.language.sandwich.FeatureInstructionUsing element, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference) {
 		if (element instanceof Ingredient) {
 			FeatureIngredientName name = ((Ingredient)element).getName();
@@ -45,8 +45,8 @@ public class InstructionUsingReferenceResolver implements org.emftext.language.s
 		}
 		return "";
 	}
-	
+
 	public void setOptions(java.util.Map<?,?> options) {
 	}
-	
+
 }

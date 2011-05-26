@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.usecaseinvariant.util;
@@ -34,7 +34,7 @@ import org.eclipse.ocl.util.Tuple;
 
 /**
  * A post-processor that retrieves OCL constraints from the meta model of a text
- * resource and evaluates them. 
+ * resource and evaluates them.
  */
 public class OCLModelValidator {
 
@@ -65,13 +65,13 @@ public class OCLModelValidator {
 		OCL ocl = OCL
 				.newInstance(org.eclipse.ocl.ecore.EcoreEnvironmentFactory.INSTANCE);
 		OCL.Helper helper = ocl.createOCLHelper();
-		
+
 		helper.setInstanceContext(context);
 		OCLExpression exp = helper.createQuery(oclQuery);
 		Query<?, ?, ?> query = OCL.newInstance().createQuery(exp);
 
 		eval = query.evaluate(context);
-		
+
 		return eval;
 	}
 
@@ -92,7 +92,7 @@ public class OCLModelValidator {
 					String errorMsg = "";
 					try {
 						result = evaluateOCL(targetObject, value);
-						
+
 						if ((result instanceof Boolean)
 								&& ((Boolean) result).booleanValue() == false) {
 							errorMsg = key.toString();
@@ -105,7 +105,7 @@ public class OCLModelValidator {
 					} catch (ParserException e) {
 						errorMsg += "Parse Error for OCL Expression (" + e.getMessage() + "): " + value;
 					}
-					
+
 
 					if (errorMsg.length() > 0) {
 						addErrorMessage(problemHandler, targetObject, errorMsg);
@@ -135,7 +135,7 @@ public class OCLModelValidator {
 		}
 	}
 
-	
+
 	/**
 	 * @param targetObject
 	 * @param resourceFile
@@ -144,7 +144,7 @@ public class OCLModelValidator {
 	private void addErrorMessage(IProblemHandler problemHandler, EObject targetObject, String errorMesssage) {
 		problemHandler.addProblem(errorMesssage, targetObject, true);
 	}
-	
+
 
 	private String constructErrorMsg(Object result) {
 		String error = "";
@@ -155,12 +155,12 @@ public class OCLModelValidator {
 		}
 		else if (ocl.isInvalid(result)) {
 			error += "Evaluation of OCL expression failed: OclInvalid";
-		} 
+		}
 		else if (result instanceof String) {
 			if (((String) result).length() > 0) {
-				error = "'" + result + "'";	
+				error = "'" + result + "'";
 			}
-		} 
+		}
 		else if (result instanceof Tuple<?, ?>) {
 			Object[] array = ((Tuple<?,?>) result).getTupleType().oclProperties().toArray(new Object[]{});
 			if (array.length > 0) {
@@ -169,8 +169,8 @@ public class OCLModelValidator {
 			for (int i = 1; i < array.length; i++) {
 				error += ", " + constructErrorMsg(array[i]);
 			}
-		} 
-		else if (result instanceof Collection<?>) { 
+		}
+		else if (result instanceof Collection<?>) {
 			Object[] array = ((Collection<?>) result).toArray(new Object[]{});
 			if (array.length > 0) {
 				error += constructErrorMsg(array[0]);
@@ -178,7 +178,7 @@ public class OCLModelValidator {
 			for (int i = 1; i < array.length; i++) {
 				error += ", " + constructErrorMsg(array[i]);
 			}
-			
+
 		}
 		else if (result instanceof EObject) {
 			EObject eObject = (EObject) result;
@@ -191,7 +191,7 @@ public class OCLModelValidator {
 
 	public void process(Resource resource, IProblemHandler problemHandler) {
 		EList<EObject> contents = resource.getContents();
-	
+
 		Set<EObject> distinctObjects = new HashSet<EObject>();
 		distinctObjects.addAll(contents);
 		for (EObject eobject : distinctObjects) {

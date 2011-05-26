@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.access;
@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AccessTest extends TestCase {
-	
+
 	@Before
 	public void setUp() {
 		new TestLanguageRegistry().registerAllLanguages();
@@ -69,7 +69,7 @@ public class AccessTest extends TestCase {
 			//only an error is reported but no exception is thrown if the method is not found
 			//the result will be null, but it can also be null because the impl method returns null
 			//therefore, there is no assertion can be done here
-							
+
 			if (isAccessInterface(method.getReturnType())) {
 				if (result != null) {
 					invokeAllMethods(result, method.getReturnType());

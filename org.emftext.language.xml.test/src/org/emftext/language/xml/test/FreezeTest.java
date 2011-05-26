@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.xml.test;
@@ -28,7 +28,7 @@ import org.emftext.language.xml.resource.xml.mopp.XmlLexer;
  * This is a test for bug 854 (EMFText Editor freezes for invalid xml files).
  */
 public class FreezeTest extends TestCase {
-	
+
 	private String example = "<collection>description\n\n    <description>\n     Some recipes used for the XML tutorial.\n  </description>\n  <recipe>\n    <title>Beef Parmesan with Garlic Angel Hair Pasta</title>\n    <ingredient name=\"beef cube steak\" amount=\"1.5\" unit=\"pound\"/>\n    ...\n    <preparation>\n      <step\n        Preheat oven to 350 degrees F (175 degrees C).\n      </step>\n      ...\n    </preparation>\n    <comment>\n      Make the meat ahead of time, and refrigerate over night, the acid in the\n      tomato sauce will tenderize the meat even more. If you do this, save the\n      mozzarella till the last minute.\n    </comment>\n    <nutrition calories=\"1167\" fat=\"23\" carbohydrates=\"45\" protein=\"32\"/>\n  </recipe>\n</collection>";
 
 	public void testLexerFreezing() {

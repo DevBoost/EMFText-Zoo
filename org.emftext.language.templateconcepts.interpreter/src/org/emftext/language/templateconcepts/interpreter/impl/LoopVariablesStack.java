@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.templateconcepts.interpreter.impl;
@@ -21,26 +21,26 @@ import java.util.Stack;
 import org.eclipse.emf.ecore.EObject;
 
 public class LoopVariablesStack {
-	
+
 	private class LoopVariable {
 		private String name;
 		private EObject value;
-		
+
 		public LoopVariable(String name, EObject value) {
 			super();
 			this.name = name;
 			this.value = value;
 		}
-		
+
 		public String getName() {
 			return name;
 		}
-		
+
 		public EObject getValue() {
 			return value;
 		}
 	}
-	
+
 	private Stack<LoopVariable> variableStack = new Stack<LoopVariable>();
 
 	public void push(String name, EObject value) {
@@ -52,9 +52,9 @@ public class LoopVariablesStack {
 	}
 
 	/**
-	 * Returns unmodifiable map of uppermost variables on stack. 
+	 * Returns unmodifiable map of uppermost variables on stack.
 	 * Key is variable name and value the respective value. <br>
-	 * The returned map is unmodifiable as the developer must not change this map externally 
+	 * The returned map is unmodifiable as the developer must not change this map externally
 	 * @return Returns unmodifiable map of uppermost variables on stack.
 	 */
 	public Map<String, EObject> getTopMostVariables() {

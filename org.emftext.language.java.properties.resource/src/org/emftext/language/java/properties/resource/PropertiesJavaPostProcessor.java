@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.properties.resource;
@@ -60,15 +60,15 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 			new PropertiesJavaPostProcessor().process((PropjavaResource) resource);
 		}
 	}
-	
+
 	public void process(PropjavaResource resource) {
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
 				EcoreUtil.copyAll(resource.getContents()));
-		
+
 		boolean changed = true;
-		
+
 		while (changed) {
 			changed = false;
 			Collection<Property> properties = PropjavaEObjectUtil.getObjectsByType(javaResource.getAllContents(), PropertiesPackage.eINSTANCE.getProperty());
@@ -78,7 +78,7 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 				break;
 			}
 		}
-		
+
 		try {
 			javaResource.save(null);
 		} catch (IOException e) {
@@ -94,7 +94,7 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 		if (!property.isReadonly()) {
 			createSetter(property, field);
 		}
-		
+
 		EcoreUtil.replace(property, field);
 	}
 
@@ -102,24 +102,24 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 		ClassMethod setterMethod = MembersFactory.eINSTANCE.createClassMethod();
 		setterMethod.setName("set" + PropjavaStringUtil.capitalize(property.getName()));
 		setterMethod.setTypeReference(TypesFactory.eINSTANCE.createVoid());
-		
+
 		OrdinaryParameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
 		parameter.setName("newValue");
 		TypeReference typeReference = field.getTypeReference();
 		TypeReference tReferenceCopy = (TypeReference) EcoreUtil.copy(typeReference);
 		parameter.setTypeReference(tReferenceCopy);
 		setterMethod.getParameters().add(parameter);
-		
+
 		AssignmentExpression assignment = ExpressionsFactory.eINSTANCE.createAssignmentExpression();
 		assignment.setAssignmentOperator(OperatorsFactory.eINSTANCE.createAssignment());
-		
+
 		IdentifierReference parameterRef = ReferencesFactory.eINSTANCE.createIdentifierReference();
 		parameterRef.setTarget(parameter);
 		assignment.setValue(parameterRef);
 		IdentifierReference fieldRef = ReferencesFactory.eINSTANCE.createIdentifierReference();
 		fieldRef.setTarget(field);
 		assignment.setChild(fieldRef);
-		
+
 		ExpressionStatement assignmentStatement = StatementsFactory.eINSTANCE.createExpressionStatement();
 		assignmentStatement.setExpression(assignment);
 		setterMethod.getStatements().add(assignmentStatement);
@@ -130,18 +130,18 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 		// create getter
 		ClassMethod getterMethod = MembersFactory.eINSTANCE.createClassMethod();
 		getterMethod.setName("get" + PropjavaStringUtil.capitalize(property.getName()));
-		
+
 		Return returnStatement = StatementsFactory.eINSTANCE.createReturn();
 		IdentifierReference fieldRef = ReferencesFactory.eINSTANCE.createIdentifierReference();
 		fieldRef.setTarget(field);
 		returnStatement.setReturnValue(fieldRef);
-		
+
 		getterMethod.getStatements().add(returnStatement);
-		
+
 		TypeReference typeReference = field.getTypeReference();
 		TypeReference tReferenceCopy = (TypeReference) EcoreUtil.copy(typeReference);
 		getterMethod.setTypeReference(tReferenceCopy);
-		
+
 		((MemberContainer) property.eContainer()).getMembers().add(getterMethod);
 	}
 
@@ -164,7 +164,7 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 		options.put(IPropjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new PropertiesJavaPostProcessor());
 		return options;
 	}
-	
+
 	public void terminate() {
 		// do nothing
 	}

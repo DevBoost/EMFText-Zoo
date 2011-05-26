@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package sg.edu.nus.comp.simTL.language.java.simTL4J.resource.simTL4J.analysis.decider;
@@ -45,7 +45,7 @@ import sg.edu.nus.comp.simTL.language.java.simTL4J.variables.LocalVariable;
 public class EnumConstantDecider extends AbstractDecider {
 
 	private EObject reference = null;
-	
+
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof EnumConstant) {
 			NamedElement ne = (NamedElement) element;
@@ -61,12 +61,12 @@ public class EnumConstantDecider extends AbstractDecider {
 			Switch aSwitch = (Switch) container;
 			Type variableType = aSwitch.getVariable().getType();
 			if (variableType instanceof Enumeration) {
-				return ((Enumeration)variableType).getConstants();	
+				return ((Enumeration)variableType).getConstants();
 			}
 			if (variableType instanceof TemporalCompositeClassifier) {
 				for(EObject superType : ((TemporalCompositeClassifier)variableType).getSuperTypes()) {
 					if (superType instanceof Enumeration) {
-						return ((Enumeration)superType).getConstants();	
+						return ((Enumeration)superType).getConstants();
 					}
 				}
 			}
@@ -75,22 +75,22 @@ public class EnumConstantDecider extends AbstractDecider {
 			AssignmentExpression assignmentExpression = (AssignmentExpression) container;
 			Type assignmentExpressionType = assignmentExpression.getType();
 			if (assignmentExpressionType instanceof Enumeration) {
-				return ((Enumeration)assignmentExpressionType).getConstants();	
+				return ((Enumeration)assignmentExpressionType).getConstants();
 			}
 		}
 		if (container instanceof LocalVariable) {
 			LocalVariable localVariable = (LocalVariable) container;
 			Type assignmentExpressionType = localVariable.getTypeReference().getTarget();
 			if (assignmentExpressionType instanceof Enumeration) {
-				return ((Enumeration)assignmentExpressionType).getConstants();	
+				return ((Enumeration)assignmentExpressionType).getConstants();
 			}
 		}
-		
+
 		EList<EObject> resultList = addImports(container);
-		
+
 		return resultList;
 	}
-	
+
 	private EList<EObject> addImports(EObject container) {
 		if(container instanceof ImportingElement) {
 			EList<EObject> resultList = new BasicEList<EObject>();
@@ -115,7 +115,7 @@ public class EnumConstantDecider extends AbstractDecider {
 		}
 		return null;
 	}
-	
+
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (ClassifiersPackage.Literals.ENUMERATION__CONSTANTS.equals(containingReference)) {
 			return true;
@@ -123,7 +123,7 @@ public class EnumConstantDecider extends AbstractDecider {
 		return false;
 	}
 
-	
+
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
 		reference = referenceContainer;

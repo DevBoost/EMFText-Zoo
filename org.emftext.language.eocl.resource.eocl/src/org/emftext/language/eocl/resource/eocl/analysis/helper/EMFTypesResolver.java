@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.eocl.resource.eocl.analysis.helper;
@@ -34,18 +34,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.eocl.resource.eocl.IEoclReferenceResolveResult;
 
 public class EMFTypesResolver {
-	
-	
+
+
 	protected Resource resource = null;
-	
-	public void doResolve(java.lang.String identifier, 
-			EObject container, 
-			org.eclipse.emf.ecore.EReference reference, 
-			EClass typeToResolve, 
+
+	public void doResolve(java.lang.String identifier,
+			EObject container,
+			org.eclipse.emf.ecore.EReference reference,
+			EClass typeToResolve,
 			boolean resolveFuzzy, IEoclReferenceResolveResult<?> result) {
-		
-	
-		
+
+
+
 		EPackage ePackage = null;
 		String eClassName = identifier;
 		List<EClassifier> candidates = new LinkedList<EClassifier>();
@@ -56,10 +56,10 @@ public class EMFTypesResolver {
 			String[] namespaces = eClassName.split("::");
 			eClassName = namespaces[namespaces.length - 1];
 			String packagePrefix = namespaces[0];
-			
-			
+
+
 			EObject rootContainer = EcoreUtil.getRootContainer(container);
-			if (rootContainer instanceof EPackage && 
+			if (rootContainer instanceof EPackage &&
 					((EPackage)rootContainer).getName().equals(packagePrefix)) {
 				//this package?
 				ePackage = (EPackage) rootContainer;
@@ -71,7 +71,7 @@ public class EMFTypesResolver {
 				collectImports(container, imports);
 
 				ePackage = imports.get(packagePrefix);
-				
+
 				if(ePackage == null) {
 					result.setErrorMessage("EPackage '" + packagePrefix + "' not found");
 					return;
@@ -102,8 +102,8 @@ public class EMFTypesResolver {
 				if (object instanceof EClassifier) candidates.add((EClassifier) object);
 			}
 		}
-		
-		
+
+
 
 		addResults(identifier, eClassName, candidates, typeToResolve, resolveFuzzy, result);
 		if (!result.wasResolved() && !identifier.contains("::")) {
@@ -117,8 +117,8 @@ public class EMFTypesResolver {
 		for (EClassifier next : candidates) {
 			if (typeToResolve.isInstance(next)) {
 				EClassifier classifier = (EClassifier) next;
-				
-				if (resolveFuzzy) {			
+
+				if (resolveFuzzy) {
 					if (classifier.getName().startsWith(className)) {
 						result.addMapping(classifier.getName(), classifier);
 					}
@@ -128,7 +128,7 @@ public class EMFTypesResolver {
 						return;
 					}
 				}
-				
+
 				//type parameter?
 				for(ETypeParameter typeParameter : classifier.getETypeParameters()) {
 					if (typeParameter.getName().equals(className)) {
@@ -139,7 +139,7 @@ public class EMFTypesResolver {
 			}
 		}
 	}
-	
+
 	private void collectImports(EObject element, Map<String, EPackage> imports) {
 		EAnnotation importAnnotation = null;
 		if (element instanceof EModelElement) {
@@ -157,7 +157,7 @@ public class EMFTypesResolver {
 			collectImports(element.eContainer(), imports);
 		}
 	}
-	
+
 	private EPackage findEPackage(String uriString) {
 		if(resource == null) {
 			return null;
@@ -172,17 +172,17 @@ public class EMFTypesResolver {
 		try {
 			ePackageResource = rs.getResource(uri, true);
 		} catch (Exception e) {}
-		
-		if (ePackageResource.getContents().isEmpty() || 
+
+		if (ePackageResource.getContents().isEmpty() ||
 				!(ePackageResource.getContents().get(0) instanceof EPackage)) {
 			return null;
 		}
 		return (EPackage) ePackageResource.getContents().get(0);
 	}
-	
 
-	
+
+
 }
 
 
-	
+

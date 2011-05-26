@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.string.resource.util;
@@ -33,17 +33,17 @@ import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
 
 /**
- * Post processor that performs 
+ * Post processor that performs
  * <i>cast repair</i>,
- * <i>expression simplification</i> and 
+ * <i>expression simplification</i> and
  * <i>java model completion</i>
  * on a resource after parsing using the JavaModelRepairer.
  */
-public class StringJavaPostProcessor implements 
-	IStringjavaOptionProvider, 
-	IStringjavaResourcePostProcessor, 
+public class StringJavaPostProcessor implements
+	IStringjavaOptionProvider,
+	IStringjavaResourcePostProcessor,
 	IStringjavaResourcePostProcessorProvider {
-	
+
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IStringjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
@@ -52,13 +52,13 @@ public class StringJavaPostProcessor implements
 
 	public void process(StringjavaResource resource) {
 		new JavaModelRepairer() {
-			
+
 			protected void registerContextDependentProxy(
 					Resource resource,
-					IdentifierReference mainIdReference, 
+					IdentifierReference mainIdReference,
 					EReference targetReference,
 					String id, EObject proxy) {
-				
+
 				((StringjavaResource)resource).registerContextDependentProxy(
 						new StringjavaContextDependentURIFragmentFactory
 							<ElementReference, ReferenceableElement>
@@ -69,7 +69,7 @@ public class StringJavaPostProcessor implements
 						proxy);
 			}
 		}.repair(resource);
-		
+
 		JavaModelCompletion.complete(resource);
 	}
 

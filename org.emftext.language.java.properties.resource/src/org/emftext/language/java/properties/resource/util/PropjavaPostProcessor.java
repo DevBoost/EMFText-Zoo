@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.properties.resource.util;
@@ -33,14 +33,14 @@ import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
 
 /**
- * Post processor that performs 
+ * Post processor that performs
  * <i>cast repair</i>,
- * <i>expression simplification</i> and 
+ * <i>expression simplification</i> and
  * <i>java model completion</i>
  * on a resource after parsing using the JavaModelRepairer.
  */
 public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjavaResourcePostProcessor, IPropjavaResourcePostProcessorProvider {
-	
+
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IPropjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
@@ -62,7 +62,7 @@ public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjava
 						-1);
 			}
 		}.repair(resource);
-		
+
 		JavaModelCompletion.complete(resource);
 		JavaModelCompletion.complete(resource);
 	}
@@ -70,7 +70,7 @@ public class PropjavaPostProcessor implements IPropjavaOptionProvider, IPropjava
 	public IPropjavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
-	
+
 	public void terminate() {
 		// do nothing
 	}

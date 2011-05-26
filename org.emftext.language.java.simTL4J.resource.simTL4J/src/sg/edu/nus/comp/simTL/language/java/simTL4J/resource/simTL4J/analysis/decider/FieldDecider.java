@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package sg.edu.nus.comp.simTL.language.java.simTL4J.resource.simTL4J.analysis.decider;
@@ -46,7 +46,7 @@ import sg.edu.nus.comp.simTL.language.java.simTL4J.types.TypesFactory;
 public class FieldDecider extends AbstractDecider {
 
 	private Field standardArrayLengthField = null;
-	
+
 	private Reference fieldReference = null;
 
 	public Field getArrayLengthFiled(Commentable objectContext) {
@@ -59,15 +59,15 @@ public class FieldDecider extends AbstractDecider {
 		}
 		return standardArrayLengthField;
 	}
-	
+
 	private boolean insideDefiningClassifier = true;
 	private boolean isStatic = false;
-	
+
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		if (container instanceof Classifier) {
-			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
-				EList<Member> memberList = 
+			if (container instanceof ConcreteClassifier && insideDefiningClassifier){
+				EList<Member> memberList =
 					((Classifier)container).getAllMembers(fieldReference);
 				for(Member member : memberList) {
 					if (member instanceof Field) {
@@ -79,7 +79,7 @@ public class FieldDecider extends AbstractDecider {
 				isStatic = ((ConcreteClassifier)container).isStatic();
 			}
 			else {
-				EList<Member> memberList = 
+				EList<Member> memberList =
 					((Classifier)container).getAllMembers(fieldReference);
 				for(Member member : memberList) {
 					if (member instanceof Field) {
@@ -91,11 +91,11 @@ public class FieldDecider extends AbstractDecider {
 				}
 			}
 		}
-		
+
 		if (container instanceof AnonymousClass) {
 			resultList.addAll(((AnonymousClass)container).getMembers());
-			
-			EList<Member> memberList = 
+
+			EList<Member> memberList =
 				((AnonymousClass)container).getAllMembers(fieldReference);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
@@ -105,12 +105,12 @@ public class FieldDecider extends AbstractDecider {
 			}
 			return resultList;
 		}
-		
+
 		if(container instanceof CompilationUnit) {
 			addImports(container, resultList);
 			addArrayLengthFiled(resultList, (CompilationUnit) container);
 		}
-		
+
 		return resultList;
 	}
 
@@ -119,7 +119,7 @@ public class FieldDecider extends AbstractDecider {
 		//We always add the field since we do not know if we have an array or not
 		resultList.add(getArrayLengthFiled(objectContext));
 	}
-	
+
 	private void addImports(EObject container,
 			EList<EObject> resultList) {
 		if(container instanceof ImportingElement) {
@@ -145,7 +145,7 @@ public class FieldDecider extends AbstractDecider {
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 		return false;
 	}
-	
+
 	public boolean walkInto(EObject element) {
 		return false;
 	}

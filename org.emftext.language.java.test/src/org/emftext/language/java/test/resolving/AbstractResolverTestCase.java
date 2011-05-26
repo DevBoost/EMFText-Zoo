@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.resolving;
@@ -38,7 +38,7 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 	protected org.emftext.language.java.classifiers.Class assertParsesToClass(String typename) throws Exception {
 		return assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.classifiers.Class.class);
 	}
-	
+
 	protected Field assertIsField(Member member, String expectedName) {
 		assertType(member, Field.class);
 		Field field = (Field) member;
@@ -56,22 +56,22 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 	protected void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
 		assertIsReferenceTo(statement, expectedCallTarget);
 	}
-	
+
 	protected void assertIsReferenceToField(Statement statement, Field expectedReferenceTarget) {
 		assertIsReferenceTo(statement, expectedReferenceTarget);
 	}
-	
+
 	protected void assertIsReferenceToLocalVariable(Statement statement, LocalVariable expectedReferenceTarget) {
 		assertIsReferenceTo(statement, expectedReferenceTarget);
 	}
-	
+
 	protected void assertIsReferenceTo(Statement statement, ReferenceableElement expectedReferenceTarget) {
 		assertType(statement, ExpressionStatement.class);
 		ExpressionStatement expression = (ExpressionStatement) statement;
 		Expression methodCallExpression = expression.getExpression();
 		assertNotNull(methodCallExpression);
 		/*TODO fix
-		 * 
+		 *
 		 * ConditionalExpression cond = (ConditionalExpression) methodCallExpression.getConditionalExpression();
 		PrimaryExpression reference = cond.getConditionalOrExpression().
 		getConditionalAndExpression().get(0).
@@ -86,7 +86,7 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 		getMultiplicativeExpression().get(0).
 		getUnaryExpression().get(0).
 		getUnaryExpressionNotPlusMinus().getPrimaryExpression();*/
-		
+
 		//assertType(reference, IdentifierReference.class);
 		//IdentifierReference identifierReference = (IdentifierReference) reference;
 		//assertEquals(expectedReferenceTarget, identifierReference.getTarget());
@@ -96,7 +96,7 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;
 	}
-	
+
 	@Override
 	protected boolean ignoreSemanticErrors(String filename) {
 		return false;

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.ejava.resource;
@@ -57,7 +57,7 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 
 	public void process(EjavaResource resource) {
 		EjavaMarkerHelper.unmark(resource, EjavaEProblemType.ANALYSIS_PROBLEM);
-		
+
 		EjavaResource eJavaResource = (EjavaResource) resource;
 		EList<EObject> contents = resource.getContents();
 		if (!contents.isEmpty()) {
@@ -72,7 +72,7 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			
+
 			EPackageWrapper ePackageWrapper = (EPackageWrapper) contents.get(0);
 			EcoreWrapper.wrap(ePackageWrapper);
 			validate(ePackageWrapper, eJavaResource);
@@ -82,14 +82,14 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 	public IEjavaResourcePostProcessor getResourcePostProcessor() {
 		return new EJavaPostProcessor();
 	}
-	
-	
+
+
 	private void validate(EPackageWrapper ePackageWrapper, EjavaResource resource) {
 		if (ePackageWrapper.getEPackage() == null) {
 			attachError(ePackageWrapper, resource);
 		}
-		
-		
+
+
 		for(ConcreteClassifier concreteClassifier : ePackageWrapper.getClassifiers()) {
 			if (concreteClassifier instanceof EClassifierWrapper &&
 					((EClassifierWrapper)concreteClassifier).getEClassifier() == null) {
@@ -97,7 +97,7 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 			}
 			else {
 				for(Member member : concreteClassifier.getMembers()) {
-					if (member instanceof EOperationWrapper && 
+					if (member instanceof EOperationWrapper &&
 							((EOperationWrapper)member).getEOperation() == null) {
 						attachError(member, resource);
 					}
@@ -105,13 +105,13 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 			}
 		}
 	}
-	
+
 	private void attachError(final NamedElement element, final EjavaResource resource) {
-		resource.addProblem(new IEjavaProblem() {			
+		resource.addProblem(new IEjavaProblem() {
 			public EjavaEProblemType getType() {
 				return EjavaEProblemType.ANALYSIS_PROBLEM;
 			}
-			
+
 			public EjavaEProblemSeverity getSeverity() {
 				return EjavaEProblemSeverity.ERROR;
 			}

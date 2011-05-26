@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test;
@@ -85,7 +85,7 @@ import pkg.NumberLiterals;
  * folder file to the method parseResource(String relativePath)</li>
  * <li>checking the returned CompilationUnit for correctness
  * </ul>
- * 
+ *
  * @author Christian Wende
  */
 public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
@@ -116,7 +116,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertType(root, CompilationUnit.class);
 		CompilationUnit unit = (CompilationUnit) root;
 		assertNotNull(unit);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -149,7 +149,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		Expression initValue = charField.getInitialValue();
 
 		CharacterLiteral literal = (CharacterLiteral)initValue;
-		
+
 		assertType(literal, CharacterLiteral.class);
 		CharacterLiteral initLiteral = (CharacterLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
@@ -159,9 +159,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
-		
+
 		DecimalDoubleLiteral literal = (DecimalDoubleLiteral) initValue;
-		
+
 		assertNotNull(member.getName() + " is not a double field.", literal);
 		assertType(literal, DecimalDoubleLiteral.class);
 		DecimalDoubleLiteral initLiteral = (DecimalDoubleLiteral) literal;
@@ -170,9 +170,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	private void assertIsHexIntegerField(Member member, int expectedInitValue) {
 		assertType(member, Field.class);
-		Field longField = (Field) member;		
+		Field longField = (Field) member;
 		Expression initValue = longField.getInitialValue();
-		
+
 		IntegerLiteral literal = (IntegerLiteral) initValue;
 
 		assertType(literal, HexIntegerLiteral.class);
@@ -182,21 +182,21 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	private void assertIsDecimalIntegerField(Member member, int expectedInitValue) {
 		assertType(member, Field.class);
-		Field longField = (Field) member;		
+		Field longField = (Field) member;
 		Expression initValue = longField.getInitialValue();
-		
+
 		IntegerLiteral literal = (IntegerLiteral) initValue;
 
 		assertType(literal, DecimalIntegerLiteral.class);
 		DecimalIntegerLiteral initLiteralForBoolean = (DecimalIntegerLiteral) literal;
 		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getDecimalValue());
 	}
-	
+
 	private void assertIsOctalLongField(Member member, String expectedInitValue) {
 		assertType(member, Field.class);
-		Field longField = (Field) member;		
+		Field longField = (Field) member;
 		Expression initValue = longField.getInitialValue();
-		
+
 		LongLiteral literal = (LongLiteral) initValue;
 
 		assertType(literal, OctalLongLiteral.class);
@@ -209,12 +209,12 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		}
 		assertEquals(expected, initLiteralForBoolean.getOctalValue());
 	}
-	
+
 	private void assertIsHexLongField(Member member, String expectedInitValue) {
 		assertType(member, Field.class);
-		Field longField = (Field) member;		
+		Field longField = (Field) member;
 		Expression initValue = longField.getInitialValue();
-		
+
 		LongLiteral literal = (LongLiteral) initValue;
 
 		assertType(literal, HexLongLiteral.class);
@@ -230,9 +230,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	private void assertIsDecimalLongField(Member member, String expectedInitValue) {
 		assertType(member, Field.class);
-		Field longField = (Field) member;		
+		Field longField = (Field) member;
 		Expression initValue = longField.getInitialValue();
-		
+
 		LongLiteral literal = (LongLiteral) initValue;
 
 		assertType(literal, DecimalLongLiteral.class);
@@ -245,7 +245,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		}
 		assertEquals(expected, initLiteralForBoolean.getDecimalValue());
 	}
-	
+
 	private void assertIsNumericField(EList<Member> members, String name,
 			Object expectedValue) {
 		NamedElement field = findElementByName(members, name);
@@ -253,7 +253,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertType(field, Field.class);
 		Field unicode = (Field) field;
 		Expression value = unicode.getInitialValue();
-		
+
 		Object initValue = null;
 		if (value instanceof DecimalIntegerLiteral) {
 			initValue = ((DecimalIntegerLiteral) value).getDecimalValue();
@@ -309,14 +309,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
-		
+
 		StringReference literal = (StringReference)initValue;
-		
+
 		assertType(literal, StringReference.class);
 		StringReference initLiteral = (StringReference) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
-	
+
 	private <T extends NamedElement> T findElementByName(
 			List<T> elements, String name) {
 		for (T next : elements) {
@@ -341,11 +341,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	protected String getTestInputFolder() {
 		return TEST_INPUT_FOLDER;
 	}
-	
+
 	/**
 	 * This method is executed before every single test and initializes fields
 	 * typically needed by the test cases
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -370,7 +370,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsForInnerTypes() throws Exception {
 		String typename = "AnnotationsForInnerTypes";
@@ -380,7 +380,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsForMethods() throws Exception {
 		String typename = "AnnotationsForMethods";
@@ -390,7 +390,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsForParameters() throws Exception {
 		String typename = "AnnotationsForParameters";
@@ -400,7 +400,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsForStatements() throws Exception {
 		String typename = "AnnotationsForStatements";
@@ -410,7 +410,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsForAnnotations() throws Exception {
 		String typename = "AnnotationsForAnnotations";
@@ -420,7 +420,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsAsAnnotationArguments() throws Exception {
 		String typename = "AnnotationsAsAnnotationArguments";
@@ -430,7 +430,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsBetweenKeywords() throws Exception {
 		String typename = "AnnotationsBetweenKeywords";
@@ -440,17 +440,17 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnnotationsForEnums() throws Exception {
 		String typename = "AnnotationsForEnums";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Enumeration eenum = assertParsesToEnumeration(typename);
 		assertMemberCount(eenum, 0);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnonymousEnum() throws Exception {
 		String typename = "AnonymousEnum";
@@ -461,7 +461,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnonymousEnumWithArguments() throws Exception {
 		String typename = "AnonymousEnumWithArguments";
@@ -472,7 +472,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testAnonymousInner() throws Exception {
 		String typename = "AnonymousInner";
@@ -492,7 +492,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testArrayInitializers() throws Exception {
 		String typename = "ArrayInitializers";
@@ -502,7 +502,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testArraysInDeclarationsComplex() throws Exception {
 		String typename = "ArraysInDeclarationsComplex";
@@ -557,7 +557,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertParsesToEnumAndReprints("BasicEnumWithCommaAtTheEnd");
 		assertParsesToEnumAndReprints("BasicEnumWithSemicolonAtTheEnd");
 	}
-	
+
 	@Test
 	public void testBooleanAssignments() throws Exception {
 		String typename = "BooleanAssignments";
@@ -567,7 +567,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testBooleanExpressions() throws Exception {
 		String typename = "BooleanExpressions";
@@ -663,7 +663,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testCommentsInFieldDeclaration() throws Exception {
 		String typename = "CommentsInFieldDeclaration";
@@ -673,7 +673,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testCommentsBetweenCaseStatements() throws Exception {
 		String typename = "CommentsBetweenCaseStatements";
@@ -683,7 +683,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testCommentsBetweenCatchClauses() throws Exception {
 		String typename = "CommentsBetweenCatchClauses";
@@ -693,7 +693,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testCommentsBetweenConstructorArguments() throws Exception {
 		String typename = "CommentsBetweenConstructorArguments";
@@ -703,7 +703,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testCommentsBetweenMethodArguments() throws Exception {
 		String typename = "CommentsBetweenMethodArguments";
@@ -713,7 +713,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testCommentsBetweenReferenceSequenceParts() throws Exception {
 		String typename = "CommentsBetweenReferenceSequenceParts";
@@ -722,7 +722,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertMemberCount(clazz, 2);
 
 		parseAndReprint(filename);
-	}	
+	}
 
 	@Test
 	public void testCommentsInParExpression() throws Exception {
@@ -732,7 +732,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertMemberCount(clazz, 1);
 
 		parseAndReprint(filename);
-	}	
+	}
 
 	@Test
 	public void testClassWithEnumeratingFieldDeclaration() throws Exception {
@@ -740,7 +740,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
-		
+
 		List<Member> members = clazz.getMembers();
 		assertType(members.get(0), Field.class);
 
@@ -772,10 +772,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String typename = "EmptyClass";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		assertParsesToClass(typename);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testEmptyEnum() throws Exception {
 		String typename = "EmptyEnum";
@@ -813,7 +813,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		registerInClassPath("EmptyInterface" + JAVA_FILE_EXTENSION);
 		registerInClassPath("IOneMethod" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -826,7 +826,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testEnumWithConstructor() throws Exception {
 		String typename = "EnumWithConstructor";
@@ -836,7 +836,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testEqualityExpression() throws Exception {
 		String typename = "EqualityExpression";
@@ -904,7 +904,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertMemberCount(clazz, 4);
 
 		registerInClassPath("ConstructorCalls" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -940,7 +940,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	public void testLegalIdentifiers() throws Exception {
 		String typename = "LegalIdentifiers";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -950,7 +950,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testForEachLoop() throws Exception {
 		String typename = "ForEachLoop";
@@ -965,14 +965,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertType(forEach, ForEachLoop.class);
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testGenericConstructorCalls() throws Exception {
 		String typename = "GenericConstructorCalls";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 5);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -982,7 +982,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 4);
-		
+
 		List<Member> members = clazz.getMembers();
 		assertConstructorTypeParameterCount(members.get(0), 1);
 		assertConstructorTypeParameterCount(members.get(1), 2);
@@ -1015,9 +1015,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
-		
+
 		registerInClassPath("GenericConstructors" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -1070,20 +1070,20 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testImport1() throws Exception {
 		String typename = "Import1";
 		String filename = typename + JAVA_FILE_EXTENSION;
 
 		registerInClassPath("Import2" + JAVA_FILE_EXTENSION);
-		
+
 		CompilationUnit model = (CompilationUnit) parseResource(filename);
 		assertNumberOfClassifiers(model, 1);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testImport2() throws Exception {
 		String typename = "Import2";
@@ -1091,22 +1091,22 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		CompilationUnit model = (CompilationUnit) parseResource(filename);
 		assertNumberOfClassifiers(model, 1);
-		
+
 		registerInClassPath("Import1" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testInstanceOfArrayType() throws Exception {
 		String typename = "InstanceOfArrayType";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 3);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testJavadoc1() throws Exception {
 		String filename1 = "JavaDocCommentBlock" + JAVA_FILE_EXTENSION;
@@ -1118,20 +1118,20 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename2 = "JavaDocCommentInClass" + JAVA_FILE_EXTENSION;
 		parseAndReprint(filename2);
 	}
-	
+
 	@Test
 	public void testJavadoc3() throws Exception {
 		String filename3 = "JavaDocCommentInField" + JAVA_FILE_EXTENSION;
 		parseAndReprint(filename3);
 	}
-	
+
 	@Test
 	public void testIOneMethod() throws Exception {
 		String typename = "IOneMethod";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		Interface interfaze = assertParsesToInterface(typename);
 		assertMemberCount(interfaze, 1);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -1164,7 +1164,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testIWithComments() throws Exception {
 		String typename = "IWithComments";
@@ -1181,7 +1181,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 27);
-		
+
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
 		assertIsDecimalIntegerField(findElementByName(members, "i1"), 3);
@@ -1193,19 +1193,19 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertIsStringField(members.get(11), "abc");
 		assertIsBooleanField(members.get(12), false);
 		assertIsBooleanField(members.get(13), true);
-		
+
 		Member maxLongField = findElementByName(members, "maxLong");
 		assertNotNull(maxLongField);
 		assertIsHexLongField(maxLongField, "0xffffffffffffffff");
-		
+
 		Member i7Field = findElementByName(members, "i7");
 		assertNotNull(i7Field);
 		assertIsHexIntegerField(i7Field, 0xff);
-		
+
 		Member i8Field = findElementByName(members, "i8");
 		assertNotNull(i8Field);
 		assertIsDecimalLongField(i8Field, "10");
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -1224,7 +1224,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = "locations/Location.java";
 		assertParsableAndReprintable(filename);
 	}
-	
+
 	@Test
 	public void testMembers() throws Exception {
 		String typename = "Members";
@@ -1247,9 +1247,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testResolving() throws Exception {
 		String folder = "resolving/";
-		
+
 		registerInClassPath(folder + "MethodCallsWithoutInheritance.java");
-		
+
 		assertParsableAndReprintable(folder + "MethodCalls.java");
 		assertParsableAndReprintable(folder + "MethodCallsWithLocalTypeReferences.java");
 		assertParsableAndReprintable(folder + "MethodCallsWithoutInheritance.java");
@@ -1263,7 +1263,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 4);
-		
+
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
@@ -1287,7 +1287,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(2, implementedInterfaces.size());
 
 		registerInClassPath("ISemicolonOnly" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -1299,10 +1299,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertMemberCount(clazz, 2);
 
 		EList<Member> members = clazz.getMembers();
-		
-		Field longField = (Field) members.get(1);		
+
+		Field longField = (Field) members.get(1);
 		Expression initValue = longField.getInitialValue();
-				
+
 		TreeIterator<EObject> iter = initValue.eAllContents();
 		DecimalIntegerLiteral literal1 = null;
 		DecimalIntegerLiteral literal2 = null;
@@ -1310,15 +1310,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 			Object obj = iter.next();
 			if (obj instanceof DecimalIntegerLiteral) {
 				if (literal1==null)literal1 = (DecimalIntegerLiteral)obj;
-				else literal2 = (DecimalIntegerLiteral)obj;				
+				else literal2 = (DecimalIntegerLiteral)obj;
 			}
 		}
 		assertNotNull("no IntegerLiteral found", literal1);
 		assertNotNull("no second IntegerLiteral found", literal2);
 		assertEquals(BigInteger.valueOf(3), literal1.getDecimalValue());
 		assertEquals(BigInteger.valueOf(4), literal2.getDecimalValue());
-		
-		
+
+
 		parseAndReprint(filename);
 	}
 
@@ -1344,7 +1344,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
 		assertMemberCount(clazz, 46);
-		
+
 		// iterate over all fields, get their value using reflection and
 		// compare this value with the one from the Java parser
 		java.lang.reflect.Field[] fields = NumberLiterals.class
@@ -1363,7 +1363,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(file);
 	}
-	
+
 	@Test
 	public void testTempLiterals() throws Exception {
 		String typename = "TempLiterals";
@@ -1372,7 +1372,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertMemberCount(clazz, 9);
 		parseAndReprint(file);
 	}
-	
+
 	@Test
 	public void testRoundedLiterals() throws Exception {
 		String typename = "RoundedLiterals";
@@ -1381,7 +1381,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertMemberCount(clazz, 26);
 		parseAndReprint(file);
 	}
-	
+
 	@Test
 	public void testParametersWithModifiers() throws Exception {
 		String typename = "ParametersWithModifiers";
@@ -1391,7 +1391,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testPrimitiveTypeArrays() throws Exception {
 		String typename = "PrimitiveTypeArrays";
@@ -1401,7 +1401,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testPkg_EmptyClass() throws Exception {
 		CompilationUnit model = (CompilationUnit) parseResource("pkg/EmptyClass.java");
@@ -1427,18 +1427,18 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 				model.getNamespaces().get(0));
 		parseAndReprint("pkg/inner/Inner.java");
 	}
-	
+
 	@Test
 	public void testPkg_PackageAnnotation() throws Exception {
 		CompilationUnit model = (CompilationUnit) parseResource("pkg/PackageAnnotation.java");
 		assertNumberOfClassifiers(model, 1);
 		parseAndReprint("pkg/PackageAnnotation.java");
 	}
-	
+
 	@Test
 	public void testPkg_package_info() throws Exception {
 		registerInClassPath("pkg/PackageAnnotation.java");
-		
+
 		parseAndReprint("pkg/package-info.java");
 	}
 
@@ -1448,7 +1448,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 2 + 4 /* + 4 empty */);
-		
+
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
@@ -1458,10 +1458,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
-		
+
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
-	
+
 	@Test
 	public void testSimpleAnnotations() throws Exception {
 		String typename = "SimpleAnnotations";
@@ -1479,7 +1479,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 4);
-		
+
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
@@ -1489,14 +1489,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 3);
-		
+
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
-	
+
 	@Test
 	public void testStatements() throws Exception {
 		registerInClassPath("ConditionalStatements" + JAVA_FILE_EXTENSION);
-		
+
 		assertParsesToClass("ConditionalStatements", 4);
 		assertParsesToClass("TryCatchStatements", 4);
 		assertParsesToClass("AssertStatements", 1);
@@ -1507,7 +1507,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertParsesToClass("JumpLabelStatements", 4);
 		assertParsesToClass("LoopStatements", 11);
 	}
-	
+
 	@Test
 	public void testStaticImports() throws Exception {
 		String typename = "StaticImports";
@@ -1520,43 +1520,43 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		registerInClassPath("pkg/EmptyClass" + JAVA_FILE_EXTENSION);
 		registerInClassPath("pkg/EscapedStrings" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testStringLiteralReferencing() throws Exception {
 		String typename = "StringLiteralReferencing";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testSuperKeyword() throws Exception {
 		String typename = "SuperKeyword";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
-		
+
 		Member method = clazz.getMembers().get(0);
 		assertType(method, Constructor.class);
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testSynchronized() throws Exception {
 		String typename = "Synchronized";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 2);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testTypeParameters() throws Exception {
 		String typename = "TypeParameters";
@@ -1576,10 +1576,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		registerInClassPath("pkg/EmptyClass" + JAVA_FILE_EXTENSION);
 		registerInClassPath("pkg/inner/Inner" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testTypeReferencingExternal() throws Exception {
 		String typename = "TypeReferencingExternal";
@@ -1589,7 +1589,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		registerInClassPath("TypeReferencing" + JAVA_FILE_EXTENSION);
 		registerInClassPath("pkg/EmptyClass" + JAVA_FILE_EXTENSION);
 		registerInClassPath("pkg/inner/Inner" + JAVA_FILE_EXTENSION);
-		
+
 		parseAndReprint(filename);
 	}
 
@@ -1602,16 +1602,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testUsingAnnotations() throws Exception {
 		String typename = "UsingAnnotations";
 		String filename = "pkg" + File.separator + typename + JAVA_FILE_EXTENSION;
 		assertParsesToClass(new File(filename));
-		
+
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testUnicode() throws Exception {
 		String folder = "unicode/";
@@ -1648,7 +1648,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.classifiers.Class.class);
 		assertMemberCount(clazz, 2);
-		
+
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
@@ -1666,13 +1666,13 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 				Collections.EMPTY_LIST, allTestFiles);
 	}
 
-	
-	
+
+
 	/**
 	 * This is a meta-test which checks naively if all test files were covered
 	 * by test cases in this suite. WARNING: this test needs to stay at the end
 	 * of the class, to be the last test executed.
-	 * 
+	 *
 	 * @throws BadLocationException
 	 * @throws IOException
 	 * @throws MalformedTreeException

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.javabehavior4uml.resource.actions;
@@ -56,17 +56,17 @@ import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.types.TypesFactory;
 
 public class AddToUMLClassifierAction implements IObjectActionDelegate {
-	
+
 	private ISelection selection;
 
 	public void run(IAction action) {
-       	if (selection instanceof IStructuredSelection) {	
+       	if (selection instanceof IStructuredSelection) {
             for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
                 Object next = i.next();
                 if (next instanceof EditPart) {
                 	//navigate from edit part to model
                 	next = ((EditPart)next).getModel();
-                } 
+                }
                 if (next instanceof EObject) {
                 	if (!(next instanceof Element)) {
                 		//find model element behind diagram (e.g. in GMF)
@@ -89,7 +89,7 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
                 		}
                 	}
 
-                	//find the first 
+                	//find the first
                  	if (next instanceof Element) {
                  		Element selectedElement = (Element) next;
 	                	openBehavior(selectedElement);
@@ -102,10 +102,10 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 	private void openBehavior(Element selectedElement) {
 
 		if (selectedElement instanceof BehavioralFeature) {
-			
+
 			Resource umlResource = selectedElement.eResource();
 			final BehavioralFeature operation = (BehavioralFeature) selectedElement;
-			
+
 			if(umlResource != null && operation.eContainer() instanceof BehavioredClassifier) {
 				final BehavioredClassifier classifier = (BehavioredClassifier) operation.eContainer();
 				URI uri = umlResource.getURI();
@@ -114,14 +114,14 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 				uri = uri.appendFileExtension("javabehavior");
 				ResourceSet rs = umlResource.getResourceSet();
 				Resource behaviorResource = rs.getResource(uri, false);
-				
+
 				if (behaviorResource == null) {
 					final Resource newBehaviorResource = rs.createResource(uri);
-					
+
 					TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(operation);
-					
+
 					if (editingDomain != null) {
-						editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {			
+						editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 							@Override
 							protected void doExecute() {
 								insertBehavior(operation, classifier, newBehaviorResource);
@@ -143,23 +143,23 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 					}
 					behaviorResource = newBehaviorResource;
 				}
-				
+
 				IFile file = (IFile) WorkspaceSynchronizer.getFile(behaviorResource);
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
 				IEditorDescriptor editorDescriptor = editorRegistry.getDefaultEditor(file.getName());
-				
+
 				if (editorDescriptor != null) {
-			        try {			        
+			        try {
 			        	IEditorPart editor = page.openEditor(
 							      new FileEditorInput(file),
 							      editorDescriptor.getId());
-			        	
+
 			        	if (editor instanceof IEditingDomainProvider) {
 			        		rs = ((IEditingDomainProvider)editor).getEditingDomain().getResourceSet();
 			    			registerPackage(
-			    					(Package) operation.eContainer().eContainer(), 
-			    					rs);	
+			    					(Package) operation.eContainer().eContainer(),
+			    					rs);
 			        	}
 					} catch (PartInitException e) {
 						e.printStackTrace();
@@ -169,27 +169,27 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 			}
 		}
 	}
-	
+
 	private void insertBehavior(
-			BehavioralFeature operation, 
+			BehavioralFeature operation,
 			BehavioredClassifier classifier,
 			Resource newBehaviorResource) {
 		JavaMethodBehavior behavior = Javabehavior4umlFactory.eINSTANCE.createJavaMethodBehavior();
 		final ClassMethod javaMethod = MembersFactory.eINSTANCE.createClassMethod();
 		javaMethod.setTypeReference(TypesFactory.eINSTANCE.createVoid());
 		javaMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
-		
+
 		operation.getMethods().add(behavior);
 		classifier.getOwnedBehaviors().add(behavior);
 		javaMethod.setName(operation.getName());
 		behavior.setJavaMethod(javaMethod);
 		newBehaviorResource.getContents().add(behavior);
 	}
-	
+
 	private void registerPackage(Package umlPackage, ResourceSet resourceSet) {
 		for(CompilationUnit cu : UML2JavaWrapper.wrapPackage(umlPackage)) {
 			URI uri = JavaUniquePathConstructor.getJavaFileResourceURI(
-					JavaUniquePathConstructor.packageName(cu) + "." + 
+					JavaUniquePathConstructor.packageName(cu) + "." +
 					cu.getClassifiers().get(0).getName());
 			synchronized (resourceSet) {
 				Resource resource = resourceSet.getResource(uri, false);
@@ -204,8 +204,8 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 	}
 
 
-	
-	
+
+
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
 	}

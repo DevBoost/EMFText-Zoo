@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.chess;
@@ -55,7 +55,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 			Board copy = (Board) EcoreUtil.copy(board);
 			EList<Round> rounds = game.getRounds();
 			List<Move> moves = new LinkedList<Move>();
-			
+
 			for (Round round : rounds) {
 				moves.addAll(round.getMoves());
 			}
@@ -74,15 +74,15 @@ public class MoveChecker implements ICgResourcePostProcessor,
 		int fromRow = move.getFromRow();
 		int toColumn = Character.toUpperCase(move.getToColumn()) - 'A' + 1;
 		int toRow = move.getToRow();
-		
+
 		Square fromSquare = getSquare(board, fromColumn, fromRow);
 		if (fromSquare instanceof EmptySquare) {
 			resource.addProblem(new ICgProblem() {
-				
+
 				public CgEProblemType getType() {
 					return CgEProblemType.ANALYSIS_PROBLEM;
 				}
-				
+
 				public String getMessage() {
 					return "There is no piece at this location.";
 				}
@@ -106,7 +106,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 		// TODO add rules for special moves (Castling, En Passant, Promotion)
 		Piece piece = square.getPiece();
 		boolean isValidMove = false;
-		
+
 		switch (piece) {
 		case BISHOP:
 			isValidMove = isValidBishopMove(fromColumn, fromRow, toColumn, toRow);
@@ -127,14 +127,14 @@ public class MoveChecker implements ICgResourcePostProcessor,
 			isValidMove = isValidRookMove(fromColumn, fromRow, toColumn, toRow);
 			break;
 		}
-		
+
 		if (!isValidMove) {
 			resource.addProblem(new ICgProblem() {
-				
+
 				public CgEProblemType getType() {
 					return CgEProblemType.ANALYSIS_PROBLEM;
 				}
-				
+
 				public String getMessage() {
 					return "This is not a legal move for a " + square.getPiece().getName() + ".";
 				}
@@ -208,7 +208,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 	private void movePiece(Board board, Square fromSquare, int fromColumnIdx, int fromRowIdx, int toColumnIdx, int toRowIdx) {
 		Row fromRow = board.getRows().get(8 - fromRowIdx);
 		fromRow.getSquares().set(fromColumnIdx - 1, ChessFactory.eINSTANCE.createEmptySquare());
-		
+
 		Row toRow = board.getRows().get(8 - toRowIdx);
 		toRow.getSquares().set(toColumnIdx - 1, fromSquare);
 	}

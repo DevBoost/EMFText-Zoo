@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.bool.resource.bool.analysis;
@@ -27,9 +27,9 @@ import org.emftext.language.bool.resource.bool.IBoolReferenceResolver;
 import org.emftext.language.bool.resource.bool.util.BoolEObjectUtil;
 
 public class FieldTypeReferenceResolver implements IBoolReferenceResolver<org.emftext.language.bool.Field, org.emftext.language.bool.FieldType> {
-	
+
 	private static final org.emftext.language.bool.Class OBJECT = BoolFactory.eINSTANCE.createClass();
-	
+
 	{
 		Name name = BoolFactory.eINSTANCE.createName();
 		name.setValue("Object");
@@ -64,7 +64,7 @@ public class FieldTypeReferenceResolver implements IBoolReferenceResolver<org.em
 			}
 		}
 	}
-	
+
 	public java.lang.String deResolve(org.emftext.language.bool.FieldType element, org.emftext.language.bool.Field container, org.eclipse.emf.ecore.EReference reference) {
 		assert element instanceof org.emftext.language.bool.Class;
 		org.emftext.language.bool.Class clazz = (org.emftext.language.bool.Class) element;
@@ -73,7 +73,7 @@ public class FieldTypeReferenceResolver implements IBoolReferenceResolver<org.em
 		Name boxedName = (Name) nameRef;
 		return boxedName.getValue();
 	}
-	
+
 	public void setOptions(java.util.Map<?,?> options) {
 		// TODO save options in a field or leave method empty if this resolver does not depend on any option
 	}

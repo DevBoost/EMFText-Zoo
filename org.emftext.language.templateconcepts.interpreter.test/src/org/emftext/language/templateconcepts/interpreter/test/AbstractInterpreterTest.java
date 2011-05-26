@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.templateconcepts.interpreter.test;
@@ -30,7 +30,7 @@ import org.emftext.language.templateconcepts.interpreter.ITemplateInterpreter;
 import org.emftext.language.templateconcepts.interpreter.TemplateInterpreterFactory;
 
 public abstract class AbstractInterpreterTest extends TestCase {
-	
+
 	public void setUp() {
 		registerResourceFactories();
 	}
@@ -38,21 +38,21 @@ public abstract class AbstractInterpreterTest extends TestCase {
 	protected void testInterpretation(String templateFileName, String customerFileName, String expectedResult) {
 		try {
 			ResourceSetImpl resourceSet = new ResourceSetImpl();
-	
+
 			String path = getInputFolder() + File.separator + customerFileName;
 			Resource resource = resourceSet.createResource(URI.createFileURI(path));
 			assertNotNull("Can't create resource for '" + path + "'- probably there is no suitable registered factory.", resource);
 			resource.load(null);
 			EObject inputModelRoot = (EObject) resource.getContents().get(0);
-			
+
 			Resource templateResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + templateFileName));
 			templateResource.load(null);
 			Template template = (Template) templateResource.getContents().get(0);
-			
+
 			ITemplateInterpreter interpreter = TemplateInterpreterFactory.createTemplateInterpreter();
 			EObject templateInstanceAST = interpreter.interprete(template, inputModelRoot, Collections.<Diagnostic>emptyList());
 			assertNotNull(templateInstanceAST);
-			
+
 			// pretty print templateInstanceAST
 			String outputPath = "output." + getOutputFileExtension();
 			Resource instance = resourceSet.createResource(URI.createURI(outputPath));
@@ -60,7 +60,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			instance.getContents().add(templateInstanceAST);
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			instance.save(outputStream, null);
-			
+
 			// normalize output
 			String result = new String(outputStream.toByteArray());
 			result = result.replace("\n", " ");
@@ -68,7 +68,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			result = result.replace("\t", " ");
 			result = result.replace("  ", " ");
 			result = result.trim();
-			
+
 			System.out.println("AbstractInterpreterTest.testInterpretation() expected:\n" + expectedResult);
 			System.out.println("AbstractInterpreterTest.testInterpretation() actual:\n" + result);
 			// compare output with expected result

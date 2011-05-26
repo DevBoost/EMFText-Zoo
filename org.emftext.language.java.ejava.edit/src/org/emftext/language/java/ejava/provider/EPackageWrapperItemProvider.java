@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 /**
@@ -43,7 +43,7 @@ import org.emftext.language.java.ejava.EjavaPackage;
  * This is the item provider adapter for a
  * {@link org.emftext.language.java.ejava.EPackageWrapper} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
- * 
+ *
  * @generated
  */
 public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
@@ -52,7 +52,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public EPackageWrapperItemProvider(AdapterFactory adapterFactory) {
@@ -62,7 +62,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * This adds a property descriptor for the EPackage feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void addEPackagePropertyDescriptor(Object object) {
@@ -102,7 +102,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * This adds a property descriptor for the Gen Package feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void addGenPackagePropertyDescriptor(Object object) {
@@ -124,7 +124,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * This returns EPackageWrapper.gif. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	@Override
@@ -136,7 +136,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	@Override
@@ -165,7 +165,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -192,7 +192,7 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
 	/**
 	 * Return the resource locator for this item provider's resources. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override

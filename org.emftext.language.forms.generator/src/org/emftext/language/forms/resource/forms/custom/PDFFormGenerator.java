@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.forms.resource.forms.custom;
@@ -39,18 +39,18 @@ public class PDFFormGenerator implements IGenerator {
 	public byte[] generate(Object argument) {
 		FopFactory fopFactory = FopFactory.newInstance();
 		IFile foFile = (IFile)argument;
-		ByteArrayOutputStream outStream = new ByteArrayOutputStream(); 
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		OutputStream bufferedOutStream = new BufferedOutputStream(outStream);
 		try {
 			Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, bufferedOutStream);
 			TransformerFactory factory = TransformerFactory.newInstance();
-			Transformer transformer = factory.newTransformer(); 
-			
+			Transformer transformer = factory.newTransformer();
+
 			StreamSource src = new StreamSource(foFile.getContents());
 			Result res = new SAXResult(fop.getDefaultHandler());
 
 			transformer.transform(src, res);
-			
+
 			bufferedOutStream.flush();
 			bufferedOutStream.close();
 			return outStream.toByteArray();

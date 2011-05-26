@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.regexp.test.antlr;
@@ -48,7 +48,7 @@ public class RegExpTest extends AbstractTestCase {
 				new Regexp_antlrMetaInformation().getSyntaxName(),
 				new Regexp_antlrResourceFactory());
 	}
-	
+
 	@Test
 	public void testSimpleExpressions() throws IOException {
 		parse("'a'");
@@ -84,7 +84,7 @@ public class RegExpTest extends AbstractTestCase {
 		System.out.println(RegExpTest.class.getSimpleName() + ".testExpsFromGrammars() found " + grammars.size() + " grammar files.");
 		// make sure all grammars are found
 		assertTrue(grammars.size() > 168);
-		
+
 		StringBuffer expressions = new StringBuffer();
 		for (String grammar : grammars) {
 			Resource resource = ConcreteSyntaxTestHelper.loadCsResource(grammar);

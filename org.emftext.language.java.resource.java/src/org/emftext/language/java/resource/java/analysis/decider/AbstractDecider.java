@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis.decider;
@@ -23,14 +23,14 @@ import org.eclipse.emf.ecore.EObject;
 public abstract class AbstractDecider implements IResolutionTargetDecider {
 
 	protected boolean active = true;
-	
+
 	/**
 	 * @return true by default
 	 */
 	public boolean continueAfterReference() {
 		return true;
 	}
-	
+
 	/**
 	 * @return false by default
 	 */
@@ -44,19 +44,19 @@ public abstract class AbstractDecider implements IResolutionTargetDecider {
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container)  {
 		return null;
 	}
-	
+
 	/**
 	 * @return true by default
 	 */
 	public boolean isSure() {
 		return true;
 	}
-	
+
 	/**
 	 * Implements the interface specification. Do not override.
 	 */
 	public void activate() {
-		active = true;		
+		active = true;
 	}
 
 	/**

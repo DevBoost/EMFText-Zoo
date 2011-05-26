@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.dot;
@@ -43,9 +43,9 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 		}
 
 		final IFile file = WorkspaceSynchronizer.getFile(resource);
-		final String message = runDOT(file.getProjectRelativePath().toOSString(), 
+		final String message = runDOT(file.getProjectRelativePath().toOSString(),
 				file.getProject().getLocation().toOSString());
-		
+
 		if (message != null) {
 			resource.addError("DOT finished with \"" + message + "\"", DotEProblemType.ANALYSIS_PROBLEM, null); //$NON-NLS-1$
 		} else {
@@ -78,7 +78,7 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 		String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH); //$NON-NLS-1$
 		if (os.startsWith("windows")) { //$NON-NLS-1$
 			return "dot.exe"; //$NON-NLS-1$
-		}	
+		}
 		return "dot"; //$NON-NLS-1$
 	}
 

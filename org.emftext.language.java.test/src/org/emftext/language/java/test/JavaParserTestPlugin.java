@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test;
@@ -31,13 +31,13 @@ public class JavaParserTestPlugin extends Plugin {
 
 	// The shared instance
 	private static JavaParserTestPlugin plugin;
-	
+
 	/**
 	 * The constructor
 	 */
 	public JavaParserTestPlugin() {
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
@@ -64,10 +64,10 @@ public class JavaParserTestPlugin extends Plugin {
 	public static JavaParserTestPlugin getDefault() {
 		return plugin;
 	}
-	
+
 	/**
 	 * Returns the base directory of this plug-in
-	 *  
+	 *
 	 * @return the base directory of this plug-in
 	 */
 	public static String getBaseDirectory(){
@@ -79,11 +79,11 @@ public class JavaParserTestPlugin extends Plugin {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Method mostly here to workaround FindBugs warning "[ST] Write to static
 	 * field from instance method"
-	 * 
+	 *
 	 * @param pluginReference
 	 */
 	private static void setPluginReference(JavaParserTestPlugin pluginReference) {

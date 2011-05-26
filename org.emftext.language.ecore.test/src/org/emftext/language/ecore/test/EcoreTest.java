@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.ecore.test;
@@ -35,7 +35,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class EcoreTest extends AbstractEcoreTestCase {
-	
+
 	@Before
 	public void setUp() {
 		EcoreResourceFactoryDelegator factoryDelegator = new EcoreResourceFactoryDelegator();
@@ -70,7 +70,7 @@ public class EcoreTest extends AbstractEcoreTestCase {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName("A");
 		ePackage.getEClassifiers().add(eClass);
-		
+
 		EAttribute eAtt = EcoreFactory.eINSTANCE.createEAttribute();
 		eAtt.setName("abstract");
 		eClass.getEStructuralFeatures().add(eAtt);
@@ -106,7 +106,7 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	public void testImport() {
 		assertParse("import.text.ecore");
 	}
-	
+
 	private void assertRePrint(String fileName) {
 		String content = null;
 		try {

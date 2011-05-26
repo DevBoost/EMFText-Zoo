@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.util;
@@ -28,9 +28,9 @@ import org.emftext.language.java.classifiers.impl.ClassifierImpl;
 public class TemporalCompositeClassifier extends ClassifierImpl {
 
 	private EObject creator;
-	
+
 	private EList<EObject> superTypes = new UniqueEList<EObject>();
-	
+
 	public TemporalCompositeClassifier(EObject creator) {
 		this.creator = creator;
 	}
@@ -42,7 +42,7 @@ public class TemporalCompositeClassifier extends ClassifierImpl {
 	public EList<EObject> getSuperTypes() {
 		return superTypes;
 	}
-	
+
 	public EList<ConcreteClassifier> getAllSuperClassifiers() {
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		for(EObject superType : getSuperTypes()) {
@@ -50,5 +50,5 @@ public class TemporalCompositeClassifier extends ClassifierImpl {
 		}
 		return result;
 	}
-	
+
 }

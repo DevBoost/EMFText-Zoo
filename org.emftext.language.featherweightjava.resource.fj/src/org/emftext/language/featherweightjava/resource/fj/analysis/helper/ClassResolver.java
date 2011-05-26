@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.featherweightjava.resource.fj.analysis.helper;
@@ -25,9 +25,9 @@ import org.emftext.language.featherweightjava.resource.fj.util.FjEObjectUtil;
 
 // TODO maybe we should add resolving for files that are in the same directory
 public class ClassResolver {
-	
+
 	private final static org.emftext.language.featherweightjava.Class OBJECT = FeatherweightjavaFactory.eINSTANCE.createClass();
-	
+
 	static {
 		OBJECT.setName("Object");
 	}
@@ -36,7 +36,7 @@ public class ClassResolver {
 			EReference reference, int position, boolean resolveFuzzy, IFjReferenceResolveResult<Class> result) {
 
 		Resource resource = container.eResource();
-		Collection<org.emftext.language.featherweightjava.Class> classes = 
+		Collection<org.emftext.language.featherweightjava.Class> classes =
 			FjEObjectUtil.getObjectsByType(resource.getAllContents(), org.emftext.language.featherweightjava.FeatherweightjavaPackage.eINSTANCE.getClass_());
 		for (Class nextClass : classes) {
 			if (identifier.equals(nextClass.getName())) {

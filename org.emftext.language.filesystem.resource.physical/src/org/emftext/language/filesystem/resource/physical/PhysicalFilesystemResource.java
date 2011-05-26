@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.filesystem.resource.physical;
@@ -148,38 +148,38 @@ public class PhysicalFilesystemResource implements Resource, Resource.Internal {
 
 	public void save(Map<?, ?> options) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void save(OutputStream outputStream, Map<?, ?> options)
 			throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setModified(boolean isModified) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setTimeStamp(long timeStamp) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setTrackingModification(boolean isTrackingModification) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setURI(URI uri) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void unload() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public EList<Adapter> eAdapters() {
@@ -194,17 +194,17 @@ public class PhysicalFilesystemResource implements Resource, Resource.Internal {
 
 	public void eNotify(Notification notification) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void eSetDeliver(boolean deliver) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void attached(EObject eObject) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public NotificationChain basicSetResourceSet(ResourceSet resourceSet,
@@ -215,7 +215,7 @@ public class PhysicalFilesystemResource implements Resource, Resource.Internal {
 
 	public void detached(EObject eObject) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public boolean isLoading() {

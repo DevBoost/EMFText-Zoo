@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.javabehavior4uml.util;
@@ -36,45 +36,45 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 
 public class UML2JavaWrapper {
-	
+
 	private static Javabehavior4umlFactory f = Javabehavior4umlFactory.eINSTANCE;
-	
+
 	public static EList<CompilationUnit> wrapPackage(Package umlPackage) {
 		EList<CompilationUnit> result = new BasicEList<CompilationUnit>();
 		for(PackageableElement element : umlPackage.getPackagedElements()) {
 			if(element instanceof Class) {
 				UMLClassWrapper wrappedClass = wrapClass((Class) element);
-				
+
 				CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 				cu.getNamespaces().addAll(
 						Arrays.asList(umlPackage.getName().split("\\.")));
-				
+
 				cu.getClassifiers().add(wrappedClass);
-				
+
 				result.add(cu);
 			}
 		}
 		return result;
 	}
-	
+
 	public static UMLClassWrapper wrapClass(Class umlClass) {
 		UMLClassWrapper wrapper = f.createUMLClassWrapper();
 		wrapper.setName(umlClass.getName());
 		wrapper.setUmlClass(umlClass);
-		
+
 		for(Property umlProperty : umlClass.getAttributes()) {
 			UMLPropertyWrapper wrappedPropery = wrapProperty(umlProperty);
 			wrapper.getMembers().add(wrappedPropery);
 		}
-		
+
 		return wrapper;
 	}
-	
+
 	public static UMLPropertyWrapper wrapProperty(Property umlProperty) {
 		UMLPropertyWrapper wrapper = f.createUMLPropertyWrapper();
 		wrapper.setName(umlProperty.getName());
 		wrapper.setUmlProperty(umlProperty);
-		
+
 		ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 		if (umlProperty.getType().getName().equals("String")) {
 			JavaClasspath cp = JavaClasspath.get(umlProperty);
@@ -85,13 +85,13 @@ public class UML2JavaWrapper {
 		else {
 			UMLClassWrapper wrapperProxy = f.createUMLClassWrapper();
 			URI proxyURI = JavaUniquePathConstructor.getClassifierURI(
-					umlProperty.getType().getPackage().getName() + "." + 
+					umlProperty.getType().getPackage().getName() + "." +
 					umlProperty.getType().getName());
 			((InternalEObject)wrapperProxy).eSetProxyURI(proxyURI);
 			type.setTarget(wrapperProxy);
 		}
 		wrapper.setTypeReference(type);
-		
+
 		return wrapper;
 	}
 

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test;
@@ -123,37 +123,37 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(AnnotationTypeDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(AnnotationTypeMemberDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(AnonymousClassDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ArrayAccess node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ArrayCreation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ArrayInitializer node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -164,49 +164,49 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(AssertStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(Assignment node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(Block node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(BlockComment node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(BooleanLiteral node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(BreakStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(CastExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(CatchClause node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -233,115 +233,115 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(ClassInstanceCreation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(CompilationUnit node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ConditionalExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ConstructorInvocation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ContinueStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(DoStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(EmptyStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(EnhancedForStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(EnumConstantDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(EnumDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ExpressionStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(FieldAccess node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(FieldDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ForStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(IfStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ImportDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(InfixExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(Initializer node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(InstanceofExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -352,80 +352,80 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(LabeledStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(LineComment node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MarkerAnnotation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MemberRef node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MemberValuePair node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MethodDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MethodInvocation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MethodRef node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(MethodRefParameter node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(Modifier node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(NormalAnnotation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(NullLiteral node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(NumberLiteral node, Object other) {
 		String oToken = null;
-		
+
 		if (other instanceof PrefixExpression) {
 			oToken = ((PrefixExpression)other).toString();
 		}
@@ -439,7 +439,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 		return setDiff(node, other, numberMatch(nToken, oToken));
 	}
-	
+
 	protected boolean numberMatch(String nToken, String oToken) {
 		nToken = normalizeNumberToken(nToken);
 		oToken = normalizeNumberToken(oToken);
@@ -449,14 +449,14 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	private String normalizeNumberToken(String token) {
 		//System.out.println("normalizeNumberToken(" + token + ")");
-		
+
 		//HEX normalization
 		token = normalizeHexNumberToken(token);
 		if (token.toLowerCase().startsWith("-0x")) {
 			token = token.substring(1);
 			token = "-" + normalizeHexNumberToken(token);
 		}
-		
+
 		if (token.toLowerCase().endsWith("l")) {
 			token = token.substring(0, token.length() - 1);
 		}
@@ -465,14 +465,14 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (token.matches("0[0-9]+")) {
 			token = new BigInteger(token, 8).toString();
 		}
-		
+
 		//condition that indicates that this is float or double --> parse
-		if(token.toLowerCase().endsWith("f") || 
+		if(token.toLowerCase().endsWith("f") ||
 				token.toLowerCase().endsWith("d") ||
 				token.toLowerCase().contains("e") ||
 				token.toLowerCase().contains("p") ||
 				token.toLowerCase().contains(".")) {
-			
+
 			if (token.toLowerCase().endsWith("f")) {
 				token = token.substring(0, token.length() - 1);
 				IJavaTokenResolveResult result = new JavaTokenResolveResult();
@@ -498,7 +498,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	private String normalizeHexNumberToken(String hexToken) {
 		try {
 			boolean hasHexSuffix = hexToken.toLowerCase().startsWith("0x");
-			
+
 			boolean endWithL = hexToken.toLowerCase().endsWith("l");
 			boolean endsWithF = hexToken.toLowerCase().endsWith("f");
 
@@ -532,31 +532,31 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(PackageDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ParameterizedType node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ParenthesizedExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(PostfixExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(PrefixExpression node, Object other) {
-		
+
 		if (other instanceof NumberLiteral) {
 			String nToken = node.toString();
 			String oToken = ((NumberLiteral)other).getToken();
@@ -565,54 +565,54 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		else {
 			return setDiff(node, other, super.match(node, other));
 		}
-		
+
 	}
 
 	@Override
 	public boolean match(PrimitiveType node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(QualifiedName node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(QualifiedType node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ReturnStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SimpleName node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SimpleType node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SingleMemberAnnotation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SingleVariableDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -621,111 +621,111 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			return false;
 		}
 		StringLiteral o = (StringLiteral) other;
-		
+
 		String nString = node.getEscapedValue();
 		String oString = o.getEscapedValue();
-		
+
 		//normalize escaped strings
 		nString = CharacterEscaper.unescapeEscapedCharacters(nString);
 		oString = CharacterEscaper.unescapeEscapedCharacters(oString);
-		
+
 		return setDiff(node, other, safeEquals(nString, oString));
 	}
 
 	@Override
 	public boolean match(SuperConstructorInvocation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SuperFieldAccess node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SuperMethodInvocation node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SwitchCase node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SwitchStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(SynchronizedStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(TagElement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(TextElement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ThisExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(ThrowStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(TryStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 
 	@Override
 	public boolean match(TypeDeclaration node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(TypeDeclarationStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(TypeLiteral node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(TypeParameter node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(VariableDeclarationExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -742,19 +742,19 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(WhileStatement node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
 	public boolean match(WildcardType node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
-	
-	
+
+
 	protected String diff = "";
-	
+
 	protected boolean setDiff(Object o1, Object o2, boolean result) {
 		if (!result && "".equals(diff)) {
 			diff += ("\nORIGINAL: \n");
@@ -765,9 +765,9 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		}
 		return result;
 	}
-	
+
 	public String getDiff() {
 		return diff;
 	}
-	
+
 }

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.templateconcepts.interpreter.impl;
@@ -30,7 +30,7 @@ public class Interpreter implements ITemplateInterpreter {
 				//model incomplete
 				return null;
 			}
-			
+
 			// the interpreter must check whether the loaded input model
 			// really confirms to the type expected by the template
 			boolean parameterModelFits = inputMetaClass.isInstance(paramModel);
@@ -51,19 +51,19 @@ public class Interpreter implements ITemplateInterpreter {
 	private void addError(Collection<Diagnostic> problems,
 			final String message) {
 		problems.add(new Diagnostic() {
-			
+
 			public String getMessage() {
 				return message;
 			}
-			
+
 			public String getLocation() {
 				return null;
 			}
-			
+
 			public int getLine() {
 				return 0;
 			}
-			
+
 			public int getColumn() {
 				return 0;
 			}

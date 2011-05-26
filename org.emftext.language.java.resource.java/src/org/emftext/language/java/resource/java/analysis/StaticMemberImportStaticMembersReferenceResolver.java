@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
@@ -26,19 +26,19 @@ import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
 import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 
-public class StaticMemberImportStaticMembersReferenceResolver implements 
+public class StaticMemberImportStaticMembersReferenceResolver implements
 	IJavaReferenceResolver<StaticMemberImport, ReferenceableElement> {
-	
-	JavaDefaultResolverDelegate<StaticMemberImport, ReferenceableElement> delegate = 
+
+	JavaDefaultResolverDelegate<StaticMemberImport, ReferenceableElement> delegate =
 		new JavaDefaultResolverDelegate<StaticMemberImport, ReferenceableElement>();
-	
+
 	public java.lang.String deResolve(ReferenceableElement element, StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
 		if (element.eIsProxy()) {
 			return delegate.deResolve(element, container, reference);
 		}
 		return element.getName();
 	}
-	
+
 	public void resolve(java.lang.String identifier, StaticMemberImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<ReferenceableElement> result) {
 		ConcreteClassifier classifier = theImport.getClassifierAtNamespaces();
 		classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, theImport.eResource());
@@ -55,7 +55,7 @@ public class StaticMemberImportStaticMembersReferenceResolver implements
 					}
 				}
 			}
-			
+
 			if (classifier instanceof Enumeration) {
 				for(EnumConstant enumConstant : ((Enumeration)classifier).getConstants()) {
 					if (identifier.equals(enumConstant.getName())) {
@@ -64,7 +64,7 @@ public class StaticMemberImportStaticMembersReferenceResolver implements
 					}
 				}
 			}
-		}	
+		}
 	}
 
 	public void setOptions(Map<?, ?> options) {

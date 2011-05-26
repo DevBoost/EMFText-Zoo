@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java_templates.resource.util;
@@ -37,16 +37,16 @@ import org.emftext.language.java.util.JavaModelRepairer;
 import org.emftext.language.templateconcepts.ExpressionChecker;
 
 /**
- * Post processor that performs 
+ * Post processor that performs
  * <i>cast repair</i>,
- * <i>expression simplification</i> and 
+ * <i>expression simplification</i> and
  * <i>java model completion</i>
  * on a resource after parsing using the JavaModelRepairer.
  */
 public class Java_templatePostProcessor implements IJavatemplateOptionProvider, IJavatemplateResourcePostProcessor, IJavatemplateResourcePostProcessorProvider {
-	
+
 	private ExpressionChecker expressionChecker = new ExpressionChecker();
-	
+
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IJavatemplateOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
@@ -70,12 +70,12 @@ public class Java_templatePostProcessor implements IJavatemplateOptionProvider, 
 						-1);
 			}
 		}.repair(resource);
-		
+
 		JavaModelCompletion.complete(resource);
 		expressionChecker.process(resource, new ExpressionChecker.ErrorReporter() {
-			
+
 			public void report(EObject element, String message) {
-				resource.addProblem(new JavatemplateProblem(message, JavatemplateEProblemType.ANALYSIS_PROBLEM, JavatemplateEProblemSeverity.ERROR), element);			
+				resource.addProblem(new JavatemplateProblem(message, JavatemplateEProblemType.ANALYSIS_PROBLEM, JavatemplateEProblemSeverity.ERROR), element);
 			}
 		});
 	}

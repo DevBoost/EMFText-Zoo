@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.metamodelprinter;
@@ -33,23 +33,23 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaPackage;
 
 /**
- * A printer for Ecore meta models. It counts the number of classes 
- * (both abstract and concrete ones) and prints their names to the 
+ * A printer for Ecore meta models. It counts the number of classes
+ * (both abstract and concrete ones) and prints their names to the
  * console.
  */
 public class Printer {
-	
+
 	public final static class NamedAndTypedFeature {
-		
+
 		private String name;
 		private String typeName;
-		
+
 		public NamedAndTypedFeature(String name, String typeName) {
 			super();
 			this.name = name;
 			this.typeName = typeName;
 		}
-		
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -82,7 +82,7 @@ public class Printer {
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Run this method without arguments to obtain a print for
 	 * the JaMoPP meta model. Pass a path to file to get a print
@@ -90,7 +90,7 @@ public class Printer {
 	 */
 	public static void main(String[] args) throws IOException {
 		registerResourceFactories();
-		
+
 		List<EPackage> packages;
 		if (args.length > 0) {
 			packages = getPackages(args[0]);
@@ -128,7 +128,7 @@ public class Printer {
 		int concreteClasses = 0;
 		int packageCount = 0;
 		Map<NamedAndTypedFeature, List<EClass>> featureNamesToClasses = new HashMap<NamedAndTypedFeature, List<EClass>>();
-		
+
 		for (EPackage nextPackage : packages) {
 			System.out.println(nextPackage.getName());
 			EList<EClassifier> classifiers = nextPackage.getEClassifiers();
@@ -156,7 +156,7 @@ public class Printer {
 			packageCount++;
 			System.out.println();
 		}
-		
+
 		for (NamedAndTypedFeature featureName : featureNamesToClasses.keySet()) {
 			List<EClass> nextClassList = featureNamesToClasses.get(featureName);
 			if (nextClassList.size() > 1) {

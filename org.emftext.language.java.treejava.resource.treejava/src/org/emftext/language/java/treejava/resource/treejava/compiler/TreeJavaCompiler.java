@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.treejava.resource.treejava.compiler;
@@ -47,12 +47,12 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 		Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
 				EcoreUtil.copyAll(resource.getContents()));
-		
+
 		boolean changed = true;
-		
+
 		while (changed) {
 			changed = false;
-			
+
 			for(Iterator<EObject> i = javaResource.getAllContents(); i.hasNext(); ) {
 				EObject next = i.next();
 				if(next instanceof Node) {
@@ -64,7 +64,7 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 				}
 			}
 		}
-		
+
 		try {
 			javaResource.save(null);
 		} catch (IOException e) {
@@ -86,7 +86,7 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 		}
 		return ncc;
 	}
-	
+
 	public ITreejavaResourcePostProcessor getResourcePostProcessor() {
 		return new TreeJavaCompiler();
 	}

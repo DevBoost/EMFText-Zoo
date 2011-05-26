@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
@@ -34,13 +34,13 @@ public class JavaHEX_FLOAT_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getHexFloatLiteral());
-		
+
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().contains(HEX_EXPONENT) || lexem.contains(".");
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
-		
+
 		lexem = lexem.substring(0, lexem.length() - 1);
-		
+
 		result.setResolvedToken(Float.parseFloat(lexem));
 	}
 

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.analysis;
@@ -37,15 +37,15 @@ public class NumberLiteralResolverTest extends TestCase {
 	JavaDECIMAL_LONG_LITERALTokenResolver decLong = new JavaDECIMAL_LONG_LITERALTokenResolver();
 	JavaDECIMAL_FLOAT_LITERALTokenResolver decFloat = new JavaDECIMAL_FLOAT_LITERALTokenResolver();
 	JavaDECIMAL_DOUBLE_LITERALTokenResolver decDouble = new JavaDECIMAL_DOUBLE_LITERALTokenResolver();
-	
+
 	JavaHEX_INTEGER_LITERALTokenResolver hexInt = new JavaHEX_INTEGER_LITERALTokenResolver();
 	JavaHEX_LONG_LITERALTokenResolver hexLong = new JavaHEX_LONG_LITERALTokenResolver();
 	JavaHEX_FLOAT_LITERALTokenResolver hexFloat = new JavaHEX_FLOAT_LITERALTokenResolver();
 	JavaHEX_DOUBLE_LITERALTokenResolver hexDouble = new JavaHEX_DOUBLE_LITERALTokenResolver();
-	
+
 	JavaOCTAL_INTEGER_LITERALTokenResolver octInt = new JavaOCTAL_INTEGER_LITERALTokenResolver();
 	JavaOCTAL_LONG_LITERALTokenResolver octLong = new JavaOCTAL_LONG_LITERALTokenResolver();
-	
+
 	public void testResolving() {
 		assertDecInt(new BigInteger("1"), "1");
 		assertHexInt(new BigInteger("1"), "0x1");
@@ -71,61 +71,61 @@ public class NumberLiteralResolverTest extends TestCase {
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveDecInt(resolved));
 	}
-	
+
 	public void assertDecLong(BigInteger expectedResolved, String lexem) {
 		Object resolved = resolveDecLong(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveDecLong(resolved));
 	}
-	
+
 	public void assertDecFloat(Float expectedResolved, String lexem) {
 		Object resolved = resolveDecFloat(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveDecFloat(resolved));
 	}
-	
+
 	public void assertDecDouble(Double expectedResolved, String lexem) {
 		Object resolved = resolveDecDouble(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveDecDouble(resolved));
 	}
-	
+
 	public void assertHexInt(BigInteger expectedResolved, String lexem) {
 		Object resolved = resolveHexInt(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveHexInt(resolved));
 	}
-	
+
 	public void assertHexLong(BigInteger expectedResolved, String lexem) {
 		Object resolved = resolveHexLong(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveHexLong(resolved));
 	}
-	
+
 	public void assertHexFloat(Float expectedResolved, String lexem) {
 		Object resolved = resolveHexFloat(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveHexFloat(resolved));
 	}
-	
+
 	public void assertHexDouble(Double expectedResolved, String lexem) {
 		Object resolved = resolveHexDouble(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveHexDouble(resolved));
 	}
-	
+
 	public void assertOctInt(BigInteger expectedResolved, String lexem) {
 		Object resolved = resolveOctInt(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveOctInt(resolved));
 	}
-	
+
 	public void assertOctLong(BigInteger expectedResolved, String lexem) {
 		Object resolved = resolveOctLong(lexem);
 		assertEquals(expectedResolved, resolved);
 		assertEquals(lexem, deResolveOctLong(resolved));
 	}
-	
+
 	private Object resolveDecInt(String lexem) {
 		return resolve(decInt, lexem);
 	}
@@ -219,7 +219,7 @@ public class NumberLiteralResolverTest extends TestCase {
 		boolean isDouble = result instanceof Double;
 		boolean isNumber = isInteger || isBigInteger || isLong || isFloat || isDouble;
 		assertTrue(isNumber);
-		
+
 		return result;
 	}
 

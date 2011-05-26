@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test;
@@ -91,13 +91,13 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
-	
+
 	protected void registerInClassPath(String file) throws Exception {
 		File inputFolder = new File("." + File.separator + getTestInputFolder());
 		File inputFile = new File(file);
 
 		CompilationUnit cu = (CompilationUnit) parseResource(inputFile);
-		
+
 		inputFile = new File(inputFolder + File.separator + file);
 		JavaClasspath.get(cu).registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
 	}
@@ -134,7 +134,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 			String filePath) throws IOException {
 		return loadResource(URI.createFileURI(filePath));
 	}
-	
+
 	private JavaRoot loadResource(
 			URI uri) throws IOException {
 		JavaResource resource = (JavaResource) getResourceSet().createResource(uri);
@@ -214,9 +214,9 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				+ entryName;
 		File outputFile = prepareOutputFile(outputFileName);
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
-		
+
 		ResourceSet resourceSet = getResourceSet();
-		
+
 		// TODO put this somewhere else
 		if (file.getName().endsWith("jdt_test_files" + File.separator + "src.zip")) {
 			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
@@ -225,34 +225,34 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 		Resource resource = resourceSet.createResource(archiveURI);
 		resource.load(getLoadOptions());
-		
+
 		if (!ignoreSemanticErrors(entry.getName())) {
 			// This will not work if external resources are not yet registered (order of tests)
 			assertResolveAllProxies(resource);
 		}
-		
+
 		if (isExcludedFromReprintTest(entry.getName())) {
 			return;
 		}
-		
+
 		//addReprintedResource(inputFile);
-		resource.setURI(URI.createFileURI(outputFile.getCanonicalPath()));	
+		resource.setURI(URI.createFileURI(outputFile.getCanonicalPath()));
 		resource.save(null);
-		
+
 		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
 				outputFile.exists());
 
 		compareTextContents(file.getInputStream(entry),
 					new FileInputStream(outputFile));
-		
+
 	}
-	
-	
+
+
 	protected static void registerLibs(String libdir, ResourceSet resourceSet, String prefix) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator
 				+ libdir);
 		List<File> allLibFiles = collectAllFilesRecursive(libFolder, "jar");
-		
+
 		for(File lib : allLibFiles) {
 			JavaClasspath.get(resourceSet).registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), prefix);
 		}
@@ -275,26 +275,26 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		String outputFileName = calculateOutputFilename(inputFile,
 				inputFolderName, outputFolderName);
 		File outputFile = prepareOutputFile(outputFileName);
-		
+
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
 		resource.load(getLoadOptions());
-		
+
 		assertNoErrors(resource.getURI().toString(), (JavaResource) resource);
 		addParsedResource(inputFile);
-		
+
 		if (!ignoreSemanticErrors(file.getPath())) {
 			// This will not work if external resources are not yet registered (order of tests)
 			assertResolveAllProxies(resource);
 		}
-		
+
 		if (isExcludedFromReprintTest(file.getPath())) {
 			return;
 		}
-		
+
 		addReprintedResource(inputFile);
-		resource.setURI(URI.createFileURI(outputFileName));	
+		resource.setURI(URI.createFileURI(outputFileName));
 		resource.save(null);
-		
+
 		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
 				outputFile.exists());
 
@@ -311,19 +311,19 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	private static boolean compareTextContents(InputStream inputStream,
 			InputStream inputStream2) throws MalformedTreeException,
 			BadLocationException, IOException {
-		
+
 		//converter unicode
 		inputStream = new JavaUnicodeConverter(inputStream);
-		
+
 		org.eclipse.jdt.core.dom.CompilationUnit unit1 = parseWithJDT(inputStream);
 		removeJavadoc(unit1);
 
 		org.eclipse.jdt.core.dom.CompilationUnit unit2 = parseWithJDT(inputStream2);
 		removeJavadoc(unit2);
-		
+
 		TalkativeASTMatcher matcher = new TalkativeASTMatcher(true);
 		boolean result = unit1.subtreeMatch(matcher, unit2);
-		
+
 		assertTrue(
 				"Reprint not equal: " + matcher.getDiff(),
 				result);
@@ -340,8 +340,8 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
 		jdtParser.setCompilerOptions(options);
-		
-		org.eclipse.jdt.core.dom.CompilationUnit result1 = 
+
+		org.eclipse.jdt.core.dom.CompilationUnit result1 =
 			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser.createAST(null);
 		return result1;
 	}
@@ -418,7 +418,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				if (member.getName().endsWith(extension)) {
 					allFiles.add(member);
 				}
-			} 
+			}
 		}
 		return allFiles;
 	}
@@ -569,7 +569,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		if (model instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) model;
 			assertNumberOfClassifiers(cu, 1);
-	
+
 			Classifier declaration = cu.getClassifiers().get(0);
 			assertClassifierName(declaration, typename);
 			assertType(declaration, expectedType);
@@ -578,7 +578,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		else {
 			return null;
 		}
-		
+
 	}
 
 	protected <T> T assertParsesToType(String typename, Class<T> expectedType)
@@ -588,7 +588,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 
 	protected abstract String getTestInputFolder();
-	
+
 	private <T> T assertParsesToType(File file, Class<T> expectedType)
 			throws Exception {
 
@@ -609,7 +609,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	private JavaRoot parseResource(File file) throws Exception {
 		return parseResource(file, getTestInputFolder());
 	}
-	
+
 	protected void parseAndReprint(String filename)
 			throws MalformedTreeException, IOException, BadLocationException {
 		parseAndReprint(filename, getTestInputFolder(),
@@ -651,11 +651,11 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 		parseAndReprint(filename);
 	}
-	
+
 	protected void assertResolveAllProxies(EObject element) {
 		assertResolveAllProxies(element.eResource());
 	}
-	
+
 	/*protected void assertResolveAllProxies() {
 		boolean failure = false;
 		for(URI uri : new ArrayList<URI>(JavaClasspath.INSTANCE.URI_MAP.keySet())) {
@@ -673,16 +673,16 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "org.omg")) {
 					continue;
 				}
-				
+
 				Resource r = getResourceSet().getResource(uri, true);
 				assertNotNull("The resource '" + uri + "' should exist",r);
 				failure = assertResolveAllProxies(r) || failure;
-				
+
 			}
 		}
 		assertFalse("There are unresolved proxies", failure);
 	}*/
-	
+
 	protected ResourceSet getResourceSet() {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getLoadOptions().putAll(getLoadOptions());
@@ -693,7 +693,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		Set<EObject> unresolvedProxies = JavaResourceUtil.findUnresolvedProxies(resource);
 		boolean failure = false;
 		String msg="";
-		
+
 		for (EObject next : unresolvedProxies) {
 			InternalEObject nextElement = (InternalEObject) next;
 			assertFalse("Can not resolve: " + nextElement.eProxyURI(), nextElement.eIsProxy());
@@ -708,7 +708,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		assertFalse(msg, failure);
 		return failure;
 	}
-	
+
 	public static List<File> getParsedResources() {
 		return parsedResources;
 	}

@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.formsembedded.resource;
@@ -31,14 +31,14 @@ import org.emftext.language.formsembedded.resource.formsembedded.util.Formsembed
  * providers.
  */
 public class UnicodeConverterProvider implements IFormsembeddedOptionProvider, IFormsembeddedInputStreamProcessorProvider {
-	
+
 	public FormsembeddedInputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
 		return new FormsembeddedUnicodeConverter(inputStream);
 	}
-	
+
 	public Map<?, ?> getOptions() {
 		return Collections.singletonMap(
-				IFormsembeddedOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, 
+				IFormsembeddedOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER,
 				new UnicodeConverterProvider());
 	}
 }

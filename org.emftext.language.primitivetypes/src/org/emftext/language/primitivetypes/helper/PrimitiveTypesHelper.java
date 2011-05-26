@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.primitivetypes.helper;
@@ -26,7 +26,7 @@ public class PrimitiveTypesHelper {
 			if (!(type instanceof EDataType)) {
 				return type;
 			}
-			
+
 			//EData types
 			EDataType dataType = (EDataType) type;
 			if (dataType.getInstanceClassName().equals("java.lang.String")) {
@@ -37,9 +37,9 @@ public class PrimitiveTypesHelper {
 			}
 			if (dataType.getInstanceClassName().equals("java.lang.Boolean")) {
 				return PrimitivetypesPackage.Literals.EBOOLEAN_ELEMENT;
-			}	
+			}
 			//TODO add more
-			return dataType;		
+			return dataType;
 		}
 		EClass typeClass = (EClass) type;
 		List<EClass> superTypes = typeClass.getEAllSuperTypes();
@@ -48,9 +48,9 @@ public class PrimitiveTypesHelper {
 				return superType;
 			}
 		}
-		
 
-		
+
+
 		return null;
 	}
 }

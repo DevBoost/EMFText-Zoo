@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 /**
@@ -60,7 +60,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This is used to implement
 	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
@@ -76,7 +76,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	/**
 	 * This constructs an instance. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public EjavaItemProviderAdapterFactory() {
@@ -91,7 +91,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This keeps track of the one adapter used for all
 	 * {@link org.emftext.language.java.ejava.EPackageWrapper} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected EPackageWrapperItemProvider ePackageWrapperItemProvider;
@@ -100,7 +100,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This creates an adapter for a
 	 * {@link org.emftext.language.java.ejava.EPackageWrapper}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This creates an adapter for a
 	 * {@link org.emftext.language.java.ejava.EClassifierClassWrapper}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -148,7 +148,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This creates an adapter for a
 	 * {@link org.emftext.language.java.ejava.EClassifierInterfaceWrapper}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -259,7 +259,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This keeps track of the one adapter used for all
 	 * {@link org.emftext.language.java.ejava.EOperationWrapper} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected EOperationWrapperItemProvider eOperationWrapperItemProvider;
@@ -268,7 +268,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This creates an adapter for a
 	 * {@link org.emftext.language.java.ejava.EOperationWrapper}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -292,7 +292,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This creates an adapter for a
 	 * {@link org.emftext.language.java.ejava.EObjectInstantiation}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Override
@@ -308,7 +308,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	/**
 	 * This returns the root adapter factory that contains this factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
@@ -318,7 +318,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	/**
 	 * This sets the composed adapter factory that contains this factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void setParentAdapterFactory(
@@ -385,7 +385,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * This delegates to {@link #changeNotifier} and to
 	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void fireNotifyChanged(Notification notification) {
@@ -400,7 +400,7 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	/**
 	 * This disposes all of the item providers created by this factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	public void dispose() {

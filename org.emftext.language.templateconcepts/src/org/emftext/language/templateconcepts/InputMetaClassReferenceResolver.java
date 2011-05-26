@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.templateconcepts;
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.templateconcepts.Template;
 
 public class InputMetaClassReferenceResolver {
-	
+
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.templateconcepts.Template container, org.eclipse.emf.ecore.EReference reference) {
 		EClass eClass = (EClass) element;
 		EPackage ePackage = eClass.getEPackage();
@@ -29,7 +29,7 @@ public class InputMetaClassReferenceResolver {
 		}
 		return ePackage.getNsURI() + "::" + eClass.getName();
 	}
-	
+
 	public EClass resolve(String identifier, Template container, EReference reference, int position, boolean resolveFuzzy) {
 		String[] namespaceAndClassName = identifier.split("::");
 		if (namespaceAndClassName.length == 2) {
@@ -45,7 +45,7 @@ public class InputMetaClassReferenceResolver {
 		}
 		return null;
 	}
-	
+
 	private EClassifier findEClassifier(String nsURI, String eClassName) {
 		EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
 	    if (ePackage == null) {

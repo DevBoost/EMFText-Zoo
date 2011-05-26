@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.resolving_new;
@@ -38,13 +38,13 @@ import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 /**
  * A test for the reference resolving mechanism. Each folder
- * contained INPUT_FOLDER is treated as a Java project and 
+ * contained INPUT_FOLDER is treated as a Java project and
  * parsed into one ResourceSet. Afterwards all references are
  * resolved and the annotations contained as comments in the
  * input files are checked.
  */
 public class ResolvingTest extends TestCase {
-	
+
 	private static final String INPUT_FOLDER = "src-input" + File.separator + "resolving_new";
 
 	/**
@@ -60,7 +60,7 @@ public class ResolvingTest extends TestCase {
 			return true;
 		}
 	}
-	
+
 	public static Test suite() throws CoreException {
 		TestSuite suite = new TestSuite();
 		File inputFolder = new File(INPUT_FOLDER);
@@ -69,7 +69,7 @@ public class ResolvingTest extends TestCase {
 		for (File nextDirectory : testDirectories) {
 			suite.addTest(new DirectoryTest(nextDirectory));
 		}
-		
+
 		return suite;
 	}
 
@@ -85,11 +85,11 @@ public class ResolvingTest extends TestCase {
 			super(directory.getName());
 			this.directory = directory;
 		}
-		
+
 		public void runTest() {
 			testDirectory(directory);
 		}
-		
+
 		private void testDirectory(File testDirectory) {
 			String directoryName = testDirectory.getName();
 			String[] parts = directoryName.split("_");
@@ -107,16 +107,16 @@ public class ResolvingTest extends TestCase {
 			ResourceSet set = new ResourceSetImpl();
 			set.getLoadOptions().putAll(getLoadOptions());
 			parseAll(testDirectory, set);
-			
+
 			// resolve all references
 			EcoreUtil.resolveAll(set);
 			pushUpCommentsFromNames(set);
-			
+
 			// find all commented EObjects that are sources or targets
 			Map<String, Object> actualTargetsMap = new HashMap<String, Object>();
 			Map<String, Object> expectedTargetsMap = new HashMap<String, Object>();
 			findSourcesAndTargets(set, actualTargetsMap, expectedTargetsMap);
-			
+
 			// check whether the actual targets match the expected targets
 			for (String actualID : actualTargetsMap.keySet()) {
 				Object actualTarget = actualTargetsMap.get(actualID);
@@ -124,11 +124,11 @@ public class ResolvingTest extends TestCase {
 				assertEquals("Target objects should match (ID " + actualID + ").", expectedTarget, actualTarget);
 			}
 			assertEquals("Number of expected and actual targets should match.", actualTargetsMap.keySet().size(), expectedTargetsMap.keySet().size());
-	
+
 			// check whether the expected number of targets is present
 			assertEquals("Number of targets should match the expected number.", actualTargetsMap.keySet().size(), size);
 		}
-	
+
 		private void pushUpCommentsFromNames(ResourceSet set) {
 			for (Resource resource : set.getResources()) {
 				pushUpCommentsFromNames(resource);
@@ -137,7 +137,7 @@ public class ResolvingTest extends TestCase {
 
 		private void pushUpCommentsFromNames(Resource resource) {
 			/* TODO is this still needed?
-			 
+
 			Collection<NamedElementName> nameObjects = JavaEObjectUtil.getObjectsByType(resource.getAllContents(), PtypesPackage.eINSTANCE.getNamedElementName());
 			for (NamedElementName name : nameObjects) {
 				((NamedElement) name.eContainer()).getComments().addAll(name.getComments());
@@ -195,7 +195,7 @@ public class ResolvingTest extends TestCase {
 			}
 			return target;
 		}
-	
+
 		private String collapse(List<String> commentList) {
 			StringBuilder sb = new StringBuilder();
 			for (String comment : commentList) {
@@ -203,7 +203,7 @@ public class ResolvingTest extends TestCase {
 			}
 			return sb.toString();
 		}
-	
+
 		private void parseAll(File testDirectory, ResourceSet set) {
 			File[] files = testDirectory.listFiles(new IgnoreSVNFilter());
 			for (File file : files) {
@@ -223,7 +223,7 @@ public class ResolvingTest extends TestCase {
 				}
 			}
 		}
-		
+
 		@Override
 		protected String getTestInputFolder() {
 			return INPUT_FOLDER;

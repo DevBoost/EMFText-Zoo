@@ -1,18 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 /**
- * 
+ *
  */
 package org.emftext.language.java.test.util;
 
@@ -25,25 +25,25 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
 /**
- * A custom TestSuite that can be used to run test in parallel. It is 
+ * A custom TestSuite that can be used to run test in parallel. It is
  * configurable by the number of threads to be used and the timeout after
  * which thread are interrupted.
  */
 public final class ThreadedTestSuite extends TestSuite {
-	
+
 	private List<Thread> threads = new ArrayList<Thread>();
 	private final int timeout;
 	private final int maxActiveThreads;
-	
+
 	public ThreadedTestSuite(String name, int timeout, int maxActiveThreads) {
 		super(name);
 		this.timeout = timeout;
 		this.maxActiveThreads = maxActiveThreads;
 	}
-	
+
 	public void run(final TestResult result) {
 		Enumeration<Test> tests = tests();
-		
+
 		while (tests.hasMoreElements()) {
 			assert threads.size() <= maxActiveThreads;
 			if (threads.size() >= maxActiveThreads) {
@@ -54,7 +54,7 @@ public final class ThreadedTestSuite extends TestSuite {
 				}
 				continue;
 			}
-			final Test each = tests.nextElement(); 
+			final Test each = tests.nextElement();
 			if (result.shouldStop()) {
 	  			break;
 			}
@@ -70,7 +70,7 @@ public final class ThreadedTestSuite extends TestSuite {
 			};
 			final Thread workerThread = new Thread(runnable, "Worker Thread");
 			threads.add(workerThread);
-			
+
 			Thread timeoutThread = new Thread(new Runnable() {
 
 				public void run() {
@@ -90,7 +90,7 @@ public final class ThreadedTestSuite extends TestSuite {
 					threads.remove(workerThread);
 				}
 			}, "Timeout Thread");
-			
+
 			workerThread.start();
 			timeoutThread.start();
 		}

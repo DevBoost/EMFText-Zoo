@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test;
@@ -28,13 +28,13 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
  * prints them.
  */
 public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase {
-	
+
 	protected static final String TEST_INPUT_FOLDER_NAME = "src-input";
 	protected static final String TEST_OUTPUT_FOLDER_NAME = "output";
-	
+
 	public static Test suite() throws CoreException {
 		final AutomatedJavaLanguageFeatureTest test = new AutomatedJavaLanguageFeatureTest();
-		
+
 		TestSuite suite = new ThreadedTestSuite(
 		"Suite testing all files in the input directory automatically", 1000, 100);
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
@@ -43,7 +43,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 			addParseTest(test, suite, file);
 			addParseAndReprintTest(test, suite, file);
 		}
-		
+
 		return suite;
 	}
 
@@ -73,7 +73,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 					fail(e.getClass() +  ": " + e.getMessage());
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 	}

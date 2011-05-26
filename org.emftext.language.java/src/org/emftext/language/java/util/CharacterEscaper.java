@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.util;
@@ -21,10 +21,10 @@ package org.emftext.language.java.util;
 public class CharacterEscaper {
 
 	private static final char BACKSLASH = '\\';
-	
+
 	/**
 	   * Removes the escape symbol if the given String contains escaped characters.
-	   * 
+	   *
 	   * @param source
 	   *      string with escapes
 	   * @return
@@ -46,13 +46,13 @@ public class CharacterEscaper {
 	                char nc = source.charAt(i);
 	                switch (nc) {
 		        		// octal characters: \0 to \377
-		                case '0': 
-		                case '1': 
-		                case '2': 
-		                case '3': 
-		                case '4': 
-		                case '5': 
-		                case '6': 
+		                case '0':
+		                case '1':
+		                case '2':
+		                case '3':
+		                case '4':
+		                case '5':
+		                case '6':
 		                case '7': {
 		                    // Now we found the '0' we need to find up to 3 octal digits
 		                    // Note: shifting left by 3 is the same as multiplying by 8
@@ -84,13 +84,13 @@ public class CharacterEscaper {
 			                        }
 		                    	}
 		                    } // for each of the digits
-	
+
 		                    if (v >= 0) {      // We got a full conversion
 		                        c = (char) v;  // Use the converted char
 		                        i += j;       // skip the numeric values
 		                    }
 		                	break;
-		                }    
+		                }
 		                case BACKSLASH: {
 		                	// if the next character is a backslash we have an
 		                	// escaped backslash
@@ -137,16 +137,16 @@ public class CharacterEscaper {
 	            }
 	            buffer.append(c);
 	        }
-			
+
 		// Fill in the remaining characters from the buffer
 		while (i < srcLen) {
 			buffer.append(source.charAt(i++));
-		}		
+		}
 		return buffer.toString();
 	}
-	
+
 	public static String escapeEscapedCharacters(String source) {
-		
+
 		source = source.replaceAll("\\\\", "\\\\\\\\");
 		source = source.replaceAll("\\\b", "\\\\b");
 		source = source.replaceAll("\\\t", "\\\\t");

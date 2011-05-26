@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package sg.edu.nus.comp.simTL.language.java.simTL4J.resource.simTL4J.analysis.decider;
@@ -36,7 +36,7 @@ import sg.edu.nus.comp.simTL.language.java.simTL4J.references.MethodCall;
 public class MethodDecider extends AbstractDecider {
 
 	protected MethodCall methodCall = null;
-	
+
 	protected Method lastFound = null;
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
@@ -47,15 +47,15 @@ public class MethodDecider extends AbstractDecider {
 		}
 		return false;
 	}
-	
+
 	private boolean insideDefiningClassifier = true;
 	private boolean isStatic = false;
-	
+
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		if (container instanceof Classifier) {
-			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
-				EList<Member> memberList = 
+			if (container instanceof ConcreteClassifier && insideDefiningClassifier){
+				EList<Member> memberList =
 					((Classifier)container).getAllMembers(methodCall);
 				for(Member member : memberList) {
 					if (member instanceof Method) {
@@ -66,7 +66,7 @@ public class MethodDecider extends AbstractDecider {
 				isStatic = ((ConcreteClassifier)container).isStatic();
 			}
 			else {
-				EList<Member> memberList = 
+				EList<Member> memberList =
 					((Classifier)container).getAllMembers(methodCall);
 				for(Member member : memberList) {
 					if (member instanceof Method) {
@@ -77,11 +77,11 @@ public class MethodDecider extends AbstractDecider {
 				}
 			}
 		}
-		
+
 		if (container instanceof AnonymousClass) {
 			resultList.addAll(((AnonymousClass)container).getMembers());
-			
-			EList<Member> memberList = 
+
+			EList<Member> memberList =
 				((AnonymousClass)container).getAllMembers(methodCall);
 			for(Member member : memberList) {
 				if (member instanceof Method) {
@@ -90,14 +90,14 @@ public class MethodDecider extends AbstractDecider {
 			}
 			return resultList;
 		}
-		
+
 		if(container instanceof CompilationUnit) {
 			addImports(container, resultList);
 		}
-		
+
 		return resultList;
 	}
-	
+
 	private void addImports(EObject container,
 			EList<EObject> resultList) {
 		if(container instanceof ImportingElement) {
@@ -128,7 +128,7 @@ public class MethodDecider extends AbstractDecider {
 						return true;
 					}
 				}
-				
+
 			}
 		}
 		return false;

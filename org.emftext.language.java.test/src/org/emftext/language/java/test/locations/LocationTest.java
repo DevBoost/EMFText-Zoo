@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.locations;
@@ -26,25 +26,25 @@ import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.junit.Test;
 
 /**
- * A test case that checks whether the generated parser creates 
- * correct location information (line, position...) for the 
+ * A test case that checks whether the generated parser creates
+ * correct location information (line, position...) for the
  * elements in a TextResource.
  */
 public class LocationTest extends AbstractJavaParserTestCase {
-	
+
 	private static final String INPUT_FOLDER = "src-input" + File.separator + "locations" + File.separator;
 
 	@Override
 	protected String getTestInputFolder() {
 		return INPUT_FOLDER;
 	}
-	
+
 	@Test
 	public void testElementLocations() {
 		String typename = "Location";
 		try {
 			org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-			
+
 			List<Member> members = clazz.getMembers();
 			// check location of the method x
 			ClassMethod x = (ClassMethod) members.get(1);
@@ -63,7 +63,7 @@ public class LocationTest extends AbstractJavaParserTestCase {
 		assertTrue(resource instanceof JavaResource);
 		JavaResource textResource = (JavaResource) resource;
 		IJavaLocationMap locationMap = textResource.getLocationMap();
-		
+
 		assertEquals(element.eClass().getName() + ": Wrong line", line, locationMap.getLine(element));
 		assertEquals(element.eClass().getName() + ": Wrong column", column, locationMap.getColumn(element));
 		assertEquals(element.eClass().getName() + ": Wrong start character", charStart, locationMap.getCharStart(element));

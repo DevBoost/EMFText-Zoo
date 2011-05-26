@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.resource.register;
@@ -40,7 +40,7 @@ public class RegisterJavaFilesAction implements IObjectActionDelegate {
 	private ISelection selection;
 
 	public void run(IAction action) {
-       	if (selection instanceof IStructuredSelection) {	
+       	if (selection instanceof IStructuredSelection) {
             for (Iterator<?> i = ((IStructuredSelection)selection).iterator(); i.hasNext(); ) {
                 Object next = i.next();
                 if (next instanceof IResource) {
@@ -51,13 +51,13 @@ public class RegisterJavaFilesAction implements IObjectActionDelegate {
 								if (resource instanceof IFile) {
 									IFile file = (IFile) resource;
 									registerFileInClasspath(file);
-								} 
+								}
 								return true;
 							}
 						});
 					} catch (CoreException e) {
 						e.printStackTrace();
-					}               	
+					}
                 }
             }
         }
@@ -65,14 +65,14 @@ public class RegisterJavaFilesAction implements IObjectActionDelegate {
 
 	private void registerFileInClasspath(
 			IFile file) {
-		
+
 		if (file == null) {
 			return;
 		}
 		if (file.getFileExtension() == null) {
 			return;
 		}
-		
+
 		if (file.getFileExtension().equals("java") || file.getFileExtension().equals("class")) {
 			URI resourceUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 			ResourceSet rs = new ResourceSetImpl();
@@ -89,7 +89,7 @@ public class RegisterJavaFilesAction implements IObjectActionDelegate {
 			}
 		}
 	}
-	
+
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
 	}

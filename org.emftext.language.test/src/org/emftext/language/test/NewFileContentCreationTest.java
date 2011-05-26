@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.test;
@@ -72,7 +72,7 @@ public class NewFileContentCreationTest extends TestCase {
 				}
 			});
 		}
-		
+
 		private void test(TestItem item) {
 			testMinimalModelCreation(item);
 			testNewFileContent();
@@ -81,7 +81,7 @@ public class NewFileContentCreationTest extends TestCase {
 		private void testNewFileContent() {
 			// the following code checks whether the content that is actually used for
 			// new file is valid. this content may differ from the content created by
-			// the minimal model helper if users provide template files containing 
+			// the minimal model helper if users provide template files containing
 			// example code for new documents.
 			String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("new_file");
 			String syntaxName = metaInformation.getSyntaxName();
@@ -125,10 +125,10 @@ public class NewFileContentCreationTest extends TestCase {
 			}
 			for (EClass nextStart : startClasses) {
 				availableClasses.addAll(getContainedClasses(nextStart));
-				
+
 				EObject result = mmh.getMinimalModel(nextStart, availableClasses);
 				assertNotNull(result);
-				
+
 				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 				IPrinter printer = item.getPrinter(buffer);
 				assertNotNull(printer);
@@ -185,9 +185,9 @@ public class NewFileContentCreationTest extends TestCase {
 	}
 
 	public static class MetaTest extends TestCase {
-		
+
 		private List<IMetaInformation> metaInformations;
-		
+
 		public MetaTest(List<IMetaInformation> metaInformations) {
 			super("Check that all .cs files are tested.");
 			this.metaInformations = metaInformations;
@@ -197,8 +197,8 @@ public class NewFileContentCreationTest extends TestCase {
 			String[] excludes = new String[] {
 					".*/org/emftext/test/.*",
 					".*/org/emftext/sdk/concretesyntax/tokenhandling/.*",
-					".*/sandwich_simple.cs",	
-					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",	
+					".*/sandwich_simple.cs",
+					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",
 					".*/formsembedded.cs",
 					".*/formsextension.cs",
 					".*/owlTextTestLanguage.text.cs",
@@ -229,7 +229,7 @@ public class NewFileContentCreationTest extends TestCase {
 			}
 		}
 	}
-	
+
 	public static Test suite() {
 		new TestLanguageRegistry().registerAllLanguages();
 		TestSuite suite = new TestSuite("All tests");

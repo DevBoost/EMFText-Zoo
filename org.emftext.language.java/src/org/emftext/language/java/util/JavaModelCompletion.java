@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2010 
+ * Copyright (c) 2006-2011
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.util;
@@ -41,10 +41,10 @@ import org.emftext.language.java.types.TypesFactory;
  * Java language specifics.
  */
 public class JavaModelCompletion {
-	
+
 	/**
 	 * Main method to perform the completion for the given resource.
-	 * 
+	 *
 	 * @param resource
 	 */
 	public static void complete(Resource resource) {
@@ -65,10 +65,10 @@ public class JavaModelCompletion {
 		}
 		simplifyExpressions(resource);
 	}
-	
+
 	/**
 	 * Adds <code>java.lang.Object</code> as default super class if non is specified.
-	 * 
+	 *
 	 * @param javaClass
 	 */
 	public static void addDefaultSuperClass(Class javaClass) {
@@ -79,11 +79,11 @@ public class JavaModelCompletion {
 			javaClass.setDefaultExtends(classifierReference);
 		}
 	}
-	
+
 	/**
 	 * Adds <code>java.lang.Object</code> as a default super interface to an interface
 	 * that implements no other interface.
-	 * 
+	 *
 	 * @param javaClass
 	 */
 	public static void addDefaultSuperInterface(Interface javaInterface) {
@@ -107,62 +107,62 @@ public class JavaModelCompletion {
 			annotation.getDefaultMembers().add(valueMethod);
 		}
 	}
-	
+
 	/**
 	 * Adds the additional methods <code>value()</code> and <code>calueOf()</code>
 	 * to the given enumeration.
-	 * 
+	 *
 	 * @param enumeration the enumeration to complete
 	 */
 	public static void addMissingEnumerationMembers(Enumeration enumeration) {
-		
+
 		//add the values
 		String valuesMethodName = "values";
 		Method valuesMethod = enumeration.getContainedMethod(valuesMethodName);
-		
+
 		if (valuesMethod == null) {
 			valuesMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
 			valuesMethod.setName(valuesMethodName);
-			
+
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
 			valuesMethod.setTypeReference(type);
 			enumeration.getDefaultMembers().add(valuesMethod);
 		}
-		
+
 		//add the value of method
 		String valueOfMethodName = "valueOf";
 		Method valueOfMethod = enumeration.getContainedMethod(valueOfMethodName);
-		
+
 		if (valueOfMethod == null) {
 			valueOfMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
 			valueOfMethod.setName(valueOfMethodName);
-			
+
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
 			valueOfMethod.setTypeReference(type);
-			
+
 			Parameter strParameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
 			strParameter.setName("str");
 			type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration.getConcreteClassifierProxy("java.lang.String"));
 			strParameter.setTypeReference(type);
-			
+
 			valueOfMethod.getParameters().add(strParameter);
 			enumeration.getDefaultMembers().add(valueOfMethod);
 		}
 	}
-	
+
 	/**
 	 * Simplifies all expression in the given resource by removing empty containers
 	 * in all expression trees.
-	 * 
+	 *
 	 * @param resource
 	 */
 	public static void simplifyExpressions(Resource resource) {
 		simplifyDown(resource.getContents());
 	}
-	
+
 	private static void simplifyDown(EList<EObject> parentList) {
 		for(EObject child : new BasicEList<EObject>(parentList)) {
 			EObject singleContained = getSingleContained(child);
@@ -194,7 +194,7 @@ public class JavaModelCompletion {
 		if (parent instanceof PrimaryExpression) {
 			return null;
 		}
-		
+
 		EObject singleContained = null;
 		for(EObject contained : parent.eContents()) {
 			if (singleContained != null) {
