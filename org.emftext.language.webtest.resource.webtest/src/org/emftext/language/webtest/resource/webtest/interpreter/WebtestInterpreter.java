@@ -20,6 +20,7 @@ import org.emftext.language.webtest.AssertTitle;
 import org.emftext.language.webtest.Input;
 import org.emftext.language.webtest.Load;
 import org.emftext.language.webtest.Submit;
+import org.emftext.language.webtest.TestScript;
 import org.emftext.language.webtest.resource.webtest.util.AbstractWebtestInterpreter;
 
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -33,6 +34,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * the interpreter.
  */
 public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, WebtestContext> {
+
+	@Override
+	public Boolean interprete_org_emftext_language_webtest_TestScript(TestScript object, WebtestContext context) {
+		return true;
+	}
 
 	@Override
 	public Boolean interprete_org_emftext_language_webtest_Load(Load object, WebtestContext context) {
