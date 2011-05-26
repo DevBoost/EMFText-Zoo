@@ -281,10 +281,9 @@ public class Generate extends AbstractAcceleoGenerator {
      * 
      * @param propertiesFile
      *            The properties file to add.
-     * @generated
+     * @generated NOT
      * @since 3.1
      */
-    @Override
     public void addPropertiesFile(String propertiesFile) {
         this.propertiesFiles.add(propertiesFile);
     }
