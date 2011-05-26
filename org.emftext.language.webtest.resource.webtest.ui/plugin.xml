@@ -68,4 +68,90 @@
 		</specification>
 	</extension>
 	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.emftext.language.webtest.resource.webtest.ui.launchConfigurationType" id="org.emftext.language.webtest.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.emftext.language.webtest.resource.webtest.ui.launchConfigurationType" class="org.emftext.language.webtest.resource.webtest.ui.launch.WebtestLaunchConfigurationTabGroup" id="org.emftext.language.webtest.launchConfigurationTabGroup" helpContextId="org.emftext.language.webtest.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug webtest model.">
+			</launchMode>
+			<launchMode mode="run" description="Run webtest model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="webtest Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.webtest.launch" modes="run,debug" class="org.emftext.language.webtest.resource.webtest.ui.launch.WebtestLaunchShortcut" description="Launch a webtest model" id="org.emftext.language.webtest.launchShortcut">
+			<description description="Run webtest model" mode="run">
+			</description>
+			<description description="Debug webtest model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.emftext.language.webtest.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.emftext.language.webtest.resource.webtest.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.emftext.language.webtest.PropertyTester" type="java.lang.Object" namespace="org.emftext.language.webtest" properties="isLaunchable" class="org.emftext.language.webtest.resource.webtest.ui.WebtestPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.webtest.resource.webtest.ui.debug.lineBreakpoint" markerType="org.emftext.language.webtest.resource.webtest.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.webtest.resource.webtest.ui.debug.lineBreakpoint" label="Breakpoints (in .webtest files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.emftext.sdk.codegen.PluginDescriptor@69c344f6.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.emftext.language.webtest.resource.webtest.ui.WebtestEditor" class="org.emftext.language.webtest.resource.webtest.ui.debug.WebtestAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.webtest.resource.webtest.debug.WebtestDebugVariable" class="org.emftext.language.webtest.resource.webtest.ui.debug.WebtestAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.webtest.resource.webtest.debug.WebtestDebugVariable" class="org.emftext.language.webtest.resource.webtest.ui.debug.WebtestAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.emftext.language.webtest.resource.webtest.ui.RulerPopupActions" targetID="#TextRulerContext">
+			<action id="org.emftext.language.webtest.resource.webtest.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.emftext.language.webtest.resource.webtest.ui.WebtestEditor" id="org.emftext.language.webtest.resource.webtest.ui.BreakpointRulerActions">
+			<action id="org.emftext.language.webtest.resource.webtest.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.emftext.language.webtest.resource.webtest.debugModel" class="org.emftext.language.webtest.resource.webtest.ui.debug.WebtestDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
 </plugin>

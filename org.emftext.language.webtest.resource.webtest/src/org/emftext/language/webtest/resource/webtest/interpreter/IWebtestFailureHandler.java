@@ -12,14 +12,9 @@
  *      - initial API and implementation
  ******************************************************************************/
 
-package org.emftext.language.webtest.runner;
+package org.emftext.language.webtest.resource.webtest.interpreter;
 
-import org.junit.Test;
+public interface IWebtestFailureHandler {
 
-public class ExampleTestcase {
-	
-	@Test
-	public void testExample() {
-		new WebtestRunner().runTest("examples/emftext.org.webtest");
-	}
+	public void handleFailedAssertion(String message, String expected, String actual);
 }

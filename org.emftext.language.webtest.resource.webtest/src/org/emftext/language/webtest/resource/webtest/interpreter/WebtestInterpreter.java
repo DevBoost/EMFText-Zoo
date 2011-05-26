@@ -1,8 +1,20 @@
-package org.emftext.language.webtest.runner;
+/*******************************************************************************
+ * Copyright (c) 2006-2011
+ * Software Technology Group, Dresden University of Technology
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany 
+ *      - initial API and implementation
+ ******************************************************************************/
+
+package org.emftext.language.webtest.resource.webtest.interpreter;
 
 import java.io.IOException;
-
-import junit.framework.Assert;
 
 import org.emftext.language.webtest.AssertTitle;
 import org.emftext.language.webtest.Input;
@@ -14,6 +26,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
+/**
+ * An interpreter for .webtest scripts that use the HtmlUnit framework to 
+ * communicate with the web. Failures that might occur during interpretation
+ * can be handled by attaching an IWebtestFailureHandler to the context of
+ * the interpreter.
+ */
 public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, WebtestContext> {
 
 	@Override
@@ -30,7 +48,10 @@ public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, Webt
 	@Override
 	public Boolean interprete_org_emftext_language_webtest_AssertTitle(AssertTitle object, WebtestContext context) {
 		String actualTitle = context.getCurrentPage().getTitleText();
-		Assert.assertEquals("Wrong title.", object.getExpected(), actualTitle);
+		String expected = object.getExpected();
+		if (!expected.equals(actualTitle)) {
+			context.getFailureHandler().handleFailedAssertion("Wrong title.", expected, actualTitle);
+		}
 		return true;
 	}
 	
@@ -38,11 +59,12 @@ public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, Webt
 	public Boolean interprete_org_emftext_language_webtest_Submit(Submit object, WebtestContext context) {
 		String formName = object.getForm();
 		HtmlForm form = (HtmlForm) context.getCurrentPage().getElementById(formName);
-		HtmlInput submitButton = form.getInputByName(object.getButton());
+		String button = object.getButton();
+		HtmlInput submitButton = form.getInputByName(button);
 		try {
 			context.setCurrentPage((HtmlPage) submitButton.click());
 		} catch (IOException e) {
-			Assert.fail(e.getMessage());
+			context.getFailureHandler().handleFailedAssertion("Exception while clicking button (" + e.getMessage() + ").", button, null);
 		}
 		return true;
 	}
@@ -57,9 +79,9 @@ public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, Webt
 	}
 
 	@Override
-	public boolean continueInterpretation(Boolean result) {
+	public boolean continueInterpretation(WebtestContext context, Boolean result) {
 		if (result == null) {
-			Assert.fail("Stopping web test.");
+			context.getFailureHandler().handleFailedAssertion("Stopping web test.", null, null);
 			return false;
 		}
 		return result;

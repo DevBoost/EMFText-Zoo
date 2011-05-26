@@ -4,8 +4,11 @@ START TestScript
 
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	defaultTokenName = "IDENTIFIER";
+	additionalDependencies = "org.emftext.language.webtest.htmlunit";
+	additionalExports = "org.emftext.language.webtest.resource.webtest.interpreter";
 }
 
 
