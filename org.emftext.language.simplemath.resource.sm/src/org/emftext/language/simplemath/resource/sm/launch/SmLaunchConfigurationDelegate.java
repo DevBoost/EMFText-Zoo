@@ -19,12 +19,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.emftext.language.simplemath.Expression;
-import org.emftext.language.simplemath.resource.sm.util.SmResourceUtil;
 
 /**
  * An example class that shows how to implement launch configurations.
@@ -37,7 +35,8 @@ public class SmLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 	public final static String ATTR_RESOURCE_URI = "uri";
 	
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
-		Expression modelRoot = getModelRoot(configuration);
+		SmLaunchConfigurationHelper helper = new SmLaunchConfigurationHelper();
+		Expression modelRoot = (Expression) helper.getModelRoot(configuration);
 		final String message = "The value of the expression is " + modelRoot.getValue() + ".";
 		// show a message box
 		Display.getDefault().syncExec(new Runnable() {
@@ -49,13 +48,5 @@ public class SmLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 		        mb.open();
 			}
 		});
-	}
-	
-	private URI getURI(ILaunchConfiguration configuration) throws CoreException {
-		return URI.createURI(configuration.getAttribute(ATTR_RESOURCE_URI, (String) null));
-	}
-	
-	private Expression getModelRoot(ILaunchConfiguration configuration) throws CoreException {
-		return SmResourceUtil.getResourceContent(getURI(configuration));
 	}
 }
