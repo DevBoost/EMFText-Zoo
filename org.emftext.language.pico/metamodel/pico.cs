@@ -23,10 +23,12 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	additionalExports = "org.emftext.language.pico.resource.pico.interpreter";
 }
 
 TOKENS {
 	DEFINE PICOID $('a'..'z')('a'..'z'|'0'..'9')*$;
+	DEFINE INTEGER $('0'..'9')+$;
 
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
@@ -34,17 +36,11 @@ TOKENS {
 
 RULES {
 
-	Natural ::= "natural";
-	
-	String ::= "string";
-	
-	NilType ::= "nil";
-	
 	Program ::= "begin" declarations statements (";" statements)* "end" ;
 	
 	Declarations ::= "declare" idTypes ("," idTypes)* ";" ;
 	
-	IDType ::= picoID[PICOID] ":" type ;
+	IDType ::= picoID[PICOID] ":" type[natural : "natural", string : "string", nil : "nil"] ;
 	
 	
 	Assignment::= left[PICOID] ":=" right;
@@ -53,7 +49,25 @@ RULES {
 	
 	WhileStatement::= "while" condition "do" body* "od";
 	
+	@Operator(type="primitive", weight="5", superclass="Expression")
 	VariableReference ::= variable[PICOID];
 	
+	@Operator(type="primitive", weight="5", superclass="Expression")
+	Natural ::= value[INTEGER];
+	
+	@Operator(type="primitive", weight="5", superclass="Expression")
+	String ::= value['"','"'];
+	
+	@Operator(type="primitive", weight="5", superclass="Expression")
+	NilLiteral ::= "nil";
+
+	@Operator(type="binary_left_associative", weight="2", superclass="Expression")
+	AdditiveExpression ::= left plus["+" : "-"] right;
+
+	@Operator(type="binary_left_associative", weight="3", superclass="Expression")
+	MultiplicativeExpression ::= left times["*" : "/"] right;
+
+	@Operator(type="binary_left_associative", weight="4", superclass="Expression")
+	ComparatorExpression ::= left comparator[lowerThan : "<", greaterThan : ">", equals : "="] right;
 	// TODO add other expressions
 }

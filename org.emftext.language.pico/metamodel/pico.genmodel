@@ -7,22 +7,35 @@
   <foreignModel>pico.ecore</foreignModel>
   <genPackages prefix="Pico" basePackage="org.emftext.language" disposableProviderFactory="true"
       ecorePackage="pico.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="pico.ecore#//Types">
+      <genEnumLiterals ecoreEnumLiteral="pico.ecore#//Types/natural"/>
+      <genEnumLiterals ecoreEnumLiteral="pico.ecore#//Types/string"/>
+      <genEnumLiterals ecoreEnumLiteral="pico.ecore#//Types/nil"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="pico.ecore#//ComparatorType">
+      <genEnumLiterals ecoreEnumLiteral="pico.ecore#//ComparatorType/lowerThan"/>
+      <genEnumLiterals ecoreEnumLiteral="pico.ecore#//ComparatorType/greaterThan"/>
+      <genEnumLiterals ecoreEnumLiteral="pico.ecore#//ComparatorType/equals"/>
+    </genEnums>
     <genClasses ecoreClass="pico.ecore#//Program">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//Program/declarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//Program/statements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="pico.ecore#//Statement"/>
-    <genClasses image="false" ecoreClass="pico.ecore#//Type"/>
     <genClasses ecoreClass="pico.ecore#//Expression"/>
     <genClasses ecoreClass="pico.ecore#//Declarations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//Declarations/idTypes"/>
     </genClasses>
     <genClasses ecoreClass="pico.ecore#//IDType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pico.ecore#//IDType/picoID"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//IDType/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute pico.ecore#//IDType/type"/>
     </genClasses>
-    <genClasses ecoreClass="pico.ecore#//Natural"/>
-    <genClasses ecoreClass="pico.ecore#//String"/>
+    <genClasses ecoreClass="pico.ecore#//Natural">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pico.ecore#//Natural/value"/>
+    </genClasses>
+    <genClasses ecoreClass="pico.ecore#//String">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pico.ecore#//String/value"/>
+    </genClasses>
     <genClasses ecoreClass="pico.ecore#//Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//Assignment/right"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pico.ecore#//Assignment/left"/>
@@ -39,6 +52,21 @@
     <genClasses ecoreClass="pico.ecore#//VariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pico.ecore#//VariableReference/variable"/>
     </genClasses>
-    <genClasses ecoreClass="pico.ecore#//NilType"/>
+    <genClasses ecoreClass="pico.ecore#//NilLiteral"/>
+    <genClasses ecoreClass="pico.ecore#//AdditiveExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//AdditiveExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//AdditiveExpression/right"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pico.ecore#//AdditiveExpression/plus"/>
+    </genClasses>
+    <genClasses ecoreClass="pico.ecore#//MultiplicativeExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//MultiplicativeExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//MultiplicativeExpression/right"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pico.ecore#//MultiplicativeExpression/times"/>
+    </genClasses>
+    <genClasses ecoreClass="pico.ecore#//ComparatorExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//ComparatorExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pico.ecore#//ComparatorExpression/right"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pico.ecore#//ComparatorExpression/comparator"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
