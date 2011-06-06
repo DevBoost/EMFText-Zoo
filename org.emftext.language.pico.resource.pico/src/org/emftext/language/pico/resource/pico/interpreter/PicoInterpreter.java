@@ -86,15 +86,28 @@ public class PicoInterpreter extends AbstractPicoInterpreter<Boolean, PicoInterp
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_pico_WhileStatement(
-			WhileStatement object, PicoInterpretationContext context) {
-		// TODO Auto-generated method stub
-		return false;
+	public Boolean interprete_org_emftext_language_pico_WhileStatement(WhileStatement whileStatement, PicoInterpretationContext context) {
+		if (context.expressionStackSize() == 0) {
+			Expression condition = whileStatement.getCondition();
+			addObjectToInterprete(whileStatement);
+			addObjectToInterprete(condition);
+		} else {
+			Object expressionValue = context.pop();
+			if (Boolean.TRUE.equals(expressionValue)) {
+				List<Statement> thenStatements = whileStatement.getBody();
+				addObjectToInterprete(whileStatement);
+				addObjectsToInterpreteInReverseOrder(thenStatements);
+			} else if (Boolean.FALSE.equals(expressionValue)) {
+				// do nothing, end of loop
+			} else {
+				throw new RuntimeException("Unexpected type for condition of WHILE statement.");
+			}
+		}
+		return true;
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_pico_VariableReference(
-			VariableReference varRef, PicoInterpretationContext context) {
+	public Boolean interprete_org_emftext_language_pico_VariableReference(VariableReference varRef, PicoInterpretationContext context) {
 		java.lang.String name = varRef.getVariable().getPicoID();
 		Object value = context.getValue(name);
 		if (value == null) {
@@ -105,22 +118,45 @@ public class PicoInterpreter extends AbstractPicoInterpreter<Boolean, PicoInterp
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_pico_NilLiteral(
-			NilLiteral object, PicoInterpretationContext context) {
+	public Boolean interprete_org_emftext_language_pico_NilLiteral(NilLiteral object, PicoInterpretationContext context) {
 		context.push(null);
 		return true;
 	}
 	
 	@Override
 	public Boolean interprete_org_emftext_language_pico_AdditiveExpression(AdditiveExpression additive, PicoInterpretationContext context) {
-		// TODO Auto-generated method stub
-		return null;
+		if (context.expressionStackSize() == 0) {
+			Expression left = additive.getLeft();
+			Expression right = additive.getRight();
+			addObjectToInterprete(additive);
+			addObjectToInterprete(left);
+			addObjectToInterprete(right);
+		} else {
+			boolean plus = additive.isPlus();
+			Object rightValue = context.pop();
+			Object leftValue = context.pop();
+			Object compareValue = add(leftValue, rightValue, plus);
+			context.push(compareValue);
+		}
+		return true;
 	}
 
 	@Override
 	public Boolean interprete_org_emftext_language_pico_MultiplicativeExpression(MultiplicativeExpression multiplicative, PicoInterpretationContext context) {
-		// TODO Auto-generated method stub
-		return null;
+		if (context.expressionStackSize() == 0) {
+			Expression left = multiplicative.getLeft();
+			Expression right = multiplicative.getRight();
+			addObjectToInterprete(multiplicative);
+			addObjectToInterprete(left);
+			addObjectToInterprete(right);
+		} else {
+			boolean times = multiplicative.isTimes();
+			Object rightValue = context.pop();
+			Object leftValue = context.pop();
+			Object compareValue = mult(leftValue, rightValue, times);
+			context.push(compareValue);
+		}
+		return true;
 	}
 
 	@Override
@@ -154,6 +190,32 @@ public class PicoInterpreter extends AbstractPicoInterpreter<Boolean, PicoInterp
 			}
 		}
 		throw new RuntimeException("Can't compare " + left + " and " + right);
+	}
+
+	private Object add(Object left, Object right, boolean plus) {
+		if (left instanceof Integer && right instanceof Integer) {
+			Integer leftInt = (Integer) left;
+			Integer rightInt = (Integer) right;
+			if (plus) {
+				return leftInt + rightInt;
+			} else {
+				return leftInt - rightInt;
+			}
+		}
+		throw new RuntimeException("Can't add " + left + " and " + right);
+	}
+
+	private Object mult(Object left, Object right, boolean times) {
+		if (left instanceof Integer && right instanceof Integer) {
+			Integer leftInt = (Integer) left;
+			Integer rightInt = (Integer) right;
+			if (times) {
+				return leftInt * rightInt;
+			} else {
+				return leftInt / rightInt;
+			}
+		}
+		throw new RuntimeException("Can't multiply " + left + " and " + right);
 	}
 
 	@Override
