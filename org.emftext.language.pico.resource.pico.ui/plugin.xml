@@ -68,4 +68,90 @@
 		</specification>
 	</extension>
 	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.emftext.language.pico.resource.pico.ui.launchConfigurationType" id="org.emftext.language.pico.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.emftext.language.pico.resource.pico.ui.launchConfigurationType" class="org.emftext.language.pico.resource.pico.ui.launch.PicoLaunchConfigurationTabGroup" id="org.emftext.language.pico.launchConfigurationTabGroup" helpContextId="org.emftext.language.pico.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug pico model.">
+			</launchMode>
+			<launchMode mode="run" description="Run pico model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="pico Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.pico.launch" modes="run,debug" class="org.emftext.language.pico.resource.pico.ui.launch.PicoLaunchShortcut" description="Launch a pico model" id="org.emftext.language.pico.launchShortcut">
+			<description description="Run pico model" mode="run">
+			</description>
+			<description description="Debug pico model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.emftext.language.pico.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.emftext.language.pico.resource.pico.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.emftext.language.pico.PropertyTester" type="java.lang.Object" namespace="org.emftext.language.pico" properties="isLaunchable" class="org.emftext.language.pico.resource.pico.ui.PicoPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.pico.resource.pico.ui.debug.lineBreakpoint" markerType="org.emftext.language.pico.resource.pico.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.pico.resource.pico.ui.debug.lineBreakpoint" label="Breakpoints (in .pico files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.emftext.language.pico.resource.pico.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.emftext.language.pico.resource.pico.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.emftext.language.pico.resource.pico.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.emftext.language.pico.resource.pico.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.emftext.language.pico.resource.pico.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.emftext.language.pico.resource.pico.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.emftext.language.pico.resource.pico.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.emftext.language.pico.resource.pico.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.emftext.language.pico.resource.pico.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.emftext.language.pico.resource.pico.ui.PicoEditor" class="org.emftext.language.pico.resource.pico.ui.debug.PicoAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.pico.resource.pico.debug.PicoDebugVariable" class="org.emftext.language.pico.resource.pico.ui.debug.PicoAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.pico.resource.pico.debug.PicoDebugVariable" class="org.emftext.language.pico.resource.pico.ui.debug.PicoAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.emftext.language.pico.resource.pico.ui.RulerPopupActions" targetID="org.emftext.language.pico.resource.pico.EditorRuler">
+			<action id="org.emftext.language.pico.resource.pico.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.emftext.language.pico.resource.pico.ui.PicoEditor" id="org.emftext.language.pico.resource.pico.ui.BreakpointRulerActions">
+			<action id="org.emftext.language.pico.resource.pico.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.emftext.language.pico.resource.pico.debugModel" class="org.emftext.language.pico.resource.pico.ui.debug.PicoDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
 </plugin>

@@ -19,10 +19,7 @@ START Program
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
-	reloadGeneratorModel = "true";
-	generateCodeFromGeneratorModel = "true";
-	disableLaunchSupport = "true";
-	disableDebugSupport = "true";
+	overrideLaunchConfigurationDelegate = "false";
 	additionalExports = "org.emftext.language.pico.resource.pico.interpreter";
 }
 
