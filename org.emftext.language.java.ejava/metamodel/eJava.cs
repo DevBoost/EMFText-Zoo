@@ -38,7 +38,7 @@ RULES {
 	        (imports !0 )*
 	        (";" !0)*
 	        !0
-	        (classifiers:EClassifierClassWrapper (";")* !0 !0)+
+	        (classifiers:EClassifierClassWrapper (";")* !0 !0)*
 	        ("\\u001a")?
 		;
 		
