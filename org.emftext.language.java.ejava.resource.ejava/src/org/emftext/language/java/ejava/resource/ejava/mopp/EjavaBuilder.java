@@ -83,27 +83,25 @@ public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ej
 			for(Member member : concreteClassifier.getMembers()) {
 				if (member instanceof EOperationWrapper) {
 					EOperationWrapper wrapper = (EOperationWrapper) member;
-					if (!wrapper.getStatements().isEmpty()) {
-						EOperation eOperation = wrapper.getEOperation();
-						EAnnotation genModelAnnotation = eOperation.getEAnnotation(GenModelPackage.eNS_URI);
-						if (genModelAnnotation == null) {
-							genModelAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-							eOperation.getEAnnotations().add(genModelAnnotation);
-						}
-						genModelAnnotation.setSource(GenModelPackage.eNS_URI);
-						genModelAnnotation.getDetails().put("body", printBody(wrapper, resource));
-						String documentation = "";
-						for(String s : wrapper.getComments()) {
-							s = s.trim();
-							if (s.startsWith("/**") && s.endsWith("*/")) {
-								s = s.substring(3, s.length() - 1);
-								s = s.replaceAll("\n.*\\*", "\n");
-								documentation += s;
-							}
-
-						}
-						genModelAnnotation.getDetails().put("documentation", documentation);
+					EOperation eOperation = wrapper.getEOperation();
+					EAnnotation genModelAnnotation = eOperation.getEAnnotation(GenModelPackage.eNS_URI);
+					if (genModelAnnotation == null) {
+						genModelAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+						eOperation.getEAnnotations().add(genModelAnnotation);
 					}
+					genModelAnnotation.setSource(GenModelPackage.eNS_URI);
+					genModelAnnotation.getDetails().put("body", printBody(wrapper, resource));
+					String documentation = "";
+					for(String s : wrapper.getComments()) {
+						s = s.trim();
+						if (s.startsWith("/**") && s.endsWith("*/")) {
+							s = s.substring(3, s.length() - 1);
+							s = s.replaceAll("\n.*\\*", "\n");
+							documentation += s;
+						}
+
+					}
+					genModelAnnotation.getDetails().put("documentation", documentation);
 				}
 			}
 		}
