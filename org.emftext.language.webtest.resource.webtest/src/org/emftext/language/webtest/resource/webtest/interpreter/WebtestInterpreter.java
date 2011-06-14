@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * An interpreter for .webtest scripts that use the HtmlUnit framework to 
+ * An interpreter for .webtest scripts that uses the HtmlUnit framework to 
  * communicate with the web. Failures that might occur during interpretation
  * can be handled by attaching an IWebtestFailureHandler to the context of
  * the interpreter.
