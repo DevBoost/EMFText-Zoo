@@ -29,4 +29,5 @@ RULES {
 	Submit ::= "submit" form[] button[];
 	Input ::= "input" form[] field[] value['"','"'];
 	AssertTitle ::= "assertTitle" expected['"','"'];
+	AssertText  ::= "assertText" expected['"','"'];
 }

@@ -16,6 +16,7 @@ package org.emftext.language.webtest.resource.webtest.interpreter;
 
 import java.io.IOException;
 
+import org.emftext.language.webtest.AssertText;
 import org.emftext.language.webtest.AssertTitle;
 import org.emftext.language.webtest.Input;
 import org.emftext.language.webtest.Load;
@@ -52,11 +53,21 @@ public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, Webt
 	}
 	
 	@Override
-	public Boolean interprete_org_emftext_language_webtest_AssertTitle(AssertTitle object, WebtestContext context) {
+	public Boolean interprete_org_emftext_language_webtest_AssertTitle(AssertTitle at, WebtestContext context) {
 		String actualTitle = context.getCurrentPage().getTitleText();
-		String expected = object.getExpected();
+		String expected = at.getExpected();
 		if (!expected.equals(actualTitle)) {
-			context.getFailureHandler().handleFailedAssertion("Wrong title.", expected, actualTitle);
+			context.handleFailedAssertion("Wrong title.", expected, actualTitle);
+		}
+		return true;
+	}
+	
+	@Override
+	public Boolean interprete_org_emftext_language_webtest_AssertText(AssertText at, WebtestContext context) {
+		String actualText = context.getCurrentPage().getTextContent();
+		String expected = at.getExpected();
+		if (!expected.contains(actualText)) {
+			context.handleFailedAssertion("Wrong title.", expected, actualText);
 		}
 		return true;
 	}
@@ -70,7 +81,7 @@ public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, Webt
 		try {
 			context.setCurrentPage((HtmlPage) submitButton.click());
 		} catch (IOException e) {
-			context.getFailureHandler().handleFailedAssertion("Exception while clicking button (" + e.getMessage() + ").", button, null);
+			context.handleFailedAssertion("Exception while clicking button (" + e.getMessage() + ").", button, null);
 		}
 		return true;
 	}
@@ -87,7 +98,7 @@ public class WebtestInterpreter extends AbstractWebtestInterpreter<Boolean, Webt
 	@Override
 	public boolean continueInterpretation(WebtestContext context, Boolean result) {
 		if (result == null) {
-			context.getFailureHandler().handleFailedAssertion("Stopping web test.", null, null);
+			context.handleFailedAssertion("Stopping web test.", null, null);
 			return false;
 		}
 		return result;

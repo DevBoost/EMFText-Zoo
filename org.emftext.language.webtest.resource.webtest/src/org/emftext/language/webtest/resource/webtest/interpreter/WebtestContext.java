@@ -49,4 +49,8 @@ public class WebtestContext {
 	public IWebtestFailureHandler getFailureHandler() {
 		return failureHandler;
 	}
+
+	public void handleFailedAssertion(String message, String expected, String actual) {
+		getFailureHandler().handleFailedAssertion(message, expected, actual);
+	}
 }
