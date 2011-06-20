@@ -201,6 +201,7 @@ public class NewFileContentCreationTest extends TestCase {
 					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",
 					".*/formsembedded.cs",
 					".*/formsextension.cs",
+					".*/formsfamily.cs",
 					".*/owlTextTestLanguage.text.cs",
 					".*/javaforms.cs",
 					".*/sqljava.cs",
