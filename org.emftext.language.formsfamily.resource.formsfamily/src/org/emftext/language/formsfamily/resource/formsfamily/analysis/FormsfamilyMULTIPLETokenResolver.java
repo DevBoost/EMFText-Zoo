@@ -6,23 +6,22 @@
  */
 package org.emftext.language.formsfamily.resource.formsfamily.analysis;
 
+import org.emftext.language.formsfamily.resource.formsfamily.analysis.helper.BooleanAttributeResolver;
+
 public class FormsfamilyMULTIPLETokenResolver implements org.emftext.language.formsfamily.resource.formsfamily.IFormsfamilyTokenResolver {
 	
-	private org.emftext.language.formsfamily.resource.formsfamily.analysis.FormsfamilyDefaultTokenResolver defaultTokenResolver = new org.emftext.language.formsfamily.resource.formsfamily.analysis.FormsfamilyDefaultTokenResolver(true);
+	private BooleanAttributeResolver defaultTokenResolver = new BooleanAttributeResolver();
 	
 	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		// By default token de-resolving is delegated to the DefaultTokenResolver.
-		String result = defaultTokenResolver.deResolve(value, feature, container, null, null, null);
+		String result = defaultTokenResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
 	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.formsfamily.resource.formsfamily.IFormsfamilyTokenResolveResult result) {
-		// By default token resolving is delegated to the DefaultTokenResolver.
-		defaultTokenResolver.resolve(lexem, feature, result, null, null, null);
+		defaultTokenResolver.resolve(lexem, feature, result);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		defaultTokenResolver.setOptions(options);
 	}
 	
 }
