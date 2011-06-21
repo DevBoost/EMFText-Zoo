@@ -17,7 +17,6 @@ FOR <http://www.emftext.org/language/formsfamily>
 START Form
 
 OPTIONS {
-	licenceHeader ="../../org.dropsbox/licence.txt";
 	overrideBuilder = "false";
 	additionalDependencies = "org.emftext.language.forms.generator";
 	disableLaunchSupport = "true";
@@ -32,23 +31,22 @@ TOKENSTYLES {
 	"TEXT" COLOR #da0000;
 	"FORM", "ITEM", "CHOICE", "DATE", "FREETEXT", "NUMBER", "DECISION", "GROUP" COLOR #000000, BOLD;
 	"ONLY", "IF" COLOR #da0000, BOLD;
-	"LIKERTSCALE" COLOR #000000, BOLD;
-	"GUTTMANSCALE" COLOR #000000, BOLD;
 }
 
 RULES {
-	Form ::= "FORM" caption['"','"'] !1 groups*;
-	Group ::= !0 "GROUP" name['"','"'] !0 items*;
-	BasicItem     ::= "ITEM" text['"','"'] ( explanation['"','"'] )? 
-				 ("ONLY" "IF" dependentOf[])? ":" 
-				 itemType !0;
-	
-	Choice   ::= "CHOICE" (multiple[MULTIPLE])? "(" options ("," options)* ")";
-	Option   ::= ( id[] ":")? text['"','"'];
-	Date     ::= "DATE";
-	FreeText ::= "FREETEXT";
-	Number   ::= "NUMBER";
-	Decision ::= "DECISION" "(" options "," options ")"; 
-	LikertScale ::= "LIKERTSCALE" text['"','"'] ( explanation['"','"'] )? "(" options ("," options)* ")";
-	GuttmanScale ::= "GUTTMANSCALE" text['"','"'] ( explanation['"','"'] )? "(" options ("," options)* ")";
+	Form      ::= "FORM" caption['"','"'] !1 groups+;
+	Group     ::= !0 "GROUP" name['"','"'] !0 items+;
+	BasicItem ::= "ITEM" text['"','"'] ( explanation['"','"'] )? 
+				  ("ONLY" "IF" dependentOf[])? ":" 
+				  itemType !0;
+	Choice    ::= "CHOICE" (multiple[MULTIPLE])? "(" options ("," options)* ")";
+	Option    ::= ( id[] ":")? text['"','"'];
+	Date      ::= "DATE";
+	FreeText  ::= "FREETEXT";
+	Number    ::= "NUMBER";
+	Decision  ::= "DECISION" "(" options "," options ")"; 
+	LikertScale  ::= "LIKERTSCALE" text['"','"'] ( explanation['"','"'] )?
+	                 "(" options ("," options)* ")";
+	GuttmanScale ::= "GUTTMANSCALE" text['"','"'] ( explanation['"','"'] )?
+	                 "(" options ("," options)* ")";
 }
