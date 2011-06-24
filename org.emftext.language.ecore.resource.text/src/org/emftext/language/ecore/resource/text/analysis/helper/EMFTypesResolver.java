@@ -62,7 +62,9 @@ public class EMFTypesResolver {
 		Map<String, EPackage> imports = collectImports(container);
 		for (String prefix : imports.keySet()) {
 			EPackage importedPackage = imports.get(prefix);
-			addCandidates(candidates, importedPackage, prefix);
+			if (importedPackage != null && !importedPackage.eIsProxy()) {
+				addCandidates(candidates, importedPackage, prefix);
+			}
 		}
 		// third: add all classifiers that are defined in the current resource
 		if (rootContainer instanceof EPackage) {
