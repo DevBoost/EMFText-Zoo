@@ -3,6 +3,7 @@ package org.emftext.language.java.resource.util;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -149,8 +150,13 @@ public class JDTConnector {
 	public JavaClasspath getJavaProjectClasspath(URI uri) {
 		return getJavaClasspath(getProject(uri));
 	}
+	
+	public void refreshJavaProjectClasspath(IProject project) {
+		URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
+		javaClasspaths.remove(projectUri);
+	}
 
-	// private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
+	private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
 	
 	private JavaClasspath getJavaClasspath(IProject project) {
 		//TODO There is caching functionality here which has been deactivated.
@@ -158,16 +164,16 @@ public class JDTConnector {
 		//     a project changes (e.g., if a new class is created, or a new library
 		//     is referenced)
 		//
-		//URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
-		//JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
-		//if (javaClasspath != null) {
-		//	return javaClasspath;
-		//}
+		URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
+		JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
+		if (javaClasspath != null) {
+			return javaClasspath;
+		}
 		ResourceSet classPath = new ResourceSetImpl();
 		IJavaProject javaProject = getJavaProject(project);
 		registerJavaProjectInClassPath(classPath, javaProject);
-		JavaClasspath javaClasspath = JavaClasspath.get(classPath);
-		//JavaClasspath javaClasspaths.put(projectUri, javaClasspath);
+		javaClasspath = JavaClasspath.get(classPath);
+		javaClasspaths.put(projectUri, javaClasspath);
 		return javaClasspath;
 	}
 
@@ -199,10 +205,23 @@ public class JDTConnector {
 						}
 					}
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
-					IFolder folder = root.getFolder(path);
+					IPath outputLocation = entry.getOutputLocation();
+					if (outputLocation == null) {
+						try {
+							outputLocation = javaProject.getOutputLocation();
+						} catch (JavaModelException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					IFolder folder = root.getFolder(outputLocation);
+					
 					// path is source folder
 					// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
-					registerResourceTreeInClasspath(folder, "java", classPath);
+					
+					// Parsing the real java files induces a huge performance problem
+					// Therefore we use BCEL here 
+					registerResourceTreeInClasspath(folder, "class", classPath);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 					IFolder folder = root.getFolder(path);
 					if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
@@ -269,7 +288,7 @@ public class JDTConnector {
 					if (resource instanceof IFile) {
 						IFile file = (IFile)resource;
 						String ext = file.getFileExtension();
-						if (file.getType() == IFile.FILE || filter == null || filter.equals(ext)) {
+						if (file.getType() == IFile.FILE && ( filter == null || filter.equals(ext))) {
 							registerFileInClasspath(file.getFullPath(), classPath);
 						}
 					} 
@@ -312,4 +331,6 @@ public class JDTConnector {
 			}
 		}
 	}
+
+	
 }
