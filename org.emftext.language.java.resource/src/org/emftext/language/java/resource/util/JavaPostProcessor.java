@@ -14,7 +14,6 @@
 package org.emftext.language.java.resource.util;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
