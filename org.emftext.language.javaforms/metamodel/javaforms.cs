@@ -19,6 +19,7 @@ OPTIONS {
 	additionalDependencies = "org.emftext.language.javaforms.codegen,org.emftext.language.java.resource";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	overridePluginXML = "false";
 }
 
 TOKENS {
