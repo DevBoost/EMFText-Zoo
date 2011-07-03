@@ -13,6 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.util;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,9 +43,7 @@ import org.emftext.language.java.util.JavaModelRepairer;
 public class JavaPostProcessor implements IJavaOptionProvider, IJavaResourcePostProcessor, IJavaResourcePostProcessorProvider {
 
 	public Map<?, ?> getOptions() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
-		return map;
+		return Collections.singletonMap(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 	}
 
 	public void process(JavaResource resource) {
