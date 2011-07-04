@@ -1,0 +1,29 @@
+package company // this is the package name 
+        company // this is the namespace prefix
+        "http://org.emftext/company.ecore" // the namespace URI 
+	{
+
+	class Company {
+		iD attribute EString name (1..1);
+		containment reference Department departments (0..-1);
+		operation void cutSalary();
+		operation EDouble totalSalary();
+		operation EInt depth(); // optional feature Depth
+	}
+	
+	class Department {
+		iD attribute EString name (1..1);
+		containment reference Employee manager (1..1);
+		containment reference Department subDepartments (0..-1);
+		containment reference Employee employees (0..-1);
+	}
+	
+	class Employee {
+		iD attribute EString name (1..1);
+		attribute EString address (1..1);
+		attribute EDouble salary (1..1);
+		reference Employee mentor (0..1); // optional feature Mentor
+	}
+
+	
+}
