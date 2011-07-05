@@ -14,8 +14,8 @@ OPTIONS {
 
 TOKENS {
 	DEFINE INTEGER $('-')?('0'..'9')+$;
-	DEFINE UPPER $('A'..'Z')('a'..'z'|'A'..'Z')*$;
-	DEFINE LOWER $('a'..'z')('a'..'z'|'A'..'Z')*$;
+	DEFINE UPPER $('A'..'Z')('a'..'z'|'A'..'Z'|'.')*$;
+	DEFINE LOWER $('a'..'z')('a'..'z'|'A'..'Z'|'.')*$;
 	DEFINE WHITESPACES $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAKS $('\r'|'\n')+$;
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
@@ -28,7 +28,8 @@ TOKENSTYLES {
 } 
 
 RULES {
-	MPackage ::= (name[LOWER])? namespace['<','>'] (!0 contents)*;
+	MPackage ::= (name[LOWER])? namespace['<','>'] (!0 imports)* (!0 contents)*;
+	MImport  ::= "import" importedPackage['<','>'] "as" prefix[LOWER];
 	MClass   ::= abstract["abstract" : ""]
 	             name[UPPER]
 	             (":" supertypes[UPPER] ("," supertypes[UPPER])* )? 

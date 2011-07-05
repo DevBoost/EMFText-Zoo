@@ -1,3 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2006-2011
+ * Software Technology Group, Dresden University of Technology
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany 
+ *      - initial API and implementation
+ ******************************************************************************/
+
 package org.emftext.language.mecore.resource.mecore.mopp;
 
 import java.util.ArrayList;
@@ -21,6 +35,7 @@ import org.emftext.language.mecore.MClass;
 import org.emftext.language.mecore.MClassifier;
 import org.emftext.language.mecore.MComplexMultiplicity;
 import org.emftext.language.mecore.MDataType;
+import org.emftext.language.mecore.MEcoreType;
 import org.emftext.language.mecore.MEnum;
 import org.emftext.language.mecore.MEnumLiteral;
 import org.emftext.language.mecore.MFeature;
@@ -141,17 +156,7 @@ public class MecoreWrapper {
 			return null;
 		}
 		if (mType instanceof MClass) {
-			// complex type, create reference
-			final EReference eReference = createEReference(mFeature);
-			commands.add(new IMecoreCommand<Object>() {
-
-				public boolean execute(Object context) {
-					eReference.setEType((EClass) mapping.get(mType));
-					return true;
-				}
-			});
-			eReference.setContainment(!mFeature.isReference());
-			eFeature = eReference;
+			eFeature = createReference(mFeature, mType);
 		} else if (mType instanceof MDataType) {
 			MDataType mDataType = (MDataType) mType;
 			// primitive type, create attribute
@@ -168,12 +173,35 @@ public class MecoreWrapper {
 				}
 			});
 			eFeature = eAttribute;
+		} else if (mType instanceof MEcoreType) {
+			eFeature = createReference(mFeature, mType);
 		} else {
 			throw new RuntimeException("Found unknown subtype of MType: " + mType.eClass().getName());
 		}
 		setMulitplicity(mFeature, eFeature);
 		mapping.put(mFeature, eFeature);
 		eFeature.setName(mFeature.getName());
+		return eFeature;
+	}
+
+	private EStructuralFeature createReference(MFeature mFeature, final MType mType) {
+		EStructuralFeature eFeature;
+		// complex type, create reference
+		final EReference eReference = createEReference(mFeature);
+		commands.add(new IMecoreCommand<Object>() {
+
+			public boolean execute(Object context) {
+				if (mType instanceof MEcoreType) {
+					MEcoreType mEcoreType = (MEcoreType) mType;
+					eReference.setEType(mEcoreType.getEcoreType());
+				} else {
+					eReference.setEType((EClass) mapping.get(mType));
+				}
+				return true;
+			}
+		});
+		eReference.setContainment(!mFeature.isReference());
+		eFeature = eReference;
 		return eFeature;
 	}
 

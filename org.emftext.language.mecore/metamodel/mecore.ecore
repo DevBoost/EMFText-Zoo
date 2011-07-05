@@ -9,10 +9,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MType" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="MPackage" eSuperTypes="#//MNamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
-        eType="#//MClassifier" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//MImport" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//MClassifier" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MImport">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackage" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MClassifier" abstract="true" eSuperTypes="#//MType"/>
   <eClassifiers xsi:type="ecore:EClass" name="MClass" eSuperTypes="#//MNamedElement #//MClassifier">
@@ -52,5 +60,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MDataType" eSuperTypes="#//MType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eDataType" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EDataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MEcoreType" eSuperTypes="#//MType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecoreType" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier"/>
   </eClassifiers>
 </ecore:EPackage>
