@@ -28,6 +28,7 @@ public class FirstFollowTest extends TestCase {
 	// available either.
 	private String[] excludedFiles = {
 			".*/customsandwich.cs",
+			".*/org.emftext.language.company/metamodel/company.text.cs",
 			".*/facade.ecore.cs",
 			".*/text.ecore.cs",
 			".*/mecore.cs",
