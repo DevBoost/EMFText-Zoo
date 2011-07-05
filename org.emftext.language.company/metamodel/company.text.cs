@@ -2,6 +2,9 @@ SYNTAXDEF company
 FOR <http://org.emftext/company.ecore>
 START Company
 
+OPTIONS {
+	reloadGeneratorModel = "true";
+}
 
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
