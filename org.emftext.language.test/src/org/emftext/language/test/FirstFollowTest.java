@@ -110,7 +110,6 @@ public class FirstFollowTest extends TestCase {
 		ConcreteSyntax syntax = loadSyntax(syntaxPath);
 		EList<Rule> rules = syntax.getRules();
 		for (Rule rule : rules) {
-			int i = 0;
 			//System.out.println("----> testing " + rule.getMetaclass().getName());
 			computer.computeFollowSet(syntax, rule);
 			TreeIterator<EObject> ruleContents = rule.eAllContents();
@@ -126,7 +125,6 @@ public class FirstFollowTest extends TestCase {
 				}
 				assertTrue(next + " must be a SyntaxElement", next instanceof SyntaxElement);
 				computer.computeFollowSet(syntax, (SyntaxElement) next);
-				i++;
 			}
 		}
 	}
