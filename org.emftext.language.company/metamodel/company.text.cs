@@ -24,13 +24,13 @@ TOKENSTYLES {
 
 
 RULES {
-	Company ::= "company"  name['"','"'] "{" (departments)* "}";
-	Department ::= "department" name['"','"']  "{"
-				"manager" manager 
-				(subDepartments | ("employee" employees))*
-				"}";
-	Employee ::=  name['"','"'] "{" "address" address['"','"'] 
-	 								"salary" salary[DECIMAL_DOUBLE_LITERAL] 
-	 								("mentor" mentor['"','"'])? 
-	 							"}";
+	Company ::= "company" #1  name['"','"'] #1  "{" ( departments)* "}";
+	Department ::= !1 "department" #1  name['"','"'] #1   "{" !1
+				"manager"  #1 manager !0
+				( subDepartments !0 | (!1 "employee" #1  employees !0))*
+				!0 "}" !0;
+	Employee ::=  name['"','"'] #1  "{" !1 "address" #1  address['"','"'] !0
+	 								"salary" #1  salary[DECIMAL_DOUBLE_LITERAL] !0
+	 								("mentor" #1  mentor['"','"'])? 
+	 							!0 "}";
 }
