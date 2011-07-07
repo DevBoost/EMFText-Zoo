@@ -26,4 +26,33 @@ aspect Salary {
 	
 	eq Employee.totalSalaryValue() = getsalary();
 }
+
+aspect Depth {
+
+	syn int Company.depth() = depthValue();
+	syn int Employee.depth() = depthValue();
+	syn int Department.depth() = depthValue();
+	
+	syn int ASTNode.depthValue();
+	syn int ASTNode.depthAddition();
+	
+	eq ASTNode.depthAddition() = 0;
+	eq Department.depthAddition() = 1;
+	
+	eq ASTNode.depthValue() {
+		int depth = 0;
+		Iterator<ASTNode> it = (Iterator<ASTNode>)iterator();
+		while(it.hasNext()){
+			ASTNode current = it.next();
+			depth = depth>=current.depthValue()?depth:current.depthValue();
+		}
+		return depth+depthAddition();
+	}
+	
+	eq Employee.depthValue() = 0;
+	
+}
+
+
+
 	
