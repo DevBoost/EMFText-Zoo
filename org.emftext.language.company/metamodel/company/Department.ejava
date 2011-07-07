@@ -2,6 +2,8 @@ epackage company;
 
 import java.util.List;
 import org.emftext.language.company.Department;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
  
 eclass Department {
 	
@@ -14,5 +16,16 @@ eclass Department {
 			}
 		}
 		return depth;
+	}
+	
+	cutSalaries() {
+		getManager().cutSalary();
+		for (Employee e : getEmployees()) {
+			e.cutSalary();
+		}
+		for (Department d : getSubDepartments()) {
+			d.cutSalaries();
+		}
+		
 	}
 }
