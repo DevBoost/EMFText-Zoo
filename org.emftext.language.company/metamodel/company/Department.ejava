@@ -1,0 +1,18 @@
+epackage company;
+
+import java.util.List;
+import org.emftext.language.company.Department;
+ 
+eclass Department {
+	
+	depth() {
+		int depth = 1;
+		List<Department> subDepartments2 = getSubDepartments();
+		if(subDepartments2 != null){
+			for (Department subDepartment : subDepartments2) {
+				depth += subDepartment.depth();
+			}
+		}
+		return depth;
+	}
+}
