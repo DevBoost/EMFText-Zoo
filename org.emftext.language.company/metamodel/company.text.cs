@@ -1,9 +1,10 @@
 SYNTAXDEF company
-FOR <http://org.emftext/company.ecore>
+FOR <http://org.emftext/company.ecore> <company.genmodel>
 START Company
 
 OPTIONS {
 	reloadGeneratorModel = "true";
+	overrideBuilder = "false";
 }
 
 TOKENS {
