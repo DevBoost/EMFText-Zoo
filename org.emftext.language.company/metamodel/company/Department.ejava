@@ -11,9 +11,13 @@ eclass Department {
 		int depth = 1;
 		List<Department> subDepartments2 = getSubDepartments();
 		if(subDepartments2 != null){
-			for (Department subDepartment : subDepartments2) {
-				depth += subDepartment.depth();
-			}
+			int max = 0;
+					for ( org.emftext.language.company.Department subDepartment : subDepartments2) {
+						if(max < subDepartment.depth()){
+							max = subDepartment.depth();
+						}
+					}
+					depth = max + 1;
 		}
 		return depth;
 	}
