@@ -1,3 +1,7 @@
+==Intend== 
+This implementation uses model driven software development based on Java, EMF
+and generative technologies of the Dropsbox (http://www.dropsbox.org/). 
+
 ==Features==
 Company
 Cut
