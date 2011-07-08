@@ -56,7 +56,7 @@ public class CompanyBuilder implements
 			graph.setStatements(current);
 
 			String nodeName = c.getName();
-			current = createShapedNodeWithName(current, nodeName);
+			current = createShapedNodeWithName(current, nodeName, "ellipse");
 
 			EList<Department> departments = c.getDepartments();
 			for (Department department : departments) {
@@ -65,6 +65,7 @@ public class CompanyBuilder implements
 
 			for (Department subDepartment : c.getDepartments()) {
 				current = createEdgesForDepartment(current, subDepartment);
+				current = createEdgeStatement(current, c.getName(), subDepartment.getName());
 			}
 
 			try {
@@ -81,10 +82,11 @@ public class CompanyBuilder implements
 
 	private StatementList createNodesForDepartment(StatementList current,
 			Department department) {
-		current = createShapedNodeWithName(current, department.getName());
+		current = createShapedNodeWithName(current, department.getName(), null);
+		current = createShapedNodeWithName(current, department.getManager().getName(), "diamond");
 		EList<Employee> employees = department.getEmployees();
 		for (Employee employee : employees) {
-			current = createShapedNodeWithName(current, employee.getName());
+			current = createShapedNodeWithName(current, employee.getName(), null);
 		}
 		EList<Department> subDepartments = department.getSubDepartments();
 		for (Department subDepartment : subDepartments) {
@@ -97,6 +99,7 @@ public class CompanyBuilder implements
 	private StatementList createEdgesForDepartment(StatementList current,
 			Department department) {
 		String sourceName = department.getName();
+		current = createEdgeStatement(current, sourceName, department.getManager().getName());
 		for (Department subDepartment : department.getSubDepartments()) {
 			String targetName = subDepartment.getName();
 			current = createEdgeStatement(current, sourceName, targetName);
@@ -104,7 +107,12 @@ public class CompanyBuilder implements
 		for (Employee e : department.getEmployees()) {
 			String targetName = e.getName();
 			current = createEdgeStatement(current, sourceName, targetName);
-		}
+			Employee mentor = e.getMentor();
+			if (mentor != null) {
+				current = createEdgeStatement(current, e.getName(), mentor.getName());
+				
+			}
+ 		}
 		for (Department subDepartment : department.getSubDepartments()) {
 			current = createEdgesForDepartment(current, subDepartment);
 		}
@@ -113,15 +121,13 @@ public class CompanyBuilder implements
 
 	private StatementList createEdgeStatement(StatementList current,
 			String sourceName, String targetName) {
-		System.out.println("CompanyBuilder.createEdgeStatement() " + sourceName
-				+ " ->  " + targetName);
 		EdgeStatement edge = dotFactory.createEdgeStatement();
 		NodeID source = dotFactory.createNodeID();
-		source.setId(sourceName);
+		source.setId("\"" + sourceName + "\"");
 		edge.setSource(source);
 		Target t = dotFactory.createTarget();
 		NodeID target = dotFactory.createNodeID();
-		target.setId(targetName);
+		target.setId("\"" + targetName + "\"");
 
 		t.setTarget(target);
 		t.setOperation("->");
@@ -133,12 +139,10 @@ public class CompanyBuilder implements
 	}
 
 	private StatementList createShapedNodeWithName(StatementList statements,
-			String nodeName) {
-		System.out.println("CompanyBuilder.createShapedNodeWithName()"
-				+ nodeName);
+			String nodeName, String shape) {
 		NodeStatement newNode = dotFactory.createNodeStatement();
 		NodeID nodeId = dotFactory.createNodeID();
-		nodeId.setId(nodeName);
+		nodeId.setId("\"" + nodeName + "\"");
 
 		AttributeList al = dotFactory.createAttributeList();
 		AList aList = dotFactory.createAList();
@@ -147,7 +151,7 @@ public class CompanyBuilder implements
 		Attribute attribute = dotFactory.createAttribute();
 		aList.setAttribute(attribute);
 		attribute.setKey("shape");
-
+		if (shape != null) attribute.setValue(shape);
 		newNode.setAttributes(al);
 		newNode.setNode_id(nodeId);
 	
