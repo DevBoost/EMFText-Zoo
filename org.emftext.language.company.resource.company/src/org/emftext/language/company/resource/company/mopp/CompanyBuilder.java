@@ -27,11 +27,11 @@ import org.emftext.language.dot.StatementList;
 import org.emftext.language.dot.Target;
 
 public class CompanyBuilder implements
-		org.emftext.language.company.resource.company.ICompanyBuilder {
+org.emftext.language.company.resource.company.ICompanyBuilder {
 
 	private DotFactory dotFactory;
 
-	
+
 	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
 		// change this to return true to enable building of all resources
 		return true;
@@ -56,7 +56,7 @@ public class CompanyBuilder implements
 			graph.setStatements(current);
 
 			String nodeName = c.getName();
-			current = createShapedNodeWithName(current, nodeName, "ellipse");
+			current = createShapedNodeWithName(current, nodeName, "house", null);
 
 			EList<Department> departments = c.getDepartments();
 			for (Department department : departments) {
@@ -82,11 +82,11 @@ public class CompanyBuilder implements
 
 	private StatementList createNodesForDepartment(StatementList current,
 			Department department) {
-		current = createShapedNodeWithName(current, department.getName(), null);
-		current = createShapedNodeWithName(current, department.getManager().getName(), "diamond");
+		current = createShapedNodeWithName(current, department.getName(), "box3d", "\"" + department.getName() + "\\n" + "depth: " + department.depth()+"\"");
+		current = createShapedNodeWithName(current, department.getManager().getName(), "diamond", null);
 		EList<Employee> employees = department.getEmployees();
 		for (Employee employee : employees) {
-			current = createShapedNodeWithName(current, employee.getName(), null);
+			current = createShapedNodeWithName(current, employee.getName(), null, null);
 		}
 		EList<Department> subDepartments = department.getSubDepartments();
 		for (Department subDepartment : subDepartments) {
@@ -110,9 +110,9 @@ public class CompanyBuilder implements
 			Employee mentor = e.getMentor();
 			if (mentor != null) {
 				current = createEdgeStatement(current, e.getName(), mentor.getName());
-				
+
 			}
- 		}
+		}
 		for (Department subDepartment : department.getSubDepartments()) {
 			current = createEdgesForDepartment(current, subDepartment);
 		}
@@ -139,7 +139,7 @@ public class CompanyBuilder implements
 	}
 
 	private StatementList createShapedNodeWithName(StatementList statements,
-			String nodeName, String shape) {
+			String nodeName, String shape, String label) {
 		NodeStatement newNode = dotFactory.createNodeStatement();
 		NodeID nodeId = dotFactory.createNodeID();
 		nodeId.setId("\"" + nodeName + "\"");
@@ -154,7 +154,18 @@ public class CompanyBuilder implements
 		if (shape != null) attribute.setValue(shape);
 		newNode.setAttributes(al);
 		newNode.setNode_id(nodeId);
-	
+
+		if(label != null){
+			AttributeList labelList = dotFactory.createAttributeList();
+			al.setNext(labelList);
+			AList labelAlist = dotFactory.createAList();
+			labelList.setList(labelAlist);
+			Attribute labelAttribute = dotFactory.createAttribute();
+			labelAttribute.setKey("label");
+			labelAttribute.setValue(label);
+			labelAlist.setAttribute(labelAttribute);
+		}
+
 		statements.setStatement(newNode);
 		StatementList sl = dotFactory.createStatementList();
 		statements.setTail(sl);
