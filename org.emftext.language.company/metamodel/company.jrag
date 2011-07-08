@@ -25,9 +25,86 @@ aspect Salary {
 	}
 	
 	eq Employee.totalSalaryValue() = getsalary();
+
+	syn double Employee.maxSalary() = getsalary();
+	
+	syn double Department.maxSalary() {
+		double max = 0;
+		for(Department department:getsubDepartmentss()){
+			if(max<department.maxSalary()){
+				max=department.maxSalary();
+			}
+		}
+		if(max<localMax()){
+			max=localMax();
+		}
+		return max;
+	}
+	
+	syn double Department.localMax(){
+		double localMax = 0;
+		for(Employee employee:getemployeess()){
+			if(localMax<employee.getsalary()){
+				localMax=employee.getsalary();
+			}
+		}
+		if(localMax<getmanager().getsalary())
+			localMax = getmanager().getsalary();
+		return localMax;
+	}
 }
 
-aspect Depth {
+aspect Management {
+	
+	inh Employee Employee.departmentHead();
+	inh Department Employee.department();
+	
+	syn boolean ASTNode.precedence();
+	
+	eq Department.getemployees(int index).departmentHead() = getmanager();
+	eq Department.getemployees(int index).department() = this;
+	
+	eq Department.getmanager().departmentHead() = getmanager();
+	eq Department.getmanager().department() = this;
+	
+	eq ASTNode.precedence() {
+		Iterator<ASTNode> it = (Iterator<ASTNode>)iterator();
+		while(it.hasNext()){
+			ASTNode current = it.next();
+			if(!current.precedence())
+				return false;
+		} 
+		return true;
+	}
+	
+	eq Employee.precedence() {
+		if(isManager()&& (getsalary() != department().localMax())){
+			return false;
+		}
+		if(getsalary() < department().localMax()){
+			return false;
+		}		
+		return true;
+	}
+	
+	eq Department.precedence() {
+	   for(Employee employee:getemployeess()){
+	   	 if(!employee.precedence())
+	   		return false;
+	   }
+	   
+	   for(Department department:getsubDepartmentss()){
+			if(!department.precedence()||department.maxSalary()>=localMax()){
+				return false;
+			}	   
+	   }
+	   return true;
+	}
+	
+	syn boolean Employee.isManager() = this == departmentHead();
+}
+
+/*aspect Depth {
 
 	syn int Company.depth() = depthValue();
 	syn int Employee.depth() = depthValue();
@@ -51,7 +128,7 @@ aspect Depth {
 	
 	eq Employee.depthValue() = 0;
 	
-}
+}*/
 
 
 
