@@ -50,8 +50,19 @@ specifications into a DOT specifications. The DOT specification is then compiled
     - Feature EMFText DOT (Graphviz)
     - Feature Refactory Runtime (Refactory Root Feature)
  - Install the current Trunk Version of JastEMF (will soon get out as Version 0.1.6 for Eclipse 3.7) from the update-site (http://jastemf.googlecode.com/svn/trunk/build/org.jastemf.build/distribution)   
- 	- Feature JastEMF Core (only for build)
- - Install the curren Version of FeatureMapper for its update-site (http://featuremapper.org/update/) (only needed for mapping the company features to metamodel)
+ 	- Feature JastEMF Core (only for build)	
+ - Install the current Version of FeatureMapper for its update-site (http://featuremapper.org/update/) (only needed for mapping the company features to metamodel)
  - Install GraphViz from http://www.graphviz.org/Download_windows.php (needed to generate the vizualization PDF from the generated DOT File)
  
- 
+==Build (Requires correct set-up)==
+Sources are located in the org.emftext.language.company (model & syntax specifications), org.emftext.language.company.resource.company (generated parsing & printing & interpretation plugin), org.emftext.language.company.resource.company.ui (UI integration 
+, Outline and Properties view).
+Steps:
+	- src-gen folders should be empty
+	- generate the EMF + JastEMF Code using the EMF Semantic task in the build.xml (takes some time, must be run in the same jre as workspace)
+ 	- generate the EMFText Plugins (right click on company.text.cs --> Generate Text Resource)
+    - check if there are any errors in the code
+    
+ ==Run (Requires correct build)==
+ 	- just run a new eclipse instance from the workspace and create a new company file using the EMFText new file wizzard
+ 	- have fun :-)! 
