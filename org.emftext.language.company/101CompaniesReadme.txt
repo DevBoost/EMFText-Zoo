@@ -37,7 +37,7 @@ different features of 101Companies. Most of the involved tools have been develop
 and JastEMF are independent of EMFText.
 
 ==Architecture==
-EMFText is used for creating an interactive textual editors. It provides a parser and a printer for company models. 
+EMFText is used for creating an interactive textual editor. It provides a parser and a printer for company models. 
 References from employees to mentors are resolved automatically by EMFText. The company model is given by a specification
 in Text-Ecore which is an EMFText-based representation of Ecore models (instead of the XMI one). The Usage of eJava avoids
 having to add implementations of the Operations for Depth and Cut into the generated code artifacts (by the EMF generator 
