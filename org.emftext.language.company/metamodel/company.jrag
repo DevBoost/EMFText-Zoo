@@ -78,10 +78,11 @@ aspect Management {
 	}
 	
 	eq Employee.precedence() {
-		if(isManager()&& (getsalary() != department().localMax())){
-			return false;
+		if(isManager()){
+			if(getsalary() != department().localMax())
+				return false;
 		}
-		if(getsalary() < department().localMax()){
+		else if(getsalary() >= department().localMax()){
 			return false;
 		}		
 		return true;
