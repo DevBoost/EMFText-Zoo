@@ -36,6 +36,14 @@ import org.emftext.language.mecore.MPackage;
 import org.emftext.language.mecore.resource.mecore.IMecoreBuilder;
 import org.emftext.language.mecore.resource.mecore.MecoreEProblemType;
 
+/**
+ * The MecoreBuilder is invoked when .mecore files are saved. It converts the
+ * MEcore models to Ecore models and saves them with the respective file 
+ * extension. The build does also invoke the EcoreValidator to check whether
+ * the produced Ecore models are valid. If problems are found they are mapped
+ * to the corresponding elements of the MEcore model and problem markers are 
+ * attached.
+ */
 public class MecoreBuilder implements IMecoreBuilder {
 	
 	public boolean isBuildingNeeded(URI uri) {

@@ -49,7 +49,8 @@ import org.emftext.language.mecore.MType;
 import org.emftext.language.mecore.resource.mecore.IMecoreCommand;
 
 /**
- * Converts Mecore models to Ecore models.
+ * Converts Mecore models to Ecore models. The wrapper tries to keep the 
+ * contents of the previous Ecore model to the extent possible.
  */
 public class MecoreWrapper {
 	

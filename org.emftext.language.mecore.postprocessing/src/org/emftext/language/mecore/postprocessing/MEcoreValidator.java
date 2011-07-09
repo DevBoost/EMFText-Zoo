@@ -22,6 +22,11 @@ import org.emftext.language.mecore.resource.mecore.mopp.MecoreProblem;
 import org.emftext.language.mecore.resource.mecore.mopp.MecoreResource;
 import org.emftext.language.mecore.resource.mecore.util.MecoreEObjectUtil;
 
+/**
+ * The MEcoreValidator checks some basic constraints that are not captured by 
+ * the EMF EcoreValidator that is called by the builder to check all Ecore 
+ * constraints.
+ */
 public class MEcoreValidator implements IMecoreOptionProvider, IMecoreResourcePostProcessorProvider, IMecoreResourcePostProcessor {
 
 	public void process(MecoreResource resource) {
