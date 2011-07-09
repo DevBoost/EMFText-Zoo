@@ -2,12 +2,14 @@ package org.emftext.language.mecore.postprocessing;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.mecore.MDataType;
 import org.emftext.language.mecore.MFeature;
+import org.emftext.language.mecore.MNamedElement;
 import org.emftext.language.mecore.MecorePackage;
 import org.emftext.language.mecore.resource.mecore.IMecoreOptionProvider;
 import org.emftext.language.mecore.resource.mecore.IMecoreOptions;
@@ -25,11 +27,12 @@ public class MEcoreValidator implements IMecoreOptionProvider, IMecoreResourcePo
 	public void process(MecoreResource resource) {
 		List<EObject> internalContents = resource.getContentsInternal();
 		for (EObject eObject : internalContents) {
-			validate(resource, eObject);
+			validateFeatureTypes(resource, eObject);
+			validateUniqueNames(resource, eObject);
 		}
 	}
 
-	private void validate(MecoreResource resource, EObject eObject) {
+	private void validateFeatureTypes(MecoreResource resource, EObject eObject) {
 		Collection<MFeature> features = MecoreEObjectUtil.getObjectsByType(eObject.eAllContents(), MecorePackage.eINSTANCE.getMFeature());
 		for (MFeature feature : features) {
 			if (feature.getType() instanceof MDataType &&
@@ -41,6 +44,29 @@ public class MEcoreValidator implements IMecoreOptionProvider, IMecoreResourcePo
 				);
 				resource.addProblem(problem, feature);
 			}
+		}
+	}
+
+	private void validateUniqueNames(MecoreResource resource, EObject eObject) {
+		List<EObject> children = eObject.eContents();
+		Map<String, EObject> nameToObjectMap = new LinkedHashMap<String, EObject>();
+		for (EObject child : children) {
+			if (child instanceof MNamedElement) {
+				MNamedElement namedChild = (MNamedElement) child;
+				String name = namedChild.getName();
+				if (nameToObjectMap.containsKey(name)) {
+					// found duplicate child
+					IMecoreProblem problem = new MecoreProblem(
+							"Found element with duplicate name (" + name + ").", 
+							MecoreEProblemType.ANALYSIS_PROBLEM,
+							MecoreEProblemSeverity.ERROR
+					);
+					resource.addProblem(problem, namedChild);
+				} else {
+					nameToObjectMap.put(name, namedChild);
+				}
+			}
+			validateUniqueNames(resource, child);
 		}
 	}
 

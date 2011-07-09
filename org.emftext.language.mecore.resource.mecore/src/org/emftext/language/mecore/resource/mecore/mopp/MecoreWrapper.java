@@ -169,6 +169,7 @@ public class MecoreWrapper {
 	private void wrapMClass(final MClass mClass, EPackage ePackage) {
 		final EClass eClass = findOrCreateEClass(mClass, ePackage);
 		mapping.put(mClass, eClass);
+		eClass.getESuperTypes().clear();
 		eClass.setName(mClass.getName());
 		eClass.setAbstract(mClass.isAbstract());
 		
