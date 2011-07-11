@@ -20,7 +20,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IElementChangedListener;
+import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -30,14 +33,49 @@ import org.emftext.language.java.JavaURIConverter;
 public class JDTConnector {
 
 	private static JDTConnector instance = null;
-	
+
 	public static JDTConnector getInstance() {
 		if (instance == null) {
 			instance = new JDTConnector();
 		}
 		return instance;
 	}
-	
+
+	public JDTConnector() {
+//		addClasspathListener();
+	}
+
+//	private void addClasspathListener() {
+//		JavaCore.addElementChangedListener(new IElementChangedListener() {
+//
+//			private IJavaProject checkDeltas(IJavaElementDelta delta) {
+//				if ((delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
+//						|| (delta.getFlags() & IJavaElementDelta.F_CLASSPATH_CHANGED) != 0
+//						|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
+//						|| (delta.getFlags() & IJavaElementDelta.F_RESOLVED_CLASSPATH_CHANGED) != 0) {
+//					if ((delta.getElement() instanceof IJavaProject))
+//						return (IJavaProject) delta.getElement();
+//				}
+//				IJavaElementDelta[] affectedChildren = delta
+//						.getAffectedChildren();
+//				for (IJavaElementDelta iJavaElementDelta : affectedChildren) {
+//					if (checkDeltas(iJavaElementDelta) != null)
+//						return checkDeltas(iJavaElementDelta);
+//				}
+//				return null;
+//			}
+//
+//			public void elementChanged(ElementChangedEvent event) {
+//				IJavaElementDelta delta = event.getDelta();
+//				if (checkDeltas(delta) != null) {
+//					IJavaProject project = checkDeltas(delta);
+//					System.out.println("should refresh "
+//							+ project.getProject().getName());
+//				}
+//			}
+//		});
+//	}
+
 	private boolean isJavaProject(IProject project) {
 		try {
 			return project.isNatureEnabled("org.eclipse.jdt.core.javanature");
@@ -45,7 +83,7 @@ public class JDTConnector {
 		}
 		return false;
 	}
-	
+
 	private IProject getProject(URI uri) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		if (uri.isPlatformResource() && uri.segmentCount() > 2) {
@@ -53,16 +91,16 @@ public class JDTConnector {
 		}
 		return null;
 	}
-	
+
 	private IJavaProject getJavaProject(URI uri) {
 		IProject project = getProject(uri);
 		return getJavaProject(project);
 	}
-	
+
 	private IJavaProject getJavaProject(IProject project) {
 		return (isJavaProject(project) ? JavaCore.create(project) : null);
 	}
-	
+
 	public String getPackageName(URI uri) {
 		IJavaProject javaProject = getJavaProject(uri);
 		IClasspathEntry[] classpathEntries = null;
@@ -83,32 +121,39 @@ public class JDTConnector {
 				String packageName = null;
 				for (int j = 2; j < uri.segmentCount() - 1; j++) {
 					String segment = uri.segment(j);
-					if (j < sourceUri.segmentCount() && (! segment.equals(sourceUri.segment(j)))) {
+					if (j < sourceUri.segmentCount()
+							&& (!segment.equals(sourceUri.segment(j)))) {
 						continue processEntry;
 					} else if (j == sourceUri.segmentCount() - 1) {
 						// last segment corresponds to default package
 						packageName = "";
 					} else if (packageName != null) {
-						packageName = (packageName.length() == 0 ? segment : packageName + "." + segment);
+						packageName = (packageName.length() == 0 ? segment
+								: packageName + "." + segment);
 					}
 				}
 				return packageName;
-			} 
+			}
 		}
 		return null;
 	}
+
 	public URI getURI(String wsRelativePath) {
 		return URI.createPlatformResourceURI(wsRelativePath, true);
 	}
+
 	public URI getURI(IPath wsRelativePath) {
 		return getURI(wsRelativePath.toString());
 	}
+
 	public URI getURI(IResource resource) {
 		return getURI(resource.getFullPath());
 	}
+
 	public String getPackageName(Resource resource) {
 		return getPackageName(resource.getURI());
 	}
+
 	public String getPackageName(IResource resource) {
 		return getPackageName(getURI(resource));
 	}
@@ -120,19 +165,20 @@ public class JDTConnector {
 	}
 
 	public void initializeResourceSet(ResourceSet resourceSet, URI resourceUri) {
-		if(resourceSet == null) {
+		if (resourceSet == null) {
 			return;
 		}
 		if (resourceSet.getURIConverter() == null) {
 			return;
 		}
-		if(!resourceSet.getURIConverter().normalize(resourceUri).isPlatformResource()) {
+		if (!resourceSet.getURIConverter().normalize(resourceUri)
+				.isPlatformResource()) {
 			return;
 		}
 		if (resourceSet.getURIConverter() instanceof JavaURIConverter) {
 			return;
 		}
-		
+
 		resourceSet.setURIConverter(new JavaURIConverter());
 		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
 		if (loadOptions.get(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH) == null) {
@@ -142,29 +188,32 @@ public class JDTConnector {
 			loadOptions.put(JavaClasspath.OPTION_REGISTER_STD_LIB, false);
 		}
 		if (resourceUri != null) {
-			JavaClasspath.setParentClasspath(resourceSet, getJavaProjectClasspath(
-					resourceSet.getURIConverter().normalize(resourceUri)));
+			JavaClasspath.setParentClasspath(resourceSet,
+					getJavaProjectClasspath(resourceSet.getURIConverter()
+							.normalize(resourceUri)));
 		}
 	}
 
 	public JavaClasspath getJavaProjectClasspath(URI uri) {
 		return getJavaClasspath(getProject(uri));
 	}
-	
+
 	public void refreshJavaProjectClasspath(IProject project) {
-		URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
+		URI projectUri = URI.createPlatformResourceURI(project.getFullPath()
+				.toString(), true);
 		javaClasspaths.remove(projectUri);
 	}
 
 	private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
-	
+
 	private JavaClasspath getJavaClasspath(IProject project) {
-		//TODO There is caching functionality here which has been deactivated.
-		//     If reactivated, the cache needs to be updated if the classpath of 
-		//     a project changes (e.g., if a new class is created, or a new library
-		//     is referenced)
+		// TODO There is caching functionality here which has been deactivated.
+		// If reactivated, the cache needs to be updated if the classpath of
+		// a project changes (e.g., if a new class is created, or a new library
+		// is referenced)
 		//
-		URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
+		URI projectUri = URI.createPlatformResourceURI(project.getFullPath()
+				.toString(), true);
 		JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
 		if (javaClasspath != null) {
 			return javaClasspath;
@@ -177,7 +226,8 @@ public class JDTConnector {
 		return javaClasspath;
 	}
 
-	private void registerJavaProjectInClassPath(ResourceSet classPath, IJavaProject javaProject) {
+	private void registerJavaProjectInClassPath(ResourceSet classPath,
+			IJavaProject javaProject) {
 		IClasspathEntry[] classpathEntries = null;
 		if (javaProject != null) {
 			try {
@@ -188,8 +238,10 @@ public class JDTConnector {
 		if (classpathEntries != null) {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			classPath.setURIConverter(new JavaURIConverter());
-			classPath.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, true);
-			classPath.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, false);
+			classPath.getLoadOptions().put(
+					JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, true);
+			classPath.getLoadOptions().put(
+					JavaClasspath.OPTION_REGISTER_STD_LIB, false);
 			for (int i = 0; i < classpathEntries.length; i++) {
 				IClasspathEntry entry = classpathEntries[i];
 				IPath path = entry.getPath();
@@ -200,7 +252,8 @@ public class JDTConnector {
 						if (nextPoject.getFullPath().equals(path)) {
 							IJavaProject importedJavaProject = getJavaProject(nextPoject);
 							if (importedJavaProject != null) {
-								registerJavaProjectInClassPath(classPath, importedJavaProject);
+								registerJavaProjectInClassPath(classPath,
+										importedJavaProject);
 							}
 						}
 					}
@@ -215,59 +268,71 @@ public class JDTConnector {
 						}
 					}
 					IFolder folder = root.getFolder(outputLocation);
-					
+
 					// path is source folder
-					// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
-					
-					// Parsing the real java files induces a huge performance problem
-					// Therefore we use BCEL here 
+					// System.out.println("Doing nothing for ClassPathEntry source: "
+					// + entry);
+
+					// Parsing the real java files induces a huge performance
+					// problem
+					// Therefore we use BCEL here
 					registerResourceTreeInClasspath(folder, "class", classPath);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 					IFolder folder = root.getFolder(path);
-					if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
+					if ("jar".equals(path.getFileExtension())
+							|| "zip".equals(path.getFileExtension())) {
 						// path is jar
-						// System.out.println("registerFileInClasspath for ClassPathEntry library: " + entry);
+						// System.out.println("registerFileInClasspath for ClassPathEntry library: "
+						// + entry);
 						IFile file = root.getFile(path);
 						if (file.getLocation() != null) {
 							path = file.getLocation();
 						}
 						registerFileInClasspath(path, classPath);
 					} else {
-						// check whether path is inside or outside of the workspace
+						// check whether path is inside or outside of the
+						// workspace
 						IResource member = root.findMember(path);
 						if (member != null) {
 							// path is binary folder in workspace
-							System.out.println("registerResourceInClasspath for ClassPathEntry library (folder): " + entry + " -> " + path);
-							registerResourceTreeInClasspath(folder, "class", classPath);
+							System.out
+									.println("registerResourceInClasspath for ClassPathEntry library (folder): "
+											+ entry + " -> " + path);
+							registerResourceTreeInClasspath(folder, "class",
+									classPath);
 						} else {
 							// path is binary folder outside of workspace
 							String osPath = path.toOSString();
 							java.io.File osFile = new java.io.File(osPath);
-							registerExternalDirectoryInClasspath(osFile, "class", classPath);
+							registerExternalDirectoryInClasspath(osFile,
+									"class", classPath);
 						}
 					}
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
-					// System.out.println("Doing nothing for ClassPathEntry container: " + entry);
+					// System.out.println("Doing nothing for ClassPathEntry container: "
+					// + entry);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_VARIABLE) {
-					// System.out.println("Doing nothing for ClassPathEntry variable: " + entry);
-				} 
+					// System.out.println("Doing nothing for ClassPathEntry variable: "
+					// + entry);
+				}
 			}
 			/*
-			try {
-				//registerResourceInClasspath(root.getFolder(javaProject.getOutputLocation()), "class", classPath);
-			} catch (JavaModelException e) {
-				System.err.println("Exception adding output folder to classpath: " + e);
-			}
-			*/
+			 * try { //registerResourceInClasspath(root.getFolder(javaProject.
+			 * getOutputLocation()), "class", classPath); } catch
+			 * (JavaModelException e) {
+			 * System.err.println("Exception adding output folder to classpath: "
+			 * + e); }
+			 */
 		}
 	}
-	
+
 	private void registerExternalDirectoryInClasspath(File osFile,
 			final String filter, ResourceSet classPath) {
 		File[] files = osFile.listFiles(new FileFilter() {
-			
+
 			public boolean accept(File file) {
-				return file.getName().endsWith("." + filter) || file.isDirectory();
+				return file.getName().endsWith("." + filter)
+						|| file.isDirectory();
 			}
 		});
 		for (File file : files) {
@@ -281,17 +346,20 @@ public class JDTConnector {
 		}
 	}
 
-	private void registerResourceTreeInClasspath(IResource resource, final String filter, final ResourceSet classPath) {
-    	try {
+	private void registerResourceTreeInClasspath(IResource resource,
+			final String filter, final ResourceSet classPath) {
+		try {
 			resource.accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) {
 					if (resource instanceof IFile) {
-						IFile file = (IFile)resource;
+						IFile file = (IFile) resource;
 						String ext = file.getFileExtension();
-						if (file.getType() == IFile.FILE && ( filter == null || filter.equals(ext))) {
-							registerFileInClasspath(file.getFullPath(), classPath);
+						if (file.getType() == IFile.FILE
+								&& (filter == null || filter.equals(ext))) {
+							registerFileInClasspath(file.getFullPath(),
+									classPath);
 						}
-					} 
+					}
 					return true;
 				}
 			});
@@ -314,10 +382,13 @@ public class JDTConnector {
 		registerResourceInClassPath(file, classPath, resourceUri);
 	}
 
-	private void registerResourceInClassPath(IPath file, ResourceSet classPath, URI resourceUri) {
+	private void registerResourceInClassPath(IPath file, ResourceSet classPath,
+			URI resourceUri) {
 		String fileExtension = file.getFileExtension();
-		if (resourceUri == null || (! classPath.getURIConverter().exists(resourceUri, null))) {
-			System.err.println("Resource for " + file + " does not exist (uri=" + resourceUri + ")");
+		if (resourceUri == null
+				|| (!classPath.getURIConverter().exists(resourceUri, null))) {
+			System.err.println("Resource for " + file + " does not exist (uri="
+					+ resourceUri + ")");
 			return;
 		}
 		if ("java".equals(fileExtension) || "class".equals(fileExtension)) {
@@ -332,5 +403,4 @@ public class JDTConnector {
 		}
 	}
 
-	
 }
