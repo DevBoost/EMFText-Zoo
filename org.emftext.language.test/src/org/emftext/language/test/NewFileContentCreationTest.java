@@ -196,6 +196,7 @@ public class NewFileContentCreationTest extends TestCase {
 		public void runTest() {
 			String[] excludes = new String[] {
 					".*/org.emftext.language.company/metamodel/company.text.cs",
+					".*/text.text.cs",
 					".*/org/emftext/test/.*",
 					".*/org/emftext/sdk/concretesyntax/tokenhandling/.*",
 					".*/sandwich_simple.cs",
