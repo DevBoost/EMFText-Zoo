@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sumup.resource.sumup.mopp;
 
 import java.io.File;

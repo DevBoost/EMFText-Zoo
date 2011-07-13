@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.analysis;
 
 public class AttributeContextDeclarationCSPropertyReferenceResolver implements org.emftext.language.eocl.resource.eocl.IEoclReferenceResolver<tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS, tudresden.ocl20.pivot.pivotmodel.Property> {

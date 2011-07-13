@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pl0.resource.pl0.analysis;
 
 public class Pl0MUL_DIVTokenResolver implements org.emftext.language.pl0.resource.pl0.IPl0TokenResolver {

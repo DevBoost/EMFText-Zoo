@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sumup.resource.sumup.analysis;
 
 public class SumupQUOTED_34_34TokenResolver implements org.emftext.language.sumup.resource.sumup.ISumupTokenResolver {

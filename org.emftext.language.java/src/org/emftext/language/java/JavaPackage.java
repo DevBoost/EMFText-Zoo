@@ -11,12 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
+
 package org.emftext.language.java;
 
 import org.eclipse.emf.ecore.EPackage;

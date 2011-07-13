@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.string.resource.stringjava.analysis;
 
 public class AnnotationInstanceAnnotationReferenceResolver implements org.emftext.language.java.string.resource.stringjava.IStringjavaReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {

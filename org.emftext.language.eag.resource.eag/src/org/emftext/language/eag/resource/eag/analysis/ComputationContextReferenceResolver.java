@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eag.resource.eag.analysis;
 
 import java.util.Map;

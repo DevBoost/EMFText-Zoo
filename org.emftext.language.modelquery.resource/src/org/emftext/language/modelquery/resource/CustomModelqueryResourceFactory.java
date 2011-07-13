@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.modelquery.resource;
 
 public class CustomModelqueryResourceFactory implements org.eclipse.emf.ecore.resource.Resource.Factory {

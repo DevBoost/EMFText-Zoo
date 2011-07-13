@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
+
 package org.emftext.language.java.closures.provider;
 
 

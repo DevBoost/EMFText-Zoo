@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.efactory.resource.efactory.analysis;
 
 import org.eclipse.emf.common.util.EList;

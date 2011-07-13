@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.javaforms.resource.javaforms.mopp;
 
 import java.io.ByteArrayOutputStream;

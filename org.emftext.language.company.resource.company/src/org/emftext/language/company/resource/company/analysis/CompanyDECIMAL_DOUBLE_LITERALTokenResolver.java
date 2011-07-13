@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.company.resource.company.analysis;
 
 public class CompanyDECIMAL_DOUBLE_LITERALTokenResolver implements org.emftext.language.company.resource.company.ICompanyTokenResolver {

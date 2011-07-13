@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eag.resource.eag.analysis;
 
 public class EagQUOTED_34_34_92TokenResolver implements org.emftext.language.eag.resource.eag.IEagTokenResolver {

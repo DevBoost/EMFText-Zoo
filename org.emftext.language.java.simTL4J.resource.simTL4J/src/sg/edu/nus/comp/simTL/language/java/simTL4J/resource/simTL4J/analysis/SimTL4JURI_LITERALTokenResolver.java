@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package sg.edu.nus.comp.simTL.language.java.simTL4J.resource.simTL4J.analysis;
 
 public class SimTL4JURI_LITERALTokenResolver implements sg.edu.nus.comp.simTL.language.java.simTL4J.resource.simTL4J.ISimTL4JTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.appflow.resource.appflow.analysis;
 
 public class ShowScreenActionScreenReferenceResolver implements org.emftext.language.appflow.resource.appflow.IAppflowReferenceResolver<org.emftext.language.appflow.actions.ShowScreenAction, org.emftext.language.appflow.screenmodel.Screen> {

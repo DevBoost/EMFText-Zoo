@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sumup.resource.sumup.analysis;
 
 public class VariableRefVariableReferenceResolver implements org.emftext.language.sumup.resource.sumup.ISumupReferenceResolver<org.emftext.language.sumup.VariableRef, org.emftext.language.sumup.Variable> {

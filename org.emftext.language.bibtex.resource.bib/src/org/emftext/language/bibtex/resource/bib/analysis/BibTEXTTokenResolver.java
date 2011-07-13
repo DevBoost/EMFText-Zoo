@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.bibtex.resource.bib.analysis;
 
 public class BibTEXTTokenResolver implements org.emftext.language.bibtex.resource.bib.IBibTokenResolver {

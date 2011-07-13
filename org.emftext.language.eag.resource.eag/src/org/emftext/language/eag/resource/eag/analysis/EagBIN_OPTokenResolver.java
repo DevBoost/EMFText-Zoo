@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eag.resource.eag.analysis;
 
 public class EagBIN_OPTokenResolver implements org.emftext.language.eag.resource.eag.IEagTokenResolver {

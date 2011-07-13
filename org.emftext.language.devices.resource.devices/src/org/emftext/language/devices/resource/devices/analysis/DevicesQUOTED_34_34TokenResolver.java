@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.devices.resource.devices.analysis;
 
 public class DevicesQUOTED_34_34TokenResolver implements org.emftext.language.devices.resource.devices.IDevicesTokenResolver {

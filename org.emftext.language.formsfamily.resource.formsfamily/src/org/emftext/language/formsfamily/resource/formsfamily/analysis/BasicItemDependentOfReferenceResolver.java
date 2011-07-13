@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsfamily.resource.formsfamily.analysis;
 
 public class BasicItemDependentOfReferenceResolver implements org.emftext.language.formsfamily.resource.formsfamily.IFormsfamilyReferenceResolver<org.emftext.language.formsfamily.BasicItem, org.emftext.language.formsfamily.Option> {

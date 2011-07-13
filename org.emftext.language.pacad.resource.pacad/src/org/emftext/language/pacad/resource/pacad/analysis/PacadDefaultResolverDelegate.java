@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pacad.resource.pacad.analysis;
 
 import org.emftext.language.pacad.Import;

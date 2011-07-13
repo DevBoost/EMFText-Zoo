@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.appflow.resource.appflow.analysis;
 
 import org.eclipse.emf.ecore.EObject;

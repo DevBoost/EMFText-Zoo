@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsfamily.resource.formsfamily.mopp;
 
 public class FormsfamilyBuilder implements org.emftext.language.formsfamily.resource.formsfamily.IFormsfamilyBuilder {

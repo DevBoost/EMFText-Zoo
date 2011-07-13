@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.closures.resource.closure.mopp;
 
 import java.io.IOException;

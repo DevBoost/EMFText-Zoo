@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsextension.resource.formsextension.analysis;
 
 import java.util.Collection;

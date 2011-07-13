@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.javaproperties.resource.properties.analysis;
 
 public class PropertiesKEYTokenResolver implements org.emftext.language.javaproperties.resource.properties.IPropertiesTokenResolver {

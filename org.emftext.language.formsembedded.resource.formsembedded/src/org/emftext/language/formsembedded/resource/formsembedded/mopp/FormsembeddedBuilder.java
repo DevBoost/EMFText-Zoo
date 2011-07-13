@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsembedded.resource.formsembedded.mopp;
 
 import java.io.IOException;

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.emfdoc.resource.emfdoc.analysis;
 
 public class DocumentationDocumentedPackageReferenceResolver implements org.emftext.language.emfdoc.resource.emfdoc.IEmfdocReferenceResolver<org.emftext.language.emfdoc.Documentation, org.eclipse.emf.ecore.EPackage> {

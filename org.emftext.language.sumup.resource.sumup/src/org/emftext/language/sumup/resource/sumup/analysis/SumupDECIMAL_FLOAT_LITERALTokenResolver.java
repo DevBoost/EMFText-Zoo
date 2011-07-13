@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sumup.resource.sumup.analysis;
 
 public class SumupDECIMAL_FLOAT_LITERALTokenResolver implements org.emftext.language.sumup.resource.sumup.ISumupTokenResolver {

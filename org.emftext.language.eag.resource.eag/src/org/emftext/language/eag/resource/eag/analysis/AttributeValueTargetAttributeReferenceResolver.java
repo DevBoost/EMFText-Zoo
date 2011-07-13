@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eag.resource.eag.analysis;
 
 public class AttributeValueTargetAttributeReferenceResolver implements org.emftext.language.eag.resource.eag.IEagReferenceResolver<org.emftext.language.eag.AttributeValue, org.emftext.language.eag.Attribute> {

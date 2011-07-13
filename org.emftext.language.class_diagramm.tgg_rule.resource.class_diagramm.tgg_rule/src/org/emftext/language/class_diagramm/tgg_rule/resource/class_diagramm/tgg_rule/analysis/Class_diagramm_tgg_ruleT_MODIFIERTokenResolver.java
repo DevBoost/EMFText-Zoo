@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule.analysis;
 
 public class Class_diagramm_tgg_ruleT_MODIFIERTokenResolver implements org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule.IClass_diagramm_tgg_ruleTokenResolver {

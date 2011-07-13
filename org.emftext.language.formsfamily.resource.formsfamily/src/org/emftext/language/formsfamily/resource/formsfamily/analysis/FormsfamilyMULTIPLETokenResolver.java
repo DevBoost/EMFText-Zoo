@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsfamily.resource.formsfamily.analysis;
 
 import org.emftext.language.formsfamily.resource.formsfamily.analysis.helper.BooleanAttributeResolver;

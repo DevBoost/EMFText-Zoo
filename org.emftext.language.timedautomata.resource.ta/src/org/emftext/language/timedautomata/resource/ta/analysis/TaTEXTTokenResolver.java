@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.timedautomata.resource.ta.analysis;
 
 public class TaTEXTTokenResolver implements org.emftext.language.timedautomata.resource.ta.ITaTokenResolver {

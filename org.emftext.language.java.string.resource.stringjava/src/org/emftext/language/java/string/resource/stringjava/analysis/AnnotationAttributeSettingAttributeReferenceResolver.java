@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.string.resource.stringjava.analysis;
 
 public class AnnotationAttributeSettingAttributeReferenceResolver implements org.emftext.language.java.string.resource.stringjava.IStringjavaReferenceResolver<org.emftext.language.java.annotations.AnnotationAttributeSetting, org.emftext.language.java.members.InterfaceMethod> {

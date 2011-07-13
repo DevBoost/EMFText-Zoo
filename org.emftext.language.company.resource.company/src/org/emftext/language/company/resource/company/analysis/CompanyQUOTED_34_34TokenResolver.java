@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.company.resource.company.analysis;
 
 public class CompanyQUOTED_34_34TokenResolver implements org.emftext.language.company.resource.company.ICompanyTokenResolver {

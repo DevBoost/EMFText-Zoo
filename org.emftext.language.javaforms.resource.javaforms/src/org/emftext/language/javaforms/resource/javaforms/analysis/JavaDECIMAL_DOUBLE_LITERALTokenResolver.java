@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.javaforms.resource.javaforms.analysis;
 
 public class JavaDECIMAL_DOUBLE_LITERALTokenResolver implements org.emftext.language.javaforms.resource.javaforms.IJavaformsTokenResolver {

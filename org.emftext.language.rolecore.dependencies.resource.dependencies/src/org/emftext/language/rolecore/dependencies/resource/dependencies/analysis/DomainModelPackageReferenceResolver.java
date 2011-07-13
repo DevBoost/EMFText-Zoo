@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.rolecore.dependencies.resource.dependencies.analysis;
 
 import org.eclipse.emf.ecore.EPackage;

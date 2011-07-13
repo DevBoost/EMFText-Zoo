@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sumup.resource.sumup.analysis;
 
 public class AssignmentTargetReferenceResolver implements org.emftext.language.sumup.resource.sumup.ISumupReferenceResolver<org.emftext.language.sumup.Assignment, org.emftext.language.sumup.OutputVariable> {

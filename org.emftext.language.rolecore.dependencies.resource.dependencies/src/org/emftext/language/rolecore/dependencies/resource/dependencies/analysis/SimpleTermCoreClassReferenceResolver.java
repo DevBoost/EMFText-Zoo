@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.rolecore.dependencies.resource.dependencies.analysis;
 
 public class SimpleTermCoreClassReferenceResolver implements org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolver<org.emftext.language.rolecore.dependencies.SimpleTerm, org.emftext.language.rolecore.dependencies.CoreClass> {

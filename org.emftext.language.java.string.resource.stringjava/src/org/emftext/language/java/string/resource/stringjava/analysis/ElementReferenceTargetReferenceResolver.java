@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.string.resource.stringjava.analysis;
 
 public class ElementReferenceTargetReferenceResolver implements org.emftext.language.java.string.resource.stringjava.IStringjavaReferenceResolver<org.emftext.language.java.references.ElementReference, org.emftext.language.java.references.ReferenceableElement> {

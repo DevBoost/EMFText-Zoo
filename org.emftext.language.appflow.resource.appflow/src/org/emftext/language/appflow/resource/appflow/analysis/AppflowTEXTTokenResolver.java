@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.appflow.resource.appflow.analysis;
 
 public class AppflowTEXTTokenResolver implements org.emftext.language.appflow.resource.appflow.IAppflowTokenResolver {

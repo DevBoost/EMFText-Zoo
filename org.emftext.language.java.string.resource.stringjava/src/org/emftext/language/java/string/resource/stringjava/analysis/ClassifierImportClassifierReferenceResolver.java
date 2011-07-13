@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.string.resource.stringjava.analysis;
 
 public class ClassifierImportClassifierReferenceResolver implements org.emftext.language.java.string.resource.stringjava.IStringjavaReferenceResolver<org.emftext.language.java.imports.ClassifierImport, org.emftext.language.java.classifiers.ConcreteClassifier> {

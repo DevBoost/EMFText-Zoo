@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsembedded.resource.formsembedded.analysis;
 
 public class JavaDECIMAL_LONG_LITERALTokenResolver implements org.emftext.language.formsembedded.resource.formsembedded.IFormsembeddedTokenResolver {

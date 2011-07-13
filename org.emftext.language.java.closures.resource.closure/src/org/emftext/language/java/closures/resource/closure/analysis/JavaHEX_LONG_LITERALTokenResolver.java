@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.closures.resource.closure.analysis;
 
 public class JavaHEX_LONG_LITERALTokenResolver implements org.emftext.language.java.closures.resource.closure.IClosureTokenResolver {

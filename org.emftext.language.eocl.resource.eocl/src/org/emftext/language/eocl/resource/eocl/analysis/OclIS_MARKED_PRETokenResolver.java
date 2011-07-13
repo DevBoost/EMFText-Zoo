@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.analysis;
 
 public class OclIS_MARKED_PRETokenResolver implements org.emftext.language.eocl.resource.eocl.IEoclTokenResolver {

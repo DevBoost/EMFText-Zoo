@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.efactory.resource.efactory.analysis;
 
 public class CustomNameMappingEClassReferenceResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver<org.emftext.language.efactory.CustomNameMapping, org.eclipse.emf.ecore.EClass> {

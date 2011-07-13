@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.lwc11.resource.lwc11.analysis;
 
 public class Lwc11TEXTTokenResolver implements org.emftext.language.lwc11.resource.lwc11.ILwc11TokenResolver {

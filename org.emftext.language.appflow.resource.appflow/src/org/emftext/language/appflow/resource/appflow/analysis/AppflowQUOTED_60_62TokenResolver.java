@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.appflow.resource.appflow.analysis;
 
 public class AppflowQUOTED_60_62TokenResolver implements org.emftext.language.appflow.resource.appflow.IAppflowTokenResolver {

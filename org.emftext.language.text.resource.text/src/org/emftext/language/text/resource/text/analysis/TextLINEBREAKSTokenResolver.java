@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.text.resource.text.analysis;
 
 public class TextLINEBREAKSTokenResolver implements org.emftext.language.text.resource.text.ITextTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.analysis;
 
 public class EoclT_INTERFACE_OR_CLASSTokenResolver implements org.emftext.language.eocl.resource.eocl.IEoclTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.devices.resource.devices.analysis;
 
 public class MessagePartsReferenceResolver implements org.emftext.language.devices.resource.devices.IDevicesReferenceResolver<org.emftext.language.devices.Message, org.emftext.language.devices.MessagePart> {

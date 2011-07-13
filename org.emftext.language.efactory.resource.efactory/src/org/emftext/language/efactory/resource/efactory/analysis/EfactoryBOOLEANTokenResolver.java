@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.efactory.resource.efactory.analysis;
 
 public class EfactoryBOOLEANTokenResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryTokenResolver {

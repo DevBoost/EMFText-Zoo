@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.lambdacalculus.resource.lambda.analysis;
 
 import org.eclipse.emf.ecore.EObject;

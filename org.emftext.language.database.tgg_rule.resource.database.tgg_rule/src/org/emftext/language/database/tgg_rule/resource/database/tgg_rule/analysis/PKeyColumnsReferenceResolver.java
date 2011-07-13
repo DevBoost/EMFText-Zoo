@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.database.tgg_rule.resource.database.tgg_rule.analysis;
 
 public class PKeyColumnsReferenceResolver implements org.emftext.language.database.tgg_rule.resource.database.tgg_rule.IDatabase_tgg_ruleReferenceResolver<org.emftext.language.database.PKey, org.emftext.language.database.Column> {

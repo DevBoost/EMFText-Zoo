@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pl0extended.resource.pl0extended.analysis;
 
 public class Pl0PLUS_MINUSTokenResolver implements org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedTokenResolver {

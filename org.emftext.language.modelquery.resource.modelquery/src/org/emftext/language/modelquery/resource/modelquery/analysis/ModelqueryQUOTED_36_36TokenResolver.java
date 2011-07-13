@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.modelquery.resource.modelquery.analysis;
 
 public class ModelqueryQUOTED_36_36TokenResolver implements org.emftext.language.modelquery.resource.modelquery.IModelqueryTokenResolver {

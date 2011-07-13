@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.emfdoc.resource.emfdoc.analysis;
 
 public class EmfdocIDTokenResolver implements org.emftext.language.emfdoc.resource.emfdoc.IEmfdocTokenResolver {

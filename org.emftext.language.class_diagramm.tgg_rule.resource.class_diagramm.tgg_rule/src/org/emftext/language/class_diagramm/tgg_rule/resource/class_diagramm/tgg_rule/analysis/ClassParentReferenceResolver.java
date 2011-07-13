@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule.analysis;
 
 public class ClassParentReferenceResolver implements org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule.IClass_diagramm_tgg_ruleReferenceResolver<org.emftext.language.class_diagramm.Class, org.emftext.language.class_diagramm.RefClass> {

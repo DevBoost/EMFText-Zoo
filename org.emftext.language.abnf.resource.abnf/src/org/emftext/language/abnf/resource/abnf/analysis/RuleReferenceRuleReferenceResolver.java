@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.abnf.resource.abnf.analysis;
 
 public class RuleReferenceRuleReferenceResolver implements org.emftext.language.abnf.resource.abnf.IAbnfReferenceResolver<org.emftext.language.abnf.RuleReference, org.emftext.language.abnf.Rule> {

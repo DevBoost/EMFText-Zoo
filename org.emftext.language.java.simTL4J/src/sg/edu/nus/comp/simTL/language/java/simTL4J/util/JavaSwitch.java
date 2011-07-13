@@ -11,12 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
+
 package sg.edu.nus.comp.simTL.language.java.simTL4J.util;
 
 import java.util.List;

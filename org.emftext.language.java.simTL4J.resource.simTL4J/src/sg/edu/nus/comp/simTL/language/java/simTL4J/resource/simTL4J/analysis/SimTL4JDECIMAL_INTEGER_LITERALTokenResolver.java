@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package sg.edu.nus.comp.simTL.language.java.simTL4J.resource.simTL4J.analysis;
 
 import java.math.BigInteger;

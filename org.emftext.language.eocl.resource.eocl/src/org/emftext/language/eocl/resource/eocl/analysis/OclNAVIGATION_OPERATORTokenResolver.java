@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.analysis;
 
 public class OclNAVIGATION_OPERATORTokenResolver implements org.emftext.language.eocl.resource.eocl.IEoclTokenResolver {

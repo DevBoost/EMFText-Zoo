@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.emfdoc.resource.emfdoc.mopp;
 
 import java.io.IOException;

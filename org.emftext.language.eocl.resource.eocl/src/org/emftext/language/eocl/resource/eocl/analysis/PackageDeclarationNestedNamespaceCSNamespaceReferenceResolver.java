@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.analysis;
 
 public class PackageDeclarationNestedNamespaceCSNamespaceReferenceResolver implements org.emftext.language.eocl.resource.eocl.IEoclReferenceResolver<tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS, tudresden.ocl20.pivot.pivotmodel.Namespace> {

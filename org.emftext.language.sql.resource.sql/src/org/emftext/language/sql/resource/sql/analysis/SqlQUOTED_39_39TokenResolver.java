@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sql.resource.sql.analysis;
 
 public class SqlQUOTED_39_39TokenResolver implements org.emftext.language.sql.resource.sql.ISqlTokenResolver {

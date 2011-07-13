@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.devices.resource.devices.analysis;
 
 public class DeviceSupportedProtocolsReferenceResolver implements org.emftext.language.devices.resource.devices.IDevicesReferenceResolver<org.emftext.language.devices.Device, org.emftext.language.devices.Protocol> {

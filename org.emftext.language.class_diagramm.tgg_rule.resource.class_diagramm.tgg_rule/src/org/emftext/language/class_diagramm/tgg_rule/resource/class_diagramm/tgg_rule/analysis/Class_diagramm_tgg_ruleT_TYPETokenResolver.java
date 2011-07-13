@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule.analysis;
 
 import de.tudresden.tornado2.metamodel.tggRules.RuleElementType;

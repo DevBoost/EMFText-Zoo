@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.requirements.resource.requirements.mopp;
 
 import java.security.acl.Owner;

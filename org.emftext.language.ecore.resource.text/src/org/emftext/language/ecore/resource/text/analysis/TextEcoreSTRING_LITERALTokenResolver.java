@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.ecore.resource.text.analysis;
 
 import org.eclipse.emf.ecore.EObject;

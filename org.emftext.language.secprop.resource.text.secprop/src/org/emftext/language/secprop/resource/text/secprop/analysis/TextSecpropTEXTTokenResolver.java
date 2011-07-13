@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.secprop.resource.text.secprop.analysis;
 
 public class TextSecpropTEXTTokenResolver implements org.emftext.language.secprop.resource.text.secprop.ITextSecpropTokenResolver {

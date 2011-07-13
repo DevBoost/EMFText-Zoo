@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.timedautomata.resource.ta.analysis;
 
 public class EdgeSourceReferenceResolver implements org.emftext.language.timedautomata.resource.ta.ITaReferenceResolver<org.emftext.language.timedAutomata.core.Edge, org.emftext.language.timedAutomata.core.Location> {

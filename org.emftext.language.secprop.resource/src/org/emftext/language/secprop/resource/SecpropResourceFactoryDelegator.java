@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.secprop.resource;
 
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;

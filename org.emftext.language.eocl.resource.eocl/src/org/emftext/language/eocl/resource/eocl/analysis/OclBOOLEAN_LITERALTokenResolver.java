@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.analysis;
 
 public class OclBOOLEAN_LITERALTokenResolver implements org.emftext.language.eocl.resource.eocl.IEoclTokenResolver {

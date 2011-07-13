@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.sqljava.resource.sqljava.analysis;
 
 import org.emftext.language.java.resource.java.IJavaTokenResolveResult;

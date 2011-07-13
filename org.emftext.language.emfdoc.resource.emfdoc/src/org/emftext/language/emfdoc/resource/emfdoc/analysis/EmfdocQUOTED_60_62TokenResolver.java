@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.emfdoc.resource.emfdoc.analysis;
 
 public class EmfdocQUOTED_60_62TokenResolver implements org.emftext.language.emfdoc.resource.emfdoc.IEmfdocTokenResolver {

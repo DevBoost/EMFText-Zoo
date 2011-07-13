@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pl0.resource.pl0.analysis;
 
 public class Pl0OP_MINUSTokenResolver implements org.emftext.language.pl0.resource.pl0.IPl0TokenResolver {

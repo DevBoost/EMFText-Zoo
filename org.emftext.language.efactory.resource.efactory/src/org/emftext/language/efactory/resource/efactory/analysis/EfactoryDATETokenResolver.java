@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.efactory.resource.efactory.analysis;
 
 public class EfactoryDATETokenResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.string.resource.stringjava.analysis;
 
 public class JavaCHARACTER_LITERALTokenResolver implements org.emftext.language.java.string.resource.stringjava.IStringjavaTokenResolver {

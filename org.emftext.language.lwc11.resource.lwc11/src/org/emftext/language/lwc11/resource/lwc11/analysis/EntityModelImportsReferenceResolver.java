@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.lwc11.resource.lwc11.analysis;
 
 public class EntityModelImportsReferenceResolver implements org.emftext.language.lwc11.resource.lwc11.ILwc11ReferenceResolver<org.emftext.language.lwc11.EntityModel, org.emftext.language.lwc11.EntityModel> {

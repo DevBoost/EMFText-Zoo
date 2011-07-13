@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.closures.resource.closure.analysis;
 
 public class JavaOCTAL_INTEGER_LITERALTokenResolver implements org.emftext.language.java.closures.resource.closure.IClosureTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.database.tgg_rule.resource.database.tgg_rule.analysis;
 
 public class FKeyReferenceReferenceResolver implements org.emftext.language.database.tgg_rule.resource.database.tgg_rule.IDatabase_tgg_ruleReferenceResolver<org.emftext.language.database.FKey, org.emftext.language.database.RefTable> {

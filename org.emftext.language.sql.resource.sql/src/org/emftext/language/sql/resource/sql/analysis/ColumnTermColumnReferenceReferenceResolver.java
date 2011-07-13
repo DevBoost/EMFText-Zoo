@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sql.resource.sql.analysis;
 
 public class ColumnTermColumnReferenceReferenceResolver implements org.emftext.language.sql.resource.sql.ISqlReferenceResolver<org.emftext.language.sql.select.term.ColumnTerm, org.emftext.language.sql.select.column.Column> {

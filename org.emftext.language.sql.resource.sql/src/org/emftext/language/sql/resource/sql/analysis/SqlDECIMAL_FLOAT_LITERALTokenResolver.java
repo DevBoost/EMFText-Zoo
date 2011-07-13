@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.sql.resource.sql.analysis;
 
 public class SqlDECIMAL_FLOAT_LITERALTokenResolver implements org.emftext.language.sql.resource.sql.ISqlTokenResolver {

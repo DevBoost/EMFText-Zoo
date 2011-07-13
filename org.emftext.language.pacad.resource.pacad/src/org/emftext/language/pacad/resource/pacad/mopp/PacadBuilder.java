@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pacad.resource.pacad.mopp;
 
 import org.emftext.language.pacad.resource.pacad.PacadConstraintChecker;

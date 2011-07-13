@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.text.resource.text.analysis;
 
 public class TextWHITESPACETokenResolver implements org.emftext.language.text.resource.text.ITextTokenResolver {

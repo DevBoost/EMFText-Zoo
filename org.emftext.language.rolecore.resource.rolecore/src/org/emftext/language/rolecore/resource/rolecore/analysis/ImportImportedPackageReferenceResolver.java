@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.rolecore.resource.rolecore.analysis;
 
 import org.eclipse.emf.common.util.URI;

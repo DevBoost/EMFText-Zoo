@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pl0.resource.pl0.analysis;
 
 import org.emftext.language.pl0.PlusMinusOperator;

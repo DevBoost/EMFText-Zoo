@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsfamily.resource.formsfamily.analysis;
 
 public class FormsfamilyQUOTED_34_34TokenResolver implements org.emftext.language.formsfamily.resource.formsfamily.IFormsfamilyTokenResolver {

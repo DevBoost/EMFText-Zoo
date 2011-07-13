@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.lwc11.resource.lwc11.analysis;
 
 import java.util.Map;

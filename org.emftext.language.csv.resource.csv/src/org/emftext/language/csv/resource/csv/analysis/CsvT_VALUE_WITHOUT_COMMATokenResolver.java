@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.csv.resource.csv.analysis;
 
 import org.eclipse.emf.common.util.EList;

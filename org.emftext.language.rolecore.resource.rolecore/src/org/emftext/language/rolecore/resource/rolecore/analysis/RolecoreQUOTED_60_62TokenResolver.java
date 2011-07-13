@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.rolecore.resource.rolecore.analysis;
 
 public class RolecoreQUOTED_60_62TokenResolver implements org.emftext.language.rolecore.resource.rolecore.IRolecoreTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pl0.resource.pl0.analysis;
 
 public class CallStatementProcedureReferenceResolver implements org.emftext.language.pl0.resource.pl0.IPl0ReferenceResolver<org.emftext.language.pl0.CallStatement, org.emftext.language.pl0.ProcedureDeclaration> {

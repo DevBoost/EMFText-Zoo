@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.javaproperties.resource.properties.mopp;
 
 public class PropertiesDynamicTokenStyler {

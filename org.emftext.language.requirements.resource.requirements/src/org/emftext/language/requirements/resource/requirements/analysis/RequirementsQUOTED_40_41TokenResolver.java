@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.requirements.resource.requirements.analysis;
 
 public class RequirementsQUOTED_40_41TokenResolver implements org.emftext.language.requirements.resource.requirements.IRequirementsTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.secprop.resource.text.secprop.analysis;
 
 public class DataChannelReferenceResolver implements org.emftext.language.secprop.resource.text.secprop.ITextSecpropReferenceResolver<org.emftext.language.secprop.Data, org.emftext.language.secprop.Channel> {

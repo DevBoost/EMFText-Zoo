@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.requirements.resource.requirements.analysis;
 
 public class RequirementsSpecImportsReferenceResolver implements org.emftext.language.requirements.resource.requirements.IRequirementsReferenceResolver<org.emftext.language.requirements.RequirementsSpec, org.emftext.language.requirements.RequirementsSpec> {

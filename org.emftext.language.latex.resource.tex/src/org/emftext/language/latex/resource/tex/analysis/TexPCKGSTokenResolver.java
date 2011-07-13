@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.latex.resource.tex.analysis;
 
 public class TexPCKGSTokenResolver implements org.emftext.language.latex.resource.tex.ITexTokenResolver {

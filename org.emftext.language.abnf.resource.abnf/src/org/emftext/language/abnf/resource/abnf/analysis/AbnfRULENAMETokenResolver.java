@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.abnf.resource.abnf.analysis;
 
 public class AbnfRULENAMETokenResolver implements org.emftext.language.abnf.resource.abnf.IAbnfTokenResolver {

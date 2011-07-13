@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.bibtex.resource.bib.analysis;
 
 public class EntryBibtexKeyReferenceResolver implements org.emftext.language.bibtex.resource.bib.IBibReferenceResolver<org.emftext.language.bibtex.Entry, org.emftext.language.bibtex.BibtexKeyField> {

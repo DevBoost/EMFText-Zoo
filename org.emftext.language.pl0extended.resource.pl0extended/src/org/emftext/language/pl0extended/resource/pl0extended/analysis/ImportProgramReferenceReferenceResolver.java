@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pl0extended.resource.pl0extended.analysis;
 
 import org.eclipse.emf.common.util.URI;

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.rolecore.resource.rolecore.analysis;
 
 public class RoleTypePlayedByReferenceResolver implements org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.emftext.language.rolecore.RoleType, org.emftext.language.rolecore.NaturalType> {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eocl.resource.eocl.mopp;
 
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.IOclResource;

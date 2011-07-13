@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.latex.resource.tex.analysis;
 
 public class TexQUOTED_35_35TokenResolver implements org.emftext.language.latex.resource.tex.ITexTokenResolver {

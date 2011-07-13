@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pacad.resource.pacad.analysis;
 
 public class ImportImportedAdventureReferenceResolver implements org.emftext.language.pacad.resource.pacad.IPacadReferenceResolver<org.emftext.language.pacad.Import, org.emftext.language.pacad.PointAndClickAdventure> {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.lambdacalculus.resource.lambda.analysis;
 
 public class LambdaTEXTTokenResolver implements org.emftext.language.lambdacalculus.resource.lambda.ILambdaTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsextension.resource.formsextension.analysis;
 
 public class ExtendedFormCompilationUnitReferenceResolver implements org.emftext.language.formsextension.resource.formsextension.IFormsextensionReferenceResolver<org.emftext.language.formsextension.ExtendedForm, org.emftext.language.java.containers.CompilationUnit> {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.xmas.resource.xmas.analysis;
 
 public class XmasATTRIBUTESTokenResolver implements org.emftext.language.xmas.resource.xmas.IXmasTokenResolver {

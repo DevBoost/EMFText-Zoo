@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.secprop.resource;
 
 // A singleton class for the text resource plug-in.

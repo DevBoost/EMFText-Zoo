@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.java.sqljava.resource.sqljava.analysis;
 
 import java.util.Collection;

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.company.resource.company.analysis;
 
 public class EmployeeMentorReferenceResolver implements org.emftext.language.company.resource.company.ICompanyReferenceResolver<org.emftext.language.company.Employee, org.emftext.language.company.Employee> {

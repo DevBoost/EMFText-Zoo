@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.bibtex.resource.bib.mopp;
 
 public class BibResource extends org.eclipse.emf.ecore.resource.impl.ResourceImpl implements org.emftext.language.bibtex.resource.bib.IBibTextResource {

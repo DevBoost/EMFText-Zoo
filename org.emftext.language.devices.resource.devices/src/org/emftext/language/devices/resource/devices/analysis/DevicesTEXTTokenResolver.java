@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.devices.resource.devices.analysis;
 
 public class DevicesTEXTTokenResolver implements org.emftext.language.devices.resource.devices.IDevicesTokenResolver {

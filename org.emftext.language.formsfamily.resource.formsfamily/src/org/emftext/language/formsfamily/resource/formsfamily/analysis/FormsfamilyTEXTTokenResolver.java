@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsfamily.resource.formsfamily.analysis;
 
 public class FormsfamilyTEXTTokenResolver implements org.emftext.language.formsfamily.resource.formsfamily.IFormsfamilyTokenResolver {

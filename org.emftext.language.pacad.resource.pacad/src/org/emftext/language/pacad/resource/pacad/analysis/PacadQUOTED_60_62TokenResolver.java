@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.pacad.resource.pacad.analysis;
 
 public class PacadQUOTED_60_62TokenResolver implements org.emftext.language.pacad.resource.pacad.IPacadTokenResolver {

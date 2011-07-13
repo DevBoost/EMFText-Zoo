@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.simpleweave.resource.simpleweave.analysis;
 
 public class SimpleweaveQUOTED_60_62TokenResolver implements org.emftext.language.simpleweave.resource.simpleweave.ISimpleweaveTokenResolver {

@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.bibtex.resource.bib.analysis;
 
 public class BibQUOTED_34_34TokenResolver implements org.emftext.language.bibtex.resource.bib.IBibTokenResolver {

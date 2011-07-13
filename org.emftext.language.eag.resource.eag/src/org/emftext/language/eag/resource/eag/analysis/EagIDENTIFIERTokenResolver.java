@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.eag.resource.eag.analysis;
 
 public class EagIDENTIFIERTokenResolver implements org.emftext.language.eag.resource.eag.IEagTokenResolver {

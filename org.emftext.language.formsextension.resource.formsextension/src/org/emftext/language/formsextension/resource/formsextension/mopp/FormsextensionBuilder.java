@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsextension.resource.formsextension.mopp;
 
 import java.util.Collections;

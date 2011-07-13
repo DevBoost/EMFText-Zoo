@@ -1,9 +1,4 @@
-/**
- * <copyright>
- * </copyright>
- *
- * 
- */
+
 package org.emftext.language.formsextension.resource.formsextension.analysis;
 
 public class FormsextensionQUOTED_34_34TokenResolver implements org.emftext.language.formsextension.resource.formsextension.IFormsextensionTokenResolver {
