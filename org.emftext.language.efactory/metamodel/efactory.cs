@@ -7,6 +7,8 @@ IMPORTS {
 }
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	overrideBuilder = "false";
 	usePredefinedTokens = "false";
 	disableLaunchSupport = "true";
