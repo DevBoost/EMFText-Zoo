@@ -3,6 +3,7 @@ FOR <http://org.emftext/company.ecore> <company.genmodel>
 START Company
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	reloadGeneratorModel = "true";
 	overrideBuilder = "false";
 	additionalDependencies = "org.emftext.language.dot";
