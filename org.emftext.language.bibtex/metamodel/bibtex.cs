@@ -16,6 +16,7 @@ FOR <http://www.emftext.org/language/bibtex>
 START Bibliography
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
 	usePredefinedTokens = "false";
 	overridePluginXML = "false";
 	reloadGeneratorModel = "true";
