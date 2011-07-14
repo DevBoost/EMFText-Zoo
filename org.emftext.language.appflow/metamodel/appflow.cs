@@ -16,6 +16,8 @@ IMPORTS {
 }
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	additionalDependencies="org.emftext.language.java.resource";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
