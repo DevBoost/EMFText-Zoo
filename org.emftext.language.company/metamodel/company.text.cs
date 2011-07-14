@@ -5,6 +5,7 @@ START Company
 OPTIONS {
 	reloadGeneratorModel = "true";
 	overrideBuilder = "false";
+	additionalDependencies = "org.emftext.language.dot";
 }
 
 TOKENS {
