@@ -7,6 +7,8 @@ FOR <http://www.emftext.org/language/abnf>
 START RuleSet
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	usePredefinedTokens = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
