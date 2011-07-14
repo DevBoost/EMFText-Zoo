@@ -17,6 +17,8 @@ FOR <http://www.emftext.org/language/formsfamily>
 START Form
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	overrideBuilder = "false";
 	additionalDependencies = "org.emftext.language.forms.generator";
 	disableLaunchSupport = "true";
