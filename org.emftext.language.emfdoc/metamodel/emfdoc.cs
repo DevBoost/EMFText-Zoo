@@ -3,6 +3,8 @@ FOR <http://www.emftext.org/language/emfdoc>
 START Documentation
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	overrideBuilder = "false";
 	usePredefinedTokens = "false";
 	disableLaunchSupport = "true";
