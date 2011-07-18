@@ -1,4 +1,4 @@
-@SuppressWarnings(tokenOverlapping)
+@SuppressWarnings(tokenOverlapping,noRuleForMetaClass)
 SYNTAXDEF mecore
 FOR <http://www.emftext.org/language/mecore> <mecore.genmodel>
 START MPackage
@@ -14,8 +14,8 @@ OPTIONS {
 
 TOKENS {
 	DEFINE INTEGER $('-')?('0'..'9')+$;
-	DEFINE UPPER $('A'..'Z')('a'..'z'|'A'..'Z'|'.')*$;
-	DEFINE LOWER $('a'..'z')('a'..'z'|'A'..'Z'|'.')*$;
+	DEFINE UPPER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'.')*$;
+	DEFINE LOWER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'.')*$;
 	DEFINE WHITESPACES $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAKS $('\r'|'\n')+$;
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
