@@ -13,10 +13,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.dbschema.AttributeColumn;
 import org.emftext.language.dbschema.Column;
@@ -26,7 +22,6 @@ import org.emftext.language.dbschema.DBSchemaUtil;
 import org.emftext.language.dbschema.DbschemaFactory;
 import org.emftext.language.dbschema.ForeignKeyColumn;
 import org.emftext.language.dbschema.Table;
-import org.emftext.language.dbschema.resource.dbschema.mopp.DbschemaMetaInformation;
 
 public class SchemaReader {
 
@@ -34,10 +29,8 @@ public class SchemaReader {
 	private DatabaseMetaData metaData;
 	private Map<Integer, String> typeMap = new LinkedHashMap<Integer, String>();
 
-	public SchemaReader(String jdbcDriver, String jdbcConnectionUrl,
-			String jdbcUser, String jdbcPassword, String schema) {
+	public SchemaReader() {
 		super();
-		connect(jdbcDriver, jdbcConnectionUrl, jdbcUser, jdbcPassword, schema);
 	}
 
 	private void connect(String jdbcDriver, String jdbcConnectionUrl,
@@ -64,21 +57,17 @@ public class SchemaReader {
 		}
 	}
 
-	public static void main(String[] args) throws SQLException, IOException {
-		String jdbcDriver = "com.mysql.jdbc.Driver";
-		String schemaName = "mySchema";
-		String jdbcConnectionUrl = "jdbc:mysql://localhost/" + schemaName;
-		String jdbcUser = "user";
-		String jdbcPassword = "pass";
+	public DBSchema discoverSchema(String jdbcDriver, String jdbcConnectionUrl,
+			String schemaName, String jdbcUser, String jdbcPassword) throws SQLException, IOException {
 		
+		connect(jdbcDriver, jdbcConnectionUrl, jdbcUser, jdbcPassword, schemaName);
 		DBSchema schema = DbschemaFactory.eINSTANCE.createDBSchema();
 		schema.setName(schemaName);
 
-		SchemaReader reader = new SchemaReader(jdbcDriver, jdbcConnectionUrl, jdbcUser, jdbcPassword, schema.getName());
+		discoverTables(schema);
+		connectReferencingTables(schema);
 		
-		reader.discoverTables(schema);
-		reader.connectReferencingTables(schema);
-		reader.saveSchema(schema);
+		return schema;
 	}
 
 	private void discoverTables(DBSchema newSchema) throws SQLException {
@@ -202,14 +191,6 @@ public class SchemaReader {
 				EcoreUtil.replace(foreignKeyColumn, fkColumn);
 			}
 		}
-	}
-
-	private void saveSchema(DBSchema schema) throws IOException {
-		new DbschemaMetaInformation().registerResourceFactory();
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.createResource(URI.createURI("temp." + new DbschemaMetaInformation().getSyntaxName()));
-		resource.getContents().add(schema);
-		resource.save(null);
 	}
 
 	private static ColumnType findType(String dataTypeName) {

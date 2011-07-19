@@ -8,6 +8,10 @@ OPTIONS {
 	
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	disableNewProjectWizard = "true";
+	overrideNewFileWizard = "false";
+	
+	additionalUIDependencies = "org.emftext.language.dbschema.discovery";
 }
 
 TOKENS {
