@@ -28,6 +28,7 @@ import org.emftext.language.conference.resource.conference.mopp.ConferenceMetaIn
 import org.emftext.language.csv.resource.csv.mopp.CsvMetaInformation;
 import org.emftext.language.customer.resource.customer.mopp.CustomerMetaInformation;
 import org.emftext.language.customsandwich.resource.customsandwich.mopp.CustomsandwichMetaInformation;
+import org.emftext.language.dbschema.resource.dbschema.mopp.DbschemaMetaInformation;
 import org.emftext.language.dot.resource.dot.mopp.DotMetaInformation;
 import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreMetaInformation;
 import org.emftext.language.mecore.resource.mecore.mopp.MecoreMetaInformation;
@@ -133,6 +134,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new CustomsandwichMetaInformation());
 		metaInformations.add(new CustomerMetaInformation());
 		metaInformations.add(new CsvMetaInformation());
+		metaInformations.add(new DbschemaMetaInformation()); // is not yet on update site, but will be added soon
 		metaInformations.add(new DotMetaInformation());
 		metaInformations.add(new FacadeEcoreMetaInformation());
 		metaInformations.add(new TextEcoreMetaInformation());
