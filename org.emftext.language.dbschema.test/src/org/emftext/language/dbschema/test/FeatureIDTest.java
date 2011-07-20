@@ -10,9 +10,15 @@ public class FeatureIDTest extends TestCase {
 
 	public void testFeatureID() {
 		EClass attColumnClass = DbschemaPackage.eINSTANCE.getAttributeColumn();
-		int featureID = DbschemaPackage.ATTRIBUTE_COLUMN__SIZE;
-		//assertEquals(3, featureID);
+		
+		assertFeatureName(attColumnClass, "size", DbschemaPackage.ATTRIBUTE_COLUMN__SIZE);
+		assertFeatureName(attColumnClass, "name", DbschemaPackage.ATTRIBUTE_COLUMN__NAME);
+		assertFeatureName(attColumnClass, "primary", DbschemaPackage.ATTRIBUTE_COLUMN__PRIMARY);
+		assertFeatureName(attColumnClass, "type", DbschemaPackage.ATTRIBUTE_COLUMN__TYPE);
+	}
+
+	private void assertFeatureName(EClass attColumnClass, String expectedName, int featureID) {
 		EStructuralFeature feature = attColumnClass.getEStructuralFeature(featureID);
-		assertEquals("size", feature.getName());
+		assertEquals(expectedName, feature.getName());
 	}
 }
