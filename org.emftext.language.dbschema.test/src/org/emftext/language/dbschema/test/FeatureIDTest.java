@@ -17,8 +17,8 @@ public class FeatureIDTest extends TestCase {
 		assertFeatureName(attColumnClass, "type", DbschemaPackage.ATTRIBUTE_COLUMN__TYPE);
 	}
 
-	private void assertFeatureName(EClass attColumnClass, String expectedName, int featureID) {
-		EStructuralFeature feature = attColumnClass.getEStructuralFeature(featureID);
+	private void assertFeatureName(EClass eClass, String expectedName, int featureID) {
+		EStructuralFeature feature = eClass.getEStructuralFeature(featureID);
 		assertEquals(expectedName, feature.getName());
 	}
 }
