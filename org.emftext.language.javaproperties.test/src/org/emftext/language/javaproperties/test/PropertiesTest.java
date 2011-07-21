@@ -52,11 +52,13 @@ public class PropertiesTest extends TestCase {
 	}
 
 	public void testParsing() {
-		File[] inputFiles = new File("input").listFiles(new FileFilter() {
+		File[] inputFiles = new File(".." + File.separator + PropertySet.class.getPackage().getName() + File.separator + "metamodel").listFiles(new FileFilter() {
 			public boolean accept(File file) {
 				return file.getName().endsWith("." + FILE_EXTENSION);
 			}
 		});
+		assertTrue("There must be at least one test file", inputFiles.length > 0);
+		
 		for (File file : inputFiles) {
 			PropertySet ecoreProperties = loadAsEcoreModel(file);
 			Properties javaProperties = loadAsJavaObject(file);
