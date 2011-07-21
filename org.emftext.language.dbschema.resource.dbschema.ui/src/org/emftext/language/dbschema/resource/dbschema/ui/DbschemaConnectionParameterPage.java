@@ -40,7 +40,8 @@ public class DbschemaConnectionParameterPage extends WizardPage implements IDbsc
 
 	public DbschemaConnectionParameterPage(String pageName) {
 		super(pageName);
-		setDescription("Select how to create the dbschema file.");
+		setTitle("Select how to create the dbschema file.");
+		setDescription("You can either create an empty file or read a schema from an existing database using a JDBC connection.");
 		schemaResource = (IDbschemaTextResource) new ResourceSetImpl().createResource(URI.createURI("temp." + new DbschemaMetaInformation().getSyntaxName()));
 	}
 
