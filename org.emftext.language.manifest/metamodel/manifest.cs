@@ -99,7 +99,7 @@ RULES{
 	PackageName::= id[ALPHANUMEXT]; //BUNDLE
 	
 	// Manifest
-	Manifest::= ("Manifest-Version:" manifestVersion[ALPHANUMEXT])? elements* !0;
+	Manifest::= ("Manifest-Version:" manifestVersion[ALPHANUMEXT])? (elements !0)* !0;
 													// VERSION
 	
 	// Elements
