@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2011 
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -27,6 +27,8 @@ OPTIONS {
 	resolveProxyElementsAfterParsing = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	
+	overrideBuilder = "false";
 }
 
 RULES {

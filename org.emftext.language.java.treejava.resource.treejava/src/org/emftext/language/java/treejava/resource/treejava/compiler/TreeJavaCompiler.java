@@ -14,9 +14,7 @@
 package org.emftext.language.java.treejava.resource.treejava.compiler;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -27,24 +25,13 @@ import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.treejava.Node;
-import org.emftext.language.java.treejava.resource.treejava.ITreejavaOptionProvider;
-import org.emftext.language.java.treejava.resource.treejava.ITreejavaOptions;
-import org.emftext.language.java.treejava.resource.treejava.ITreejavaResourcePostProcessor;
-import org.emftext.language.java.treejava.resource.treejava.ITreejavaResourcePostProcessorProvider;
 import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaResource;
 
-public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
-	ITreejavaResourcePostProcessorProvider, ITreejavaOptionProvider {
+public class TreeJavaCompiler {
 
-	public Map<?, ?> getOptions() {
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(ITreejavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new TreeJavaCompiler());
-		return options;
-	}
-
-	public void process(TreejavaResource resource) {
+	public void compile(TreejavaResource resource) throws IOException {
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
-		Resource javaResource = resource.getResourceSet().createResource(javaURI);
+		final Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
 				EcoreUtil.copyAll(resource.getContents()));
 
@@ -65,11 +52,7 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 			}
 		}
 
-		try {
-			javaResource.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		javaResource.save(null);
 	}
 
 	private NewConstructorCall convertTreeToNewConstructorCallChain(Node rootNode) {
@@ -85,13 +68,5 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 			ncc.getArguments().add(childNcc);
 		}
 		return ncc;
-	}
-
-	public ITreejavaResourcePostProcessor getResourcePostProcessor() {
-		return new TreeJavaCompiler();
-	}
-
-	public void terminate() {
-		// do nothing
 	}
 }
