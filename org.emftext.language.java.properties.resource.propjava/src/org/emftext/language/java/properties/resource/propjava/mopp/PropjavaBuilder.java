@@ -44,13 +44,12 @@ import org.emftext.language.java.types.TypesFactory;
 public class PropjavaBuilder implements org.emftext.language.java.properties.resource.propjava.IPropjavaBuilder {
 	
 	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
-		// change this to return true to enable building of all resources
-		for(String segment : uri.segmentsList()){
-			if(segment.toLowerCase().equals("bin"))
+		for (String segment : uri.segmentsList()) {
+			if (segment.toLowerCase().equals("bin")) {
 				return false;
+			}
 		}
-
-		return false;
+		return true;
 	}
 	
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.properties.resource.propjava.mopp.PropjavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
