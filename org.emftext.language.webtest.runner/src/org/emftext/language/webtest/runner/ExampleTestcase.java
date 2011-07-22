@@ -14,12 +14,13 @@
 
 package org.emftext.language.webtest.runner;
 
+import org.emftext.language.webtest.TestScript;
 import org.junit.Test;
 
 public class ExampleTestcase {
 	
 	@Test
 	public void testExample() {
-		new WebtestRunner().runTest("examples/emftext.org.webtest");
+		new WebtestRunner().runTest("../" + TestScript.class.getPackage().getName() + "/metamodel/webtest.newfile.webtest");
 	}
 }
