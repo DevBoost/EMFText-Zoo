@@ -20,7 +20,6 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	overridePluginXML = "false";
 	reloadGeneratorModel = "true";
-	additionalDependencies = "org.emftext.language.pacad.util";
 	overrideDefaultResolverDelegate = "false";
 	overrideTextResource = "false";
 	//disableTokenSorting = "true";
@@ -32,10 +31,10 @@ TOKENS {
 	DEFINE COMMENT $'%'(~('\n'|'\r'))*$;
 	DEFINE YEAR $('1' |'2')('0'..'9')('0'..'9')('0'..'9')$;
 	DEFINE INTEGER $('0'..'9')+$;
-	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'.')+$;
-	//DEFINE WHITESPACETEXT $(('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+((' ')('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'))*)+$;
-	DEFINE WHITESPACE $(' ' | '\t' | '\f')+$;
+	DEFINE ID $('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'.'| '/' |':'|'_')+$;
+	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'.')+$;
 	DEFINE LINEBREAK $('\r\n' | '\r' | '\n')$;
+	DEFINE WHITESPACE $(' ' | '\t' | '\f')+$;
 }
 
 TOKENSTYLES {
@@ -44,57 +43,87 @@ TOKENSTYLES {
 	"@ARTICLE" COLOR #000080;
 }
 
-
 RULES {
 	// syntax definition for class 'Bibliography'
 	Bibliography ::= entries*;
 	
-	BibtexKeyField ::= value[TEXT];
+	@SuppressWarnings(explicitSyntaxChoice)
+	BibtexKeyField ::= (value[ID]|value[TEXT]);
 	
-	TitleField ::= "title" "=" #1  value['"','"'] ;
-	BookTitleField ::= "booktitle" "=" #1 value['"','"'];
-	YearField ::= "year" "=" #1 "{" value[YEAR] "}";
+	@SuppressWarnings(explicitSyntaxChoice)
+	AuthorField ::= "author" "=" #1 (("\"" authors ("and" authors)* "\"") | ("{" authors ("and" authors)* "}") ) ;
+	Author ::= ((firstName[TEXT] (secondName[TEXT] )? lastName[TEXT]) | ((lastName[TEXT] "," firstName[TEXT] (secondName[TEXT] )?))) ;
+
+	@SuppressWarnings(explicitSyntaxChoice)
+	EditorField ::= "editor" "=" #1 ( ("{" editors ("and" editors)* "}") | ("\"" editors ("and" editors)* "\"")) ;
+	Editor ::= ((firstName[TEXT] (secondName[TEXT] )? lastName[TEXT]) | (lastName[TEXT] "," firstName[TEXT] (secondName[TEXT] )?)) ;
+
+	@SuppressWarnings(explicitSyntaxChoice)
+	KeywordField ::= "keywords" "="  #1 ("{" keywords ("," keywords)* "}" | "\"" keywords ("," keywords)* "\"") ;
+	Keyword ::= (value[TEXT] | value[]);
+
+	@SuppressWarnings(explicitSyntaxChoice)
+	TitleField ::= "title" "=" #1 (value['"','"'] | ("{" value[] "}")) ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	BookTitleField ::= "booktitle" "=" #1 (value['"','"'] | "{" value[] "}");
+	@SuppressWarnings(explicitSyntaxChoice)
+	SeriesField ::= "series" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	AddressField ::= "address" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	MonthField ::= "month" "=" #1  (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	OrganizationField ::= "organization" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	PublisherField ::= "publisher" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	JournalField ::= "journal" "=" #1  (value['"','"'] | "{" value[] "}");
+	@SuppressWarnings(explicitSyntaxChoice)
+	NoteField ::= "note" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	EidField ::= "eid" "=" #1  (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	AbstractField ::= "abstract" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	UrlField ::= "url" "=" #1 (value['"','"'] | "{" value[] "}") ;
 	
-	AuthorField ::= "author" "=" #1 "{" authors ("and" authors)* "}" ;
-	Author ::= firstName[TEXT] (secondName[TEXT] )? lastName[TEXT] ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	YearField ::= "year" "=" #1 ("{" value[YEAR] "}" | "\"" value[YEAR] "\"");
 
-	EditorField ::= "editor" "=" #1 "{" editors ("and" editors)* "}" ;
-	Editor ::= firstName[TEXT] (secondName[TEXT] )? lastName[TEXT] ;
+	@SuppressWarnings(explicitSyntaxChoice)
+	VolumeField ::= "volume" "=" #1 ("\"" (value[INTEGER]) "\"" | "{" (value[INTEGER]) "}");
+	@SuppressWarnings(explicitSyntaxChoice)
+	PartField ::= "part" "=" #1  ("{" value[INTEGER] "}"| "\"" value[INTEGER] "\"");
+	@SuppressWarnings(explicitSyntaxChoice)
+	NumberField ::= "number" "=" #1 ("{" value[INTEGER] "}"| "\"" value[INTEGER] "\"");
 
-	JournalField ::= "journal" "=" #1 "{" value[TEXT] "}";
-
-	VolumeField ::= "volume" "=" #1 "{" (value[INTEGER])"}";
-
-	PageField ::= "pages" "=" #1 "{" fromPage ("--" toPage)? "}";
+	@SuppressWarnings(explicitSyntaxChoice)
+	PageField ::= "pages" "=" #1 ("{" fromPage (("--" | "-") toPage)? "}" | "\"" fromPage (("--" | "-") toPage)? "\"");
 	Page ::= value[INTEGER];
 
-	NumberField ::= "number" "=" #1 "{" value[INTEGER] "}";
-	SeriesField ::= "series" "=" #1  value['"','"'] ;
-
-	AddressField ::= "address" "=" #1  value['"','"'] ;
-	MonthField ::= "month" "=" #1  value['"','"'] ;
-	OrganizationField ::= "organization" "=" #1  value['"','"'] ;
-	PublisherField ::= "publisher" "=" #1  value['"','"'] ;
-	NoteField ::= "note" "=" #1  value['"','"'] ;
-	PartField ::= "part" "=" #1  "{" value[INTEGER] "}" ;
-	EidField ::= "eid" "=" #1  value['"','"'] ;
-
-	InProceedingsEntry ::= "@INPROCEEDINGS" "{" !1 
+	InProceedingsEntry ::= ("@INPROCEEDINGS"|"@inproceedings") "{" !1 
 		bibtexKey #1
-		// title, bookTitle, year, author are required 
-		("," !1 ((title) | (bookTitle) | (year) | (author)))+ 
-		// editor, volume, number, series, pages, address, month, organization, publisher, note are optional
-		("," !1 ((editor) | (volume) | (number) | (series) | (pages) | (address) | (month) | (organization) | (publisher) | (note) ))*		
-	!1 "}";
+		("," (
+			(url)? | (abstract)? | (keyword)? |
+			// title, bookTitle, year, author are required 
+			(title) | (bookTitle) | (year) | (author) |
+			// editor, volume, number, series, pages, address, month, 
+			// organization, publisher, note are optional
+			(editor)? | (volume)? | (number)? | (series)? | (pages)? | 
+			(address)? | (month)? | (organization)? | (publisher)? | (note)? 
+		) #1)*
+		!1 "}";	
 
-	ArticleEntry ::= "@ARTICLE" "{" !1 
+	ArticleEntry ::= ("@ARTICLE"|"@article") "{" !1 
 		bibtexKey #1
-		// title, journal, volume, year, author, pages are required 
-		("," !1 ((title) | (journal) | (volume)| (year) | (author) | (pages)))+ 
-		// number, month, part, eid, note
-		("," !1 ((number) | (month) | (part)| (eid) | (note) ))* 
-	!1 "}";
-
-	
+		("," (
+			(url)? | (abstract)? | (keyword)? |
+			// title, journal, volume, year, author, pages are required 
+			(title) | (journal) | (volume) | (year) | (author) | (pages) |
+			// number, month, part, eid, note are optional
+			(number)? | (month)? | (part)? | (eid)? | (note)?
+		) #1)*
+		!1 "}";	
+		
 
 }

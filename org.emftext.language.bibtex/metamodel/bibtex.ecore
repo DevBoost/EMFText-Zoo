@@ -15,10 +15,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="YearValue">
+  <eClassifiers xsi:type="ecore:EClass" name="YearValue" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntValue">
+  <eClassifiers xsi:type="ecore:EClass" name="IntValue" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//IntValue"/>
@@ -62,7 +62,14 @@
     <eOperations name="getFields" upperBound="-1" eType="#//Field"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bibtexKey" lowerBound="1"
         eType="#//BibtexKeyField" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abstract" eType="#//AbstractField"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="url" eType="#//UrlField"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keyword" eType="#//KeywordField"
+        containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UrlField" eSuperTypes="#//StringValue #//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="InProceedingsEntry" eSuperTypes="#//Entry">
     <eOperations name="getFields" upperBound="-1" eType="#//Field">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -133,4 +140,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
         eType="#//Entry" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Keyword" eSuperTypes="#//StringValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KeywordField" eSuperTypes="#//Field">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keywords" upperBound="-1"
+        eType="#//Keyword" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractField" eSuperTypes="#//StringValue #//Field"/>
 </ecore:EPackage>
