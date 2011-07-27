@@ -12,6 +12,7 @@ OPTIONS {
 	overrideNewFileWizard = "false";
 	
 	additionalUIDependencies = "org.emftext.language.dbschema.discovery";
+	licenceHeader = "../../org.dropsbox/licence.txt";
 }
 
 TOKENS {

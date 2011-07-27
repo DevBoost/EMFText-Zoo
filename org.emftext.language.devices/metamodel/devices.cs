@@ -5,6 +5,7 @@ START CommunicationSpec
 OPTIONS {
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	licenceHeader = "../../org.dropsbox/licence.txt";
 }
 
 TOKENS {

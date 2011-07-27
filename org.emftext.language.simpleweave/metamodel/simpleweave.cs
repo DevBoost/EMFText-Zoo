@@ -5,6 +5,7 @@ START WModel
 OPTIONS {
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	licenceHeader = "../../org.dropsbox/licence.txt";
 }
 
 RULES {

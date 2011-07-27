@@ -7,6 +7,7 @@ OPTIONS {
 	tokenspace = "1";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	licenceHeader = "../../org.dropsbox/licence.txt";
 }
 
 TOKENS {
@@ -33,13 +34,13 @@ TOKENSTYLES {
 
 RULES {
 	
-	Document::= prefix[SYMBOL]"documentclass" ( "[" (fontsize[FNTSZS])? ("," papertype[PPRSZS])"]") ? ( "{" documenttype[DOCCLS] "}" ) ? (containspackages)* (begindoc) ? (containstitle) ? (containsabstract) ? (containsbody) ? (containsbib) ? (enddoc);
+	Document::= prefix[SYMBOL]"documentclass" ( "[" (fontsize[FNTSZS])? ("," papertype[PPRSZS])"]")? ( "{" documenttype[DOCCLS] "}" )? (containspackages)* (begindoc)? (containstitle)? (containsabstract)? (containsbody)? (containsbib)? (enddoc);
 
 	Packages::= packageprefix[SYMBOL]"usepackage" "{" packagetype[PCKGS] "}";
 	
 	Begin::= beginprefix[SYMBOL]"begin{document}";
 
-	Title::= (titleprefix[SYMBOL]"title" "{" (titletext['#','#']) "}" ) ? (titleprefix[SYMBOL]"author" "{" authortext['#','#'] "}") (titleprefix[SYMBOL] "maketitle"); //| (titlecontainsgen)*;
+	Title::= (titleprefix[SYMBOL]"title" "{" (titletext['#','#']) "}" )? (titleprefix[SYMBOL]"author" "{" authortext['#','#'] "}") (titleprefix[SYMBOL] "maketitle"); //| (titlecontainsgen)*;
 	
 	Abstracte::= abstractprefix[SYMBOL]"begin{abstract}" abstracttext['#','#'] abstractprefix[SYMBOL]"end{abstract}";
 	
