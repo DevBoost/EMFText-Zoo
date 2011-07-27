@@ -22,6 +22,7 @@ import org.emftext.language.appflow.resource.appflow.mopp.AppflowMetaInformation
 import org.emftext.language.aterms.resource.aterms.mopp.AtermsMetaInformation;
 import org.emftext.language.b.resource.mch.mopp.MchMetaInformation;
 import org.emftext.language.bool.resource.bool.mopp.BoolMetaInformation;
+import org.emftext.language.bibtex.resource.bibtex.mopp.BibtexMetaInformation;
 import org.emftext.language.c_sharp.resource.csharp.mopp.CsharpMetaInformation;
 import org.emftext.language.chess.resource.cg.mopp.CgMetaInformation;
 import org.emftext.language.conference.resource.conference.mopp.ConferenceMetaInformation;
@@ -129,6 +130,7 @@ public class TestLanguageRegistry {
 	public Set<Object> getMetaInformationsForLanguageOnUpdateSite() {
 		Set<Object> metaInformations = new LinkedHashSet<Object>();
 		metaInformations.add(new AbnfMetaInformation());
+		metaInformations.add(new BibtexMetaInformation());
 		metaInformations.add(new CgMetaInformation());
 		metaInformations.add(new ConferenceMetaInformation());
 		metaInformations.add(new CustomsandwichMetaInformation());
