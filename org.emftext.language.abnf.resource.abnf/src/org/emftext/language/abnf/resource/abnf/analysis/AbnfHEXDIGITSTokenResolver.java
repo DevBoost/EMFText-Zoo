@@ -18,7 +18,11 @@ public class AbnfHEXDIGITSTokenResolver implements org.emftext.language.abnf.res
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert value instanceof Integer;
 		Integer integerObject = (Integer) value;
-		return Integer.toHexString(integerObject);
+		String hexString = Integer.toHexString(integerObject);
+		if (hexString.length() < 2) {
+			hexString = "0" + hexString;
+		}
+		return hexString;
 	}
 	
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.abnf.resource.abnf.IAbnfTokenResolveResult result) {
