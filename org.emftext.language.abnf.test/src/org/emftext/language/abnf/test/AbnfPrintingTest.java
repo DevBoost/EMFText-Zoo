@@ -18,8 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Collections;
 
 import junit.framework.TestCase;
 
@@ -38,6 +37,8 @@ import org.emftext.language.abnf.resource.abnf.mopp.AbnfMetaInformation;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfResourceFactory;
 import org.emftext.language.abnf.resource.abnf.util.AbnfStreamUtil;
 import org.emftext.sdk.EMFTextSDKPlugin;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class AbnfPrintingTest extends TestCase {
 	
@@ -50,6 +51,7 @@ public class AbnfPrintingTest extends TestCase {
 				new AbnfResourceFactory());
 	}
 	
+	@Ignore
 	public void testPrinting2() {
 		Rule rule1 = FACTORY.createRule();
 		rule1.setName("rule1");
@@ -81,15 +83,38 @@ public class AbnfPrintingTest extends TestCase {
 		assertEquals("rule1 rule2", printResult);
 	}
 
+	@Ignore
 	public void testPrinting3() {
-		Map<Object, Object> loadOptions = new LinkedHashMap<Object, Object>();
-		testPrinting("rule1=rule1 rule1\n", loadOptions);
+		testPrinting("rule1=rule1 rule1\n");
 	}
 
+	@Test
+	public void testWhitespacePrinting1() {
+		testPrinting("rule1    =    rule1 rule1\n");
+	}
+
+	@Test
+	public void testWhitespacePrinting2() {
+		testPrinting("rule1    =    1* rule1 rule1\n");
+	}
+
+	@Test
+	public void testWhitespacePrinting3() {
+		testPrinting("rule1 = rule1 / rule1    / rule1\n");
+	}
+
+	@Test
+	public void testHexPrinting1() {
+		testPrinting("rule1 = %x14\n");
+	}
+
+	@Test
+	public void testHexPrinting2() {
+		testPrinting("rule1 = %x14-20\n");
+	}
+
+	@Ignore
 	public void testPrinting1() {
-		if (EMFTextSDKPlugin.VERSION.compareTo("1.4.0") <= 0) {
-			return;
-		}
 		testPrinting(new File("." + File.separator + "input" + File.separator + "abnf.abnf"));
 	}
 
@@ -101,14 +126,14 @@ public class AbnfPrintingTest extends TestCase {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
-		testPrinting(input, null);
+		testPrinting(input);
 	}
 
-	private void testPrinting(String input, Map<?,?> loadOptions) {
+	private void testPrinting(String input) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource(URI.createURI("bug1408." + FILE_EXTENSION));
 		try {
-			resource.load(new ByteArrayInputStream(input.getBytes()), loadOptions);
+			resource.load(new ByteArrayInputStream(input.getBytes()), Collections.emptyMap());
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -126,6 +151,11 @@ public class AbnfPrintingTest extends TestCase {
 			fail(e.getMessage());
 		}
 		String printResult = outputStream.toString();
+		// Attention: We need to ignore whitespace after '%x', because
+		// there is an explicit choice in the syntax which cannot be 
+		// recovered by the printer
+		printResult = printResult.replace("%x ", "%x");
+		printResult = printResult.replace("- ", "-");
 		System.out.println("RESULT OF PRINTING ==>" + printResult + "<==");
 		assertEquals(input, printResult);
 	}
