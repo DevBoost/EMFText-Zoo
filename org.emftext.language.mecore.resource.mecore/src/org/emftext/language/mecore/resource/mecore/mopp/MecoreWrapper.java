@@ -27,9 +27,12 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.mecore.MClass;
@@ -42,10 +45,13 @@ import org.emftext.language.mecore.MEnumLiteral;
 import org.emftext.language.mecore.MFeature;
 import org.emftext.language.mecore.MModelElement;
 import org.emftext.language.mecore.MMultiplicity;
+import org.emftext.language.mecore.MOperation;
 import org.emftext.language.mecore.MPackage;
+import org.emftext.language.mecore.MParameter;
 import org.emftext.language.mecore.MSimpleMultiplicity;
 import org.emftext.language.mecore.MSimpleMultiplicityValue;
 import org.emftext.language.mecore.MType;
+import org.emftext.language.mecore.MTypedElement;
 import org.emftext.language.mecore.resource.mecore.IMecoreCommand;
 
 /**
@@ -179,6 +185,11 @@ public class MecoreWrapper {
 			wrapMFeature(mFeature, eClass);
 		}
 		
+		// handle operations
+		for (MOperation mOperation : mClass.getOperations()) {
+			wrapMOperation(mOperation, eClass);
+		}
+		
 		// handle super types
 		commands.add(new IMecoreCommand<Object>() {
 
@@ -204,11 +215,7 @@ public class MecoreWrapper {
 		if (mType instanceof MClass) {
 			eFeature = createReference(mFeature, mType, existingEClass);
 		} else if (mType instanceof MDataType) {
-			MDataType mDataType = (MDataType) mType;
-			// primitive type, create attribute
-			EAttribute eAttribute = findOrCreateEAttribute(mFeature, existingEClass);
-			eAttribute.setEType(mDataType.getEDataType());
-			eFeature = eAttribute;
+			eFeature = createAttribute(mFeature, existingEClass, mType);
 		} else if (mType instanceof MEnum) {
 			final EAttribute eAttribute = findOrCreateEAttribute(mFeature, existingEClass);
 			commands.add(new IMecoreCommand<Object>() {
@@ -229,53 +236,98 @@ public class MecoreWrapper {
 		eFeature.setName(mFeature.getName());
 	}
 
+	private EStructuralFeature createAttribute(MFeature mFeature,
+			EClass existingEClass, final MType mType) {
+		// primitive type, create attribute
+		EAttribute eAttribute = findOrCreateEAttribute(mFeature, existingEClass);
+		setType(eAttribute, mType);
+		return eAttribute;
+	}
+
+	private void wrapMOperation(MOperation mOperation, EClass existingEClass) {
+		final MType mType = mOperation.getType();
+		if (mType == null) {
+			return;
+		}
+		final EOperation eOperation = findOrCreateEOperation(mOperation, existingEClass);
+		// TODO handle parameters
+		for (MParameter mParameter : mOperation.getParameters()) {
+			wrapMParameter(mParameter, eOperation);
+		}
+
+		commands.add(new IMecoreCommand<Object>() {
+
+			public boolean execute(Object context) {
+				eOperation.setEType((EClassifier) mapping.get(mType));
+				return true;
+			}
+		});
+
+		setMulitplicity(mOperation, eOperation);
+		mapping.put(mOperation, eOperation);
+		eOperation.setName(mOperation.getName());
+	}
+
+	private void wrapMParameter(MParameter mParameter, EOperation existingOperation) {
+		final MType mType = mParameter.getType();
+		if (mType == null) {
+			return;
+		}
+		final EParameter eParameter = findOrCreateEParameter(mParameter, existingOperation);
+
+		commands.add(new IMecoreCommand<Object>() {
+
+			public boolean execute(Object context) {
+				setType(eParameter, mType);
+				return true;
+			}
+		});
+
+		setMulitplicity(mParameter, eParameter);
+		mapping.put(mParameter, eParameter);
+		eParameter.setName(mParameter.getName());
+	}
+
 	private EStructuralFeature createReference(MFeature mFeature, final MType mType, EClass eClass) {
-		EStructuralFeature eFeature;
 		// complex type, create reference
 		final EReference eReference = findOrCreateEReference(mFeature, eClass);
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				if (mType instanceof MEcoreType) {
-					MEcoreType mEcoreType = (MEcoreType) mType;
-					eReference.setEType(mEcoreType.getEcoreType());
-				} else {
-					eReference.setEType((EClass) mapping.get(mType));
-				}
+				setType(eReference, mType);
 				return true;
 			}
 		});
 		eReference.setContainment(!mFeature.isReference());
-		eFeature = eReference;
-		return eFeature;
+		return eReference;
 	}
 
-	private void setMulitplicity(MFeature mFeature, EStructuralFeature eFeature) {
-		MMultiplicity multiplicity = mFeature.getMultiplicity();
+	private void setMulitplicity(MTypedElement mElement, ETypedElement eElement) {
+		MMultiplicity multiplicity = mElement.getMultiplicity();
 		if (multiplicity instanceof MSimpleMultiplicity) {
 			MSimpleMultiplicity simpleMultiplicity = (MSimpleMultiplicity) multiplicity;
 			MSimpleMultiplicityValue value = simpleMultiplicity.getValue();
 			if (value == MSimpleMultiplicityValue.STAR) {
-				setBounds(eFeature, 0, -1);
+				setBounds(eElement, 0, -1);
 			} else if (value == MSimpleMultiplicityValue.PLUS) {
-				setBounds(eFeature, 1, -1);
+				setBounds(eElement, 1, -1);
 			} else if (value == MSimpleMultiplicityValue.OPTIONAL) {
-				setBounds(eFeature, 0, 1);
+				setBounds(eElement, 0, 1);
 			} else {
-				setBounds(eFeature, 1, 1);
+				setBounds(eElement, 1, 1);
 			}
 		} else if (multiplicity instanceof MComplexMultiplicity) {
 			MComplexMultiplicity complexMultiplicity = (MComplexMultiplicity) multiplicity;
-			eFeature.setLowerBound(complexMultiplicity.getLowerBound());
-			eFeature.setUpperBound(complexMultiplicity.getUpperBound());
+			eElement.setLowerBound(complexMultiplicity.getLowerBound());
+			eElement.setUpperBound(complexMultiplicity.getUpperBound());
 		} else if (multiplicity == null) {
-			setBounds(eFeature, 1, 1);
+			setBounds(eElement, 1, 1);
 		}
 	}
 
-	private void setBounds(EStructuralFeature eFeature, int lower, int upper) {
-		eFeature.setLowerBound(lower);
-		eFeature.setUpperBound(upper);
+	private void setBounds(ETypedElement element, int lower, int upper) {
+		element.setLowerBound(lower);
+		element.setUpperBound(upper);
 	}
 
 	private EPackage findOrCreateEPackage(MPackage mPackage, EPackage existingSuperPackage) {
@@ -398,7 +450,75 @@ public class MecoreWrapper {
 		return eReference;
 	}
 
+	private EOperation findOrCreateEOperation(MOperation mOperation, EClass existingEClass) {
+		if (mapping.containsKey(mOperation)) {
+			return (EOperation) mapping.get(mOperation);
+		}
+
+		EOperation existingOperation = null;
+		for (EOperation operation : existingEClass.getEOperations()) {
+			String name = operation.getName();
+			if (name != null && name.equals(mOperation.getName())) {
+				// TODO check parameter types and return type
+				existingOperation = operation;
+				break;
+			}
+		}
+		
+		if (existingOperation != null && existingOperation instanceof EOperation) {
+			mapping.put(mOperation, existingOperation);
+			return (EOperation) existingOperation;
+		}
+		
+		// if we can't find an existing EOperation, we need to create a fresh one
+		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
+		addAnnotation(eOperation, COMMENT_VALUE);
+		existingEClass.getEOperations().add(eOperation);
+		mapping.put(mOperation, eOperation);
+		return eOperation;
+	}
+
+	private EParameter findOrCreateEParameter(MParameter mParameter, EOperation existingEOperation) {
+		if (mapping.containsKey(mParameter)) {
+			return (EParameter) mapping.get(mParameter);
+		}
+
+		EParameter existingParameter = null;
+		for (EParameter parameter : existingEOperation.getEParameters()) {
+			String name = parameter.getName();
+			if (name != null && name.equals(mParameter.getName())) {
+				// TODO check parameter types and return type
+				existingParameter = parameter;
+				break;
+			}
+		}
+		
+		if (existingParameter != null && existingParameter instanceof EParameter) {
+			mapping.put(mParameter, existingParameter);
+			return (EParameter) existingParameter;
+		}
+		
+		// if we can't find an existing EParameter, we need to create a fresh one
+		EParameter eParameter = EcoreFactory.eINSTANCE.createEParameter();
+		addAnnotation(eParameter, COMMENT_VALUE);
+		existingEOperation.getEParameters().add(eParameter);
+		mapping.put(mParameter, eParameter);
+		return eParameter;
+	}
+
 	public Map<MModelElement, EModelElement> getMapping() {
 		return mapping;
+	}
+
+	private void setType(ETypedElement eTypedElement, MType mType) {
+		if (mType instanceof MEcoreType) {
+			MEcoreType mEcoreType = (MEcoreType) mType;
+			eTypedElement.setEType(mEcoreType.getEcoreType());
+		} else if (mType instanceof MDataType) {
+			MDataType mDataType = (MDataType) mType;
+			eTypedElement.setEType(mDataType.getEDataType());
+		} else {
+			eTypedElement.setEType((EClass) mapping.get(mType));
+		}
 	}
 }

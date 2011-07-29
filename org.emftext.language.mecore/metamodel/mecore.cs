@@ -30,13 +30,16 @@ TOKENSTYLES {
 RULES {
 	MPackage ::= (name[LOWER])? namespace['<','>'] (!0 imports)* (!0 contents)*;
 	MImport  ::= "import" importedPackage['<','>'] "as" prefix[LOWER];
-	MClass   ::= abstract["abstract" : ""]
+	MClass   ::= abstract["abstract" : ""] 
+				 interface["interface" : ""]
 	             name[UPPER]
 	             (":" supertypes[UPPER] ("," supertypes[UPPER])* )? 
-	             ("(" features* ")")? ;
+	             ("(" features* operations* ")")? ;
 	MEnum    ::= "enum" name[UPPER] ("(" literals* ")")?;
 	MEnumLiteral ::= name[UPPER] literal['"','"']?;
 	MFeature ::= reference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity?;
+	MOperation ::= name[LOWER] "(" (parameters ("," parameters)*)? ")" type[UPPER]  multiplicity?;
+	MParameter ::= name[LOWER] type[UPPER] multiplicity?;
 	
 	MSimpleMultiplicity ::= value[star : "*", optional : "?", plus : "+"];
 	MComplexMultiplicity ::= "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")";
