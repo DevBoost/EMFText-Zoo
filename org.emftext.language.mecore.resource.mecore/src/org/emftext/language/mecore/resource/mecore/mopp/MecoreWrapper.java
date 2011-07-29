@@ -179,6 +179,7 @@ public class MecoreWrapper {
 		eClass.getESuperTypes().clear();
 		eClass.setName(mClass.getName());
 		eClass.setAbstract(mClass.isAbstract());
+		eClass.setInterface(mClass.isInterface());
 		
 		// handle features
 		for (MFeature mFeature : mClass.getFeatures()) {
