@@ -178,8 +178,11 @@ public class MecoreWrapper {
 		mapping.put(mClass, eClass);
 		eClass.getESuperTypes().clear();
 		eClass.setName(mClass.getName());
-		eClass.setAbstract(mClass.isAbstract());
-		eClass.setInterface(mClass.isInterface());
+
+		boolean isInterface = mClass.isInterface();
+		// interfaces must be abstract
+		eClass.setAbstract(isInterface || mClass.isAbstract());
+		eClass.setInterface(isInterface);
 		
 		// handle features
 		for (MFeature mFeature : mClass.getFeatures()) {
