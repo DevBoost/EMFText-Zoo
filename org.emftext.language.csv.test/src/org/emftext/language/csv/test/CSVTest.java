@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.csv.CSVDocument;
@@ -71,6 +72,12 @@ public class CSVTest extends TestCase {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
+		
+		EList<Diagnostic> errors = resource.getErrors();
+		for (Diagnostic error : errors) {
+			System.out.println("CSVTest.testPrinting() Error in resource: " + error);
+		}
+		assertTrue("The resource must not contain errors.", errors.isEmpty());
 		EList<EObject> contents = resource.getContents();
 		assertNotNull(contents);
 		assertEquals(1, contents.size());

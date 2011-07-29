@@ -24,6 +24,8 @@ OPTIONS {
 	tokenspace = "0";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	
+	overrideMetaInformation = "false";
 }
 
 TOKENS {
