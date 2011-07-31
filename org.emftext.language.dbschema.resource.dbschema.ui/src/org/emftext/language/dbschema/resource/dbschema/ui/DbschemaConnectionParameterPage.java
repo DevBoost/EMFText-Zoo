@@ -45,7 +45,6 @@ public class DbschemaConnectionParameterPage extends WizardPage implements IDbsc
 		schemaResource = (IDbschemaTextResource) new ResourceSetImpl().createResource(URI.createURI("temp." + new DbschemaMetaInformation().getSyntaxName()));
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		Listener changeListener = new Listener() {
 			
@@ -218,7 +217,6 @@ public class DbschemaConnectionParameterPage extends WizardPage implements IDbsc
 		return group;
 	}
 
-	@Override
 	public IDbschemaTextResource getResource() {
 		return schemaResource;
 	}
