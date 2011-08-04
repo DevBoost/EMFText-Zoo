@@ -85,6 +85,8 @@ RULES {
 	@SuppressWarnings(explicitSyntaxChoice)
 	AbstractField ::= "abstract" "=" #1 (value['"','"'] | "{" value[] "}") ;
 	@SuppressWarnings(explicitSyntaxChoice)
+	ReviewField ::= "review" "=" #1 (value['"','"'] | "{" value[] "}") ;
+	@SuppressWarnings(explicitSyntaxChoice)
 	UrlField ::= "url" "=" #1 (value['"','"'] | "{" value[] "}") ;
 	
 	@SuppressWarnings(explicitSyntaxChoice)
@@ -104,7 +106,7 @@ RULES {
 	InProceedingsEntry ::= ("@INPROCEEDINGS"|"@inproceedings") "{" !1 
 		bibtexKey #1
 		("," (
-			(url)? | (abstract)? | (keyword)? |
+			(url)? | (abstract)? | (keyword)? | (review)? |
 			// title, bookTitle, year, author are required 
 			(title) | (bookTitle) | (year) | (author) |
 			// editor, volume, number, series, pages, address, month, 
@@ -117,7 +119,7 @@ RULES {
 	ArticleEntry ::= ("@ARTICLE"|"@article") "{" !1 
 		bibtexKey #1
 		("," (
-			(url)? | (abstract)? | (keyword)? |
+			(url)? | (abstract)? | (keyword)? | (review)? |
 			// title, journal, volume, year, author, pages are required 
 			(title) | (journal) | (volume) | (year) | (author) | (pages) |
 			// number, month, part, eid, note are optional
