@@ -122,6 +122,9 @@ public class Builder {
 					if (!isMany) {
 						list.clear();
 					}
+					if (!eFeature.getEType().isInstance(newValue)) {
+						throw new IllegalArgumentException();
+					}
 					list.add(newValue);
 				} else {
 					assert false;
