@@ -114,6 +114,9 @@ public class Builder {
 			Value value, boolean isMany, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands) {
 		try {
 			Object newValue = getValue(eFeature, value, createdObjectsMap, commands);
+			if (!eFeature.getEType().isInstance(newValue)) {
+				throw new IllegalArgumentException();
+			}
 			int upperBound = eFeature.getUpperBound();
 			if (upperBound > 1 || upperBound < 0) {
 				Object oldValue = object.eGet(eFeature);
@@ -121,9 +124,6 @@ public class Builder {
 					List<Object> list = (List<Object>) oldValue;
 					if (!isMany) {
 						list.clear();
-					}
-					if (!eFeature.getEType().isInstance(newValue)) {
-						throw new IllegalArgumentException();
 					}
 					list.add(newValue);
 				} else {
