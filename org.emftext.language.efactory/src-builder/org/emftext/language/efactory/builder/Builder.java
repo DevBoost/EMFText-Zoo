@@ -143,6 +143,10 @@ public class Builder {
 		if (value instanceof Reference) {
 			Reference reference = (Reference) value;
 			EObject referencedNewObject = reference.getValue();
+			if (!(referencedNewObject instanceof NewObject)) {
+				// this is a 'native' reference to an existing model not wrapped in a NewObject
+				return referencedNewObject;
+			}
 			EObject referencedEObject = createdObjectsMap.get(referencedNewObject);
 			return referencedEObject;
 		} else if (value instanceof Containment) {

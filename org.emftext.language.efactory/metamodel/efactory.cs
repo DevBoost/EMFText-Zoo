@@ -13,6 +13,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+
 	additionalDependencies = "org.eclipse.emf.ecore.xmi";
 }
 
@@ -45,7 +46,7 @@ RULES {
 
 	PackageImport::= "use" #1 ePackage[STRING] (#1 "as" #1 alias[IDENTIFIER])? !0;
 
-	Import ::= "import" #1 importURI[STRING] !0;
+	ModelImport ::= "import" #1 importedModel[STRING] !0;
 
 	GlobalNameMapping ::= "@Name" "{" #1 nameFeature[IDENTIFIER] #1 "}";
 	CustomNameMapping ::= "@Name" "{" #1 eClass[IDENTIFIER] #1 "=" #1 nameFeature[IDENTIFIER] #1 "}";

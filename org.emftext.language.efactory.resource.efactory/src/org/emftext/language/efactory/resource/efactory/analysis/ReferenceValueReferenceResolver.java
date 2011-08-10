@@ -23,14 +23,13 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.emftext.language.efactory.NewObject;
 import org.emftext.language.efactory.Reference;
 import org.emftext.language.efactory.resource.efactory.IEfactoryElementMapping;
 import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceMapping;
 import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult;
 import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver;
 
-public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolver<Reference, NewObject> {
+public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolver<Reference, EObject> {
 	
 	// TODO mseifert: use cache in default reference resolver instead
 	private static class ReferenceCache implements Adapter {
@@ -62,24 +61,26 @@ public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolv
 		}
 	}
 	
-	private EfactoryDefaultResolverDelegate<Reference, NewObject> delegate = new EfactoryDefaultResolverDelegate<Reference, NewObject>();
+	private EfactoryDefaultResolverDelegate<Reference, EObject> delegate = new EfactoryDefaultResolverDelegate<Reference, EObject>();
 	
-	public void resolve(String identifier, Reference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final IEfactoryReferenceResolveResult<NewObject> result) {
+	public void resolve(String identifier, Reference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final IEfactoryReferenceResolveResult<EObject> result) {
 		ReferenceCache cache = getCache(container);
 		
 		if (cache != null && !resolveFuzzy) {
 			Object newObject = cache.getNewObject(identifier);
 			if (newObject != null) {
-				result.addMapping(identifier, (NewObject) newObject);
+				result.addMapping(identifier, (EObject) newObject);
 				return;
 			}
 		}
 		//System.out.println("ReferenceValueReferenceResolver.resolve(" + identifier + ")");
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
-		Collection<IEfactoryReferenceMapping<NewObject>> mappings = result.getMappings();
-		for (IEfactoryReferenceMapping<NewObject> mapping : mappings) {
-			if (mapping instanceof IEfactoryElementMapping<?>) {
-				cache.put(mapping.getIdentifier(), ((IEfactoryElementMapping<?>) mapping).getTargetElement());
+		Collection<IEfactoryReferenceMapping<EObject>> mappings = result.getMappings();
+		if (mappings != null) {
+			for (IEfactoryReferenceMapping<EObject> mapping : mappings) {
+				if (mapping instanceof IEfactoryElementMapping<?>) {
+					cache.put(mapping.getIdentifier(), ((IEfactoryElementMapping<?>) mapping).getTargetElement());
+				}
 			}
 		}
 	}
@@ -106,7 +107,7 @@ public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolv
 		return object;
 	}
 
-	public java.lang.String deResolve(NewObject element, Reference container, EReference reference) {
+	public java.lang.String deResolve(EObject element, Reference container, EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
