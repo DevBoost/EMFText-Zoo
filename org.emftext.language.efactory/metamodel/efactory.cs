@@ -13,6 +13,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	additionalDependencies = "org.eclipse.emf.ecore.xmi";
 }
 
 TOKENS {
