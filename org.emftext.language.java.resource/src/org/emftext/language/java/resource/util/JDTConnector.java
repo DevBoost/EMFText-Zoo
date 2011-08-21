@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -33,10 +34,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -280,7 +278,8 @@ public class JDTConnector {
 							e.printStackTrace();
 						}
 					}
-					IFolder folder = root.getFolder(outputLocation);
+
+					IContainer outputContainer = (IContainer) root.findMember(outputLocation);
 
 					// path is source folder
 					// System.out.println("Doing nothing for ClassPathEntry source: "
@@ -289,7 +288,7 @@ public class JDTConnector {
 					// Parsing the real java files induces a huge performance
 					// problem
 					// Therefore we use BCEL here
-					registerResourceTreeInClasspath(folder, "class", classPath);
+					registerResourceTreeInClasspath(outputContainer, "class", classPath);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 					IFolder folder = root.getFolder(path);
 					if ("jar".equals(path.getFileExtension())
