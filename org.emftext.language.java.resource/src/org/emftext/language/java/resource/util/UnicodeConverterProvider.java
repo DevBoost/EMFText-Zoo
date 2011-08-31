@@ -14,7 +14,7 @@
 package org.emftext.language.java.resource.util;
 
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider;
@@ -37,8 +37,6 @@ public class UnicodeConverterProvider implements IJavaOptionProvider, IJavaInput
 	}
 
 	public Map<?, ?> getOptions() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		return map;
+		return Collections.singletonMap(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 	}
 }
