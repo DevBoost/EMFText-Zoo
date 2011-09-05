@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl.URIMap;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -133,27 +132,6 @@ public class JavaClasspath extends AdapterImpl {
 		return globalClasspath;
 	}
 
-	protected JavaClasspath parentClasspath = null;
-
-	/**
-	 * Sets the parent classpath of the given resource set if the URIConverter of the
-	 * resource set is a JavaURIConverter.
-	 *
-	 * @param resourceSet
-	 * @param parentClasspath
-	 */
-	public static void setParentClasspath(ResourceSet resourceSet, JavaClasspath parentClasspath) {
-		if (resourceSet.getURIConverter() instanceof JavaURIConverter) {
-			JavaURIConverter javaURIConverter = (JavaURIConverter)resourceSet.getURIConverter();
-			javaURIConverter.setParentMap((URIMap)parentClasspath.getURIMap());
-			get(resourceSet).parentClasspath = parentClasspath;
-		}
-	}
-
-	public JavaClasspath getParentClasspath() {
-		return parentClasspath;
-	}
-
 	protected Map<String, List<String>> packageClassifierMap =
 		new HashMap<String, List<String>>();
 
@@ -174,9 +152,6 @@ public class JavaClasspath extends AdapterImpl {
 
 	protected List<String> getPackageContents(String packageName) {
 		List<String> content = new ArrayList<String>();
-		if (parentClasspath != null) {
-			content.addAll(getParentClasspath().getPackageContents(packageName));
-		}
 		if (packageClassifierMap.containsKey(packageName)) {
 			content.addAll(packageClassifierMap.get(packageName));
 		}
@@ -184,13 +159,7 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	public boolean existsPackage(String packageName) {
-		if (parentClasspath != null) {
-			return packageClassifierMap.containsKey(packageName) ||
-				parentClasspath.existsPackage(packageName);
-		}
-		else {
-			return packageClassifierMap.containsKey(packageName);
-		}
+		return packageClassifierMap.containsKey(packageName);
 	}
 
 	protected URIConverter uriConverter = null;

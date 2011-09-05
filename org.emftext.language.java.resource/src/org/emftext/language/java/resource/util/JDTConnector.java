@@ -13,13 +13,15 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.util;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -30,7 +32,6 @@ import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.JavaURIConverter;
 
 public class JDTConnector {
 
@@ -43,42 +44,12 @@ public class JDTConnector {
 		return instance;
 	}
 
-	public JDTConnector() {
-//		addClasspathListener();
-	}
-
-//	private void addClasspathListener() {
-//		JavaCore.addElementChangedListener(new IElementChangedListener() {
-//
-//			private IJavaProject checkDeltas(IJavaElementDelta delta) {
-//				if ((delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
-//						|| (delta.getFlags() & IJavaElementDelta.F_CLASSPATH_CHANGED) != 0
-//						|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-//						|| (delta.getFlags() & IJavaElementDelta.F_RESOLVED_CLASSPATH_CHANGED) != 0) {
-//					if ((delta.getElement() instanceof IJavaProject))
-//						return (IJavaProject) delta.getElement();
-//				}
-//				IJavaElementDelta[] affectedChildren = delta
-//						.getAffectedChildren();
-//				for (IJavaElementDelta iJavaElementDelta : affectedChildren) {
-//					if (checkDeltas(iJavaElementDelta) != null)
-//						return checkDeltas(iJavaElementDelta);
-//				}
-//				return null;
-//			}
-//
-//			public void elementChanged(ElementChangedEvent event) {
-//				IJavaElementDelta delta = event.getDelta();
-//				if (checkDeltas(delta) != null) {
-//					IJavaProject project = checkDeltas(delta);
-//					System.out.println("should refresh "
-//							+ project.getProject().getName());
-//				}
-//			}
-//		});
-//	}
+	public JDTConnector() { }
 
 	private boolean isJavaProject(IProject project) {
+		if (project == null) {
+			return false;
+		}
 		try {
 			return project.isNatureEnabled("org.eclipse.jdt.core.javanature");
 		} catch (CoreException e) {
@@ -98,85 +69,72 @@ public class JDTConnector {
 		return (isJavaProject(project) ? JavaCore.create(project) : null);
 	}
 
-	public ResourceSet createResourceSet(URI resourceUri) {
+	public ResourceSet refresh(URI resourceUri) {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		initializeResourceSet(resourceSet, resourceUri);
 		return resourceSet;
 	}
 
-	public void initializeResourceSet(ResourceSet resourceSet, URI resourceUri) {
+	public void refreshResourceSet(ResourceSet resourceSet, URI resourceURI) {
+		for (Adapter a : resourceSet.eAdapters()) {
+			if (a instanceof JavaClasspath) {
+				resourceSet.eAdapters().remove(a);
+				break;
+			}
+		}
+		initializeResourceSet(resourceSet, resourceURI);
+	}
+	
+	public void initializeResourceSet(ResourceSet resourceSet, URI resourceURI) {
 		if (resourceSet == null) {
 			return;
 		}
 		if (resourceSet.getURIConverter() == null) {
 			return;
 		}
-		if (!resourceSet.getURIConverter().normalize(resourceUri)
+		if (!resourceSet.getURIConverter().normalize(resourceURI)
 				.isPlatformResource()) {
 			return;
 		}
-		if (resourceSet.getURIConverter() instanceof JavaURIConverter) {
-			return;
+		//was a classpath already computed?
+		for (Adapter a : resourceSet.eAdapters()) {
+			if (a instanceof JavaClasspath) {
+				return;
+			}
 		}
 
-		resourceSet.setURIConverter(new JavaURIConverter());
-		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
-		if (loadOptions.get(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH) == null) {
-			loadOptions.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, true);
-		}
-		if (loadOptions.get(JavaClasspath.OPTION_REGISTER_STD_LIB) == null) {
-			loadOptions.put(JavaClasspath.OPTION_REGISTER_STD_LIB, false);
-		}
-		if (resourceUri != null) {
-			JavaClasspath.setParentClasspath(resourceSet,
-					getJavaProjectClasspath(resourceSet.getURIConverter()
-							.normalize(resourceUri)));
+		if (resourceURI != null) {
+			Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
+			if (loadOptions.get(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH) == null) {
+				loadOptions.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, true);
+			}
+			if (loadOptions.get(JavaClasspath.OPTION_REGISTER_STD_LIB) == null) {
+				loadOptions.put(JavaClasspath.OPTION_REGISTER_STD_LIB, false);
+			}
+			
+			IJavaProject javaProject = getJavaProject(getProject(resourceURI));
+			registerJavaProjectInClassPath(resourceSet, javaProject);
 		}
 	}
 
-	public JavaClasspath getJavaProjectClasspath(URI uri) {
-		return getJavaClasspath(getProject(uri));
-	}
-
-	public void refreshJavaProjectClasspath(IProject project) {
-		URI projectUri = URI.createPlatformResourceURI(project.getFullPath()
-				.toString(), true);
-		javaClasspaths.remove(projectUri);
-	}
-
-	private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
-
-	private JavaClasspath getJavaClasspath(IProject project) {
-		// TODO There is caching functionality here which has been deactivated.
-		// If reactivated, the cache needs to be updated if the classpath of
-		// a project changes (e.g., if a new class is created, or a new library
-		// is referenced)
-		URI projectUri = URI.createPlatformResourceURI(project.getFullPath()
-				.toString(), true);
-		JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
-		if (javaClasspath != null) {
-			//return javaClasspath;
-		}
-		ResourceSet classPath = new ResourceSetImpl();
-		IJavaProject javaProject = getJavaProject(project);
-		registerJavaProjectInClassPath(classPath, javaProject);
-		javaClasspath = JavaClasspath.get(classPath);
-		javaClasspaths.put(projectUri, javaClasspath);
-		return javaClasspath;
-	}
-
-	private void registerJavaProjectInClassPath(final ResourceSet classPath,
-			IJavaProject javaProject) {
+	private void registerJavaProjectInClassPath(
+			final ResourceSet resourceSet,
+			final IJavaProject javaProject) {
 
 		SearchEngine searchEngine = new SearchEngine();
 		
 		try {
 			searchEngine.searchAllTypeNames(null, null, 
 					SearchEngine.createJavaSearchScope(new IJavaProject[] {javaProject}), 
-					new ClasspathFiller(JavaClasspath.get(classPath)), IJavaSearchConstants.FORCE_IMMEDIATE_SEARCH, null);
+					new ClasspathFiller(JavaClasspath.get(resourceSet)), IJavaSearchConstants.FORCE_IMMEDIATE_SEARCH, null);
 		} catch (JavaModelException e) { 
-			e.printStackTrace();
+			log("Problem building classpath", e);
 		}
+	}
+
+	private void log(String msg, JavaModelException e) {
+		ResourcesPlugin.getPlugin().getLog().log(new 
+				Status(IStatus.WARNING, "org.emftext.language.java", "[JaMoPP] " + msg, e));
 	}	
 
 	private static final class ClasspathFiller extends TypeNameRequestor {
