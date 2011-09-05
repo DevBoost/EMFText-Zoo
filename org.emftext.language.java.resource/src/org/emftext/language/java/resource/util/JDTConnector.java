@@ -177,7 +177,7 @@ public class JDTConnector {
 		} catch (JavaModelException e) { 
 			e.printStackTrace();
 		}
-	}
+	}	
 
 	private static final class ClasspathFiller extends TypeNameRequestor {
 		private final JavaClasspath classPath;
@@ -192,7 +192,7 @@ public class JDTConnector {
 				char[][] enclosingTypeNames, String path) {
 			
 			URI uri;
-			if (path.startsWith("/")) { //TODO is this correct on unix systems?
+			if (isInWorkspace(path)) {
 				uri = URI.createPlatformResourceURI(path, true);
 			} else {
 				uri = URI.createFileURI(path);
@@ -209,8 +209,12 @@ public class JDTConnector {
 			
 			classPath.registerClassifier(
 					fullContainerName, 
-					String.valueOf(simpleTypeName), uri);
-			
+					String.valueOf(simpleTypeName), uri);			
+		}
+		
+		private boolean isInWorkspace(String path) {
+			IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
+			return wsRoot.findMember(path) != null;
 		}
 	}
 
