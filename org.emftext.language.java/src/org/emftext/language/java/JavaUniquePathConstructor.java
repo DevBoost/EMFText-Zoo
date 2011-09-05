@@ -61,6 +61,11 @@ public class JavaUniquePathConstructor {
 	public static final String CLASSIFIER_SEPARATOR = "$";
 
 	/**
+	 * Java's file extension (.java).
+	 */
+	public static final String JAVA_FILE_EXTENSION = ".java";
+
+	/**
 	 * Constructs an URI from a fully qualified classifier name
 	 * pointing at the resource containing the classifier.
 	 *
@@ -69,7 +74,7 @@ public class JavaUniquePathConstructor {
 	 */
 	public static URI getJavaFileResourceURI(String fullQualifiedName) {
 		String logicalUriString = JAVA_CLASSIFIER_PATHMAP;
-		logicalUriString = logicalUriString + fullQualifiedName + ".java";
+		logicalUriString = logicalUriString + fullQualifiedName + JAVA_FILE_EXTENSION;
 
 		return URI.createURI(logicalUriString);
 	}
