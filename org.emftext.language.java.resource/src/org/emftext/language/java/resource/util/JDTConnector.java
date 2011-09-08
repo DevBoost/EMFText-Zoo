@@ -149,17 +149,31 @@ public class JDTConnector {
 				char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			
-			URI uri;
-			if (isInWorkspace(path)) {
-				uri = URI.createPlatformResourceURI(path, true);
+			String filePath = null;
+			String inArchivePath = null;
+			if (path.contains(".jar|")) {
+				String[] split = path.split("\\|");
+				filePath = split[0];
+				inArchivePath = split[1];
 			} else {
-				uri = URI.createFileURI(path);
+				filePath = path;
 			}
 			
-			if (path.contains(".jar|")) {
-				String[] split = uri.toString().split("%7C");
-				uri = URI.createURI("archive:" + split[0] + "!/" + split[1]);
+			URI uri;
+			if (isInWorkspace(filePath)) {
+				if (inArchivePath != null) {
+					uri = URI.createURI("archive:" + URI.createPlatformResourceURI(filePath, true) + "!/" + inArchivePath);
+				} else {
+					uri = URI.createPlatformResourceURI(filePath, true);
+				}		
+			} else {
+				if (inArchivePath != null) {
+					uri = URI.createURI("archive:" + URI.createFileURI(filePath).toString() + "!/" + inArchivePath);
+				} else {
+					uri = URI.createFileURI(filePath);
+				}
 			}
+
 			String fullContainerName = String.valueOf(packageName) + ".";
 			for (char[] enclosingType : enclosingTypeNames) {
 				fullContainerName = fullContainerName + String.valueOf(enclosingType) + "$";
