@@ -20,6 +20,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -65,13 +66,17 @@ public class JavaClasspath extends AdapterImpl {
 	 */
 	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
 
+	/**
+	 * If this option is set to true in a resource set, all names in a Java resource will 
+	 * be printed as full-qualified names when the resource is saved. If this option is
+	 * used, imports do not need to be updated when Java resources are modified.
+	 * This option is set to false by default.
+	 */
 	public static final String OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES = "OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES";
-
 
 	/**
 	 * Singleton instance.
 	 */
-
 	private static final JavaClasspath globalClasspath =
 		new JavaClasspath(URIConverter.INSTANCE);
 
@@ -115,7 +120,20 @@ public class JavaClasspath extends AdapterImpl {
 		if(Boolean.TRUE.equals(localClasspathOption))  {
 			for(Adapter a : resourceSet.eAdapters()) {
 				if (a instanceof JavaClasspath) {
-					return (JavaClasspath)a;
+					JavaClasspath javaClasspath = (JavaClasspath) a;
+					URIConverter newURIConverter = resourceSet.getURIConverter();
+					if (javaClasspath.uriConverter != newURIConverter) {
+						//the URI converter has been replaced, the URI map needs to be transferred
+						for (Entry<URI, URI> oldEntry : javaClasspath.uriConverter.getURIMap().entrySet()) {
+							if (oldEntry.getKey().toString().startsWith(
+									JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+								newURIConverter.getURIMap().put(oldEntry.getKey(), oldEntry.getValue());
+							}
+						}
+						javaClasspath.uriConverter = newURIConverter;
+					}
+					
+					return javaClasspath;
 				}
 			}
 			JavaClasspath myClasspath = new JavaClasspath(
@@ -174,8 +192,6 @@ public class JavaClasspath extends AdapterImpl {
 	private JavaClasspath(URIConverter uriConverter) {
 		this.uriConverter = uriConverter;
 	}
-
-
 
 	/**
 	 * Registers all classes of the Java standard library
@@ -351,8 +367,6 @@ public class JavaClasspath extends AdapterImpl {
 			}
 		}
 	}
-
-
 
 	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri) {
 		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
