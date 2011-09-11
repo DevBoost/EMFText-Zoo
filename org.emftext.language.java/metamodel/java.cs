@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2011 
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -83,49 +83,21 @@ TOKENSTYLES {
 	"STRING_LITERAL" COLOR #2A00FF;
 	"IDENTIFIER" COLOR #000000;
 	
-	"abstract" COLOR #7F0055, BOLD;
-	"assert" COLOR #7F0055, BOLD;
-	"case" COLOR #7F0055, BOLD;
-	"catch" COLOR #7F0055, BOLD;
-	"class" COLOR #7F0055, BOLD;	
-	"continue" COLOR #7F0055, BOLD;
-	"enum" COLOR #7F0055, BOLD;
-	"extends" COLOR #7F0055, BOLD;
-	"import" COLOR #7F0055, BOLD;
-	"implements" COLOR #7F0055, BOLD;
-	"interface" COLOR #7F0055, BOLD;
-	"package" COLOR #7F0055, BOLD;
-	"this" COLOR #7F0055, BOLD;
-	"super" COLOR #7F0055, BOLD;
-	"new" COLOR #7F0055, BOLD;
-	"switch" COLOR #7F0055, BOLD;
-	"default" COLOR #7F0055, BOLD;
-	"for" COLOR #7F0055, BOLD;
-	"if" COLOR #7F0055, BOLD;
-	"else" COLOR #7F0055, BOLD;
-	"while" COLOR #7F0055, BOLD;	
-	"try" COLOR #7F0055, BOLD;
-	"boolean" COLOR #7F0055, BOLD;
-	"double" COLOR #7F0055, BOLD;
-	"do" COLOR #7F0055, BOLD;
-	"instanceof" COLOR #7F0055, BOLD;
-	"strictfp" COLOR #7F0055, BOLD;
-	"void" COLOR #7F0055, BOLD;
-	"throws" COLOR #7F0055, BOLD;
-	"float" COLOR #7F0055, BOLD;
-	"final" COLOR #7F0055, BOLD;
-	"private" COLOR #7F0055, BOLD;
-	"protected" COLOR #7F0055, BOLD;
-	"public" COLOR #7F0055, BOLD;
-	"synchronized" COLOR #7F0055, BOLD;
-	"int" COLOR #7F0055, BOLD;	
-	"long" COLOR #7F0055, BOLD;
+	"abstract",	"assert",
+	"boolean", "byte",
+	"case", "catch", "class", "continue", "char",
+	"default", "double", "do",
+	"enum",	"extends", "else",
+	"for", "float", "final",
+	"if", "import", "implements", "int", "interface", "instanceof",
+	"package", "private", "protected", "public",
+	"super", "switch", "strictfp", "static", "synchronized",
+	"this", "try", "throws", "transient",
+	"new", "null",
+	"while",
+	"void",
+	"long",
 	"return" COLOR #7F0055, BOLD;
-	"static" COLOR #7F0055, BOLD;
-	"char" COLOR #7F0055, BOLD;
-	"byte" COLOR #7F0055, BOLD;
-	"transient" COLOR #7F0055, BOLD;
-	"null" COLOR #7F0055, BOLD;
 }
 
 RULES {
