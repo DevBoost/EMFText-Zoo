@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.antlr.runtime3_3_0.ANTLRInputStream;
+import org.antlr.runtime3_4_0.ANTLRInputStream;
 import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.junit.Test;
 
