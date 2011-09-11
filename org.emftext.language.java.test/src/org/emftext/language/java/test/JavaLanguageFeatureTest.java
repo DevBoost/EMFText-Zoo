@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -1657,8 +1658,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		File inputFolder = new File("./" + getTestInputFolder());
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
 		allTestFiles.removeAll(getReprintedResources());
-		for (File file : allTestFiles) {
-			System.out.println("Not parsed and reprinted: " + file);
+		for (Iterator<File> i = allTestFiles.iterator(); i.hasNext();) {
+			File file = (File) i.next();
+			if (file.toString().contains("/resolving_new/")) {
+				//these files are not covered by this test
+				i.remove();
+			} else {
+				System.out.println("Not parsed and reprinted: " + file);	
+			}
 		}
 		System.out.println("Not parsed and reprinted total: "
 				+ allTestFiles.size());
@@ -1684,6 +1691,13 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 				+ getTestInputFolder());
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
 		allTestFiles.removeAll(getParsedResources());
+		for (Iterator<File> i = allTestFiles.iterator(); i.hasNext();) {
+			File file = (File) i.next();
+			if (file.toString().contains("/resolving_new/")) {
+				//these files are not covered by this test
+				i.remove();
+			}
+		}
 		assertEquals(
 				"All testfiles contained in input folder were covered by a test case.",
 				Collections.EMPTY_LIST, allTestFiles);
