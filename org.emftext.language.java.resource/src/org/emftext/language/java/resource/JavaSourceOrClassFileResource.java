@@ -41,6 +41,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
+import org.emftext.language.java.containers.EmptyModel;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
@@ -64,6 +65,9 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
+		if (uri.toString().endsWith("..java")) {
+			System.out.println("");
+		}
 	}
 
 	private boolean isClassFile() {
@@ -229,10 +233,14 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			//could also be a package-info.java without CU
 			if(root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) getContents().get(0);
-				cu.setName(myURI.lastSegment());
+				String packageName = JavaUniquePathConstructor.packageName(cu);
+				if (!"".equals(packageName)) {
+					cu.setName(packageName + "." + myURI.lastSegment());
+				} else {
+					cu.setName(myURI.lastSegment());
+				}
 				JavaClasspath.get(this).registerClassifierSource(cu, myURI);
-			}
-			else if (root instanceof Package) {
+			} else if (root instanceof Package) {
 				//package-info.java
 				Package p = (Package) root;
 
@@ -248,6 +256,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				else {
 					populatePackage(p);
 				}
+			} else if (root instanceof EmptyModel) {
+				((EmptyModel) root).setName(myURI.trimFileExtension().lastSegment());
 			}
 		}
 	}

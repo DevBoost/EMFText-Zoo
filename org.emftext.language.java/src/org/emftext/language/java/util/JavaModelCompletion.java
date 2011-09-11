@@ -20,19 +20,20 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.annotations.AnnotationAttributeSetting;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.annotations.AnnotationsFactory;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.PrimaryExpression;
+import org.emftext.language.java.members.EmptyMember;
+import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
+import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 
@@ -61,6 +62,12 @@ public class JavaModelCompletion {
 			}
 			if (element instanceof Annotation) {
 				addMissingAnnotationMembers((Annotation) element);
+			}
+			if (element instanceof EmptyMember) {
+				setEmptyMemberName((EmptyMember) element);
+			}
+			if (element instanceof Block) {
+				setBlockName((Block) element);
 			}
 		}
 		simplifyExpressions(resource);
@@ -99,7 +106,7 @@ public class JavaModelCompletion {
 		String valueMethodName = "value";
 		Method valueMethod = annotation.getContainedMethod(valueMethodName);
 		if (valueMethod == null) {
-			valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
+			valueMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
 			valueMethod.setName(valueMethodName);
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(annotation.getConcreteClassifierProxy("java.lang.String"));
@@ -153,6 +160,33 @@ public class JavaModelCompletion {
 		}
 	}
 
+	public static void setEmptyMemberName(EmptyMember emptyMember) {
+		if (emptyMember.getName() != null) {
+			return;
+		}
+		EObject container = emptyMember.eContainer();
+		if (!(container instanceof MemberContainer)) {
+			return;
+		}
+		int idx = ((MemberContainer) container).getMembers().indexOf(emptyMember);
+		String name = "Member" + idx;
+		emptyMember.setName(name);
+	}
+
+	public static void setBlockName(Block block) {
+		if (block.getName() != null) {
+			return;
+		}
+		EObject container = block.eContainer();
+		if (container instanceof MemberContainer) {
+			int idx = ((MemberContainer) container).getMembers().indexOf(block);
+			String name = "Member" + idx;
+			block.setName(name);
+			return;
+		}
+		block.setName("Block");	
+	}
+
 	/**
 	 * Simplifies all expression in the given resource by removing empty containers
 	 * in all expression trees.
@@ -182,8 +216,7 @@ public class JavaModelCompletion {
 	}
 
 	private static EObject getSingleContained(EObject parent) {
-		if (parent.eContainer() instanceof AnnotationInstance ||
-				parent.eContainer() instanceof AnnotationAttributeSetting) {
+		if (parent.eContainer() instanceof AnnotationInstance) {
 			//special case. Might be changed in the future.
 			return null;
 		}

@@ -269,11 +269,13 @@ public class JavaClasspath extends AdapterImpl {
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
 
 		int endIdx = -1;
-		if(compilationUnit.getName() != null) {
-			endIdx = compilationUnit.getName().lastIndexOf("$");
+		String cuName = compilationUnit.getName();
+		
+		if (cuName != null) {
+			endIdx = cuName.lastIndexOf("$");
 		}
 		if (endIdx > -1) {
-			char[] nameParts = compilationUnit.getName().toCharArray();
+			char[] nameParts = cuName.toCharArray();
 			for(int i= 0; i< endIdx; i++) {
 				if(nameParts[i] == '$') {
 					int idx = packageName.lastIndexOf(".");
@@ -282,7 +284,7 @@ public class JavaClasspath extends AdapterImpl {
 			}
 		}
 
-		if (compilationUnit.getName() != null && compilationUnit.getName().contains("$")) {
+		if (cuName != null && cuName.contains("$")) {
 			packageName = packageName + "$";
 		}
 
