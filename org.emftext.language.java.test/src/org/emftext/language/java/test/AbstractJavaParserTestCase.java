@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
@@ -285,6 +286,8 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		if (!ignoreSemanticErrors(file.getPath())) {
 			// This will not work if external resources are not yet registered (order of tests)
 			assertResolveAllProxies(resource);
+			// Default EMF vaildation should not fail
+			assertModelValid(resource);
 		}
 
 		if (isExcludedFromReprintTest(file.getPath())) {
@@ -708,6 +711,18 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		assertFalse(msg, failure);
 		return failure;
 	}
+	
+
+	private void assertModelValid(Resource resource) {
+		org.eclipse.emf.common.util.Diagnostic result = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		String msg = "EMF validation problems found:";
+		for (org.eclipse.emf.common.util.Diagnostic childResult : result.getChildren()) {
+			System.out.println(childResult.getMessage());
+			msg += "\n" + childResult.getMessage();
+		}
+		assertTrue(msg, result.getChildren().isEmpty());
+	}
+
 
 	public static List<File> getParsedResources() {
 		return parsedResources;
