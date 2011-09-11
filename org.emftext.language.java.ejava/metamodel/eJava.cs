@@ -29,6 +29,7 @@ OPTIONS {
 	resolveProxyElementsAfterParsing = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	ignoreTypeRestrictionsForPrinting = "true";
 }
 
 RULES {
