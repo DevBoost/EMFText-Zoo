@@ -80,9 +80,20 @@ public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ej
 				JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES, Boolean.TRUE);
 
 		for(ConcreteClassifier concreteClassifier : ePackageWrapper.getClassifiers()) {
-			for(Member member : concreteClassifier.getMembers()) {
+			for (Member member : concreteClassifier.getMembers()) {
 				if (member instanceof EOperationWrapper) {
 					EOperationWrapper wrapper = (EOperationWrapper) member;
+					// TODO this is a temporary fix for a bug that was introduced in revision 13360
+					//
+					// the original intent of the fix was to allow empty method bodies, but the fix
+					// causes problems when multiple eJava files refer to the same metamodel. In this
+					// case, saving one eJava file removes all the method bodies that are defined in
+					// the other eJava files from the Ecore model. This is because there are wrapper
+					// objects for related methods, but their actual body is not known when building
+					// one eJava file.
+					if (wrapper.getStatements().isEmpty()) {
+						continue;
+					}
 					EOperation eOperation = wrapper.getEOperation();
 					EAnnotation genModelAnnotation = eOperation.getEAnnotation(GenModelPackage.eNS_URI);
 					if (genModelAnnotation == null) {
