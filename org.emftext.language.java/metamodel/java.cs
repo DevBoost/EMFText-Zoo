@@ -47,8 +47,7 @@ OPTIONS {
 	resolveProxyElementsAfterParsing = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
-	useClassicPrinter = "true";
-	//ignoreTypeRestrictionsForPrinting = "true";
+	ignoreTypeRestrictionsForPrinting = "true";
 }
 
 TOKENS {
