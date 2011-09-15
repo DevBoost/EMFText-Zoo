@@ -254,7 +254,7 @@ public class MecoreWrapper {
 			return;
 		}
 		final EOperation eOperation = findOrCreateEOperation(mOperation, existingEClass);
-		// TODO handle parameters
+		// handle parameters
 		for (MParameter mParameter : mOperation.getParameters()) {
 			wrapMParameter(mParameter, eOperation);
 		}
@@ -262,7 +262,7 @@ public class MecoreWrapper {
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				eOperation.setEType((EClassifier) mapping.get(mType));
+				setType(eOperation, mType);
 				return true;
 			}
 		});
