@@ -13,9 +13,6 @@
  ******************************************************************************/
 package org.emftext.language.pacad.resource.pacad.analysis;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.pacad.Import;
 import org.emftext.language.pacad.PointAndClickAdventure;
 
@@ -45,63 +42,6 @@ public class PacadDefaultResolverDelegate<ContainerType extends org.eclipse.emf.
 		
 		public String getSimilarMatch() {
 			return similarMatch;
-		}
-		
-	}
-	
-	private static class ReferenceCache implements org.emftext.language.pacad.resource.pacad.IPacadReferenceCache, org.eclipse.emf.common.notify.Adapter {
-		
-		private java.util.Map<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>> cache = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>>();
-		private boolean isInitialized;
-		private org.eclipse.emf.common.notify.Notifier target;
-		
-		public org.eclipse.emf.common.notify.Notifier getTarget() {
-			return target;
-		}
-		
-		public boolean isAdapterForType(Object arg0) {
-			return false;
-		}
-		
-		public void notifyChanged(org.eclipse.emf.common.notify.Notification arg0) {
-		}
-		
-		public void setTarget(org.eclipse.emf.common.notify.Notifier arg0) {
-			target = arg0;
-		}
-		
-		public java.util.Set<org.eclipse.emf.ecore.EObject> getObjects(org.eclipse.emf.ecore.EClass type) {
-			return cache.get(type);
-		}
-		
-		public void initialize(org.eclipse.emf.ecore.EObject root) {
-			if (isInitialized) {
-				return;
-			}
-			put(root);
-			java.util.Iterator<org.eclipse.emf.ecore.EObject> it = root.eAllContents();
-			while (it.hasNext()) {
-				put(it.next());
-			}
-			isInitialized = true;
-		}
-		
-		private void put(org.eclipse.emf.ecore.EObject object) {
-			org.eclipse.emf.ecore.EClass eClass = object.eClass();
-			if (!cache.containsKey(eClass)) {
-				cache.put(eClass, new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>());
-			}
-			cache.get(eClass).add(object);
-		}
-		
-		public void clear() {
-			cache.clear();
-			isInitialized = false;
-		}
-
-		public Map<String, EObject> getNameToObjectMap() {
-			// TODO Auto-generated method stub
-			return null;
 		}
 		
 	}
@@ -429,12 +369,14 @@ public class PacadDefaultResolverDelegate<ContainerType extends org.eclipse.emf.
 		org.eclipse.emf.ecore.EObject root = org.emftext.language.pacad.resource.pacad.util.PacadEObjectUtil.findRootContainer(object);
 		java.util.List<org.eclipse.emf.common.notify.Adapter> eAdapters = root.eAdapters();
 		for (org.eclipse.emf.common.notify.Adapter adapter : eAdapters) {
-			if (adapter instanceof ReferenceCache) {
-				ReferenceCache cache = (ReferenceCache) adapter;
+			if (adapter instanceof PacadReferenceCache) {
+				PacadReferenceCache cache = (PacadReferenceCache) adapter;
 				return cache;
 			}
 		}
-		ReferenceCache cache = new ReferenceCache();
+		// TODO this was just modified to fix compilation problems. instead of null,
+		// a correct name provider should be passe here.
+		PacadReferenceCache cache = new PacadReferenceCache(null);
 		cache.initialize(root);
 		root.eAdapters().add(cache);
 		return cache;

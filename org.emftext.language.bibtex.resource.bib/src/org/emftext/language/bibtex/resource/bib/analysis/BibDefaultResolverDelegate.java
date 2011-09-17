@@ -14,9 +14,6 @@
 
 package org.emftext.language.bibtex.resource.bib.analysis;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.EObject;
 
 public class BibDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> {
 	
@@ -44,63 +41,6 @@ public class BibDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		
 		public String getSimilarMatch() {
 			return similarMatch;
-		}
-		
-	}
-	
-	private static class ReferenceCache implements org.emftext.language.bibtex.resource.bib.IBibReferenceCache, org.eclipse.emf.common.notify.Adapter {
-		
-		private java.util.Map<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>> cache = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>>();
-		private boolean isInitialized;
-		private org.eclipse.emf.common.notify.Notifier target;
-		
-		public org.eclipse.emf.common.notify.Notifier getTarget() {
-			return target;
-		}
-		
-		public boolean isAdapterForType(Object arg0) {
-			return false;
-		}
-		
-		public void notifyChanged(org.eclipse.emf.common.notify.Notification arg0) {
-		}
-		
-		public void setTarget(org.eclipse.emf.common.notify.Notifier arg0) {
-			target = arg0;
-		}
-		
-		public java.util.Set<org.eclipse.emf.ecore.EObject> getObjects(org.eclipse.emf.ecore.EClass type) {
-			return cache.get(type);
-		}
-		
-		public void initialize(org.eclipse.emf.ecore.EObject root) {
-			if (isInitialized) {
-				return;
-			}
-			put(root);
-			java.util.Iterator<org.eclipse.emf.ecore.EObject> it = root.eAllContents();
-			while (it.hasNext()) {
-				put(it.next());
-			}
-			isInitialized = true;
-		}
-		
-		private void put(org.eclipse.emf.ecore.EObject object) {
-			org.eclipse.emf.ecore.EClass eClass = object.eClass();
-			if (!cache.containsKey(eClass)) {
-				cache.put(eClass, new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>());
-			}
-			cache.get(eClass).add(object);
-		}
-		
-		public void clear() {
-			cache.clear();
-			isInitialized = false;
-		}
-
-		public Map<String, EObject> getNameToObjectMap() {
-			// TODO Auto-generated method stub
-			return null;
 		}
 		
 	}
@@ -454,12 +394,14 @@ public class BibDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		org.eclipse.emf.ecore.EObject root = org.emftext.language.bibtex.resource.bib.util.BibEObjectUtil.findRootContainer(object);
 		java.util.List<org.eclipse.emf.common.notify.Adapter> eAdapters = root.eAdapters();
 		for (org.eclipse.emf.common.notify.Adapter adapter : eAdapters) {
-			if (adapter instanceof ReferenceCache) {
-				ReferenceCache cache = (ReferenceCache) adapter;
+			if (adapter instanceof BibReferenceCache) {
+				BibReferenceCache cache = (BibReferenceCache) adapter;
 				return cache;
 			}
 		}
-		ReferenceCache cache = new ReferenceCache();
+		// TODO this was just modified to fix compilation problems. instead of null,
+		// a correct name provider should be passe here.
+		BibReferenceCache cache = new BibReferenceCache(null);
 		cache.initialize(root);
 		root.eAdapters().add(cache);
 		return cache;
