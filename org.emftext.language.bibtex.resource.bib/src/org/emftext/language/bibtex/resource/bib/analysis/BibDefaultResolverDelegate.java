@@ -14,6 +14,10 @@
 
 package org.emftext.language.bibtex.resource.bib.analysis;
 
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+
 public class BibDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> {
 	
 	private static class StringMatch {
@@ -92,6 +96,11 @@ public class BibDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		public void clear() {
 			cache.clear();
 			isInitialized = false;
+		}
+
+		public Map<String, EObject> getNameToObjectMap() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 	}
