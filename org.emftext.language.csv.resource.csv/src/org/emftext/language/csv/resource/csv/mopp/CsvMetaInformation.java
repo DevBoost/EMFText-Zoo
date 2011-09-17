@@ -14,6 +14,9 @@
 
 package org.emftext.language.csv.resource.csv.mopp;
 
+import org.emftext.language.csv.resource.csv.ICsvNameProvider;
+import org.emftext.language.csv.resource.csv.analysis.CsvDefaultNameProvider;
+
 public class CsvMetaInformation implements org.emftext.language.csv.resource.csv.ICsvMetaInformation {
 	
 	public String getSyntaxName() {
@@ -106,6 +109,10 @@ public class CsvMetaInformation implements org.emftext.language.csv.resource.csv
 	
 	public String getLaunchConfigurationType() {
 		return "org.emftext.language.csv.resource.csv.ui.launchConfigurationType";
+	}
+
+	public ICsvNameProvider createNameProvider() {
+		return new CsvDefaultNameProvider();
 	}
 	
 }
