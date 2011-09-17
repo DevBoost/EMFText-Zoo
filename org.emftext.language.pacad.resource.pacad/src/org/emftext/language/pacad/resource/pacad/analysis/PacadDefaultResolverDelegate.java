@@ -13,6 +13,9 @@
  ******************************************************************************/
 package org.emftext.language.pacad.resource.pacad.analysis;
 
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.pacad.Import;
 import org.emftext.language.pacad.PointAndClickAdventure;
 
@@ -94,6 +97,11 @@ public class PacadDefaultResolverDelegate<ContainerType extends org.eclipse.emf.
 		public void clear() {
 			cache.clear();
 			isInitialized = false;
+		}
+
+		public Map<String, EObject> getNameToObjectMap() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 	}
