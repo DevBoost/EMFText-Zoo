@@ -14,6 +14,7 @@
 package org.emftext.language.efactory.resource.efactory.analysis;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,13 +22,17 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.efactory.Feature;
+import org.emftext.language.efactory.NewObject;
 import org.emftext.language.efactory.Reference;
 import org.emftext.language.efactory.resource.efactory.IEfactoryElementMapping;
 import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceMapping;
 import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult;
 import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver;
+import org.emftext.language.efactory.resource.efactory.mopp.EfactoryReferenceResolveResult;
 
 public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolver<Reference, EObject> {
 	
@@ -73,15 +78,51 @@ public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolv
 				return;
 			}
 		}
-		//System.out.println("ReferenceValueReferenceResolver.resolve(" + identifier + ")");
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
-		Collection<IEfactoryReferenceMapping<EObject>> mappings = result.getMappings();
+		//always resolve fuzzy to filter found objects afterwards
+		EfactoryReferenceResolveResult<EObject> delegateResult = new EfactoryReferenceResolveResult<EObject>(true);
+		delegate.resolve(identifier, container, reference, position, true, delegateResult);
+		Collection<IEfactoryReferenceMapping<EObject>> mappings = delegateResult.getMappings();
+		
+		EClass realType = null;
+		Feature feature = (Feature) container.eContainer();
+		if (feature.getEFeature() instanceof EReference) {
+			EReference realReference = (EReference) feature.getEFeature();
+			realType = realReference.getEReferenceType();
+		}
+		
+		IEfactoryElementMapping<EObject> validMapping = null;
+		
 		if (mappings != null) {
-			for (IEfactoryReferenceMapping<EObject> mapping : mappings) {
-				if (mapping instanceof IEfactoryElementMapping<?>) {
-					cache.put(mapping.getIdentifier(), ((IEfactoryElementMapping<?>) mapping).getTargetElement());
+			for (Iterator<IEfactoryReferenceMapping<EObject>> i = mappings.iterator(); i.hasNext(); ) {
+				IEfactoryReferenceMapping<EObject> next = i.next();
+				if (next instanceof IEfactoryElementMapping<?>) {
+					IEfactoryElementMapping<EObject> mapping = (IEfactoryElementMapping<EObject>) next;
+					if (!mapping.getIdentifier().equals(identifier)) {
+						i.remove();
+						continue;
+					}
+					
+					EObject targetElement = mapping.getTargetElement();
+					EClass targetType = null;
+					if (targetElement instanceof NewObject) {
+						targetType = ((NewObject) targetElement).getEClass();
+					} else {
+						targetType = targetElement.eClass();
+					}
+					
+					if (!targetType.equals(realType)) {
+						i.remove();
+					} else {
+						cache.put(mapping.getIdentifier(), mapping.getTargetElement());
+						validMapping = mapping;
+						break;
+					}
 				}
 			}
+		}
+		
+		if (validMapping != null) {
+			result.addMapping(identifier, validMapping.getTargetElement());
 		}
 	}
 
