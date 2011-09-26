@@ -20,8 +20,6 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	overridePluginXML = "false";
 	reloadGeneratorModel = "true";
-	overrideDefaultResolverDelegate = "false";
-	overrideTextResource = "false";
 	//disableTokenSorting = "true";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
