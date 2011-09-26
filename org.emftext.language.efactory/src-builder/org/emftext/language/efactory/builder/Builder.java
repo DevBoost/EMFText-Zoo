@@ -26,9 +26,6 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.access.EMFTextAccessProxy;
-import org.emftext.access.resource.IResource;
 import org.emftext.language.efactory.Attribute;
 import org.emftext.language.efactory.BooleanAttribute;
 import org.emftext.language.efactory.Containment;
@@ -50,7 +47,7 @@ import org.emftext.language.efactory.Value;
  */
 public class Builder {
 
-	public List<EObject> build(Factory eFactory) {
+	public List<EObject> build(Factory eFactory, Map<EObject, String> problems) {
 		List<EObject> result = new ArrayList<EObject>();
 		// stores the commands that set references after creating all objects
 		List<Runnable> commands = new ArrayList<Runnable>();
@@ -59,7 +56,7 @@ public class Builder {
 		
 		for (NewObject root : eFactory.getRoots()) {
 			// create the model tree
-			EObject rootEObject = createEObject(root, createdObjectsMap, commands);
+			EObject rootEObject = createEObject(root, createdObjectsMap, commands, problems);
 			// set the cross references
 			for (Runnable runnable : commands) {
 				runnable.run();
@@ -73,7 +70,8 @@ public class Builder {
 	private EObject createEObject(
 			NewObject newObject, 
 			Map<NewObject, EObject> createdObjectsMap, 
-			List<Runnable> commands) {
+			List<Runnable> commands,
+			Map<EObject, String> problems) {
 		EClass eClass = newObject.getEClass();
 		EPackage ePackage = eClass.getEPackage();
 		EFactory eFactoryInstance = ePackage.getEFactoryInstance();
@@ -84,7 +82,7 @@ public class Builder {
 			boolean isMany = feature.isIsMany();
 			EStructuralFeature eFeature = feature.getEFeature();
 			Value value = feature.getValue();
-			setFeature(eObject, eFeature, value, isMany, createdObjectsMap, commands);
+			setFeature(eObject, eFeature, value, isMany, createdObjectsMap, commands, problems);
 		}
 		return eObject;
 	}
@@ -95,25 +93,28 @@ public class Builder {
 			final Value value, 
 			final boolean isMany, 
 			final Map<NewObject, EObject> createdObjectsMap,
-			final List<Runnable> commands) {
+			final List<Runnable> commands,
+			final Map<EObject, String> problems) {
 		if (value instanceof Reference) {
 			// references need to be set at the end, because
 			// the referenced object may not exist yet
 			commands.add(new Runnable() {
 				
 				public void run() {
-					setFeatureBasic(object, eFeature, value, isMany, createdObjectsMap, commands);
+					setFeatureBasic(object, eFeature, value, isMany, createdObjectsMap, commands, problems);
 				}
 			});
+		} else {
+			setFeatureBasic(object, eFeature, value, isMany, createdObjectsMap, commands, problems);
 		}
-		setFeatureBasic(object, eFeature, value, isMany, createdObjectsMap, commands);
 	}
 
 	@SuppressWarnings("unchecked")
 	private void setFeatureBasic(EObject object, EStructuralFeature eFeature,
-			Value value, boolean isMany, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands) {
+			Value value, boolean isMany, Map<NewObject, EObject> createdObjectsMap,
+			List<Runnable> commands, Map<EObject, String> problems) {
+		Object newValue = getValue(eFeature, value, createdObjectsMap, commands, problems);
 		try {
-			Object newValue = getValue(eFeature, value, createdObjectsMap, commands);
 			if (!eFeature.getEType().isInstance(newValue)) {
 				throw new IllegalArgumentException();
 			}
@@ -133,13 +134,13 @@ public class Builder {
 				object.eSet(eFeature, newValue);
 			}
 		} catch (IllegalArgumentException e) {
-			Resource resource = value.eResource();
-			IResource textResource = (IResource) EMFTextAccessProxy.get(resource, IResource.class);
-			textResource.addError("Can't set value.", value);
+			String msg = "Can't set value of type '" + newValue.getClass().getSimpleName() 
+					+ "' to feature '" + eFeature.getName() + "'.";
+			problems.put(value, msg);
 		}
 	}
 
-	private Object getValue(EStructuralFeature eFeature, Value value, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands) {
+	private Object getValue(EStructuralFeature eFeature, Value value, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands, Map<EObject, String> problems) {
 		if (value instanceof Reference) {
 			Reference reference = (Reference) value;
 			EObject referencedNewObject = reference.getValue();
@@ -151,7 +152,7 @@ public class Builder {
 			return referencedEObject;
 		} else if (value instanceof Containment) {
 			Containment containment = (Containment) value;
-			return createEObject(containment.getValue(), createdObjectsMap, commands);
+			return createEObject(containment.getValue(), createdObjectsMap, commands, problems);
 		} else if (value instanceof Attribute) {
 			return createAttributeValue(eFeature, (Attribute) value);
 		} else {

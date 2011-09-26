@@ -15,6 +15,7 @@ package org.emftext.language.efactory.test;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.HashMap;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -105,7 +106,7 @@ public class BuilderTest extends TestCase {
 		Factory factory = (Factory) root;
 		// build model
 		Builder builder = new Builder();
-		List<EObject> builtModel = builder.build(factory);
+		List<EObject> builtModel = builder.build(factory, new HashMap<EObject, String>());
 		Resource tempResource = rs.createResource(URI.createURI("temp_resource_for_build_model.xmi"));
 		tempResource.getContents().addAll(builtModel);
 		// load expected model

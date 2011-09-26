@@ -15,8 +15,10 @@ package org.emftext.language.efactory.resource.efactory.mopp;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -26,6 +28,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.emftext.language.efactory.Factory;
 import org.emftext.language.efactory.builder.Builder;
+import org.emftext.language.efactory.resource.efactory.EfactoryEProblemType;
 
 public class EfactoryBuilder implements org.emftext.language.efactory.resource.efactory.IEfactoryBuilder {
 	
@@ -37,7 +40,8 @@ public class EfactoryBuilder implements org.emftext.language.efactory.resource.e
 				if (rootObject instanceof Factory) {
 					Factory factory = (Factory) rootObject;
 					Builder builder = new Builder();
-					List<EObject> roots = builder.build(factory);
+					Map<EObject, String> problems = new LinkedHashMap<EObject, String>();
+					List<EObject> roots = builder.build(factory, problems );
 					URI xmiURI = resource.getURI().trimFileExtension().appendFileExtension("xmi");
 					Resource xmiResource = new ResourceSetImpl().createResource(xmiURI);
 					xmiResource.getContents().addAll(roots);
@@ -47,6 +51,10 @@ public class EfactoryBuilder implements org.emftext.language.efactory.resource.e
 						xmiResource.save(options);
 					} catch (IOException e) {
 						e.printStackTrace();
+					}
+					
+					for (Entry<EObject, String> problem : problems.entrySet()) {
+						resource.addError(problem.getValue(), EfactoryEProblemType.BUILDER_ERROR, problem.getKey());
 					}
 				}
 			}

@@ -15,6 +15,7 @@ package org.emftext.language.efactory.test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.HashMap;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -84,7 +85,7 @@ public class LoadTest extends TestCase {
 		for (EObject eObject : contents) {
 			if (eObject instanceof Factory) {
 				Factory eFactory = (Factory) eObject;
-				List<EObject> roots = builder.build(eFactory);
+				List<EObject> roots = builder.build(eFactory, new HashMap<EObject, String>());
 				assertFalse(roots.isEmpty());
 			}
 		}
