@@ -7,6 +7,7 @@ OPTIONS {
 	overrideBuilder = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	
 }
 
 
@@ -17,12 +18,18 @@ TOKENS {
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 		
 	DEFINE TEXT $('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' | '::')+$;
+	
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ ;
+	DEFINE ML_COMMENT $'/*'.*'*/'$ ;
 }
 
 
 TOKENSTYLES {
 	"STRING_LITERAL" COLOR #2A00FF;
 	"TEXT" COLOR #000000;
+	// comments
+	"SL_COMMENT" COLOR #008000;
+	"ML_COMMENT" COLOR #008000;
 	
 	"Requirements" COLOR #7F0055, BOLD;
 	"Documentation" COLOR #7F0055, BOLD;
