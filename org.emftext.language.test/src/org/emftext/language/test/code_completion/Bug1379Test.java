@@ -15,6 +15,8 @@ package org.emftext.language.test.code_completion;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -54,10 +56,46 @@ public class Bug1379Test extends TestCase {
 
 	private void testPerformance(int size) {
 		String largeRegex = createLargeRegex(size);
+		// check completion at end of document
+		testPerformance(size, largeRegex, largeRegex.length(), 8);
+		// check completion at start of document
+		testPerformance(size, largeRegex, 0, 6);
+	}
+
+	private void testPerformance(int size, String largeRegex, int cursorOffset, int expectedNumberOfProposals) {
+		IRegexp_antlrTextResource textResource = createResource(largeRegex);
+		Regexp_antlrCodeCompletionHelper helper = new Regexp_antlrCodeCompletionHelper();
+		long before = System.currentTimeMillis();
+		Regexp_antlrCompletionProposal[] proposals = helper.computeCompletionProposals(textResource, largeRegex, cursorOffset);
+		List<Regexp_antlrCompletionProposal> matchingProposals = new ArrayList<Regexp_antlrCompletionProposal>();
+		for (Regexp_antlrCompletionProposal proposal : proposals) {
+			boolean matchesPrefix = proposal.getMatchesPrefix();
+			//System.out.println("Bug1379Test.testPerformance() " + proposal.getInsertString() + (matchesPrefix ? " (matches)" : ""));
+			if (matchesPrefix) {
+				matchingProposals.add(proposal);
+			}
+		}
+		//assertEquals(expectedNumberOfProposals, matchingProposals.size());
+		// ( ) * + ? . | ~ 
+		// 'someFrom' 'someValue'
+		long after = System.currentTimeMillis();
+		System.out.println("testPerformance(" + size + ") took " + (after - before) + "ms");
+	}
+
+	public void testNPE() {
+		Regexp_antlrCodeCompletionHelper helper = new Regexp_antlrCodeCompletionHelper();
+		String content = "('a'|'b')+";
+		IRegexp_antlrTextResource textResource = createResource(content);
+		Regexp_antlrCompletionProposal[] proposals = helper.computeCompletionProposals(textResource, content, 0);
+		assertEquals(6, proposals.length);
+		// ( . | ~ 'someFrom' 'someValue'
+	}
+
+	private IRegexp_antlrTextResource createResource(String content) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource(URI.createURI("temp." + FILE_EXTENSION));
 		try {
-			resource.load(new ByteArrayInputStream(largeRegex.getBytes()), null);
+			resource.load(new ByteArrayInputStream(content.getBytes()), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -65,17 +103,9 @@ public class Bug1379Test extends TestCase {
 		assertEquals("Resource must not have errors.", 0, resource.getErrors().size());
 		assertTrue(resource instanceof IRegexp_antlrTextResource);
 		IRegexp_antlrTextResource textResource = (IRegexp_antlrTextResource) resource;
-		Regexp_antlrCodeCompletionHelper helper = new Regexp_antlrCodeCompletionHelper();
-		long before = System.currentTimeMillis();
-		Regexp_antlrCompletionProposal[] proposals = helper.computeCompletionProposals(textResource, largeRegex, largeRegex.length());
-		for (Regexp_antlrCompletionProposal proposal : proposals) {
-			System.out.println("Bug1379Test.testPerformance() " + proposal.getInsertString());
-		}
-		assertEquals(6, proposals.length);
-		long after = System.currentTimeMillis();
-		System.out.println("testPerformance(" + size + ") took " + (after - before) + "ms");
+		return textResource;
 	}
-
+	
 	private String createLargeRegex(int size) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < size; i++) {
