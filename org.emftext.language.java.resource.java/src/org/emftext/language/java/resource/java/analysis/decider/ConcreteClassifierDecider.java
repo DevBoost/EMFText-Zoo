@@ -206,7 +206,12 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					resultList.add(((ClassifierImport)aImport).getClassifier());
 				}
 				else if (aImport instanceof StaticMemberImport) {
-					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
+					StaticMemberImport staticMemberImport = (StaticMemberImport)aImport;
+					if (!staticMemberImport.getStaticMembers().isEmpty()) {
+						//access first element to trigger proxy resolution and avoid ConcurrentModificationException
+						staticMemberImport.getStaticMembers().get(0);
+					}
+					resultList.addAll(staticMemberImport.getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
 					resultList.addAll(aImport.getImportedMembers());
