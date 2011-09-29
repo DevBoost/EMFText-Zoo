@@ -16,8 +16,6 @@ package org.emftext.language.csv.test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -32,10 +30,8 @@ import org.emftext.language.csv.CSVDocument;
 import org.emftext.language.csv.CsvFactory;
 import org.emftext.language.csv.Row;
 import org.emftext.language.csv.Value;
-import org.emftext.language.csv.resource.csv.ICsvOptions;
 import org.emftext.language.csv.resource.csv.mopp.CsvMetaInformation;
 import org.emftext.language.csv.resource.csv.mopp.CsvResourceFactory;
-import org.emftext.language.csv.resource.csv.postprocessing.CsvPostProcessor;
 
 public class CSVTest extends TestCase {
 
@@ -52,22 +48,26 @@ public class CSVTest extends TestCase {
 	public void testBug1408() {
 		testPrinting(
 				"a,b,c" + NEW_LINE + "d,e,f" + NEW_LINE, 
-				"a,b,c,new" + NEW_LINE + "d,e,f" + NEW_LINE,
+				"a;b;c;new" + NEW_LINE + "d;e;f" + NEW_LINE,
 				"new"
 		);
 		testPrinting(
 				"a,b,c" + NEW_LINE + "d,e,f" + NEW_LINE, 
-				"a,b,c,\"ne,w\"" + NEW_LINE + "d,e,f" + NEW_LINE,
+				"a;b;c;\"ne,w\"" + NEW_LINE + "d;e;f" + NEW_LINE,
 				"ne,w"
+		);
+		testPrinting(
+				"a,b,c" + NEW_LINE + "d,e,f" + NEW_LINE, 
+				"a;b;c;\"ne;w\"" + NEW_LINE + "d;e;f" + NEW_LINE,
+				"ne;w"
 		);
 	}
 
 	private void testPrinting(String input, String expectedResult, String newValueText) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource(URI.createURI("bug1408." + FILE_EXTENSION));
-		Map<?,?> loadOptions = Collections.singletonMap(ICsvOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new CsvPostProcessor());
 		try {
-			resource.load(new ByteArrayInputStream(input.getBytes()), loadOptions);
+			resource.load(new ByteArrayInputStream(input.getBytes()), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
