@@ -1,0 +1,68 @@
+package math.semantics;
+
+petrinet Math 
+
+types <math.text.ecore> <math.text.genmodel>;
+
+{
+ 	autoinit place InitialPlace : Element 
+ 	place EndPlace : Element 
+
+ 	InitialPlace - e -> eval
+ 	eval - e(value := result) -> EndPlace
+
+ 	transition eval 
+ 	if ( @Expression.isInstance(e).not())  
+ 	do { 
+ 		result = e.getValue();  
+ 	}
+ 	InitialPlace - e -> add 
+ 	EndPlace - arg1 -> add
+ 	EndPlace - arg2 -> add  
+ 	add - e (value := result )-> EndPlace   
+ 
+   	transition add  
+	if ( @Expression.isInstance(e)
+			&& ((Expression) e).getElements().get(0).equals(arg1) 
+			&& ((Expression) e).getElements().get(1).equals(arg2)
+			&& ((Expression) e).getOperator().equals("+") )
+   	do { 
+   		left = arg1.getValue();
+   		right = arg2.getValue();
+   		result = left.add(right);
+ 	} 
+ 	
+ 	InitialPlace - e -> sub 
+ 	EndPlace - arg1 -> sub
+ 	EndPlace - arg2 -> sub
+ 	sub - e ( value := result ) -> EndPlace 
+  
+ 	transition sub
+	if ( @Expression.isInstance(e) 
+			&& ((Expression) e).getElements().get(0).equals(arg1) 
+			&& ((Expression) e).getElements().get(1).equals(arg2) 
+			&& ((Expression) e).getOperator().equals("-") )
+   	do {
+   		left = arg1.getValue();
+   		right = arg2.getValue();
+   		result = left.sub(right);
+ 	}
+ 	
+ 	InitialPlace - e -> mul
+ 	EndPlace - arg1 -> mul
+ 	EndPlace - arg2 -> mul 
+ 	mul - e (value := result) -> EndPlace
+ 
+ 	transition mul
+	if ( @Expression.isInstance(e) 
+			&& ((Expression) e).getElements().get(0).equals(arg1)
+			&& ((Expression) e).getElements().get(1).equals(arg2) 
+			&& ((Expression) e).getOperator().equals("*") )
+   	do {
+   		expression = ((Expression) e);
+   	  	left = expression.getElements().get(0).getValue(); 
+   		right = expression.getElements().get(1).getValue();
+   		result = left.mult(right);
+ 	} 
+ 
+}    
