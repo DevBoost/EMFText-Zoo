@@ -146,7 +146,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 		else {
 			try {
-			result = super.getEObject(id);
+				result = super.getEObject(id);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -223,29 +223,28 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	private void register() throws IOException {
 		URI myURI = getURI();
 
-		//only for physical URIs
-		if("pathmap".equals(myURI.scheme())) {
-			return;
-		}
-
 		if (!getContents().isEmpty()) {
 			EObject root = getContents().get(0);
+			if(root instanceof CompilationUnit) {
+				CompilationUnit cu = (CompilationUnit) root;
+				setCompilationUnitName(cu);
+			}
+			
+			//only for physical URIs
+			if("pathmap".equals(myURI.scheme())) {
+				return;
+			}
+			
 			//could also be a package-info.java without CU
 			if(root instanceof CompilationUnit) {
-				CompilationUnit cu = (CompilationUnit) getContents().get(0);
-				String packageName = JavaUniquePathConstructor.packageName(cu);
-				if (!"".equals(packageName)) {
-					cu.setName(packageName + "." + myURI.lastSegment());
-				} else {
-					cu.setName(myURI.lastSegment());
-				}
+				CompilationUnit cu = (CompilationUnit) root;
 				JavaClasspath.get(this).registerClassifierSource(cu, myURI);
 			} else if (root instanceof Package) {
 				//package-info.java
 				Package p = (Package) root;
 
 				if(Platform.isRunning()) {
-					//if inside eclipse, register other files is workspace
+					//if inside eclipse, register other files in workspace
 					IContainer container = WorkspaceSynchronizer.getFile(this).getParent();
 					try {
 						collectSubunits(container, p);
@@ -259,6 +258,16 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			} else if (root instanceof EmptyModel) {
 				((EmptyModel) root).setName(myURI.trimFileExtension().lastSegment());
 			}
+		}
+	}
+
+	private void setCompilationUnitName(CompilationUnit cu) {
+		String packageName = JavaUniquePathConstructor.packageName(cu);
+		String fileName = getURI().lastSegment();
+		if (!"".equals(packageName)) {		
+			cu.setName(packageName + "." + fileName);
+		} else {
+			cu.setName(fileName);
 		}
 	}
 
