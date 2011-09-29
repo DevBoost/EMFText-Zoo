@@ -24,38 +24,22 @@ OPTIONS {
 	tokenspace = "0";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	resolveProxyElementsAfterParsing = "false";
 	
-	overrideMetaInformation = "false";
+	overridePrinter2 = "false";
 }
 
 TOKENS {
 	DEFINE LINEBREAK $('\r\n'|'\r'|'\n')$;
+	DEFINE COMMA $(','|';')$;
 	
-	DEFINE FRAGMENT QUOTED_VALUE   $('"')(('\\''"')|('\\''\\')|~('"'|'\\'))*('"')$;
-	DEFINE FRAGMENT UNQUOTED_VALUE $(~('"'|','|'\r\n'|'\r'|'\n'))+$;
-	
-	// TODO known problem: CSV files must either end with a linebreak or a comma
-	// because we cannot match the EOF signal here. A possible workaround is to
-	// add a stream preprocessor that add a linebreak if it is missing.
-	DEFINE T_VALUE_WITH_COMMA      $($ + QUOTED_VALUE + $ | $ + UNQUOTED_VALUE + $) ',' $;
-	DEFINE T_VALUE_WITHOUT_COMMA   $($ + QUOTED_VALUE + $ | $ + UNQUOTED_VALUE + $) $ + LINEBREAK;
+	DEFINE UNQUOTED_VALUE $(~('"'|','|';'|'\r\n'|'\r'|'\n'))+$;
 }
 
 RULES {
 	CSVDocument ::= rows* linebreaks[LINEBREAK]*;
-	// this is a awkward trick to parse CSV files:
-	//
-	// all values except the last one use the ValueWithComma class to allow only
-	// the T_VALUE_WITH_COMMA token. For the last value we use the ValueWithoutComma
-	// class to match values that end with a linebreak
-	//
-	// after parsing a post processor replaces all instances of ValueWithComma and
-	// ValueWithoutComma with ordinary Value instances
-	Row ::= values : ValueWithComma+ values : ValueWithoutComma?;
+
+	Row ::= (values)+ _[LINEBREAK]?;
 	
-	ValueWithComma ::= text[T_VALUE_WITH_COMMA];
-	ValueWithoutComma ::= text[T_VALUE_WITHOUT_COMMA];
-	
-	// this rule is only used for printing
-	Value ::= text[T_VALUE_WITH_COMMA];
+	Value ::= ( _[COMMA] (text['"','"','\\\\\\'] | text[UNQUOTED_VALUE])) | (text['"','"','\\\\\\'] | text[UNQUOTED_VALUE]) | text[COMMA];
 }
