@@ -36,7 +36,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		final AutomatedJavaLanguageFeatureTest test = new AutomatedJavaLanguageFeatureTest();
 
 		TestSuite suite = new ThreadedTestSuite(
-		"Suite testing all files in the input directory automatically", 1000, 100);
+		"Suite testing all files in the input directory automatically", 30 * 1000, 100);
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, "java");
 		for (final File file : allTestFiles) {
