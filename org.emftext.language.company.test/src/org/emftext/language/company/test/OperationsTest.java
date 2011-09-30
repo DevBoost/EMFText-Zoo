@@ -19,14 +19,19 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.company.Company;
 import org.emftext.language.company.Department;
 import org.emftext.language.company.Employee;
@@ -85,18 +90,31 @@ public class OperationsTest {
 		for (Department department : departments) {
 			int recursiveDepth = department.depth();
 			int testDepth = getDepth(department);
-			System.out.println("recursice depth: " + recursiveDepth + " test depth: " + testDepth);
+			System.out.println("recursive depth: " + recursiveDepth + " test depth: " + testDepth);
 			assertEquals(recursiveDepth, testDepth);
 		}
 	}
 	
 	private int getDepth(Department department){
 		int depth = 1;
+		Set<Department> departments = new HashSet<Department>();
+		departments.add(department);
 		TreeIterator<EObject> allContents = department.eAllContents();
 		while (allContents.hasNext()) {
 			EObject object = (EObject) allContents.next();
 			if(object instanceof Department){
-				depth++;
+				departments.add((Department) object);
+				Department superDepartment = (Department) object.eContainer();
+				List<Department> subDepartments = superDepartment.getSubDepartments();
+				boolean foundAthThisLayer = false;
+				for (Department department2 : subDepartments) {
+					if(!object.equals(department2) && departments.contains(department2)){
+						foundAthThisLayer = true;
+					}
+				}
+				if(!foundAthThisLayer){
+					depth++;
+				}
 			}
 		}
 		return depth;
