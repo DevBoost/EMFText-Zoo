@@ -51,7 +51,7 @@ public class Bug1379Test extends TestCase {
 		testPerformance(100000);
 		// now the overall test takes about 10 seconds
 		long endTime = System.currentTimeMillis();
-		assertTrue("Code completion computations must not take more than one minute.", endTime - startTime < 60000);
+		assertTrue("Code completion computations must not take more than 5 minutes.", endTime - startTime < 5 * 60 * 1000);
 	}
 
 	private void testPerformance(int size) {
