@@ -27,9 +27,9 @@ import org.emftext.sdk.concretesyntax.CsString;
 import org.emftext.sdk.concretesyntax.Placeholder;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
 import org.emftext.test.ConcreteSyntaxTestHelper;
-import org.emftext.test.expectationcomputer.AbstractExpectationComputerTest;
+import org.emftext.test.expectationcomputer.AbstractExpectationComputerTestCase;
 
-public class ExpectationComputerTest extends AbstractExpectationComputerTest {
+public class ExpectationComputerTest extends AbstractExpectationComputerTestCase {
 
 	private ConcreteSyntax cct2Syntax;
 	private ConcreteSyntax cct3Syntax;
