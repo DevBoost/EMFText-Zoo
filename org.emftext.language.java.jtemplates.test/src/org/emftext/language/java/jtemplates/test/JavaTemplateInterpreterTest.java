@@ -17,9 +17,9 @@ import org.emftext.language.customer.resource.customer.mopp.CustomerMetaInformat
 import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateMetaInformation;
 import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateResourceFactory;
 import org.emftext.language.java.resource.java.mopp.JavaMetaInformation;
-import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTest;
+import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTestCase;
 
-public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
+public class JavaTemplateInterpreterTest extends AbstractInterpreterTestCase {
 
 	public void testSandwichInterpretation() {
 		// basic test (input model is not used)
