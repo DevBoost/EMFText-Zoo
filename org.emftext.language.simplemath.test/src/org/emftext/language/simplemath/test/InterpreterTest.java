@@ -25,7 +25,7 @@ import org.emftext.language.simplemath.resource.sm.ISmResourcePostProcessor;
 import org.emftext.language.simplemath.resource.sm.ISmResourcePostProcessorProvider;
 
 
-public class InterpreterTest extends AbstractSimpleMathTest {
+public class InterpreterTest extends AbstractSimpleMathTestCase {
 
 	public void setUp() throws Exception {
 		super.setUp();

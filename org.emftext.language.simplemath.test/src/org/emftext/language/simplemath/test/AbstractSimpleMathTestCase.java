@@ -32,7 +32,7 @@ import org.emftext.language.simplemath.Expression;
 import org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation;
 import org.emftext.language.simplemath.resource.sm.mopp.SmResourceFactory;
 
-public abstract class AbstractSimpleMathTest extends TestCase {
+public abstract class AbstractSimpleMathTestCase extends TestCase {
 	
 	public void setUp() throws Exception {
 		super.setUp();

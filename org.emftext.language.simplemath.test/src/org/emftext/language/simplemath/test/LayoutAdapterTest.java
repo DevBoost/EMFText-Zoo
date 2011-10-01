@@ -28,7 +28,7 @@ import org.emftext.language.simplemath.IntegerLiteralExp;
 import org.emftext.language.simplemath.resource.sm.mopp.SmLayoutInformation;
 import org.emftext.language.simplemath.resource.sm.mopp.SmLayoutInformationAdapter;
 
-public class LayoutAdapterTest extends AbstractSimpleMathTest {
+public class LayoutAdapterTest extends AbstractSimpleMathTestCase {
 
 	public void testStartOffsets() {
 		InputStream bais = new ByteArrayInputStream("1+2".getBytes());

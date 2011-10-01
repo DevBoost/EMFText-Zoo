@@ -23,7 +23,7 @@ import org.emftext.language.simplemath.Additive;
 import org.emftext.language.simplemath.Expression;
 import org.emftext.language.simplemath.IntegerLiteralExp;
 
-public class SimpleMathTest extends AbstractSimpleMathTest {
+public class SimpleMathTest extends AbstractSimpleMathTestCase {
 	
 	public void testOnePlusTwo() {
 		try {
