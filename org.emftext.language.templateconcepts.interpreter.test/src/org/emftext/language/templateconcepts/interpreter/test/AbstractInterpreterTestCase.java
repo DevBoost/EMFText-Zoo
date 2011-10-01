@@ -29,7 +29,7 @@ import org.emftext.language.templateconcepts.Template;
 import org.emftext.language.templateconcepts.interpreter.ITemplateInterpreter;
 import org.emftext.language.templateconcepts.interpreter.TemplateInterpreterFactory;
 
-public abstract class AbstractInterpreterTest extends TestCase {
+public abstract class AbstractInterpreterTestCase extends TestCase {
 
 	public void setUp() {
 		registerResourceFactories();
