@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.bool.resource.bool.mopp.BoolResourceFactory;
 import org.emftext.language.tbool.resource.tbool.mopp.TboolResourceFactory;
-import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTest;
+import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTestCase;
 
-public class TBoolInterpretationTest extends AbstractInterpreterTest {
+public class TBoolInterpretationTest extends AbstractInterpreterTestCase {
 
 	public void testInterpretation() {
 		testInterpretation("test1.tbool", "test1a.ecore", "public class MyClass { private MyClass staticAttribute ; }");
