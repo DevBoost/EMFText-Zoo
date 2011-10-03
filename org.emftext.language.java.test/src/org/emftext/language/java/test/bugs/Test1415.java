@@ -33,7 +33,7 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.junit.Test;
 
-public class Test1415 extends AbstractTest {
+public class Test1415 extends AbstractTestCase {
 
 	private static String OUT_FOLDER = "./output";
 	

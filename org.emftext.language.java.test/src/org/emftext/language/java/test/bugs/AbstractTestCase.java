@@ -26,9 +26,9 @@ import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 
 import junit.framework.TestCase;
 
-public abstract class AbstractTest extends TestCase {
+public abstract class AbstractTestCase extends TestCase {
 
-	public AbstractTest() {
+	public AbstractTestCase() {
 		super();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());

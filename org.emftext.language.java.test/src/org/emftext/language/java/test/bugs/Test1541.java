@@ -26,7 +26,7 @@ import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersFactory;
 import org.junit.Test;
 
-public class Test1541 extends AbstractTest {
+public class Test1541 extends AbstractTestCase {
 
 	private static final String LB = System.getProperty("line.separator");
 
