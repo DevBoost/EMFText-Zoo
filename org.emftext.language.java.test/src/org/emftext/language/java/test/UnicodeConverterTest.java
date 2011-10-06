@@ -32,7 +32,7 @@ public class UnicodeConverterTest {
 	@Test
 	public void testUnsignedByteToInt() {
 		System.out.println("UnicodeConverterTest.testUnsignedByteToInt() " +
-				Assert.class.getResource(".").toString());
+				Assert.class.getProtectionDomain().getCodeSource().getLocation());
 		assertEquals(255, JavaUnicodeConverter.unsignedByteToInt((byte) 0xFF));
 		assertEquals(1, JavaUnicodeConverter.unsignedByteToInt((byte) 0x01));
 	}
