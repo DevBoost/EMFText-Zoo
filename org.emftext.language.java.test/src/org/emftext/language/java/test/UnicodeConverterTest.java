@@ -24,12 +24,15 @@ import java.io.InputStreamReader;
 
 import org.antlr.runtime3_4_0.ANTLRInputStream;
 import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class UnicodeConverterTest {
 
 	@Test
 	public void testUnsignedByteToInt() {
+		System.out.println("UnicodeConverterTest.testUnsignedByteToInt() " +
+				Assert.class.getResource(".").toString());
 		assertEquals(255, JavaUnicodeConverter.unsignedByteToInt((byte) 0xFF));
 		assertEquals(1, JavaUnicodeConverter.unsignedByteToInt((byte) 0x01));
 	}
