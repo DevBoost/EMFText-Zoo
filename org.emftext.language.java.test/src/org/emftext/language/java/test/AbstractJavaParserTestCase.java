@@ -336,6 +336,10 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 	private static org.eclipse.jdt.core.dom.CompilationUnit parseWithJDT(
 			InputStream inputStream) {
+		
+		System.out.println("AbstractJavaParserTestCase.parseWithJDT() Scanner is loaded from " + org.eclipse.jdt.internal.compiler.parser.Scanner.class.getProtectionDomain().getCodeSource().getLocation().toString());
+		System.out.println("AbstractJavaParserTestCase.parseWithJDT() RecoveryScanner is loaded from " + org.eclipse.jdt.internal.compiler.parser.RecoveryScanner.class.getProtectionDomain().getCodeSource().getLocation().toString());
+		
 		ASTParser jdtParser = ASTParser.newParser(AST.JLS3);
 		char[] charArray = readTextContents(inputStream).toCharArray();
 		jdtParser.setSource(charArray);
