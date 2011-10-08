@@ -20,7 +20,13 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.util.JavaPostProcessor;
+import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 /**
@@ -32,16 +38,21 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 	protected static final String TEST_INPUT_FOLDER_NAME = "src-input";
 	protected static final String TEST_OUTPUT_FOLDER_NAME = "output";
 
-	public static Test suite() throws CoreException {
+	public static Test suite() throws Exception {
 		final AutomatedJavaLanguageFeatureTest test = new AutomatedJavaLanguageFeatureTest();
 
 		TestSuite suite = new ThreadedTestSuite(
-		"Suite testing all files in the input directory automatically", 30 * 1000, 100);
+		"Suite testing all files in the input directory automatically", 30 * 1000, 1);
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, "java");
+		suiteResourceSet = new ResourceSetImpl();
+		suiteResourceSet.getLoadOptions().put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		suiteResourceSet.getLoadOptions().put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+		suiteResourceSet.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		for (final File file : allTestFiles) {
 			addParseTest(test, suite, file);
 			addParseAndReprintTest(test, suite, file);
+			addFileToClasspath(file);
 		}
 
 		return suite;
@@ -52,7 +63,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		suite.addTest(new TestCase("Parse " + file.getName()) {
 			public void runTest() {
 				try {
-					test.parseResource(file, "./");
+					test.parseResource(file.getPath(), "./");
 				}
 				catch (Exception e) {
 					fail(e.getClass() +  ": " + e.getMessage());
@@ -67,7 +78,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		suite.addTest(new TestCase("Parse and Reprint " + file.getName()) {
 			public void runTest() {
 				try {
-					test.parseAndReprint(file.getName(), TEST_INPUT_FOLDER_NAME, TEST_OUTPUT_FOLDER_NAME);
+					test.parseAndReprint(file, TEST_INPUT_FOLDER_NAME, TEST_OUTPUT_FOLDER_NAME);
 				}
 				catch (Exception e) {
 					fail(e.getClass() +  ": " + e.getMessage());
@@ -76,6 +87,30 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 
 			}
 		});
+	}
+	
+	private static void addFileToClasspath(File file) throws Exception {
+		JavaClasspath cp = JavaClasspath.get(suiteResourceSet);
+		String fullName = file.getPath().substring(TEST_INPUT_FOLDER_NAME.length() + 3, file.getPath().length() - 5);
+		fullName = fullName.replaceAll(File.separator, ".");
+		int idx = fullName.lastIndexOf(".");
+		String packageName;
+		String classifierName;
+		if (idx == -1) {
+			packageName = "";
+			classifierName = fullName;
+		} else {
+			packageName = fullName.substring(0, idx);
+			classifierName = fullName.substring(idx + 1);			
+		}
+		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getCanonicalPath()));
+	}
+	
+	private static ResourceSet suiteResourceSet = null;
+	
+	@Override
+	protected ResourceSet getResourceSet() {
+		return suiteResourceSet;
 	}
 
 	@Override
