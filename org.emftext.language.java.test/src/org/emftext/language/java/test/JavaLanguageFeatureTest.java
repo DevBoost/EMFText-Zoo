@@ -628,8 +628,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testCrazyUnicode() throws Exception {
 		String typename = "CrazyUnicode";
-		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		String file = "pkg" + File.separator + typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass("pkg", typename);
 		assertMemberCount(clazz, 2);
 
 		parseAndReprint(file);
@@ -851,8 +851,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testEscapedStrings() throws Exception {
 		String typename = "EscapedStrings";
-		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		String file = "pkg" + File.separator + typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass("pkg", typename);
 		assertMemberCount(clazz, 9);
 
 		// iterate over all fields, get their value using reflection and
@@ -1342,8 +1342,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testNumberLiterals() throws Exception {
 		String typename = "NumberLiterals";
-		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		String file = "pkg" + File.separator + typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass("pkg", typename);
 		assertMemberCount(clazz, 46);
 
 		// iterate over all fields, get their value using reflection and
@@ -1368,8 +1368,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testTempLiterals() throws Exception {
 		String typename = "TempLiterals";
-		File file = new File(typename + JAVA_FILE_EXTENSION);
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		String file = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 9);
 		parseAndReprint(file);
 	}
@@ -1377,8 +1377,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testRoundedLiterals() throws Exception {
 		String typename = "RoundedLiterals";
-		File file = new File(typename + JAVA_FILE_EXTENSION);
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		String file = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 26);
 		parseAndReprint(file);
 	}
@@ -1608,7 +1608,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	public void testUsingAnnotations() throws Exception {
 		String typename = "UsingAnnotations";
 		String filename = "pkg" + File.separator + typename + JAVA_FILE_EXTENSION;
-		assertParsesToClass(new File(filename));
+		assertParsesToClass("pkg", typename);
 
 		parseAndReprint(filename);
 	}
@@ -1647,7 +1647,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	public void testVariableReferencing() throws Exception {
 		String typename = "VariableReferencing";
 		String filename = typename + JAVA_FILE_EXTENSION;
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.classifiers.Class.class);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 2);
 
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);

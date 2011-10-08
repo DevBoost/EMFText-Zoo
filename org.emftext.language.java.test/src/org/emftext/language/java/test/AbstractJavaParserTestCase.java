@@ -97,7 +97,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		File inputFolder = new File("." + File.separator + getTestInputFolder());
 		File inputFile = new File(file);
 
-		CompilationUnit cu = (CompilationUnit) parseResource(inputFile);
+		CompilationUnit cu = (CompilationUnit) parseResource(inputFile.getPath());
 
 		inputFile = new File(inputFolder + File.separator + file);
 		JavaClasspath.get(cu).registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
@@ -113,14 +113,9 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	private static List<File> reprintedResources = new ArrayList<File>();
 
 	protected JavaRoot parseResource(String filename,
-			String inputFolderName) throws Exception {
-		return parseResource(new File(filename), inputFolderName);
-	}
-
-	protected JavaRoot parseResource(File inputFile,
 			String inputFolderName) throws IOException {
 		File inputFolder = new File("./" + inputFolderName);
-		File file = new File(inputFolder, inputFile.getPath());
+		File file = new File(inputFolder, filename);
 		assertTrue("File " + file + " should exist.", file.exists());
 		addParsedResource(file);
 		return loadResource(file.getCanonicalPath());
@@ -262,15 +257,14 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	protected void parseAndReprint(String filename, String inputFolderName,
 			String outputFolderName) throws MalformedTreeException,
 			IOException, BadLocationException {
-		File file = new File(filename);
+		File file = new File("." + File.separator + inputFolderName + File.separator + filename);
 		parseAndReprint(file, inputFolderName, outputFolderName);
 	}
 
 	protected void parseAndReprint(File file, String inputFolderName,
 			String outputFolderName) throws MalformedTreeException,
 			IOException, BadLocationException {
-		File inputFolder = new File("." + File.separator + inputFolderName);
-		File inputFile = new File(inputFolder + File.separator + file.getPath());
+		File inputFile = file;
 		assertTrue("File " + inputFile.getAbsolutePath() + " exists.",
 				inputFile.exists());
 		String outputFileName = calculateOutputFilename(inputFile,
@@ -548,30 +542,39 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				getModifiers(method).get(0) instanceof Public);
 	}
 
-	protected org.emftext.language.java.classifiers.Class assertParsesToClass(
-			File file) throws Exception {
-		return assertParsesToType(file,
-				org.emftext.language.java.classifiers.Class.class);
-	}
-
 	protected Enumeration assertParsesToEnumeration(String typename)
 			throws Exception {
-		return assertParsesToType(typename, Enumeration.class);
+		return assertParsesToEnumeration("", typename);
 	}
 
+	protected Enumeration assertParsesToEnumeration(String pkgFolder, String typename)
+			throws Exception {
+		return assertParsesToType(pkgFolder, typename, Enumeration.class);
+	}
+	
 	protected Interface assertParsesToInterface(String typename)
 			throws Exception {
-		return assertParsesToType(typename, Interface.class);
+		return assertParsesToInterface("", typename);
+	}
+
+	protected Interface assertParsesToInterface(String pkgFolder, String typename)
+			throws Exception {
+		return assertParsesToType(pkgFolder, typename, Interface.class);
 	}
 
 	protected Annotation assertParsesToAnnotation(String typename)
 			throws Exception {
-		return assertParsesToType(typename, Annotation.class);
+		return assertParsesToAnnotation("", typename);
+	}
+	
+	protected Annotation assertParsesToAnnotation(String pkgFolder, String typename)
+			throws Exception {
+		return assertParsesToType(pkgFolder, typename, Annotation.class);
 	}
 
-	protected <T> T assertParsesToType(String typename, String folder,
+	protected <T> T assertParsesToType(String pkgFolder, String typename, String folder,
 			Class<T> expectedType) throws Exception {
-		String filename = typename + ".java";
+		String filename = pkgFolder + File.separator + typename + ".java";
 		JavaRoot model = parseResource(filename, folder);
 		if (model instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) model;
@@ -588,33 +591,21 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 	}
 
-	protected <T> T assertParsesToType(String typename, Class<T> expectedType)
+	protected <T> T assertParsesToType(String typename, Class<T> expectedType) 
+			throws Exception {	
+		return assertParsesToType("", typename, expectedType);
+	}
+	
+	protected <T> T assertParsesToType(String pkgFolder, String typename, Class<T> expectedType)
 			throws Exception {
-		return assertParsesToType(typename, getTestInputFolder(),
+		return assertParsesToType(pkgFolder, typename, getTestInputFolder(),
 				expectedType);
 	}
 
 	protected abstract String getTestInputFolder();
 
-	private <T> T assertParsesToType(File file, Class<T> expectedType)
-			throws Exception {
-
-		JavaRoot model = parseResource(file);
-		if (model instanceof CompilationUnit) {
-			CompilationUnit cu = (CompilationUnit) model;
-			assertNumberOfClassifiers(cu, 1);
-
-			Classifier declaration = cu.getClassifiers().get(0);
-			assertType(declaration, expectedType);
-			return expectedType.cast(declaration);
-		}
-		else {
-			return null;
-		}
-	}
-
-	private JavaRoot parseResource(File file) throws Exception {
-		return parseResource(file, getTestInputFolder());
+	protected JavaRoot parseResource(String filename) throws Exception {
+		return parseResource(filename, getTestInputFolder());
 	}
 
 	protected void parseAndReprint(String filename)
@@ -627,14 +618,15 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 			IOException, BadLocationException {
 		parseAndReprint(file, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
-
-	protected JavaRoot parseResource(String filename) throws Exception {
-		return parseResource(filename, getTestInputFolder());
+	
+	protected org.emftext.language.java.classifiers.Class assertParsesToClass(
+			String typename) throws Exception {
+		return assertParsesToClass("", typename);
 	}
 
 	protected org.emftext.language.java.classifiers.Class assertParsesToClass(
-			String typename) throws Exception {
-		return assertParsesToType(typename,
+			String pkgFolder, String typename) throws Exception {
+		return assertParsesToType(pkgFolder, typename,
 				org.emftext.language.java.classifiers.Class.class);
 	}
 
@@ -648,11 +640,16 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		assertEquals(name + " should have " + expectedCount
 				+ " member(s).", expectedCount, container.getMembers().size());
 	}
-
+	
 	protected void assertParsesToClass(String typename, int expectedMembers)
 			throws Exception, IOException, BadLocationException {
+		assertParsesToClass("", typename, expectedMembers);
+	}
+
+	protected void assertParsesToClass(String pkgFolder, String typename, int expectedMembers)
+			throws Exception, IOException, BadLocationException {
 		String filename = typename + ".java";
-		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(pkgFolder, typename);
 		assertEquals(typename + " should have " + expectedMembers
 				+ " member(s).", expectedMembers, clazz.getMembers().size());
 
