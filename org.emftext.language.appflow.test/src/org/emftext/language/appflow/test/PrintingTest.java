@@ -18,7 +18,6 @@ import static junit.framework.Assert.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -30,7 +29,6 @@ import org.emftext.language.appflow.AppFlowPackage;
 import org.emftext.language.appflow.Application;
 import org.emftext.language.appflow.actions.ActionsPackage;
 import org.emftext.language.appflow.commons.CommonsPackage;
-import org.emftext.language.appflow.impl.AppFlowFactoryImpl;
 import org.emftext.language.appflow.resource.appflow.mopp.AppflowMetaInformation;
 import org.emftext.language.appflow.screenmodel.Screen;
 import org.emftext.language.appflow.screenmodel.ScreenmodelFactory;
