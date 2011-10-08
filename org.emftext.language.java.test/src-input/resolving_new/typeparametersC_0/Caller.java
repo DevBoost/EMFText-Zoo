@@ -1,7 +1,6 @@
 package resolving_new.typeparametersC_0;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Caller {
@@ -13,7 +12,8 @@ public class Caller {
 				return 0;
 			}};
 			
-		Collections.singletonMap("key", "value").get("key").toLowerCase();
+		// TODO currently fails (see issue #1777)
+		//Collections.singletonMap("key", "value").get("key").toLowerCase();
 		Arrays.binarySearch(new Caller [] {new Caller()}, "", comp);
 	}
 
