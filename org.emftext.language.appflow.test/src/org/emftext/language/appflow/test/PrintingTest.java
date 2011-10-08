@@ -31,6 +31,7 @@ import org.emftext.language.appflow.Application;
 import org.emftext.language.appflow.actions.ActionsPackage;
 import org.emftext.language.appflow.commons.CommonsPackage;
 import org.emftext.language.appflow.impl.AppFlowFactoryImpl;
+import org.emftext.language.appflow.resource.appflow.mopp.AppflowMetaInformation;
 import org.emftext.language.appflow.screenmodel.Screen;
 import org.emftext.language.appflow.screenmodel.ScreenmodelFactory;
 import org.emftext.language.appflow.screenmodel.ScreenmodelPackage;
@@ -56,8 +57,8 @@ public class PrintingTest {
 		EPackage.Registry.INSTANCE.put(ActionsPackage.eNS_URI, ActionsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(ScreenmodelPackage.eNS_URI, ScreenmodelPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(WidgetsPackage.eNS_URI, WidgetsPackage.eINSTANCE);
-		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-		extensionToFactoryMap.put("appflow", new AppFlowFactoryImpl());
+
+		new AppflowMetaInformation().registerResourceFactory();
 	}
 	
 	@Test
