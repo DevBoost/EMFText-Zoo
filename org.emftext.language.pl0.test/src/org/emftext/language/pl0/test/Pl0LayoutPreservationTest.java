@@ -13,13 +13,19 @@
  ******************************************************************************/
 package org.emftext.language.pl0.test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -27,6 +33,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -54,25 +61,43 @@ public class Pl0LayoutPreservationTest extends TestCase {
 				return file.isFile() && file.getName().endsWith(".pl0");
 			}
 		});
+		List<File> sortedInputFiles = new ArrayList<File>();
 		for (File file : inputFiles) {
+			sortedInputFiles.add(file);
+		}
+		Collections.sort(sortedInputFiles, new Comparator<File>() {
+
+			public int compare(File file1, File file2) {
+				return file1.getName().compareTo(file2.getName());
+			}
+		});
+		
+		for (File file : sortedInputFiles) {
 			assertParseAndPrint(file);
 		}
 	}
 
 	private void assertParseAndPrint(File file) {
-		EObject root = parse(file);
+		System.out.println("Pl0LayoutPreservationTest.assertParseAndPrint(" + file.getName() + ")");
 		try {
-			assertPrinting(root, Pl0StreamUtil.getContent(new FileInputStream(file)));
+			String originalContent = Pl0StreamUtil.getContent(new FileInputStream(file));
+			String upperCaseContent = originalContent.toUpperCase();
+			EObject root = parse(upperCaseContent);
+			assertPrinting(root, upperCaseContent);
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
 
-	private EObject parse(File file) {
+	private EObject parse(String input) {
+		return parse(new ByteArrayInputStream(input.getBytes()));
+	}
+	
+	private EObject parse(InputStream stream) {
 		IPl0TextResource tempResource = createTempResource();
 		try {
-			tempResource.load(new FileInputStream(file), null);
+			tempResource.load(stream, null);
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -81,7 +106,11 @@ public class Pl0LayoutPreservationTest extends TestCase {
 		EList<EObject> contents = tempResource.getContents();
 		assertNotNull("Resource must have content.", contents);
 		assertEquals(1, contents.size());
-		assertEquals("Resource should have no errors", 0, tempResource.getErrors().size());
+		EList<Diagnostic> errors = tempResource.getErrors();
+		for (Diagnostic error : errors) {
+			System.out.println("Error in resource: " + error);
+		}
+		assertEquals("Resource should have no errors", 0, errors.size());
 		EObject root = contents.get(0);
 		return root;
 	}
@@ -100,7 +129,7 @@ public class Pl0LayoutPreservationTest extends TestCase {
 		System.out.println("PRINTER2 returns: ==>" + printer2result + "<== (" + Arrays.toString(printer2result.getBytes()) + ")");
 		System.out.println("Expected is:      ==>" + expected + "<== (" + Arrays.toString(expected.getBytes()) + ")");
 		
-		assertEquals("Wrong result from printer2.", expected, printer2result);
+		assertTrue("Wrong result from printer2.", expected.equalsIgnoreCase(printer2result));
 	}
 
 	private String getPrintResult(EObject object, IPl0TextPrinter printer, OutputStream outputStream) {

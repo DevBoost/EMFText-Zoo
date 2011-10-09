@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2011 
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -44,7 +44,7 @@ TOKENS {
 TOKENSTYLES {
 	"SL_COMMENT" COLOR #3a732e;
 	"ML_COMMENT" COLOR #3a732e;
-	"QUOTED_34_34" COLOR #FF0000, BOLD;
+	//"QUOTED_34_34" COLOR #FF0000, BOLD;
 	"PL0ID" COLOR #0000FF;
 	"NUMBER" COLOR #00FF00, ITALIC;
 	//"program" COLOR #7F0085, BOLD;
