@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 
 /**
@@ -38,7 +37,6 @@ public class ScopedTreeWalker {
 
 	private EObject currentBestResult = null;
 	private boolean finished = false;
-	private Resource dummyResource = null;
 
 	/**
 	 * Initializes a new walker with a list of deciders.
@@ -210,13 +208,13 @@ public class ScopedTreeWalker {
 						if(decider.isPossibleTarget(identifier, element)) {
 							currentBestResult = element;
 							if (decider.isSure()) {
-								if (currentBestResult.eResource() == null) {
-									if (dummyResource == null) {
-										dummyResource = new ResourceImpl();
+								if (!currentBestResult.eIsProxy() && currentBestResult.eResource() == null) {
+									Resource containerResource = container.eResource();
+									if (containerResource != null) {
+										//use a dummy resource (e.g. for packages), since client code 
+										//might expect that the resolved element is contained in a resource
+										containerResource.getContents().add(currentBestResult);
 									}
-									//use a dummy resource (e.g. for packages), since client code 
-									//might expect that the resolved element is contained in a resource
-									dummyResource.getContents().add(currentBestResult);
 								}
 								finished = true;
 								return;
