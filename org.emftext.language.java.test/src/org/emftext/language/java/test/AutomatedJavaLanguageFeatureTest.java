@@ -22,11 +22,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 /**
@@ -45,14 +41,10 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		"Suite testing all files in the input directory automatically", 30 * 1000, 1);
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, "java");
-		suiteResourceSet = new ResourceSetImpl();
-		suiteResourceSet.getLoadOptions().put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		suiteResourceSet.getLoadOptions().put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
-		suiteResourceSet.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		for (final File file : allTestFiles) {
 			addParseTest(test, suite, file);
 			addParseAndReprintTest(test, suite, file);
-			addFileToClasspath(file);
+			addFileToClasspath(test, file);
 		}
 
 		return suite;
@@ -89,8 +81,9 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		});
 	}
 	
-	private static void addFileToClasspath(File file) throws Exception {
-		JavaClasspath cp = JavaClasspath.get(suiteResourceSet);
+	private static void addFileToClasspath(
+			final AutomatedJavaLanguageFeatureTest test, File file) throws Exception {
+		JavaClasspath cp = JavaClasspath.get(test.getResourceSet());
 		String fullName = file.getPath().substring(TEST_INPUT_FOLDER_NAME.length() + 3, file.getPath().length() - 5);
 		fullName = fullName.replaceAll(File.separator, ".");
 		int idx = fullName.lastIndexOf(".");
@@ -106,11 +99,14 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getCanonicalPath()));
 	}
 	
-	private static ResourceSet suiteResourceSet = null;
+	private ResourceSet sharedTestResourceSet = null;
 	
 	@Override
 	protected ResourceSet getResourceSet() {
-		return suiteResourceSet;
+		if (sharedTestResourceSet == null) {
+			sharedTestResourceSet = super.getResourceSet();
+		}
+		return sharedTestResourceSet;
 	}
 
 	@Override
