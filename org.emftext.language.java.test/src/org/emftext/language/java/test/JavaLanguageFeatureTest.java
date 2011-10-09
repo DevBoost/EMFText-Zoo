@@ -104,8 +104,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	private static final String[] FILES_EXCLUDED_FROM_REPRINT_TEST = new String[] {};
 
 	@Override
-	protected Map<?, ?> getLoadOptions() {
-		Map<String, Object> map = new HashMap<String, Object>();
+	protected Map<Object, Object> getLoadOptions() {
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		return map;
@@ -819,6 +819,18 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
+	public void testEnumValueMethodsUse() throws Exception {
+		String typename = "EnumValueMethodsUse";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		Enumeration enumeration = (Enumeration) clazz.getMembers().get(0);
+		assertMemberCount(enumeration, 0);
+		//after model completion adds the default members, there should be 3
+		assertEquals(2, enumeration.getDefaultMembers().size());
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testEnumWithMember() throws Exception {
 		String typename = "EnumWithMember";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -964,6 +976,17 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		ClassMethod simpleForEachMethod = (ClassMethod) simpleForEach;
 		Statement forEach = simpleForEachMethod.getStatements().get(0);
 		assertType(forEach, ForEachLoop.class);
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testFullQualifiedNameReferences() throws Exception {
+		String typename = "FullQualifiedNameReferences";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		//there should be 8 package segments that were created during resolving by the ScopedTreeWalker
+		//FIXME: assertEquals(8 + 1, clazz.eResource().getContents().size());
+		
 		parseAndReprint(filename);
 	}
 

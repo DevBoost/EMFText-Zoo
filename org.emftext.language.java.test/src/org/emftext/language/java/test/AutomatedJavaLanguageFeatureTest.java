@@ -85,7 +85,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 			final AutomatedJavaLanguageFeatureTest test, File file) throws Exception {
 		JavaClasspath cp = JavaClasspath.get(test.getResourceSet());
 		String fullName = file.getPath().substring(TEST_INPUT_FOLDER_NAME.length() + 3, file.getPath().length() - 5);
-		fullName = fullName.replaceAll(File.separator, ".");
+		fullName = fullName.replace(File.separator, ".");
 		int idx = fullName.lastIndexOf(".");
 		String packageName;
 		String classifierName;

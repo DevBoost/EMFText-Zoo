@@ -126,7 +126,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName()));
 	}
 
-	private JavaRoot loadResource(
+	protected JavaRoot loadResource(
 			String filePath) throws IOException {
 		return loadResource(URI.createFileURI(filePath));
 	}
@@ -147,8 +147,8 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return root;
 	}
 
-	protected Map<?, ?> getLoadOptions() {
-		Map<String, Object> map = new HashMap<String, Object>();
+	protected Map<Object, Object> getLoadOptions() {
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
@@ -358,7 +358,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		}
 	}
 
-	private static String calculateOutputFilename(File inputFile,
+	protected static String calculateOutputFilename(File inputFile,
 			String inputFolderName, String outputFolderName) {
 		File inputPath = new File("." + File.separator + inputFolderName);
 		int trimOffset = inputPath.getAbsolutePath().length();

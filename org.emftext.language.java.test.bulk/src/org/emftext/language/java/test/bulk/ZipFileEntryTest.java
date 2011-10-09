@@ -91,8 +91,8 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	protected Map<String, List<String>> packageClassifierMap =null; 
 	
 	@Override
-	protected Map<?, ?> getLoadOptions() {
-		Map<String, Object> map = new HashMap<String, Object>();
+	protected Map<Object, Object> getLoadOptions() {
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
