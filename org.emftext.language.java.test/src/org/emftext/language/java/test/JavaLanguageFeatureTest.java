@@ -1698,6 +1698,18 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
+	public void testBug1695() throws Exception {
+		String typename = "Bug1695";
+		String filename = "bugs" + File.separator + typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass("bugs", typename);
+
+		assertEquals("Bug1695", clazz.getName());
+		assertEquals("InnerClass", clazz.getMembers().get(0).getName());
+		
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testHasMissingParseReprints() throws Exception {
 		File inputFolder = new File("./" + getTestInputFolder());
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
