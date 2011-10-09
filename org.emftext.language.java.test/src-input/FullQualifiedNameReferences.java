@@ -1,9 +1,8 @@
 
 public class FullQualifiedNameReferences {
 	public void m() {
-		java.awt.image.renderable.ParameterBlock.class.toString();
-		java.awt.Adjustable.class.toString();
-		pkg.EmptyClass.class.toString();
-		pkg.inner.Inner.class.toString();		
+		java.lang.annotation.IncompleteAnnotationException.class.toString();
+		java.lang.instrument.ClassFileTransformer.class.toString();
+		org.xml.sax.Attributes.class.toString();
 	}
 }

@@ -211,8 +211,7 @@ public class ScopedTreeWalker {
 								if (!currentBestResult.eIsProxy() && currentBestResult.eResource() == null) {
 									Resource containerResource = container.eResource();
 									if (containerResource != null) {
-										//use a dummy resource (e.g. for packages), since client code 
-										//might expect that the resolved element is contained in a resource
+										//add package elements created on demand to the current resource
 										containerResource.getContents().add(currentBestResult);
 									}
 								}

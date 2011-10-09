@@ -22,7 +22,6 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.references.IdentifierReference;
-import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesPackage;
 
 /**
@@ -38,7 +37,7 @@ public class PackageDecider extends AbstractDecider {
 		if (referenceContainer instanceof IdentifierReference) {
 			IdentifierReference idReference = (IdentifierReference) referenceContainer;
 			 //a classifier must follow
-			if(idReference.getNext() == null || idReference.getNext() instanceof MethodCall) {
+			if(!(idReference.getNext() instanceof IdentifierReference)) {
 				return false;
 			}
 			if (!referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
@@ -57,15 +56,6 @@ public class PackageDecider extends AbstractDecider {
 	}
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container)  {
-		if (container instanceof JavaRoot && container.eResource() != null) {
-			EList<EObject> resultList = new BasicEList<EObject>();
-
-			Package p = ContainersFactory.eINSTANCE.createPackage();
-			p.setName(identifier);
-			resultList.add(p);
-
-			return resultList;
-		}
 		if (container instanceof Package) {
 			EList<EObject> resultList = new BasicEList<EObject>();
 			Package parentPackage = (Package) container;
@@ -75,6 +65,15 @@ public class PackageDecider extends AbstractDecider {
 			parentPackage.getSubpackages().add(p);
 			p.getNamespaces().addAll(parentPackage.getNamespaces());
 			p.getNamespaces().add(parentPackage.getName());
+			resultList.add(p);
+
+			return resultList;
+		}
+		if (container instanceof JavaRoot && container.eResource() != null) {
+			EList<EObject> resultList = new BasicEList<EObject>();
+
+			Package p = ContainersFactory.eINSTANCE.createPackage();
+			p.setName(identifier);
 			resultList.add(p);
 
 			return resultList;

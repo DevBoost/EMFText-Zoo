@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.emftext.language.java.classifiers.Annotation;
@@ -984,8 +985,28 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String typename = "FullQualifiedNameReferences";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		//there should be 8 package segments that were created during resolving by the ScopedTreeWalker
-		//FIXME: assertEquals(8 + 1, clazz.eResource().getContents().size());
+		assertResolveAllProxies(clazz);
+		//there should be 3 package segments that were created during resolving by the ScopedTreeWalker
+		Resource r = clazz.eResource();
+		assertEquals(3 + 1, r.getContents().size());
+		org.emftext.language.java.containers.Package p1 = 
+				(org.emftext.language.java.containers.Package) r.getContents().get(1);
+		org.emftext.language.java.containers.Package p2 = 
+				(org.emftext.language.java.containers.Package) r.getContents().get(2);
+		org.emftext.language.java.containers.Package p3 = 
+				(org.emftext.language.java.containers.Package) r.getContents().get(3);
+		assertEquals("java", p1.getName());
+		assertEquals("java", p2.getName());
+		assertEquals("org", p3.getName());
+		assertEquals("lang", p1.getSubpackages().get(0).getName());
+		assertEquals("lang", p2.getSubpackages().get(0).getName());
+		assertEquals("xml", p3.getSubpackages().get(0).getName());
+		assertEquals("annotation", p1.getSubpackages().get(0).getSubpackages().get(0).getName());
+		assertEquals("instrument", p2.getSubpackages().get(0).getSubpackages().get(0).getName());
+		assertEquals("sax", p3.getSubpackages().get(0).getSubpackages().get(0).getName());
+		assertEquals(0, p1.getSubpackages().get(0).getSubpackages().get(0).getSubpackages().size());
+		assertEquals(0, p2.getSubpackages().get(0).getSubpackages().get(0).getSubpackages().size());
+		assertEquals(0, p3.getSubpackages().get(0).getSubpackages().get(0).getSubpackages().size());
 		
 		parseAndReprint(filename);
 	}
