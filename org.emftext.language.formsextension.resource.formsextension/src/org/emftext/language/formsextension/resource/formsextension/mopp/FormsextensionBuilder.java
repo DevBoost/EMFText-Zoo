@@ -33,7 +33,6 @@ import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
-import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.statements.StatementsFactory;
@@ -52,7 +51,6 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		if (isInBinFolder(uri)) {
 			return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
 		}
-		JDTConnector.getInstance().initializeResourceSet(resource.getResourceSet(), uri);
 		
 		if (resource.getWarnings().size() + resource.getErrors().size() > 0) {
 			return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
