@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.resource.util.JDTConnector;
 
 public class JavaActionMethodReferenceResolver implements org.emftext.language.appflow.resource.appflow.IAppflowReferenceResolver<org.emftext.language.appflow.actions.JavaAction, org.emftext.language.java.members.Method> {
 	
@@ -33,7 +32,6 @@ public class JavaActionMethodReferenceResolver implements org.emftext.language.a
 		String methodName = identifier.substring(lastDot + 1, identifier.length());
 		
 		ResourceSet resourceSet = container.eResource().getResourceSet();
-		JDTConnector.getInstance().initializeResourceSet(resourceSet, container.eResource().getURI());
 		JavaClasspath classpath = JavaClasspath.get(container);
 		EObject classifier = classpath.getClassifier(className);
 		//System.out.println("JavaActionMethodReferenceResolver.resolve()" + classpath.getURIMap());
