@@ -15,7 +15,6 @@ package org.emftext.language.java.ejava.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
-import org.emftext.language.java.resource.util.JDTConnector;
 
 /**
  * Extension of generate resource implementation that prints all operations into
@@ -26,11 +25,4 @@ public class ExtendedEjavaResource extends EjavaResource {
 	public ExtendedEjavaResource(URI uri) {
 		super(uri);
 	}
-
-	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
-		JDTConnector.getInstance().initializeResourceSet(getResourceSet(), uri);
-		java.util.Map<java.lang.Object, java.lang.Object> loadOptions = addDefaultLoadOptions(options);
-		super.load(loadOptions);
-	}
-
 }
