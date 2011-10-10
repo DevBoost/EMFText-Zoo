@@ -109,9 +109,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				optionsWithUnicodeConverter.put(
 						IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, 
 						new IJavaInputStreamProcessorProvider() {
-							@Override
-							public JavaInputStreamProcessor getInputStreamProcessor(
-									InputStream inputStream) {
+							
+							public JavaInputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
 								return new JavaUnicodeConverter(inputStream);	
 							}
 				});
