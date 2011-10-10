@@ -15,6 +15,9 @@ public class ReferenceValueReferenceResolver implements org.emftext.language.efa
 	private org.emftext.language.efactory.resource.efactory.analysis.EfactoryDefaultResolverDelegate<org.emftext.language.efactory.Reference, org.eclipse.emf.ecore.EObject> delegate = new CustomEfactoryDefaultResolverDelegate<org.emftext.language.efactory.Reference, org.eclipse.emf.ecore.EObject>();
 	
 	public void resolve(String identifier, org.emftext.language.efactory.Reference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+		if (!(container.eContainer() instanceof Feature)) {
+			return;
+		}
 		Feature feature = (Feature) container.eContainer();
 		if (feature.getEFeature() instanceof EReference) {
 			EReference realReference = (EReference) feature.getEFeature();
