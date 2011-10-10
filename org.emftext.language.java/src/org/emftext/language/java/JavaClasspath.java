@@ -18,12 +18,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
@@ -49,6 +58,59 @@ import org.emftext.language.java.members.MemberContainer;
  *
  */
 public class JavaClasspath extends AdapterImpl {
+	
+	//TODO comment
+	public static interface Initializer {
+		void initialize(Resource resource);
+		
+		boolean requiresLocalClasspath();
+		
+		boolean requiresStdLib();
+	}
+
+	public static final String EP_JAVA_CLASSPATH_INITIALIZER = "org.emftext.language.java.java_classpath_initializer";
+	
+	private static Set<Initializer> initializers = null;
+	
+	public static Set<Initializer> getInitializers() {
+		if (initializers == null) {
+			initializers = new LinkedHashSet<Initializer>();
+			readInitializersExtensionPoint();
+		}
+		return initializers;
+	}
+	
+	private static void readInitializersExtensionPoint() {
+		if (Platform.isRunning()) {
+			IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+			IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
+			for (IConfigurationElement element : configurationElements) {
+				try {
+					String type = element.getAttribute("class");
+					if (type == null) {
+						continue;
+					}
+					Initializer initializer = (Initializer) element.createExecutableExtension("class");
+					initializers.add(initializer);
+					//if one initializer requires a local classpath, a local classpath is used by default
+					useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
+					//if one initializer does not require the std. lib, we assume it provides one
+					registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
+				} catch (CoreException ce) {
+					String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
+					ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
+					IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0, "Error instantiating Java classpath initializer", ce);
+					log.log(status);
+				}
+			}
+		}
+	}
+	
+	private static void initialize(Resource resource) {
+		for (Initializer initializer : getInitializers()) {
+			initializer.initialize(resource);
+		}
+	}
 
 	/**
 	 * If this option is set to true in a resource set, each classifier loaded is registered
@@ -59,6 +121,8 @@ public class JavaClasspath extends AdapterImpl {
 	 */
 	public static final String OPTION_USE_LOCAL_CLASSPATH = "OPTION_USE_LOCAL_CLASSPATH";
 
+	private static boolean useLocalClasspathDefault = false;
+	
 	/**
 	 * If this option is set to true (default) in a resource set, the Java standard library
 	 * (i.e., rt.jar or classes.jar) is registered automatically based on
@@ -66,6 +130,8 @@ public class JavaClasspath extends AdapterImpl {
 	 */
 	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
 
+	private static boolean registerStdLibDefault = true;
+		
 	/**
 	 * If this option is set to true in a resource set, all names in a Java resource will 
 	 * be printed as full-qualified names when the resource is saved. If this option is
@@ -102,10 +168,18 @@ public class JavaClasspath extends AdapterImpl {
 			return globalClasspath;
 		}
 		else {
-			return get(resource.getResourceSet());
+			JavaClasspath myClasspath = get(resource.getResourceSet());
+			if (!myClasspath.initialized) {
+				//set to true before calling initializers, 
+				//since the initializers most likely call this
+				//method again to obtain the classpath.
+				myClasspath.initialized = true;
+				initialize(resource);	
+			}
+			return myClasspath;
 		}
 	}
-
+	
 	public static JavaClasspath get(ResourceSet resourceSet) {
 		if (resourceSet == null) {
 			return globalClasspath;
@@ -113,8 +187,11 @@ public class JavaClasspath extends AdapterImpl {
 
 		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
 		Object registerStdLibOption = resourceSet.getLoadOptions().get(OPTION_REGISTER_STD_LIB);
+		if (localClasspathOption == null) {
+			localClasspathOption = Boolean.valueOf(useLocalClasspathDefault);
+		}		
 		if (registerStdLibOption == null) {
-			registerStdLibOption = Boolean.TRUE;
+			registerStdLibOption = Boolean.valueOf(registerStdLibDefault);
 		}
 
 		if(Boolean.TRUE.equals(localClasspathOption))  {
@@ -137,7 +214,8 @@ public class JavaClasspath extends AdapterImpl {
 				}
 			}
 			JavaClasspath myClasspath = new JavaClasspath(
-					resourceSet.getURIConverter());
+					resourceSet.getURIConverter());	
+			
 			resourceSet.eAdapters().add(myClasspath);
 
 			if(Boolean.TRUE.equals(registerStdLibOption))  {
@@ -192,6 +270,12 @@ public class JavaClasspath extends AdapterImpl {
 	private JavaClasspath(URIConverter uriConverter) {
 		this.uriConverter = uriConverter;
 	}
+
+	private JavaClasspath(Resource resource) {
+		this.uriConverter = resource.getResourceSet().getURIConverter();
+	}
+
+	private boolean initialized = false;
 
 	/**
 	 * Registers all classes of the Java standard library

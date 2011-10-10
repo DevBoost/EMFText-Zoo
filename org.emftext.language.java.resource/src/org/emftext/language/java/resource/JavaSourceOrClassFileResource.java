@@ -14,8 +14,10 @@
 package org.emftext.language.java.resource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,10 +49,20 @@ import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.references.ElementReference;
+import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
+import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.java.IJavaResourcePostProcessor;
+import org.emftext.language.java.resource.java.mopp.JavaContextDependentURIFragmentFactory;
+import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
+import org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
-import org.emftext.language.java.resource.util.JDTConnector;
+import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.emftext.language.java.util.JavaModelCompletion;
+import org.emftext.language.java.util.JavaModelRepairer;
 
 /**
  * A resource that uses either the generated <code>JavaParser</code> or
@@ -84,13 +97,26 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		if (isClassFile()) {
 			JavaClasspath javaClasspath = JavaClasspath.get(this);
 			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
-			//System.out.println("JavaSourceOrClassFileResource.doLoad(" + getURI() + ")");
 			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
 			getContents().add(cu);
 			JavaModelCompletion.complete(this);
-		}
-		else {
-			super.doLoad(inputStream, options);
+		} else {
+			Map<Object, Object> optionsWithUnicodeConverter = new LinkedHashMap<Object, Object>();
+			if (options != null) {
+				optionsWithUnicodeConverter.putAll(options);
+			}
+			if (!optionsWithUnicodeConverter.containsKey(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER)) {
+				optionsWithUnicodeConverter.put(
+						IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, 
+						new IJavaInputStreamProcessorProvider() {
+							@Override
+							public JavaInputStreamProcessor getInputStreamProcessor(
+									InputStream inputStream) {
+								return new JavaUnicodeConverter(inputStream);	
+							}
+				});
+			}
+			super.doLoad(inputStream, optionsWithUnicodeConverter);
 			if (getContents().isEmpty() && getErrors().isEmpty()) {
 				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 			}
@@ -99,7 +125,6 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	@Override
 	public void load(Map<?, ?> options) throws IOException {
-		JDTConnector.getInstance().initializeResourceSet(getResourceSet(), uri);
     	URIConverter uriConverter = getURIConverter();
     	URI normalizedURI = uriConverter.normalize(uri);
 		if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
@@ -394,5 +419,33 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			//if there is no package and this is a logical URI, guess the package based on the URI
 			cu.getNamespaces().addAll(getURI().trimSegments(1).segmentsList());
 		}
+	}
+
+	@Override
+	protected void runPostProcessor(IJavaResourcePostProcessor postProcessor) {
+		//do the repair and complete at post processing time (after parsing, before validation)
+		repairAndComplete();
+	}
+	
+	protected void repairAndComplete() {
+		new JavaModelRepairer() {
+			protected void registerContextDependentProxy(
+					Resource resource,
+					IdentifierReference mainIdReference, EReference targetReference,
+					String id, EObject proxy) {
+				assert !targetReference.isMany();
+
+				((JavaResource)resource).registerContextDependentProxy(
+						new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(
+								new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
+						mainIdReference,
+						targetReference,
+						id,
+						proxy,
+						-1);
+			}
+		}.repair(this);
+
+		JavaModelCompletion.complete(this);
 	}
 }
