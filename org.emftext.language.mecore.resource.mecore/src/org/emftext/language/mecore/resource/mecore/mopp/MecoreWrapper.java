@@ -292,17 +292,21 @@ public class MecoreWrapper {
 		eParameter.setName(mParameter.getName());
 	}
 
-	private EStructuralFeature createReference(MFeature mFeature, final MType mType, EClass eClass) {
+	private EStructuralFeature createReference(final MFeature mFeature, final MType mType, EClass eClass) {
 		// complex type, create reference
 		final EReference eReference = findOrCreateEReference(mFeature, eClass);
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
 				setType(eReference, mType);
+				MFeature opposite = mFeature.getOpposite();
+				if (opposite != null) {
+					eReference.setEOpposite((EReference) mapping.get(opposite));
+				}
 				return true;
 			}
 		});
-		eReference.setContainment(!mFeature.isReference());
+		eReference.setContainment(!mFeature.isNcReference());
 		return eReference;
 	}
 

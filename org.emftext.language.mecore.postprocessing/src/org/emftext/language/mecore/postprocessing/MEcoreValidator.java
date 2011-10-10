@@ -53,14 +53,36 @@ public class MEcoreValidator implements IMecoreOptionProvider, IMecoreResourcePo
 	private void validateFeatureTypes(MecoreResource resource, EObject eObject) {
 		Collection<MFeature> features = MecoreEObjectUtil.getObjectsByType(eObject.eAllContents(), MecorePackage.eINSTANCE.getMFeature());
 		for (MFeature feature : features) {
-			if (feature.getType() instanceof MDataType &&
-				feature.isReference()) {
+			boolean isNcReference = feature.isNcReference();
+			boolean isAttribute = feature.getType() instanceof MDataType;
+			if (isAttribute && isNcReference) {
 				IMecoreProblem problem = new MecoreProblem(
 						"Attributes cannot be tagged as non-containment. Remove the tilde.", 
 						MecoreEProblemType.ANALYSIS_PROBLEM, 
 						MecoreEProblemSeverity.ERROR
 				);
 				resource.addProblem(problem, feature);
+			}
+			MFeature opposite = feature.getOpposite();
+			if (isAttribute && opposite != null) {
+				IMecoreProblem problem = new MecoreProblem(
+						"Attributes cannot have opposites. Remove the opposite.", 
+						MecoreEProblemType.ANALYSIS_PROBLEM, 
+						MecoreEProblemSeverity.ERROR
+				);
+				resource.addProblem(problem, feature);
+			}
+			if (opposite != null) {
+				boolean oppositeIsContainment = !opposite.isNcReference();
+				boolean featureIsContianment = !isAttribute && !feature.isNcReference();
+				if (oppositeIsContainment && featureIsContianment) {
+					IMecoreProblem problem = new MecoreProblem(
+							"Opposites cannot be both containment references.", 
+							MecoreEProblemType.ANALYSIS_PROBLEM, 
+							MecoreEProblemSeverity.ERROR
+					);
+					resource.addProblem(problem, feature);
+				}
 			}
 		}
 	}

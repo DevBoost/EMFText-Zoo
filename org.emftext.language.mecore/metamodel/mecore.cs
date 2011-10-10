@@ -37,7 +37,7 @@ RULES {
 	             ("(" features* operations* ")")? ;
 	MEnum    ::= "enum" name[UPPER] ("(" literals* ")")?;
 	MEnumLiteral ::= name[UPPER] literal['"','"']?;
-	MFeature ::= reference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity?;
+	MFeature ::= ncReference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity? ("<>" opposite[UPPER])?;
 	MOperation ::= name[LOWER] "(" (parameters ("," parameters)*)? ")" type[UPPER]  multiplicity?;
 	MParameter ::= name[LOWER] type[UPPER] multiplicity?;
 	
