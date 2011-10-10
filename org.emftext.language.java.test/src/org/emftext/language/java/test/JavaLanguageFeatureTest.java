@@ -64,9 +64,6 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.operators.LessThan;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.StringReference;
-import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
@@ -107,8 +104,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Override
 	protected Map<Object, Object> getLoadOptions() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		return map;
 	}
 

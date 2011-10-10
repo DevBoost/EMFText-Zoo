@@ -16,15 +16,12 @@ package org.emftext.language.java.test.bugs;
 import java.util.HashMap;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
-
-import junit.framework.TestCase;
 
 public abstract class AbstractTestCase extends TestCase {
 
@@ -36,8 +33,6 @@ public abstract class AbstractTestCase extends TestCase {
 	
 	protected Map<?, ?> getLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		return map;
 	}
 

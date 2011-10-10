@@ -14,7 +14,12 @@
 package org.emftext.language.java.test;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.junit.Test;
 
 /**
@@ -32,7 +37,34 @@ public class UnicodeTest extends AbstractJavaParserTestCase {
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testUnicodeConverterDeactivated() {
+		try {
+			Map<String, Object> loadOptions = Collections.singletonMap(
+					IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, null);
+			
+			assertParsesWithErrorsClass("ControlZ", loadOptions);
+			assertParsesWithErrorsClass("Unicode", loadOptions);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
+	protected void assertParsesWithErrorsClass(String typename, 
+			Map<?, ?> loadOptions) throws Exception {
+		String filename = File.separator + typename + ".java";
+		File inputFolder = new File("./" + getTestInputFolder());
+		File file = new File(inputFolder, filename);
+		assertTrue("File " + file + " should exist.", file.exists());
+		URI fileURI = URI.createFileURI(file.getCanonicalPath());
+		JavaResource resource = (JavaResource) getResourceSet().createResource(fileURI);
+		resource.load(loadOptions);
+		
+		assertTrue(!resource.getErrors().isEmpty());
+		assertTrue(resource.getErrors().get(0).getMessage().startsWith("Syntax error on"));
+	}
+	
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;

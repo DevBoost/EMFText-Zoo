@@ -66,13 +66,10 @@ import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaTextDiagnostic;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.resource.java.util.JavaResourceUtil;
 import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 
 /**
@@ -147,10 +144,8 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return root;
 	}
 
-	protected Map<Object, Object> getLoadOptions() {
+	protected Map<? extends Object, ? extends Object> getLoadOptions() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		return map;
 	}

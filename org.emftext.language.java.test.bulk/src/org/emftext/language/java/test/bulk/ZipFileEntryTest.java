@@ -26,9 +26,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 /**
@@ -93,8 +90,6 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	@Override
 	protected Map<Object, Object> getLoadOptions() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		map.put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.FALSE);
 		return map;

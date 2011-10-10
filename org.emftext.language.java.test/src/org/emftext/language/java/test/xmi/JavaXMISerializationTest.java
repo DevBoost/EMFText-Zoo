@@ -141,8 +141,8 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 	}
 	
 	@Override
-	protected Map<Object, Object> getLoadOptions() {
-		Map<Object, Object> m = super.getLoadOptions();
+	protected Map<? extends Object, ? extends Object> getLoadOptions() {
+		Map<? extends Object, ? extends Object> m = super.getLoadOptions();
 		//m.put(XMIResource.OPTION_XML_VERSION, "1.1");
 		return m;
 	}
