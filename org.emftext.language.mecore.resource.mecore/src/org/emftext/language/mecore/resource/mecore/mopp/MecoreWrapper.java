@@ -302,6 +302,8 @@ public class MecoreWrapper {
 				MFeature opposite = mFeature.getOpposite();
 				if (opposite != null) {
 					eReference.setEOpposite((EReference) mapping.get(opposite));
+				} else {
+					eReference.setEOpposite(null);
 				}
 				return true;
 			}
