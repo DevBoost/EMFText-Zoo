@@ -20,12 +20,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
-import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 
@@ -45,13 +43,29 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 		
 		final JavaXMISerializationTest test = new JavaXMISerializationTest();
 
-		TestSuite suite = new ThreadedTestSuite(
-		"Suite testing XMI conversion for all files in the input directory automatically", 30 * 1000, 1);
+		TestSuite suite = new TestSuite(
+				"Suite testing XMI conversion for all files in the input directory automatically");
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, "java");
+		
+		File last = null;
+		for (final File file : allTestFiles) {
+			test.addFileToClasspath(file, test.getResourceSet());
+			if (file.getName().equals("TypeReferencing.java")) {
+				last = file; 
+				continue;
+			}
+		}
+		if (last != null) {
+			//put the "TypeReferencing.java" file last, because it contains inner
+			//types referenced by other files. If these types are not registered
+			//before proxy resolving, the test will fail.
+			allTestFiles.remove(last);
+			allTestFiles.add(last);
+		}
+		
 		for (final File file : allTestFiles) {
 			if (!Arrays.asList(filesWithInvalidCharacters).contains(file.getName())) {
-				addFileToClasspath(test, file);
 				addLoadTest(test, suite, file);
 			}
 		}
@@ -71,8 +85,22 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 		suite.addTest(new TestCase("Loading " + file.getName()) {
 			public void runTest() {
 				try {
-					JavaRoot root = test.loadResource(file.getAbsolutePath());
-					test.assertResolveAllProxies(root);
+					test.loadResource(file.getAbsolutePath());
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+					fail(e.getClass() +  ": " + e.getMessage());
+				}
+			}
+		});
+	}
+
+	private static void addTransferToXMITest(final JavaXMISerializationTest test,
+			TestSuite suite) {
+		suite.addTest(new TestCase("Coverting all Java resources to XMI") {
+			public void runTest() {
+				try {
+					test.transferToXMI();
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -96,40 +124,7 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 			}
 		});
 	}
-	
-	private static void addTransferToXMITest(final JavaXMISerializationTest test,
-			TestSuite suite) {
-		suite.addTest(new TestCase("Coverting all Java resources to XMI") {
-			public void runTest() {
-				try {
-					test.transferToXMI();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-					fail(e.getClass() +  ": " + e.getMessage());
-				}
-			}
-		});
-	}
-	
-	private static void addFileToClasspath(
-			final JavaXMISerializationTest test, File file) throws Exception {
-		JavaClasspath cp = JavaClasspath.get(test.getResourceSet());
-		String fullName = file.getPath().substring(TEST_INPUT_FOLDER_NAME.length() + 3, file.getPath().length() - 5);
-		fullName = fullName.replace(File.separator, ".");
-		int idx = fullName.lastIndexOf(".");
-		String packageName;
-		String classifierName;
-		if (idx == -1) {
-			packageName = "";
-			classifierName = fullName;
-		} else {
-			packageName = fullName.substring(0, idx);
-			classifierName = fullName.substring(idx + 1);			
-		}
-		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getAbsolutePath()));
-	}
-	
+
 	private ResourceSet sharedTestResourceSet = null;
 	
 	@Override
@@ -150,7 +145,10 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 	protected void transferToXMI() throws Exception {
 		ResourceSet rs = getResourceSet();
 		EcoreUtil.resolveAll(rs);
+		
+		
 		for (Resource javaResource : new ArrayList<Resource>(rs.getResources())) {
+			assertResolveAllProxies(javaResource);
 			if (javaResource.getContents().isEmpty()) {
 				System.out.println("WARNING: Emtpy Resource: " + javaResource.getURI());
 				continue;

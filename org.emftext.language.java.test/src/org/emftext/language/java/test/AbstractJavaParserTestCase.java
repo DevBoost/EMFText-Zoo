@@ -128,7 +128,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return loadResource(URI.createFileURI(filePath));
 	}
 
-	private JavaRoot loadResource(
+	protected JavaRoot loadResource(
 			URI uri) throws IOException {
 		JavaResource resource = (JavaResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
@@ -142,6 +142,23 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				content instanceof JavaRoot);
 		JavaRoot root = (JavaRoot) content;
 		return root;
+	}
+	
+	protected void addFileToClasspath(File file, ResourceSet resourceSet) throws Exception {
+		JavaClasspath cp = JavaClasspath.get(resourceSet);
+		String fullName = file.getPath().substring(getTestInputFolder().length() + 3, file.getPath().length() - 5);
+		fullName = fullName.replace(File.separator, ".");
+		int idx = fullName.lastIndexOf(".");
+		String packageName;
+		String classifierName;
+		if (idx == -1) {
+			packageName = "";
+			classifierName = fullName;
+		} else {
+			packageName = fullName.substring(0, idx);
+			classifierName = fullName.substring(idx + 1);			
+		}
+		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getAbsolutePath()));
 	}
 
 	protected Map<? extends Object, ? extends Object> getLoadOptions() {

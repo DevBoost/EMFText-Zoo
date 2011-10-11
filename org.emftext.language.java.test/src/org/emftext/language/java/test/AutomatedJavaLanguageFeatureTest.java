@@ -20,10 +20,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 /**
  * A test that read all Java files from the input directory and parses and
@@ -37,16 +34,36 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 	public static Test suite() throws Exception {
 		final AutomatedJavaLanguageFeatureTest test = new AutomatedJavaLanguageFeatureTest();
 
-		TestSuite suite = new ThreadedTestSuite(
-		"Suite testing all files in the input directory automatically", 30 * 1000, 1);
+		TestSuite suite = new TestSuite(
+				"Suite testing all files in the input directory automatically");
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, "java");
+		File last = null;
 		for (final File file : allTestFiles) {
-			addParseTest(test, suite, file);
-			addParseAndReprintTest(test, suite, file);
-			addFileToClasspath(test, file);
+			test.addFileToClasspath(file, test.getResourceSet());
+			if (file.getName().equals("TypeReferencing.java")) {
+				last = file; 
+				continue;
+			}
 		}
-
+		if (last != null) {
+			//put the "TypeReferencing.java" file last, because it contains inner
+			//types referenced by other files. If these types are not registered
+			//before proxy resolving, the test will fail.
+			allTestFiles.remove(last);
+			allTestFiles.add(last);
+		}
+		
+		//first do all parse tests (will register inner types in classpath)
+		for (final File file : allTestFiles) {
+			addParseTest(test, suite, file);		
+		}
+		
+		//second do resolving and printing test
+		for (final File file : allTestFiles) {
+			addParseAndReprintTest(test, suite, file);			
+		}
+		
 		return suite;
 	}
 
@@ -79,24 +96,6 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 
 			}
 		});
-	}
-	
-	private static void addFileToClasspath(
-			final AutomatedJavaLanguageFeatureTest test, File file) throws Exception {
-		JavaClasspath cp = JavaClasspath.get(test.getResourceSet());
-		String fullName = file.getPath().substring(TEST_INPUT_FOLDER_NAME.length() + 3, file.getPath().length() - 5);
-		fullName = fullName.replace(File.separator, ".");
-		int idx = fullName.lastIndexOf(".");
-		String packageName;
-		String classifierName;
-		if (idx == -1) {
-			packageName = "";
-			classifierName = fullName;
-		} else {
-			packageName = fullName.substring(0, idx);
-			classifierName = fullName.substring(idx + 1);			
-		}
-		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getAbsolutePath()));
 	}
 	
 	private ResourceSet sharedTestResourceSet = null;
