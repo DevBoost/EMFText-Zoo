@@ -71,7 +71,7 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 		suite.addTest(new TestCase("Loading " + file.getName()) {
 			public void runTest() {
 				try {
-					JavaRoot root = test.loadResource(file.getCanonicalPath());
+					JavaRoot root = test.loadResource(file.getAbsolutePath());
 					test.assertResolveAllProxies(root);
 				}
 				catch (Exception e) {
@@ -127,7 +127,7 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 			packageName = fullName.substring(0, idx);
 			classifierName = fullName.substring(idx + 1);			
 		}
-		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getCanonicalPath()));
+		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getAbsolutePath()));
 	}
 	
 	private ResourceSet sharedTestResourceSet = null;

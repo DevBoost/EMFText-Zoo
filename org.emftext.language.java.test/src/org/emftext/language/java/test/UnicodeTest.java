@@ -57,7 +57,7 @@ public class UnicodeTest extends AbstractJavaParserTestCase {
 		File inputFolder = new File("./" + getTestInputFolder());
 		File file = new File(inputFolder, filename);
 		assertTrue("File " + file + " should exist.", file.exists());
-		URI fileURI = URI.createFileURI(file.getCanonicalPath());
+		URI fileURI = URI.createFileURI(file.getAbsolutePath());
 		JavaResource resource = (JavaResource) getResourceSet().createResource(fileURI);
 		resource.load(loadOptions);
 		

@@ -96,7 +96,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 			packageName = fullName.substring(0, idx);
 			classifierName = fullName.substring(idx + 1);			
 		}
-		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getCanonicalPath()));
+		cp.registerClassifier(packageName, classifierName, URI.createFileURI(file.getAbsolutePath()));
 	}
 	
 	private ResourceSet sharedTestResourceSet = null;

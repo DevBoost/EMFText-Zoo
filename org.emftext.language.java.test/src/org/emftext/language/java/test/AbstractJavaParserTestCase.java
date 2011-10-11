@@ -97,7 +97,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		CompilationUnit cu = (CompilationUnit) parseResource(inputFile.getPath());
 
 		inputFile = new File(inputFolder + File.separator + file);
-		JavaClasspath.get(cu).registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
+		JavaClasspath.get(cu).registerClassifierSource(cu, URI.createFileURI(inputFile.getAbsolutePath().toString()));
 	}
 
 	protected static final String TEST_OUTPUT_FOLDER = "output";
@@ -115,7 +115,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		File file = new File(inputFolder, filename);
 		assertTrue("File " + file + " should exist.", file.exists());
 		addParsedResource(file);
-		return loadResource(file.getCanonicalPath());
+		return loadResource(file.getAbsolutePath());
 	}
 
 	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
@@ -227,7 +227,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		}
 
 		//addReprintedResource(inputFile);
-		resource.setURI(URI.createFileURI(outputFile.getCanonicalPath()));
+		resource.setURI(URI.createFileURI(outputFile.getAbsolutePath()));
 		resource.save(null);
 
 		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
@@ -266,7 +266,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				inputFolderName, outputFolderName);
 		File outputFile = prepareOutputFile(outputFileName);
 
-		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
+		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getAbsolutePath().toString()));
 		resource.load(getLoadOptions());
 
 		assertNoErrors(resource.getURI().toString(), (JavaResource) resource);
