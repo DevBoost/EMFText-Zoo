@@ -266,10 +266,9 @@ public class ClassFileModelLoader {
 			if (i == method.getArgumentTypes().length - 1 && withVaraibleLength) {
 				emfMethod.getParameters().add(
 						constructVariableLengthParameter(argType));
-			}
-			else {
+			} else {
 				emfMethod.getParameters().add(
-						constructParameter(argType));
+						constructParameter(argType, i));
 			}
 		}
 
@@ -299,8 +298,7 @@ public class ClassFileModelLoader {
 				TypeReference parameterTypeRef = parameter.getTypeReference();
 				if(parameterTypeRef instanceof ClassifierReference) {
 					argumentSignature = constructTypeArguments(argumentSignature, (ClassifierReference) parameterTypeRef, emfMethod, emfClassifier);
-				}
-				else {
+				} else {
 					argumentSignature = constructTypeArguments(argumentSignature, null, emfMethod, emfClassifier);
 				}
 			}
@@ -320,11 +318,12 @@ public class ClassFileModelLoader {
 		return (Member) emfMethod;
 	}
 
-	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType) {
+	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType, int attrNumber) {
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
 		emfParameter.setTypeReference(emfTypeReference);
+		emfParameter.setName("arg" + attrNumber);
 
         int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
@@ -575,8 +574,7 @@ public class ClassFileModelLoader {
 				classifierReference.setTarget(typeParameter);
 
 				result.add(classifierReference);
-			}
-			else {
+			} else {
 				result.add(null);
 			}
 
