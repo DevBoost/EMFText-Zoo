@@ -29,7 +29,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.javaforms.codegen.Generate;
 import org.emftext.language.javaforms.resource.javaforms.IJavaformsBuilder;
 import org.emftext.language.javaforms.resource.javaforms.IJavaformsTextPrinter;
@@ -46,7 +45,6 @@ public class JavaformsBuilder implements IJavaformsBuilder {
 		if (resource.getErrors().size() > 0) {
 			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
 		}
-		JDTConnector.getInstance().initializeResourceSet(resource.getResourceSet(), resource.getURI());
 		EcoreUtil.resolveAll(resource);
 		
 		URI model = resource.getURI();
