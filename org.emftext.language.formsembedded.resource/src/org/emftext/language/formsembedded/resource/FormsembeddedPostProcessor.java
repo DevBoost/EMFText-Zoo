@@ -29,7 +29,6 @@ import org.emftext.language.formsembedded.resource.formsembedded.mopp.Formsembed
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
-import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
 
@@ -43,7 +42,6 @@ import org.emftext.language.java.util.JavaModelRepairer;
 public class FormsembeddedPostProcessor implements IFormsembeddedOptionProvider, IFormsembeddedResourcePostProcessor, IFormsembeddedResourcePostProcessorProvider {
 
 	public void process(FormsembeddedResource resource) {
-		JDTConnector.getInstance().initializeResourceSet(resource.getResourceSet(), resource.getURI());
 		new JavaModelRepairer() {
 			protected void registerContextDependentProxy(
 					Resource resource,
