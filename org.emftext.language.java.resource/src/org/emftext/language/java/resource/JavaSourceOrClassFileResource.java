@@ -65,9 +65,10 @@ import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
 
 /**
- * A resource that uses either the generated <code>JavaParser</code> or
- * the <code>ClassFileModelLoader</code> for loading depending on the file
- * extension of the resource's URI.
+ * A resource that uses either the generated 
+ * {@link org.emftext.language.java.resource.java.mopp.JavaParser} 
+ * or the {@link ClassFileModelLoader} for loading depending on 
+ * the file extension of the resource's URI.
  */
 public class JavaSourceOrClassFileResource extends JavaResource {
 
@@ -78,12 +79,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
-		if (uri.toString().endsWith("..java")) {
-			System.out.println("");
-		}
 	}
 
-	private boolean isClassFile() {
+	protected boolean isClassFile() {
+		if (uri == null) {
+			return false;
+		}
 		//is there a physical source file behind this URI?
 		URI normalizedURI = getURIConverter().normalize(uri);
 
@@ -92,7 +93,16 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 		return false;
 	}
+	
+	protected boolean hasJavaClassifierURI() {
+		if (uri == null) {
+			return false;
+		}
+		return uri.toString().startsWith(
+				JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP);
+	}
 
+	@Override
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		if (isClassFile()) {
 			JavaClasspath javaClasspath = JavaClasspath.get(this);
@@ -130,17 +140,16 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if (!isLoaded) {
 				loadPackageFromClasspath();
 			}
-		}
-		else if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+		} else if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
 			//classes should have a physical resource
 			//System.out.println("[JaMoPP] Warning: " + uri.lastSegment() + " not registered in class path");
-		}
-		else {
+		} else {
 			super.load(options);
 		}
 		register();
 	}
 
+	@Override
 	protected void doUnload() {
 		if (!getContents().isEmpty()) {
 			if(getContents().get(0) instanceof Package) {
@@ -157,14 +166,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		EObject result = null;
 		if (isClassFile() &&
 				id.startsWith("//" + JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
-
 			if (!getContents().isEmpty()) {
 				//in a class file, there is always only one classifier as root element:
 				//id path can be ignored
 				CompilationUnit cu =  (CompilationUnit) contents.get(0);
 				return cu.getClassifiers().get(0);
-			}
-			else {
+			} else {
 				assert(false);
 			}
 		}
@@ -194,6 +201,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		return result;
 	}
 
+	@Override
 	protected EObject getEObject(List<String> uriFragmentPath) {
 		int size = uriFragmentPath.size();
 		EObject eObject = getEObjectForURIFragmentRootSegment(size == 0 ? ""
@@ -225,9 +233,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		return eObject;
 	}
 
-
-
-	private void loadPackageFromClasspath() {
+	protected void loadPackageFromClasspath() {
 		Package thePackage = ContainersFactory.eINSTANCE.createPackage();
 		String packageName = getURI().trimFileExtension().toString().substring(
 				JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP.length());
@@ -244,7 +250,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		getContents().add(thePackage);
 	}
 
-	private void register() throws IOException {
+	protected void register() throws IOException {
 		URI myURI = getURI();
 
 		if (!getContents().isEmpty()) {
@@ -255,7 +261,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 			
 			//only for physical URIs
-			if("pathmap".equals(myURI.scheme())) {
+			if(hasJavaClassifierURI()) {
 				return;
 			}
 			
@@ -285,17 +291,22 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 	}
 
-	private void setCompilationUnitName(CompilationUnit cu) {
-		String packageName = JavaUniquePathConstructor.packageName(cu);
+	protected void setCompilationUnitName(CompilationUnit cu) {
+		String packageName = "";
+		if(!hasJavaClassifierURI()) {
+			//physical URIs do not include the package name
+			//so we construct it from the cu's namespaces
+			packageName = JavaUniquePathConstructor.packageName(cu);
+		}
 		String fileName = getURI().lastSegment();
-		if (!"".equals(packageName)) {		
+		if (!"".equals(packageName)) {
 			cu.setName(packageName + "." + fileName);
 		} else {
 			cu.setName(fileName);
 		}
 	}
 
-	private void populatePackage(Package p) {
+	protected void populatePackage(Package p) {
 		String fullPackageName = JavaUniquePathConstructor.packageName(p) + "." + p.getName();;
 		for (EObject classifier : JavaClasspath.get(this).getClassifiers(
 				fullPackageName, "*")) {
@@ -310,7 +321,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 	}
 
-	private void collectSubunits(IContainer container, Package thisPackage) throws CoreException, IOException {
+	protected void collectSubunits(IContainer container, Package thisPackage) throws CoreException, IOException {
 		if (container == null) return;
 
 		IResource[] members = container.members();
@@ -413,7 +424,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	 *
 	 * @param cu
 	 */
-	private void addPackageDeclaration(CompilationUnit cu) {
+	protected void addPackageDeclaration(CompilationUnit cu) {
 		if (cu.getNamespaces().isEmpty() && !getURI().isFile() && !getURI().isPlatform()) {
 			//if there is no package and this is a logical URI, guess the package based on the URI
 			cu.getNamespaces().addAll(getURI().trimSegments(1).segmentsList());

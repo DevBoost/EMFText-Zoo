@@ -623,7 +623,7 @@ public class ClassFileModelLoader {
 	}
 
 
-	private TypeReference createReferenceToType(String signature) {
+	protected TypeReference createReferenceToType(String signature) {
 		TypeReference emfTypeReference = null;
 
 		while(signature.startsWith("[")) {
@@ -773,7 +773,7 @@ public class ClassFileModelLoader {
 		return "";
 	}
 
-	private TypeReference createReferenceToClassifier(String fullClassifierName) {
+	protected TypeReference createReferenceToClassifier(String fullClassifierName) {
 		fullClassifierName = fullClassifierName.replaceAll("/", ".");
 		Classifier classifier = (Classifier) javaClasspath.getClassifier(fullClassifierName);
 		ClassifierReference classifierReference =
@@ -782,7 +782,7 @@ public class ClassFileModelLoader {
 		return classifierReference;
 	}
 
-	private int getArrayDimension(String signature) {
+	protected int getArrayDimension(String signature) {
 		int arrayDimension = 0;
 		while(signature.startsWith("[")) {
 			signature = signature.substring(1);
