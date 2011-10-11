@@ -89,7 +89,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mTypedElementItemProvider;
+	protected MecoreItemProviderAdapter mTypedElementItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MTypedElement}.
@@ -100,7 +100,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMTypedElementAdapter() {
 		if (mTypedElementItemProvider == null) {
-			mTypedElementItemProvider = new MecoreItemProvider(this);
+			mTypedElementItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mTypedElementItemProvider;
@@ -112,7 +112,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mPackageItemProvider;
+	protected MecoreItemProviderAdapter mPackageItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MPackage}.
@@ -123,7 +123,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMPackageAdapter() {
 		if (mPackageItemProvider == null) {
-			mPackageItemProvider = new MecoreItemProvider(this);
+			mPackageItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mPackageItemProvider;
@@ -135,7 +135,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mImportItemProvider;
+	protected MecoreItemProviderAdapter mImportItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MImport}.
@@ -146,7 +146,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMImportAdapter() {
 		if (mImportItemProvider == null) {
-			mImportItemProvider = new MecoreItemProvider(this);
+			mImportItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mImportItemProvider;
@@ -158,7 +158,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mClassItemProvider;
+	protected MecoreItemProviderAdapter mClassItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MClass}.
@@ -169,7 +169,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMClassAdapter() {
 		if (mClassItemProvider == null) {
-			mClassItemProvider = new MecoreItemProvider(this);
+			mClassItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mClassItemProvider;
@@ -181,7 +181,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mEnumItemProvider;
+	protected MecoreItemProviderAdapter mEnumItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MEnum}.
@@ -192,7 +192,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMEnumAdapter() {
 		if (mEnumItemProvider == null) {
-			mEnumItemProvider = new MecoreItemProvider(this);
+			mEnumItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mEnumItemProvider;
@@ -204,7 +204,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mEnumLiteralItemProvider;
+	protected MecoreItemProviderAdapter mEnumLiteralItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MEnumLiteral}.
@@ -215,7 +215,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMEnumLiteralAdapter() {
 		if (mEnumLiteralItemProvider == null) {
-			mEnumLiteralItemProvider = new MecoreItemProvider(this);
+			mEnumLiteralItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mEnumLiteralItemProvider;
@@ -227,7 +227,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mFeatureItemProvider;
+	protected MecoreItemProviderAdapter mFeatureItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MFeature}.
@@ -238,7 +238,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMFeatureAdapter() {
 		if (mFeatureItemProvider == null) {
-			mFeatureItemProvider = new MecoreItemProvider(this);
+			mFeatureItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mFeatureItemProvider;
@@ -250,7 +250,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mSimpleMultiplicityItemProvider;
+	protected MecoreItemProviderAdapter mSimpleMultiplicityItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MSimpleMultiplicity}.
@@ -261,7 +261,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMSimpleMultiplicityAdapter() {
 		if (mSimpleMultiplicityItemProvider == null) {
-			mSimpleMultiplicityItemProvider = new MecoreItemProvider(this);
+			mSimpleMultiplicityItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mSimpleMultiplicityItemProvider;
@@ -273,7 +273,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mComplexMultiplicityItemProvider;
+	protected MecoreItemProviderAdapter mComplexMultiplicityItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MComplexMultiplicity}.
@@ -284,7 +284,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMComplexMultiplicityAdapter() {
 		if (mComplexMultiplicityItemProvider == null) {
-			mComplexMultiplicityItemProvider = new MecoreItemProvider(this);
+			mComplexMultiplicityItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mComplexMultiplicityItemProvider;
@@ -296,7 +296,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mDataTypeItemProvider;
+	protected MecoreItemProviderAdapter mDataTypeItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MDataType}.
@@ -307,7 +307,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMDataTypeAdapter() {
 		if (mDataTypeItemProvider == null) {
-			mDataTypeItemProvider = new MecoreItemProvider(this);
+			mDataTypeItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mDataTypeItemProvider;
@@ -319,7 +319,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mEcoreTypeItemProvider;
+	protected MecoreItemProviderAdapter mEcoreTypeItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MEcoreType}.
@@ -330,7 +330,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMEcoreTypeAdapter() {
 		if (mEcoreTypeItemProvider == null) {
-			mEcoreTypeItemProvider = new MecoreItemProvider(this);
+			mEcoreTypeItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mEcoreTypeItemProvider;
@@ -342,7 +342,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mOperationItemProvider;
+	protected MecoreItemProviderAdapter mOperationItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MOperation}.
@@ -353,7 +353,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMOperationAdapter() {
 		if (mOperationItemProvider == null) {
-			mOperationItemProvider = new MecoreItemProvider(this);
+			mOperationItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mOperationItemProvider;
@@ -365,7 +365,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MecoreItemProvider mParameterItemProvider;
+	protected MecoreItemProviderAdapter mParameterItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MParameter}.
@@ -376,7 +376,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	@Override
 	public Adapter createMParameterAdapter() {
 		if (mParameterItemProvider == null) {
-			mParameterItemProvider = new MecoreItemProvider(this);
+			mParameterItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mParameterItemProvider;

@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
-import org.eclipse.emf.edit.EMFEditPlugin;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedImage;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -38,6 +37,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.emftext.language.mecore.MComplexMultiplicity;
 import org.emftext.language.mecore.MDataType;
 import org.emftext.language.mecore.MFeature;
@@ -54,7 +54,7 @@ import org.emftext.language.mecore.MecorePackage;
  * <!-- end-user-doc -->
  * @generated NOT
  */
-public class MecoreItemProvider
+public class MecoreItemProviderAdapter
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -68,7 +68,7 @@ public class MecoreItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MecoreItemProvider(AdapterFactory adapterFactory) {
+	public MecoreItemProviderAdapter(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -257,6 +257,7 @@ public class MecoreItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+		fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, true));
 		super.notifyChanged(notification);
 	}
 
