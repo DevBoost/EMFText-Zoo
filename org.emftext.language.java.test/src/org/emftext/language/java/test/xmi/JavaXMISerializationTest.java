@@ -151,6 +151,10 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 		ResourceSet rs = getResourceSet();
 		EcoreUtil.resolveAll(rs);
 		for (Resource javaResource : new ArrayList<Resource>(rs.getResources())) {
+			if (javaResource.getContents().isEmpty()) {
+				System.out.println("WARNING: Emtpy Resource: " + javaResource.getURI());
+				continue;
+			}
 			JavaRoot root = (JavaRoot) javaResource.getContents().get(0);
 			String outputFileName = "ERROR";
 			if (root instanceof CompilationUnit) {
