@@ -1,14 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2006-2009 
+ * Copyright (c) 2006-2009
  * Software Technology Group, Dresden University of Technology
- * 
+ *
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
+ *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.bulk;
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
-import org.emftext.language.java.test.util.ThreadedTestSuite;
+import org.emftext.language.java.test.util.ThreadedSuite;
 
 /**
  * An abstract super class for test that must read input from ZIP files.
@@ -41,21 +41,21 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCase {
 
 	protected final static String BULK_INPUT_DIR = "input/";
-	
+
 	/**
-	 * 
+	 *
 	 * @param testFolderName name of folder containing the src.zip and additional jars
 	 * @param startEntryName name of an entry in src.zip as start position of the test
 	 */
 	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber) throws CoreException, IOException {
 		// run with 'threadNumber' threads and wait for maximal 30 minutes
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files.", 30 * 60 * 1000, threadNumber);
-		
+		TestSuite suite = new ThreadedSuite("Suite testing all files.", 30 * 60 * 1000, threadNumber);
+
 		List<String> inputZips = getInputZips(testFolderName);
 		for (String inputZip : inputZips) {
 			addToTestSuite(suite, getTestsForZipFileEntries(
-					inputZip, 
-					false, 
+					inputZip,
+					false,
 					startEntryName));
 		}
 		return suite;
@@ -63,7 +63,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 
 	protected static List<String> getInputZips(String testFolderName) {
 		List<String> result = new ArrayList<String>();
-		
+
 		File dir = new File(BULK_INPUT_DIR);
 		File[] folders = dir.listFiles();
 		boolean srcZipExists = false;
@@ -72,23 +72,23 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 				for(File srcZipFile: folder.listFiles()) {
 					if (srcZipFile.getName().equals("src.zip") && folder.getName().endsWith(testFolderName)) {
 						System.out.println("TheTest.getInputZips() " + folder);
-						result.add(BULK_INPUT_DIR + folder.getName() + 
-								File.separator + 
+						result.add(BULK_INPUT_DIR + folder.getName() +
+								File.separator +
 								srcZipFile.getName());
 						srcZipExists = true;
 					}
 				}
 			}
 		}
-			
+
 		if (!srcZipExists) {
 			System.err.println("src.zip not found in folder '" + testFolderName + "'.");
-		}	
-		
+		}
+
 		return result;
 	}
-	
-	
+
+
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;
@@ -98,19 +98,19 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 	protected String getTestInputFolder() {
 		return null;
 	}
-	
+
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
 		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null);
 	}
-	
+
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry) throws IOException, CoreException {
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
-		
-		Map<URI, URI> uriMap = null; 
+
+		Map<URI, URI> uriMap = null;
 		Map<String, List<String>> packageClassifierMap = null;
-		
+
 		if (!zipFilePath.endsWith("jdt_test_files" + File.separator + "src.zip")) {
 			ResourceSet dummyRS = new ResourceSetImpl();
 			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
@@ -129,10 +129,10 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 			uriMap = dummyRS.getURIConverter().getURIMap();
 			packageClassifierMap = JavaClasspath.get(dummyRS).getPackageClassifierMap();
 		}
-		
-		
+
+
 		while (entries.hasMoreElements()) {
-			
+
 			ZipEntry entry = entries.nextElement();
 			String entryName = entry.getName();
 			if (startEntry != null && !entryName.endsWith(startEntry)) {
@@ -162,7 +162,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		}
 		return streams;
 	}
-	
+
 	protected static void addToTestSuite(TestSuite suite,
 			Collection<TestCase> tests) throws IOException {
 		for (TestCase test : tests) {
