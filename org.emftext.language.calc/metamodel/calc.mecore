@@ -1,0 +1,50 @@
+calc <http://www.emftext.org/language/calc>
+
+Calculation (
+	inputVariables Variable*
+	outputVariables Variable*
+	rules Rule*
+	
+	getVariable(name EString) Variable
+)
+
+Variable : NamedElement (~type Type)
+
+Rule (
+	condition Expression?
+	assignment Assigment
+)
+
+Assigment (
+	~left Variable
+	right Expression
+)
+
+// expressions
+abstract Expression
+abstract BinaryExpression : Expression (left Expression right Expression)
+Negation: Expression (body Expression)
+Compound: Expression (body Expression)
+VariableReference: Expression (~variable Variable)
+Additive : BinaryExpression (operator PlusMinus)
+Multiplictive : BinaryExpression (operator MulDiv)
+Or : BinaryExpression
+And : BinaryExpression
+Compare : BinaryExpression (operator Comp)
+// functions can be added dynamically by adding them to the interpreter context
+FunctionCall : Expression, NamedElement (arguments Expression*)
+
+// operators
+enum PlusMinus (PLUS MINUS)
+enum MulDiv (MUL DIV)
+enum Comp (EQ LT LTE GT GTE)
+
+Type : NamedElement
+
+abstract NamedElement (
+	name EString
+)
+
+abstract Literal : Expression
+NumberLiteral : Literal (value EDouble)
+StringLiteral : Literal (value EString)
