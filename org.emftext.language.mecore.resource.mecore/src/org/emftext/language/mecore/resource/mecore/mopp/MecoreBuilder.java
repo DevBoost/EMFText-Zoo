@@ -15,14 +15,24 @@
 package org.emftext.language.mecore.resource.mecore.mopp;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -30,6 +40,7 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.emftext.language.mecore.MModelElement;
 import org.emftext.language.mecore.MPackage;
@@ -91,7 +102,7 @@ public class MecoreBuilder implements IMecoreBuilder {
 			e.printStackTrace();
 			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
 		}
-		// TODO reload generator model (if it exists)
+		reloadGeneratorModel(ecoreResource);
 		
 		// run Ecore validation and map result back to .mecore file
 		Map<Object, Object> context = new LinkedHashMap<Object, Object>();
@@ -105,6 +116,30 @@ public class MecoreBuilder implements IMecoreBuilder {
 			}
 		}
 		return org.eclipse.core.runtime.Status.OK_STATUS;
+	}
+
+	/** 
+	 * Reload the generator model (if one with the same name exists).
+	 * 
+	 * @param ecoreResource the resource containing the Ecore model
+	 */
+	private void reloadGeneratorModel(Resource ecoreResource) {
+		URI genModelURI = ecoreResource.getURI().trimFileExtension().appendFileExtension("genmodel");
+		ResourceSet resourceSet = ecoreResource.getResourceSet();
+		Resource genModelResource = resourceSet.getResource(genModelURI, true);
+		if (genModelResource == null) {
+			return;
+		}
+		List<EObject> genModelContents = genModelResource.getContents();
+		if (genModelContents.isEmpty()) {
+			return;
+		}
+		for (EObject genModelObject : genModelContents) {
+			if (genModelObject instanceof GenModel) {
+				GenModel genModel = (GenModel) genModelObject;
+				reloadGeneratorModel(genModel, resourceSet);
+			}
+		}
 	}
 
 	private void processDiagnostics(MecoreResource resource, MecoreWrapper wrapper, Diagnostic diagnostics) {
@@ -140,5 +175,56 @@ public class MecoreBuilder implements IMecoreBuilder {
 			}
 		}
 		return null;
+	}
+
+	private GenModel reloadGeneratorModel(GenModel genModel, ResourceSet rs) {
+		if (Platform.isRunning()) {
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			final URI genModelURI = genModel.eResource().getURI();
+			//only reload when we are working on the platform
+			if(genModelURI.isPlatform()) {
+				IResource member = workspace.getRoot().findMember(genModelURI.toPlatformString(true));
+				if (member instanceof IFile) {
+					IFile file = (IFile) member;
+					if (!file.isReadOnly()) {
+		            	try {
+		            		updateGenModel(genModel);
+		            		Resource genModelResource = rs.getResource(genModelURI, true);
+		        			return (GenModel) genModelResource.getContents().get(0);
+		            	} catch (Exception e) {
+		            		MecorePlugin.logError("Error while updating genmodel " + file, e);
+		            	}
+		        	}
+				}
+			}
+		}
+		return genModel;
+	}
+
+	private void updateGenModel(final GenModel genModel) throws Exception {
+        final Resource genModelResource = genModel.eResource();
+ 
+		final boolean reconcileSucceeded = genModel.reconcile();
+		if (!reconcileSucceeded) {
+			throw new RuntimeException("Reconciliation of genmodel failed.");
+		}
+        
+        final Diagnostic diag = genModel.diagnose();
+        if (diag.getSeverity() != Diagnostic.OK) {
+        	throw new DiagnosticException(diag);
+        }
+        
+        new Job("saving genmodel after reconciling") {
+        	
+        	@Override
+        	protected IStatus run(IProgressMonitor monitor) {
+        		try {
+        			genModelResource.save(Collections.EMPTY_MAP);
+        		} catch (IOException e) {
+        			throw new RuntimeException(e);
+        		}
+        		return Status.OK_STATUS;
+        	}
+        }.schedule();
 	}
 }
