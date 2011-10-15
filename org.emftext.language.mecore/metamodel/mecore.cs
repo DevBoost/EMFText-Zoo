@@ -10,6 +10,8 @@ OPTIONS {
 	overrideBuilder = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	
+	additionalDependencies = "org.eclipse.emf.codegen.ecore";
 }
 
 TOKENS {
