@@ -34,7 +34,6 @@ import org.emftext.language.abnf.Repetition;
 import org.emftext.language.abnf.Rule;
 import org.emftext.language.abnf.RuleReference;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfMetaInformation;
-import org.emftext.language.abnf.resource.abnf.mopp.AbnfResourceFactory;
 import org.emftext.language.abnf.resource.abnf.util.AbnfStreamUtil;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -45,9 +44,7 @@ public class AbnfPrintingTest extends TestCase {
 	private static final AbnfFactory FACTORY = AbnfFactory.eINSTANCE;
 
 	public void setUp() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				FILE_EXTENSION,
-				new AbnfResourceFactory());
+		new AbnfMetaInformation().registerResourceFactory();
 	}
 	
 	@Ignore
