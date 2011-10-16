@@ -19,7 +19,7 @@ TOKENS {
 	DEFINE DIGIT $('0'..'9')$;
 	DEFINE DIGITS $($ + DIGIT + DIGIT + $)$;
 	DEFINE FRAGMENT HEXDIGIT $($ + DIGIT + $|'a'..'f'|'A'..'F'$ + $)$;
-	DEFINE HEXDIGITS HEXDIGIT + HEXDIGIT;
+	DEFINE HEXDIGITS HEXDIGIT + HEXDIGIT + $($ + HEXDIGIT + HEXDIGIT + $)?$;
 	DEFINE RULENAME $('A'..'Z'|'a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'-')*$;
 	
 	DEFINE FRAGMENT CRLF    $('\r\n'|'\r'|'\n')$;
