@@ -107,6 +107,7 @@ import org.emftext.test.cct3.resource.cct3.mopp.Cct3MetaInformation;
 import org.emftext.test.cct4.resource.cct4.mopp.Cct4MetaInformation;
 import org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation;
 import org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation;
+import org.emftext.test.noeclipse.resource.noeclipse.mopp.NoeclipseMetaInformation;
 import org.emftext.test.printing.resource.printing.mopp.PrintingMetaInformation;
 import org.emftext.test.resolving.resource.resolving.mopp.ResolvingMetaInformation;
 import org.reuseware.coconut.fracol.resource.fracol.mopp.FracolMetaInformation;
@@ -231,6 +232,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new Bug1154MetaInformation());
 		metaInformations.add(new Bug1233MetaInformation());
 		metaInformations.add(new Bug1709MetaInformation());
+		metaInformations.add(new NoeclipseMetaInformation());
 		metaInformations.add(new PrintingMetaInformation());
 		metaInformations.add(new ResolvingMetaInformation());
 		metaInformations.add(new SwrlMetaInformation());
