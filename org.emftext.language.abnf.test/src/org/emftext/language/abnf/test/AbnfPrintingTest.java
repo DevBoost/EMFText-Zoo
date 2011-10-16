@@ -36,7 +36,6 @@ import org.emftext.language.abnf.RuleReference;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfMetaInformation;
 import org.emftext.language.abnf.resource.abnf.mopp.AbnfResourceFactory;
 import org.emftext.language.abnf.resource.abnf.util.AbnfStreamUtil;
-import org.emftext.sdk.EMFTextSDKPlugin;
 import org.junit.Ignore;
 import org.junit.Test;
 
