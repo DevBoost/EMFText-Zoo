@@ -8,43 +8,39 @@ Calculation (
 	getVariable(name EString) Variable
 )
 
-Variable : NamedElement (~type Type)
-
 Rule (
 	condition Expression?
-	assignment Assigment
-)
-
-Assigment (
-	~left Variable
+	~target Variable
 	right Expression
 )
 
-// expressions
-abstract Expression
-abstract BinaryExpression : Expression (left Expression right Expression)
-Negation: Expression (body Expression)
-Compound: Expression (body Expression)
-VariableReference: Expression (~variable Variable)
-Additive : BinaryExpression (operator PlusMinus)
-Multiplictive : BinaryExpression (operator MulDiv)
-Or : BinaryExpression
-And : BinaryExpression
-Compare : BinaryExpression (operator Comp)
-// functions can be added dynamically by adding them to the interpreter context
-FunctionCall : Expression, NamedElement (arguments Expression*)
-
-// operators
-enum PlusMinus (PLUS MINUS)
-enum MulDiv (MUL DIV)
-enum Comp (EQ LT LTE GT GTE)
+abstract NamedElement (name EString)
 
 Type : NamedElement
 
-abstract NamedElement (
-	name EString
-)
+Variable : NamedElement (~type Type)
 
+// expressions
+abstract Expression
+// unary expressions
+Negation          : Expression (body Expression)
+Compound          : Expression (body Expression)
+VariableReference : Expression (~variable Variable)
+// binary expressions
+abstract BinaryExpression : Expression (left Expression right Expression)
+Compare       : BinaryExpression (operator Comp)
+Additive      : BinaryExpression (operator PlusMinus)
+Multiplictive : BinaryExpression (operator MulDiv)
+Or            : BinaryExpression
+And           : BinaryExpression
+// functions can be added dynamically by adding them to the interpreter context
+FunctionCall : Expression, NamedElement (arguments Expression*)
+// literals
 abstract Literal : Expression
 NumberLiteral : Literal (value EDouble)
 StringLiteral : Literal (value EString)
+
+// operators
+enum Comp (EQ LT LTE GT GTE)
+enum PlusMinus (PLUS MINUS)
+enum MulDiv (MUL DIV)

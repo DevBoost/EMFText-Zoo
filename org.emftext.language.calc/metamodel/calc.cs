@@ -23,38 +23,38 @@ RULES {
 		
 	Variable ::= type[IDENT] name[IDENT];
 	
-	Rule ::= ("wenn" condition)? assignment;
+	Rule ::= ("wenn" condition)? target[IDENT] "=" right;
 	
-	Assigment ::= left[IDENT] "=" right;
-	
-	@Operator(type="unary_prefix", weight="8", superclass="Expression")	
-	Negation      ::= "-" body;
 	@Operator(type="primitive", weight="9", superclass="Expression")
 	Compound      ::= "(" body ")";
-	@Operator(type="primitive", weight="9", superclass="Expression")
+
+	@Operator(type="primitive", weight="7", superclass="Expression")
 	FunctionCall  ::= name[IDENT] "(" (arguments (";" arguments)*)? ")";
 
-	@Operator(type="binary_left_associative", weight="6", superclass="Expression")
-	Additive      ::= left operator[PLUS : "+", MINUS : "-"] right;
-
-	@Operator(type="binary_left_associative", weight="7", superclass="Expression")
-	Multiplictive ::= left operator[MUL : "*", DIV : "/"] right;
+	@Operator(type="unary_prefix", weight="6", superclass="Expression")	
+	Negation      ::= "-" body;
 
 	@Operator(type="binary_left_associative", weight="5", superclass="Expression")
-	Compare       ::= left operator[EQ : "==", LT : "<", LTE : "<=", GT : ">", GTE : ">="] right;
+	Multiplictive ::= left operator[MUL : "*", DIV : "/"] right;
 
 	@Operator(type="binary_left_associative", weight="4", superclass="Expression")
-	Or ::= left "oder" right;
+	Additive      ::= left operator[PLUS : "+", MINUS : "-"] right;
 
 	@Operator(type="binary_left_associative", weight="3", superclass="Expression")
-	And ::= left "und" right;
+	Compare       ::= left operator[EQ : "==", LT : "<", LTE : "<=", GT : ">", GTE : ">="] right;
 
-	@Operator(type="primitive", weight="9", superclass="Expression")
+	@Operator(type="binary_left_associative", weight="2", superclass="Expression")
+	Or            ::= left "oder" right;
+
+	@Operator(type="binary_left_associative", weight="1", superclass="Expression")
+	And           ::= left "und" right;
+
+	@Operator(type="primitive", weight="7", superclass="Expression")
 	NumberLiteral ::= value[NUMBER];
 
-	@Operator(type="primitive", weight="9", superclass="Expression")
+	@Operator(type="primitive", weight="7", superclass="Expression")
 	StringLiteral ::= value['"','"'];
 
-	@Operator(type="primitive", weight="9", superclass="Expression")
+	@Operator(type="primitive", weight="7", superclass="Expression")
 	VariableReference ::= variable[IDENT];
 }

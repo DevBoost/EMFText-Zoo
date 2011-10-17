@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.emftext.language.calc.Additive;
 import org.emftext.language.calc.And;
-import org.emftext.language.calc.Assigment;
 import org.emftext.language.calc.Calculation;
 import org.emftext.language.calc.Comp;
 import org.emftext.language.calc.Compare;
@@ -78,20 +77,12 @@ public class CalcInterpreter extends AbstractCalcInterpreter<Object, CalcContext
 			context.addInterpretationEvent(new CheckConditionEvent(condition, booleanValue));
 		}
 		if (Boolean.TRUE.equals(conditionValue)) {
-			Assigment assignment = rule.getAssignment();
-			return interprete(assignment, context);
+			Variable left = rule.getTarget();
+			Expression right = rule.getRight();
+			Object value = interprete(right, context);
+			context.setValue(left, value);
+			context.addInterpretationEvent(new SetVariableValueEvent(left, value));
 		}
-		return null;
-	}
-	
-	@Override
-	public Object interprete_org_emftext_language_calc_Assigment(
-			Assigment assigment, CalcContext context) {
-		Variable left = assigment.getLeft();
-		Expression right = assigment.getRight();
-		Object value = interprete(right, context);
-		context.setValue(left, value);
-		context.addInterpretationEvent(new SetVariableValueEvent(left, value));
 		return null;
 	}
 	
