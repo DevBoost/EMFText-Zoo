@@ -16,8 +16,8 @@ OPTIONS {
 
 TOKENS {
 	DEFINE STAR $'*'$;
-	DEFINE DIGIT $('0'..'9')$;
-	DEFINE DIGITS $($ + DIGIT + DIGIT + $)$;
+	DEFINE FRAGMENT DIGIT $('0'..'9')$;
+	DEFINE DIGITS $($ + DIGIT + $)+$;
 	DEFINE FRAGMENT HEXDIGIT $($ + DIGIT + $|'a'..'f'|'A'..'F'$ + $)$;
 	DEFINE HEXDIGITS HEXDIGIT + HEXDIGIT + $($ + HEXDIGIT + HEXDIGIT + $)?$;
 	DEFINE RULENAME $('A'..'Z'|'a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'-')*$;
@@ -63,7 +63,7 @@ RULES {
 
 	Concatenation ::= repetition (_[CWSP]+ repetition)*;
 
-	Repetition ::= (repeat)? element;
+	Repetition ::= ((lowerBound[DIGITS])? (repeat[STAR])? (upperBound[DIGITS])?)? element;
 	// element        =  rulename / group / option / char-val / num-val / prose-val
 
 	OptionalSequence ::= "[" _[CWSP]* alternatives* _[CWSP]* "]";
@@ -78,6 +78,4 @@ RULES {
 	AdditionalDecTerminal  ::= "." value[DIGITS] tail?;
 	AdditionalHexTerminal  ::= "." (value[HEXDIGITS]|value[DIGITS]) tail?;
 	StringTerminal      ::= value['"','"'];
-	
-	Multiplicity ::= (lowerBound[DIGIT])? (repeat[STAR])? (upperBound[DIGIT])?;
 }
