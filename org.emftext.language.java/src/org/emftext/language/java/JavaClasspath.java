@@ -67,6 +67,35 @@ public class JavaClasspath extends AdapterImpl {
 		
 		boolean requiresStdLib();
 	}
+	
+	private static class InitializerExtensionPointReader {
+		
+		private static void read() {
+			if (Platform.isRunning()) {
+				IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+				IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
+				for (IConfigurationElement element : configurationElements) {
+					try {
+						String type = element.getAttribute("class");
+						if (type == null) {
+							continue;
+						}
+						Initializer initializer = (Initializer) element.createExecutableExtension("class");
+						initializers.add(initializer);
+						//if one initializer requires a local classpath, a local classpath is used by default
+						useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
+						//if one initializer does not require the std. lib, we assume it provides one
+						registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
+					} catch (CoreException ce) {
+						String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
+						ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
+						IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0, "Error instantiating Java classpath initializer", ce);
+						log.log(status);
+					}
+				}
+			}		
+		}
+	}
 
 	public static final String EP_JAVA_CLASSPATH_INITIALIZER = "org.emftext.language.java.java_classpath_initializer";
 	
@@ -81,29 +110,13 @@ public class JavaClasspath extends AdapterImpl {
 	}
 	
 	private static void readInitializersExtensionPoint() {
-		if (Platform.isRunning()) {
-			IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-			IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
-			for (IConfigurationElement element : configurationElements) {
-				try {
-					String type = element.getAttribute("class");
-					if (type == null) {
-						continue;
-					}
-					Initializer initializer = (Initializer) element.createExecutableExtension("class");
-					initializers.add(initializer);
-					//if one initializer requires a local classpath, a local classpath is used by default
-					useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
-					//if one initializer does not require the std. lib, we assume it provides one
-					registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
-				} catch (CoreException ce) {
-					String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
-					ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
-					IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0, "Error instantiating Java classpath initializer", ce);
-					log.log(status);
-				}
-			}
+		try {
+			java.lang.Class.forName("org.eclipse.core.runtime.Platform");
+		} catch (ClassNotFoundException e) {
+			// running outside Eclipse
+			return;
 		}
+		InitializerExtensionPointReader.read();
 	}
 	
 	private static void initialize(Resource resource) {
