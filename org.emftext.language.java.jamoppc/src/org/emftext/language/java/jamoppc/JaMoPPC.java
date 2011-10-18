@@ -40,9 +40,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.language.java.resource.util.JavaPostProcessor;
-import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 public class JaMoPPC {
 
@@ -202,23 +199,16 @@ public class JaMoPPC {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				Resource.Factory.Registry.DEFAULT_EXTENSION,
 				new XMIResourceFactoryImpl());
-		rs.getLoadOptions().put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER,
-				new JavaPostProcessor());
 	}
 
 	protected static void serializeMetamodel(File outFolder) throws IOException {
 		URI outUri = URI.createFileURI(outFolder.getCanonicalPath());
-
-		URI ptEcoreURI = outUri.appendSegment("primitive_types.ecore");
-		Resource ptEcoreResource = rs.createResource(ptEcoreURI);
-		ptEcoreResource.getContents().add(PrimitivetypesPackage.eINSTANCE);
 
 		URI javaEcoreURI = outUri.appendSegment("java.ecore");
 		Resource javaEcoreResource = rs.createResource(javaEcoreURI);
 		javaEcoreResource.getContents().addAll(
 				JavaPackage.eINSTANCE.getESubpackages());
 
-		ptEcoreResource.save(null);
 		javaEcoreResource.save(null);
 	}
 
