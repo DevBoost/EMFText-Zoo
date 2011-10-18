@@ -21,12 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -37,7 +31,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -272,19 +265,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			} else if (root instanceof Package) {
 				//package-info.java
 				Package p = (Package) root;
-
-				if(Platform.isRunning()) {
-					//if inside eclipse, register other files in workspace
-					IContainer container = WorkspaceSynchronizer.getFile(this).getParent();
-					try {
-						collectSubunits(container, p);
-					} catch (CoreException e) {
-						e.printStackTrace();
-					}
-				}
-				else {
-					populatePackage(p);
-				}
+				populatePackage(p);
 			} else if (root instanceof EmptyModel) {
 				((EmptyModel) root).setName(myURI.trimFileExtension().lastSegment());
 			}
@@ -320,39 +301,6 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 		}
 	}
-
-	protected void collectSubunits(IContainer container, Package thisPackage) throws CoreException, IOException {
-		if (container == null) return;
-
-		IResource[] members = container.members();
-		String fullPackageName = JavaUniquePathConstructor.packageName(thisPackage) + "." + thisPackage.getName();
-		for (IResource resource : members) {
-			if (resource instanceof IFile) {
-				IFile file = (IFile) resource;
-				if (file.getFileExtension().equals("java") && !file.getName().equals("package-info.java")) {
-					//URI fileUri = URI.createFileURI( file.getFullPath().toString());
-					URI resourceUri = URI.createURI("platform:/resource" + file.getFullPath().toString());
-					if (!getURIConverter().getURIMap().values().contains(resourceUri)) {
-						JavaClasspath.get(this).registerClassifier(
-								fullPackageName,
-								file.getName().substring(0, file.getName().length() - 5),
-								resourceUri);
-					}
-				}
-			} else if (resource instanceof IFolder && !resource.getName().startsWith(".")) {
-				IFolder folder = (IFolder) resource;
-
-				Package pkg = ContainersFactory.eINSTANCE.createPackage();
-				pkg.getNamespaces().addAll(thisPackage.getNamespaces());
-				pkg.getNamespaces().add(thisPackage.getName());
-				pkg.setName(folder.getName());
-				thisPackage.getSubpackages().add(pkg);
-				collectSubunits(folder, pkg);
-			}
-		}
-		populatePackage(thisPackage);
-	}
-
 
 	@Override
 	protected void doSave(OutputStream outputStream, Map<?, ?> options)
