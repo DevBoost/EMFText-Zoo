@@ -151,10 +151,12 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	public static JavaClasspath get() {
+		getInitializers();
 		return globalClasspath;
 	}
 
 	public static JavaClasspath get(EObject objectContext) {
+		getInitializers();
 		if (objectContext == null) {
 			return globalClasspath;
 		}
@@ -164,6 +166,7 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	public static JavaClasspath get(Resource resource) {
+		getInitializers();
 		if(resource == null) {
 			return globalClasspath;
 		}
@@ -181,6 +184,7 @@ public class JavaClasspath extends AdapterImpl {
 	}
 	
 	public static JavaClasspath get(ResourceSet resourceSet) {
+		getInitializers();
 		if (resourceSet == null) {
 			return globalClasspath;
 		}
