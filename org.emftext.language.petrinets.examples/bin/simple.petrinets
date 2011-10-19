@@ -1,0 +1,27 @@
+petrinet "simple"{
+	place "Start"
+	place "Consumer"
+	place "Producer"
+	place "Stack"
+	
+	transition "init"
+	transition "put"
+	transition "take"
+	
+	"Start" -> "init"
+	"init" -> "Consumer"
+	"init" -> "Producer"
+	
+	"Producer" -> "put"
+	"put" -> "Stack"
+	
+	"Stack" -> "take"
+	"take" -> "Consumer"
+	
+	// some exemplary errors
+	transition "invalid"
+	"invalid" -> "Start"  // makes place "Start" invalid
+	"invalid" -> "invalid"
+	"Consumer" -> "Consumer"
+	"invalid" -consume-> "Consumer"
+}

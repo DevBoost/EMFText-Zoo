@@ -1,4 +1,3 @@
-SYNTAXDEF petrinets
 FOR <http://www.emftext.org/language/petrinets>
 START PetriNet
 
@@ -10,6 +9,7 @@ OPTIONS {
 	overridePluginXML = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
+	overrideDefaultResolverDelegate = "false";
 }
 
 TOKENS {

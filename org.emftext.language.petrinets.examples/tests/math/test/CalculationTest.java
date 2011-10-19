@@ -51,8 +51,8 @@ public class CalculationTest {
 		
 		MathSemanticsEvaluation mathSemanticsEvaluation = new MathSemanticsEvaluation();
 		mathSemanticsEvaluation.add_to_place_InitialPlace(add);
-		mathSemanticsEvaluation.add_to_place_InitialPlace(two);
-		mathSemanticsEvaluation.add_to_place_InitialPlace(three);
+		//mathSemanticsEvaluation.add_to_place_InitialPlace(two);
+		//mathSemanticsEvaluation.add_to_place_InitialPlace(three);
 		mathSemanticsEvaluation.evaluateSemantics();
 		
 		assertEquals(5, add.getValue());
@@ -119,7 +119,7 @@ public class CalculationTest {
 		assertEquals(5, add.getValue());
 		assertEquals(30, mult.getValue());
 	}
-
+ 
 	
 }
 

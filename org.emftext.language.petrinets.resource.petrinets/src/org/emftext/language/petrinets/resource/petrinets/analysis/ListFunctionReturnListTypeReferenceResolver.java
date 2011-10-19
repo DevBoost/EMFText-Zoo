@@ -11,7 +11,7 @@ public class ListFunctionReturnListTypeReferenceResolver implements org.emftext.
 	private org.emftext.language.petrinets.resource.petrinets.analysis.PetrinetsDefaultResolverDelegate<org.emftext.language.petrinets.ListFunction, org.emftext.language.petrinets.PGenericType> delegate = new org.emftext.language.petrinets.resource.petrinets.analysis.PetrinetsDefaultResolverDelegate<org.emftext.language.petrinets.ListFunction, org.emftext.language.petrinets.PGenericType>();
 	
 	public void resolve(String identifier, org.emftext.language.petrinets.ListFunction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.petrinets.resource.petrinets.IPetrinetsReferenceResolveResult<org.emftext.language.petrinets.PGenericType> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+		TypeResolver.getInstance().resolve(identifier, container, result);
 	}
 	
 	public String deResolve(org.emftext.language.petrinets.PGenericType element, org.emftext.language.petrinets.ListFunction container, org.eclipse.emf.ecore.EReference reference) {

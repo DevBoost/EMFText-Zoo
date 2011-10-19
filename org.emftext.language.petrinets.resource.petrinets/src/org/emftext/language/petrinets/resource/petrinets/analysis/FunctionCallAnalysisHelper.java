@@ -272,6 +272,7 @@ public class FunctionCallAnalysisHelper {
 	}
 
 	public EClassifier calculateType(TypedElement e) {
+		if (e.eIsProxy()) return null;
 		if (e instanceof FreeVariable) {
 			ConsumingArc ca = (ConsumingArc) e.eContainer();
 			EClassifier type = ca.getIn().getType();
