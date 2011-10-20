@@ -1,0 +1,28 @@
+hedl <http://www.emftext.org/language/hedl>
+
+EntityModel (
+	entities Entity*
+)
+
+abstract NamedElement (
+	name EString
+)
+
+abstract Type : NamedElement (
+	getJavaClassname() EString
+)
+
+Entity : Type (
+	properties Property*
+)
+
+JavaType : Type (
+	javaClass EJavaClass
+)
+
+Property : NamedElement (
+	readonly EBoolean
+	unique EBoolean
+	nullable EBoolean
+	~type Type
+)
