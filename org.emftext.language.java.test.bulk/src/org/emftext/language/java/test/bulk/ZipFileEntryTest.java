@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 /**
@@ -92,6 +93,8 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		map.put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.FALSE);
+		map.put(IJavaOptions.DISABLE_LOCATION_MAP, Boolean.TRUE);
+		map.put(IJavaOptions.DISABLE_LAYOUT_INFORMATION_RECORDING, Boolean.TRUE);
 		return map;
 	}
 	
