@@ -1,3 +1,4 @@
+SYNTAXDEF petrinets
 FOR <http://www.emftext.org/language/petrinets>
 START PetriNet
 
