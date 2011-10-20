@@ -48,7 +48,9 @@ import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
 import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider;
 import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.java.IJavaReferenceResolverSwitch;
 import org.emftext.language.java.resource.java.IJavaResourcePostProcessor;
+import org.emftext.language.java.resource.java.IJavaTextPrinter;
 import org.emftext.language.java.resource.java.mopp.JavaContextDependentURIFragmentFactory;
 import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
 import org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch;
@@ -64,11 +66,6 @@ import org.emftext.language.java.util.JavaModelRepairer;
  * the file extension of the resource's URI.
  */
 public class JavaSourceOrClassFileResource extends JavaResource {
-
-//	@Override
-//	public ILocationMap getLocationMap() {
-//		return new DevNullLocationMap();
-//	}
 
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
@@ -101,7 +98,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			JavaClasspath javaClasspath = JavaClasspath.get(this);
 			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
 			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
-			getContents().add(cu);
+			getContentsInternal().add(cu);
 			JavaModelCompletion.complete(this);
 		} else {
 			Map<Object, Object> optionsWithUnicodeConverter = new LinkedHashMap<Object, Object>();
@@ -119,7 +116,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				});
 			}
 			super.doLoad(inputStream, optionsWithUnicodeConverter);
-			if (getContents().isEmpty() && getErrors().isEmpty()) {
+			if (getContentsInternal().isEmpty() && getErrors().isEmpty()) {
 				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 			}
 		}
@@ -144,9 +141,9 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	@Override
 	protected void doUnload() {
-		if (!getContents().isEmpty()) {
-			if(getContents().get(0) instanceof Package) {
-				getContents().clear();
+		if (!getContentsInternal().isEmpty()) {
+			if(getContentsInternal().get(0) instanceof Package) {
+				getContentsInternal().clear();
 			}
 			else {
 				super.doUnload();
@@ -159,7 +156,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		EObject result = null;
 		if (isClassFile() &&
 				id.startsWith("//" + JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
-			if (!getContents().isEmpty()) {
+			if (!getContentsInternal().isEmpty()) {
 				//in a class file, there is always only one classifier as root element:
 				//id path can be ignored
 				CompilationUnit cu =  (CompilationUnit) contents.get(0);
@@ -240,14 +237,14 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 		}
 		populatePackage(thePackage);
-		getContents().add(thePackage);
+		getContentsInternal().add(thePackage);
 	}
 
 	protected void register() throws IOException {
 		URI myURI = getURI();
 
-		if (!getContents().isEmpty()) {
-			EObject root = getContents().get(0);
+		if (!getContentsInternal().isEmpty()) {
+			EObject root = getContentsInternal().get(0);
 			if(root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) root;
 				setCompilationUnitName(cu);
@@ -315,8 +312,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			resourceSetForSave = new ResourceSetImpl();
 		}
 
-		if(getContents().size() > 1) {
-			for(EObject eObject : new BasicEList<EObject>(getContents())) {
+		if (containsMultipleCompilationUnits()) {
+			for (EObject eObject : new BasicEList<EObject>(getContentsInternal())) {
 				if (eObject instanceof CompilationUnit) {
 					CompilationUnit cu = (CompilationUnit) eObject;
 					if (cu.getClassifiers().isEmpty()) {
@@ -336,8 +333,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 								normalizedURI.segmentCount() - 1 - folder.length,
 								normalizedURI.segmentCount() - 1).equals(Arrays.asList(folder))) {
 						subResourcURI = subResourcURI.trimSegments(1);
-					}
-					else {
+					} else {
 						subResourcURI = subResourcURI.appendSegments(folder);
 					}
 					subResourcURI = subResourcURI.appendSegment(file);
@@ -350,21 +346,38 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 					subResource.getContents().add(cu);
 					subResource.save(options);
-				}
-				else {
+				} else {
 					//nothing
 				}
 			}
-		}
-		else {
-			if (!getContents().isEmpty() && getContents().get(0) instanceof CompilationUnit) {
-				CompilationUnit cu = (CompilationUnit) getContents().get(0) ;
-				addPackageDeclaration(cu);
+		} else {
+			if (!getContentsInternal().isEmpty()) {
+				if (getContentsInternal().get(0) instanceof CompilationUnit) {
+					CompilationUnit cu = (CompilationUnit) getContentsInternal().get(0) ;
+					addPackageDeclaration(cu);
+				}
+				IJavaTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
+				IJavaReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
+				referenceResolverSwitch.setOptions(options);
+				printer.print(getContentsInternal().get(0)); //only print the single CU or Package
+				//super.doSave(outputStream, options);
 			}
-			super.doSave(outputStream, options);
 		}
 	}
 
+	protected boolean containsMultipleCompilationUnits() {
+		boolean foundOne = false;
+		for(EObject eObject : getContentsInternal()) {
+			if (eObject instanceof CompilationUnit) {
+				if (foundOne) {
+					return true;
+				}
+				foundOne = true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * This method adds a package declaration (namespaces) to the given compilation unit
 	 * if none is defined and this resource has a logical URI. The segments of the logical
