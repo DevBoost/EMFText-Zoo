@@ -153,6 +153,12 @@ public class InterpreterTest extends AbstractCalcTestCase {
 			input, output, succFunction);
 	}
 
+	public void testNegation() {
+		input.put("x", 3.0);
+		output.put("y", -3.0);
+		interpret("input double x output double y y = -x", input, output);
+	}
+
 	private void interpret(String text, Map<String, Object> input, Map<String, Object> expectedOutput, ICalcFunction... functions) {
 		Calculation calculation = assertParseable(text);
 		CalcContext context = interpreter.interpret(calculation, input, functions);

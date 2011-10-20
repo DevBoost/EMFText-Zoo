@@ -25,7 +25,7 @@ RULES {
 	
 	Rule ::= ("wenn" condition)? target[IDENT] "=" right;
 	
-	@Operator(type="primitive", weight="9", superclass="Expression")
+	@Operator(type="primitive", weight="7", superclass="Expression")
 	Compound      ::= "(" body ")";
 
 	@Operator(type="primitive", weight="7", superclass="Expression")

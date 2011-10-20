@@ -13,6 +13,7 @@ import org.emftext.language.calc.Expression;
 import org.emftext.language.calc.FunctionCall;
 import org.emftext.language.calc.MulDiv;
 import org.emftext.language.calc.Multiplictive;
+import org.emftext.language.calc.Negation;
 import org.emftext.language.calc.NumberLiteral;
 import org.emftext.language.calc.Or;
 import org.emftext.language.calc.PlusMinus;
@@ -34,13 +35,18 @@ public class CalcInterpreter extends AbstractCalcInterpreter<Object, CalcContext
 		for (ICalcFunction function : functions) {
 			context.addFunction(function);
 		}
+		setInputValues(calculation, input, context);
+		interprete(calculation, context);
+		return context;
+	}
+
+	private void setInputValues(Calculation calculation,
+			Map<String, Object> input, CalcContext context) {
 		// set input
 		for (String variableName : input.keySet()) {
 			Variable variable = calculation.getVariable(variableName);
 			context.setValue(variable , input.get(variableName));
 		}
-		interprete(calculation, context);
-		return context;
 	}
 
 	@Override
@@ -138,7 +144,7 @@ public class CalcInterpreter extends AbstractCalcInterpreter<Object, CalcContext
 		} else {
 			throw new InterpreterException("Unknown operator " + operator);
 		}
-		throw new InterpreterException("Cannot handle multiplictive.");
+		throw new InterpreterException("Cannot handle multiplicative.");
 	}
 	
 	@Override
@@ -226,6 +232,18 @@ public class CalcInterpreter extends AbstractCalcInterpreter<Object, CalcContext
 			argumentValues[i] = interprete(argument, context);
 		}
 		return function.evaluate(argumentValues);
+	}
+	
+	@Override
+	public Object interprete_org_emftext_language_calc_Negation(
+			Negation negation, CalcContext context) {
+		Expression body = negation.getBody();
+		Object bodyValue = interprete(body, context);
+		if (!(bodyValue instanceof Double)) {
+			throw new InterpreterException("Wrong type for negation.");
+		}
+		Double doubleValue = (Double) bodyValue;
+		return -doubleValue.doubleValue();
 	}
 	
 	@Override
