@@ -18,6 +18,7 @@ TOKENS {
 	DEFINE WHITESPACE $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAK  $('\r'|'\n')+$;
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
+	DEFINE ML_COMMENT $'/**'.*'*/'$;
 }
 
 TOKENSTYLES {
@@ -25,7 +26,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	EntityModel ::= entities*;
+	EntityModel ::= (entities | enums)*;
 	
 	Entity ::= name[UPPER] "{" properties* "}";
 	
@@ -36,4 +37,8 @@ RULES {
 		type[UPPER]
 		name[LOWER] 
 		";";
+		
+	Enum ::= "enum" name[UPPER] "{" literals* "}";
+	
+	EnumLiteral ::= comment[ML_COMMENT]? name[UPPER];
 }

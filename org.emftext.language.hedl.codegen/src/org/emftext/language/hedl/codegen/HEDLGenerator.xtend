@@ -39,12 +39,29 @@ class HEDLGenerator {
 			
 			«FOR entity : entityModel.entities »
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
+		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
 			 */
 			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
 			
+			/**
+			 * Returns the «entity.name» with the given id.
+			 */
+			public «entity.name» get«entity.name»(int id);
+				
+			«FOR property : uniqueProperties »
+			/**
+			 * Returns the «entity.name» with the given «property.name».
+			 */
+			public «entity.name» get«entity.name»By«property.name.toFirstUpper»(«property.type.javaClassname» «property.name»);
+			
 			«ENDFOR»
+			/**
+			 * Deletes a «entity.name».
+			 */
+			public void delete(«entity.name» entity);
+		«ENDFOR»
 		}
 		'''
 	}
@@ -122,11 +139,37 @@ class HEDLGenerator {
 
 				«FOR entity : entityModel.entities »
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
+		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 				/**
 			 	 * Create method using all read-only properties.
 			 	 */
 				public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
-					return «entity.name.toFirstLower»DAO.create«entity.name»(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
+					return «entity.name.toFirstLower»DAO.create(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
+				}
+				
+				/**
+				 * Returns the «entity.name» with the given id.
+				 */
+				public «entity.name» get«entity.name»(int id) {
+					«entity.name» entity = «entity.name.toFirstLower»DAO.get(session, id);
+					return entity;
+				}
+				
+				«FOR property : uniqueProperties »
+				/**
+				 * Returns the «entity.name» with the given «property.name».
+				 */
+				public «entity.name» get«entity.name»By«property.name.toFirstUpper»(«property.type.javaClassname» «property.name») {
+					«entity.name» entity = «entity.name.toFirstLower»DAO.getBy«property.name.toFirstUpper»(session, «property.name»);
+					return entity;
+				}
+				
+				«ENDFOR»
+				/**
+				 * Deletes a «entity.name».
+				 */
+				public void delete(«entity.name» entity) {
+					«entity.name.toFirstLower»DAO.delete(session, entity);
 				}
 				«ENDFOR»
 			}
@@ -139,18 +182,70 @@ class HEDLGenerator {
 		package «packageName»;
 		
 		import org.hibernate.classic.Session;
+		import org.hibernate.Criteria;
+		import org.hibernate.HibernateException;
+		import org.hibernate.criterion.MatchMode;
+		import org.hibernate.criterion.Order;
+		import org.hibernate.criterion.Restrictions;
+		
+		import java.util.List;
 
 		// this class is generated. any change will be overridden.
 		public class «entity.name»DAO {
 			
+			«FOR property : entity.properties »
+			private final String FIELD__«entity.name.toUpperCase»__«property.name.toUpperCase» = getField(«entity.name».class, "«property.name»");
+			«ENDFOR»
+			
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
+		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 			/**
-			 * Create method using all read-only properties.
+			 * Creates a «entity.name» using all read-only properties.
 			 */
-			public «entity.name» create«entity.name»(Session session«FOR property : readOnlyProperties », «property.type.javaClassname» «property.name.toFirstLower»«ENDFOR») {
+			public «entity.name» create(Session session«FOR property : readOnlyProperties », «property.type.javaClassname» «property.name.toFirstLower»«ENDFOR») {
 				«entity.name» newEntity = new «entity.name»(«FOR property : readOnlyProperties »«property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
 				session.persist(newEntity);
 				return newEntity;
+			}
+
+			/**
+			 * Returns the «entity.name» with the given id.
+			 */
+			public «entity.name» get(Session session, int id) {
+				«entity.name» entity = («entity.name») session.get(«entity.name».class, id);
+				return entity;
+			}
+			«FOR property : uniqueProperties »
+			/**
+			 * Returns the «entity.name» with the given «property.name».
+			 */
+			public «entity.name» getBy«property.name.toFirstUpper»(Session session, «property.type.javaClassname» «property.name») {
+				Criteria criteria = session.createCriteria(«entity.name».class);
+				criteria = criteria.add(Restrictions.eq(FIELD__«entity.name.toUpperCase»__«property.name.toUpperCase», «property.name»));
+				List<?> list = criteria.list();
+				if (list != null && !list.isEmpty()) {
+					return («entity.name») list.get(0);
+				}
+				return null;
+			}
+			
+			«ENDFOR»
+
+			/**
+			 * Deletes a «entity.name».
+			 */
+			public void delete(Session session, «entity.name» entity) {
+				session.delete(entity);
+			}
+			
+			private static String getField(Class<?> clazz, String fieldName) {
+				try {
+					return clazz.getDeclaredField(fieldName).getName();
+				} catch (SecurityException e) {
+					throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.getMessage());
+				} catch (NoSuchFieldException e) {
+					throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.getMessage());
+				}
 			}
 		}
 		'''
@@ -170,6 +265,8 @@ class HEDLGenerator {
 		import javax.persistence.Temporal;
 		import javax.persistence.TemporalType;
 		import javax.persistence.UniqueConstraint;
+		import javax.persistence.EnumType;
+		import javax.persistence.Enumerated;
 
 		import org.hibernate.annotations.GenericGenerator;
 		
@@ -189,6 +286,9 @@ class HEDLGenerator {
 			«IF javaType.javaClass.equals(typeof(java.util.Date)) »
 			@Temporal(TemporalType.TIMESTAMP)
 			«ENDIF»
+			«ENDIF»
+			«IF property.type instanceof org.emftext.language.hedl.Enum »
+			@Enumerated(EnumType.STRING)
 			«ENDIF»
 			private «property.type.javaClassname» «property.name»;
 			
@@ -237,6 +337,21 @@ class HEDLGenerator {
 				this.«property.name» = newValue;
 			}
 			
+			«ENDFOR»
+		}
+		'''
+	}
+
+	def generateEnum(String packageName, org.emftext.language.hedl.Enum enumeration) {
+		return '''
+		package «packageName»;
+		
+		// this class is generated. any change will be overridden.
+		public enum «enumeration.name» {
+			
+			«FOR literal : enumeration.literals »
+			«literal.comment»
+			«literal.name»,
 			«ENDFOR»
 		}
 		'''
