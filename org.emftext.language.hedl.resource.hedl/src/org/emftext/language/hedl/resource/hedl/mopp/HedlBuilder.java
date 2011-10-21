@@ -23,7 +23,7 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
-import org.emftext.language.hedl.codegen.DAOGenerator;
+import org.emftext.language.hedl.codegen.HEDLGenerator;
 import org.emftext.language.hedl.resource.hedl.util.HedlStringUtil;
 
 
@@ -41,7 +41,7 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 		IContainer modelFolder = modelFile.getParent();
 		File modelFolderFile = modelFolder.getRawLocation().toFile();
 		
-		DAOGenerator daoGenerator = new DAOGenerator();
+		HEDLGenerator daoGenerator = new HEDLGenerator();
 		// set option overrideBuilder to 'false' and then perform build here
 		TreeIterator<EObject> allContents = resource.getAllContents();
 		while (allContents.hasNext()) {

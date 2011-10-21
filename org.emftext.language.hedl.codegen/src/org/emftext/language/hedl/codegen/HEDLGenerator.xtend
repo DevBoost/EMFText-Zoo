@@ -3,11 +3,8 @@ package org.emftext.language.hedl.codegen
 import org.emftext.language.hedl.EntityModel
 import org.emftext.language.hedl.Entity
 import org.emftext.language.hedl.JavaType
-import org.emftext.language.hedl.Type
 
-import java.util.Data
-
-class DAOGenerator {
+class HEDLGenerator {
 
 	def generateICommand(String packageName) {
 		return '''
