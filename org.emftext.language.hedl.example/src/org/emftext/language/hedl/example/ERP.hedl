@@ -1,0 +1,47 @@
+// Attention: Put hibernate JARs in classpath to compile generated classes!
+
+Producer {
+	String name;
+}
+
+PriceSet {
+	Double sellingPrice;
+	Date lastUpdate;
+}
+
+Item {
+	String name;
+	readonly nullable PriceSet priceSet;
+	nullable Producer *producer;
+}
+
+SupplierItem {
+	readonly String supplierItemNumber;
+	readonly Supplier *supplier;
+	Item item;
+	Double supplierPrice;
+	Date lastUpdate;
+}
+
+Supplier {
+	readonly String name;
+	nullable Warehouse warehouse;
+}
+
+Warehouse {
+	readonly String name;
+}
+
+CustomerOrder {
+	OrderedItem items*;
+	Customer *customer;
+}
+
+OrderedItem {
+	Item *item;
+}
+
+Customer {
+	String firstname;
+	String lastname;
+}
