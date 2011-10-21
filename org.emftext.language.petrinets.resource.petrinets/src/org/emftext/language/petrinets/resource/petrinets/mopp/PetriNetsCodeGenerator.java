@@ -94,10 +94,7 @@ public class PetriNetsCodeGenerator {
 			return;
 		if (resource.getContents().get(0) instanceof PetriNet) {
 			PetriNet pn = (PetriNet) resource.getContents().get(0);
-			EcoreUtil.resolveAll(pn.eResource().getResourceSet());
-
-			EcoreUtil.resolveAll(pn.eResource().getResourceSet());
-			EcoreUtil.resolveAll(pn.eResource().getResourceSet());
+			if (pn.isAbstrct()) return;
 			EcoreUtil.resolveAll(pn.eResource().getResourceSet());
 			initialiseGenClassMap(pn);
 			generateCode(pn);

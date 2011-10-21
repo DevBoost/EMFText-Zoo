@@ -38,11 +38,12 @@ TOKENSTYLES {
 	"SL_COMMENT" COLOR #000080, ITALIC;
 	"library" COLOR #7F0055, BOLD;
 	"autoinit" COLOR #7F0055, BOLD;
+	"abstract" COLOR #7F0055, BOLD;
 	
 }  
  
 RULES { 
-	PetriNet ::= ("package" pkg[IDENTIFIER] ("." pkg[IDENTIFIER])* ";")? "petrinet" name[IDENTIFIER]?
+	PetriNet ::= ("package" pkg[IDENTIFIER] ("." pkg[IDENTIFIER])* ";")? (abstrct["abstract":""])? "petrinet" name[IDENTIFIER]?
 				("types" ePackages['<','>'] genModels['<','>'] ";")*
 				("import" imports['<','>']";")*
 				("FUNCTIONS:" "{" functions* "}")?

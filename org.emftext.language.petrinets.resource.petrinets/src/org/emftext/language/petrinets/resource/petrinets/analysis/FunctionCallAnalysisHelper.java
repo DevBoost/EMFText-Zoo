@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -234,6 +235,22 @@ public class FunctionCallAnalysisHelper {
 					setter.getParameters().add(parameter);
 					functions.add(setter);
 				}
+			}
+			EList<EOperation> eOperations = cls.getEOperations();
+			for (EOperation eOperation : eOperations) {
+				Function f = factory.createBasicFunction();
+				f.setName(eOperation.getName());
+				f.setLibrary(false);
+				f.setFunctionType(FunctionType.READ);
+				f.setContext(cls);
+				EClassifier eType = eOperation.getEType();
+				if (eOperation.getUpperBound() == -1) {
+					PList elist = PetrinetsFactoryImpl.eINSTANCE.createPList();
+					elist.setType(eType);
+					eType = elist;
+				}
+				f.setType(eType);
+				functions.add(f);
 			}
 		}
 		if (type instanceof EEnum) {
