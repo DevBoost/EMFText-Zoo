@@ -135,14 +135,14 @@ containers.CompilationUnit
 	;
 	
 imports.ClassifierImport
-	::= "import" (namespaces[] #0 "." #0 )* #0 classifier[] #0 ";";
+	::= "import" (namespaces[] #0 "." #0 )* classifier[] #0 ";";
 
 @SuppressWarnings(minOccurenceMismatch) //the minimal occurence of namespaces[] is in other cases 0
 imports.PackageImport
 	::= "import" (namespaces[] #0 "." #0 )+ #0 "*" #0 ";";
 
 imports.StaticMemberImport
-	::= "import" static (namespaces[] #0 "." #0 )* #0 staticMembers[] #0 ";";
+	::= "import" static (namespaces[] #0 "." #0 )* staticMembers[] #0 ";";
 
 @SuppressWarnings(minOccurenceMismatch) //the minimal occurence of namespaces[] is in other cases 0
 imports.StaticClassifierImport
