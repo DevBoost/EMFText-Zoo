@@ -23,22 +23,31 @@ TOKENS {
 
 TOKENSTYLES {
 	"UPPER" COLOR #000000, BOLD;
+	"ML_COMMENT" COLOR #3F5FBF;
+	"COMMENT" COLOR #3F7F5F;
 }
 
 RULES {
 	EntityModel ::= (entities | enums)*;
 	
-	Entity ::= name[UPPER] "{" properties* "}";
+	Entity ::= comment[ML_COMMENT]? name[UPPER] "{" properties* constraints* "}";
 	
-	Property ::= 
+	Property ::=
+		comment[ML_COMMENT]?  
 		readonly["readonly" : ""] 
 		nullable["nullable" : ""] 
 		unique["unique" : ""] 
+		persist["persist" : ""] 
+		refresh["refresh" : ""] 
 		type[UPPER]
+		fromMultiplicity["*" : ""]
 		name[LOWER] 
+		toMultiplicity["*" : ""]
 		";";
 		
 	Enum ::= "enum" name[UPPER] "{" literals* "}";
 	
 	EnumLiteral ::= comment[ML_COMMENT]? name[UPPER];
+	
+	UniqueConstraint ::= "unique" "(" properties[LOWER] properties[LOWER]+ ")";
 }

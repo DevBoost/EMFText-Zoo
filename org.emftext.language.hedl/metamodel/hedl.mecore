@@ -1,8 +1,12 @@
 hedl <http://www.emftext.org/language/hedl>
 
 EntityModel (
-	entities Entity*
+	entities Entity* <> Entity.entityModel
 	enums Enum*
+)
+
+abstract Commentable (
+	comment EString?
 )
 
 abstract NamedElement (
@@ -13,25 +17,36 @@ abstract Type : NamedElement (
 	getJavaClassname() EString
 )
 
-Entity : Type (
+Entity : Type, Commentable (
+	~entityModel EntityModel <> EntityModel.entities
 	properties Property*
+	constraints Constraint*
+)
+
+abstract Constraint
+
+// a constraint over multiple properties
+UniqueConstraint : Constraint (
+	~properties Property*
 )
 
 Enum : Type (
 	literals EnumLiteral*
 )
 
-EnumLiteral : NamedElement (
-	comment EString?
-)
+EnumLiteral : NamedElement, Commentable
 
 JavaType : Type (
 	javaClass EJavaClass
 )
 
-Property : NamedElement (
+Property : NamedElement, Commentable (
 	readonly EBoolean
 	unique EBoolean
 	nullable EBoolean
+	persist EBoolean
+	refresh EBoolean
 	~type Type
+	fromMultiplicity EBoolean
+	toMultiplicity EBoolean
 )

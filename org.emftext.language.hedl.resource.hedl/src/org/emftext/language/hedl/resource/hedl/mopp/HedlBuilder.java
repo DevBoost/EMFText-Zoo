@@ -25,6 +25,7 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
+import org.emftext.language.hedl.codegen.HEDLCodegenConstants;
 import org.emftext.language.hedl.codegen.HEDLGenerator;
 import org.emftext.language.hedl.resource.hedl.util.HedlStringUtil;
 
@@ -41,7 +42,15 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 		IFile modelFile = WorkspaceSynchronizer.getFile(resource);
 		IContainer modelFolder = modelFile.getParent();
 		File modelFolderFile = modelFolder.getRawLocation().toFile();
-		
+		File daoFolder = new File(modelFolderFile, HEDLCodegenConstants.DAO_PACKAGE_NAME);
+		daoFolder.mkdirs();
+		File entitiesFolder = new File(modelFolderFile, HEDLCodegenConstants.ENTITY_PACKAGE_NAME);
+		entitiesFolder.mkdirs();
+		File customFolder = new File(modelFolderFile, HEDLCodegenConstants.CUSTOM_PACKAGE_NAME);
+		customFolder.mkdirs();
+		String mainDAOClassname = resource.getURI().trimFileExtension().lastSegment() + "DAO";
+		String mainDAOBaseClassname = mainDAOClassname + "Base";
+
 		int loc = 0;
 		HEDLGenerator generator = new HEDLGenerator();
 		// set option overrideBuilder to 'false' and then perform build here
@@ -52,29 +61,37 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 				Entity entity = (Entity) next;
 				// generate entity base class
 				StringConcatenation result = generator.generateEntityBaseClass(packageName, entity);
-				loc += saveGeneratedClass(modelFolderFile, result, entity.getName());
+				loc += saveGeneratedClass(entitiesFolder, result, entity.getName());
 				// generate entity DAO class
 				result = generator.generateEntityDAO(packageName, entity);
-				loc += saveGeneratedClass(modelFolderFile, result, entity.getName() + "DAO");
+				loc += saveGeneratedClass(daoFolder, result, entity.getName() + "DAO");
 			} else if (next instanceof org.emftext.language.hedl.Enum) {
 				org.emftext.language.hedl.Enum enumeration = (org.emftext.language.hedl.Enum) next;
 				// generate enum class
 				StringConcatenation result = generator.generateEnum(packageName, enumeration);
-				loc += saveGeneratedClass(modelFolderFile, result, enumeration.getName());
+				loc += saveGeneratedClass(entitiesFolder, result, enumeration.getName());
 			} else if (next instanceof EntityModel) {
 				EntityModel entityModel = (EntityModel) next;
-				StringConcatenation result = generator.generateIDBOperations(packageName, entityModel);
-				loc += saveGeneratedClass(modelFolderFile, result, "IDBOperations");
+				StringConcatenation result = generator.generateIDBOperationsBase(packageName, entityModel);
+				loc += saveGeneratedClass(daoFolder, result, "IDBOperationsBase");
+				result = generator.generateIDBOperations(packageName);
+				loc += saveGeneratedClass(customFolder, result, "IDBOperations", false);
 				result = generator.generateICommand(packageName);
-				loc += saveGeneratedClass(modelFolderFile, result, "ICommand");
-				result = generator.generateMainDAO(packageName, entityModel);
-				loc += saveGeneratedClass(modelFolderFile, result, "MainDAO");
+				loc += saveGeneratedClass(daoFolder, result, "ICommand");
+				result = generator.generateOperationProviderBase(packageName, entityModel);
+				loc += saveGeneratedClass(daoFolder, result, "OperationProviderBase");
+				result = generator.generateOperationProvider(packageName);
+				loc += saveGeneratedClass(customFolder, result, "OperationProvider", false);
+				result = generator.generateMainDAO(packageName, mainDAOClassname);
+				loc += saveGeneratedClass(customFolder, result, mainDAOClassname, false);
+				result = generator.generateMainDAOBase(packageName, mainDAOBaseClassname, entityModel);
+				loc += saveGeneratedClass(daoFolder, result, mainDAOBaseClassname);
 				result = generator.generateOngoingShutdownException(packageName);
-				loc += saveGeneratedClass(modelFolderFile, result, "OngoingShutdownException");
+				loc += saveGeneratedClass(daoFolder, result, "OngoingShutdownException");
 			}
 		}
 		try {
-			modelFolder.refreshLocal(1, new NullProgressMonitor());
+			modelFolder.refreshLocal(2, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// ignore
 		}
@@ -84,8 +101,16 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 
 	private int saveGeneratedClass(File modelFolderFile, StringConcatenation content,
 			String classname) {
+		return saveGeneratedClass(modelFolderFile, content, classname, true);
+	}
+	
+	private int saveGeneratedClass(File modelFolderFile, StringConcatenation content,
+			String classname, boolean override) {
 		int loc = 0;
 		File entityClassFile = new File(modelFolderFile, classname + ".java");
+		if (entityClassFile.exists() && !override) {
+			return loc;
+		}
 		try {
 			FileOutputStream fos = new FileOutputStream(entityClassFile);
 			String text = content.toString();
