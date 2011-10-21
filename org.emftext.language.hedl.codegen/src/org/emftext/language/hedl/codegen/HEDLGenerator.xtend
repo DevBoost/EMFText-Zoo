@@ -578,6 +578,8 @@ class HEDLGenerator {
 		return '''
 		package «packageName».«HEDLCodegenConstants::ENTITY_PACKAGE_NAME»;
 		
+		import java.util.List;
+		
 		import javax.persistence.Entity;
 		import javax.persistence.GeneratedValue;
 		import javax.persistence.Id;
@@ -591,8 +593,7 @@ class HEDLGenerator {
 		import javax.persistence.EnumType;
 		import javax.persistence.Enumerated;
 		import javax.persistence.CascadeType;
-		import javax.persistence.ManyToOne;
-		import javax.persistence.OneToOne;
+		import javax.persistence.OneToMany;
 		import javax.persistence.Column;
 
 		import org.hibernate.annotations.GenericGenerator;
@@ -639,7 +640,7 @@ class HEDLGenerator {
 			«IF property.type == HedlBuiltinTypes::LONGSTRING »
 			@Column(length=100000)
 			«ENDIF»
-			private «property.type.javaClassname» «property.name»;
+			private «property.typeClassname» «property.name»;
 			
 			«ENDFOR»
 			/**
@@ -672,7 +673,7 @@ class HEDLGenerator {
 			}
 
 			«FOR property : entity.properties »
-			public «property.type.javaClassname» get«property.name.toFirstUpper»() {
+			public «property.typeClassname» get«property.name.toFirstUpper»() {
 				return «property.name»;
 			}
 			
@@ -682,7 +683,7 @@ class HEDLGenerator {
 			 */
 			@Deprecated
 			«ENDIF»
-			public void set«property.name.toFirstUpper»(«property.type.javaClassname» newValue) {
+			public void set«property.name.toFirstUpper»(«property.typeClassname» newValue) {
 				this.«property.name» = newValue;
 			}
 			

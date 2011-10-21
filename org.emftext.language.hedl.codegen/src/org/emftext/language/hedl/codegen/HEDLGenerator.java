@@ -2302,6 +2302,9 @@ public class HEDLGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("import java.util.List;");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("import javax.persistence.Entity;");
     _builder.newLine();
     _builder.append("import javax.persistence.GeneratedValue;");
@@ -2328,9 +2331,7 @@ public class HEDLGenerator {
     _builder.newLine();
     _builder.append("import javax.persistence.CascadeType;");
     _builder.newLine();
-    _builder.append("import javax.persistence.ManyToOne;");
-    _builder.newLine();
-    _builder.append("import javax.persistence.OneToOne;");
+    _builder.append("import javax.persistence.OneToMany;");
     _builder.newLine();
     _builder.append("import javax.persistence.Column;");
     _builder.newLine();
@@ -2601,9 +2602,8 @@ public class HEDLGenerator {
         }
         _builder.append("\t");
         _builder.append("private ");
-        Type _type_5 = property_1.getType();
-        String _javaClassname = _type_5.getJavaClassname();
-        _builder.append(_javaClassname, "	");
+        String _typeClassname = property_1.getTypeClassname();
+        _builder.append(_typeClassname, "	");
         _builder.append(" ");
         String _name_5 = property_1.getName();
         _builder.append(_name_5, "	");
@@ -2667,9 +2667,9 @@ public class HEDLGenerator {
         _builder.append("(");
         {
           for(final Property property_2 : readOnlyProperties) {
-            Type _type_6 = property_2.getType();
-            String _javaClassname_1 = _type_6.getJavaClassname();
-            _builder.append(_javaClassname_1, "	");
+            Type _type_5 = property_2.getType();
+            String _javaClassname = _type_5.getJavaClassname();
+            _builder.append(_javaClassname, "	");
             _builder.append(" ");
             String _name_8 = property_2.getName();
             String _firstLower = StringExtensions.toFirstLower(_name_8);
@@ -2740,9 +2740,8 @@ public class HEDLGenerator {
       for(final Property property_4 : _properties_3) {
         _builder.append("\t");
         _builder.append("public ");
-        Type _type_7 = property_4.getType();
-        String _javaClassname_2 = _type_7.getJavaClassname();
-        _builder.append(_javaClassname_2, "	");
+        String _typeClassname_1 = property_4.getTypeClassname();
+        _builder.append(_typeClassname_1, "	");
         _builder.append(" get");
         String _name_11 = property_4.getName();
         String _firstUpper = StringExtensions.toFirstUpper(_name_11);
@@ -2786,9 +2785,8 @@ public class HEDLGenerator {
         String _firstUpper_1 = StringExtensions.toFirstUpper(_name_13);
         _builder.append(_firstUpper_1, "	");
         _builder.append("(");
-        Type _type_8 = property_4.getType();
-        String _javaClassname_3 = _type_8.getJavaClassname();
-        _builder.append(_javaClassname_3, "	");
+        String _typeClassname_2 = property_4.getTypeClassname();
+        _builder.append(_typeClassname_2, "	");
         _builder.append(" newValue) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");

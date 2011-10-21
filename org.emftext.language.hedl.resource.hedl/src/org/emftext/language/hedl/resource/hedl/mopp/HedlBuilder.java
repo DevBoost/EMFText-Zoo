@@ -91,7 +91,7 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 			}
 		}
 		try {
-			modelFolder.refreshLocal(2, new NullProgressMonitor());
+			modelFolder.refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// ignore
 		}
