@@ -42,6 +42,7 @@ import org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation
 import org.emftext.language.filesystem.resource.fs.mopp.FsMetaInformation;
 import org.emftext.language.forms.resource.forms.mopp.FormsMetaInformation;
 import org.emftext.language.formular.resource.formular.mopp.FormularMetaInformation;
+import org.emftext.language.hedl.resource.hedl.mopp.HedlMetaInformation;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureMetaInformation;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation;
 import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorMetaInformation;
@@ -150,6 +151,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new FeatureMetaInformation());
 		metaInformations.add(new FormularMetaInformation());
 		metaInformations.add(new FormsMetaInformation());
+		metaInformations.add(new HedlMetaInformation());
 		metaInformations.add(new JavaMetaInformation());
 		metaInformations.add(new JavabehaviorMetaInformation());
 		metaInformations.add(new ClosureMetaInformation());
