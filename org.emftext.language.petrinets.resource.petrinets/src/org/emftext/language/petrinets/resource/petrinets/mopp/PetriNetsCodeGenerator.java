@@ -388,7 +388,7 @@ public class PetriNetsCodeGenerator {
 		stringBuffer.newline();
 		stringBuffer.appendLine("public void add_to_place_"
 				+ trimQuotes(p.getName()) + "(" + printType(p) + " object) {");
-
+		stringBuffer.appendLine("if (_place_" + trimQuotes(p.getName()) + ".contains(object)) return;");
 		EList<ConsumingArc> outgoing = p.getOutgoing();
 		for (ConsumingArc consumingArc : outgoing) {
 			stringBuffer.appendLine("{");
@@ -608,9 +608,21 @@ public class PetriNetsCodeGenerator {
 			return "List<" + printType(list) + ">";
 		}
 		if (type.getInstanceClassName() != null) {
-			return type.getInstanceClassName();
+			return mapPrimitiveTypes(type.getInstanceClassName());
 		}
-		return type.getName();
+		return mapPrimitiveTypes(type.getName());
+	}
+
+	private String mapPrimitiveTypes(String instanceClassName) {
+		if (instanceClassName.equals("int")) return "Integer";
+		if (instanceClassName.equals("bool")) return "Boolean";
+		if (instanceClassName.equals("double")) return "Double";
+		if (instanceClassName.equals("float")) return "Float";
+		if (instanceClassName.equals("long")) return "Long";
+		return instanceClassName;
+		
+		
+		
 	}
 
 	private void generateCode(EObject o) {
