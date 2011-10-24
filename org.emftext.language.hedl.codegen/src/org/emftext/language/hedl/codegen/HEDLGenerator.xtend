@@ -52,6 +52,8 @@ class HEDLGenerator {
 		return '''
 		package «packageName».«HEDLCodegenConstants::DAO_PACKAGE_NAME»;
 
+		import java.util.List;
+		
 		«FOR otherEntity : entityModel.entities »
 		import «packageName».«HEDLCodegenConstants::ENTITY_PACKAGE_NAME».«otherEntity.name»;
 		«ENDFOR»
@@ -94,6 +96,11 @@ class HEDLGenerator {
 			«ENDIF»
 			«ENDFOR»
 			/**
+			 * Returns all entities of type «entity.name».
+			 */
+			public List<«entity.name»> getAll«entity.name»s();
+				
+			/**
 			 * Deletes a «entity.name».
 			 */
 			public void delete(«entity.name» entity);
@@ -126,6 +133,7 @@ class HEDLGenerator {
 		return '''
 		package «packageName».«HEDLCodegenConstants::DAO_PACKAGE_NAME»;
 
+		import java.util.ArrayList;
 		import java.util.List;
 		
 		import java.util.logging.Level;
@@ -241,12 +249,12 @@ class HEDLGenerator {
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
 			 */
-			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
+			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »final «property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
 				final «entity.name»[] entity = new «entity.name»[1];
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						
+						entity[0] = operations.create«entity.name»(«FOR property : readOnlyProperties »«property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
 					}
 				});
 				return entity[0];
@@ -255,12 +263,12 @@ class HEDLGenerator {
 			/**
 			 * Returns the «entity.name» with the given id.
 			 */
-			public «entity.name» get«entity.name»(int id) {
+			public «entity.name» get«entity.name»(final int id) {
 				final «entity.name»[] entity = new «entity.name»[1];
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						
+						entity[0] = operations.get«entity.name»(id);
 					}
 				});
 				return entity[0];
@@ -270,12 +278,12 @@ class HEDLGenerator {
 			/**
 			 * Returns the «entity.name» with the given «property.name».
 			 */
-			public «entity.name» get«entity.name»By«property.name.toFirstUpper»(«property.type.javaClassname» «property.name») {
+			public «entity.name» get«entity.name»By«property.name.toFirstUpper»(final «property.type.javaClassname» «property.name») {
 				final «entity.name»[] entity = new «entity.name»[1];
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						
+						entity[0] = operations.get«entity.name»By«property.name.toFirstUpper»(«property.name»);
 					}
 				});
 				return entity[0];
@@ -288,12 +296,12 @@ class HEDLGenerator {
 			/**
 			 * Returns the «entity.name» with the given properties.
 			 */
-			public «entity.name» get«entity.name»By«FOR property : uniqueConstraint.properties»«property.name.toFirstUpper»«ENDFOR»(«FOR property : uniqueConstraint.properties»«property.type.javaClassname» «property.name»«IF uniqueConstraint.properties.last != property », «ENDIF»«ENDFOR») {
+			public «entity.name» get«entity.name»By«FOR property : uniqueConstraint.properties»«property.name.toFirstUpper»«ENDFOR»(«FOR property : uniqueConstraint.properties»final «property.type.javaClassname» «property.name»«IF uniqueConstraint.properties.last != property », «ENDIF»«ENDFOR») {
 				final «entity.name»[] entity = new «entity.name»[1];
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						
+						entity[0] = operations.get«entity.name»By«FOR property : uniqueConstraint.properties»«property.name.toFirstUpper»«ENDFOR»(«FOR property : uniqueConstraint.properties»«property.name»«IF uniqueConstraint.properties.last != property », «ENDIF»«ENDFOR»);
 					}
 				});
 				return entity[0];
@@ -302,13 +310,27 @@ class HEDLGenerator {
 			«ENDIF»
 			«ENDFOR»
 			/**
-			 * Deletes a «entity.name».
+			 * Returns all entities of type «entity.name».
 			 */
-			public void delete(«entity.name» entity) {
+			public List<«entity.name»> getAll«entity.name»s() {
+				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						
+						entities.addAll(operations.getAll«entity.name»s());
+					}
+				});
+				return entities;
+			}
+			
+			/**
+			 * Deletes a «entity.name».
+			 */
+			public void delete(final «entity.name» entity) {
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						operations.delete(entity);
 					}
 				});
 			}
@@ -354,6 +376,8 @@ class HEDLGenerator {
 	def generateOperationProviderBase(String packageName, EntityModel entityModel) {
 		return '''
 		package «packageName».«HEDLCodegenConstants::DAO_PACKAGE_NAME»;
+
+		import java.util.List;
 
 		import org.hibernate.Criteria;
 		import org.hibernate.HibernateException;
@@ -434,6 +458,14 @@ class HEDLGenerator {
 			«ENDIF»
 			«ENDFOR»
 			/**
+			 * Returns all entities of type «entity.name».
+			 */
+			public List<«entity.name»> getAll«entity.name»s() {
+				final List<«entity.name»> entities = «entity.name.toFirstLower»DAO.getAll(session);
+				return entities;
+			}
+			
+			/**
 			 * Deletes a «entity.name».
 			 */
 			public void delete(«entity.name» entity) {
@@ -455,6 +487,8 @@ class HEDLGenerator {
 	def generateEntityDAO(String packageName, Entity entity) {
 		return '''
 		package «packageName».«HEDLCodegenConstants::DAO_PACKAGE_NAME»;
+		
+		import java.util.List;
 		
 		import org.hibernate.classic.Session;
 		import org.hibernate.Criteria;
@@ -547,6 +581,16 @@ class HEDLGenerator {
 			
 			«ENDIF»
 			«ENDFOR»
+			/**
+			 * Returns all entities of type «entity.name».
+			 */
+			public List<«entity.name»> getAll(Session session) {
+				Criteria criteria = session.createCriteria(«entity.name».class);
+				@SuppressWarnings("unchecked")
+				List<«entity.name»> entities = (List<«entity.name»>) criteria.list();
+				return entities;
+			}
+			
 			/**
 			 * Deletes a «entity.name».
 			 */
