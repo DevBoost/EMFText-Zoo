@@ -125,6 +125,9 @@ class HEDLGenerator {
 		// will be preserved.
 		public class «className» extends «className»Base {
 			
+			public void handleException(Exception e, boolean retry) {
+				e.printStackTrace();
+			}
 		}
 		''';
 	}
@@ -161,7 +164,7 @@ class HEDLGenerator {
 		«ENDFOR»
 
 		// this class is generated. any change will be overridden.
-		public class «className» implements IDBOperationsBase {
+		public abstract class «className» implements IDBOperationsBase {
 			
 			private Logger logger = Logger.getLogger(getClass().getName());
 			
@@ -215,21 +218,20 @@ class HEDLGenerator {
 					command.execute(new OperationProvider(session));
 					tx.commit();
 				} catch (Exception e) {
+					handleException(e, retry);
 					if (tx != null) {
 						try {
 							tx.rollback();
 						} catch (TransactionException te) {
-							logger.log(Level.SEVERE, "TransactionException: " + te.getMessage());
+							handleException(te, retry);
 						}
 					}
-					e.printStackTrace();
-					logger.log(Level.SEVERE, "Exception (" + e.getClass().getName() + "): " + e.getMessage());
 				} finally {
 					try {
 						session.close();
 						successfull = true;
 					} catch (HibernateException he) {
-						logger.log(Level.SEVERE, "HibernateException: " + he.getMessage());
+						handleException(he, retry);
 					}
 				}
 				
@@ -238,6 +240,8 @@ class HEDLGenerator {
 					executeInTransaction(command, false);
 				}
 			}
+			
+			public abstract void handleException(Exception e, boolean retry);
 			
 			public void tearDown() {
 				sessionFactory.close();
