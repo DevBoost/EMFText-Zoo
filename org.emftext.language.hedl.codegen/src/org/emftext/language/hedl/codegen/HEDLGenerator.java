@@ -673,6 +673,9 @@ public class HEDLGenerator {
     _builder.append("boolean successfull = false;");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("boolean closed = false;");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("Session session = sessionFactory.openSession();");
@@ -694,6 +697,9 @@ public class HEDLGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("tx.commit();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("successfull = true;");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("} catch (Exception e) {");
@@ -732,7 +738,7 @@ public class HEDLGenerator {
     _builder.append("session.close();");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("successfull = true;");
+    _builder.append("closed = true;");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("} catch (HibernateException he) {");
@@ -749,7 +755,7 @@ public class HEDLGenerator {
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if (!successfull && retry) {");
+    _builder.append("if ((!successfull || !closed) && retry) {");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("// retry once");

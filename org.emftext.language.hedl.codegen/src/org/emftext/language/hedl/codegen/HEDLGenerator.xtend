@@ -209,6 +209,7 @@ class HEDLGenerator {
 			
 			private void executeInTransaction(ICommand command, boolean retry) {
 				boolean successfull = false;
+				boolean closed = false;
 				
 				Session session = sessionFactory.openSession();
 				Transaction tx = null;
@@ -217,6 +218,7 @@ class HEDLGenerator {
 					tx.setTimeout(5);
 					command.execute(new OperationProvider(session));
 					tx.commit();
+					successfull = true;
 				} catch (Exception e) {
 					handleException(e, retry);
 					if (tx != null) {
@@ -229,13 +231,13 @@ class HEDLGenerator {
 				} finally {
 					try {
 						session.close();
-						successfull = true;
+						closed = true;
 					} catch (HibernateException he) {
 						handleException(he, retry);
 					}
 				}
 				
-				if (!successfull && retry) {
+				if ((!successfull || !closed) && retry) {
 					// retry once
 					executeInTransaction(command, false);
 				}
