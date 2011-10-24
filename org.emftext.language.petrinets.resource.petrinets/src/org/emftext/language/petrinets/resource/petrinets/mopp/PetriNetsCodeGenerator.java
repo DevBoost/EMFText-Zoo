@@ -94,8 +94,9 @@ public class PetriNetsCodeGenerator {
 			return;
 		if (resource.getContents().get(0) instanceof PetriNet) {
 			PetriNet pn = (PetriNet) resource.getContents().get(0);
-			if (pn.isAbstrct()) return;
-			EcoreUtil.resolveAll(pn.eResource().getResourceSet());
+			if (pn.isAbstrct())
+				return;
+			//EcoreUtil.resolveAll(pn.eResource().getResourceSet());
 			initialiseGenClassMap(pn);
 			generateCode(pn);
 
@@ -209,6 +210,26 @@ public class PetriNetsCodeGenerator {
 		stringBuffer.appendLine("public class " + name
 				+ "SemanticsEvaluation {");
 
+		stringBuffer.newline();
+
+		stringBuffer.appendLine("public interface ILogger {");
+		stringBuffer.appendLine("public void log(String log);");
+		stringBuffer.appendLine("}");
+		stringBuffer.newline();
+		
+		stringBuffer.appendLine("private ILogger logger = null;");
+		stringBuffer.newline();
+		
+		stringBuffer.appendLine("public void setLogger(ILogger l) {");
+		stringBuffer.appendLine("logger = l;");
+		stringBuffer.appendLine("}");
+		stringBuffer.newline();
+		
+		stringBuffer.appendLine("public void log(String logMsg) {");
+		stringBuffer.appendLine("if (logger != null)");
+		stringBuffer.appendLine("logger.log(logMsg);");
+		stringBuffer.appendLine("}");
+		
 		stringBuffer.newline();
 		generateRemoveTransationCodeAccessorCode();
 
@@ -388,7 +409,11 @@ public class PetriNetsCodeGenerator {
 		stringBuffer.newline();
 		stringBuffer.appendLine("public void add_to_place_"
 				+ trimQuotes(p.getName()) + "(" + printType(p) + " object) {");
-		stringBuffer.appendLine("if (_place_" + trimQuotes(p.getName()) + ".contains(object)) return;");
+		stringBuffer.appendLine("if (_place_" + trimQuotes(p.getName())
+				+ ".contains(object)) return;");
+		
+		
+		
 		EList<ConsumingArc> outgoing = p.getOutgoing();
 		for (ConsumingArc consumingArc : outgoing) {
 			stringBuffer.appendLine("{");
@@ -434,6 +459,10 @@ public class PetriNetsCodeGenerator {
 
 		stringBuffer.appendLine("_place_" + trimQuotes(p.getName())
 				+ ".add(object);");
+		
+		stringBuffer
+		.appendLine("log(\"addding \"+ object +\" to place: "
+				+ p.getName() + "\");");
 
 		stringBuffer.appendLine("}");
 
@@ -516,6 +545,9 @@ public class PetriNetsCodeGenerator {
 			generateCode(statement);
 		}
 
+		stringBuffer
+		.appendLine("log(\"firing transition "+ t.getName() + "\");");
+		
 		stringBuffer.appendLine("// init out places");
 		for (ProducingArc arc : t.getOutgoing()) {
 			Place out = arc.getOut();
@@ -584,9 +616,9 @@ public class PetriNetsCodeGenerator {
 	private String printType(TypedElement element) {
 		if (element.getType() == null) {
 			EClassifier type = null;
-			if (element instanceof Expression) {
+			if (element instanceof TypedElement) {
 				type = FunctionCallAnalysisHelper.getInstance().getType(
-						(Expression) element);
+						(TypedElement) element);
 			}
 			if (element instanceof InitialisedVariable) {
 				Expression initialisation = ((InitialisedVariable) element)
@@ -614,15 +646,18 @@ public class PetriNetsCodeGenerator {
 	}
 
 	private String mapPrimitiveTypes(String instanceClassName) {
-		if (instanceClassName.equals("int")) return "Integer";
-		if (instanceClassName.equals("bool")) return "Boolean";
-		if (instanceClassName.equals("double")) return "Double";
-		if (instanceClassName.equals("float")) return "Float";
-		if (instanceClassName.equals("long")) return "Long";
+		if (instanceClassName.equals("int"))
+			return "Integer";
+		if (instanceClassName.equals("bool"))
+			return "Boolean";
+		if (instanceClassName.equals("double"))
+			return "Double";
+		if (instanceClassName.equals("float"))
+			return "Float";
+		if (instanceClassName.equals("long"))
+			return "Long";
 		return instanceClassName;
-		
-		
-		
+
 	}
 
 	private void generateCode(EObject o) {
@@ -711,9 +746,10 @@ public class PetriNetsCodeGenerator {
 			argumentVars.put(expression, this.contextVariableName);
 		}
 		String contextVar = null;
-		if (fc.getType() != null && !"PVoid".equals(fc.getType().getName())) {
+		String returnType = printType(fc);
+		if (returnType != null && !"PVoid".equals(returnType) && !"".equals(returnType)) {
 			contextVar = generateContextVariableName();
-			stringBuffer.appendLine(printType(fc) + " " + contextVar + " = ");
+			stringBuffer.appendLine(returnType + " " + contextVar + " = ");
 		} else {
 			stringBuffer.appendLine("");
 		}

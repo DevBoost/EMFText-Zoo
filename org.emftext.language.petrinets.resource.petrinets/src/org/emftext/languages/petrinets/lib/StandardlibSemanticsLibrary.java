@@ -15,6 +15,22 @@ package org.emftext.languages.petrinets.lib;
 
 public class StandardlibSemanticsLibrary {
 
+	public static boolean greaterThan(int arg1, int arg2) {
+		return arg1 > arg2;
+	}
+	
+	public static boolean greaterEqual(int arg1, int arg2) {
+		return arg1 >= arg2;
+	}
+	
+	public static boolean lessThan(int arg1, int arg2) {
+		return arg1 < arg2;
+	}
+	
+	public static boolean lessEqual(int arg1, int arg2) {
+		return arg1 <= arg2;
+	}
+	
 	public static int add(int arg1, int arg2) {
 		return arg1 + arg2;
 	}
@@ -78,6 +94,22 @@ public class StandardlibSemanticsLibrary {
 
 	public static float sub(float arg1, float arg2) {
 		return arg1 - arg2;
+	}
+
+	public static Double add(Double arg1, Double arg2) {
+		return arg1 + arg2;
+	}
+
+	public static Double sub(Double arg1, Double arg2) {
+		return arg1 - arg2;
+	}
+
+	public static Double mult(Double arg1, Double arg2) {
+		return arg1 * arg2;
+	}
+
+	public static Double div(Double arg1, Double arg2) {
+		return arg1 / arg2;
 	}
 
 }
