@@ -27,7 +27,7 @@ abstract Constraint
 
 // a constraint over multiple properties
 UniqueConstraint : Constraint (
-	~properties Property*
+	~properties Property(2..-1)
 )
 
 Enum : Type (
@@ -49,5 +49,6 @@ Property : NamedElement, Commentable (
 	~type Type
 	fromMultiplicity EBoolean
 	toMultiplicity EBoolean
+	~mappedBy Property? // TODO check that mappedBy is a property of the type of this property
 	getTypeClassname() EString
 )

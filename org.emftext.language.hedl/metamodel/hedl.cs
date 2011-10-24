@@ -43,6 +43,7 @@ RULES {
 		fromMultiplicity["*" : ""]
 		name[LOWER] 
 		toMultiplicity["*" : ""]
+		("<=" mappedBy[LOWER])?
 		";";
 		
 	Enum ::= "enum" name[UPPER] "{" literals* "}";

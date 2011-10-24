@@ -682,7 +682,7 @@ class HEDLGenerator {
 			@JoinColumn(name="«property.name»"«IF property.readonly», updatable=false«ENDIF», nullable=« property.nullable»)
 			«ENDIF»
 			«IF !property.fromMultiplicity && property.toMultiplicity »
-			@OneToMany(cascade={«IF property.persist»CascadeType.PERSIST, «ENDIF»«IF property.refresh»CascadeType.REFRESH«ENDIF»«IF !property.persist && !property.refresh»CascadeType.ALL«ENDIF»})
+			@OneToMany(cascade={«IF property.persist»CascadeType.PERSIST, «ENDIF»«IF property.refresh»CascadeType.REFRESH«ENDIF»«IF !property.persist && !property.refresh»CascadeType.ALL«ENDIF»}«IF property.mappedBy != null », mappedBy="« property.mappedBy.name »"«ENDIF»)
 			«ENDIF»
 			«ENDIF»
 			«IF property.type == HedlBuiltinTypes::LONGSTRING »
