@@ -21,13 +21,6 @@ import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
 import org.emftext.language.java.resource.java.IJavaTokenResolver;
 import org.emftext.language.java.util.CharacterEscaper;
 
-// TODO @mseifert: add conversion of supplementary unicode characters
-// These consist of two characters (high and low surrogate).
-// The high surrogate is in the range of \ud800..\udbff.
-// The low surrogate is in the range of \udc00..\udfff.
-// The supplementary unicode characters can not be converted
-// by the InputStreamConverter, because ANTLR does not support
-// them.
 public class JavaSTRING_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {

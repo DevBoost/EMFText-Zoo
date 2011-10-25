@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
 import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-// TODO @mseifert: add conversion of supplementary unicode characters
-// see JavaSTRING_LITERALTokenResolver
 public class JavaIDENTIFIERTokenResolver implements IJavaTokenResolver {
 
 	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
