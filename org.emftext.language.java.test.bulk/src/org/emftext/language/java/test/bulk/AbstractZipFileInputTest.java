@@ -46,8 +46,13 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 	 *
 	 * @param testFolderName name of folder containing the src.zip and additional jars
 	 * @param startEntryName name of an entry in src.zip as start position of the test
+	 * @param prefixUsedInZipFile 
 	 */
 	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber) throws CoreException, IOException {
+		return constructSuite(testFolderName, startEntryName, threadNumber, false);
+	}
+	
+	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber, boolean prefixUsedInZipFile) throws CoreException, IOException {
 		// run with 'threadNumber' threads and wait for maximal 50 minutes
 		TestSuite suite = new ThreadedSuite("Suite testing all files.", 50 * 60 * 1000, threadNumber);
 
@@ -56,7 +61,8 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 			addToTestSuite(suite, getTestsForZipFileEntries(
 					inputZip,
 					false,
-					startEntryName));
+					startEntryName,
+					prefixUsedInZipFile));
 		}
 		return suite;
 	}
@@ -88,7 +94,6 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		return result;
 	}
 
-
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;
@@ -99,11 +104,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		return null;
 	}
 
-	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
-		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null);
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, boolean prefixUsedInZipFile) throws IOException, CoreException {
+		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null, prefixUsedInZipFile);
 	}
 
-	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry) throws IOException, CoreException {
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry, boolean prefixUsedInZipFile) throws IOException, CoreException {
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -111,7 +116,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		Map<URI, URI> uriMap = null;
 		Map<String, List<String>> packageClassifierMap = null;
 
-		if (!zipFilePath.endsWith("jdt_test_files" + File.separator + "src.zip")) {
+		if (!prefixUsedInZipFile) {
 			ResourceSet dummyRS = new ResourceSetImpl();
 			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.FALSE);
@@ -120,8 +125,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 			registerLibs("input/" + plainZipFileName, dummyRS, "");
 			uriMap = dummyRS.getURIConverter().getURIMap();
 			packageClassifierMap = JavaClasspath.get(dummyRS).getPackageClassifierMap();
-		}
-		else {
+		} else {
 			//for the JDT test file register only the std. lib
 			ResourceSet dummyRS = new ResourceSetImpl();
 			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
@@ -142,7 +146,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 				startEntry = null;
 			}
 			if (entryName.endsWith(".java")) {
-				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, uriMap, packageClassifierMap);
+				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, prefixUsedInZipFile, uriMap, packageClassifierMap);
 				tests.add(newTest);
 			}
 		}

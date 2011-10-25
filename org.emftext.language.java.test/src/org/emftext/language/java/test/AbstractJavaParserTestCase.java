@@ -225,8 +225,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 		ResourceSet resourceSet = getResourceSet();
 
-		// TODO put this somewhere else
-		if (file.getName().endsWith("jdt_test_files" + File.separator + "src.zip")) {
+		if (prefixUsedInZipFile()) {
 			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
 			registerLibs(libFolderName, resourceSet, prefix);
 		}
@@ -255,6 +254,9 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 	}
 
+	protected boolean prefixUsedInZipFile() {
+		return false;
+	}
 
 	protected static void registerLibs(String libdir, ResourceSet resourceSet, String prefix) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator

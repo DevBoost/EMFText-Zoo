@@ -15,12 +15,14 @@ package org.emftext.language.java.test.resolving;
 
 import java.io.File;
 
+import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
@@ -54,44 +56,41 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 	}
 
 	protected void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
-		assertIsReferenceTo(statement, expectedCallTarget);
-	}
-
-	protected void assertIsReferenceToField(Statement statement, Field expectedReferenceTarget) {
-		assertIsReferenceTo(statement, expectedReferenceTarget);
-	}
-
-	protected void assertIsReferenceToLocalVariable(Statement statement, LocalVariable expectedReferenceTarget) {
-		assertIsReferenceTo(statement, expectedReferenceTarget);
-	}
-
-	protected void assertIsReferenceTo(Statement statement, ReferenceableElement expectedReferenceTarget) {
 		assertType(statement, ExpressionStatement.class);
 		ExpressionStatement expression = (ExpressionStatement) statement;
 		Expression methodCallExpression = expression.getExpression();
 		assertNotNull(methodCallExpression);
-		/*TODO fix
-		 *
-		 * ConditionalExpression cond = (ConditionalExpression) methodCallExpression.getConditionalExpression();
-		PrimaryExpression reference = cond.getConditionalOrExpression().
-		getConditionalAndExpression().get(0).
-		getInclusiveOrExpression().get(0).
-		getExclusiveOrExpression().get(0).
-		getAndExpression().get(0).
-		getEqualityExpression().get(0).
-		getInstanceOfExpression().get(0).
-		getRelationExpression().
-		getShiftExpression().get(0).
-		getAdditiveExpression().get(0).
-		getMultiplicativeExpression().get(0).
-		getUnaryExpression().get(0).
-		getUnaryExpressionNotPlusMinus().getPrimaryExpression();*/
-
-		//assertType(reference, IdentifierReference.class);
-		//IdentifierReference identifierReference = (IdentifierReference) reference;
-		//assertEquals(expectedReferenceTarget, identifierReference.getTarget());
+		assertType(methodCallExpression, MethodCall.class);
+		MethodCall mc = (MethodCall) methodCallExpression;
+		assertEquals(expectedCallTarget, mc.getTarget());
 	}
 
+	protected void assertIsReferenceToField(Statement statement, Field expectedReferenceTarget) {
+		assertType(statement, ExpressionStatement.class);
+		ExpressionStatement expression = (ExpressionStatement) statement;
+		Expression expr = expression.getExpression();
+		assertNotNull(expr);
+		assertType(expr, AssignmentExpression.class);
+		Expression expr2 = ((AssignmentExpression) expr).getChild();
+		assertNotNull(expr2);
+		assertType(expr2, IdentifierReference.class);
+		IdentifierReference identifierReference = (IdentifierReference) expr2;
+		assertEquals(expectedReferenceTarget, identifierReference.getTarget());
+	}
+
+	protected void assertIsReferenceToLocalVariable(Statement statement, LocalVariable expectedReferenceTarget) {
+		assertType(statement, ExpressionStatement.class);
+		ExpressionStatement expression = (ExpressionStatement) statement;
+		Expression expr = expression.getExpression();
+		assertNotNull(expr);
+		assertType(expr, AssignmentExpression.class);
+		Expression expr2 = ((AssignmentExpression) expr).getChild();
+		assertNotNull(expr2);
+		assertType(expr2, IdentifierReference.class);
+		IdentifierReference identifierReference = (IdentifierReference) expr2;
+		assertEquals(expectedReferenceTarget, identifierReference.getTarget());
+	}
+	
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;

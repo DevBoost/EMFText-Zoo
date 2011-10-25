@@ -38,6 +38,7 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	private final ZipFile zipFile;
 	private final List<ZipEntry> entries = new ArrayList<ZipEntry>();
 	private final boolean excludeFromReprint;
+	private final boolean prefixUsedInZipFile;
 
 	/**
 	 * Creates a new test for the given entry in a ZIP file. If a resource set is given
@@ -46,15 +47,16 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	 * @param zipFile
 	 * @param entry
 	 * @param excludeFromReprint
+	 * @param prefixUsedInZipFile 
 	 * @param resourceSet
 	 */
 	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint,
-			Map<URI, URI> uriMap, Map<String, List<String>> packageClassifierMap) {
+			boolean prefixUsedInZipFile, Map<URI, URI> uriMap, Map<String, List<String>> packageClassifierMap) {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
 		this.excludeFromReprint = excludeFromReprint;
 		//addZipEntry(entry);
-		
+		this.prefixUsedInZipFile = prefixUsedInZipFile;
 		this.uriMap = uriMap;
 		this.packageClassifierMap = packageClassifierMap;
 		
@@ -142,6 +144,11 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	@Override
 	protected String getTestInputFolder() {
 		return null;
+	}
+	
+	@Override
+	protected boolean prefixUsedInZipFile() {
+		return prefixUsedInZipFile;
 	}
 	
 	@Override

@@ -15,6 +15,8 @@ package org.emftext.language.java.test.resolving;
 
 import java.io.IOException;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
 import org.junit.Test;
 
@@ -25,13 +27,22 @@ public class ReferenceToInheritedMethodTest extends AbstractResolverTestCase {
 
 	@Test
 	public void testReferencing() throws Exception {
-		// TODO fix
-		//testReferencing("MethodCallsWithoutInheritance");
-		//testReferencing("ReferenceToInheritedMethod");
+		testReferencing("MethodCallsWithoutInheritance");
+		testReferencing("ReferenceToInheritedMethod");
 	}
 
 	protected void testReferencing(String typename) throws IOException, BadLocationException {
 		String filename =  typename + ".java";
 		parseAndReprint(filename);
+	}
+	
+
+	//Use a single resource set because resources 
+	//needs to know each other in this test.
+	ResourceSet rs = new ResourceSetImpl();
+	
+	protected ResourceSet getResourceSet() {
+		rs.getLoadOptions().putAll(getLoadOptions());
+		return rs;
 	}
 }

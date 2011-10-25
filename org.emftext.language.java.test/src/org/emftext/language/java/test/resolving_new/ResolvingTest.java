@@ -110,7 +110,6 @@ public class ResolvingTest extends TestCase {
 
 			// resolve all references
 			EcoreUtil.resolveAll(set);
-			pushUpCommentsFromNames(set);
 
 			// find all commented EObjects that are sources or targets
 			Map<String, Object> actualTargetsMap = new HashMap<String, Object>();
@@ -127,23 +126,6 @@ public class ResolvingTest extends TestCase {
 
 			// check whether the expected number of targets is present
 			assertEquals("Number of targets should match the expected number.", actualTargetsMap.keySet().size(), size);
-		}
-
-		private void pushUpCommentsFromNames(ResourceSet set) {
-			for (Resource resource : set.getResources()) {
-				pushUpCommentsFromNames(resource);
-			}
-		}
-
-		private void pushUpCommentsFromNames(Resource resource) {
-			/* TODO is this still needed?
-
-			Collection<NamedElementName> nameObjects = JavaEObjectUtil.getObjectsByType(resource.getAllContents(), PtypesPackage.eINSTANCE.getNamedElementName());
-			for (NamedElementName name : nameObjects) {
-				((NamedElement) name.eContainer()).getComments().addAll(name.getComments());
-				name.getComments().clear();
-			}
-			*/
 		}
 
 		private void findSourcesAndTargets(ResourceSet set,

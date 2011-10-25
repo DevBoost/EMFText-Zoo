@@ -30,7 +30,7 @@ public class JDTTestFilesTest extends AbstractZipFileInputTest {
 	public static final int    THREAD_NO   = 8;
 	
 	public static Test suite() throws CoreException, IOException {
-		return constructSuite(TEST_FOLDER, START_ENTRY, THREAD_NO);
+		return constructSuite(TEST_FOLDER, START_ENTRY, THREAD_NO, true);
 	}
 	
 }

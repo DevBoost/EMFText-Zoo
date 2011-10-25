@@ -16,5 +16,4 @@ public class Arguments {
 		//m(null,null,null);
 		return null;
 	}
-	// TODO add more examples with complex expressions as arguments
 }

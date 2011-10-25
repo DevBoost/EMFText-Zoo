@@ -33,11 +33,12 @@ public class JavaSTRING_LITERALTokenResolverTest {
 		assertEquals("\007", resolve(resolver, "\\007"));
 		assertEquals("\0007", resolve(resolver, "\\0007"));
 
-		// TODO mseifert: figure out what is really expected here
-		// test ordinary unicode escape sequence
-		//assertEquals("\u0020", resolve(resolver, "\\u0020"));
+		// Ordinary unicode escape sequence:
+		// The JavaSTRING_LITERALTokenResolver does not touch this escaped unicode characters
+		// since they are already converted by the JavaUnicodeConverter.
+		assertEquals("\\u0020", resolve(resolver, "\\u0020"));
 		// test escaped backslash (not a unicode sequence)
-		//assertEquals("\\u0020", resolve(resolver, "\\\\u0020"));
+		assertEquals("\\u0020", resolve(resolver, "\\\\u0020"));
 
 		assertEquals("\\", resolve(resolver, "\\\\"));
 		assertEquals("\n", resolve(resolver, "\\n"));
