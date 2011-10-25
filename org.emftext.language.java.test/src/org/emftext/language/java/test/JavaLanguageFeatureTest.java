@@ -1693,6 +1693,20 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
+	public void testUnicodeSurrogateCharacter() throws Exception {
+		String typename = "UnicodeSurrogateCharacters";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		Member m1 = clazz.getMembers().get(0);
+		assertTrue(m1 instanceof Field);
+		Expression value = ((Field) m1).getInitialValue();
+		assertTrue(value instanceof CharacterLiteral);
+		char c = ((CharacterLiteral) value).getValue();
+		assertEquals(55296, c);
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testBug1695() throws Exception {
 		String typename = "Bug1695";
 		String filename = "bugs" + File.separator + typename + JAVA_FILE_EXTENSION;
@@ -1703,7 +1717,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		
 		parseAndReprint(filename);
 	}
-	
+
 	@Test
 	public void testHasMissingParseReprints() throws Exception {
 		File inputFolder = new File("./" + getTestInputFolder());

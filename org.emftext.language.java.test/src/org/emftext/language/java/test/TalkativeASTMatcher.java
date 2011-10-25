@@ -16,6 +16,7 @@ package org.emftext.language.java.test;
 import java.math.BigInteger;
 
 import org.eclipse.jdt.core.dom.ASTMatcher;
+import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
@@ -759,7 +760,13 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (!result && "".equals(diff)) {
 			diff += ("\nORIGINAL: \n");
 			diff += (o1.toString());
+			if (o1 instanceof ASTNode) {
+				diff += "(POSITION: " + ((ASTNode) o1).getStartPosition() + ")\n";
+			}
 			diff += ("\nREPRINT:\n");
+			if (o2 instanceof ASTNode) {
+				diff += "(POSITION: " + ((ASTNode) o2).getStartPosition() + ")\n";
+			}
 			diff += (o2.toString());
 			diff += ("\n--------\n");
 		}

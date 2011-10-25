@@ -34,6 +34,15 @@ public class JavaCHARACTER_LITERALTokenResolverTest {
 		//System.out.println("RES:  " + resolve(resolver, character));
 		//System.out.println("DRES: " + resolver.deResolve(resolve(resolver, character), null,null));
 
+		//surrogates
+		assertEquals("'\\uD800'", deResolve(resolver, (char)55296));
+		assertEquals("'\\uD804'", deResolve(resolver, (char)55300));
+		assertEquals("'\\uDFFF'", deResolve(resolver, (char)57343));
+		
+		//just before and after surrogates
+		assertEquals("'" + (char)55295 + "'", deResolve(resolver, (char)55295));
+		assertEquals("'" + (char)57344 + "'", deResolve(resolver, (char)57344));
+		
 		assertEquals('\\', resolve(resolver, "\\\\"));
 		assertEquals('\n', resolve(resolver, "\\n"));
 		assertEquals('\b', resolve(resolver, "\\b"));
@@ -50,5 +59,9 @@ public class JavaCHARACTER_LITERALTokenResolverTest {
 		IJavaTokenResolveResult result = new JavaTokenResolveResult();
 		resolver.resolve("\'" + lexem + "\'", null, result);
 		return (Character) result.getResolvedToken();
+	}
+	
+	private String deResolve(JavaCHARACTER_LITERALTokenResolver resolver, Object value) {
+		return resolver.deResolve(value, null, null);
 	}
 }

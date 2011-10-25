@@ -323,7 +323,8 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 		//converter unicode
 		inputStream = new JavaUnicodeConverter(inputStream);
-
+		inputStream2 = new JavaUnicodeConverter(inputStream2);
+		
 		org.eclipse.jdt.core.dom.CompilationUnit unit1 = parseWithJDT(inputStream);
 		removeJavadoc(unit1);
 

@@ -46,6 +46,13 @@ public class UnicodeConverterTest {
 		assertConversion("\\377\\388", "\\377\\388");
 		assertConversion("\u202a", "\\u202a");
 	}
+	
+	@Test
+	public void testNonConversion() throws IOException {
+		//already converted unicode characters should not change
+		assertConversion("\ud800\udc02", "\ud800\udc02");
+	}
+	
 
 	private void assertConversion(String expectedOutput, String input) throws IOException {
 		JavaUnicodeConverter converter = new JavaUnicodeConverter(new ByteArrayInputStream(input.getBytes()));
