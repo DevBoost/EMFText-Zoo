@@ -23,11 +23,9 @@ import org.emftext.language.java.util.CharacterEscaper;
 
 public class JavaCHARACTER_LITERALTokenResolver implements IJavaTokenResolver {
 
-	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
-
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
-		String result = defaultResolver.deResolve(value,feature,container);
-		result = CharacterEscaper.escapeEscapedCharacters(result);
+		assert value instanceof Character;
+		String result = CharacterEscaper.escapeEscapedCharacter((Character) value);
 		result = '\'' + result + '\'';
 		return result;
 	}
@@ -43,7 +41,5 @@ public class JavaCHARACTER_LITERALTokenResolver implements IJavaTokenResolver {
 		result.setResolvedToken(character);
 	}
 
-	public void setOptions(Map<?, ?> options) {
-		defaultResolver.setOptions(options);
-	}
+	public void setOptions(Map<?, ?> options) { }
 }

@@ -30,14 +30,8 @@ import org.emftext.language.java.util.CharacterEscaper;
 // them.
 public class JavaSTRING_LITERALTokenResolver implements IJavaTokenResolver {
 
-	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
-
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
-		String result = defaultResolver.deResolve(value, feature, container);
-
-		//escape escapes
-		result = CharacterEscaper.escapeEscapedCharacters(result);
-
+		String result = CharacterEscaper.escapeEscapedCharacters(value.toString());
 		result = '"' + result + '"';
 		return result;
 	}
@@ -51,14 +45,9 @@ public class JavaSTRING_LITERALTokenResolver implements IJavaTokenResolver {
 		// escape sequences: \b \t \n \f \r \" \' \\
 		// octal characters: \0 to \377
 		// unicode characters (e.g., \u0000)
-
-		//TODO @mseifert: either implement escaping (inverse of unescapeEscapedCharacters)
-		//     for deResolve or leave the below .
 		lexem = CharacterEscaper.unescapeEscapedCharacters(lexem);
-
 		result.setResolvedToken(lexem);
 	}
 
-	public void setOptions(Map<?, ?> options) {
-	}
+	public void setOptions(Map<?, ?> options) { }
 }
