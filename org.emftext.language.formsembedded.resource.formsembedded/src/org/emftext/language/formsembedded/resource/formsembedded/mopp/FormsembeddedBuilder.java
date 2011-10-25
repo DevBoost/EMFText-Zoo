@@ -67,7 +67,7 @@ public class FormsembeddedBuilder implements IFormsembeddedBuilder {
 			NewConstructorCall constructorCall = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
 			ClassifierReference classifierRef = TypesFactory.eINSTANCE.createClassifierReference();
 			Class clazz = ClassifiersFactory.eINSTANCE.createClass();
-			clazz.setFullName("org.emftext.language.forms.interpreter.FormInterpreter");
+			clazz.setName("org.emftext.language.forms.interpreter.FormInterpreter");
 			classifierRef.setTarget(clazz);
 			constructorCall.setTypeReference(classifierRef);
 			
@@ -83,7 +83,7 @@ public class FormsembeddedBuilder implements IFormsembeddedBuilder {
 
 			// loaded form
 			Class formClass = ClassifiersFactory.eINSTANCE.createClass();
-			formClass.setFullName("org.emftext.language.forms.Form");
+			formClass.setName("org.emftext.language.forms.Form");
 			
 			CastExpression ce = ExpressionsFactory.eINSTANCE.createCastExpression();
 			ClassifierReference castClassifierRef = TypesFactory.eINSTANCE.createClassifierReference();
