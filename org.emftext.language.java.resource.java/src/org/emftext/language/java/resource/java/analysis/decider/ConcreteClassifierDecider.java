@@ -45,6 +45,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
+import org.emftext.language.java.util.TemporalFullNameHolder;
 
 /**
  * A decider that looks for concrete classifiers.
@@ -253,20 +254,21 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				if(concreteClassifier.eIsProxy()) {
 					concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
 				}
-				concreteClassifier.setFullName(id);
 				if(!concreteClassifier.eIsProxy()) {
 					return true;
 				}
 				return true;
 			}
+			// this is needed because classifiers with '$'-signs in their name are
+			// allowed which interferes with the usage of '$' as separator.
 			if(id.contains("$")) {
 				String mainID = id.substring(id.lastIndexOf("$") + 1);
-				if( mainID.equals(concreteClassifier.getName())) {
+				if (mainID.equals(concreteClassifier.getName())) {
 					//set the full id for reprint
 					if(concreteClassifier.eIsProxy()) {
 						concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
 					}
-					concreteClassifier.setFullName(id);
+					TemporalFullNameHolder.setFullName(concreteClassifier, id);
 					if(!concreteClassifier.eIsProxy()) {
 						return true;
 					}

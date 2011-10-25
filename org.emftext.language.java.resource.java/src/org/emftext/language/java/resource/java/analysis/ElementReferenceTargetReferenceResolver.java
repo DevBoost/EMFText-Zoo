@@ -46,6 +46,7 @@ import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDec
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.util.TemporalCompositeClassifier;
+import org.emftext.language.java.util.TemporalFullNameHolder;
 
 public class ElementReferenceTargetReferenceResolver implements
 	IJavaReferenceResolver<ElementReference, ReferenceableElement> {
@@ -79,10 +80,7 @@ public class ElementReferenceTargetReferenceResolver implements
 				}
 				return packageName + fullClassName;
 			}
-
-			if(concreteClassifier.getFullName() != null) {
-				return concreteClassifier.getFullName();
-			}
+			return TemporalFullNameHolder.getFullName(concreteClassifier);
 		}
 		return element.getName();
 	}

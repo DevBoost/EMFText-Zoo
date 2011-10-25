@@ -385,7 +385,7 @@ public class JavaClasspath extends AdapterImpl {
 			}
 		}
 
-		if (cuName != null && cuName.contains("$")) {
+		if (cuName != null && "".equals(cuName) && cuName.contains("$")) {
 			packageName = packageName + "$";
 		}
 
@@ -420,6 +420,7 @@ public class JavaClasspath extends AdapterImpl {
 
 		int idx = classifierName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 		if (idx >= 0) {
+			//the classifier name contains a "$"
 			innerName = classifierName.substring(idx + 1);
 			outerName = classifierName.substring(0, idx + 1);
 			if (".".equals(packageName)) {
@@ -464,6 +465,9 @@ public class JavaClasspath extends AdapterImpl {
 					}
 					String outerClassifier = outerPackage.substring(idx + 1);
 					outerPackage = outerPackage.substring(0, idx + 1);
+					if ("".equals(outerPackage)) {
+						outerPackage = ".";
+					}
 
 					registerPackage(outerPackage, outerClassifier);
 				}

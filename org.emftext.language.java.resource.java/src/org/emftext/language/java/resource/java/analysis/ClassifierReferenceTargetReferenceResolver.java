@@ -40,6 +40,7 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.util.TemporalFullNameHolder;
 
 public class ClassifierReferenceTargetReferenceResolver implements
 	IJavaReferenceResolver<ClassifierReference, Classifier> {
@@ -76,10 +77,7 @@ public class ClassifierReferenceTargetReferenceResolver implements
 				}
 				return packageName + fullClassName;
 			}
-
-			if(concreteClassifier.getFullName() != null) {
-				return concreteClassifier.getFullName();
-			}
+			return TemporalFullNameHolder.getFullName(concreteClassifier);
 		}
 		return classifier.getName();
 	}
