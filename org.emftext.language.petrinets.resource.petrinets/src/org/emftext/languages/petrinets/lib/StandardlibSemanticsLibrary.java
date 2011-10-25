@@ -112,4 +112,13 @@ public class StandardlibSemanticsLibrary {
 		return arg1 / arg2;
 	}
 
+	public static Integer hashValue(String string) {
+		return string.hashCode();
+	}
+
+	public static Integer hashValue(boolean b) {
+		if (b) return 1;
+		return 0;
+	}
+
 }
