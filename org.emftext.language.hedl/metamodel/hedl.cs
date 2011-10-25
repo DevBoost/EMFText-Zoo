@@ -6,6 +6,7 @@ START EntityModel
 
 OPTIONS {
 	disableLaunchSupport = "true";
+	disableDebugSupport = "true";
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
 	additionalDependencies = "org.eclipse.emf.workspace,org.emftext.language.hedl.codegen";
