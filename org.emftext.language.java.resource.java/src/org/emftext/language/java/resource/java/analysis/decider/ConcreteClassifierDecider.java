@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -31,6 +30,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.commons.NamespaceAwareElement;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -122,58 +122,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					}
 				}
 			}
-
-			//if id contains $, treat $ as separator
-			if(identifier.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
-				String[] path = identifier.split("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
-
-				EList<ConcreteClassifier> innerClassifiers = new BasicEList<ConcreteClassifier>();
-				if(classifier instanceof ConcreteClassifier) {
-					innerClassifiers.addAll(
-							((ConcreteClassifier) classifier).getInnerClassifiers());
-				}
-				for(ConcreteClassifier superClassifier : classifier.getAllSuperClassifiers()) {
-					innerClassifiers.addAll(
-							superClassifier.getInnerClassifiers());
-				}
-
-				outer: for(int i = 0; i < path.length; i++) {
-					for(ConcreteClassifier innerClassifier : innerClassifiers) {
-						if(path[i].equals(innerClassifier.getName())) {
-							innerClassifiers.clear();
-							if (!innerClassifier.eIsProxy()) {
-								innerClassifiers.addAll(
-										innerClassifier.getInnerClassifiers());
-							}
-							else {
-								//This special case is required in the unusual case that a class is name "ClassName$"
-								//in this case "$" is not really a separator. JaMoPP things that ClassName
-								//(without $) is a class. The proxy we have points at the class, but the
-								//class does not exist as such.
-								String containerName = ((InternalEObject)innerClassifier).eProxyURI().trimFragment().toString().substring(
-										JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
-								containerName = containerName.subSequence(0, containerName.length() - ".java".length()) + "$";
-								if (containerName.endsWith(identifier)) {
-									for(EObject innerClassifierProxy : JavaClasspath.get(container).getClassifiers(containerName, "*")) {
-										innerClassifiers.add((ConcreteClassifier)EcoreUtil.resolve(innerClassifierProxy, container));
-									}
-								}
-							}
-
-							for(ConcreteClassifier superClassifier : innerClassifier.getAllSuperClassifiers()) {
-								innerClassifiers.addAll(
-										superClassifier.getInnerClassifiers());
-							}
-							classifier = innerClassifier;
-							if (i == path.length - 1) {
-								resultList.addAll(innerClassifiers);
-							}
-							continue outer;
-						}
-					}
-					return ECollections.emptyEList();
-				}
-			}
 		}
 
 		if(container instanceof AnonymousClass) {
@@ -191,6 +139,58 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 
 		addImportsAndInnerClasses(container, resultList);
 
+		//this is required for classes that contain '$' in their name
+		if(container instanceof CompilationUnit && identifier.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
+			String[] path = identifier.split("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR, -1);
+			EList<EObject> innerClassifiers = new BasicEList<EObject>(resultList);
+			String outerName = null;
+			outer: for(int i = 0; i < path.length; i++) {
+				for(EObject cand : innerClassifiers) {
+					if (cand instanceof ConcreteClassifier) {
+						ConcreteClassifier innerClassifier = (ConcreteClassifier) cand;
+						if(path[i].equals(innerClassifier.getName())) {
+							innerClassifiers.clear();
+							if (outerName != null) {
+								outerName = outerName + path[i] + "$"; 
+							}
+							if (!innerClassifier.eIsProxy()) {
+								if (outerName == null) {
+									outerName = innerClassifier.getContainingCompilationUnit().getNamespacesAsString() + 
+											innerClassifier.getName() + "$"; 
+								}
+								innerClassifiers.addAll(innerClassifier.getInnerClassifiers());
+								for(ConcreteClassifier superClassifier : innerClassifier.getAllSuperClassifiers()) {
+									innerClassifiers.addAll(
+											superClassifier.getInnerClassifiers());
+								}
+							} else {
+								//This special case is required in the unusual case that a class is name "ClassName$"
+								//in this case "$" is not really a separator. JaMoPP things that ClassName
+								//(without $) is a class. The proxy we have points at the class, but the
+								//class does not exist as such.
+								if (outerName == null) {
+									outerName = ((InternalEObject) innerClassifier).eProxyURI().trimFragment().toString().substring(
+											JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
+									outerName = outerName.subSequence(
+											0, outerName.length() - JavaUniquePathConstructor.JAVA_FILE_EXTENSION.length()) + "$";	
+								}
+								for(EObject innerClassifierProxy : JavaClasspath.get(container).getClassifiers(
+										outerName, "*")) {
+									innerClassifiers.add((ConcreteClassifier) EcoreUtil.resolve(
+											innerClassifierProxy, container));
+								}
+							}
+							if (i + 1 == path.length - 1) {
+								resultList.addAll(innerClassifiers);
+							}
+							continue outer;
+						}	
+					}
+				}
+
+			}
+		}
+		
 		return resultList;
 	}
 

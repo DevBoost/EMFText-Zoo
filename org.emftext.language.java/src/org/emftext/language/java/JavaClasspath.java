@@ -366,29 +366,7 @@ public class JavaClasspath extends AdapterImpl {
 	 * @throws IOException
 	 */
 	public void registerClassifierSource(CompilationUnit compilationUnit, URI uri) {
-
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
-
-		int endIdx = -1;
-		String cuName = compilationUnit.getName();
-		
-		if (cuName != null) {
-			endIdx = cuName.lastIndexOf("$");
-		}
-		if (endIdx > -1) {
-			char[] nameParts = cuName.toCharArray();
-			for(int i= 0; i< endIdx; i++) {
-				if(nameParts[i] == '$') {
-					int idx = packageName.lastIndexOf(".");
-					packageName = packageName.substring(0, idx) + "$" + packageName.substring(idx + 1);
-				}
-			}
-		}
-
-		if (cuName != null && "".equals(cuName) && cuName.contains("$")) {
-			packageName = packageName + "$";
-		}
-
 		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
 			registerClassifier(
 					packageName, classifier.getName(), uri);
@@ -409,7 +387,6 @@ public class JavaClasspath extends AdapterImpl {
 		if (classifierName == null || uri == null) {
 			return;
 		}
-
 		if (!packageName.endsWith(".") && !packageName.endsWith("$")) {
 			packageName = packageName + ".";
 		}
@@ -596,7 +573,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 
 		EList<EObject> resultList = new UniqueEList<EObject>();
-
+		
 		synchronized (this) {
 			for (String classifierName : getPackageContents(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {

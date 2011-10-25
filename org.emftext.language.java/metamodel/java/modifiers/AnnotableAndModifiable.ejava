@@ -39,6 +39,9 @@ eclass AnnotableAndModifiable {
 	}
 
 	isHidden() {
+		if (this.eIsProxy()) {
+			return false;
+		}
 		//all members of an interface are public by default
 		if (this.eContainer() instanceof Interface) {
 			return false;

@@ -1705,6 +1705,20 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(55296, c);
 		parseAndReprint(filename);
 	}
+	
+	@Test
+	public void test$InClassName() throws Exception {
+		parseAndReprint("ClassWith$InName" + JAVA_FILE_EXTENSION);
+		parseAndReprint("ClassWith$$InName" + JAVA_FILE_EXTENSION);
+		parseAndReprint("Class$$$$With$$$$In$$$$Name$$$$$" + JAVA_FILE_EXTENSION);
+		parseAndReprint("pkg/ClassWith$In$$Pkg" + JAVA_FILE_EXTENSION);
+		parseAndReprint("pkg/inner/ClassWith$In$$Inner$Pkg" + JAVA_FILE_EXTENSION);
+
+		String typename = "ClassWithDollarReferenced";
+		String filename = typename + JAVA_FILE_EXTENSION;
+
+		parseAndReprint(filename);
+	}
 
 	@Test
 	public void testBug1695() throws Exception {

@@ -95,7 +95,7 @@ public class JavaUniquePathConstructor {
 		if (idx >= 0) {
 			classesPart = classesPart.substring(idx + 1);
 		}
-		String[] classNames = classesPart.split("\\" + CLASSIFIER_SEPARATOR);
+		String[] classNames = classesPart.split("\\" + CLASSIFIER_SEPARATOR, -1);
 
 		String uriFragment = "";
 		for(int i = 0; i < classNames.length; i++) {
@@ -107,7 +107,6 @@ public class JavaUniquePathConstructor {
 			}
 			uriFragment = uriFragment + classNames[i] + CLASSIFIERS_PATH_SUFIX;
 		}
-
 		logicalUri = logicalUri.appendFragment(
 				uriFragment);
 		return logicalUri;

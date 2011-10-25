@@ -215,6 +215,21 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 						JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX.length(),
 						uriFragment.length() - 2);
 				eObject = compilationUnit.getContainedClassifier(name);
+				int j = i + 1;
+				while (j < size && eObject == null) {
+					// this is required for classifiers with '$' in their names
+					String subUriFragment = uriFragmentPath.get(j);
+					name = name + "$" + subUriFragment.substring(
+							JavaUniquePathConstructor.CLASSIFIERS_SUB_PATH_PREFIX.length(),
+							subUriFragment.length() - 2);
+					eObject = compilationUnit.getContainedClassifier(name);
+					if (eObject != null) {
+						i = j;
+					} else {
+						j++;
+					}
+				}
+
 			} else {
 				 eObject = ((InternalEObject)eObject).eObjectForURIFragmentSegment(uriFragmentPath.get(i));
 			}
