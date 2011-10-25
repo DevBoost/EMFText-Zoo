@@ -215,7 +215,6 @@ class HEDLGenerator {
 				Transaction tx = null;
 				try {
 					tx = session.beginTransaction();
-					tx.setTimeout(5);
 					command.execute(new OperationProvider(session));
 					tx.commit();
 					successfull = true;
@@ -427,13 +426,6 @@ class HEDLGenerator {
 				return «entity.name.toFirstLower»DAO.create(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
 			}
 			
-			«FOR property : uniqueProperties »
-			/** Constructor using the unique property «property.name». */
-			public «entity.name» create«entity.name»With«property.name.toFirstUpper»(«property.type.javaClassname» «property.name.toFirstLower») {
-				return «entity.name.toFirstLower»DAO.createWith«property.name.toFirstUpper»(session, «property.name.toFirstLower»);
-			}
-			
-			«ENDFOR»
 			/**
 			 * Returns the «entity.name» with the given id.
 			 */
@@ -532,18 +524,6 @@ class HEDLGenerator {
 				return newEntity;
 			}
 			
-			«FOR property : uniqueProperties »
-			/**
-			 * Creates a «entity.name» using the unique property «property.name».
-			 */
-			public «entity.name» createWith«property.name.toFirstUpper»(Session session, «property.type.javaClassname» «property.name.toFirstLower») {
-				«entity.name» newEntity = new «entity.name»();
-				newEntity.set«property.name.toFirstUpper»(«property.name.toFirstLower»);
-				session.persist(newEntity);
-				return newEntity;
-			}
-			
-			«ENDFOR»
 			/**
 			 * Returns the «entity.name» with the given id.
 			 */
@@ -632,6 +612,7 @@ class HEDLGenerator {
 		
 		import javax.persistence.Entity;
 		import javax.persistence.GeneratedValue;
+		import javax.persistence.GenerationType;
 		import javax.persistence.Id;
 		import javax.persistence.JoinColumn;
 		import javax.persistence.ManyToOne;
@@ -647,6 +628,7 @@ class HEDLGenerator {
 		import javax.persistence.Column;
 
 		import org.hibernate.annotations.GenericGenerator;
+		import org.hibernate.annotations.Parameter;
 		
 		@Entity
 		@Table(name = "«entity.name»"
@@ -659,9 +641,18 @@ class HEDLGenerator {
 		// this class is generated. any change will be overridden.
 		public class «entity.name» {
 			
-			@Id
-			@GeneratedValue(generator = "increment")
-			@GenericGenerator(name = "increment", strategy = "increment")
+			@GenericGenerator(name="«entity.name»IdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
+			  parameters = {
+			    @Parameter(name="table", value="IdentityGenerator"),
+			    @Parameter(name="primary_key_column", value="sequence_name"),
+			    @Parameter(name="primary_key_value", value="«entity.name»"),
+			    @Parameter(name="value_column", value="next_hi_value"),
+			    @Parameter(name="primary_key_length", value="100"),
+			    @Parameter(name="max_lo", value="1000")
+			  }
+			)
+			@Id 
+			@GeneratedValue(strategy=GenerationType.TABLE, generator="«entity.name»IdGenerator")
 			private int id;
 
 			«FOR property : entity.properties »
