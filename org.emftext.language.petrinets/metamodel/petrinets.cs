@@ -51,8 +51,9 @@ RULES {
 				
 	Place ::= autoinit["autoinit" : ""] "place" name[IDENTIFIER]? ":" type[IDENTIFIER]?;
 	
-	Transition ::= "transition"  name[IDENTIFIER] ( "->" alias[IDENTIFIER] )? ("if" "(" guard ")")? "do" 
-				"{" (statements:Statement,Expression ";")*
+	Transition ::= "transition"  name[IDENTIFIER] ( "->" alias[IDENTIFIER] )? (!1 "if" "(" !1 guard ")")? 
+				!1"do" 
+				"{" (!1 statements:Statement,Expression ";")*
 				"}"; 
 				
 	BasicFunction ::= library["library": ""]?  "function" type[IDENTIFIER] context[IDENTIFIER]"."name[IDENTIFIER] "(" (parameters ("," parameters)*)? ")";
