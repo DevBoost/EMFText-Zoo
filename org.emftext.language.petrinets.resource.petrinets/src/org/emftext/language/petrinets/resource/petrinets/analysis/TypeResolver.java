@@ -54,4 +54,8 @@ public class TypeResolver {
 			}
 		}
 	}
+	
+	public String deResolve(EClassifier type) {
+		return type.getName();
+	}
 }

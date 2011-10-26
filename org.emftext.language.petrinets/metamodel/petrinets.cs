@@ -43,11 +43,11 @@ TOKENSTYLES {
 }  
  
 RULES { 
-	PetriNet ::= ("package" pkg[IDENTIFIER] ("." pkg[IDENTIFIER])* ";")? (abstrct["abstract":""])? "petrinet" name[IDENTIFIER]?
-				("types" ePackages['<','>'] genModels['<','>'] ";")*
-				("import" imports['<','>']";")*
-				("FUNCTIONS:" "{" functions* "}")?
-				"{" (components | arcs)* "}";
+	PetriNet ::= ("package" pkg[IDENTIFIER] ("." pkg[IDENTIFIER])* ";")? !0 (abstrct["abstract":""])? "petrinet" name[IDENTIFIER]? !0
+				("types" #1 ePackages['<','>'] #1 genModels['<','>'] ";" !0)*
+				("import" imports['<','>']";" !0)*
+				("FUNCTIONS:" "{" !1 (functions !0)* "}")?
+				"{" (!1 components | !1 arcs)* "}";
 				
 	Place ::= autoinit["autoinit" : ""] "place" name[IDENTIFIER]? ":" type[IDENTIFIER]?;
 	
@@ -67,7 +67,7 @@ RULES {
 		
 	ProducingArc ::= in[IDENTIFIER] "-" output[IDENTIFIER] "(" settings? ("," settings)* ")" "->" out[IDENTIFIER];	
 	
-	Setting ::= feature[IDENTIFIER] settingOperator[assign : ":=", add : "+="] value[IDENTIFIER] ; 
+	Setting ::= feature[IDENTIFIER] #1 settingOperator[assign : ":=", add : "+="] value[IDENTIFIER] ; 
 	
 	InitialisedVariable ::= name[IDENTIFIER] "=" initialisation; 
 	

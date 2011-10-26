@@ -66,7 +66,7 @@ public class SettingFeatureReferenceResolver
 	public String deResolve(org.eclipse.emf.ecore.EStructuralFeature element,
 			org.emftext.language.petrinets.Setting container,
 			org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return element.getName();
 	}
 
 	public void setOptions(java.util.Map<?, ?> options) {

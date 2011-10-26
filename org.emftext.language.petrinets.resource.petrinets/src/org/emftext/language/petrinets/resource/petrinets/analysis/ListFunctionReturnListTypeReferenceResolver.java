@@ -15,7 +15,7 @@ public class ListFunctionReturnListTypeReferenceResolver implements org.emftext.
 	}
 	
 	public String deResolve(org.emftext.language.petrinets.PGenericType element, org.emftext.language.petrinets.ListFunction container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return TypeResolver.getInstance().deResolve(element);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

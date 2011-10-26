@@ -15,7 +15,7 @@ public class BasicFunctionContextReferenceResolver implements org.emftext.langua
 	}
 	
 	public String deResolve(org.eclipse.emf.ecore.EClassifier element, org.emftext.language.petrinets.BasicFunction container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return TypeResolver.getInstance().deResolve(element);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

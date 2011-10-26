@@ -15,7 +15,7 @@ public class ParameterTypeReferenceResolver implements org.emftext.language.petr
 	}
 	
 	public String deResolve(org.eclipse.emf.ecore.EClassifier element, org.emftext.language.petrinets.Parameter container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return TypeResolver.getInstance().deResolve(element);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
