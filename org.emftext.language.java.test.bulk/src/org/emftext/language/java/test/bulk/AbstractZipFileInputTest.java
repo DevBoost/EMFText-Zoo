@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -29,8 +28,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.test.util.ThreadedSuite;
@@ -113,25 +111,38 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
-		Map<URI, URI> uriMap = null;
-		Map<String, List<String>> packageClassifierMap = null;
-
 		if (!prefixUsedInZipFile) {
-			ResourceSet dummyRS = new ResourceSetImpl();
-			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
-			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.FALSE);
+			//reuse global classpath
+			JavaClasspath.getInitializers().add(new JavaClasspath.Initializer() {			
+				public boolean requiresStdLib() {
+					return false;
+				}
+				
+				public boolean requiresLocalClasspath() {
+					return true;
+				}
+				
+				public void initialize(Resource resource) { }
+			});
+			JavaClasspath globalCP = JavaClasspath.get();
 			String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
 			plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
-			registerLibs("input/" + plainZipFileName, dummyRS, "");
-			uriMap = dummyRS.getURIConverter().getURIMap();
-			packageClassifierMap = JavaClasspath.get(dummyRS).getPackageClassifierMap();
+			registerLibs("input/" + plainZipFileName, globalCP, "");
 		} else {
 			//for the JDT test file register only the std. lib
-			ResourceSet dummyRS = new ResourceSetImpl();
-			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
-			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.TRUE);
-			uriMap = dummyRS.getURIConverter().getURIMap();
-			packageClassifierMap = JavaClasspath.get(dummyRS).getPackageClassifierMap();
+			JavaClasspath.getInitializers().add(new JavaClasspath.Initializer() {			
+				public boolean requiresStdLib() {
+					return true;
+				}
+				
+				public boolean requiresLocalClasspath() {
+					return true;
+				}
+				
+				public void initialize(Resource resource) { }
+			});
+			//trigger init
+			JavaClasspath.get();
 		}
 
 
@@ -146,7 +157,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 				startEntry = null;
 			}
 			if (entryName.endsWith(".java")) {
-				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, prefixUsedInZipFile, uriMap, packageClassifierMap);
+				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, prefixUsedInZipFile);
 				tests.add(newTest);
 			}
 		}

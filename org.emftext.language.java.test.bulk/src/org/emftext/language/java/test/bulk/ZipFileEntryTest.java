@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
@@ -51,14 +50,12 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	 * @param resourceSet
 	 */
 	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint,
-			boolean prefixUsedInZipFile, Map<URI, URI> uriMap, Map<String, List<String>> packageClassifierMap) {
+			boolean prefixUsedInZipFile) {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
 		this.excludeFromReprint = excludeFromReprint;
 		//addZipEntry(entry);
 		this.prefixUsedInZipFile = prefixUsedInZipFile;
-		this.uriMap = uriMap;
-		this.packageClassifierMap = packageClassifierMap;
 		
 		entries.add(entry);
 	}
@@ -87,9 +84,6 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 		}
 	}
 	
-	protected Map<URI, URI> uriMap = null;
-	protected Map<String, List<String>> packageClassifierMap =null; 
-	
 	@Override
 	protected Map<Object, Object> getLoadOptions() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -103,12 +97,6 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	protected ResourceSet getResourceSet() {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getLoadOptions().putAll(getLoadOptions());
-		JavaClasspath myClasspath = JavaClasspath.get(rs);
-		for(String p : packageClassifierMap.keySet()) {
-			myClasspath.getPackageClassifierMap().put(p, new ArrayList<String>(
-					packageClassifierMap.get(p)));
-		}
-		rs.getURIConverter().getURIMap().putAll(uriMap);
 		return rs;
 	}
 	

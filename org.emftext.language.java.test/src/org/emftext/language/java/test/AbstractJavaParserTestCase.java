@@ -227,7 +227,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 		if (prefixUsedInZipFile()) {
 			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
-			registerLibs(libFolderName, resourceSet, prefix);
+			registerLibs(libFolderName, JavaClasspath.get(resourceSet), prefix);
 		}
 
 		Resource resource = resourceSet.createResource(archiveURI);
@@ -258,13 +258,13 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return false;
 	}
 
-	protected static void registerLibs(String libdir, ResourceSet resourceSet, String prefix) throws IOException, CoreException  {
+	protected static void registerLibs(String libdir, JavaClasspath cp, String prefix) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator
 				+ libdir);
 		List<File> allLibFiles = collectAllFilesRecursive(libFolder, "jar");
 
 		for(File lib : allLibFiles) {
-			JavaClasspath.get(resourceSet).registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), prefix);
+			cp.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), prefix);
 		}
 	}
 
