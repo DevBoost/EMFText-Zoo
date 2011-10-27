@@ -258,9 +258,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
 			if(id.equals(concreteClassifier.getName())) {
-				if (id.equals("Pkg2Enum")) {
-					System.out.println("REMOVEs");
-				}
 				return true;
 			}
 			// this is needed because classifiers with '$'-signs in their name are

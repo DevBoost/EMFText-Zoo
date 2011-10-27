@@ -357,6 +357,16 @@
           upperBound="-1" eType="#//classifiers/ConcreteClassifier" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//containers/JavaRoot #//annotations/Annotable">
+      <eOperations name="getNamespacesAsString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="String packageName = &quot;&quot;;&#xA;for (java.util.Iterator&lt;String> it = getNamespaces().iterator(); it&#xA;&#x9;&#x9;.hasNext();) {&#xA;&#x9;String namespaceFragment = it.next();&#xA;&#x9;packageName = packageName&#xA;&#x9;&#x9;&#x9;+ namespaceFragment&#xA;&#x9;&#x9;&#x9;+ org.emftext.language.java.JavaUniquePathConstructor.PACKAGE_SEPARATOR;&#xA;}&#xA;return packageName;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getClassifiersInSamePackage" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="EList&lt;ConcreteClassifier> defaultImportList = new org.emftext.language.java.util.UniqueEList&lt;ConcreteClassifier>();&#xA;&#xA;String packageName = getNamespacesAsString();&#xA;&#xA;defaultImportList.addAll(getConcreteClassifierProxies(packageName&#xA;&#x9;&#x9;+ getName(), &quot;*&quot;));&#xA;&#xA;return defaultImportList;"/>
+        </eAnnotations>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
           eType="#//containers/CompilationUnit" containment="true"/>
     </eClassifiers>

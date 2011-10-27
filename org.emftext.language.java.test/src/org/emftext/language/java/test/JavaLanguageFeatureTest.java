@@ -1492,6 +1492,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
+	public void testPkg_package_info3() throws Exception {
+		//deep nested package with annotation in SAME package
+		parseAndReprint("pkg2/pkg3/pkg4/PackageAnnotation.java");
+
+		parseAndReprint("pkg2/pkg3/pkg4/package-info.java");
+	}
+	
+	@Test
 	public void testSemicolonAfterMembers() throws Exception {
 		String typename = "SemicolonAfterMembers";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -1671,6 +1679,12 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	public void testUnicodeIdentifiers() throws Exception {
 		String folder = "unicode/";
 		assertParsableAndReprintable(folder + "UnicodeIdentifiers.java");
+	}
+	
+	@Test
+	public void testMoreUnicodeCharacters() throws Exception {
+		String folder = "unicode/";
+		assertParsableAndReprintable(folder + "MoreUnicodeCharacters.java");
 	}
 
 	@Test
