@@ -154,7 +154,7 @@ public class JavaClasspath extends AdapterImpl {
 		getInitializers();
 		if (globalClasspath == null) {
 			globalClasspath = new JavaClasspath(URIConverter.INSTANCE);
-			if (useLocalClasspathDefault()) {
+			if (registerStdLibDefault()) {
 				globalClasspath.registerStdLib();
 			}
 		}
