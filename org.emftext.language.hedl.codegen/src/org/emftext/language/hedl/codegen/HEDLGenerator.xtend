@@ -101,6 +101,19 @@ class HEDLGenerator {
 			public List<«entity.name»> getAll«entity.name»s();
 				
 			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search«entity.name»(String _searchString, int _maxResults);
+			
+		«var toOneReferences = entity.properties.filter(p | p.toOneReference) »
+			«FOR toOneReference : toOneReferences »
+			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search«entity.name»With« toOneReference.name.toFirstUpper »(final « toOneReference.typeClassname » « toOneReference.name», String _searchString, int _maxResults);
+			
+			«ENDFOR»
+			/**
 			 * Deletes a «entity.name».
 			 */
 			public void delete(«entity.name» entity);
@@ -329,6 +342,37 @@ class HEDLGenerator {
 			}
 			
 			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search«entity.name»(final String _searchString, final int _maxResults) {
+				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.search«entity.name»(_searchString, _maxResults));
+					}
+				});
+				return entities;
+			}
+			
+		«var toOneReferences = entity.properties.filter(p | p.toOneReference) »
+			«FOR toOneReference : toOneReferences »
+			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search«entity.name»With« toOneReference.name.toFirstUpper »(final « toOneReference.typeClassname » « toOneReference.name», final String _searchString, final int _maxResults) {
+				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.search«entity.name»With« toOneReference.name.toFirstUpper »(« toOneReference.name», _searchString, _maxResults));
+					}
+				});
+				return entities;
+			}
+			
+			«ENDFOR»
+			/**
 			 * Deletes a «entity.name».
 			 */
 			public void delete(final «entity.name» entity) {
@@ -419,8 +463,8 @@ class HEDLGenerator {
 			}
 			
 			«FOR entity : entityModel.entities »
-			«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
-			«var uniqueProperties = entity.properties.filter(p | p.unique) »
+		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
+		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 			/** Create method using all read-only properties. */
 			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
 				return «entity.name.toFirstLower»DAO.create(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
@@ -464,6 +508,23 @@ class HEDLGenerator {
 			}
 			
 			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search«entity.name»(String _searchString, int _maxResults) {
+				return «entity.name.toFirstLower»DAO.search(session, _searchString, _maxResults);
+			}
+			
+		«var toOneReferences = entity.properties.filter(p | p.toOneReference) »
+			«FOR toOneReference : toOneReferences »
+			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search«entity.name»With« toOneReference.name.toFirstUpper »(« toOneReference.typeClassname » « toOneReference.name», String _searchString, int _maxResults) {
+				return «entity.name.toFirstLower»DAO.searchWith« toOneReference.name.toFirstUpper »(session, « toOneReference.name», _searchString, _maxResults);
+			}
+			
+			«ENDFOR»
+			/**
 			 * Deletes a «entity.name».
 			 */
 			public void delete(«entity.name» entity) {
@@ -491,6 +552,7 @@ class HEDLGenerator {
 		import org.hibernate.classic.Session;
 		import org.hibernate.Criteria;
 		import org.hibernate.HibernateException;
+		import org.hibernate.criterion.Disjunction;
 		import org.hibernate.criterion.MatchMode;
 		import org.hibernate.criterion.Order;
 		import org.hibernate.criterion.Restrictions;
@@ -577,6 +639,47 @@ class HEDLGenerator {
 				return entities;
 			}
 			
+			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> search(Session _session, String _searchString, int _maxResults) {
+				Criteria criteria = _session.createCriteria(«entity.name».class);
+				Disjunction disjunction = Restrictions.disjunction();
+				«FOR property : entity.properties »
+				«IF property.type.javaClassname.equals(typeof(String).getName()) »
+				disjunction.add(Restrictions.like(FIELD__«property.name.toUpperCase», _searchString.trim(), MatchMode.ANYWHERE));
+				«ENDIF»
+				«ENDFOR»
+				criteria = criteria.add(disjunction);
+				criteria = criteria.setMaxResults(_maxResults);
+				@SuppressWarnings("unchecked")
+				List<«entity.name»> entities = (List<«entity.name»>) criteria.list();
+				return entities;
+			}
+			
+		«var toOneReferences = entity.properties.filter(p | p.toOneReference) »
+			«FOR toOneReference : toOneReferences »
+			/**
+			 * Searches for entities of type «entity.name».
+			 */
+			public List<«entity.name»> searchWith« toOneReference.name.toFirstUpper »(Session _session, « toOneReference.typeClassname » « toOneReference.name», String _searchString, int _maxResults) {
+				Criteria criteria = _session.createCriteria(«entity.name».class);
+				// restrict by the value of the unique property
+				criteria = criteria.add(Restrictions.eq(FIELD__«toOneReference.name.toUpperCase», « toOneReference.name»));
+				Disjunction disjunction = Restrictions.disjunction();
+				«FOR property : entity.properties »
+				«IF property.type.javaClassname.equals(typeof(String).getName()) »
+				disjunction.add(Restrictions.like(FIELD__«property.name.toUpperCase», _searchString.trim(), MatchMode.ANYWHERE));
+				«ENDIF»
+				«ENDFOR»
+				criteria = criteria.add(disjunction);
+				criteria = criteria.setMaxResults(_maxResults);
+				@SuppressWarnings("unchecked")
+				List<«entity.name»> entities = (List<«entity.name»>) criteria.list();
+				return entities;
+			}
+			
+			«ENDFOR»
 			/**
 			 * Deletes a «entity.name».
 			 */

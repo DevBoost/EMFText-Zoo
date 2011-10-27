@@ -64,13 +64,14 @@ public class PropertyItemProvider
 
 			addCommentPropertyDescriptor(object);
 			addReadonlyPropertyDescriptor(object);
-			addUniquePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addNullablePropertyDescriptor(object);
 			addFromMultiplicityPropertyDescriptor(object);
 			addToMultiplicityPropertyDescriptor(object);
 			addPersistPropertyDescriptor(object);
 			addRefreshPropertyDescriptor(object);
+			addMappedByPropertyDescriptor(object);
+			addUniquePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -111,28 +112,6 @@ public class PropertyItemProvider
 				 getString("_UI_Property_readonly_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Property_readonly_feature", "_UI_Property_type"),
 				 HedlPackage.Literals.PROPERTY__READONLY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Unique feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addUniquePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Property_unique_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Property_unique_feature", "_UI_Property_type"),
-				 HedlPackage.Literals.PROPERTY__UNIQUE,
 				 true,
 				 false,
 				 false,
@@ -274,6 +253,50 @@ public class PropertyItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Mapped By feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMappedByPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_mappedBy_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_mappedBy_feature", "_UI_Property_type"),
+				 HedlPackage.Literals.PROPERTY__MAPPED_BY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Unique feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUniquePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_unique_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_unique_feature", "_UI_Property_type"),
+				 HedlPackage.Literals.PROPERTY__UNIQUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Property.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -314,12 +337,12 @@ public class PropertyItemProvider
 		switch (notification.getFeatureID(Property.class)) {
 			case HedlPackage.PROPERTY__COMMENT:
 			case HedlPackage.PROPERTY__READONLY:
-			case HedlPackage.PROPERTY__UNIQUE:
 			case HedlPackage.PROPERTY__NULLABLE:
 			case HedlPackage.PROPERTY__FROM_MULTIPLICITY:
 			case HedlPackage.PROPERTY__TO_MULTIPLICITY:
 			case HedlPackage.PROPERTY__PERSIST:
 			case HedlPackage.PROPERTY__REFRESH:
+			case HedlPackage.PROPERTY__UNIQUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
