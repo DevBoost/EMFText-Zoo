@@ -82,10 +82,6 @@ public class JavaClasspath extends AdapterImpl {
 						}
 						Initializer initializer = (Initializer) element.createExecutableExtension("class");
 						initializers.add(initializer);
-						//if one initializer requires a local classpath, a local classpath is used by default
-						useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
-						//if one initializer does not require the std. lib, we assume it provides one
-						registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
 					} catch (CoreException ce) {
 						String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
 						ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
@@ -133,8 +129,6 @@ public class JavaClasspath extends AdapterImpl {
 	 * in the global <code>URIConverter.URI_MAP</code>.
 	 */
 	public static final String OPTION_USE_LOCAL_CLASSPATH = "OPTION_USE_LOCAL_CLASSPATH";
-
-	private static boolean useLocalClasspathDefault = false;
 	
 	/**
 	 * If this option is set to true (default) in a resource set, the Java standard library
@@ -142,8 +136,6 @@ public class JavaClasspath extends AdapterImpl {
 	 * <code>System.getProperty("sun.boot.class.path")</code>.
 	 */
 	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
-
-	private static boolean registerStdLibDefault = true;
 		
 	/**
 	 * If this option is set to true in a resource set, all names in a Java resource will 
@@ -156,24 +148,24 @@ public class JavaClasspath extends AdapterImpl {
 	/**
 	 * Singleton instance.
 	 */
-	private static final JavaClasspath globalClasspath =
-		new JavaClasspath(URIConverter.INSTANCE);
-
-	static {
-		globalClasspath.registerStdLib();
-	}
+	private static JavaClasspath globalClasspath = null;
 
 	public static JavaClasspath get() {
 		getInitializers();
+		if (globalClasspath == null) {
+			globalClasspath = new JavaClasspath(URIConverter.INSTANCE);
+			if (useLocalClasspathDefault()) {
+				globalClasspath.registerStdLib();
+			}
+		}
 		return globalClasspath;
 	}
 
 	public static JavaClasspath get(EObject objectContext) {
 		getInitializers();
 		if (objectContext == null) {
-			return globalClasspath;
-		}
-		else {
+			return get();
+		} else {
 			return get(objectContext.eResource());
 		}
 	}
@@ -181,9 +173,8 @@ public class JavaClasspath extends AdapterImpl {
 	public static JavaClasspath get(Resource resource) {
 		getInitializers();
 		if(resource == null) {
-			return globalClasspath;
-		}
-		else {
+			return get();
+		} else {
 			JavaClasspath myClasspath = get(resource.getResourceSet());
 			if (!myClasspath.initialized) {
 				//set to true before calling initializers, 
@@ -199,16 +190,16 @@ public class JavaClasspath extends AdapterImpl {
 	public static JavaClasspath get(ResourceSet resourceSet) {
 		getInitializers();
 		if (resourceSet == null) {
-			return globalClasspath;
+			return get();
 		}
 
 		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
 		Object registerStdLibOption = resourceSet.getLoadOptions().get(OPTION_REGISTER_STD_LIB);
 		if (localClasspathOption == null) {
-			localClasspathOption = Boolean.valueOf(useLocalClasspathDefault);
+			localClasspathOption = Boolean.valueOf(useLocalClasspathDefault());
 		}		
 		if (registerStdLibOption == null) {
-			registerStdLibOption = Boolean.valueOf(registerStdLibDefault);
+			registerStdLibOption = Boolean.valueOf(registerStdLibDefault());
 		}
 
 		if(Boolean.TRUE.equals(localClasspathOption))  {
@@ -242,9 +233,27 @@ public class JavaClasspath extends AdapterImpl {
 			return myClasspath;
 		}
 
-		return globalClasspath;
+		return get();
 	}
 
+	protected static boolean useLocalClasspathDefault() {
+		boolean useLocalClasspathDefault = false;
+		for (Initializer initializer : getInitializers()) {
+			//if one initializer requires a local classpath, a local classpath is used by default
+			useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
+		}
+		return useLocalClasspathDefault;
+	}
+	
+	protected static boolean registerStdLibDefault() {
+		boolean registerStdLibDefault = true;
+		for (Initializer initializer : getInitializers()) {
+			//if one initializer does not require the std. lib, we assume it provides one
+			registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
+		}
+		return registerStdLibDefault;
+	}
+	
 	protected Map<String, List<String>> packageClassifierMap =
 		new HashMap<String, List<String>>();
 
@@ -268,11 +277,18 @@ public class JavaClasspath extends AdapterImpl {
 		if (packageClassifierMap.containsKey(packageName)) {
 			content.addAll(packageClassifierMap.get(packageName));
 		}
+		//delegate to global map
+		if (get().packageClassifierMap.containsKey(packageName)) {
+			content.addAll(get().packageClassifierMap.get(packageName));
+		}
 		return content;
 	}
 
 	public boolean existsPackage(String packageName) {
-		return packageClassifierMap.containsKey(packageName);
+		if (packageClassifierMap.containsKey(packageName)) {
+			return true;
+		}
+		return get().packageClassifierMap.containsKey(packageName);
 	}
 
 	protected URIConverter uriConverter = null;
