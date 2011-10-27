@@ -2066,7 +2066,7 @@ public class HEDLGenerator {
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("session.persist(newEntity);");
+    _builder.append("session.save(newEntity);");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return newEntity;");

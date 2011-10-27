@@ -520,7 +520,7 @@ class HEDLGenerator {
 			 */
 			public «entity.name» create(Session session«FOR property : readOnlyProperties », «property.type.javaClassname» «property.name.toFirstLower»«ENDFOR») {
 				«entity.name» newEntity = new «entity.name»(«FOR property : readOnlyProperties »«property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
-				session.persist(newEntity);
+				session.save(newEntity);
 				return newEntity;
 			}
 			
