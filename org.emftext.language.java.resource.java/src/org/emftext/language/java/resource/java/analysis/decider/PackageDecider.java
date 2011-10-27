@@ -18,10 +18,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
-import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.JavaRoot;
-import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.PackageReference;
+import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.ReferencesPackage;
 
 /**
@@ -46,7 +46,7 @@ public class PackageDecider extends AbstractDecider {
 			}
 			if (referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT) &&
 					idReference.eContainer() instanceof IdentifierReference &&
-					((IdentifierReference)idReference.eContainer()).getTarget() instanceof Package) {
+					((IdentifierReference)idReference.eContainer()).getTarget() instanceof PackageReference) {
 				//maybe the next sub package
 				return true;
 			}
@@ -56,15 +56,13 @@ public class PackageDecider extends AbstractDecider {
 	}
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container)  {
-		if (container instanceof Package) {
+		if (container instanceof PackageReference) {
 			EList<EObject> resultList = new BasicEList<EObject>();
-			Package parentPackage = (Package) container;
+			PackageReference parentPackage = (PackageReference) container;
 
-			Package p = ContainersFactory.eINSTANCE.createPackage();
+			PackageReference p = ReferencesFactory.eINSTANCE.createPackageReference();
 			p.setName(identifier);
 			parentPackage.getSubpackages().add(p);
-			p.getNamespaces().addAll(parentPackage.getNamespaces());
-			p.getNamespaces().add(parentPackage.getName());
 			resultList.add(p);
 
 			return resultList;
@@ -72,7 +70,7 @@ public class PackageDecider extends AbstractDecider {
 		if (container instanceof JavaRoot && container.eResource() != null) {
 			EList<EObject> resultList = new BasicEList<EObject>();
 
-			Package p = ContainersFactory.eINSTANCE.createPackage();
+			PackageReference p = ReferencesFactory.eINSTANCE.createPackageReference();
 			p.setName(identifier);
 			resultList.add(p);
 
@@ -87,7 +85,7 @@ public class PackageDecider extends AbstractDecider {
 	}
 
 	public boolean isPossibleTarget(String id, EObject element) {
-		if (element instanceof Package) {
+		if (element instanceof PackageReference) {
 			NamedElement ne = (NamedElement) element;
 			return id.equals(ne.getName());
 		}

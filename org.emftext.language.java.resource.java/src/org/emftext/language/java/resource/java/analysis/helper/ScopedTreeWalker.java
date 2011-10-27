@@ -197,10 +197,8 @@ public class ScopedTreeWalker {
 	 * @param posInNavOrigin
 	 */
 	private void searchInAdditionalContent(String identifier, EObject container, EReference navOrigin, int posInNavOrigin) {
-
 		for(IResolutionTargetDecider decider : deciderList) {
 			if (decider.isActive()) {
-
 				EList<? extends EObject> additionalCandidates = decider.getAdditionalCandidates(identifier, container);
 
 				if (additionalCandidates != null) {

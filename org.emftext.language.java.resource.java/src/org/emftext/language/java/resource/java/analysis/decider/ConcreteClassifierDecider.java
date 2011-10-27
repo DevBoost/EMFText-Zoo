@@ -32,7 +32,6 @@ import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
-import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.ImportingElement;
@@ -41,6 +40,7 @@ import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.references.MethodCall;
+import org.emftext.language.java.references.PackageReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
@@ -80,16 +80,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 
-		if (container instanceof Package) {
-			Package p = (Package) container;
-			String packageName = JavaUniquePathConstructor.packageName(p);
-			if (packageName.equals("")) {
-				packageName = p.getName();
-			}
-			else {
-				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + p.getName();
-			}
-
+		if (container instanceof PackageReference) {
+			PackageReference p = (PackageReference) container;
+			String packageName = packageName(p);
 			resultList.addAll(JavaClasspath.get(resource).getClassifiers(
 					packageName, "*"));
 		}
@@ -194,6 +187,20 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		return resultList;
 	}
 
+	private String packageName(PackageReference p) {
+		String s = "";
+		while (p != null) {
+			s =  p.getName() + "." + s;
+			EObject container = p.eContainer();
+			if (container instanceof PackageReference) {
+				p = (PackageReference) container;
+			} else {
+				p = null;
+			}
+		}
+		return s;
+	}
+
 	private void addImportsAndInnerClasses(EObject container,
 			EList<EObject> resultList) {
 		//1) Inner classifiers of superclasses
@@ -251,11 +258,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
 			if(id.equals(concreteClassifier.getName())) {
-				if(concreteClassifier.eIsProxy()) {
-					concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
-				}
-				if(!concreteClassifier.eIsProxy()) {
-					return true;
+				if (id.equals("Pkg2Enum")) {
+					System.out.println("REMOVEs");
 				}
 				return true;
 			}

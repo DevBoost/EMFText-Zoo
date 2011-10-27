@@ -63,6 +63,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.operators.LessThan;
 import org.emftext.language.java.parameters.VariableLengthParameter;
+import org.emftext.language.java.references.PackageReference;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForEachLoop;
@@ -984,12 +985,12 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		//there should be 3 package segments that were created during resolving by the ScopedTreeWalker
 		Resource r = clazz.eResource();
 		assertEquals(3 + 1, r.getContents().size());
-		org.emftext.language.java.containers.Package p1 = 
-				(org.emftext.language.java.containers.Package) r.getContents().get(1);
-		org.emftext.language.java.containers.Package p2 = 
-				(org.emftext.language.java.containers.Package) r.getContents().get(2);
-		org.emftext.language.java.containers.Package p3 = 
-				(org.emftext.language.java.containers.Package) r.getContents().get(3);
+		PackageReference p1 = 
+				(PackageReference) r.getContents().get(1);
+		PackageReference p2 = 
+				(PackageReference) r.getContents().get(2);
+		PackageReference p3 = 
+				(PackageReference) r.getContents().get(3);
 		assertEquals("java", p1.getName());
 		assertEquals("java", p2.getName());
 		assertEquals("org", p3.getName());
@@ -1480,6 +1481,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		registerInClassPath("pkg/PackageAnnotation.java");
 
 		parseAndReprint("pkg/package-info.java");
+	}
+	
+	@Test
+	public void testPkg_package_info2() throws Exception {
+		parseAndReprint("pkg2/pkg3/Pkg2Enum.java");
+		parseAndReprint("pkg2/pkg3/PackageAnnotation.java");
+
+		parseAndReprint("pkg2/package-info.java");
 	}
 
 	@Test

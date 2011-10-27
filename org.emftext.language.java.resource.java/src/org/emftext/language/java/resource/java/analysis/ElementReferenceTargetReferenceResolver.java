@@ -23,12 +23,12 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.PackageReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
@@ -95,7 +95,7 @@ public class ElementReferenceTargetReferenceResolver implements
 			//a follow up reference: different scope
 			parentReference = (Reference) container.eContainer();
 			if (parentReference instanceof IdentifierReference &&
-					((IdentifierReference)parentReference).getTarget() instanceof Package) {
+					((IdentifierReference) parentReference).getTarget() instanceof PackageReference) {
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {

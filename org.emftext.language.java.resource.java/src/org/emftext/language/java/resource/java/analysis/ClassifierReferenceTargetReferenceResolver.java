@@ -179,8 +179,11 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			}
 
 		}
-
+		
 		if (target != null) {
+			if (target.eIsProxy()) {
+				target = EcoreUtil.resolve(target, container);
+			}
 			result.addMapping(identifier, (Classifier) target);
 		}
 	}
