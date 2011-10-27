@@ -15,7 +15,6 @@ package org.emftext.language.java;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -259,7 +258,7 @@ public class JavaClasspath extends AdapterImpl {
 
 	protected void registerPackage(String packageName, String className) {
 		if (!packageClassifierMap.containsKey(packageName)) {
-			packageClassifierMap.put(packageName, new ArrayList<String>());
+			packageClassifierMap.put(packageName, new UniqueEList<String>());
 		}
 		if (!packageClassifierMap.get(packageName).contains(className)) {
 			packageClassifierMap.get(packageName).add(className);
@@ -273,7 +272,7 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	protected List<String> getPackageContents(String packageName) {
-		List<String> content = new ArrayList<String>();
+		List<String> content = new UniqueEList<String>();
 		if (packageClassifierMap.containsKey(packageName)) {
 			content.addAll(packageClassifierMap.get(packageName));
 		}
