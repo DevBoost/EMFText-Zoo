@@ -180,7 +180,7 @@ public class PetrinetsBuilder implements
 					else
 						found = foundType.getName();
 
-					resource.addError(
+					resource.addWarning(
 							"Casting to a non-subtype is not allowed. (cast target: "
 									+ target + ", found: " + found + ")",
 							PetrinetsEProblemType.BUILDER_ERROR, c);

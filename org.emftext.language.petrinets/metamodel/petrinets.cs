@@ -49,7 +49,7 @@ RULES {
 				("FUNCTIONS:" "{" !1 (functions !0)* "}")?
 				"{" (!1 components | !1 arcs)* "}";
 				
-	Place ::= autoinit["autoinit" : ""] "place" name[IDENTIFIER]? ":" type[IDENTIFIER]?;
+	Place ::= autoinit["autoinit" : ""] "place" #1 name[IDENTIFIER]? #1 ":" type[IDENTIFIER]?;
 	
 	Transition ::= "transition"  name[IDENTIFIER] ( "->" alias[IDENTIFIER] )? (!1 "if" "(" !1 guard ")")? 
 				!1"do" 

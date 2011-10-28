@@ -15,6 +15,22 @@ package org.emftext.languages.petrinets.lib;
 
 public class StandardlibSemanticsLibrary {
 
+	public static boolean greaterThan(double arg1, double arg2) {
+		return arg1 > arg2;
+	}
+	
+	public static boolean greaterEqual(double arg1, double arg2) {
+		return arg1 >= arg2;
+	}
+	
+	public static boolean lessThan(double arg1, double arg2) {
+		return arg1 < arg2;
+	}
+	
+	public static boolean lessEqual(double arg1, double arg2) {
+		return arg1 <= arg2;
+	}
+	
 	public static boolean greaterThan(int arg1, int arg2) {
 		return arg1 > arg2;
 	}
@@ -121,4 +137,5 @@ public class StandardlibSemanticsLibrary {
 		return 0;
 	}
 
+	
 }

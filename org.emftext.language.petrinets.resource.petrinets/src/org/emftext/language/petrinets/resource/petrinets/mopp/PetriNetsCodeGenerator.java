@@ -548,7 +548,7 @@ public class PetriNetsCodeGenerator {
 		stringBuffer.appendLine("// init out places");
 		for (ProducingArc arc : t.getOutgoing()) {
 			Place out = arc.getOut();
-			String outvar = arc.getOutput().getName();
+			String outvar =  arc.getOutput().getName();
 
 			stringBuffer.appendLine("// evaluate settings for " + outvar);
 			EList<Setting> settings = arc.getSettings();
