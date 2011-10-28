@@ -34,7 +34,8 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 	// characters XML (1.0) does not support.
 	protected static final String[] filesWithInvalidCharacters = new String [] {
 		"EscapedStrings.java", "UnicodeIdentifiers.java", "SpecialCharacters.java", 
-		"StaticImports.java" //because it depends on EscapedStrings
+		"StaticImports.java", //because it depends on EscapedStrings
+		"MoreUnicodeCharacters.java"
 	};
 	
 	public static Test suite() throws Exception {
