@@ -84,6 +84,13 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		return false;
 	}
 	
+	protected boolean isPackage() {
+		if (getContentsInternal().isEmpty()) {
+			return false;
+		}
+		return getContentsInternal().get(0) instanceof Package;
+	}
+	
 	protected boolean hasJavaClassifierURI() {
 		if (uri == null) {
 			return false;
@@ -154,7 +161,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	@Override
 	public EObject getEObject(String id) {
 		EObject result = null;
-		if (isClassFile() &&
+		if ((isClassFile() || isPackage()) &&
 				id.startsWith("//" + JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
 			if (!getContentsInternal().isEmpty()) {
 				//in a class file, there is always only one classifier as root element:
