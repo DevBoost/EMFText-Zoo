@@ -6,21 +6,30 @@
  */
 package org.emftext.language.hedl.resource.hedl.analysis;
 
-public class UniqueConstraintPropertiesReferenceResolver implements org.emftext.language.hedl.resource.hedl.IHedlReferenceResolver<org.emftext.language.hedl.UniqueConstraint, org.emftext.language.hedl.Property> {
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.hedl.Property;
+import org.emftext.language.hedl.UniqueConstraint;
+import org.emftext.language.hedl.resource.hedl.IHedlReferenceResolveResult;
+import org.emftext.language.hedl.resource.hedl.IHedlReferenceResolver;
+
+public class UniqueConstraintPropertiesReferenceResolver implements IHedlReferenceResolver<UniqueConstraint, Property> {
 	
-	private org.emftext.language.hedl.resource.hedl.analysis.HedlDefaultResolverDelegate<org.emftext.language.hedl.UniqueConstraint, org.emftext.language.hedl.Property> delegate = new org.emftext.language.hedl.resource.hedl.analysis.HedlDefaultResolverDelegate<org.emftext.language.hedl.UniqueConstraint, org.emftext.language.hedl.Property>();
+	private HedlDefaultResolverDelegate<UniqueConstraint, Property> delegate = new HedlDefaultResolverDelegate<UniqueConstraint, Property>();
 	
-	public void resolve(String identifier, org.emftext.language.hedl.UniqueConstraint container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.hedl.resource.hedl.IHedlReferenceResolveResult<org.emftext.language.hedl.Property> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, UniqueConstraint container, EReference reference, int position, boolean resolveFuzzy, final IHedlReferenceResolveResult<Property> result) {
+		EObject root = container.eContainer();
+		delegate.tryToResolveIdentifierInObjectTree(identifier, container, root, reference, position, resolveFuzzy, result, true);
 	}
 	
-	public String deResolve(org.emftext.language.hedl.Property element, org.emftext.language.hedl.UniqueConstraint container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(Property element, UniqueConstraint container, EReference reference) {
+		return element.getName();
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend
-		// on any option
+	public void setOptions(Map<?,?> options) {
+		// not used
 	}
 	
 }
