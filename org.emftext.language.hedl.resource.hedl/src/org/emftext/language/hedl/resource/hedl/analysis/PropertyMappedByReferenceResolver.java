@@ -6,21 +6,33 @@
  */
 package org.emftext.language.hedl.resource.hedl.analysis;
 
-public class PropertyMappedByReferenceResolver implements org.emftext.language.hedl.resource.hedl.IHedlReferenceResolver<org.emftext.language.hedl.Property, org.emftext.language.hedl.Property> {
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.hedl.Property;
+import org.emftext.language.hedl.Type;
+import org.emftext.language.hedl.resource.hedl.IHedlReferenceResolveResult;
+import org.emftext.language.hedl.resource.hedl.IHedlReferenceResolver;
+
+public class PropertyMappedByReferenceResolver implements IHedlReferenceResolver<Property, Property> {
 	
-	private org.emftext.language.hedl.resource.hedl.analysis.HedlDefaultResolverDelegate<org.emftext.language.hedl.Property, org.emftext.language.hedl.Property> delegate = new org.emftext.language.hedl.resource.hedl.analysis.HedlDefaultResolverDelegate<org.emftext.language.hedl.Property, org.emftext.language.hedl.Property>();
+	private HedlDefaultResolverDelegate<Property, Property> delegate = new HedlDefaultResolverDelegate<Property, Property>();
 	
-	public void resolve(String identifier, org.emftext.language.hedl.Property container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.hedl.resource.hedl.IHedlReferenceResolveResult<org.emftext.language.hedl.Property> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, Property container, EReference reference, int position, boolean resolveFuzzy, final IHedlReferenceResolveResult<Property> result) {
+		Type type = container.getType();
+		if (type != null) {
+			// the property that is referenced by the 'mappedBy' reference must be contained in the
+			// type of the property
+			delegate.tryToResolveIdentifierInObjectTree(identifier, container, type, reference, position, resolveFuzzy, result, true);
+		}
 	}
 	
-	public String deResolve(org.emftext.language.hedl.Property element, org.emftext.language.hedl.Property container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(Property element, Property container, EReference reference) {
+		return container.getName();
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend
-		// on any option
+	public void setOptions(Map<?,?> options) {
+		// not used
 	}
 	
 }

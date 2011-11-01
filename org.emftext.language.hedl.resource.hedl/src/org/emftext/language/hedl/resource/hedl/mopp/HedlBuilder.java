@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -27,6 +28,7 @@ import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
 import org.emftext.language.hedl.codegen.HEDLCodegenConstants;
 import org.emftext.language.hedl.codegen.HEDLGenerator;
+import org.emftext.language.hedl.codegen.ImportsOrganizer;
 import org.emftext.language.hedl.resource.hedl.util.HedlStringUtil;
 
 
@@ -90,10 +92,15 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 				loc += saveGeneratedClass(daoFolder, result, "OngoingShutdownException");
 			}
 		}
+		
 		try {
 			modelFolder.refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// ignore
+		}
+		
+		if (modelFolder instanceof IFolder) {
+			new ImportsOrganizer().organize((IFolder) modelFolder);
 		}
 		logInfo("Generated lines of code: " + loc);
 		return org.eclipse.core.runtime.Status.OK_STATUS;

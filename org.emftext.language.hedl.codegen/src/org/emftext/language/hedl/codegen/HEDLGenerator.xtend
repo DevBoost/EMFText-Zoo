@@ -179,8 +179,6 @@ class HEDLGenerator {
 		// this class is generated. any change will be overridden.
 		public abstract class «className» implements IDBOperationsBase {
 			
-			private Logger logger = Logger.getLogger(getClass().getName());
-			
 			private SessionFactory sessionFactory;
 		
 			public «className»() {
@@ -741,6 +739,9 @@ class HEDLGenerator {
 		, uniqueConstraints=@UniqueConstraint(columnNames={«FOR property : uniqueConstraint.properties»"«property.name»", «ENDFOR»})
 		«ENDIF»
 		«ENDFOR»)
+		«IF entity.comment != null »
+		« entity.comment.replace("\t", "") »
+		«ENDIF»
 		// this class is generated. any change will be overridden.
 		public class «entity.name» {
 			
@@ -784,6 +785,9 @@ class HEDLGenerator {
 			«IF property.type == HedlBuiltinTypes::LONGSTRING »
 			@Column(length=100000)
 			«ENDIF»
+			«IF property.comment != null »
+			« property.comment.replace("\t", "") »
+			«ENDIF»
 			private «property.typeClassname» «property.name»;
 			
 			«ENDFOR»
@@ -807,6 +811,9 @@ class HEDLGenerator {
 			}
 			
 			«ENDIF»
+			/**
+			 * Returns the automatically generated id the identifies this entity object.
+			 */
 			public int getId() {
 				return id;
 			}
@@ -817,13 +824,18 @@ class HEDLGenerator {
 			}
 
 			«FOR property : entity.properties »
+			/**
+			 * Returns the value of property '« property.name »'.
+			 */
 			public «property.typeClassname» get«property.name.toFirstUpper»() {
 				return «property.name»;
 			}
 			
 			«IF property.readonly »
 			/**
-			 * This property is read-only. The setter is only provided for Hibernate.
+			 * The property '« property.name »' is read-only. 
+			 * This setter is only provided for Hibernate. 
+			 * It should not be used directly.
 			 */
 			@Deprecated
 			«ENDIF»
@@ -844,7 +856,9 @@ class HEDLGenerator {
 		public enum «enumeration.name» {
 			
 			«FOR literal : enumeration.literals »
-			«literal.comment»
+			«IF literal.comment != null »
+			« literal.comment.replace("\t", "") »
+			«ENDIF»
 			«literal.name»,
 			«ENDFOR»
 		}

@@ -624,11 +624,6 @@ public class HEDLGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private Logger logger = Logger.getLogger(getClass().getName());");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("private SessionFactory sessionFactory;");
     _builder.newLine();
     _builder.newLine();
@@ -3018,6 +3013,16 @@ public class HEDLGenerator {
     }
     _builder.append(")");
     _builder.newLineIfNotEmpty();
+    {
+      String _comment = entity.getComment();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_comment, null);
+      if (_operator_notEquals) {
+        String _comment_1 = entity.getComment();
+        String _replace = _comment_1.replace("\t", "");
+        _builder.append(_replace, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("// this class is generated. any change will be overridden.");
     _builder.newLine();
     _builder.append("public class ");
@@ -3271,8 +3276,8 @@ public class HEDLGenerator {
                 _builder.append("}");
                 {
                   Property _mappedBy = property_1.getMappedBy();
-                  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_mappedBy, null);
-                  if (_operator_notEquals) {
+                  boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_mappedBy, null);
+                  if (_operator_notEquals_1) {
                     _builder.append(", mappedBy=\"");
                     Property _mappedBy_1 = property_1.getMappedBy();
                     String _name_8 = _mappedBy_1.getName();
@@ -3293,6 +3298,17 @@ public class HEDLGenerator {
             _builder.append("\t");
             _builder.append("@Column(length=100000)");
             _builder.newLine();
+          }
+        }
+        {
+          String _comment_2 = property_1.getComment();
+          boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_comment_2, null);
+          if (_operator_notEquals_2) {
+            _builder.append("\t");
+            String _comment_3 = property_1.getComment();
+            String _replace_1 = _comment_3.replace("\t", "");
+            _builder.append(_replace_1, "	");
+            _builder.newLineIfNotEmpty();
           }
         }
         _builder.append("\t");
@@ -3371,8 +3387,8 @@ public class HEDLGenerator {
             _builder.append(_firstLower, "	");
             {
               Property _last = IterableExtensions.<Property>last(readOnlyProperties);
-              boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_last, property_2);
-              if (_operator_notEquals_1) {
+              boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_last, property_2);
+              if (_operator_notEquals_3) {
                 _builder.append(", ");
               }
             }
@@ -3408,6 +3424,15 @@ public class HEDLGenerator {
       }
     }
     _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* Returns the automatically generated id the identifies this entity object.");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public int getId() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -3434,20 +3459,34 @@ public class HEDLGenerator {
       EList<Property> _properties_3 = entity.getProperties();
       for(final Property property_4 : _properties_3) {
         _builder.append("\t");
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append(" ");
+        _builder.append("* Returns the value of property \'");
+        String _name_15 = property_4.getName();
+        _builder.append(_name_15, "	 ");
+        _builder.append("\'.");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("public ");
         String _typeClassname_1 = property_4.getTypeClassname();
         _builder.append(_typeClassname_1, "	");
         _builder.append(" get");
-        String _name_15 = property_4.getName();
-        String _firstUpper = StringExtensions.toFirstUpper(_name_15);
+        String _name_16 = property_4.getName();
+        String _firstUpper = StringExtensions.toFirstUpper(_name_16);
         _builder.append(_firstUpper, "	");
         _builder.append("() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("return ");
-        String _name_16 = property_4.getName();
-        _builder.append(_name_16, "		");
+        String _name_17 = property_4.getName();
+        _builder.append(_name_17, "		");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -3463,7 +3502,18 @@ public class HEDLGenerator {
             _builder.newLine();
             _builder.append("\t");
             _builder.append(" ");
-            _builder.append("* This property is read-only. The setter is only provided for Hibernate.");
+            _builder.append("* The property \'");
+            String _name_18 = property_4.getName();
+            _builder.append(_name_18, "	 ");
+            _builder.append("\' is read-only. ");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append(" ");
+            _builder.append("* This setter is only provided for Hibernate. ");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(" ");
+            _builder.append("* It should not be used directly.");
             _builder.newLine();
             _builder.append("\t");
             _builder.append(" ");
@@ -3476,8 +3526,8 @@ public class HEDLGenerator {
         }
         _builder.append("\t");
         _builder.append("public void set");
-        String _name_17 = property_4.getName();
-        String _firstUpper_1 = StringExtensions.toFirstUpper(_name_17);
+        String _name_19 = property_4.getName();
+        String _firstUpper_1 = StringExtensions.toFirstUpper(_name_19);
         _builder.append(_firstUpper_1, "	");
         _builder.append("(");
         String _typeClassname_2 = property_4.getTypeClassname();
@@ -3487,8 +3537,8 @@ public class HEDLGenerator {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("this.");
-        String _name_18 = property_4.getName();
-        _builder.append(_name_18, "		");
+        String _name_20 = property_4.getName();
+        _builder.append(_name_20, "		");
         _builder.append(" = newValue;");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -3524,10 +3574,17 @@ public class HEDLGenerator {
     {
       EList<EnumLiteral> _literals = enumeration.getLiterals();
       for(final EnumLiteral literal : _literals) {
-        _builder.append("\t");
-        String _comment = literal.getComment();
-        _builder.append(_comment, "	");
-        _builder.newLineIfNotEmpty();
+        {
+          String _comment = literal.getComment();
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_comment, null);
+          if (_operator_notEquals) {
+            _builder.append("\t");
+            String _comment_1 = literal.getComment();
+            String _replace = _comment_1.replace("\t", "");
+            _builder.append(_replace, "	");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t");
         String _name_1 = literal.getName();
         _builder.append(_name_1, "	");
