@@ -742,7 +742,7 @@ public class HEDLGenerator {
     _builder.append("private void executeInTransaction(ICommand command, boolean retry) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("boolean successfull = false;");
+    _builder.append("boolean successful = false;");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("boolean closed = false;");
@@ -768,7 +768,7 @@ public class HEDLGenerator {
     _builder.append("tx.commit();");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("successfull = true;");
+    _builder.append("successful = true;");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("} catch (Exception e) {");
@@ -824,7 +824,7 @@ public class HEDLGenerator {
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if ((!successfull || !closed) && retry) {");
+    _builder.append("if ((!successful || !closed) && retry) {");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("// retry once");

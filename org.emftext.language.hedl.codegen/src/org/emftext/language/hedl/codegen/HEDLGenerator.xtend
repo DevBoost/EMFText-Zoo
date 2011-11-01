@@ -221,7 +221,7 @@ class HEDLGenerator {
 			}
 			
 			private void executeInTransaction(ICommand command, boolean retry) {
-				boolean successfull = false;
+				boolean successful = false;
 				boolean closed = false;
 				
 				Session session = sessionFactory.openSession();
@@ -230,7 +230,7 @@ class HEDLGenerator {
 					tx = session.beginTransaction();
 					command.execute(new OperationProvider(session));
 					tx.commit();
-					successfull = true;
+					successful = true;
 				} catch (Exception e) {
 					handleException(e, retry);
 					if (tx != null) {
@@ -249,7 +249,7 @@ class HEDLGenerator {
 					}
 				}
 				
-				if ((!successfull || !closed) && retry) {
+				if ((!successful || !closed) && retry) {
 					// retry once
 					executeInTransaction(command, false);
 				}
