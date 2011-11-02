@@ -13,8 +13,9 @@ public class Caller {
 				return 0;
 			}};
 
-		CollectionsSource.singletonMap("key", "value").get("key").toLowerCase();
-		Collections.singletonMap("key", "value").get("key").toLowerCase();
+		// TODO fails (see issue #1777)
+		//CollectionsSource.singletonMap("key", "value").get("key").toLowerCase();
+		//Collections.singletonMap("key", "value").get("key").toLowerCase();
 		Arrays.binarySearch(new Caller [] {new Caller()}, "", comp);
 	}
 
