@@ -759,10 +759,10 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	protected boolean setDiff(Object o1, Object o2, boolean result) {
 		if (!result && "".equals(diff)) {
 			diff += ("\nORIGINAL: \n");
-			diff += (o1.toString());
 			if (o1 instanceof ASTNode) {
 				diff += "(POSITION: " + ((ASTNode) o1).getStartPosition() + ")\n";
-			}
+			}	
+			diff += (o1.toString());
 			diff += ("\nREPRINT:\n");
 			if (o2 instanceof ASTNode) {
 				diff += "(POSITION: " + ((ASTNode) o2).getStartPosition() + ")\n";
