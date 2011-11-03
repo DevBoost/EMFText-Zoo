@@ -1,0 +1,14 @@
+The file
+
+java/io/FileSystem.class
+
+was removed from the rt.jar in order to simulate the correct compile
+time classpath for source files with the following imports:
+java.io.*;
+org.openide.*;
+
+Both packages contain a class with the name 'FileSystem'. At compile time,
+the classes in the 'org.openide' package need to have precedence over 
+the classes of the package 'java.io'. Since in JaMoPP the classpath is 
+not ordered, this can not be emulated. Instead, 'java.io.FileSystem'
+was removed completely to let the tests pass.
