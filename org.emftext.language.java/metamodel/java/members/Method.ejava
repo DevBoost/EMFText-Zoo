@@ -34,6 +34,18 @@ eclass Method {
 			return false;
 		}
 		if (otherMethod.isMethodForCall(methodCall, true)) {
+			if (isMethodForCall(methodCall, true)) {
+				//we both match perfectly; lets compare our return types
+				if (getTypeReference().getTarget().isSuperType(
+						getArrayDimension(), 
+						otherMethod.getTypeReference().getTarget(), 
+						otherMethod)) {
+					// I am the more concrete type
+					return true;
+				} else {
+					return false;
+				}
+			}
 			//the other already matches perfectly; I am not better
 			return false;
 		}
