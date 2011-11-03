@@ -2,6 +2,7 @@
 public class InterfaceUse {
 	static {
 		Interface3 x = null;
-		x.getX().getBytes();
+		//TODO this does not compile with javac version on Jenkins CI
+		//x.getX().getBytes();
 	}
 }
