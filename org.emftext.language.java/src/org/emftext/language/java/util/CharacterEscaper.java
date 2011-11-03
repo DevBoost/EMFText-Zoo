@@ -190,7 +190,11 @@ public class CharacterEscaper {
 				break;
 			}
 			default : {
-				s = "" + character;
+				if ((0 <= character && character <= 31) || character == 127) {
+					s = "\\" + Integer.toOctalString(character);
+				} else {
+					s = "" + character;					
+				}
 			}
 		}
 		return s;
