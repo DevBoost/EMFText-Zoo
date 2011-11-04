@@ -568,6 +568,8 @@ class HEDLGenerator {
 		// this class is generated. any change will be overridden.
 		public class «entity.name»DAO {
 			
+			public final static String TABLE_NAME = «entity.name».class.getSimpleName().toLowerCase();
+			
 			public final static String FIELD__ID = getField(«entity.name».class, "id");
 			«FOR property : entity.properties »
 			public final static String FIELD__«property.name.toUpperCase» = getField(«entity.name».class, "«property.name»");
