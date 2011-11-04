@@ -7,6 +7,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.IValidationContext;
 
+/**
+ * Checks that all entities have valid names (e.g., no java keywords). 
+ */
 public class ForbiddenEntityNamesConstraint extends AbstractHedlConstraint {
 
 	@Override

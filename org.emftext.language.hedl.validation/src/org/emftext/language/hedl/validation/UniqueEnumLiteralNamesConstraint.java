@@ -10,6 +10,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.ConstraintStatus;
 
+/**
+ * Checks that there are no two enumeration literals in the same enumeration that 
+ * have the same name. 
+ */
 public class UniqueEnumLiteralNamesConstraint extends AbstractHedlConstraint {
 
 	@Override

@@ -7,6 +7,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.IValidationContext;
 
+/**
+ * Checks that all enumerations have valid names (e.g., no java keywords). 
+ */
 public class ForbiddenEnumerationNamesConstraint extends AbstractHedlConstraint {
 
 	@Override
