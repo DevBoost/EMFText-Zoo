@@ -36,7 +36,11 @@ eclass Method {
 		if (otherMethod.isMethodForCall(methodCall, true)) {
 			if (isMethodForCall(methodCall, true)) {
 				//we both match perfectly; lets compare our return types
-				if (getTypeReference().getTarget().isSuperType(
+				if (!getTypeReference().getTarget().equalsType(
+						getArrayDimension(), 
+						otherMethod.getTypeReference().getTarget(), 
+						otherMethod.getArrayDimension())
+						&& getTypeReference().getTarget().isSuperType(
 						getArrayDimension(), 
 						otherMethod.getTypeReference().getTarget(), 
 						otherMethod)) {
