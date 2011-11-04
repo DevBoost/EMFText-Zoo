@@ -1328,6 +1328,20 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
+	public void testMethodOverride() throws Exception {
+		String typename = "MethodOverride";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		Statement s = ((Block) clazz.getMembers().get(0)).getStatements().get(1);
+		ConcreteClassifier target = ((MethodCall) ((IdentifierReference) (
+				(ExpressionStatement) s).getExpression()).getNext()).getTarget().getContainingConcreteClassifier();
+		assertEquals("StringBuffer", target.getName());
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
+	}
+
+	@Test
 	public void testMethodCallsWithLocalTypeReferences() throws Exception {
 		String typename = "MethodCallsWithLocalTypeReferences";
 		String filename = typename + JAVA_FILE_EXTENSION;

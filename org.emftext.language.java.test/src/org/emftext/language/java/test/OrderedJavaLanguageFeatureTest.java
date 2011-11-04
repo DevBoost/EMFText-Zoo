@@ -33,7 +33,7 @@ public class OrderedJavaLanguageFeatureTest {
 			}
 		};
 
-		test.testPkg_package_info3();
+		test.testMethodOverride();
 //		test.test$InClassName();
 //		test.testBooleanExpressions();
 //		test.testEmptyEnum();

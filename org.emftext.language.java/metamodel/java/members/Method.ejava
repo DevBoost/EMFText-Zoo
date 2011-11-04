@@ -8,6 +8,7 @@ import java.parameters.Parameter;
 import java.parameters.VariableLengthParameter;
 import java.references.MethodCall;
 import java.types.Type;
+import java.classifiers.ConcreteClassifier;
 
 eclass Method {
 	
@@ -36,18 +37,13 @@ eclass Method {
 		if (otherMethod.isMethodForCall(methodCall, true)) {
 			if (isMethodForCall(methodCall, true)) {
 				//we both match perfectly; lets compare our return types
-				if (!getTypeReference().getTarget().equalsType(
-						getArrayDimension(), 
-						otherMethod.getTypeReference().getTarget(), 
-						otherMethod.getArrayDimension())
-						&& getTypeReference().getTarget().isSuperType(
-						getArrayDimension(), 
-						otherMethod.getTypeReference().getTarget(), 
-						otherMethod)) {
-					// I am the more concrete type
-					return true;
-				} else {
-					return false;
+				Type target = getTypeReference().getTarget();
+				if (target instanceof ConcreteClassifier) {
+					if (((ConcreteClassifier) target).getAllSuperClassifiers().contains(
+							otherMethod.getTypeReference().getTarget())) {
+						// I am the more concrete type
+						return true;
+					}
 				}
 			}
 			//the other already matches perfectly; I am not better
