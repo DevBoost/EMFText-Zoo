@@ -31,6 +31,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
@@ -63,10 +64,13 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.operators.LessThan;
 import org.emftext.language.java.parameters.VariableLengthParameter;
+import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.PackageReference;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.statements.Block;
+import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
@@ -1165,11 +1169,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		org.emftext.language.java.classifiers.Class clazz = 
 				assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
-		//Statement s = ((Block) clazz.getMembers().get(0)).getStatements().get(1);
-		//ConcreteClassifier target = ((MethodCall) ((IdentifierReference) (
-		//		(ExpressionStatement) s).getExpression()).getNext()).getTarget().getContainingConcreteClassifier();
+		Statement s = ((Block) clazz.getMembers().get(0)).getStatements().get(1);
+		ConcreteClassifier target = ((MethodCall) ((IdentifierReference) (
+				(ExpressionStatement) s).getExpression()).getNext()).getTarget().getContainingConcreteClassifier();
 		//should point at interface2 with the most concrete type as return type of getX()
-		//assertEquals("Interface2", target.getName());
+		assertEquals("Interface2", target.getName());
 		parseAndReprint(typename + JAVA_FILE_EXTENSION);
 	}
 
