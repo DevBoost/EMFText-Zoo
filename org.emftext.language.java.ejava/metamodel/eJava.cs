@@ -30,6 +30,11 @@ OPTIONS {
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 	ignoreTypeRestrictionsForPrinting = "true";
+	overrideNewFileContentProvider = "false";
+	overrideNewFileWizardPage = "false";
+	overrideNewFileWizard = "false";
+	
+	additionalUIDependencies = "org.eclipse.jdt.core";
 }
 
 RULES {
