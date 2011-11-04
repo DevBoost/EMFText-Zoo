@@ -25,7 +25,7 @@ public class JavaCHARACTER_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		assert value instanceof Character;
-		String result = CharacterEscaper.escapeEscapedCharacter((Character) value);
+		String result = CharacterEscaper.escapeEscapedCharacter((Character) value, false);
 		result = '\'' + result + '\'';
 		return result;
 	}

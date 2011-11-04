@@ -146,12 +146,16 @@ public class CharacterEscaper {
 		StringBuffer buffer = new StringBuffer(srcLen);
 		char[] characters = source.toCharArray();
 		for (int i=0; i < characters.length; i++) {
-			buffer.append(escapeEscapedCharacter(characters[i]));
+			boolean octalDigitFollows = false;
+			if (i+1 < characters.length) {
+				octalDigitFollows = 48 <= characters[i+1] && characters[i+1] <= 55;
+			}
+			buffer.append(escapeEscapedCharacter(characters[i], octalDigitFollows));
 		}
 		return buffer.toString();
 	}
 
-	public static String escapeEscapedCharacter(char character) {
+	public static String escapeEscapedCharacter(char character, boolean octalDigitFollows) {
 		String s;
 		if (Character.MIN_SURROGATE <= character && character <= Character.MAX_SURROGATE) {
 			//escape unicode surrogate characters
@@ -191,7 +195,11 @@ public class CharacterEscaper {
 			}
 			default : {
 				if ((0 <= character && character <= 31) || character == 127) {
-					s = "\\" + Integer.toOctalString(character);
+					String octalString = Integer.toOctalString(character);
+					while (octalDigitFollows == true && octalString.length() != 3) {
+						octalString = "0" + octalString;
+					}
+					s = "\\" + octalString;
 				} else {
 					s = "" + character;					
 				}
