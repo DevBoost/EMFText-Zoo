@@ -153,7 +153,7 @@ public class DbschemaConnectionParameterPage extends WizardPage implements IDbsc
 		sourceViewer.setDocument(new Document());
 		sourceViewer.getTextWidget().setLayoutData(gd);
 		colorManager = new DbschemaColorManager();
-		sourceViewer.configure(new DbschemaEditorConfiguration(this, null, null, colorManager));
+		sourceViewer.configure(new DbschemaSourceViewerConfiguration(this, null, null, colorManager));
 
 		setControl(container);
 		update();
