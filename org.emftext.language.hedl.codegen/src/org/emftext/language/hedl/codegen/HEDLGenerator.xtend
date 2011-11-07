@@ -69,6 +69,7 @@ class HEDLGenerator {
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
 			 */
@@ -84,6 +85,13 @@ class HEDLGenerator {
 			 * Returns the «entity.name» with the given «property.name».
 			 */
 			public «entity.name» get«entity.name»By«property.name.toFirstUpper»(«property.type.javaClassname» «property.name»);
+			
+			«ENDFOR»
+			«FOR property : toOneProperties »
+			/**
+			 * Returns the «entity.name»s with the given «property.name».
+			 */
+			public List<«entity.name»> get«entity.name»sBy«property.name.toFirstUpper»(«property.type.javaClassname» «property.name»);
 			
 			«ENDFOR»
 			«FOR constraint : entity.constraints »
@@ -271,6 +279,7 @@ class HEDLGenerator {
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
 			 */
@@ -312,6 +321,22 @@ class HEDLGenerator {
 					}
 				});
 				return entity[0];
+			}
+			
+			«ENDFOR»
+			«FOR property : toOneProperties »
+			/**
+			 * Returns the «entity.name»s with the given «property.name».
+			 */
+			public List<«entity.name»> get«entity.name»sBy«property.name.toFirstUpper»(final «property.type.javaClassname» «property.name») {
+				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get«entity.name»sBy«property.name.toFirstUpper»(«property.name»));
+					}
+				});
+				return entities;
 			}
 			
 			«ENDFOR»
@@ -489,6 +514,7 @@ class HEDLGenerator {
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/** Create method using all read-only properties. */
 			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
 				return «entity.name.toFirstLower»DAO.create(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
@@ -507,6 +533,14 @@ class HEDLGenerator {
 			public «entity.name» get«entity.name»By«property.name.toFirstUpper»(«property.type.javaClassname» «property.name») {
 				«entity.name» entity = «entity.name.toFirstLower»DAO.getBy«property.name.toFirstUpper»(session, «property.name»);
 				return entity;
+			}
+				
+			«ENDFOR»
+			«FOR property : toOneProperties »
+			/** Returns the «entity.name»s with the given «property.name». */
+			public List<«entity.name»> get«entity.name»sBy«property.name.toFirstUpper»(«property.type.javaClassname» «property.name») {
+				List<«entity.name»> entities = «entity.name.toFirstLower»DAO.getBy«property.name.toFirstUpper»(session, «property.name»);
+				return entities;
 			}
 				
 			«ENDFOR»
@@ -613,6 +647,7 @@ class HEDLGenerator {
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a «entity.name» using all read-only properties.
 			 */
@@ -642,6 +677,19 @@ class HEDLGenerator {
 					return («entity.name») list.get(0);
 				}
 				return null;
+			}
+			
+			«ENDFOR»
+			«FOR property : toOneProperties »
+			/**
+			 * Returns the «entity.name»s with the given «property.name».
+			 */
+			public List<«entity.name»> getBy«property.name.toFirstUpper»(Session session, «property.type.javaClassname» «property.name») {
+				Criteria criteria = session.createCriteria(«entity.name».class);
+				criteria = criteria.add(Restrictions.eq(FIELD__«property.name.toUpperCase», «property.name»));
+				@SuppressWarnings("unchecked")
+				List<«entity.name»> list = (List<«entity.name»>) criteria.list();
+				return list;
 			}
 			
 			«ENDFOR»
