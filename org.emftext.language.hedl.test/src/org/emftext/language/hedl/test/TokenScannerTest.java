@@ -10,7 +10,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.emftext.language.hedl.resource.hedl.IHedlTokenStyle;
 import org.emftext.language.hedl.resource.hedl.mopp.HedlTokenStyle;
-import org.emftext.language.hedl.resource.hedl.ui.HedlColorManager;
 import org.emftext.language.hedl.resource.hedl.ui.HedlTokenScanner;
 
 public class TokenScannerTest extends TestCase {
@@ -27,8 +26,7 @@ public class TokenScannerTest extends TestCase {
 	}
 
 	private List<IToken> scan(String text) {
-		HedlColorManager colorManager = new HedlColorManager();
-		HedlTokenScanner scanner = new HedlTokenScanner(null, colorManager) {
+		HedlTokenScanner scanner = new HedlTokenScanner(null, null) {
 			@Override
 			public IHedlTokenStyle getStaticTokenStyle() {
 				int[] foreground = new int[] {0,0,0};
