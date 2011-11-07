@@ -27,15 +27,20 @@ import org.eclipse.emf.common.util.URI;
 import org.emftext.language.webtest.codegen.files.Generate;
 import org.emftext.language.webtest.resource.webtest.IWebtestBuilder;
 import org.emftext.language.webtest.resource.webtest.mopp.WebtestResource;
+import org.emftext.language.webtest.resource.webtest.util.WebtestURIUtil;
 
 public class WebTestBuilder extends IncrementalProjectBuilder implements IWebtestBuilder {
 
-	public org.eclipse.core.resources.IProject[] build(int kind, @SuppressWarnings("rawtypes") java.util.Map args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
-		return new org.emftext.language.webtest.resource.webtest.mopp.WebtestBuilderAdapter().build(kind, args, monitor, this, getProject());
+	public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<String, String> args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+		return new org.emftext.language.webtest.resource.webtest.mopp.WebtestBuilderAdapter() {
+			public IWebtestBuilder getBuilder() {
+				return WebTestBuilder.this;
+			};
+		}.build(kind, args, monitor);
 	}
 
 	public boolean isBuildingNeeded(URI uri) {
-		return !uri.toString().contains("/bin/");
+		return !new WebtestURIUtil().isInBinFolder(uri);
 	}
 
 	public IStatus build(WebtestResource resource, IProgressMonitor monitor) {
