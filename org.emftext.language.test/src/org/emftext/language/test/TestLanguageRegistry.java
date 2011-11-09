@@ -42,6 +42,7 @@ import org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation
 import org.emftext.language.filesystem.resource.fs.mopp.FsMetaInformation;
 import org.emftext.language.forms.resource.forms.mopp.FormsMetaInformation;
 import org.emftext.language.formular.resource.formular.mopp.FormularMetaInformation;
+import org.emftext.language.functions.resource.functions.mopp.FunctionsMetaInformation;
 import org.emftext.language.hedl.resource.hedl.mopp.HedlMetaInformation;
 import org.emftext.language.java.closures.resource.closure.mopp.ClosureMetaInformation;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation;
@@ -140,7 +141,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new CustomsandwichMetaInformation());
 		metaInformations.add(new CustomerMetaInformation());
 		metaInformations.add(new CsvMetaInformation());
-		metaInformations.add(new DbschemaMetaInformation()); // is not yet on update site, but will be added soon
+		metaInformations.add(new DbschemaMetaInformation());
 		metaInformations.add(new DotMetaInformation());
 		metaInformations.add(new FacadeEcoreMetaInformation());
 		metaInformations.add(new TextEcoreMetaInformation());
@@ -151,6 +152,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new FeatureMetaInformation());
 		metaInformations.add(new FormularMetaInformation());
 		metaInformations.add(new FormsMetaInformation());
+		metaInformations.add(new FunctionsMetaInformation()); // is not yet on update site, but will be added soon
 		metaInformations.add(new HedlMetaInformation());
 		metaInformations.add(new JavaMetaInformation());
 		metaInformations.add(new JavabehaviorMetaInformation());
