@@ -1340,6 +1340,19 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals("StringBuffer", target.getName());
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
+	
+	@Test
+	public void testMethodOverloading() throws Exception {
+		String filename = "resolving_new/methodOverloading_2/MethodOverloading" + JAVA_FILE_EXTENSION;
+		CompilationUnit cu = (CompilationUnit) parseResource(filename);
+		ConcreteClassifier clazz = cu.getClassifiers().get(0);
+		
+		Statement s = ((ClassMethod) clazz.getMembers().get(2)).getStatements().get(2);
+		ClassMethod target = (ClassMethod) ((MethodCall) (
+				(ExpressionStatement) s).getExpression()).getTarget();
+		assertEquals(clazz.getMembers().get(1), target);
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
+	}
 
 	@Test
 	public void testMethodCallsWithLocalTypeReferences() throws Exception {

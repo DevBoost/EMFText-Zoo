@@ -103,6 +103,10 @@ eclass Method {
 				
 				if (parameterType != null && argumentType != null) {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
+						//for unbound type parameters assume java.lang.Object as type (important for perfect match)
+						if (argumentType instanceof org.emftext.language.java.generics.TypeParameter) {
+							argumentType = getObjectClass();
+						}
 						if (needsPerfectMatch) {
 							parametersMatch = parametersMatch
 								&& argumentType.equalsType(argument.getArrayDimension(),
