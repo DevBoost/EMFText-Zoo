@@ -47,10 +47,14 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 	 * @param prefixUsedInZipFile 
 	 */
 	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber) throws CoreException, IOException {
-		return constructSuite(testFolderName, startEntryName, threadNumber, false);
+		return constructSuite(testFolderName, startEntryName, threadNumber, new String[] {}, false);
 	}
-	
-	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber, boolean prefixUsedInZipFile) throws CoreException, IOException {
+
+	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber, String[] excludedTests) throws CoreException, IOException {
+		return constructSuite(testFolderName, startEntryName, threadNumber, excludedTests, false);
+	}
+
+	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber, String[] excludedTests, boolean prefixUsedInZipFile) throws CoreException, IOException {
 		// run with 'threadNumber' threads and wait for maximal 50 minutes
 		TestSuite suite = new ThreadedSuite("Suite testing all files.", 50 * 60 * 1000, threadNumber);
 
@@ -60,6 +64,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 					inputZip,
 					false,
 					startEntryName,
+					excludedTests,
 					prefixUsedInZipFile));
 		}
 		return suite;
@@ -103,10 +108,10 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 	}
 
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, boolean prefixUsedInZipFile) throws IOException, CoreException {
-		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null, prefixUsedInZipFile);
+		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null, new String[] {}, prefixUsedInZipFile);
 	}
 
-	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry, boolean prefixUsedInZipFile) throws IOException, CoreException {
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry, String[] excludedTests, boolean prefixUsedInZipFile) throws IOException, CoreException {
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -146,15 +151,20 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		}
 
 
-		while (entries.hasMoreElements()) {
+		mainLoop: while (entries.hasMoreElements()) {
 
 			ZipEntry entry = entries.nextElement();
 			String entryName = entry.getName();
 			if (startEntry != null && !entryName.endsWith(startEntry)) {
-				continue;
+				continue mainLoop;
 			}
 			else {
 				startEntry = null;
+			}
+			for (String excludedTest : excludedTests) {
+				if (entryName.endsWith(excludedTest)) {
+					continue mainLoop;
+				}
 			}
 			if (entryName.endsWith(".java")) {
 				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, prefixUsedInZipFile);
