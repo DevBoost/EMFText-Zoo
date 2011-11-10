@@ -119,7 +119,7 @@ class HEDLGenerator {
 			/**
 			 * Searches for entities of type «entity.name».
 			 */
-			public List<«entity.name»> search«entity.name»(String _searchString, int _maxResults);
+			public List<«entity.name»> search«entity.name»s(String _searchString, int _maxResults);
 			
 		«var toOneReferences = entity.properties.filter(p | p.toOneReference) »
 			«FOR toOneReference : toOneReferences »
@@ -392,12 +392,12 @@ class HEDLGenerator {
 			/**
 			 * Searches for entities of type «entity.name».
 			 */
-			public List<«entity.name»> search«entity.name»(final String _searchString, final int _maxResults) {
+			public List<«entity.name»> search«entity.name»s(final String _searchString, final int _maxResults) {
 				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						entities.addAll(operations.search«entity.name»(_searchString, _maxResults));
+						entities.addAll(operations.search«entity.name»s(_searchString, _maxResults));
 					}
 				});
 				return entities;
@@ -577,7 +577,7 @@ class HEDLGenerator {
 			/**
 			 * Searches for entities of type «entity.name».
 			 */
-			public List<«entity.name»> search«entity.name»(String _searchString, int _maxResults) {
+			public List<«entity.name»> search«entity.name»s(String _searchString, int _maxResults) {
 				return «entity.name.toFirstLower»DAO.search(session, _searchString, _maxResults);
 			}
 			

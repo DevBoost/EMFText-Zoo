@@ -512,7 +512,7 @@ public class HEDLGenerator {
         _builder.append("> search");
         String _name_37 = entity.getName();
         _builder.append(_name_37, "	");
-        _builder.append("(String _searchString, int _maxResults);");
+        _builder.append("s(String _searchString, int _maxResults);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
@@ -1673,7 +1673,7 @@ public class HEDLGenerator {
         _builder.append("> search");
         String _name_68 = entity_1.getName();
         _builder.append(_name_68, "	");
-        _builder.append("(final String _searchString, final int _maxResults) {");
+        _builder.append("s(final String _searchString, final int _maxResults) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("final List<");
@@ -1696,7 +1696,7 @@ public class HEDLGenerator {
         _builder.append("entities.addAll(operations.search");
         String _name_71 = entity_1.getName();
         _builder.append(_name_71, "				");
-        _builder.append("(_searchString, _maxResults));");
+        _builder.append("s(_searchString, _maxResults));");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("}");
@@ -2557,7 +2557,7 @@ public class HEDLGenerator {
         _builder.append("> search");
         String _name_60 = entity_1.getName();
         _builder.append(_name_60, "	");
-        _builder.append("(String _searchString, int _maxResults) {");
+        _builder.append("s(String _searchString, int _maxResults) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
