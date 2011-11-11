@@ -177,8 +177,16 @@ public class HEDLGenerator {
         EList<Property> _properties_2 = entity.getProperties();
         final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
+              boolean _operator_and = false;
               Type _type = p.getType();
-              return ((Boolean)(_type instanceof Enum));
+              if (!(_type instanceof Enum)) {
+                _operator_and = false;
+              } else {
+                boolean _isUnique = p.isUnique();
+                boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
+                _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+              }
+              return ((Boolean)_operator_and);
             }
           };
         Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
@@ -998,8 +1006,16 @@ public class HEDLGenerator {
         EList<Property> _properties_2 = entity_1.getProperties();
         final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
+              boolean _operator_and = false;
               Type _type = p.getType();
-              return ((Boolean)(_type instanceof Enum));
+              if (!(_type instanceof Enum)) {
+                _operator_and = false;
+              } else {
+                boolean _isUnique = p.isUnique();
+                boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
+                _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+              }
+              return ((Boolean)_operator_and);
             }
           };
         Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
@@ -2086,8 +2102,16 @@ public class HEDLGenerator {
         EList<Property> _properties_2 = entity_1.getProperties();
         final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
+              boolean _operator_and = false;
               Type _type = p.getType();
-              return ((Boolean)(_type instanceof Enum));
+              if (!(_type instanceof Enum)) {
+                _operator_and = false;
+              } else {
+                boolean _isUnique = p.isUnique();
+                boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
+                _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+              }
+              return ((Boolean)_operator_and);
             }
           };
         Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
@@ -2833,8 +2857,16 @@ public class HEDLGenerator {
     EList<Property> _properties_3 = entity.getProperties();
     final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
         public Boolean apply(final Property p) {
+          boolean _operator_and = false;
           Type _type = p.getType();
-          return ((Boolean)(_type instanceof Enum));
+          if (!(_type instanceof Enum)) {
+            _operator_and = false;
+          } else {
+            boolean _isUnique = p.isUnique();
+            boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
+            _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+          }
+          return ((Boolean)_operator_and);
         }
       };
     Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_3, _function_2);

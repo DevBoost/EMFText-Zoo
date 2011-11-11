@@ -68,7 +68,7 @@ class HEDLGenerator {
 			«FOR entity : entityModel.entities »
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
-		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
@@ -278,7 +278,7 @@ class HEDLGenerator {
 			«FOR entity : entityModel.entities »
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
-		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
@@ -513,7 +513,7 @@ class HEDLGenerator {
 			«FOR entity : entityModel.entities »
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
-		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/** Create method using all read-only properties. */
 			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
@@ -646,7 +646,7 @@ class HEDLGenerator {
 			
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
-		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum) »
+		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a «entity.name» using all read-only properties.
