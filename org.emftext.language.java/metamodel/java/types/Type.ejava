@@ -26,6 +26,34 @@ eclass Type {
 	 */
 	equalsType() {
 		Type _this = this;
+		//comparison for type parameters
+		if (_this instanceof org.emftext.language.java.generics.TypeParameter) {
+			org.emftext.language.java.generics.TypeParameter typeParameter = (org.emftext.language.java.generics.TypeParameter) _this;
+			for (org.emftext.language.java.types.TypeReference referencedType : typeParameter.getExtendTypes()) {
+				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && referencedType.getTarget().equalsType(arrayDimension, otherType, otherArrayDimension)) {
+					return true;
+				}
+			}
+			if (typeParameter.getExtendTypes().isEmpty()) {
+				if (getObjectClass().equalsType(arrayDimension, otherType, otherArrayDimension)) {
+					return true;
+				}
+			}
+		} 
+		if (otherType instanceof org.emftext.language.java.generics.TypeParameter) {
+			org.emftext.language.java.generics.TypeParameter typeParameter = (org.emftext.language.java.generics.TypeParameter) otherType;
+			for (org.emftext.language.java.types.TypeReference referencedType : typeParameter.getExtendTypes()) {
+				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && equalsType(arrayDimension, referencedType.getTarget(), otherArrayDimension)) {
+					return true;
+				}
+			}
+			if (typeParameter.getExtendTypes().isEmpty()) {
+				if (equalsType(arrayDimension, getObjectClass(), otherArrayDimension)) {
+					return true;
+				}
+			}
+		}
+		
 		//do comparison on the classifier level
 		if (_this instanceof PrimitiveType) {
 			_this = ((PrimitiveType)_this).wrapPrimitiveType();
