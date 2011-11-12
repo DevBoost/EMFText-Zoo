@@ -26,5 +26,7 @@ RULES {
 		(description['"','"'])?;
 		
 	Property ::= "property" name[] multiple["*" : ""] (":" datatype[])? (description['"','"'])?;
-	Datatype ::= "datatype" name[] (description['"','"'])?  properties*;
+	Datatype ::= 
+		ignored["ignored" : ""] 
+		"datatype" name[] (description['"','"'])?  properties*;
 }
