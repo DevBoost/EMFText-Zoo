@@ -32,6 +32,7 @@ import org.emftext.language.customer.resource.customer.mopp.CustomerMetaInformat
 import org.emftext.language.customsandwich.resource.customsandwich.mopp.CustomsandwichMetaInformation;
 import org.emftext.language.dbschema.resource.dbschema.mopp.DbschemaMetaInformation;
 import org.emftext.language.dot.resource.dot.mopp.DotMetaInformation;
+import org.emftext.language.dynamicui.resource.dynamicui.mopp.DynamicuiMetaInformation;
 import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreMetaInformation;
 import org.emftext.language.mecore.resource.mecore.mopp.MecoreMetaInformation;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreMetaInformation;
@@ -143,6 +144,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new CsvMetaInformation());
 		metaInformations.add(new DbschemaMetaInformation());
 		metaInformations.add(new DotMetaInformation());
+		metaInformations.add(new DynamicuiMetaInformation());
 		metaInformations.add(new FacadeEcoreMetaInformation());
 		metaInformations.add(new TextEcoreMetaInformation());
 		metaInformations.add(new MecoreMetaInformation());
