@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -38,12 +39,21 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Label;
 import org.emftext.language.java.ejava.resource.ejava.util.EjavaRuntimeUtil;
 
 /**
@@ -54,8 +64,8 @@ import org.emftext.language.java.ejava.resource.ejava.util.EjavaRuntimeUtil;
 public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 
 	private final String fileExtension;
-	private org.eclipse.swt.widgets.Text packageText;
-	private org.eclipse.swt.widgets.Text metaclassText;
+	private CLabel packageText;
+	private CLabel metaclassText;
 	private org.eclipse.jface.viewers.ISelection selection;
 	private Map<EPackage, IFile> packageMap;
 	private String metaClassName = "";
@@ -68,6 +78,7 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 	private org.eclipse.swt.widgets.Button metaclassButton;
 	private IFile ejavaFile;
 	private Map<GenModel, IFile> genmodelMap;
+	private AdapterFactoryLabelProvider labelProvider;
 
 	/**
 	 * Constructor for the NewFileWizardPage.
@@ -86,25 +97,18 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 	 */
 	public void createControl(org.eclipse.swt.widgets.Composite parent) {
 		initializeMeta();
+		initializeLabelProvider();
 		org.eclipse.swt.widgets.Composite container = new org.eclipse.swt.widgets.Composite(parent, org.eclipse.swt.SWT.NULL);
 		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
 		container.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-		org.eclipse.swt.widgets.Label label = new org.eclipse.swt.widgets.Label(container, org.eclipse.swt.SWT.NULL);
-		label.setText("&Package:");
-
-		packageText = new org.eclipse.swt.widgets.Text(container, org.eclipse.swt.SWT.BORDER | org.eclipse.swt.SWT.SINGLE);
-		packageText.setEditable(false);
 		org.eclipse.swt.layout.GridData gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL_HORIZONTAL);
+		Label label = new org.eclipse.swt.widgets.Label(container, org.eclipse.swt.SWT.NULL);
+		label.setText("&Package:");
+		packageText = new CLabel(container, SWT.LEFT | SWT.BORDER);
+		gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL_HORIZONTAL);
 		packageText.setLayoutData(gd);
-		packageText.addModifyListener(new org.eclipse.swt.events.ModifyListener() {
-			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-				packageName = packageText.getText();
-				dialogChanged();
-			}
-		});
-
 		packageButton = new org.eclipse.swt.widgets.Button(container, org.eclipse.swt.SWT.PUSH);
 		packageButton.setText("Browse...");
 		packageButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -113,26 +117,20 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 				if(selectedMetamodel != null){
 					correspondingGenmodel = getGenmodelFromPackage(selectedMetamodel);
 					packageName = selectedMetamodel.getName();
+					packageText.setText(labelProvider.getText(selectedMetamodel));
+					packageText.setImage(labelProvider.getImage(selectedMetamodel));
 				} else {
 					correspondingGenmodel = null;
 					packageName = "";
 				}
-				packageText.setText(packageName);
+				dialogChanged();
 			}
 		});
 		label = new org.eclipse.swt.widgets.Label(container, org.eclipse.swt.SWT.NULL);
 		label.setText("&Metaclass:");
-
-		metaclassText = new org.eclipse.swt.widgets.Text(container, org.eclipse.swt.SWT.BORDER | org.eclipse.swt.SWT.SINGLE);
-		metaclassText.setEditable(false);
+		metaclassText = new CLabel(container, SWT.LEFT | SWT.BORDER);
 		gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL_HORIZONTAL);
 		metaclassText.setLayoutData(gd);
-		metaclassText.addModifyListener(new org.eclipse.swt.events.ModifyListener() {
-			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-				metaClassName = metaclassText.getText();
-				dialogChanged();
-			}
-		});
 		metaclassButton = new org.eclipse.swt.widgets.Button(container, org.eclipse.swt.SWT.PUSH);
 		metaclassButton.setText("Browse...");
 		metaclassButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -141,23 +139,36 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 				selectedMetaclass = handleBrowse(metaclasses, "Select a metaclass in metamodel '" + getContainerName() + "'", EClass.class);
 				if(selectedMetaclass != null){
 					metaClassName = selectedMetaclass.getName();
+					metaclassText.setText(labelProvider.getText(selectedMetaclass));
+					metaclassText.setImage(labelProvider.getImage(selectedMetaclass));
 				} else {
 					metaClassName = "";
 				}
-				metaclassText.setText(metaClassName);
+				dialogChanged();
 			}
 		});
-		
+
 		initializeUI();
+		dialogChanged();
 		setControl(container);
 	}
-	
+
+	private void initializeLabelProvider() {
+		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+		labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+	}
+
 	private List<EClass> getMetaclassesFromPackage(EPackage selectedMetamodel) {
 		List<EClass> metaclasses = new ArrayList<EClass>();
-		EList<EClassifier> classifiers = selectedMetamodel.getEClassifiers();
-		for (EClassifier classifier : classifiers) {
-			if(classifier instanceof EClass){
-				metaclasses.add((EClass) classifier); 
+		if(selectedMetamodel != null){
+			EList<EClassifier> classifiers = selectedMetamodel.getEClassifiers();
+			for (EClassifier classifier : classifiers) {
+				if(classifier instanceof EClass){
+					metaclasses.add((EClass) classifier); 
+				}
 			}
 		}
 		return metaclasses;
@@ -207,56 +218,58 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 			if (ssel.size() == 1){
 				Object firstElement = ssel.getFirstElement();
 				IProject project = null;
-				if(firstElement instanceof IProject){
-					project = (IProject) firstElement;
-				} else if(firstElement instanceof IJavaProject){
-					IJavaProject javaProject = (IJavaProject) firstElement;
-					project = javaProject.getProject();
-				} else if (firstElement instanceof IResource){
-					IResource resource = (IResource) firstElement;
-					project = resource.getProject();
-				}
-				if(project != null){
-					List<IFile> ecoreFiles = getFilesByExtension(project, ".ecore");
-					List<IFile> genmodelFiles = getFilesByExtension(project, ".genmodel");
-					packageMap = getEObjectToFileMap(ecoreFiles, EPackage.class);
-					genmodelMap = getEObjectToFileMap(genmodelFiles, GenModel.class);
-					if(genmodelMap == null){
-						return;
+				if(firstElement instanceof IAdaptable){
+					IAdaptable adapter = (IAdaptable) firstElement;
+					project = (IProject) adapter.getAdapter(IProject.class);
+					IResource resource = (IResource) adapter.getAdapter(IResource.class);
+					IContainer container = (IContainer) adapter.getAdapter(IContainer.class);
+					if(project == null && resource != null){
+						project = resource.getProject();
+					} else if(project == null && container != null){
+						project = container.getProject();
 					}
-					if(firstElement instanceof IFile){
-						IFile file = (IFile) firstElement;
-						metaClassName = file.getFullPath().removeFileExtension().lastSegment();
-						IContainer fileParent = file.getParent();
-						packageName = fileParent.getFullPath().lastSegment();
-						selectedMetamodel = getEPackageByName(packageName);
-						if(selectedMetamodel != null){
-							selectedMetaclass = (EClass) selectedMetamodel.getEClassifier(metaClassName);
-							if(selectedMetaclass == null){
+					if(project != null){
+						List<IFile> ecoreFiles = getFilesByExtension(project, ".ecore");
+						List<IFile> genmodelFiles = getFilesByExtension(project, ".genmodel");
+						packageMap = getEObjectToFileMap(ecoreFiles, EPackage.class);
+						genmodelMap = getEObjectToFileMap(genmodelFiles, GenModel.class);
+						if(genmodelMap == null){
+							return;
+						}
+						if(firstElement instanceof IFile){
+							IFile file = (IFile) firstElement;
+							metaClassName = file.getFullPath().removeFileExtension().lastSegment();
+							IContainer fileParent = file.getParent();
+							packageName = fileParent.getFullPath().lastSegment();
+							selectedMetamodel = getEPackageByName(packageName);
+							if(selectedMetamodel != null){
+								selectedMetaclass = (EClass) selectedMetamodel.getEClassifier(metaClassName);
+								if(selectedMetaclass == null){
+									metaClassName = "";
+								}
+								correspondingGenmodel = getGenmodelFromPackage(selectedMetamodel);
+							} else {
+								correspondingGenmodel = null;
+								packageName = "";
 								metaClassName = "";
 							}
-							correspondingGenmodel = getGenmodelFromPackage(selectedMetamodel);
-						} else {
-							correspondingGenmodel = null;
-							packageName = "";
-							metaClassName = "";
+						} else if(firstElement instanceof IFolder){
+							IFolder folder = (IFolder) firstElement;
+							EPackage ePackage = getEPackageByName(folder.getName());
+							IContainer parent = folder.getParent();
+							IFile ecoreFile = packageMap.get(ePackage);
+							if(parent != null && ecoreFile != null && parent.findMember(ecoreFile.getFullPath().lastSegment(), false) != null && ePackage != null){
+								selectedMetamodel = ePackage;
+								correspondingGenmodel = getGenmodelFromPackage(selectedMetamodel);
+								packageName = ePackage.getName();
+							} 
 						}
-					} else if(firstElement instanceof IFolder){
-						IFolder folder = (IFolder) firstElement;
-						EPackage ePackage = getEPackageByName(folder.getName());
-						IContainer parent = folder.getParent();
-						IFile ecoreFile = packageMap.get(ePackage);
-						if(parent != null && ecoreFile != null && parent.findMember(ecoreFile.getFullPath().lastSegment(), false) != null && ePackage != null){
-							selectedMetamodel = ePackage;
-							correspondingGenmodel = getGenmodelFromPackage(selectedMetamodel);
-							packageName = ePackage.getName();
-						} 
 					}
 				}
 			}
 		}
 	}
-	
+
 	private GenModel getGenmodelFromPackage(EPackage epackage) {
 		Set<GenModel> genmodels = genmodelMap.keySet();
 		for (GenModel genModel : genmodels) {
@@ -282,6 +295,14 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 			metaclassButton.setEnabled(false);
 		} else {
 			packageText.setText(getContainerName());
+			Image img = labelProvider.getImage(getSelectedMetamodel());
+			if(img != null){
+				packageText.setImage(img);
+			}
+			img = labelProvider.getImage(getSelectedMetaclass());
+			if(img != null){
+				metaclassText.setImage(img);
+			}
 			metaclassText.setText(getMetaClassName());
 		}
 	}
@@ -304,6 +325,9 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 	}
 
 	private EPackage getEPackageByName(String name){
+		if(packageMap == null){
+			return null;
+		}
 		Set<EPackage> set = packageMap.keySet();
 		Iterator<EPackage> iterator = set.iterator();
 		while (iterator.hasNext()) {
@@ -314,7 +338,7 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 		}
 		return null;
 	}
-	
+
 	private IContainer getContainerForEPackage(EPackage epackage){
 		IFile ecoreFile = packageMap.get(epackage);
 		if(ecoreFile == null){
@@ -324,7 +348,7 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 		IFolder packageFolder = parent.getFolder(new Path(epackage.getName()));
 		return packageFolder;
 	}
-	
+
 	/**
 	 * Ensures that both text fields are set.
 	 */
@@ -349,7 +373,7 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 			updateStatus("Folder '" + getContainerName() + "' must be writable");
 			return;
 		}
-		
+
 		if (getMetaClassName().length() == 0) {
 			updateStatus("Metaclass must be specified");
 			return;
