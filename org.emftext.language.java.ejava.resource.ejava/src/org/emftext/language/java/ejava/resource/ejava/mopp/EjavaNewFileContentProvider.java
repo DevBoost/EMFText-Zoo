@@ -1,9 +1,16 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2006-2011
+ * Software Technology Group, Dresden University of Technology
  *
- * 
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.language.java.ejava.resource.ejava.mopp;
 
 import java.io.ByteArrayOutputStream;
@@ -14,7 +21,6 @@ import java.util.List;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
