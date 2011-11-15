@@ -1,9 +1,16 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2006-2011
+ * Software Technology Group, Dresden University of Technology
  *
- * 
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.language.java.ejava.resource.ejava.ui;
 
 import org.eclipse.core.resources.IContainer;
@@ -18,7 +25,6 @@ public class EjavaNewFileWizard extends org.eclipse.jface.wizard.Wizard implemen
 	private String categoryId = null;
 	private org.emftext.language.java.ejava.resource.ejava.ui.EjavaNewFileWizardPage page;
 	private org.eclipse.jface.viewers.ISelection selection;
-	private String newName = null;
 	
 	public EjavaNewFileWizard() {
 		super();
@@ -47,7 +53,6 @@ public class EjavaNewFileWizard extends org.eclipse.jface.wizard.Wizard implemen
 	 */
 	public boolean performFinish() {
 		final IFile file = page.getEJavaFile();
-		IContainer fileContainer = page.getEJavaFileContainer();
 		final EPackage metamodel = page.getSelectedMetamodel();
 		final EClass metaclass = page.getSelectedMetaclass();
 		final GenModel genmodel = page.getGenmodel();
@@ -129,11 +134,6 @@ public class EjavaNewFileWizard extends org.eclipse.jface.wizard.Wizard implemen
 	 */
 	private java.io.InputStream openContentStream(EPackage metamodel, GenModel genmodel, EClass metaclass) {
 		return new java.io.ByteArrayInputStream(new org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation().getNewFileContentProvider().getNewFileContent(metamodel, genmodel, metaclass).getBytes());
-	}
-	
-	private void throwCoreException(String message) throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.runtime.IStatus status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, "NewFileContentPrinter", org.eclipse.core.runtime.IStatus.OK, message, null);
-		throw new org.eclipse.core.runtime.CoreException(status);
 	}
 	
 	/**
