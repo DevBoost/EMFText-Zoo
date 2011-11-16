@@ -77,9 +77,7 @@ TOKENS {
 	DEFINE OCTAL_INTEGER_LITERAL $'0'('0'..'7')+$;
 
 	@SuppressWarnings(unusedToken)
-	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
-	@SuppressWarnings(unusedToken)
-	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
+	DEFINE WHITESPACE $(' '|'\t'|'\f'|'\r'|'\n')+$;
 }
 
 TOKENSTYLES {
