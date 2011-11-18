@@ -36,6 +36,13 @@ public class IntToIntHashMap {
 	 * size of the map times the load factor.
 	 */
 	private int loadThreshold;
+	/**
+	 * This value is returned when calling {@link #get(int)} for a key that is
+	 * not contained in this map. The normal Java HashMap implementation returns
+	 * <code>null</code> in such cases, but since we use primitive integers we 
+	 * can't return <code>null</code>. The default value for this is zero.
+	 */
+	private int valueForMissingEntries;
 	
 	public IntToIntHashMap() {
 		this(16, 0.75);
@@ -124,7 +131,7 @@ public class IntToIntHashMap {
 			}
 			if (hashTable[physicalIndex] == 0) {
 				// found empty bucket, key is not contained in this map
-				return 0;
+				return valueForMissingEntries;
 			}
 			// found a filled bucket that contained the wrong key.
 			// try the next bucket (this situation is caused by hash collisions).
@@ -134,7 +141,7 @@ public class IntToIntHashMap {
 				break;
 			}
 		}
-		return 0;
+		return valueForMissingEntries;
 	}
 
 	private int index(int key) {
@@ -148,5 +155,12 @@ public class IntToIntHashMap {
 	 */
 	public int size() {
 		return this.entries;
+	}
+
+	/**
+	 * Sets the value that is returned for missing keys.
+	 */
+	public void setValueForMissingEntries(int valueForMissingEntries) {
+		this.valueForMissingEntries = valueForMissingEntries;
 	}
 }
