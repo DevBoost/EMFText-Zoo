@@ -53,7 +53,7 @@ public class FunctionsBuilder implements IFunctionsBuilder {
 	public IStatus build(FunctionsResource resource, IProgressMonitor monitor) {
 		IFile modelFile = WorkspaceSynchronizer.getFile(resource);
 		IContainer modelFolder = modelFile.getParent();
-		File modelFolderFile = modelFolder.getRawLocation().toFile();
+		File modelFolderFile = modelFolder.getLocation().toFile();
 		
 		File latexFile = runLatexGenerator(resource, monitor, modelFolderFile);
 		
