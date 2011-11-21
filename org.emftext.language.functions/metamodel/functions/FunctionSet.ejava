@@ -1,0 +1,34 @@
+epackage functions;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
+
+eclass FunctionSet {
+	
+	getFunctions() {
+		EList<Function> functions = new BasicEList<Function>();
+		for (Element element : getElements()) {
+			if (element instanceof Function) {
+				functions.add((Function) element);
+			}
+		}
+		return functions;
+	}
+
+	getTotalCosts() {
+		int total = 0;
+		for (Function child : getFunctions()) {
+			if (child.isIgnored()) {
+				continue;
+			}
+			if (child.getParent() != null) {
+				continue;
+			}
+			total += child.getTotalCosts();
+		}
+		for (FunctionSet subset : getSubsets()) {
+			total += subset.getTotalCosts();
+		}
+		return total;
+	}
+}

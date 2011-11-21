@@ -268,8 +268,8 @@ public class FunctionsItemProviderAdapterFactory extends FunctionsAdapterFactory
 	public void dispose() {
 		if (functionSetItemProvider != null) functionSetItemProvider.dispose();
 		if (functionItemProvider != null) functionItemProvider.dispose();
-		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (datatypeItemProvider != null) datatypeItemProvider.dispose();
+		if (propertyItemProvider != null) propertyItemProvider.dispose();
 	}
 
 }

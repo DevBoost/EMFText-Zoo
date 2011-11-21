@@ -37,7 +37,7 @@ import org.emftext.language.functions.FunctionsPackage;
  * @generated
  */
 public class FunctionSetItemProvider
-	extends ItemProviderAdapter
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -82,6 +82,7 @@ public class FunctionSetItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(FunctionsPackage.Literals.FUNCTION_SET__ELEMENTS);
+			childrenFeatures.add(FunctionsPackage.Literals.FUNCTION_SET__SUBSETS);
 		}
 		return childrenFeatures;
 	}
@@ -118,7 +119,10 @@ public class FunctionSetItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_FunctionSet_type");
+		String label = ((FunctionSet)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_FunctionSet_type") :
+			getString("_UI_FunctionSet_type") + " " + label;
 	}
 
 	/**
@@ -134,6 +138,7 @@ public class FunctionSetItemProvider
 
 		switch (notification.getFeatureID(FunctionSet.class)) {
 			case FunctionsPackage.FUNCTION_SET__ELEMENTS:
+			case FunctionsPackage.FUNCTION_SET__SUBSETS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -160,17 +165,11 @@ public class FunctionSetItemProvider
 			(createChildParameter
 				(FunctionsPackage.Literals.FUNCTION_SET__ELEMENTS,
 				 FunctionsFactory.eINSTANCE.createDatatype()));
-	}
 
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return functionsEditPlugin.INSTANCE;
+		newChildDescriptors.add
+			(createChildParameter
+				(FunctionsPackage.Literals.FUNCTION_SET__SUBSETS,
+				 FunctionsFactory.eINSTANCE.createFunctionSet()));
 	}
 
 }

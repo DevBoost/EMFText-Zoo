@@ -64,56 +64,11 @@ public class FunctionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addDescriptionPropertyDescriptor(object);
-			addIgnoredPropertyDescriptor(object);
 			addRelatedToPropertyDescriptor(object);
+			addIgnoredPropertyDescriptor(object);
+			addCostsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Function_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Function_name_feature", "_UI_Function_type"),
-				 FunctionsPackage.Literals.FUNCTION__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Function_description_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Function_description_feature", "_UI_Function_type"),
-				 FunctionsPackage.Literals.FUNCTION__DESCRIPTION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -134,6 +89,28 @@ public class FunctionItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Costs feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCostsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Function_costs_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Function_costs_feature", "_UI_Function_type"),
+				 FunctionsPackage.Literals.FUNCTION__COSTS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -172,7 +149,7 @@ public class FunctionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FunctionsPackage.Literals.FUNCTION__PARENT);
+			childrenFeatures.add(FunctionsPackage.Literals.FUNCTION__CHILDREN);
 		}
 		return childrenFeatures;
 	}
@@ -205,14 +182,13 @@ public class FunctionItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Function)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Function_type") :
-			getString("_UI_Function_type") + " " + label;
+			"noname" : label.replace("_", " ");
 	}
 
 	/**
@@ -227,12 +203,11 @@ public class FunctionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Function.class)) {
-			case FunctionsPackage.FUNCTION__NAME:
-			case FunctionsPackage.FUNCTION__DESCRIPTION:
 			case FunctionsPackage.FUNCTION__IGNORED:
+			case FunctionsPackage.FUNCTION__COSTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FunctionsPackage.FUNCTION__PARENT:
+			case FunctionsPackage.FUNCTION__CHILDREN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -252,7 +227,7 @@ public class FunctionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FunctionsPackage.Literals.FUNCTION__PARENT,
+				(FunctionsPackage.Literals.FUNCTION__CHILDREN,
 				 FunctionsFactory.eINSTANCE.createFunction()));
 	}
 

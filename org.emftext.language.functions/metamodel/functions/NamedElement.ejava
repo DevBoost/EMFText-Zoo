@@ -1,0 +1,40 @@
+epackage functions;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.eclipse.emf.ecore.EObject;
+
+eclass NamedElement {
+	
+	getReadableName() {
+		return getReadableString(getName());
+	}
+	
+	getReadableDescription() {
+		return getReadableString(getDescription());
+	}
+	
+	getReadableString() {
+		return text == null ? null : replaceQuotes(text.replace("_", " "), "\\inquotes{", "}");
+	}
+
+	replaceQuotes() {
+		StringBuilder result = new StringBuilder();
+
+		Matcher matcher = Pattern.compile("'([^']*)'").matcher(text);
+		int lastStart = 0;
+		while (matcher.find()) {
+			String group = matcher.group(1);
+			int start = matcher.start();
+			int end = matcher.end();
+			result.append(text.substring(lastStart, start));
+			result.append(prefix);
+			result.append(group);
+			result.append(suffix);
+			lastStart = end;
+		}
+		result.append(text.substring(lastStart, text.length()));
+		return result.toString();
+	}
+}

@@ -1,30 +1,43 @@
 functions <http://www.emftext.org/functions>
 
-FunctionSet (
-	elements Element*
-)
-
-abstract Element
-
-Function : Element (
-	~parent Function?
-	~relatedTo Element*
+abstract NamedElement (
 	name EString
 	description EString?
+
+	getReadableName() EString
+	getReadableDescription() EString
+	getReadableString(text EString) EString
+	replaceQuotes(text EString, prefix EString, suffix EString) EString
+)
+
+abstract Element : NamedElement
+
+FunctionSet : NamedElement (
+	elements Element*
+	subsets FunctionSet*
+	
+	getFunctions() Function*
+	getDatatypes() Datatype*
+	getTotalCosts() EInt
+)
+
+Function : Element (
+	~parent Function? <> Function.children
+	~children Function* <> Function.parent
+	
+	~relatedTo Element*
 	ignored EBoolean
+	
+	costs EInt
+	getTotalCosts() EInt
 )
 
 Datatype : Element (
-	name EString
-	description EString?
-	
 	properties Property*
 	ignored EBoolean
 )
 
-Property (
-	name EString
-	description EString?
+Property : NamedElement (
 	multiple EBoolean
 	~datatype Datatype?
 )

@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.emftext.language.functions.Element;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
@@ -30,7 +31,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * @generated
  */
 public class ElementItemProvider
-	extends ItemProviderAdapter
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -70,7 +71,10 @@ public class ElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Element_type");
+		String label = ((Element)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Element_type") :
+			getString("_UI_Element_type") + " " + label;
 	}
 
 	/**
@@ -96,17 +100,6 @@ public class ElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return functionsEditPlugin.INSTANCE;
 	}
 
 }

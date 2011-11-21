@@ -4,6 +4,9 @@ START FunctionSet
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	additionalDependencies = "org.eclipse.emf.workspace,org.eclipse.ui.console,org.eclipse.jface,org.emftext.language.functions.generators";
+	
+	overrideBuilder = "false";
 }
 
 TOKENS {
@@ -18,11 +21,11 @@ TOKENSTYLES {
 }
 
 RULES {
-	FunctionSet ::= elements*;
+	FunctionSet ::= name[] ("{" elements* "}" | subsets*);
 	Function ::= 
 		ignored["ignored" : ""] 
-		"function" name[] (":" parent[])?
-		("->" relatedTo[]*)? 
+		"function" name[] (":" parent[])? (costs[])?
+		("->" relatedTo[]*)?
 		(description['"','"'])?;
 		
 	Property ::= "property" name[] multiple["*" : ""] (":" datatype[])? (description['"','"'])?;

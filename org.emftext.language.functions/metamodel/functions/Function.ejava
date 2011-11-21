@@ -1,0 +1,19 @@
+epackage functions;
+
+import org.eclipse.emf.ecore.EObject;
+
+eclass Function{
+
+	getTotalCosts() {
+		int total = 0;
+		for (Function child : getChildren()) {
+			if (child.isIgnored()) {
+				continue;
+			}
+			total += child.getTotalCosts();
+		}
+		return total + getCosts();
+	}
+}
+
+
