@@ -114,16 +114,27 @@ class LatexGenerator {
 	def private String generateLatexForFunction(Function function, String prefix) {
 		var section = prefix + "section";
 		var addLineBreak = false;
+		var relatedFunctions = function.relatedFunctions;
+		var linksToRelatedFunctions = "";
+		for (relatedFunction : relatedFunctions) {
+			linksToRelatedFunctions = linksToRelatedFunctions + relatedFunction.readableName + "~(\\ref{func:" + relatedFunction.name.replace("_", ":") + "})";
+			if (relatedFunctions.indexOf(relatedFunction) < relatedFunctions.size - 1) {
+				linksToRelatedFunctions = linksToRelatedFunctions + ", ";
+			}
+		}
 		if ("subsubsubsection".equals(section)) {
 			section = "paragraph";
 			addLineBreak = true;
 		}
 		return '''
 			\« section »{« function.readableName »}
+			\label{func:« function.name.replace("_", ":").replace("ä", "ae").replace("ö", "oe").replace("ü", "ue") »}
 			
+			% « IF addLineBreak »\newline«ENDIF»
 			« IF function.children.empty »\marginpar{\tiny{« function.costs »~\timeunit}}«ENDIF»
-			« IF addLineBreak »\newline«ENDIF»
 			« function.getReadableDescription()?.replaceAll("'(.*)'", "\\\\inquotes{\\1}") »
+			
+			« IF !relatedFunctions.empty »\vspace{0.2cm}\noindent{\footnotesize Verwandte Funktionen: « linksToRelatedFunctions »}«ENDIF»
 			
 			« var validChildren = function.children.filter(f | !f.ignored) »
 			« FOR childFunction : validChildren »

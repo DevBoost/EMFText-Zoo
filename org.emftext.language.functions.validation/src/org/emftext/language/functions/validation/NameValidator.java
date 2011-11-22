@@ -1,11 +1,14 @@
 package org.emftext.language.functions.validation;
 
-import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
@@ -16,12 +19,12 @@ import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.model.IModelConstraint;
 import org.eclipse.emf.validation.service.AbstractConstraintDescriptor;
 import org.eclipse.emf.validation.service.IConstraintDescriptor;
-import org.emftext.language.functions.Function;
+import org.emftext.language.functions.Element;
 import org.emftext.language.functions.FunctionSet;
 
-public class FunctionsValidator extends AbstractModelConstraint implements IModelConstraint {
+public class NameValidator extends AbstractModelConstraint implements IModelConstraint {
 	
-	public FunctionsValidator() {
+	public NameValidator() {
 		super();
 	}
 
@@ -29,22 +32,37 @@ public class FunctionsValidator extends AbstractModelConstraint implements IMode
 	public IStatus validate(IValidationContext context) {
 		
 		EObject target = context.getTarget();
-		if (target instanceof Function) {
-			Function function = (Function) target;
-			FunctionSet functionSet = (FunctionSet) function.eContainer();
-			boolean hasChildren = false;
-			for (Function next : functionSet.getFunctions()) {
-				if (next.getParent() == function) {
-					hasChildren = true;
-					break;
+		if (target instanceof FunctionSet) {
+			FunctionSet functionSet = (FunctionSet) target;
+			if (functionSet.eContainer() != null) {
+				return Status.OK_STATUS;
+			}
+			
+			Map<String, Set<Element>> nameToObjectsMap = new LinkedHashMap<String, Set<Element>>();
+			TreeIterator<EObject> it = functionSet.eAllContents();
+			while (it.hasNext()) {
+				EObject next = (EObject) it.next();
+				if (next instanceof Element) {
+					Element element = (Element) next;
+					String name = element.getName();
+					Set<Element> elements = nameToObjectsMap.get(name);
+					if (elements == null) {
+						elements = new LinkedHashSet<Element>();
+						nameToObjectsMap.put(name, elements);
+					}
+					elements.add(element);
 				}
 			}
-			if (hasChildren && function.getCosts() > 0) {
-				return new ConstraintStatus(this, target, "Composite functions must not have explicit costs.", Collections.singleton(function));
+			
+			for (String name : nameToObjectsMap.keySet()) {
+				Set<Element> elements = nameToObjectsMap.get(name);
+				if (elements.size() > 1) {
+					// found duplicate name
+					ConstraintStatus status = new ConstraintStatus(this, target, "Duplicate names are not allowed.", elements);
+					return status;
+				}
 			}
-			if (!hasChildren && function.getCosts() == 0 && !function.isIgnored()) {
-				return new ConstraintStatus(this, target, "Leaf functions must define explicit costs.", Collections.singleton(function));
-			}
+			
 		}
 		return Status.OK_STATUS;
 	}
@@ -80,7 +98,7 @@ public class FunctionsValidator extends AbstractModelConstraint implements IMode
 			}
 			
 			public String getPluginId() {
-				return FunctionsValidator.class.getPackage().getName();
+				return CostValidator.class.getPackage().getName();
 			}
 			
 			public String getName() {

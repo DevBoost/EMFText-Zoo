@@ -15,6 +15,9 @@ epackage functions;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
+
 eclass Function {
 
 	getTotalCosts() {
@@ -26,6 +29,16 @@ eclass Function {
 			total += child.getTotalCosts();
 		}
 		return total + getCosts();
+	}
+	
+	getRelatedFunctions() {
+		EList<Function> functions = new BasicEList<Function>();
+		for (Element element : getRelatedTo()) {
+			if (element instanceof Function) {
+				functions.add((Function) element);
+			}
+		}
+		return functions;
 	}
 }
 
