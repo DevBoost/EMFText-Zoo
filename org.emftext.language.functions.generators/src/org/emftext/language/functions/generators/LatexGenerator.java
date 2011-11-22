@@ -2,6 +2,7 @@ package org.emftext.language.functions.generators;
 
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
@@ -125,7 +126,7 @@ public class LatexGenerator {
       return _string;
   }
   
-  public List<Function> getFunctions(final FunctionSet functionSet) {
+  public List<Function> getFunctions(final FunctionSet functionSet, final boolean addFunctionsFromSubset) {
       EList<Function> _functions = functionSet.getFunctions();
       final Function1<Function,Boolean> _function = new Function1<Function,Boolean>() {
           public Boolean apply(final Function f) {
@@ -145,84 +146,123 @@ public class LatexGenerator {
       Iterable<Function> _filter = IterableExtensions.<Function>filter(_functions, _function);
       List<Function> _list = IterableExtensions.<Function>toList(_filter);
       List<Function> list = _list;
+      boolean _operator_not = BooleanExtensions.operator_not(addFunctionsFromSubset);
+      if (_operator_not) {
+        return list;
+      }
       EList<FunctionSet> _subsets = functionSet.getSubsets();
       EList<FunctionSet> subsets = _subsets;
       for (final FunctionSet nextSubset : subsets) {
-        List<Function> _functions_1 = this.getFunctions(nextSubset);
+        List<Function> _functions_1 = this.getFunctions(nextSubset, addFunctionsFromSubset);
         CollectionExtensions.<Function>addAll(list, _functions_1);
       }
       return list;
   }
   
+  public String generateFunctionCostTable(final FunctionSet functionSet) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("%");
+    _builder.newLine();
+    _builder.append("% Attention: This file is generated and will be overridden.");
+    _builder.newLine();
+    _builder.append("%");
+    _builder.newLine();
+    _builder.append("%\\begin{table}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("%\\centering");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\\begin{longtable}{|p{9.15cm}|p{2.25cm}|}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\\tableheaderfunction & ");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\\tableheadereffort \\\\");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    String _generateFunctionCosts = this.generateFunctionCosts(functionSet);
+    _builder.append(_generateFunctionCosts, "			");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("\\rowcolor[gray]{.85}\\textbf{\\tablefootertotaleffort} &");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("\\textbf{");
+    int _talCosts = functionSet.getTotalCosts();
+    _builder.append(_talCosts, "			");
+    _builder.append("} \\\\");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\\end{longtable}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("%\\caption{Aufwandsabsch\u00E4tzung gegliedert nach Unterfunktionen.}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("%\\label{tab:aufwand}");
+    _builder.newLine();
+    _builder.append("%\\end{table}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    return _string;
+  }
+  
   public String generateFunctionCosts(final FunctionSet functionSet) {
-      List<Function> _functions = this.getFunctions(functionSet);
-      List<Function> rootFunctions = _functions;
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("%");
-      _builder.newLine();
-      _builder.append("% Attention: This file is generated and will be overridden.");
-      _builder.newLine();
-      _builder.append("%");
-      _builder.newLine();
-      _builder.append("%\\begin{table}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("%\\centering");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("\\begin{longtable}{|p{9.15cm}|p{2.25cm}|}");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\hline");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\tableheaderfunction & ");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\tableheadereffort \\\\");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\hline");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\hline");
-      _builder.newLine();
-      {
-        for(final Function rootFunction : rootFunctions) {
-          _builder.append("\t\t\t");
-          String _generateColumnForFunction = this.generateColumnForFunction(rootFunction, "");
-          _builder.append(_generateColumnForFunction, "			");
-          _builder.newLineIfNotEmpty();
-        }
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EObject _eContainer = functionSet.eContainer();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_eContainer, null);
+      if (_operator_notEquals) {
+        _builder.append("\\rowcolor[gray]{.9}");
+        _builder.newLine();
+        _builder.append("\\textbf{");
+        String _readableName = functionSet.getReadableName();
+        _builder.append(_readableName, "");
+        _builder.append("} & \\textbf{");
+        int _talCosts = functionSet.getTotalCosts();
+        _builder.append(_talCosts, "");
+        _builder.append("} (Summe) \\\\");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\\hline");
+        _builder.newLine();
       }
-      _builder.append("\t\t\t");
-      _builder.append("\\hline");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\textbf{\\tablefootertotaleffort} &");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("\\textbf{");
-      int _talCosts = functionSet.getTotalCosts();
-      _builder.append(_talCosts, "			");
-      _builder.append("} \\\\");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t\t");
-      _builder.append("\\hline");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("\\end{longtable}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("%\\caption{Aufwandsabsch\u00E4tzung gegliedert nach Unterfunktionen.}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("%\\label{tab:aufwand}");
-      _builder.newLine();
-      _builder.append("%\\end{table}");
-      _builder.newLine();
-      String _string = _builder.toString();
-      return _string;
+    }
+    List<Function> _functions = this.getFunctions(functionSet, false);
+    List<Function> rootFunctions = _functions;
+    _builder.newLineIfNotEmpty();
+    {
+      for(final Function rootFunction : rootFunctions) {
+        String _generateColumnForFunction = this.generateColumnForFunction(rootFunction, "\\xspace\\xspace");
+        _builder.append(_generateColumnForFunction, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EList<FunctionSet> _subsets = functionSet.getSubsets();
+      for(final FunctionSet subsets : _subsets) {
+        String _generateFunctionCosts = this.generateFunctionCosts(subsets);
+        _builder.append(_generateFunctionCosts, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\\hline");
+    _builder.newLine();
+    String _string = _builder.toString();
+    return _string;
   }
   
   private String generateColumnForFunction(final Function function, final String prefix) {
@@ -234,7 +274,7 @@ public class LatexGenerator {
       boolean _isEmpty = _children.isEmpty();
       boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
       if (_operator_not) {
-        _builder.append("\\textbf{");
+        _builder.append("\\rowcolor[gray]{.95}\\textbf{");
       }
     }
     String _readableName = function.getReadableName();

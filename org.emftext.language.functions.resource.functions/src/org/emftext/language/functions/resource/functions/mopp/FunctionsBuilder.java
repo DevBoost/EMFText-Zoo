@@ -86,7 +86,7 @@ public class FunctionsBuilder implements IFunctionsBuilder {
 		generateFunctionDescriptionFile(modelFolderFile, filename, generator,
 				functionSet, "");
 		
-		saveToFile(latexCostsFile, generator.generateFunctionCosts(functionSet), true);
+		saveToFile(latexCostsFile, generator.generateFunctionCostTable(functionSet), true);
 		return latexMainFile;
 	}
 

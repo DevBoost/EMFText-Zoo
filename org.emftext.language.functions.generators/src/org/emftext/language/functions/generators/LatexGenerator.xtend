@@ -61,17 +61,19 @@ class LatexGenerator {
 '''.toString()
 	}
 	
-	def public List<Function> getFunctions(FunctionSet functionSet) {
+	def public List<Function> getFunctions(FunctionSet functionSet, boolean addFunctionsFromSubset) {
 		var list = functionSet.getFunctions().filter(f | f.parent == null && !f.ignored).toList
+		if (!addFunctionsFromSubset) {
+			return list
+		}
 		var subsets = functionSet.subsets
 		for (nextSubset : subsets) {
-			list.addAll(getFunctions(nextSubset));
+			list.addAll(getFunctions(nextSubset, addFunctionsFromSubset));
 		}
 		return list
 	}
 	
-	def public String generateFunctionCosts(FunctionSet functionSet) {
-		var rootFunctions = getFunctions(functionSet)
+	def public String generateFunctionCostTable(FunctionSet functionSet) {
 		return '''
 %
 % Attention: This file is generated and will be overridden.
@@ -84,11 +86,8 @@ class LatexGenerator {
 			\tableheadereffort \\
 			\hline
 			\hline
-			« FOR rootFunction : rootFunctions »
-			« generateColumnForFunction(rootFunction, "") »
-			« ENDFOR»
-			\hline
-			\textbf{\tablefootertotaleffort} &
+			« generateFunctionCosts(functionSet) »
+			\rowcolor[gray]{.85}\textbf{\tablefootertotaleffort} &
 			\textbf{« functionSet.totalCosts »} \\
 			\hline
 		\end{longtable}
@@ -98,9 +97,27 @@ class LatexGenerator {
 		'''.toString()
 	}
 	
+	def public String generateFunctionCosts(FunctionSet functionSet) {
+		return '''
+			« IF functionSet.eContainer != null »
+			\rowcolor[gray]{.9}
+			\textbf{« functionSet.readableName »} & \textbf{« functionSet.totalCosts »} (Summe) \\
+			\hline
+			« ENDIF »
+			« var rootFunctions = getFunctions(functionSet, false) »
+			« FOR rootFunction : rootFunctions »
+			« generateColumnForFunction(rootFunction, "\\xspace\\xspace") »
+			« ENDFOR»
+			« FOR subsets : functionSet.subsets »
+			« generateFunctionCosts(subsets) »
+			« ENDFOR»
+			\hline
+		'''.toString()
+	}
+	
 	def private String generateColumnForFunction(Function function, String prefix) {
 		return '''
-			«prefix» « IF !function.children.empty »\textbf{«ENDIF»« function.readableName »« IF !function.children.empty »}«ENDIF»&
+			«prefix» « IF !function.children.empty »\rowcolor[gray]{.95}\textbf{«ENDIF»« function.readableName »« IF !function.children.empty »}«ENDIF»&
 			« IF !function.children.empty »\textbf{«ENDIF»« function.totalCosts »« IF !function.children.empty »}«ENDIF» « IF !function.children.empty »(Summe)«ENDIF»
 			\\
 			\hline
