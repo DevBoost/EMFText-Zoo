@@ -43,7 +43,7 @@ import org.emftext.language.java.types.TypesPackage;
 
 /**
  * The JavaModelRepairer can be used to fix part of Java models that
- * are incorrectly create by the Java parser. This is mostly due to
+ * are incorrectly created by the Java parser. This is mostly due to
  * language features which are not context free, but the JavaModelRepairer
  * also simplifies deeply nested expression trees caused by the right
  * recursive structure of the Java grammar.
