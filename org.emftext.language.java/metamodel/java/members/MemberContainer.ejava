@@ -6,12 +6,26 @@ import java.members.Member;
 import java.members.MemberContainer;
 import java.members.Method;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 /**
  * A utility class that provides methods that belong to class 
  * MemberContainer, but can not go there, because MemberContainer 
  * is generated.
  */
 eclass MemberContainer {
+
+	getMethods() {	
+		EList<Method> methodList = new BasicEList<Method>();
+
+		for (Member member : getMembers()) {
+			if (member instanceof Method) {
+				methodList.add((Method) member);
+			}
+		}	
+		return methodList;
+	}
 	
 	/**
 	 * @param name
