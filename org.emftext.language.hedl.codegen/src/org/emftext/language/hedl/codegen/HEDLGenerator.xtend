@@ -485,6 +485,8 @@ class HEDLGenerator {
 		import org.hibernate.criterion.MatchMode;
 		import org.hibernate.criterion.Order;
 		import org.hibernate.criterion.Restrictions;
+		import org.hibernate.metadata.ClassMetadata;
+		import org.hibernate.persister.entity.AbstractEntityPersister;
 		
 		«FOR otherEntity : entityModel.entities »
 			import «packageName».«HEDLCodegenConstants::ENTITY_PACKAGE_NAME».«otherEntity.name»;
@@ -606,6 +608,18 @@ class HEDLGenerator {
 			}
 			
 			«ENDFOR»
+			
+			public String getTableName(Class<?> clazz) {
+				ClassMetadata hibernateMetadata = getSession().getSessionFactory().getClassMetadata(clazz);
+				if (hibernateMetadata == null) {
+				    return null;
+				}
+				if (hibernateMetadata instanceof AbstractEntityPersister) {
+				     AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetadata;
+				     return persister.getTableName();
+				}
+				return null;
+			}
 		}
 		''';
 	}
@@ -636,8 +650,6 @@ class HEDLGenerator {
 
 		// this class is generated. any change will be overridden.
 		public class «entity.name»DAO {
-			
-			public final static String TABLE_NAME = «entity.name».class.getSimpleName().toLowerCase();
 			
 			public final static String FIELD__ID = getField(«entity.name».class, "id");
 			«FOR property : entity.properties »
