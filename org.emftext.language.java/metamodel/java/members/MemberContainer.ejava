@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  */
 eclass MemberContainer {
 
-	getMethods() {	
+	getMethods() {
 		EList<Method> methodList = new BasicEList<Method>();
 
 		for (Member member : getMembers()) {
@@ -25,6 +25,19 @@ eclass MemberContainer {
 			}
 		}	
 		return methodList;
+	}
+	
+	removeMethods() {
+		EList<Method> methodsToRemove = new BasicEList<Method>();
+
+		for (Member member : getMembers()) {
+			if (member instanceof Method) {
+				if (name.equals(member.getName())) {
+					methodsToRemove.add((Method) member);
+				}
+			}
+		}
+		getMembers().removeAll(methodsToRemove);
 	}
 	
 	/**
