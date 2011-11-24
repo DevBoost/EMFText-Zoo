@@ -19,11 +19,22 @@ import java.modifiers.Static;
 import java.references.Reference;
 import java.references.SelfReference;
 import java.types.Type;
-
-
+import java.util.List;
+import java.util.ArrayList;
 
 eclass AnnotableAndModifiable {
 
+	removeModifier() {
+		List<AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();
+		List<AnnotationInstanceOrModifier> modifiersToRemove = new ArrayList<AnnotationInstanceOrModifier>();
+		for (AnnotationInstanceOrModifier modifier : modifiers) {
+			if (modifierType.isInstance(modifier)) {
+				modifiersToRemove.add(modifier);
+			}
+		}
+		modifiers.removeAll(modifiersToRemove);
+	}
+	
 	isStatic() {
 		//all members of an interface as static by default
 		if (this.eContainer() instanceof Interface) {
