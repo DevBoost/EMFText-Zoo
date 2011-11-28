@@ -491,11 +491,15 @@ class HEDLGenerator {
 		«FOR otherEntity : entityModel.entities »
 			import «packageName».«HEDLCodegenConstants::ENTITY_PACKAGE_NAME».«otherEntity.name»;
 		«ENDFOR»
-		
 		«FOR otherEnum : entityModel.enums »
 			import «packageName».«HEDLCodegenConstants::ENTITY_PACKAGE_NAME».«otherEnum.name»;
 		«ENDFOR»
 		
+		/**
+		 * This class provides all default operations that are derived from the HEDL entity model.
+		 *
+		 * Note: This class is generated. Any change will be overridden.
+		 */
 		public abstract class OperationProviderBase implements IDBOperationsBase {
 				
 			private Session session;
@@ -517,7 +521,9 @@ class HEDLGenerator {
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
-			/** Create method using all read-only properties. */
+			/** 
+			 * Create an instance of type «entity.name» using all read-only properties.
+			 */
 			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
 				return «entity.name.toFirstLower»DAO.create(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
 			}
@@ -608,7 +614,9 @@ class HEDLGenerator {
 			}
 			
 			«ENDFOR»
-			
+			/**
+			 * Returns the name of the table that contains entities of the given type.
+			 */
 			public String getTableName(Class<?> clazz) {
 				ClassMetadata hibernateMetadata = getSession().getSessionFactory().getClassMetadata(clazz);
 				if (hibernateMetadata == null) {
@@ -648,7 +656,12 @@ class HEDLGenerator {
 		
 		import java.util.List;
 
-		// this class is generated. any change will be overridden.
+		/**
+		 * This class provides all default operations that are derived from the HEDL entity model
+		 * for type «entity.name».
+		 *
+		 * Note: This class is generated. Any change will be overridden.
+		 */
 		public class «entity.name»DAO {
 			
 			public final static String FIELD__ID = getField(«entity.name».class, "id");
@@ -854,7 +867,10 @@ class HEDLGenerator {
 		«IF entity.comment != null »
 		« entity.comment.replace("\t", "") »
 		«ENDIF»
-		// this class is generated. any change will be overridden.
+		/*
+		 * This class is generated from the entity '«entity.name»' defined in the HEDL model.
+		 * Note: Any change made to this class will be overridden.
+		 */
 		public class «entity.name» {
 			
 			@GenericGenerator(name="«entity.name»IdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
@@ -930,6 +946,11 @@ class HEDLGenerator {
 				return id;
 			}
 
+			/**
+			 * The property 'id' is read-only. 
+			 * This setter is only provided for Hibernate. 
+			 * It must not be used directly.
+			 */
 			@Deprecated
 			public void setId(int id) {
 				this.id = id;
@@ -947,9 +968,13 @@ class HEDLGenerator {
 			/**
 			 * The property '« property.name »' is read-only. 
 			 * This setter is only provided for Hibernate. 
-			 * It should not be used directly.
+			 * It must not be used directly.
 			 */
 			@Deprecated
+			«ELSE»
+			/**
+			 * Sets the value of property '« property.name »'.
+			 */
 			«ENDIF»
 			public void set«property.name.toFirstUpper»(«property.typeClassname» newValue) {
 				this.«property.name» = newValue;
