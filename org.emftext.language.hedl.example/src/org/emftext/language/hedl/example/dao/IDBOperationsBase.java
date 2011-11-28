@@ -1,5 +1,7 @@
 package org.emftext.language.hedl.example.dao;
 
+import java.util.List;
+
 import org.emftext.language.hedl.example.entities.Customer;
 import org.emftext.language.hedl.example.entities.CustomerOrder;
 import org.emftext.language.hedl.example.entities.Item;
@@ -25,6 +27,16 @@ public interface IDBOperationsBase {
 	public Producer getProducer(int id);
 		
 	/**
+	 * Returns all entities of type Producer.
+	 */
+	public List<Producer> getAllProducers();
+		
+	/**
+	 * Searches for entities of type Producer.
+	 */
+	public List<Producer> searchProducers(String _searchString, int _maxResults);
+	
+	/**
 	 * Deletes a Producer.
 	 */
 	public void delete(Producer entity);
@@ -44,6 +56,16 @@ public interface IDBOperationsBase {
 	 */
 	public PriceSet getPriceSet(int id);
 		
+	/**
+	 * Returns all entities of type PriceSet.
+	 */
+	public List<PriceSet> getAllPriceSets();
+		
+	/**
+	 * Searches for entities of type PriceSet.
+	 */
+	public List<PriceSet> searchPriceSets(String _searchString, int _maxResults);
+	
 	/**
 	 * Deletes a PriceSet.
 	 */
@@ -65,6 +87,36 @@ public interface IDBOperationsBase {
 	public Item getItem(int id);
 		
 	/**
+	 * Returns the Items with the given priceSet.
+	 */
+	public List<Item> getItemsByPriceSet(PriceSet priceSet);
+	
+	/**
+	 * Returns the Items with the given producer.
+	 */
+	public List<Item> getItemsByProducer(Producer producer);
+	
+	/**
+	 * Returns all entities of type Item.
+	 */
+	public List<Item> getAllItems();
+		
+	/**
+	 * Searches for entities of type Item.
+	 */
+	public List<Item> searchItems(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type Item.
+	 */
+	public List<Item> searchItemWithPriceSet(final PriceSet priceSet, String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type Item.
+	 */
+	public List<Item> searchItemWithProducer(final Producer producer, String _searchString, int _maxResults);
+	
+	/**
 	 * Deletes a Item.
 	 */
 	public void delete(Item entity);
@@ -84,6 +136,36 @@ public interface IDBOperationsBase {
 	 */
 	public SupplierItem getSupplierItem(int id);
 		
+	/**
+	 * Returns the SupplierItems with the given supplier.
+	 */
+	public List<SupplierItem> getSupplierItemsBySupplier(Supplier supplier);
+	
+	/**
+	 * Returns the SupplierItems with the given item.
+	 */
+	public List<SupplierItem> getSupplierItemsByItem(Item item);
+	
+	/**
+	 * Returns all entities of type SupplierItem.
+	 */
+	public List<SupplierItem> getAllSupplierItems();
+		
+	/**
+	 * Searches for entities of type SupplierItem.
+	 */
+	public List<SupplierItem> searchSupplierItems(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type SupplierItem.
+	 */
+	public List<SupplierItem> searchSupplierItemWithSupplier(final Supplier supplier, String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type SupplierItem.
+	 */
+	public List<SupplierItem> searchSupplierItemWithItem(final Item item, String _searchString, int _maxResults);
+	
 	/**
 	 * Deletes a SupplierItem.
 	 */
@@ -105,6 +187,26 @@ public interface IDBOperationsBase {
 	public Supplier getSupplier(int id);
 		
 	/**
+	 * Returns the Suppliers with the given warehouse.
+	 */
+	public List<Supplier> getSuppliersByWarehouse(Warehouse warehouse);
+	
+	/**
+	 * Returns all entities of type Supplier.
+	 */
+	public List<Supplier> getAllSuppliers();
+		
+	/**
+	 * Searches for entities of type Supplier.
+	 */
+	public List<Supplier> searchSuppliers(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type Supplier.
+	 */
+	public List<Supplier> searchSupplierWithWarehouse(final Warehouse warehouse, String _searchString, int _maxResults);
+	
+	/**
 	 * Deletes a Supplier.
 	 */
 	public void delete(Supplier entity);
@@ -124,6 +226,16 @@ public interface IDBOperationsBase {
 	 */
 	public Warehouse getWarehouse(int id);
 		
+	/**
+	 * Returns all entities of type Warehouse.
+	 */
+	public List<Warehouse> getAllWarehouses();
+		
+	/**
+	 * Searches for entities of type Warehouse.
+	 */
+	public List<Warehouse> searchWarehouses(String _searchString, int _maxResults);
+	
 	/**
 	 * Deletes a Warehouse.
 	 */
@@ -145,6 +257,26 @@ public interface IDBOperationsBase {
 	public CustomerOrder getCustomerOrder(int id);
 		
 	/**
+	 * Returns the CustomerOrders with the given customer.
+	 */
+	public List<CustomerOrder> getCustomerOrdersByCustomer(Customer customer);
+	
+	/**
+	 * Returns all entities of type CustomerOrder.
+	 */
+	public List<CustomerOrder> getAllCustomerOrders();
+		
+	/**
+	 * Searches for entities of type CustomerOrder.
+	 */
+	public List<CustomerOrder> searchCustomerOrders(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type CustomerOrder.
+	 */
+	public List<CustomerOrder> searchCustomerOrderWithCustomer(final Customer customer, String _searchString, int _maxResults);
+	
+	/**
 	 * Deletes a CustomerOrder.
 	 */
 	public void delete(CustomerOrder entity);
@@ -165,6 +297,26 @@ public interface IDBOperationsBase {
 	public OrderedItem getOrderedItem(int id);
 		
 	/**
+	 * Returns the OrderedItems with the given item.
+	 */
+	public List<OrderedItem> getOrderedItemsByItem(Item item);
+	
+	/**
+	 * Returns all entities of type OrderedItem.
+	 */
+	public List<OrderedItem> getAllOrderedItems();
+		
+	/**
+	 * Searches for entities of type OrderedItem.
+	 */
+	public List<OrderedItem> searchOrderedItems(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type OrderedItem.
+	 */
+	public List<OrderedItem> searchOrderedItemWithItem(final Item item, String _searchString, int _maxResults);
+	
+	/**
 	 * Deletes a OrderedItem.
 	 */
 	public void delete(OrderedItem entity);
@@ -184,6 +336,16 @@ public interface IDBOperationsBase {
 	 */
 	public Customer getCustomer(int id);
 		
+	/**
+	 * Returns all entities of type Customer.
+	 */
+	public List<Customer> getAllCustomers();
+		
+	/**
+	 * Searches for entities of type Customer.
+	 */
+	public List<Customer> searchCustomers(String _searchString, int _maxResults);
+	
 	/**
 	 * Deletes a Customer.
 	 */

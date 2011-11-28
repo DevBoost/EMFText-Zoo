@@ -1,10 +1,22 @@
 package org.emftext.language.hedl.example.dao;
 
+import java.util.List;
+
+import org.emftext.language.hedl.example.entities.Item;
 import org.emftext.language.hedl.example.entities.Supplier;
 import org.emftext.language.hedl.example.entities.SupplierItem;
+import org.hibernate.Criteria;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
-// this class is generated. any change will be overridden.
+/**
+ * This class provides all default operations that are derived from the HEDL entity model
+ * for type SupplierItem.
+ *
+ * Note: This class is generated. Any change will be overridden.
+ */
 public class SupplierItemDAO {
 	
 	public final static String FIELD__ID = getField(SupplierItem.class, "id");
@@ -19,7 +31,7 @@ public class SupplierItemDAO {
 	 */
 	public SupplierItem create(Session session, java.lang.String supplierItemNumber, Supplier supplier) {
 		SupplierItem newEntity = new SupplierItem(supplierItemNumber, supplier);
-		session.persist(newEntity);
+		session.save(newEntity);
 		return newEntity;
 	}
 	
@@ -29,6 +41,84 @@ public class SupplierItemDAO {
 	public SupplierItem get(Session session, int id) {
 		SupplierItem entity = (SupplierItem) session.get(SupplierItem.class, id);
 		return entity;
+	}
+	
+	/**
+	 * Returns the SupplierItems with the given supplier.
+	 */
+	public List<SupplierItem> getBySupplier(Session session, Supplier supplier) {
+		Criteria criteria = session.createCriteria(SupplierItem.class);
+		criteria = criteria.add(Restrictions.eq(FIELD__SUPPLIER, supplier));
+		@SuppressWarnings("unchecked")
+		List<SupplierItem> list = (List<SupplierItem>) criteria.list();
+		return list;
+	}
+	
+	/**
+	 * Returns the SupplierItems with the given item.
+	 */
+	public List<SupplierItem> getByItem(Session session, Item item) {
+		Criteria criteria = session.createCriteria(SupplierItem.class);
+		criteria = criteria.add(Restrictions.eq(FIELD__ITEM, item));
+		@SuppressWarnings("unchecked")
+		List<SupplierItem> list = (List<SupplierItem>) criteria.list();
+		return list;
+	}
+	
+	/**
+	 * Returns all entities of type SupplierItem.
+	 */
+	public List<SupplierItem> getAll(Session session) {
+		Criteria criteria = session.createCriteria(SupplierItem.class);
+		@SuppressWarnings("unchecked")
+		List<SupplierItem> entities = (List<SupplierItem>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type SupplierItem.
+	 */
+	public List<SupplierItem> search(Session _session, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(SupplierItem.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__SUPPLIERITEMNUMBER, _searchString.trim(), MatchMode.ANYWHERE));
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<SupplierItem> entities = (List<SupplierItem>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type SupplierItem.
+	 */
+	public List<SupplierItem> searchWithSupplier(Session _session, Supplier supplier, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(SupplierItem.class);
+		// restrict by the value of the unique property
+		criteria = criteria.add(Restrictions.eq(FIELD__SUPPLIER, supplier));
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__SUPPLIERITEMNUMBER, _searchString.trim(), MatchMode.ANYWHERE));
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<SupplierItem> entities = (List<SupplierItem>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type SupplierItem.
+	 */
+	public List<SupplierItem> searchWithItem(Session _session, Item item, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(SupplierItem.class);
+		// restrict by the value of the unique property
+		criteria = criteria.add(Restrictions.eq(FIELD__ITEM, item));
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__SUPPLIERITEMNUMBER, _searchString.trim(), MatchMode.ANYWHERE));
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<SupplierItem> entities = (List<SupplierItem>) criteria.list();
+		return entities;
 	}
 	
 	/**

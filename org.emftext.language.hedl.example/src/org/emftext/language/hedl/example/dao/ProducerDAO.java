@@ -1,9 +1,20 @@
 package org.emftext.language.hedl.example.dao;
 
-import org.emftext.language.hedl.example.entities.Producer;
-import org.hibernate.classic.Session;
+import java.util.List;
 
-// this class is generated. any change will be overridden.
+import org.emftext.language.hedl.example.entities.Producer;
+import org.hibernate.Criteria;
+import org.hibernate.classic.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ * This class provides all default operations that are derived from the HEDL entity model
+ * for type Producer.
+ *
+ * Note: This class is generated. Any change will be overridden.
+ */
 public class ProducerDAO {
 	
 	public final static String FIELD__ID = getField(Producer.class, "id");
@@ -14,7 +25,7 @@ public class ProducerDAO {
 	 */
 	public Producer create(Session session) {
 		Producer newEntity = new Producer();
-		session.persist(newEntity);
+		session.save(newEntity);
 		return newEntity;
 	}
 	
@@ -24,6 +35,30 @@ public class ProducerDAO {
 	public Producer get(Session session, int id) {
 		Producer entity = (Producer) session.get(Producer.class, id);
 		return entity;
+	}
+	
+	/**
+	 * Returns all entities of type Producer.
+	 */
+	public List<Producer> getAll(Session session) {
+		Criteria criteria = session.createCriteria(Producer.class);
+		@SuppressWarnings("unchecked")
+		List<Producer> entities = (List<Producer>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Producer.
+	 */
+	public List<Producer> search(Session _session, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(Producer.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__NAME, _searchString.trim(), MatchMode.ANYWHERE));
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<Producer> entities = (List<Producer>) criteria.list();
+		return entities;
 	}
 	
 	/**

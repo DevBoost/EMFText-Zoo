@@ -1,21 +1,32 @@
 package org.emftext.language.hedl.example.dao;
 
-import org.emftext.language.hedl.example.entities.Customer;
-import org.hibernate.classic.Session;
+import java.util.List;
 
-// this class is generated. any change will be overridden.
+import org.emftext.language.hedl.example.entities.Customer;
+import org.hibernate.Criteria;
+import org.hibernate.classic.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ * This class provides all default operations that are derived from the HEDL entity model
+ * for type Customer.
+ *
+ * Note: This class is generated. Any change will be overridden.
+ */
 public class CustomerDAO {
 	
 	public final static String FIELD__ID = getField(Customer.class, "id");
-	public final static String FIELD__FIRSTNAME = getField(Customer.class, "firstname");
-	public final static String FIELD__LASTNAME = getField(Customer.class, "lastname");
+	public final static String FIELD__FIRSTNAME = getField(Customer.class, "firstName");
+	public final static String FIELD__LASTNAME = getField(Customer.class, "lastName");
 	
 	/**
 	 * Creates a Customer using all read-only properties.
 	 */
 	public Customer create(Session session) {
 		Customer newEntity = new Customer();
-		session.persist(newEntity);
+		session.save(newEntity);
 		return newEntity;
 	}
 	
@@ -25,6 +36,31 @@ public class CustomerDAO {
 	public Customer get(Session session, int id) {
 		Customer entity = (Customer) session.get(Customer.class, id);
 		return entity;
+	}
+	
+	/**
+	 * Returns all entities of type Customer.
+	 */
+	public List<Customer> getAll(Session session) {
+		Criteria criteria = session.createCriteria(Customer.class);
+		@SuppressWarnings("unchecked")
+		List<Customer> entities = (List<Customer>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Customer.
+	 */
+	public List<Customer> search(Session _session, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(Customer.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__FIRSTNAME, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__LASTNAME, _searchString.trim(), MatchMode.ANYWHERE));
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<Customer> entities = (List<Customer>) criteria.list();
+		return entities;
 	}
 	
 	/**

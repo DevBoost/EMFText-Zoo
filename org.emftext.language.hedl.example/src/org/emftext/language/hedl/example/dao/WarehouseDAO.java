@@ -1,9 +1,20 @@
 package org.emftext.language.hedl.example.dao;
 
-import org.emftext.language.hedl.example.entities.Warehouse;
-import org.hibernate.classic.Session;
+import java.util.List;
 
-// this class is generated. any change will be overridden.
+import org.emftext.language.hedl.example.entities.Warehouse;
+import org.hibernate.Criteria;
+import org.hibernate.classic.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ * This class provides all default operations that are derived from the HEDL entity model
+ * for type Warehouse.
+ *
+ * Note: This class is generated. Any change will be overridden.
+ */
 public class WarehouseDAO {
 	
 	public final static String FIELD__ID = getField(Warehouse.class, "id");
@@ -14,7 +25,7 @@ public class WarehouseDAO {
 	 */
 	public Warehouse create(Session session, java.lang.String name) {
 		Warehouse newEntity = new Warehouse(name);
-		session.persist(newEntity);
+		session.save(newEntity);
 		return newEntity;
 	}
 	
@@ -24,6 +35,30 @@ public class WarehouseDAO {
 	public Warehouse get(Session session, int id) {
 		Warehouse entity = (Warehouse) session.get(Warehouse.class, id);
 		return entity;
+	}
+	
+	/**
+	 * Returns all entities of type Warehouse.
+	 */
+	public List<Warehouse> getAll(Session session) {
+		Criteria criteria = session.createCriteria(Warehouse.class);
+		@SuppressWarnings("unchecked")
+		List<Warehouse> entities = (List<Warehouse>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Warehouse.
+	 */
+	public List<Warehouse> search(Session _session, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(Warehouse.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__NAME, _searchString.trim(), MatchMode.ANYWHERE));
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<Warehouse> entities = (List<Warehouse>) criteria.list();
+		return entities;
 	}
 	
 	/**

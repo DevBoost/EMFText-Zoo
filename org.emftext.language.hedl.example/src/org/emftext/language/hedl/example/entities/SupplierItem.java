@@ -3,6 +3,7 @@ package org.emftext.language.hedl.example.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,16 +13,29 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "SupplierItem"
 )
-// this class is generated. any change will be overridden.
+/*
+ * This class is generated from the entity 'SupplierItem' defined in the HEDL model.
+ * Note: Any change made to this class will be overridden.
+ */
 public class SupplierItem {
 	
-	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GenericGenerator(name="SupplierItemIdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
+	  parameters = {
+	    @Parameter(name="table", value="IdentityGenerator"),
+	    @Parameter(name="primary_key_column", value="sequence_name"),
+	    @Parameter(name="primary_key_value", value="SupplierItem"),
+	    @Parameter(name="value_column", value="next_hi_value"),
+	    @Parameter(name="primary_key_length", value="100"),
+	    @Parameter(name="max_lo", value="1000")
+	  }
+	)
+	@Id 
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="SupplierItemIdGenerator")
 	private int id;
 
 	private java.lang.String supplierItemNumber;
@@ -55,59 +69,95 @@ public class SupplierItem {
 		this.supplier = supplier;
 	}
 	
+	/**
+	 * Returns the automatically generated id the identifies this entity object.
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * The property 'id' is read-only. 
+	 * This setter is only provided for Hibernate. 
+	 * It must not be used directly.
+	 */
 	@Deprecated
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Returns the value of property 'supplierItemNumber'.
+	 */
 	public java.lang.String getSupplierItemNumber() {
 		return supplierItemNumber;
 	}
 	
 	/**
-	 * This property is read-only. The setter is only provided for Hibernate.
+	 * The property 'supplierItemNumber' is read-only. 
+	 * This setter is only provided for Hibernate. 
+	 * It must not be used directly.
 	 */
 	@Deprecated
 	public void setSupplierItemNumber(java.lang.String newValue) {
 		this.supplierItemNumber = newValue;
 	}
 	
+	/**
+	 * Returns the value of property 'supplier'.
+	 */
 	public Supplier getSupplier() {
 		return supplier;
 	}
 	
 	/**
-	 * This property is read-only. The setter is only provided for Hibernate.
+	 * The property 'supplier' is read-only. 
+	 * This setter is only provided for Hibernate. 
+	 * It must not be used directly.
 	 */
 	@Deprecated
 	public void setSupplier(Supplier newValue) {
 		this.supplier = newValue;
 	}
 	
+	/**
+	 * Returns the value of property 'item'.
+	 */
 	public Item getItem() {
 		return item;
 	}
 	
+	/**
+	 * Sets the value of property 'item'.
+	 */
 	public void setItem(Item newValue) {
 		this.item = newValue;
 	}
 	
+	/**
+	 * Returns the value of property 'supplierPrice'.
+	 */
 	public double getSupplierPrice() {
 		return supplierPrice;
 	}
 	
+	/**
+	 * Sets the value of property 'supplierPrice'.
+	 */
 	public void setSupplierPrice(double newValue) {
 		this.supplierPrice = newValue;
 	}
 	
+	/**
+	 * Returns the value of property 'lastUpdate'.
+	 */
 	public java.util.Date getLastUpdate() {
 		return lastUpdate;
 	}
 	
+	/**
+	 * Sets the value of property 'lastUpdate'.
+	 */
 	public void setLastUpdate(java.util.Date newValue) {
 		this.lastUpdate = newValue;
 	}

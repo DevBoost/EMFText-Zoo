@@ -1,9 +1,20 @@
 package org.emftext.language.hedl.example.dao;
 
-import org.emftext.language.hedl.example.entities.OrderedItem;
-import org.hibernate.classic.Session;
+import java.util.List;
 
-// this class is generated. any change will be overridden.
+import org.emftext.language.hedl.example.entities.Item;
+import org.emftext.language.hedl.example.entities.OrderedItem;
+import org.hibernate.Criteria;
+import org.hibernate.classic.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ * This class provides all default operations that are derived from the HEDL entity model
+ * for type OrderedItem.
+ *
+ * Note: This class is generated. Any change will be overridden.
+ */
 public class OrderedItemDAO {
 	
 	public final static String FIELD__ID = getField(OrderedItem.class, "id");
@@ -14,7 +25,7 @@ public class OrderedItemDAO {
 	 */
 	public OrderedItem create(Session session) {
 		OrderedItem newEntity = new OrderedItem();
-		session.persist(newEntity);
+		session.save(newEntity);
 		return newEntity;
 	}
 	
@@ -24,6 +35,55 @@ public class OrderedItemDAO {
 	public OrderedItem get(Session session, int id) {
 		OrderedItem entity = (OrderedItem) session.get(OrderedItem.class, id);
 		return entity;
+	}
+	
+	/**
+	 * Returns the OrderedItems with the given item.
+	 */
+	public List<OrderedItem> getByItem(Session session, Item item) {
+		Criteria criteria = session.createCriteria(OrderedItem.class);
+		criteria = criteria.add(Restrictions.eq(FIELD__ITEM, item));
+		@SuppressWarnings("unchecked")
+		List<OrderedItem> list = (List<OrderedItem>) criteria.list();
+		return list;
+	}
+	
+	/**
+	 * Returns all entities of type OrderedItem.
+	 */
+	public List<OrderedItem> getAll(Session session) {
+		Criteria criteria = session.createCriteria(OrderedItem.class);
+		@SuppressWarnings("unchecked")
+		List<OrderedItem> entities = (List<OrderedItem>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type OrderedItem.
+	 */
+	public List<OrderedItem> search(Session _session, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(OrderedItem.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<OrderedItem> entities = (List<OrderedItem>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type OrderedItem.
+	 */
+	public List<OrderedItem> searchWithItem(Session _session, Item item, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(OrderedItem.class);
+		// restrict by the value of the unique property
+		criteria = criteria.add(Restrictions.eq(FIELD__ITEM, item));
+		Disjunction disjunction = Restrictions.disjunction();
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<OrderedItem> entities = (List<OrderedItem>) criteria.list();
+		return entities;
 	}
 	
 	/**
