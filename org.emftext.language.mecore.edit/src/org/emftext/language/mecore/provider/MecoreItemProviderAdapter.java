@@ -43,6 +43,7 @@ import org.emftext.language.mecore.MDataType;
 import org.emftext.language.mecore.MFeature;
 import org.emftext.language.mecore.MMultiplicity;
 import org.emftext.language.mecore.MNamedElement;
+import org.emftext.language.mecore.MOperation;
 import org.emftext.language.mecore.MSimpleMultiplicity;
 import org.emftext.language.mecore.MSimpleMultiplicityValue;
 import org.emftext.language.mecore.MTypedElement;
@@ -135,10 +136,10 @@ public class MecoreItemProviderAdapter
 	}
 
 	/**
-	 * This returns MDataType.gif.
+	 * This returns an image for the given objects.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Object getImage(Object object) {
 		if (object instanceof EObject) {
@@ -231,18 +232,21 @@ public class MecoreItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		if (object instanceof EObject) {
 			EObject eObject = (EObject) object;
-			String className = eObject.eClass().getName().substring(1);
+			String result = eObject.eClass().getName().substring(1);
 			if (eObject instanceof MNamedElement) {
 				MNamedElement mNamedElement = (MNamedElement) eObject;
-				className += " " + mNamedElement.getName();
+				result += " " + mNamedElement.getName();
 			}
-			return className;
+			if (eObject instanceof MOperation) {
+				result += "()";
+			}
+			return result;
 		}
 		return getString("");
 	}
@@ -271,33 +275,12 @@ public class MecoreItemProviderAdapter
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-/*
-		if (object instanceof EObject) {
-			EObject eObject = (EObject) object;
-
-			EList<EStructuralFeature> allStructuralFeatures = eObject.eClass().getEAllStructuralFeatures();
-			for (EStructuralFeature eStructuralFeature : allStructuralFeatures) {
-				EClassifier eType = eStructuralFeature.getEType();
-				EList<EClassifier> eClassifiers = MecorePackage.eINSTANCE.getEClassifiers();
-				for (EClassifier eClassifier : eClassifiers) {
-					
-					newChildDescriptors.add(
-							createChildParameter(
-									eStructuralFeature,
-									eClassifier
-							)
-					);
-				}
-			}
-		}
-		*/
 	}
 
-	  /**
-	   * Get the resource locator for this adapter's resources.
-	   */
-	  protected ResourceLocator getResourceLocator()
-	  {
-	    return EcoreEditPlugin.INSTANCE;
-	  }
+	/**
+	 * Get the resource locator for this adapter's resources.
+	 */
+	protected ResourceLocator getResourceLocator() {
+		return EcoreEditPlugin.INSTANCE;
+	}
 }
