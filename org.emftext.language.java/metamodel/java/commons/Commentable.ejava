@@ -166,7 +166,7 @@ eclass Commentable {
 		if(classifier == null) {
 			CompilationUnit cu = getContainingCompilationUnit();
 			//maybe the outer classifier is in an extra cu
-			if (cu != null && cu.getName().contains("$")) {
+			if (cu != null && cu.getName() != null && cu.getName().contains("$")) {
 				classifier = (ConcreteClassifier) EcoreUtil.resolve(
 				getConcreteClassifierProxy(cu.getNamespacesAsString()), this);
 				if(classifier.eIsProxy())  {
@@ -210,7 +210,7 @@ eclass Commentable {
 		return (CompilationUnit) value;
 	}
 
-	/**
+	/** 
 	 * Finds the containing annotation instance for the given element.
 	 * 
 	 * @param value
