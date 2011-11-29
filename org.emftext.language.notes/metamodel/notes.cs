@@ -10,8 +10,6 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
-	DEFINE ML_COMMENT $'/*'(.*)'*/'$;
 	DEFINE WHITESPACE $('\t' | '\f')$;
 	DEFINE LINEBREAK $('\r\n' | '\r' | '\n')$;
 	DEFINE TEXT $('A'..'Z' | 'a'..'z' | '0'..'9' | '-' | ' ' )+$;
