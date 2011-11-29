@@ -59,6 +59,7 @@ import org.emftext.language.manifest.resource.manifest.mopp.MFMetaInformation;
 import org.emftext.language.martinfowlerdsl.resource.martinfowlerdsl.mopp.MartinfowlerdslMetaInformation;
 import org.emftext.language.modelquery.resource.modelquery.mopp.ModelqueryMetaInformation;
 import org.emftext.language.models.resource.model.mopp.ModelMetaInformation;
+import org.emftext.language.notes.resource.notes.mopp.NotesMetaInformation;
 import org.emftext.language.office.resource.office.mopp.OfficeMetaInformation;
 import org.emftext.language.office2.resource.office2.mopp.Office2MetaInformation;
 import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
@@ -153,6 +154,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new FjMetaInformation());
 		metaInformations.add(new FeatureMetaInformation());
 		metaInformations.add(new FormularMetaInformation());
+		metaInformations.add(new NotesMetaInformation());
 		metaInformations.add(new FormsMetaInformation());
 		metaInformations.add(new FunctionsMetaInformation()); // is not yet on update site, but will be added soon
 		metaInformations.add(new HedlMetaInformation());
