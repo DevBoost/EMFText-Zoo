@@ -166,7 +166,12 @@ eclass TypeParameter {
 			ConcreteClassifier containingClassifier = reference.getContainingConcreteClassifier();
 			while (containingClassifier != null) {
 				prevTypeList.add(containingClassifier);
-				containingClassifier = ((Commentable)containingClassifier.eContainer()).getContainingConcreteClassifier();
+				EObject container = containingClassifier.eContainer();
+				if (container instanceof Commentable) {
+					containingClassifier = ((Commentable) container).getContainingConcreteClassifier();
+				} else {
+					containingClassifier = null;
+				}
 			}
 		}
 		
