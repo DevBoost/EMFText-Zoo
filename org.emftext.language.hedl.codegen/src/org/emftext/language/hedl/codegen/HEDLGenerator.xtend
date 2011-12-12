@@ -70,6 +70,7 @@ class HEDLGenerator {
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
+		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
 			 */
@@ -109,6 +110,20 @@ class HEDLGenerator {
 			 * Returns all «entity.name»s with the given «property.name».
 			 */
 			public List<«entity.name»> get« entity.name »sBy«property.name.toFirstUpper»(«property.type.javaClassname» «property.name»);
+			
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
+			 */
+			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»Before(«property.type.javaClassname» _maxDate);
+			
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
+			 */
+			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»After(«property.type.javaClassname» _minDate);
 			
 			«ENDFOR»
 			/**
@@ -280,6 +295,7 @@ class HEDLGenerator {
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
+		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
 			/**
 			 * Creates a new «entity.name» using all read-only properties.
 			 */
@@ -374,6 +390,38 @@ class HEDLGenerator {
 			}
 			
 			«ENDIF»
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
+			 */
+			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»Before(final «property.type.javaClassname» _maxDate) {
+				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get«entity.name»With«property.name.toFirstUpper»Before(_maxDate));
+					}
+				});
+				return entities;
+			}
+			
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
+			 */
+			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»After(final «property.type.javaClassname» _minDate) {
+				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get«entity.name»With«property.name.toFirstUpper»After(_minDate));
+					}
+				});
+				return entities;
+			}
+			
 			«ENDFOR»
 			/**
 			 * Returns all entities of type «entity.name».
@@ -521,6 +569,7 @@ class HEDLGenerator {
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
+		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
 			/** 
 			 * Create an instance of type «entity.name» using all read-only properties.
 			 */
@@ -573,6 +622,26 @@ class HEDLGenerator {
 			}
 			
 			«ENDIF»
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
+			 */
+			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»Before(«property.type.javaClassname» _maxDate) {
+				final List<«entity.name»> entities = «entity.name.toFirstLower»DAO.get«property.name.toFirstUpper»Before(session, _maxDate);
+				return entities;
+			}
+			
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
+			 */
+			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»After(«property.type.javaClassname» _minDate) {
+				final List<«entity.name»> entities = «entity.name.toFirstLower»DAO.get«property.name.toFirstUpper»After(session, _minDate);
+				return entities;
+			}
+			
 			«ENDFOR»
 			/**
 			 * Returns all entities of type «entity.name».
@@ -672,6 +741,7 @@ class HEDLGenerator {
 		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
+		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 			/**
 			 * Creates a «entity.name» using all read-only properties.
@@ -745,6 +815,34 @@ class HEDLGenerator {
 			public List<«entity.name»> getBy«property.name.toFirstUpper»(Session session, «property.type.javaClassname» «property.name») {
 				Criteria criteria = session.createCriteria(«entity.name».class);
 				criteria = criteria.add(Restrictions.eq(FIELD__«property.name.toUpperCase», «property.name»));
+				List<?> list = criteria.list();
+				@SuppressWarnings("unchecked")
+				List<«entity.name»> entities = (List<«entity.name»>) list;
+				return entities;
+			}
+			
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
+			 */
+			public List<«entity.name»> get«property.name.toFirstUpper»Before(Session session, «property.type.javaClassname» _maxDate) {
+				Criteria criteria = session.createCriteria(«entity.name».class);
+				criteria = criteria.add(Restrictions.le(FIELD__«property.name.toUpperCase», _maxDate));
+				List<?> list = criteria.list();
+				@SuppressWarnings("unchecked")
+				List<«entity.name»> entities = (List<«entity.name»>) list;
+				return entities;
+			}
+			
+			«ENDFOR»
+			«FOR property : dateProperties »
+			/**
+			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
+			 */
+			public List<«entity.name»> get«property.name.toFirstUpper»After(Session session, «property.type.javaClassname» _minDate) {
+				Criteria criteria = session.createCriteria(«entity.name».class);
+				criteria = criteria.add(Restrictions.ge(FIELD__«property.name.toUpperCase», _minDate));
 				List<?> list = criteria.list();
 				@SuppressWarnings("unchecked")
 				List<«entity.name»> entities = (List<«entity.name»>) list;
