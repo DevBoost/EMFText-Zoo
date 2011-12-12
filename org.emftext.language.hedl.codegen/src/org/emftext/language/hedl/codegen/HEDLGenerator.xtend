@@ -116,14 +116,14 @@ class HEDLGenerator {
 			/**
 			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
 			 */
-			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»Before(«property.type.javaClassname» _maxDate);
+			public List<«entity.name»> get«entity.name»sWith«property.name.toFirstUpper»Before(«property.type.javaClassname» _maxDate);
 			
 			«ENDFOR»
 			«FOR property : dateProperties »
 			/**
 			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
 			 */
-			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»After(«property.type.javaClassname» _minDate);
+			public List<«entity.name»> get«entity.name»sWith«property.name.toFirstUpper»After(«property.type.javaClassname» _minDate);
 			
 			«ENDFOR»
 			/**
@@ -395,12 +395,12 @@ class HEDLGenerator {
 			/**
 			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
 			 */
-			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»Before(final «property.type.javaClassname» _maxDate) {
+			public List<«entity.name»> get«entity.name»sWith«property.name.toFirstUpper»Before(final «property.type.javaClassname» _maxDate) {
 				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						entities.addAll(operations.get«entity.name»With«property.name.toFirstUpper»Before(_maxDate));
+						entities.addAll(operations.get«entity.name»sWith«property.name.toFirstUpper»Before(_maxDate));
 					}
 				});
 				return entities;
@@ -411,12 +411,12 @@ class HEDLGenerator {
 			/**
 			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
 			 */
-			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»After(final «property.type.javaClassname» _minDate) {
+			public List<«entity.name»> get«entity.name»sWith«property.name.toFirstUpper»After(final «property.type.javaClassname» _minDate) {
 				final List<«entity.name»> entities = new ArrayList<«entity.name»>();
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						entities.addAll(operations.get«entity.name»With«property.name.toFirstUpper»After(_minDate));
+						entities.addAll(operations.get«entity.name»sWith«property.name.toFirstUpper»After(_minDate));
 					}
 				});
 				return entities;
@@ -627,7 +627,7 @@ class HEDLGenerator {
 			/**
 			 * Returns all «entity.name»s where «property.name» is set to a value before '_maxDate'.
 			 */
-			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»Before(«property.type.javaClassname» _maxDate) {
+			public List<«entity.name»> get«entity.name»sWith«property.name.toFirstUpper»Before(«property.type.javaClassname» _maxDate) {
 				final List<«entity.name»> entities = «entity.name.toFirstLower»DAO.get«property.name.toFirstUpper»Before(session, _maxDate);
 				return entities;
 			}
@@ -637,7 +637,7 @@ class HEDLGenerator {
 			/**
 			 * Returns all «entity.name»s where «property.name» is set to a value after '_minDate'.
 			 */
-			public List<«entity.name»> get«entity.name»With«property.name.toFirstUpper»After(«property.type.javaClassname» _minDate) {
+			public List<«entity.name»> get«entity.name»sWith«property.name.toFirstUpper»After(«property.type.javaClassname» _minDate) {
 				final List<«entity.name»> entities = «entity.name.toFirstLower»DAO.get«property.name.toFirstUpper»After(session, _minDate);
 				return entities;
 			}

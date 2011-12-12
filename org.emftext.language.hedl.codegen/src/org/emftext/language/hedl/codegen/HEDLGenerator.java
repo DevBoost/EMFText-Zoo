@@ -525,7 +525,7 @@ public class HEDLGenerator {
             _builder.append("> get");
             String _name_35 = entity.getName();
             _builder.append(_name_35, "	");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_36 = property_6.getName();
             String _firstUpper_4 = StringExtensions.toFirstUpper(_name_36);
             _builder.append(_firstUpper_4, "	");
@@ -565,7 +565,7 @@ public class HEDLGenerator {
             _builder.append("> get");
             String _name_40 = entity.getName();
             _builder.append(_name_40, "	");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_41 = property_7.getName();
             String _firstUpper_5 = StringExtensions.toFirstUpper(_name_41);
             _builder.append(_firstUpper_5, "	");
@@ -1760,7 +1760,7 @@ public class HEDLGenerator {
             _builder.append("> get");
             String _name_63 = entity_1.getName();
             _builder.append(_name_63, "	");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_64 = property_9.getName();
             String _firstUpper_8 = StringExtensions.toFirstUpper(_name_64);
             _builder.append(_firstUpper_8, "	");
@@ -1796,7 +1796,7 @@ public class HEDLGenerator {
             _builder.append("entities.addAll(operations.get");
             String _name_67 = entity_1.getName();
             _builder.append(_name_67, "				");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_68 = property_9.getName();
             String _firstUpper_9 = StringExtensions.toFirstUpper(_name_68);
             _builder.append(_firstUpper_9, "				");
@@ -1847,7 +1847,7 @@ public class HEDLGenerator {
             _builder.append("> get");
             String _name_72 = entity_1.getName();
             _builder.append(_name_72, "	");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_73 = property_10.getName();
             String _firstUpper_10 = StringExtensions.toFirstUpper(_name_73);
             _builder.append(_firstUpper_10, "	");
@@ -1883,7 +1883,7 @@ public class HEDLGenerator {
             _builder.append("entities.addAll(operations.get");
             String _name_76 = entity_1.getName();
             _builder.append(_name_76, "				");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_77 = property_10.getName();
             String _firstUpper_11 = StringExtensions.toFirstUpper(_name_77);
             _builder.append(_firstUpper_11, "				");
@@ -2892,7 +2892,7 @@ public class HEDLGenerator {
             _builder.append("> get");
             String _name_57 = entity_1.getName();
             _builder.append(_name_57, "	");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_58 = property_9.getName();
             String _firstUpper_8 = StringExtensions.toFirstUpper(_name_58);
             _builder.append(_firstUpper_8, "	");
@@ -2954,7 +2954,7 @@ public class HEDLGenerator {
             _builder.append("> get");
             String _name_65 = entity_1.getName();
             _builder.append(_name_65, "	");
-            _builder.append("With");
+            _builder.append("sWith");
             String _name_66 = property_10.getName();
             String _firstUpper_10 = StringExtensions.toFirstUpper(_name_66);
             _builder.append(_firstUpper_10, "	");
