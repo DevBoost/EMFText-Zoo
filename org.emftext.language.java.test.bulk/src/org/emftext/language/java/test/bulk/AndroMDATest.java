@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * AndroMDA.
  */
-public class AndroMDATest extends AbstractZipFileInputTest {
+public class AndroMDATest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "andromda-3.3";
 	public static final String START_ENTRY = "";

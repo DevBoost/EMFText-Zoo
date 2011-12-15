@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * the Mantissa math library.
  */
-public class MantissaTest extends AbstractZipFileInputTest {
+public class MantissaTest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "mantissa-7.2";
 	public static final String START_ENTRY = "";

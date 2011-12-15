@@ -32,7 +32,7 @@ import org.emftext.language.java.test.AbstractJavaParserTestCase;
  * A test that can be used to parse and print entries in a 
  * ZIP file.
  */
-public class ZipFileEntryTest extends AbstractJavaParserTestCase {
+public class ZipFileEntryTestCase extends AbstractJavaParserTestCase {
 
 	private final ZipFile zipFile;
 	private final List<ZipEntry> entries = new ArrayList<ZipEntry>();
@@ -49,7 +49,7 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	 * @param prefixUsedInZipFile 
 	 * @param resourceSet
 	 */
-	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint,
+	public ZipFileEntryTestCase(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint,
 			boolean prefixUsedInZipFile) {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
@@ -101,7 +101,7 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	}
 	
 	private void parseAndReprintEntry(ZipEntry entry) throws Exception {
-		String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
+		String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTestCase.BULK_INPUT_DIR.length());
 		plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
 		
 		parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "input/" + plainZipFileName);

@@ -36,7 +36,7 @@ import org.emftext.language.java.test.util.ThreadedSuite;
 /**
  * An abstract super class for test that must read input from ZIP files.
  */
-public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCase {
+public abstract class AbstractZipFileInputTestCase extends AbstractJavaParserTestCase {
 
 	protected final static String BULK_INPUT_DIR = "input/";
 
@@ -130,7 +130,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 				public void initialize(Resource resource) { }
 			});
 			JavaClasspath globalCP = JavaClasspath.get();
-			String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
+			String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTestCase.BULK_INPUT_DIR.length());
 			plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
 			registerLibs("input/" + plainZipFileName, globalCP, "");
 		} else {
@@ -167,7 +167,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 				}
 			}
 			if (entryName.endsWith(".java")) {
-				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, prefixUsedInZipFile);
+				ZipFileEntryTestCase newTest = new ZipFileEntryTestCase(zipFile, entry, excludeFromReprint, prefixUsedInZipFile);
 				tests.add(newTest);
 			}
 		}

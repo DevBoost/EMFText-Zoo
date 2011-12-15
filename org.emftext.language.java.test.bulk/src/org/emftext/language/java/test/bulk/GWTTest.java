@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * Google Web Toolkit (GWT).
  */
-public class GWTTest extends AbstractZipFileInputTest {
+public class GWTTest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "gwt-1.5.3";
 	public static final String START_ENTRY = "";

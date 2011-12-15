@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * the Xerces XML parser.
  */
-public class XercesTest extends AbstractZipFileInputTest {
+public class XercesTest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "Xerces-J-2.9.1";
 	public static final String START_ENTRY = "";

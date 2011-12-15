@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * the Struts framework.
  */
-public class StrutsTest extends AbstractZipFileInputTest {
+public class StrutsTest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "struts-2.1.6";
 	public static final String START_ENTRY = "";

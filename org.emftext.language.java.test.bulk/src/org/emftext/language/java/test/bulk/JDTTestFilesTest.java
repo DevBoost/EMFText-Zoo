@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the test sources that are
  * used by the JDT to test the JDT compiler.
  */
-public class JDTTestFilesTest extends AbstractZipFileInputTest {
+public class JDTTestFilesTest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "jdt_test_files";
 	public static final String START_ENTRY = "";

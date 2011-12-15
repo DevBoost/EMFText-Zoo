@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * Eclipse 3.4.1 (Ganymede).
  */
-public class Eclipse341Test extends AbstractZipFileInputTest {
+public class Eclipse341Test extends AbstractZipFileInputTestCase {
 	
 	public static final String TEST_FOLDER = "eclipse-3.4.1";
 	public static final String START_ENTRY = "";

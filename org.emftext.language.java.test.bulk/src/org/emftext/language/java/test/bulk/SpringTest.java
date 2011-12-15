@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * the Spring framework.
  */
-public class SpringTest extends AbstractZipFileInputTest {
+public class SpringTest extends AbstractZipFileInputTestCase {
 
 	public static final String TEST_FOLDER = "spring-framework-3.0.0.M1";
 	public static final String START_ENTRY = "";

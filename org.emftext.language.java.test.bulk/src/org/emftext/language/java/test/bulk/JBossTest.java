@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.CoreException;
  * Uses JaMoPP to parse and print the source files of
  * the JBoss Application Server.
  */
-public class JBossTest extends AbstractZipFileInputTest {
+public class JBossTest extends AbstractZipFileInputTestCase {
 	
 	public static final String TEST_FOLDER = "jboss-5.0.0.GA";
 	public static final String START_ENTRY = "";
