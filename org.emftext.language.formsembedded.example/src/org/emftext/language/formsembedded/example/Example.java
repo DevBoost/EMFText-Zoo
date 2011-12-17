@@ -23,11 +23,11 @@ import org.emftext.language.forms.resource.forms.mopp.FormsResourceFactory;
 import java.util.List;
 
 
-public class Test {
+public class Example {
 	public static void main (String [] args) {
 	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap ( ).put ( "forms" , new FormsResourceFactory ( ) ) ;
 	URIConverter.URI_MAP.put ( URI.createURI ( "platform:/resource/" ) , URI.createURI ( "../" ) ) ;
-	new Test ( ).printAndShowForm ( ) ;
+	new Example ( ).printAndShowForm ( ) ;
 }
 	public void printAndShowForm () {
 	Form f = ( org.emftext.language.forms.Form ) new org.emftext.language.forms.interpreter.FormInterpreter ( ).load ( "platform:/resource/org.emftext.language.formsembedded.example/src/org/emftext/language/formsembedded/example/Test.formsembedded.forms" ) ;
