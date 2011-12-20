@@ -239,6 +239,9 @@ public class HEDLGenerator {
         Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_4, _function_4);
         Iterable<Property> dateProperties = _filter_4;
         _builder.newLineIfNotEmpty();
+        EList<Property> _constructorProperties = entity.getConstructorProperties();
+        EList<Property> constructorProperties = _constructorProperties;
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("/**");
         _builder.newLine();
@@ -246,7 +249,7 @@ public class HEDLGenerator {
         _builder.append("* Creates a new ");
         String _name_2 = entity.getName();
         _builder.append(_name_2, "	 ");
-        _builder.append(" using all read-only properties.");
+        _builder.append(" using all read-only and all non-null properties.");
         _builder.newLineIfNotEmpty();
         _builder.append("\t ");
         _builder.append("*/");
@@ -260,7 +263,7 @@ public class HEDLGenerator {
         _builder.append(_name_4, "	");
         _builder.append("(");
         {
-          for(final Property property : readOnlyProperties) {
+          for(final Property property : constructorProperties) {
             Type _type = property.getType();
             String _javaClassname = _type.getJavaClassname();
             _builder.append(_javaClassname, "	");
@@ -269,7 +272,7 @@ public class HEDLGenerator {
             String _firstLower = StringExtensions.toFirstLower(_name_5);
             _builder.append(_firstLower, "	");
             {
-              Property _last = IterableExtensions.<Property>last(readOnlyProperties);
+              Property _last = IterableExtensions.<Property>last(constructorProperties);
               boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_last, property);
               if (_operator_notEquals) {
                 _builder.append(", ");
@@ -1169,6 +1172,9 @@ public class HEDLGenerator {
         Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_4, _function_4);
         Iterable<Property> dateProperties = _filter_4;
         _builder.newLineIfNotEmpty();
+        EList<Property> _constructorProperties = entity_1.getConstructorProperties();
+        EList<Property> constructorProperties = _constructorProperties;
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("/**");
         _builder.newLine();
@@ -1176,7 +1182,7 @@ public class HEDLGenerator {
         _builder.append("* Creates a new ");
         String _name_3 = entity_1.getName();
         _builder.append(_name_3, "	 ");
-        _builder.append(" using all read-only properties.");
+        _builder.append(" using all read-only and all non-null properties.");
         _builder.newLineIfNotEmpty();
         _builder.append("\t ");
         _builder.append("*/");
@@ -1190,7 +1196,7 @@ public class HEDLGenerator {
         _builder.append(_name_5, "	");
         _builder.append("(");
         {
-          for(final Property property : readOnlyProperties) {
+          for(final Property property : constructorProperties) {
             _builder.append("final ");
             Type _type = property.getType();
             String _javaClassname = _type.getJavaClassname();
@@ -1200,7 +1206,7 @@ public class HEDLGenerator {
             String _firstLower = StringExtensions.toFirstLower(_name_6);
             _builder.append(_firstLower, "	");
             {
-              Property _last = IterableExtensions.<Property>last(readOnlyProperties);
+              Property _last = IterableExtensions.<Property>last(constructorProperties);
               boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_last, property);
               if (_operator_notEquals) {
                 _builder.append(", ");
@@ -1233,12 +1239,12 @@ public class HEDLGenerator {
         _builder.append(_name_9, "				");
         _builder.append("(");
         {
-          for(final Property property_1 : readOnlyProperties) {
+          for(final Property property_1 : constructorProperties) {
             String _name_10 = property_1.getName();
             String _firstLower_1 = StringExtensions.toFirstLower(_name_10);
             _builder.append(_firstLower_1, "				");
             {
-              Property _last_1 = IterableExtensions.<Property>last(readOnlyProperties);
+              Property _last_1 = IterableExtensions.<Property>last(constructorProperties);
               boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_last_1, property_1);
               if (_operator_notEquals_1) {
                 _builder.append(", ");
@@ -2477,14 +2483,17 @@ public class HEDLGenerator {
         Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_4, _function_4);
         Iterable<Property> dateProperties = _filter_4;
         _builder.newLineIfNotEmpty();
+        EList<Property> _constructorProperties = entity_1.getConstructorProperties();
+        EList<Property> constructorProperties = _constructorProperties;
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("/** ");
         _builder.newLine();
         _builder.append("\t ");
-        _builder.append("* Create an instance of type ");
+        _builder.append("* Creates an instance of type ");
         String _name_5 = entity_1.getName();
         _builder.append(_name_5, "	 ");
-        _builder.append(" using all read-only properties.");
+        _builder.append(" using all read-only and all non-null properties.");
         _builder.newLineIfNotEmpty();
         _builder.append("\t ");
         _builder.append("*/");
@@ -2498,7 +2507,7 @@ public class HEDLGenerator {
         _builder.append(_name_7, "	");
         _builder.append("(");
         {
-          for(final Property property : readOnlyProperties) {
+          for(final Property property : constructorProperties) {
             Type _type = property.getType();
             String _javaClassname = _type.getJavaClassname();
             _builder.append(_javaClassname, "	");
@@ -2507,7 +2516,7 @@ public class HEDLGenerator {
             String _firstLower_1 = StringExtensions.toFirstLower(_name_8);
             _builder.append(_firstLower_1, "	");
             {
-              Property _last = IterableExtensions.<Property>last(readOnlyProperties);
+              Property _last = IterableExtensions.<Property>last(constructorProperties);
               boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_last, property);
               if (_operator_notEquals) {
                 _builder.append(", ");
@@ -2524,7 +2533,7 @@ public class HEDLGenerator {
         _builder.append(_firstLower_2, "		");
         _builder.append("DAO.create(session");
         {
-          for(final Property property_1 : readOnlyProperties) {
+          for(final Property property_1 : constructorProperties) {
             _builder.append(", ");
             String _name_10 = property_1.getName();
             String _firstLower_3 = StringExtensions.toFirstLower(_name_10);
@@ -3438,6 +3447,9 @@ public class HEDLGenerator {
     Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_5, _function_4);
     Iterable<Property> toOneProperties = _filter_4;
     _builder.newLineIfNotEmpty();
+    EList<Property> _constructorProperties = entity.getConstructorProperties();
+    EList<Property> constructorProperties = _constructorProperties;
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("/**");
     _builder.newLine();
@@ -3445,7 +3457,7 @@ public class HEDLGenerator {
     _builder.append("* Creates a ");
     String _name_8 = entity.getName();
     _builder.append(_name_8, "	 ");
-    _builder.append(" using all read-only properties.");
+    _builder.append(" using all read-only and all non-null properties.");
     _builder.newLineIfNotEmpty();
     _builder.append("\t ");
     _builder.append("*/");
@@ -3456,7 +3468,7 @@ public class HEDLGenerator {
     _builder.append(_name_9, "	");
     _builder.append(" create(Session session");
     {
-      for(final Property property_1 : readOnlyProperties) {
+      for(final Property property_1 : constructorProperties) {
         _builder.append(", ");
         Type _type = property_1.getType();
         String _javaClassname = _type.getJavaClassname();
@@ -3477,12 +3489,12 @@ public class HEDLGenerator {
     _builder.append(_name_12, "		");
     _builder.append("(");
     {
-      for(final Property property_2 : readOnlyProperties) {
+      for(final Property property_2 : constructorProperties) {
         String _name_13 = property_2.getName();
         String _firstLower_1 = StringExtensions.toFirstLower(_name_13);
         _builder.append(_firstLower_1, "		");
         {
-          Property _last = IterableExtensions.<Property>last(readOnlyProperties);
+          Property _last = IterableExtensions.<Property>last(constructorProperties);
           boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_last, property_2);
           if (_operator_notEquals) {
             _builder.append(", ");
@@ -4792,18 +4804,11 @@ public class HEDLGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    EList<Property> _properties_2 = entity.getProperties();
-    final Function1<Property,Boolean> _function = new Function1<Property,Boolean>() {
-        public Boolean apply(final Property p) {
-          boolean _isReadonly = p.isReadonly();
-          return ((Boolean)_isReadonly);
-        }
-      };
-    Iterable<Property> _filter = IterableExtensions.<Property>filter(_properties_2, _function);
-    Iterable<Property> readOnlyProperties = _filter;
+    EList<Property> _constructorProperties = entity.getConstructorProperties();
+    EList<Property> constructorProperties = _constructorProperties;
     _builder.newLineIfNotEmpty();
     {
-      boolean _isEmpty = IterableExtensions.isEmpty(readOnlyProperties);
+      boolean _isEmpty = constructorProperties.isEmpty();
       boolean _operator_not_10 = BooleanExtensions.operator_not(_isEmpty);
       if (_operator_not_10) {
         _builder.append("\t");
@@ -4811,7 +4816,7 @@ public class HEDLGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append(" ");
-        _builder.append("* Constructor using all read-only properties.");
+        _builder.append("* Constructor using all read-only and all non-nullable properties.");
         _builder.newLine();
         _builder.append("\t");
         _builder.append(" ");
@@ -4823,7 +4828,7 @@ public class HEDLGenerator {
         _builder.append(_name_12, "	");
         _builder.append("(");
         {
-          for(final Property property_2 : readOnlyProperties) {
+          for(final Property property_2 : constructorProperties) {
             Type _type_5 = property_2.getType();
             String _javaClassname = _type_5.getJavaClassname();
             _builder.append(_javaClassname, "	");
@@ -4832,7 +4837,7 @@ public class HEDLGenerator {
             String _firstLower = StringExtensions.toFirstLower(_name_13);
             _builder.append(_firstLower, "	");
             {
-              Property _last = IterableExtensions.<Property>last(readOnlyProperties);
+              Property _last = IterableExtensions.<Property>last(constructorProperties);
               boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_last, property_2);
               if (_operator_notEquals_3) {
                 _builder.append(", ");
@@ -4847,7 +4852,7 @@ public class HEDLGenerator {
         _builder.append("super();");
         _builder.newLine();
         {
-          for(final Property property_3 : readOnlyProperties) {
+          for(final Property property_3 : constructorProperties) {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("this.");
@@ -4917,8 +4922,8 @@ public class HEDLGenerator {
     _builder.newLine();
     _builder.newLine();
     {
-      EList<Property> _properties_3 = entity.getProperties();
-      for(final Property property_4 : _properties_3) {
+      EList<Property> _properties_2 = entity.getProperties();
+      for(final Property property_4 : _properties_2) {
         _builder.append("\t");
         _builder.append("/**");
         _builder.newLine();

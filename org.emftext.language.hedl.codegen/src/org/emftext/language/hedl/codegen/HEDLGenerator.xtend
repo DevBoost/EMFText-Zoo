@@ -71,10 +71,11 @@ class HEDLGenerator {
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
+		«var constructorProperties = entity.constructorProperties »
 			/**
-			 * Creates a new «entity.name» using all read-only properties.
+			 * Creates a new «entity.name» using all read-only and all non-null properties.
 			 */
-			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
+			public «entity.name» create«entity.name»(«FOR property : constructorProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF constructorProperties.last != property», «ENDIF»«ENDFOR»);
 			
 			/**
 			 * Returns the «entity.name» with the given id.
@@ -296,15 +297,16 @@ class HEDLGenerator {
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
+		«var constructorProperties = entity.constructorProperties »
 			/**
-			 * Creates a new «entity.name» using all read-only properties.
+			 * Creates a new «entity.name» using all read-only and all non-null properties.
 			 */
-			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »final «property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
+			public «entity.name» create«entity.name»(«FOR property : constructorProperties »final «property.type.javaClassname» «property.name.toFirstLower»«IF constructorProperties.last != property», «ENDIF»«ENDFOR») {
 				final «entity.name»[] entity = new «entity.name»[1];
 				executeInTransaction(new ICommand() {
 					
 					public void execute(IDBOperations operations) {
-						entity[0] = operations.create«entity.name»(«FOR property : readOnlyProperties »«property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
+						entity[0] = operations.create«entity.name»(«FOR property : constructorProperties »«property.name.toFirstLower»«IF constructorProperties.last != property», «ENDIF»«ENDFOR»);
 					}
 				});
 				return entity[0];
@@ -570,11 +572,12 @@ class HEDLGenerator {
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
 		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
+		«var constructorProperties = entity.constructorProperties »
 			/** 
-			 * Create an instance of type «entity.name» using all read-only properties.
+			 * Creates an instance of type «entity.name» using all read-only and all non-null properties.
 			 */
-			public «entity.name» create«entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
-				return «entity.name.toFirstLower»DAO.create(session«FOR property : readOnlyProperties », «property.name.toFirstLower»«ENDFOR»);
+			public «entity.name» create«entity.name»(«FOR property : constructorProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF constructorProperties.last != property», «ENDIF»«ENDFOR») {
+				return «entity.name.toFirstLower»DAO.create(session«FOR property : constructorProperties », «property.name.toFirstLower»«ENDFOR»);
 			}
 			
 			/**
@@ -743,11 +746,12 @@ class HEDLGenerator {
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
+		«var constructorProperties = entity.constructorProperties »
 			/**
-			 * Creates a «entity.name» using all read-only properties.
+			 * Creates a «entity.name» using all read-only and all non-null properties.
 			 */
-			public «entity.name» create(Session session«FOR property : readOnlyProperties », «property.type.javaClassname» «property.name.toFirstLower»«ENDFOR») {
-				«entity.name» newEntity = new «entity.name»(«FOR property : readOnlyProperties »«property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR»);
+			public «entity.name» create(Session session«FOR property : constructorProperties », «property.type.javaClassname» «property.name.toFirstLower»«ENDFOR») {
+				«entity.name» newEntity = new «entity.name»(«FOR property : constructorProperties »«property.name.toFirstLower»«IF constructorProperties.last != property», «ENDIF»«ENDFOR»);
 				session.save(newEntity);
 				return newEntity;
 			}
@@ -1024,14 +1028,14 @@ class HEDLGenerator {
 				super();
 			}
 
-		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
-			«IF !readOnlyProperties.empty »
+		«var constructorProperties = entity.constructorProperties »
+			«IF !constructorProperties.empty »
 			/**
-			 * Constructor using all read-only properties.
+			 * Constructor using all read-only and all non-nullable properties.
 			 */
-			public «entity.name»(«FOR property : readOnlyProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF readOnlyProperties.last != property», «ENDIF»«ENDFOR») {
+			public «entity.name»(«FOR property : constructorProperties »«property.type.javaClassname» «property.name.toFirstLower»«IF constructorProperties.last != property», «ENDIF»«ENDFOR») {
 				super();
-				«FOR property : readOnlyProperties »
+				«FOR property : constructorProperties »
 				this.«property.name.toFirstLower» = «property.name.toFirstLower»;
 				«ENDFOR»
 			}
