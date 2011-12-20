@@ -736,7 +736,9 @@ class HEDLGenerator {
 		 */
 		public class «entity.name»DAO {
 			
+			«IF entity.superType == null »
 			public final static String FIELD__ID = getField(«entity.name».class, "id");
+			«ENDIF»
 			«FOR property : entity.properties »
 			public final static String FIELD__«property.name.toUpperCase» = getField(«entity.name».class, "«property.name»");
 			«ENDFOR»
@@ -973,8 +975,9 @@ class HEDLGenerator {
 		 * This class is generated from the entity '«entity.name»' defined in the HEDL model.
 		 * Note: Any change made to this class will be overridden.
 		 */
-		public class «entity.name» {
+		public class «entity.name» « IF entity.superType != null »extends « entity.superType.name » «ENDIF»{
 			
+			«IF entity.superType == null »
 			@GenericGenerator(name="«entity.name»IdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
 			  parameters = {
 			    @Parameter(name="table", value="IdentityGenerator"),
@@ -989,6 +992,7 @@ class HEDLGenerator {
 			@GeneratedValue(strategy=GenerationType.TABLE, generator="«entity.name»IdGenerator")
 			private int id;
 
+			«ENDIF»
 			«FOR property : entity.properties »
 			«IF property.type instanceof JavaType »
 		«var javaType = property.type as JavaType »
@@ -1041,8 +1045,9 @@ class HEDLGenerator {
 			}
 			
 			«ENDIF»
+			«IF entity.superType == null »
 			/**
-			 * Returns the automatically generated id the identifies this entity object.
+			 * Returns the automatically generated id that identifies this entity object.
 			 */
 			public int getId() {
 				return id;
@@ -1058,6 +1063,7 @@ class HEDLGenerator {
 				this.id = id;
 			}
 
+			«ENDIF»
 			«FOR property : entity.properties »
 			/**
 			 * Returns the value of property '« property.name »'.

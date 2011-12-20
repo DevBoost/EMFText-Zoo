@@ -3,6 +3,9 @@ package org.emftext.language.hedl.validation;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+// TODO required constraint: superTypes must not be cyclic
+// TODO required constraint: enum properties cannot be nullable
+// TODO required constraint: integer properties cannot be nullable
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;

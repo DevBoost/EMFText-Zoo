@@ -31,7 +31,10 @@ TOKENSTYLES {
 RULES {
 	EntityModel ::= (entities | enums)*;
 	
-	Entity ::= comment[ML_COMMENT]? name[UPPER] "{" properties* constraints* "}";
+	Entity ::= 
+		comment[ML_COMMENT]? 
+		name[UPPER] ("extends" superType[UPPER])? 
+		"{" properties* constraints* "}";
 	
 	Property ::=
 		comment[ML_COMMENT]?  
