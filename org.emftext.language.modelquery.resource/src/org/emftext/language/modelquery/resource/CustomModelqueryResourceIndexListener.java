@@ -38,7 +38,7 @@ public class CustomModelqueryResourceIndexListener implements IndexListener {
 			resource.executeQuery();
 		}
 		else {
-			System.err.println("[Modelquery] Removing Index Listener for: " + resourceURI.toString());
+			System.out.println("[Modelquery] Removing Index Listener for: " + resourceURI.toString());
 			IndexUtil.INSTANCE.removeListener(this);
 		}
 	}
