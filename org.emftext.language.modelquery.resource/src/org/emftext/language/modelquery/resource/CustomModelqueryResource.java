@@ -230,11 +230,7 @@ public class CustomModelqueryResource extends ModelqueryResource {
 				contents.add(copy);
 				modelQuery.getResultIDs().add(result.get(copy));
 			}
-			System.out.println("[Modelquery] Query:  " + modelQuery.getQueries());
-			System.out.println("[Modelquery] Result: " + modelQuery.getResultIDs());
 		}
-		
-
 	}
 	
 	private String computeBaseID(ID myID) {
