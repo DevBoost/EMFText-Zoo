@@ -34,6 +34,10 @@ public class CustomModelqueryResourceIndexListener implements IndexListener {
 	public void indexChanged(Set<ID> delta) {
 		CustomModelqueryResource resource = resourceRef.get();
 		if (resource != null) {
+			//TODO #1811: this will not trigger an update of the Reuseware composition interface of
+			//     the modelquery since the index for the modelquery itself is not updated. 
+			//     Updating it here however would result in an infinite loop since the update would
+			//     call this listener again.
 			resource.executeQuery();
 		}
 		else {
