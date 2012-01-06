@@ -112,16 +112,18 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 		packageButton.setText("Browse...");
 		packageButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-				selectedMetamodel = handleBrowse(packageMap.keySet(), "Select a metamodel contained in this project", EPackage.class);
-				if(selectedMetamodel != null){
+				EPackage dialogPackage = handleBrowse(packageMap.keySet(), "Select a metamodel contained in this project", EPackage.class); 
+				if(dialogPackage != null && !dialogPackage.equals(selectedMetamodel)){
+					selectedMetamodel = dialogPackage;
 					correspondingGenmodel = getGenmodelFromPackage(selectedMetamodel);
 					packageName = selectedMetamodel.getName();
 					packageText.setText(labelProvider.getText(selectedMetamodel));
 					packageText.setImage(labelProvider.getImage(selectedMetamodel));
-				} else {
-					correspondingGenmodel = null;
-					packageName = "";
-				}
+					selectedMetaclass = null;
+					metaClassName = "";
+					metaclassText.setText("");
+					metaclassText.setImage(null);
+				} 
 				dialogChanged();
 			}
 		});
@@ -135,13 +137,12 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 		metaclassButton.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 				List<EClass> metaclasses = getMetaclassesFromPackage(selectedMetamodel);
-				selectedMetaclass = handleBrowse(metaclasses, "Select a metaclass in metamodel '" + getContainerName() + "'", EClass.class);
-				if(selectedMetaclass != null){
+				EClass dialogClass = handleBrowse(metaclasses, "Select a metaclass in metamodel '" + getContainerName() + "'", EClass.class);
+				if(dialogClass != null && !dialogClass.equals(selectedMetaclass)){
+					selectedMetaclass = dialogClass;
 					metaClassName = selectedMetaclass.getName();
 					metaclassText.setText(labelProvider.getText(selectedMetaclass));
 					metaclassText.setImage(labelProvider.getImage(selectedMetaclass));
-				} else {
-					metaClassName = "";
 				}
 				dialogChanged();
 			}
