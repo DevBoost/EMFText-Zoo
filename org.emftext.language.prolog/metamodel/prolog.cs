@@ -27,8 +27,7 @@ TOKENS {
 
 
 RULES {
-	PrologProgram ::= clauseList;
-	ClauseList ::= clause+;
+	PrologProgram ::= clauses+;
 	Clause ::= predicate ( ":-" predicateList)? ".";
 	PredicateList ::= predicate ("," predicate)*;
 	Predicate ::= atom ("("termList")")?;
@@ -36,7 +35,7 @@ RULES {
 	Numeral ::= value[FLOAT];
 	Variable ::= name[CAPITAL_WORD];
 	Structure ::= atom "("termList")";
-	SmallAtom ::= text[CAPITAL_WORD];
+	SmallAtom ::= text[SMALL_WORD];
 	String ::= text['\'','\''];
 	VariableReference ::= variable[CAPITAL_WORD];
 }
