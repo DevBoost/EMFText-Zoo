@@ -19,7 +19,7 @@ TOKENS {
 	DEFINE FLOAT $('-')?(('1'..'9') ($ + DIGIT + $)* | '0') ('.' ($ + DIGIT + $)+)? $;
 	DEFINE FRAGMENT UPPER $('A'..'Z')$;
 	DEFINE FRAGMENT LOWER $('a'..'z')$;
-	DEFINE FRAGMENT SPECIAL $('+','-','*','/','_')$;
+	DEFINE FRAGMENT SPECIAL $('+'|'-'|'*'|'/'|'_')$;
 	DEFINE FRAGMENT CHAR $($ + LOWER + $ | $ + UPPER + $ | $ + DIGIT + $ | $ + SPECIAL + $)$;
 	DEFINE CAPITAL_WORD UPPER + CHAR + $*$;
 	DEFINE SMALL_WORD   LOWER + CHAR + $*$;
