@@ -22,6 +22,7 @@ TOKENS {
 	DEFINE FRAGMENT CHAR $($ + LOWER + $ | $ + UPPER + $ | $ + DIGIT + $ | $ + SPECIAL + $)$;
 	DEFINE CAPITAL_WORD UPPER + CHAR + $*$;
 	DEFINE SMALL_WORD   LOWER + CHAR + $*$;
+	DEFINE ANONYMOUS $'_'($ + CAPITAL_WORD + $)?$;
 	DEFINE SL_COMMENT $'%'(~('\n'|'\r'|'\uffff'))*$;
 }
 
@@ -34,6 +35,7 @@ RULES {
 	TermList ::= term ("," term)*;
 	Numeral ::= value[FLOAT];
 	Variable ::= name[CAPITAL_WORD];
+	AnonymousVariable ::= text[ANONYMOUS];
 	Structure ::= atom "("termList")";
 	SmallAtom ::= text[SMALL_WORD];
 	String ::= text['\'','\''];
