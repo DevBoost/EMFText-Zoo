@@ -1,4 +1,4 @@
-SYNTAXDEF prolog
+SYNTAXDEF pl
 FOR <http://www.emftext.org/language/prolog>
 START PrologProgram
 
@@ -7,7 +7,6 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	//defaultTokenName = "IDENTIFIER";
 	reloadGeneratorModel = "true";
-	disableTokenSorting = "true";
 }
 
 
@@ -29,11 +28,11 @@ TOKENS {
 
 RULES {
 	PrologProgram ::= clauseList;
-	ClauseList ::= clauseList? clause;
+	ClauseList ::= clause+;
 	Clause ::= predicate ( ":-" predicateList)? ".";
-	PredicateList ::= (predicateList ",")? predicate;
+	PredicateList ::= predicate ("," predicate)*;
 	Predicate ::= atom ("("termList")")?;
-	TermList ::= (termList ",")? term;
+	TermList ::= term ("," term)*;
 	Numeral ::= value[FLOAT];
 	Variable ::= name[CAPITAL_WORD];
 	Structure ::= atom "("termList")";
