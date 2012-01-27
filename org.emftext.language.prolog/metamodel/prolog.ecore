@@ -10,14 +10,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Clause">
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" lowerBound="1"
         eType="#//Predicate" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="predicateList" eType="#//PredicateList"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conjunction" eType="#//Conjunction"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//RHS"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PredicateList">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" lowerBound="1"
-        upperBound="-1" eType="#//Predicate" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" abstract="true" eSuperTypes="#//Term"/>
   <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true"/>
@@ -26,12 +20,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Term #//Tail">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Structure" eSuperTypes="#//Term">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="atom" lowerBound="1" eType="#//Atom"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" lowerBound="1" upperBound="-1"
-        eType="#//Term" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SmallAtom" eSuperTypes="#//Atom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -44,7 +32,7 @@
         eType="#//Term" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//Tail" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Predicate">
+  <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="#//Part #//Term">
     <eStructuralFeatures xsi:type="ecore:EReference" name="atom" lowerBound="1" eType="#//Atom"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
@@ -59,13 +47,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tail" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Term">
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Part">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//VariableReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" eType="#//Term"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RHS" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Conjunction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" lowerBound="1" upperBound="-1"
         eType="#//Part" containment="true"/>
   </eClassifiers>

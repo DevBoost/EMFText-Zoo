@@ -29,13 +29,12 @@ TOKENS {
 
 RULES {
 	PrologProgram ::= clauses+;
-	Clause ::= predicate ( ":-" predicateList)? ".";
-	PredicateList ::= predicate ("," predicate)*;
+	Clause ::= predicate ( ":-" conjunction)? ".";
+	Conjunction ::= parts ("," parts)*;
 	Predicate ::= atom ("(" terms ("," terms)* ")")?;
 	Numeral ::= value[FLOAT];
 	Variable ::= name[CAPITAL_WORD];
 	AnonymousVariable ::= text[ANONYMOUS];
-	Structure ::= atom "(" terms ("," terms)* ")";
 	SmallAtom ::= text[SMALL_WORD];
 	String ::= text['\'','\''];
 	VariableReference ::= variable[CAPITAL_WORD];
