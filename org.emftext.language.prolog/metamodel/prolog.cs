@@ -31,13 +31,14 @@ RULES {
 	PrologProgram ::= clauses+;
 	Clause ::= predicate ( ":-" predicateList)? ".";
 	PredicateList ::= predicate ("," predicate)*;
-	Predicate ::= atom ("("termList")")?;
-	TermList ::= term ("," term)*;
+	Predicate ::= atom ("(" terms ("," terms)* ")")?;
 	Numeral ::= value[FLOAT];
 	Variable ::= name[CAPITAL_WORD];
 	AnonymousVariable ::= text[ANONYMOUS];
-	Structure ::= atom "("termList")";
+	Structure ::= atom "(" terms ("," terms)* ")";
 	SmallAtom ::= text[SMALL_WORD];
 	String ::= text['\'','\''];
 	VariableReference ::= variable[CAPITAL_WORD];
+	List ::= "[" (headTerms ("," headTerms)* ("|" tail)? )? "]";
+	Assignment ::= variable "is" term;
 }

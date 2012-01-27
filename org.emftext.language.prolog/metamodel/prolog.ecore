@@ -12,6 +12,8 @@
         eType="#//Predicate" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicateList" eType="#//PredicateList"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//RHS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" lowerBound="1"
@@ -22,14 +24,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Numeral" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Term">
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Term #//Tail">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Structure" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EReference" name="atom" lowerBound="1" eType="#//Atom"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="termList" lowerBound="1"
-        eType="#//TermList" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" lowerBound="1" upperBound="-1"
+        eType="#//Term" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SmallAtom" eSuperTypes="#//Atom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -37,15 +39,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="#//Atom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="List" eSuperTypes="#//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="List" eSuperTypes="#//Term #//Tail">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headTerms" upperBound="-1"
+        eType="#//Term" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//Tail" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Predicate">
     <eStructuralFeatures xsi:type="ecore:EReference" name="atom" lowerBound="1" eType="#//Atom"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="termList" eType="#//TermList"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TermList">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
         eType="#//Term" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Term">
@@ -56,6 +58,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="AnonymousVariable" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Head"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Tail"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Tail" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//VariableReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" eType="#//Term"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RHS" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" lowerBound="1" upperBound="-1"
+        eType="#//Part" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Part" abstract="true"/>
 </ecore:EPackage>
