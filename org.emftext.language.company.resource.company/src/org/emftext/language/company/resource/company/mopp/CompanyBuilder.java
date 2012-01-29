@@ -16,6 +16,9 @@ package org.emftext.language.company.resource.company.mopp;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -179,4 +182,7 @@ org.emftext.language.company.resource.company.ICompanyBuilder {
 		return sl;
 	}
 
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
