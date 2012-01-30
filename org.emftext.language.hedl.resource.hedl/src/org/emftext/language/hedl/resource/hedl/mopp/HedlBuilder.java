@@ -1,9 +1,16 @@
-/**
- * <copyright>
- * </copyright>
- *
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
  * 
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany 
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.language.hedl.resource.hedl.mopp;
 
 import java.io.File;
@@ -16,6 +23,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -30,7 +38,6 @@ import org.emftext.language.hedl.codegen.HEDLCodegenConstants;
 import org.emftext.language.hedl.codegen.HEDLGenerator;
 import org.emftext.language.hedl.codegen.ImportsOrganizer;
 import org.emftext.language.hedl.resource.hedl.util.HedlStringUtil;
-
 
 public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHedlBuilder {
 	
@@ -165,5 +172,9 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 			}
 		}
 		return false;
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
