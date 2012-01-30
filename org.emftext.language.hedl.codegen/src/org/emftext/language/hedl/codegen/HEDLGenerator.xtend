@@ -66,7 +66,6 @@ class HEDLGenerator {
 		public interface IDBOperationsBase {
 			
 			«FOR entity : entityModel.entities »
-		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
@@ -292,7 +291,6 @@ class HEDLGenerator {
 			}
 
 			«FOR entity : entityModel.entities »
-		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
@@ -567,7 +565,6 @@ class HEDLGenerator {
 			}
 			
 			«FOR entity : entityModel.entities »
-		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var toOneProperties = entity.properties.filter(p | p.type instanceof Entity && !p.toMultiplicity && !p.unique) »
@@ -743,7 +740,6 @@ class HEDLGenerator {
 			public final static String FIELD__«property.name.toUpperCase» = getField(«entity.name».class, "«property.name»");
 			«ENDFOR»
 			
-		«var readOnlyProperties = entity.properties.filter(p | p.readonly) »
 		«var uniqueProperties = entity.properties.filter(p | p.unique) »
 		«var enumProperties = entity.properties.filter(p | p.type instanceof org.emftext.language.hedl.Enum && !p.unique) »
 		«var dateProperties = entity.properties.filter(p | typeof(java.util.Date).getName().equals(p.type?.getJavaClassname()) && !p.unique) »

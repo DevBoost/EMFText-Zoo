@@ -1,16 +1,15 @@
 package org.emftext.language.hedl.codegen;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.emftext.language.hedl.Constraint;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
-import org.emftext.language.hedl.Enum;
 import org.emftext.language.hedl.EnumLiteral;
 import org.emftext.language.hedl.JavaType;
 import org.emftext.language.hedl.Property;
@@ -21,7 +20,7 @@ import org.emftext.language.hedl.types.HedlBuiltinTypes;
 
 @SuppressWarnings("all")
 public class HEDLGenerator {
-  public StringConcatenation generateICommand(final String packageName) {
+  public CharSequence generateICommand(final String packageName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -51,7 +50,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateOngoingShutdownException(final String packageName) {
+  public CharSequence generateOngoingShutdownException(final String packageName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -74,7 +73,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateIDBOperations(final String packageName) {
+  public CharSequence generateIDBOperations(final String packageName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -103,7 +102,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateIDBOperationsBase(final String packageName, final EntityModel entityModel) {
+  public CharSequence generateIDBOperationsBase(final String packageName, final EntityModel entityModel) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -131,8 +130,8 @@ public class HEDLGenerator {
     }
     _builder.newLine();
     {
-      EList<Enum> _enums = entityModel.getEnums();
-      for(final Enum otherEnum : _enums) {
+      EList<org.emftext.language.hedl.Enum> _enums = entityModel.getEnums();
+      for(final org.emftext.language.hedl.Enum otherEnum : _enums) {
         _builder.append("import ");
         _builder.append(packageName, "");
         _builder.append(".");
@@ -157,43 +156,33 @@ public class HEDLGenerator {
         EList<Property> _properties = entity.getProperties();
         final Function1<Property,Boolean> _function = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
-              boolean _isReadonly = p.isReadonly();
-              return ((Boolean)_isReadonly);
+              boolean _isUnique = p.isUnique();
+              return Boolean.valueOf(_isUnique);
             }
           };
         Iterable<Property> _filter = IterableExtensions.<Property>filter(_properties, _function);
-        Iterable<Property> readOnlyProperties = _filter;
+        Iterable<Property> uniqueProperties = _filter;
         _builder.newLineIfNotEmpty();
         EList<Property> _properties_1 = entity.getProperties();
         final Function1<Property,Boolean> _function_1 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
-              boolean _isUnique = p.isUnique();
-              return ((Boolean)_isUnique);
-            }
-          };
-        Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_1, _function_1);
-        Iterable<Property> uniqueProperties = _filter_1;
-        _builder.newLineIfNotEmpty();
-        EList<Property> _properties_2 = entity.getProperties();
-        final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
-            public Boolean apply(final Property p) {
               boolean _operator_and = false;
               Type _type = p.getType();
-              if (!(_type instanceof Enum)) {
+              if (!(_type instanceof org.emftext.language.hedl.Enum)) {
                 _operator_and = false;
               } else {
                 boolean _isUnique = p.isUnique();
                 boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
-                _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+                _operator_and = BooleanExtensions.operator_and((_type instanceof org.emftext.language.hedl.Enum), _operator_not);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
-        Iterable<Property> enumProperties = _filter_2;
+        Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_1, _function_1);
+        Iterable<Property> enumProperties = _filter_1;
         _builder.newLineIfNotEmpty();
-        EList<Property> _properties_3 = entity.getProperties();
-        final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_2 = entity.getProperties();
+        final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _operator_and = false;
               boolean _operator_and_1 = false;
@@ -212,14 +201,14 @@ public class HEDLGenerator {
                 boolean _operator_not_1 = BooleanExtensions.operator_not(_isUnique);
                 _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_not_1);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_3, _function_3);
-        Iterable<Property> toOneProperties = _filter_3;
+        Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
+        Iterable<Property> toOneProperties = _filter_2;
         _builder.newLineIfNotEmpty();
-        EList<Property> _properties_4 = entity.getProperties();
-        final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_3 = entity.getProperties();
+        final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _operator_and = false;
               String _name = java.util.Date.class.getName();
@@ -233,11 +222,11 @@ public class HEDLGenerator {
                 boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
                 _operator_and = BooleanExtensions.operator_and(_equals, _operator_not);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_4, _function_4);
-        Iterable<Property> dateProperties = _filter_4;
+        Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_3, _function_3);
+        Iterable<Property> dateProperties = _filter_3;
         _builder.newLineIfNotEmpty();
         EList<Property> _constructorProperties = entity.getConstructorProperties();
         EList<Property> constructorProperties = _constructorProperties;
@@ -424,8 +413,8 @@ public class HEDLGenerator {
                 _builder.append(_name_23, "	");
                 _builder.append("By");
                 {
-                  EList<Property> _properties_5 = uniqueConstraint.getProperties();
-                  for(final Property property_3 : _properties_5) {
+                  EList<Property> _properties_4 = uniqueConstraint.getProperties();
+                  for(final Property property_3 : _properties_4) {
                     String _name_24 = property_3.getName();
                     String _firstUpper_2 = StringExtensions.toFirstUpper(_name_24);
                     _builder.append(_firstUpper_2, "	");
@@ -433,8 +422,8 @@ public class HEDLGenerator {
                 }
                 _builder.append("(");
                 {
-                  EList<Property> _properties_6 = uniqueConstraint.getProperties();
-                  for(final Property property_4 : _properties_6) {
+                  EList<Property> _properties_5 = uniqueConstraint.getProperties();
+                  for(final Property property_4 : _properties_5) {
                     Type _type_3 = property_4.getType();
                     String _javaClassname_3 = _type_3.getJavaClassname();
                     _builder.append(_javaClassname_3, "	");
@@ -442,8 +431,8 @@ public class HEDLGenerator {
                     String _name_25 = property_4.getName();
                     _builder.append(_name_25, "	");
                     {
-                      EList<Property> _properties_7 = uniqueConstraint.getProperties();
-                      Property _last_1 = IterableExtensions.<Property>last(_properties_7);
+                      EList<Property> _properties_6 = uniqueConstraint.getProperties();
+                      Property _last_1 = IterableExtensions.<Property>last(_properties_6);
                       boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_last_1, property_4);
                       if (_operator_notEquals_1) {
                         _builder.append(", ");
@@ -628,15 +617,15 @@ public class HEDLGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
-        EList<Property> _properties_8 = entity.getProperties();
-        final Function1<Property,Boolean> _function_5 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_7 = entity.getProperties();
+        final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _isToOneReference = p.isToOneReference();
-              return ((Boolean)_isToOneReference);
+              return Boolean.valueOf(_isToOneReference);
             }
           };
-        Iterable<Property> _filter_5 = IterableExtensions.<Property>filter(_properties_8, _function_5);
-        Iterable<Property> toOneReferences = _filter_5;
+        Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_7, _function_4);
+        Iterable<Property> toOneReferences = _filter_4;
         _builder.newLineIfNotEmpty();
         {
           for(final Property toOneReference : toOneReferences) {
@@ -725,7 +714,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateMainDAO(final String packageName, final String className) {
+  public CharSequence generateMainDAO(final String packageName, final String className) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -769,7 +758,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateMainDAOBase(final String packageName, final String className, final EntityModel entityModel) {
+  public CharSequence generateMainDAOBase(final String packageName, final String className, final EntityModel entityModel) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -835,8 +824,8 @@ public class HEDLGenerator {
     }
     _builder.newLine();
     {
-      EList<Enum> _enums = entityModel.getEnums();
-      for(final Enum otherEnum : _enums) {
+      EList<org.emftext.language.hedl.Enum> _enums = entityModel.getEnums();
+      for(final org.emftext.language.hedl.Enum otherEnum : _enums) {
         _builder.append("import ");
         _builder.append(packageName, "");
         _builder.append(".");
@@ -1090,43 +1079,33 @@ public class HEDLGenerator {
         EList<Property> _properties = entity_1.getProperties();
         final Function1<Property,Boolean> _function = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
-              boolean _isReadonly = p.isReadonly();
-              return ((Boolean)_isReadonly);
+              boolean _isUnique = p.isUnique();
+              return Boolean.valueOf(_isUnique);
             }
           };
         Iterable<Property> _filter = IterableExtensions.<Property>filter(_properties, _function);
-        Iterable<Property> readOnlyProperties = _filter;
+        Iterable<Property> uniqueProperties = _filter;
         _builder.newLineIfNotEmpty();
         EList<Property> _properties_1 = entity_1.getProperties();
         final Function1<Property,Boolean> _function_1 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
-              boolean _isUnique = p.isUnique();
-              return ((Boolean)_isUnique);
-            }
-          };
-        Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_1, _function_1);
-        Iterable<Property> uniqueProperties = _filter_1;
-        _builder.newLineIfNotEmpty();
-        EList<Property> _properties_2 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
-            public Boolean apply(final Property p) {
               boolean _operator_and = false;
               Type _type = p.getType();
-              if (!(_type instanceof Enum)) {
+              if (!(_type instanceof org.emftext.language.hedl.Enum)) {
                 _operator_and = false;
               } else {
                 boolean _isUnique = p.isUnique();
                 boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
-                _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+                _operator_and = BooleanExtensions.operator_and((_type instanceof org.emftext.language.hedl.Enum), _operator_not);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
-        Iterable<Property> enumProperties = _filter_2;
+        Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_1, _function_1);
+        Iterable<Property> enumProperties = _filter_1;
         _builder.newLineIfNotEmpty();
-        EList<Property> _properties_3 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_2 = entity_1.getProperties();
+        final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _operator_and = false;
               boolean _operator_and_1 = false;
@@ -1145,14 +1124,14 @@ public class HEDLGenerator {
                 boolean _operator_not_1 = BooleanExtensions.operator_not(_isUnique);
                 _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_not_1);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_3, _function_3);
-        Iterable<Property> toOneProperties = _filter_3;
+        Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
+        Iterable<Property> toOneProperties = _filter_2;
         _builder.newLineIfNotEmpty();
-        EList<Property> _properties_4 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_3 = entity_1.getProperties();
+        final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _operator_and = false;
               String _name = java.util.Date.class.getName();
@@ -1166,11 +1145,11 @@ public class HEDLGenerator {
                 boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
                 _operator_and = BooleanExtensions.operator_and(_equals, _operator_not);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_4, _function_4);
-        Iterable<Property> dateProperties = _filter_4;
+        Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_3, _function_3);
+        Iterable<Property> dateProperties = _filter_3;
         _builder.newLineIfNotEmpty();
         EList<Property> _constructorProperties = entity_1.getConstructorProperties();
         EList<Property> constructorProperties = _constructorProperties;
@@ -1636,8 +1615,8 @@ public class HEDLGenerator {
                 _builder.append(_name_52, "	");
                 _builder.append("By");
                 {
-                  EList<Property> _properties_5 = uniqueConstraint.getProperties();
-                  for(final Property property_5 : _properties_5) {
+                  EList<Property> _properties_4 = uniqueConstraint.getProperties();
+                  for(final Property property_5 : _properties_4) {
                     String _name_53 = property_5.getName();
                     String _firstUpper_6 = StringExtensions.toFirstUpper(_name_53);
                     _builder.append(_firstUpper_6, "	");
@@ -1645,8 +1624,8 @@ public class HEDLGenerator {
                 }
                 _builder.append("(");
                 {
-                  EList<Property> _properties_6 = uniqueConstraint.getProperties();
-                  for(final Property property_6 : _properties_6) {
+                  EList<Property> _properties_5 = uniqueConstraint.getProperties();
+                  for(final Property property_6 : _properties_5) {
                     _builder.append("final ");
                     Type _type_4 = property_6.getType();
                     String _javaClassname_4 = _type_4.getJavaClassname();
@@ -1655,8 +1634,8 @@ public class HEDLGenerator {
                     String _name_54 = property_6.getName();
                     _builder.append(_name_54, "	");
                     {
-                      EList<Property> _properties_7 = uniqueConstraint.getProperties();
-                      Property _last_2 = IterableExtensions.<Property>last(_properties_7);
+                      EList<Property> _properties_6 = uniqueConstraint.getProperties();
+                      Property _last_2 = IterableExtensions.<Property>last(_properties_6);
                       boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_last_2, property_6);
                       if (_operator_notEquals_2) {
                         _builder.append(", ");
@@ -1694,8 +1673,8 @@ public class HEDLGenerator {
                 _builder.append(_name_57, "				");
                 _builder.append("By");
                 {
-                  EList<Property> _properties_8 = uniqueConstraint.getProperties();
-                  for(final Property property_7 : _properties_8) {
+                  EList<Property> _properties_7 = uniqueConstraint.getProperties();
+                  for(final Property property_7 : _properties_7) {
                     String _name_58 = property_7.getName();
                     String _firstUpper_7 = StringExtensions.toFirstUpper(_name_58);
                     _builder.append(_firstUpper_7, "				");
@@ -1703,13 +1682,13 @@ public class HEDLGenerator {
                 }
                 _builder.append("(");
                 {
-                  EList<Property> _properties_9 = uniqueConstraint.getProperties();
-                  for(final Property property_8 : _properties_9) {
+                  EList<Property> _properties_8 = uniqueConstraint.getProperties();
+                  for(final Property property_8 : _properties_8) {
                     String _name_59 = property_8.getName();
                     _builder.append(_name_59, "				");
                     {
-                      EList<Property> _properties_10 = uniqueConstraint.getProperties();
-                      Property _last_3 = IterableExtensions.<Property>last(_properties_10);
+                      EList<Property> _properties_9 = uniqueConstraint.getProperties();
+                      Property _last_3 = IterableExtensions.<Property>last(_properties_9);
                       boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_last_3, property_8);
                       if (_operator_notEquals_3) {
                         _builder.append(", ");
@@ -2030,15 +2009,15 @@ public class HEDLGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
-        EList<Property> _properties_11 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_5 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_10 = entity_1.getProperties();
+        final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _isToOneReference = p.isToOneReference();
-              return ((Boolean)_isToOneReference);
+              return Boolean.valueOf(_isToOneReference);
             }
           };
-        Iterable<Property> _filter_5 = IterableExtensions.<Property>filter(_properties_11, _function_5);
-        Iterable<Property> toOneReferences = _filter_5;
+        Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_10, _function_4);
+        Iterable<Property> toOneReferences = _filter_4;
         _builder.newLineIfNotEmpty();
         {
           for(final Property toOneReference : toOneReferences) {
@@ -2227,7 +2206,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateOperationProvider(final String packageName) {
+  public CharSequence generateOperationProvider(final String packageName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -2267,7 +2246,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateOperationProviderBase(final String packageName, final EntityModel entityModel) {
+  public CharSequence generateOperationProviderBase(final String packageName, final EntityModel entityModel) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -2317,8 +2296,8 @@ public class HEDLGenerator {
       }
     }
     {
-      EList<Enum> _enums = entityModel.getEnums();
-      for(final Enum otherEnum : _enums) {
+      EList<org.emftext.language.hedl.Enum> _enums = entityModel.getEnums();
+      for(final org.emftext.language.hedl.Enum otherEnum : _enums) {
         _builder.append("import ");
         _builder.append(packageName, "");
         _builder.append(".");
@@ -2401,43 +2380,33 @@ public class HEDLGenerator {
         EList<Property> _properties = entity_1.getProperties();
         final Function1<Property,Boolean> _function = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
-              boolean _isReadonly = p.isReadonly();
-              return ((Boolean)_isReadonly);
+              boolean _isUnique = p.isUnique();
+              return Boolean.valueOf(_isUnique);
             }
           };
         Iterable<Property> _filter = IterableExtensions.<Property>filter(_properties, _function);
-        Iterable<Property> readOnlyProperties = _filter;
+        Iterable<Property> uniqueProperties = _filter;
         _builder.newLineIfNotEmpty();
         EList<Property> _properties_1 = entity_1.getProperties();
         final Function1<Property,Boolean> _function_1 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
-              boolean _isUnique = p.isUnique();
-              return ((Boolean)_isUnique);
-            }
-          };
-        Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_1, _function_1);
-        Iterable<Property> uniqueProperties = _filter_1;
-        _builder.newLineIfNotEmpty();
-        EList<Property> _properties_2 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
-            public Boolean apply(final Property p) {
               boolean _operator_and = false;
               Type _type = p.getType();
-              if (!(_type instanceof Enum)) {
+              if (!(_type instanceof org.emftext.language.hedl.Enum)) {
                 _operator_and = false;
               } else {
                 boolean _isUnique = p.isUnique();
                 boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
-                _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+                _operator_and = BooleanExtensions.operator_and((_type instanceof org.emftext.language.hedl.Enum), _operator_not);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
-        Iterable<Property> enumProperties = _filter_2;
+        Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_1, _function_1);
+        Iterable<Property> enumProperties = _filter_1;
         _builder.newLineIfNotEmpty();
-        EList<Property> _properties_3 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_2 = entity_1.getProperties();
+        final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _operator_and = false;
               boolean _operator_and_1 = false;
@@ -2456,14 +2425,14 @@ public class HEDLGenerator {
                 boolean _operator_not_1 = BooleanExtensions.operator_not(_isUnique);
                 _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_not_1);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_3, _function_3);
-        Iterable<Property> toOneProperties = _filter_3;
+        Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_2, _function_2);
+        Iterable<Property> toOneProperties = _filter_2;
         _builder.newLineIfNotEmpty();
-        EList<Property> _properties_4 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_3 = entity_1.getProperties();
+        final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _operator_and = false;
               String _name = java.util.Date.class.getName();
@@ -2477,11 +2446,11 @@ public class HEDLGenerator {
                 boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
                 _operator_and = BooleanExtensions.operator_and(_equals, _operator_not);
               }
-              return ((Boolean)_operator_and);
+              return Boolean.valueOf(_operator_and);
             }
           };
-        Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_4, _function_4);
-        Iterable<Property> dateProperties = _filter_4;
+        Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_3, _function_3);
+        Iterable<Property> dateProperties = _filter_3;
         _builder.newLineIfNotEmpty();
         EList<Property> _constructorProperties = entity_1.getConstructorProperties();
         EList<Property> constructorProperties = _constructorProperties;
@@ -2798,8 +2767,8 @@ public class HEDLGenerator {
                 _builder.append(_name_47, "	");
                 _builder.append("By");
                 {
-                  EList<Property> _properties_5 = uniqueConstraint.getProperties();
-                  for(final Property property_5 : _properties_5) {
+                  EList<Property> _properties_4 = uniqueConstraint.getProperties();
+                  for(final Property property_5 : _properties_4) {
                     String _name_48 = property_5.getName();
                     String _firstUpper_6 = StringExtensions.toFirstUpper(_name_48);
                     _builder.append(_firstUpper_6, "	");
@@ -2807,8 +2776,8 @@ public class HEDLGenerator {
                 }
                 _builder.append("(");
                 {
-                  EList<Property> _properties_6 = uniqueConstraint.getProperties();
-                  for(final Property property_6 : _properties_6) {
+                  EList<Property> _properties_5 = uniqueConstraint.getProperties();
+                  for(final Property property_6 : _properties_5) {
                     Type _type_4 = property_6.getType();
                     String _javaClassname_4 = _type_4.getJavaClassname();
                     _builder.append(_javaClassname_4, "	");
@@ -2816,8 +2785,8 @@ public class HEDLGenerator {
                     String _name_49 = property_6.getName();
                     _builder.append(_name_49, "	");
                     {
-                      EList<Property> _properties_7 = uniqueConstraint.getProperties();
-                      Property _last_1 = IterableExtensions.<Property>last(_properties_7);
+                      EList<Property> _properties_6 = uniqueConstraint.getProperties();
+                      Property _last_1 = IterableExtensions.<Property>last(_properties_6);
                       boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_last_1, property_6);
                       if (_operator_notEquals_1) {
                         _builder.append(", ");
@@ -2837,8 +2806,8 @@ public class HEDLGenerator {
                 _builder.append(_firstLower_8, "		");
                 _builder.append("DAO.getBy");
                 {
-                  EList<Property> _properties_8 = uniqueConstraint.getProperties();
-                  for(final Property property_7 : _properties_8) {
+                  EList<Property> _properties_7 = uniqueConstraint.getProperties();
+                  for(final Property property_7 : _properties_7) {
                     String _name_52 = property_7.getName();
                     String _firstUpper_7 = StringExtensions.toFirstUpper(_name_52);
                     _builder.append(_firstUpper_7, "		");
@@ -2846,13 +2815,13 @@ public class HEDLGenerator {
                 }
                 _builder.append("(session, ");
                 {
-                  EList<Property> _properties_9 = uniqueConstraint.getProperties();
-                  for(final Property property_8 : _properties_9) {
+                  EList<Property> _properties_8 = uniqueConstraint.getProperties();
+                  for(final Property property_8 : _properties_8) {
                     String _name_53 = property_8.getName();
                     _builder.append(_name_53, "		");
                     {
-                      EList<Property> _properties_10 = uniqueConstraint.getProperties();
-                      Property _last_2 = IterableExtensions.<Property>last(_properties_10);
+                      EList<Property> _properties_9 = uniqueConstraint.getProperties();
+                      Property _last_2 = IterableExtensions.<Property>last(_properties_9);
                       boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_last_2, property_8);
                       if (_operator_notEquals_2) {
                         _builder.append(", ");
@@ -3071,15 +3040,15 @@ public class HEDLGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
-        EList<Property> _properties_11 = entity_1.getProperties();
-        final Function1<Property,Boolean> _function_5 = new Function1<Property,Boolean>() {
+        EList<Property> _properties_10 = entity_1.getProperties();
+        final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
             public Boolean apply(final Property p) {
               boolean _isToOneReference = p.isToOneReference();
-              return ((Boolean)_isToOneReference);
+              return Boolean.valueOf(_isToOneReference);
             }
           };
-        Iterable<Property> _filter_5 = IterableExtensions.<Property>filter(_properties_11, _function_5);
-        Iterable<Property> toOneReferences = _filter_5;
+        Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_10, _function_4);
+        Iterable<Property> toOneReferences = _filter_4;
         _builder.newLineIfNotEmpty();
         {
           for(final Property toOneReference : toOneReferences) {
@@ -3247,7 +3216,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateEntityDAO(final String packageName, final Entity entity) {
+  public CharSequence generateEntityDAO(final String packageName, final Entity entity) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -3292,8 +3261,8 @@ public class HEDLGenerator {
     _builder.newLine();
     {
       EntityModel _entityModel_1 = entity.getEntityModel();
-      EList<Enum> _enums = _entityModel_1.getEnums();
-      for(final Enum otherEnum : _enums) {
+      EList<org.emftext.language.hedl.Enum> _enums = _entityModel_1.getEnums();
+      for(final org.emftext.language.hedl.Enum otherEnum : _enums) {
         _builder.append("import ");
         _builder.append(packageName, "");
         _builder.append(".");
@@ -3371,43 +3340,33 @@ public class HEDLGenerator {
     EList<Property> _properties_1 = entity.getProperties();
     final Function1<Property,Boolean> _function = new Function1<Property,Boolean>() {
         public Boolean apply(final Property p) {
-          boolean _isReadonly = p.isReadonly();
-          return ((Boolean)_isReadonly);
+          boolean _isUnique = p.isUnique();
+          return Boolean.valueOf(_isUnique);
         }
       };
     Iterable<Property> _filter = IterableExtensions.<Property>filter(_properties_1, _function);
-    Iterable<Property> readOnlyProperties = _filter;
+    Iterable<Property> uniqueProperties = _filter;
     _builder.newLineIfNotEmpty();
     EList<Property> _properties_2 = entity.getProperties();
     final Function1<Property,Boolean> _function_1 = new Function1<Property,Boolean>() {
         public Boolean apply(final Property p) {
-          boolean _isUnique = p.isUnique();
-          return ((Boolean)_isUnique);
-        }
-      };
-    Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_2, _function_1);
-    Iterable<Property> uniqueProperties = _filter_1;
-    _builder.newLineIfNotEmpty();
-    EList<Property> _properties_3 = entity.getProperties();
-    final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
-        public Boolean apply(final Property p) {
           boolean _operator_and = false;
           Type _type = p.getType();
-          if (!(_type instanceof Enum)) {
+          if (!(_type instanceof org.emftext.language.hedl.Enum)) {
             _operator_and = false;
           } else {
             boolean _isUnique = p.isUnique();
             boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
-            _operator_and = BooleanExtensions.operator_and((_type instanceof Enum), _operator_not);
+            _operator_and = BooleanExtensions.operator_and((_type instanceof org.emftext.language.hedl.Enum), _operator_not);
           }
-          return ((Boolean)_operator_and);
+          return Boolean.valueOf(_operator_and);
         }
       };
-    Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_3, _function_2);
-    Iterable<Property> enumProperties = _filter_2;
+    Iterable<Property> _filter_1 = IterableExtensions.<Property>filter(_properties_2, _function_1);
+    Iterable<Property> enumProperties = _filter_1;
     _builder.newLineIfNotEmpty();
-    EList<Property> _properties_4 = entity.getProperties();
-    final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
+    EList<Property> _properties_3 = entity.getProperties();
+    final Function1<Property,Boolean> _function_2 = new Function1<Property,Boolean>() {
         public Boolean apply(final Property p) {
           boolean _operator_and = false;
           String _name = java.util.Date.class.getName();
@@ -3421,14 +3380,14 @@ public class HEDLGenerator {
             boolean _operator_not = BooleanExtensions.operator_not(_isUnique);
             _operator_and = BooleanExtensions.operator_and(_equals, _operator_not);
           }
-          return ((Boolean)_operator_and);
+          return Boolean.valueOf(_operator_and);
         }
       };
-    Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_4, _function_3);
-    Iterable<Property> dateProperties = _filter_3;
+    Iterable<Property> _filter_2 = IterableExtensions.<Property>filter(_properties_3, _function_2);
+    Iterable<Property> dateProperties = _filter_2;
     _builder.newLineIfNotEmpty();
-    EList<Property> _properties_5 = entity.getProperties();
-    final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
+    EList<Property> _properties_4 = entity.getProperties();
+    final Function1<Property,Boolean> _function_3 = new Function1<Property,Boolean>() {
         public Boolean apply(final Property p) {
           boolean _operator_and = false;
           boolean _operator_and_1 = false;
@@ -3447,11 +3406,11 @@ public class HEDLGenerator {
             boolean _operator_not_1 = BooleanExtensions.operator_not(_isUnique);
             _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_not_1);
           }
-          return ((Boolean)_operator_and);
+          return Boolean.valueOf(_operator_and);
         }
       };
-    Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_5, _function_4);
-    Iterable<Property> toOneProperties = _filter_4;
+    Iterable<Property> _filter_3 = IterableExtensions.<Property>filter(_properties_4, _function_3);
+    Iterable<Property> toOneProperties = _filter_3;
     _builder.newLineIfNotEmpty();
     EList<Property> _constructorProperties = entity.getConstructorProperties();
     EList<Property> constructorProperties = _constructorProperties;
@@ -3746,8 +3705,8 @@ public class HEDLGenerator {
             _builder.append(_name_39, "	");
             _builder.append(" getBy");
             {
-              EList<Property> _properties_6 = uniqueConstraint.getProperties();
-              for(final Property property_5 : _properties_6) {
+              EList<Property> _properties_5 = uniqueConstraint.getProperties();
+              for(final Property property_5 : _properties_5) {
                 String _name_40 = property_5.getName();
                 String _firstUpper_2 = StringExtensions.toFirstUpper(_name_40);
                 _builder.append(_firstUpper_2, "	");
@@ -3755,8 +3714,8 @@ public class HEDLGenerator {
             }
             _builder.append("(Session session, ");
             {
-              EList<Property> _properties_7 = uniqueConstraint.getProperties();
-              for(final Property property_6 : _properties_7) {
+              EList<Property> _properties_6 = uniqueConstraint.getProperties();
+              for(final Property property_6 : _properties_6) {
                 Type _type_3 = property_6.getType();
                 String _javaClassname_3 = _type_3.getJavaClassname();
                 _builder.append(_javaClassname_3, "	");
@@ -3764,8 +3723,8 @@ public class HEDLGenerator {
                 String _name_41 = property_6.getName();
                 _builder.append(_name_41, "	");
                 {
-                  EList<Property> _properties_8 = uniqueConstraint.getProperties();
-                  Property _last_1 = IterableExtensions.<Property>last(_properties_8);
+                  EList<Property> _properties_7 = uniqueConstraint.getProperties();
+                  Property _last_1 = IterableExtensions.<Property>last(_properties_7);
                   boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_last_1, property_6);
                   if (_operator_notEquals_1) {
                     _builder.append(", ");
@@ -3782,8 +3741,8 @@ public class HEDLGenerator {
             _builder.append(".class);");
             _builder.newLineIfNotEmpty();
             {
-              EList<Property> _properties_9 = uniqueConstraint.getProperties();
-              for(final Property property_7 : _properties_9) {
+              EList<Property> _properties_8 = uniqueConstraint.getProperties();
+              for(final Property property_7 : _properties_8) {
                 _builder.append("\t\t");
                 _builder.append("criteria = criteria.add(Restrictions.eq(FIELD__");
                 String _name_43 = property_7.getName();
@@ -4132,8 +4091,8 @@ public class HEDLGenerator {
     _builder.append("Disjunction disjunction = Restrictions.disjunction();");
     _builder.newLine();
     {
-      EList<Property> _properties_10 = entity.getProperties();
-      for(final Property property_11 : _properties_10) {
+      EList<Property> _properties_9 = entity.getProperties();
+      for(final Property property_11 : _properties_9) {
         {
           Type _type_7 = property_11.getType();
           String _javaClassname_7 = _type_7.getJavaClassname();
@@ -4177,15 +4136,15 @@ public class HEDLGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
-    EList<Property> _properties_11 = entity.getProperties();
-    final Function1<Property,Boolean> _function_5 = new Function1<Property,Boolean>() {
+    EList<Property> _properties_10 = entity.getProperties();
+    final Function1<Property,Boolean> _function_4 = new Function1<Property,Boolean>() {
         public Boolean apply(final Property p) {
           boolean _isToOneReference = p.isToOneReference();
-          return ((Boolean)_isToOneReference);
+          return Boolean.valueOf(_isToOneReference);
         }
       };
-    Iterable<Property> _filter_5 = IterableExtensions.<Property>filter(_properties_11, _function_5);
-    Iterable<Property> toOneReferences = _filter_5;
+    Iterable<Property> _filter_4 = IterableExtensions.<Property>filter(_properties_10, _function_4);
+    Iterable<Property> toOneReferences = _filter_4;
     _builder.newLineIfNotEmpty();
     {
       for(final Property toOneReference : toOneReferences) {
@@ -4246,8 +4205,8 @@ public class HEDLGenerator {
         _builder.append("Disjunction disjunction = Restrictions.disjunction();");
         _builder.newLine();
         {
-          EList<Property> _properties_12 = entity.getProperties();
-          for(final Property property_12 : _properties_12) {
+          EList<Property> _properties_11 = entity.getProperties();
+          for(final Property property_12 : _properties_11) {
             {
               Type _type_8 = property_12.getType();
               String _javaClassname_8 = _type_8.getJavaClassname();
@@ -4383,7 +4342,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateEntityBaseClass(final String packageName, final Entity entity) {
+  public CharSequence generateEntityBaseClass(final String packageName, final Entity entity) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");
@@ -4593,7 +4552,7 @@ public class HEDLGenerator {
         }
         {
           Type _type_2 = property_1.getType();
-          if ((_type_2 instanceof Enum)) {
+          if ((_type_2 instanceof org.emftext.language.hedl.Enum)) {
             _builder.append("\t");
             _builder.append("@Enumerated(EnumType.STRING)");
             _builder.newLine();
@@ -5033,7 +4992,8 @@ public class HEDLGenerator {
             _builder.newLine();
             _builder.append("\t");
             _builder.append("@Deprecated");
-            _builder.newLine();} else {
+            _builder.newLine();
+          } else {
             _builder.append("\t");
             _builder.append("/**");
             _builder.newLine();
@@ -5079,7 +5039,7 @@ public class HEDLGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateEnum(final String packageName, final Enum enumeration) {
+  public CharSequence generateEnum(final String packageName, final org.emftext.language.hedl.Enum enumeration) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     _builder.append(packageName, "");

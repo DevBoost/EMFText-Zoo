@@ -31,21 +31,21 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
 import org.emftext.language.hedl.codegen.HEDLCodegenConstants;
 import org.emftext.language.hedl.codegen.HEDLGenerator;
 import org.emftext.language.hedl.codegen.ImportsOrganizer;
+import org.emftext.language.hedl.resource.hedl.IHedlBuilder;
 import org.emftext.language.hedl.resource.hedl.util.HedlStringUtil;
 
-public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHedlBuilder {
+public class HedlBuilder implements IHedlBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		return !isInBinFolder(uri);
 	}
 	
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.hedl.resource.hedl.mopp.HedlResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus build(HedlResource resource, IProgressMonitor monitor) {
 		URI uri = resource.getURI();
 		String packageName = getPackageName(uri);
 		IFile modelFile = WorkspaceSynchronizer.getFile(resource);
@@ -69,7 +69,7 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 			if (next instanceof Entity) {
 				Entity entity = (Entity) next;
 				// generate entity base class
-				StringConcatenation result = generator.generateEntityBaseClass(packageName, entity);
+				CharSequence result = generator.generateEntityBaseClass(packageName, entity);
 				loc += saveGeneratedClass(entitiesFolder, result, entity.getName());
 				// generate entity DAO class
 				result = generator.generateEntityDAO(packageName, entity);
@@ -77,11 +77,11 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 			} else if (next instanceof org.emftext.language.hedl.Enum) {
 				org.emftext.language.hedl.Enum enumeration = (org.emftext.language.hedl.Enum) next;
 				// generate enum class
-				StringConcatenation result = generator.generateEnum(packageName, enumeration);
+				CharSequence result = generator.generateEnum(packageName, enumeration);
 				loc += saveGeneratedClass(entitiesFolder, result, enumeration.getName());
 			} else if (next instanceof EntityModel) {
 				EntityModel entityModel = (EntityModel) next;
-				StringConcatenation result = generator.generateIDBOperationsBase(packageName, entityModel);
+				CharSequence result = generator.generateIDBOperationsBase(packageName, entityModel);
 				loc += saveGeneratedClass(daoFolder, result, "IDBOperationsBase");
 				result = generator.generateIDBOperations(packageName);
 				loc += saveGeneratedClass(customFolder, result, "IDBOperations", false);
@@ -113,12 +113,12 @@ public class HedlBuilder implements org.emftext.language.hedl.resource.hedl.IHed
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
 
-	private int saveGeneratedClass(File modelFolderFile, StringConcatenation content,
+	private int saveGeneratedClass(File modelFolderFile, CharSequence content,
 			String classname) {
 		return saveGeneratedClass(modelFolderFile, content, classname, true);
 	}
 	
-	private int saveGeneratedClass(File modelFolderFile, StringConcatenation content,
+	private int saveGeneratedClass(File modelFolderFile, CharSequence content,
 			String classname, boolean override) {
 		int loc = 0;
 		File entityClassFile = new File(modelFolderFile, classname + ".java");
