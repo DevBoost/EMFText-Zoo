@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -14,18 +14,25 @@
 
 package org.emftext.language.formular.resource.formular.mopp;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.emftext.language.formular.resource.formular.IFormularBuilder;
 import org.emftext.language.formular.resource.formular.custom.FormsGenerator;
 
-public class FormularBuilder implements org.emftext.language.formular.resource.formular.IFormularBuilder {
+public class FormularBuilder implements IFormularBuilder {
 
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.formular.resource.formular.mopp.FormularResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus build(FormularResource resource, IProgressMonitor monitor) {
 		new FormsGenerator().process(resource.getContents());
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
 	}
 
 	public boolean isBuildingNeeded(URI uri) {
 		return true;
 	}
 
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
