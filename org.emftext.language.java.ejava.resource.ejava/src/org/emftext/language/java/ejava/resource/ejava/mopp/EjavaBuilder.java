@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -19,7 +19,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -30,25 +34,24 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.resource.ejava.EjavaEProblemType;
+import org.emftext.language.java.ejava.resource.ejava.IEjavaBuilder;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaTextPrinter;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.Statement;
 
-public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ejava.IEjavaBuilder {
+public class EjavaBuilder implements IEjavaBuilder {
 
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
-		// change this to return true to enable building of all resources
+	public boolean isBuildingNeeded(URI uri) {
+		// return true to enable building of all resources
 		return true;
 	}
 
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
-		EjavaMarkerHelper.unmark(resource,EjavaEProblemType.BUILDER_ERROR);
+	public IStatus build(EjavaResource resource, IProgressMonitor monitor) {
+		EjavaMarkerHelper.unmark(resource, EjavaEProblemType.BUILDER_ERROR);
 
 		if (!resource.getContents().isEmpty()) {
 			createBodyAnnotations(resource);
-
 		}
-		// set option overrideBuilder to 'false' and then perform build here
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
 
@@ -155,4 +158,7 @@ public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ej
 		return outputStream.toString();
 	}
 
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
