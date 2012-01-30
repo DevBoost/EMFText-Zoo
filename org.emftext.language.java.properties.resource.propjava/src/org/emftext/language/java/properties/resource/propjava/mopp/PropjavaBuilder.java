@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -16,6 +16,9 @@ package org.emftext.language.java.properties.resource.propjava.mopp;
 import java.io.IOException;
 import java.util.Collection;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -31,6 +34,7 @@ import org.emftext.language.java.parameters.OrdinaryParameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.properties.PropertiesPackage;
 import org.emftext.language.java.properties.Property;
+import org.emftext.language.java.properties.resource.propjava.IPropjavaBuilder;
 import org.emftext.language.java.properties.resource.propjava.util.PropjavaEObjectUtil;
 import org.emftext.language.java.properties.resource.propjava.util.PropjavaStringUtil;
 import org.emftext.language.java.references.IdentifierReference;
@@ -41,9 +45,9 @@ import org.emftext.language.java.statements.StatementsFactory;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 
-public class PropjavaBuilder implements org.emftext.language.java.properties.resource.propjava.IPropjavaBuilder {
+public class PropjavaBuilder implements IPropjavaBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		for (String segment : uri.segmentsList()) {
 			if (segment.toLowerCase().equals("bin")) {
 				return false;
@@ -52,7 +56,7 @@ public class PropjavaBuilder implements org.emftext.language.java.properties.res
 		return true;
 	}
 	
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.properties.resource.propjava.mopp.PropjavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus build(PropjavaResource resource, IProgressMonitor monitor) {
 		
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		Resource javaResource = resource.getResourceSet().createResource(javaURI);
@@ -148,5 +152,8 @@ public class PropjavaBuilder implements org.emftext.language.java.properties.res
 		field.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPrivate());
 		return field;
 	}
-	
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
