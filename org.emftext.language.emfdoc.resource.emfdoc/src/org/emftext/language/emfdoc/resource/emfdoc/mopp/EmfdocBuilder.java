@@ -15,9 +15,11 @@ package org.emftext.language.emfdoc.resource.emfdoc.mopp;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -58,5 +60,9 @@ public class EmfdocBuilder implements org.emftext.language.emfdoc.resource.emfdo
 		} catch (IOException e) {
 			return new Status(IStatus.ERROR, EmfdocPlugin.PLUGIN_ID, "Exception while adding documentation to Ecore model.");
 		}
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
