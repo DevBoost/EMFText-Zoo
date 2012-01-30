@@ -174,4 +174,8 @@ public class FunctionsBuilder implements IFunctionsBuilder {
 			FunctionsPlugin.logError(e.getMessage(), e);
 		}
 	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
