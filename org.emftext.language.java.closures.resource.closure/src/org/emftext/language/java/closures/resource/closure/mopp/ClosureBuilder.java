@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -13,65 +13,15 @@
  ******************************************************************************/
 package org.emftext.language.java.closures.resource.closure.mopp;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.classifiers.AnonymousClass;
-import org.emftext.language.java.classifiers.Classifier;
-import org.emftext.language.java.classifiers.ClassifiersFactory;
-import org.emftext.language.java.classifiers.Interface;
-import org.emftext.language.java.closures.AbstractClosure;
-import org.emftext.language.java.closures.AbstractClosureCall;
-import org.emftext.language.java.closures.Closure;
-import org.emftext.language.java.closures.ClosuresPackage;
-import org.emftext.language.java.closures.resource.closure.util.ClosureEObjectUtil;
-import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.ContainersFactory;
-import org.emftext.language.java.expressions.AssignmentExpression;
-import org.emftext.language.java.expressions.Expression;
-import org.emftext.language.java.imports.ClassifierImport;
-import org.emftext.language.java.imports.ImportsPackage;
-import org.emftext.language.java.instantiations.InstantiationsFactory;
-import org.emftext.language.java.instantiations.NewConstructorCall;
-import org.emftext.language.java.members.ClassMethod;
-import org.emftext.language.java.members.InterfaceMethod;
-import org.emftext.language.java.members.MembersFactory;
-import org.emftext.language.java.members.Method;
-import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
-import org.emftext.language.java.modifiers.ModifiersFactory;
-import org.emftext.language.java.modifiers.Private;
-import org.emftext.language.java.modifiers.Protected;
-import org.emftext.language.java.modifiers.Public;
-import org.emftext.language.java.parameters.Parameter;
-import org.emftext.language.java.references.IdentifierReference;
-import org.emftext.language.java.references.MethodCall;
-import org.emftext.language.java.references.ReferencesFactory;
-import org.emftext.language.java.references.ReferencesPackage;
-import org.emftext.language.java.resource.java.mopp.JavaResource;
-import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
-import org.emftext.language.java.statements.ExpressionStatement;
-import org.emftext.language.java.statements.Return;
-import org.emftext.language.java.statements.Statement;
-import org.emftext.language.java.statements.StatementsFactory;
-import org.emftext.language.java.statements.StatementsPackage;
-import org.emftext.language.java.types.ClassifierReference;
-import org.emftext.language.java.types.NamespaceClassifierReference;
-import org.emftext.language.java.types.PrimitiveType;
-import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.variables.LocalVariable;
+import org.emftext.language.java.closures.resource.closure.IClosureBuilder;
 
-public class ClosureBuilder implements org.emftext.language.java.closures.resource.closure.IClosureBuilder {
+public class ClosureBuilder implements IClosureBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		// change this to return true to enable building of all resources
 		for(String segment : uri.segmentsList()){
 			if(segment.toLowerCase().equals("bin"))
@@ -80,11 +30,9 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 
 		return false;
 	}
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.java.closures.resource.closure.mopp.ClosureResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
-		// set option overrideBuilder to 'false' and then perform build here
-		
+	
+	public IStatus build(ClosureResource resource, IProgressMonitor monitor) {
 		process(resource);
-		
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
 	
@@ -101,6 +49,10 @@ public class ClosureBuilder implements org.emftext.language.java.closures.resour
 		
 		workerThread.start();
 		*/
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 
 	/*
