@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -16,31 +16,40 @@ package org.emftext.language.office2.resource.office2.mopp;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.office2.OfficeModel;
+import org.emftext.language.office2.resource.office2.IOffice2Builder;
+import org.emftext.language.office2.resource.office2.util.Office2RuntimeUtil;
 
-public class Office2Builder implements org.emftext.language.office2.resource.office2.IOffice2Builder {
+public class Office2Builder implements IOffice2Builder {
 
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		// change this to return true to enable building of all resources
 		return true;
 	}
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.office2.resource.office2.mopp.Office2Resource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
-		((OfficeModel)resource.getEObject("/")).assignToOffice();
-		((OfficeModel)resource.getEObject("/")).relocate();
-		((OfficeModel)resource.getEObject("/")).removeUnusedOffices();
+	
+	public IStatus build(Office2Resource resource, IProgressMonitor monitor) {
+		OfficeModel officeModel = (OfficeModel) resource.getEObject("/");
+		officeModel.assignToOffice();
+		officeModel.relocate();
+		officeModel.removeUnusedOffices();
+		
 		URI origURI = resource.getURI();
 		URI completedURI = origURI.trimFileExtension().appendFileExtension("completed").appendFileExtension(origURI.fileExtension());
 		resource.setURI(completedURI);
 		try {
 			resource.save(null);
 		} catch (IOException e) {
-			e.printStackTrace();
+			new Office2RuntimeUtil().logError("IOException while building office2 model.", e);
 		}
 
-
-		// set option overrideBuilder to 'false' and then perform build here
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
-
+	
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
