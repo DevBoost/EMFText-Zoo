@@ -212,12 +212,32 @@ public class AssignmentItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(PrologPackage.Literals.ASSIGNMENT__TERM,
-				 PrologFactory.eINSTANCE.createExpression()));
+				 PrologFactory.eINSTANCE.createAnonymousVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(PrologPackage.Literals.ASSIGNMENT__TERM,
-				 PrologFactory.eINSTANCE.createAnonymousVariable()));
+				 PrologFactory.eINSTANCE.createAdditive()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.ASSIGNMENT__TERM,
+				 PrologFactory.eINSTANCE.createMultiplicative()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.ASSIGNMENT__TERM,
+				 PrologFactory.eINSTANCE.createPower()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.ASSIGNMENT__TERM,
+				 PrologFactory.eINSTANCE.createNegation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.ASSIGNMENT__TERM,
+				 PrologFactory.eINSTANCE.createBracketExpression()));
 	}
 
 }

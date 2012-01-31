@@ -189,12 +189,32 @@ public class ListItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(PrologPackage.Literals.LIST__HEAD_TERMS,
-				 PrologFactory.eINSTANCE.createExpression()));
+				 PrologFactory.eINSTANCE.createAnonymousVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(PrologPackage.Literals.LIST__HEAD_TERMS,
-				 PrologFactory.eINSTANCE.createAnonymousVariable()));
+				 PrologFactory.eINSTANCE.createAdditive()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.LIST__HEAD_TERMS,
+				 PrologFactory.eINSTANCE.createMultiplicative()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.LIST__HEAD_TERMS,
+				 PrologFactory.eINSTANCE.createPower()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.LIST__HEAD_TERMS,
+				 PrologFactory.eINSTANCE.createNegation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PrologPackage.Literals.LIST__HEAD_TERMS,
+				 PrologFactory.eINSTANCE.createBracketExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -42,7 +42,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Term"/>
   <eClassifiers xsi:type="ecore:EClass" name="AnonymousVariable" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -58,4 +57,44 @@
         eType="#//Part" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Part" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Additive" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//ADDITIVE_OPERATOR"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//Term"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//Term"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ADDITIVE_OPERATOR">
+    <eLiterals name="plus" literal="PLUS"/>
+    <eLiterals name="minus" value="1" literal="MINUS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiplicative" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//MULTIPLICATIVE_OPERATOR"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//Term"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//Term"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MULTIPLICATIVE_OPERATOR">
+    <eLiterals name="mult" literal="MULT"/>
+    <eLiterals name="div" value="1" literal="DIV"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Power" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" lowerBound="1" eType="#//Term"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exponent" lowerBound="1"
+        eType="#//Term" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//ADDITIVE_OPERATOR"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="#//Term"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BracketExpression" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="#//Term"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

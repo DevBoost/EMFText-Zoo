@@ -20,7 +20,6 @@ public class VariableReferenceVariableReferenceResolver implements org.emftext.l
 	private org.emftext.language.prolog.resource.pl.analysis.PlDefaultResolverDelegate<org.emftext.language.prolog.VariableReference, org.emftext.language.prolog.Variable> delegate = new org.emftext.language.prolog.resource.pl.analysis.PlDefaultResolverDelegate<org.emftext.language.prolog.VariableReference, org.emftext.language.prolog.Variable>();
 	
 	public void resolve(String identifier, org.emftext.language.prolog.VariableReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.prolog.resource.pl.IPlReferenceResolveResult<org.emftext.language.prolog.Variable> result) {
-//		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 		Clause clause = getClause(container);
 		if(clause != null){
 			List<Variable> variables = getChildrenInHierarchy(clause, Variable.class);

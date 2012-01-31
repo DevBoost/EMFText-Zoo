@@ -283,29 +283,6 @@ public class PrologItemProviderAdapterFactory extends PrologAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.Expression} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ExpressionItemProvider expressionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.emftext.language.prolog.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createExpressionAdapter() {
-		if (expressionItemProvider == null) {
-			expressionItemProvider = new ExpressionItemProvider(this);
-		}
-
-		return expressionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.AnonymousVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -372,6 +349,121 @@ public class PrologItemProviderAdapterFactory extends PrologAdapterFactory imple
 		}
 
 		return conjunctionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.Additive} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AdditiveItemProvider additiveItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.prolog.Additive}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAdditiveAdapter() {
+		if (additiveItemProvider == null) {
+			additiveItemProvider = new AdditiveItemProvider(this);
+		}
+
+		return additiveItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.Multiplicative} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MultiplicativeItemProvider multiplicativeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.prolog.Multiplicative}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMultiplicativeAdapter() {
+		if (multiplicativeItemProvider == null) {
+			multiplicativeItemProvider = new MultiplicativeItemProvider(this);
+		}
+
+		return multiplicativeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.Power} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PowerItemProvider powerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.prolog.Power}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPowerAdapter() {
+		if (powerItemProvider == null) {
+			powerItemProvider = new PowerItemProvider(this);
+		}
+
+		return powerItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.Negation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NegationItemProvider negationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.prolog.Negation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNegationAdapter() {
+		if (negationItemProvider == null) {
+			negationItemProvider = new NegationItemProvider(this);
+		}
+
+		return negationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.prolog.BracketExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BracketExpressionItemProvider bracketExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.prolog.BracketExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBracketExpressionAdapter() {
+		if (bracketExpressionItemProvider == null) {
+			bracketExpressionItemProvider = new BracketExpressionItemProvider(this);
+		}
+
+		return bracketExpressionItemProvider;
 	}
 
 	/**
@@ -482,10 +574,14 @@ public class PrologItemProviderAdapterFactory extends PrologAdapterFactory imple
 		if (listItemProvider != null) listItemProvider.dispose();
 		if (predicateItemProvider != null) predicateItemProvider.dispose();
 		if (variableReferenceItemProvider != null) variableReferenceItemProvider.dispose();
-		if (expressionItemProvider != null) expressionItemProvider.dispose();
 		if (anonymousVariableItemProvider != null) anonymousVariableItemProvider.dispose();
 		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (conjunctionItemProvider != null) conjunctionItemProvider.dispose();
+		if (additiveItemProvider != null) additiveItemProvider.dispose();
+		if (multiplicativeItemProvider != null) multiplicativeItemProvider.dispose();
+		if (powerItemProvider != null) powerItemProvider.dispose();
+		if (negationItemProvider != null) negationItemProvider.dispose();
+		if (bracketExpressionItemProvider != null) bracketExpressionItemProvider.dispose();
 	}
 
 }
