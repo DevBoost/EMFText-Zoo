@@ -33,7 +33,7 @@ RULES {
 	Conjunction ::= parts ("," parts)*;
 	
 	//@Operator(type="primitive", weight="10", superclass="Term")
-	Predicate ::= atom ("(" terms ("," terms)* ")")?;
+	Predicate ::= name[SMALL_WORD] ("(" terms ("," terms)* ")")?;
 	
 	@Operator(type="primitive", weight="10", superclass="Term")
 	Numeral ::= value[FLOAT];
@@ -43,9 +43,6 @@ RULES {
 	
 	@Operator(type="primitive", weight="10", superclass="Term")
 	AnonymousVariable ::= text[ANONYMOUS];
-	
-	//@Operator(type="primitive", weight="10", superclass="Term")
-	SmallAtom ::= text[SMALL_WORD];
 	
 	//@Operator(type="primitive", weight="10", superclass="Term")
 	String ::= text['\'','\''];
