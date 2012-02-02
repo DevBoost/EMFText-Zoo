@@ -13,7 +13,8 @@ TOKENS {
 	DEFINE COMMENT $'//'.*('\r'|'\n')$;
 	DEFINE LINEBREAK $('\r'|'\n')$;
 	DEFINE WHITESPACE $' '|'\t'|'\f'$;
-	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'ִ'|'ײ'|'Ü'|'ה'|'צ'|'ü'|'ß')+$ ;
+	// the unicode sequences represent ִײÜהצüß
+	DEFINE TEXT $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-'|'\u00C4'|'\u00D6'|'\u00DC'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00df')+$ ;
 }
 
 TOKENSTYLES {
