@@ -15,6 +15,7 @@ package org.emftext.language.java.ejava.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
@@ -34,6 +35,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -56,6 +58,7 @@ import org.emftext.language.java.ejava.EStructuralFeatureSetWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
@@ -267,6 +270,16 @@ public class EcoreWrapper {
 		}
 		wrapper.setEOperation(eOperation);
 		wrapper.setTypeReference(createTypeReferenceForETypedElement(eOperation));
+
+		// add type parameters to operation wrapper
+		List<TypeParameter> typeParameters = wrapper.getTypeParameters();
+		if (typeParameters.isEmpty()) {
+			for (ETypeParameter eTypeParameter : eOperation.getETypeParameters()) {
+				TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
+				typeParameter.setName(eTypeParameter.getName());
+				typeParameters.add(typeParameter);
+			}
+		}
 
 		if (wrapper.getParameters().isEmpty()) {
 			for(EParameter eParameter : eOperation.getEParameters()) {
