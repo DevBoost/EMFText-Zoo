@@ -17,11 +17,12 @@ OPTIONS {
 TOKENS {
 	DEFINE INTEGER $('-')?('0'..'9')+$;
 	DEFINE UPPER $('A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'.')*$;
-	DEFINE LOWER $('a'..'z')('a'..'z'|'A'..'Z'|'0'..'9'|'.')*$;
+	DEFINE FRAGMENT LOWER_CHAR $('a'..'z')$;
+	DEFINE LOWER LOWER_CHAR + $('a'..'z'|'A'..'Z'|'0'..'9'|'.')*$;
 	DEFINE WHITESPACES $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAKS $('\r'|'\n')+$;
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
-	DEFINE URI $'<' $ + LOWER + $ '://' ('a'..'z'|'0'..'9'|'A'..'Z'|'.'|'/'|'_'|'%'|'-'|'?'|'&'|'='|'#')+'>'$;
+	DEFINE URI $'<' ($ + LOWER_CHAR + $|'.') ('a'..'z'|'0'..'9'|'A'..'Z'|'.'|':'|'/'|'_'|'%'|'-'|'?'|'&'|'='|'#')+'>'$;
 }
 
 TOKENSTYLES {
@@ -39,7 +40,7 @@ RULES {
 	MClass   ::= abstract["abstract" : ""] 
 				 interface["interface" : ""]
 	             name[UPPER]
-	             (":" supertypes[UPPER] ("," supertypes[UPPER])* )? 
+	             (":" (supertypes[UPPER]|eSupertypes[LOWER]) ("," (supertypes[UPPER]|eSupertypes[LOWER]))* )? 
 	             ("<" typeParameters ("," typeParameters)* ">")? 
 	             ("(" features* operations* ")")? ;
 	             

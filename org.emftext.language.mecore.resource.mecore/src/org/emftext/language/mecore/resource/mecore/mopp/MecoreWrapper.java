@@ -202,12 +202,19 @@ public class MecoreWrapper {
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
+				List<EClass> eSuperTypes = eClass.getESuperTypes();
 				for (MClass supertype : mClass.getSupertypes()) {
 					EClass eSuperType = (EClass) mapping.get(supertype);
 					if (eSuperType == null) {
 						continue;
 					}
-					eClass.getESuperTypes().add(eSuperType);
+					eSuperTypes.add(eSuperType);
+				}
+				// add imported super types
+				for (EClass eSuperType : mClass.getESupertypes()) {
+					if (!eSuperTypes.contains(eSuperType)) {
+						eSuperTypes.add(eSuperType);
+					}
 				}
 				return true;
 			}
