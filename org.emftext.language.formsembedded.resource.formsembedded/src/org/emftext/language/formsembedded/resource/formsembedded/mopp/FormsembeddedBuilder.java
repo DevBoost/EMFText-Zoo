@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -16,10 +16,11 @@ package org.emftext.language.formsembedded.resource.formsembedded.mopp;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,11 +51,11 @@ public class FormsembeddedBuilder implements IFormsembeddedBuilder {
 
 	public IStatus build(FormsembeddedResource resource, IProgressMonitor monitor) {
 		if (resource.getWarnings().size() + resource.getErrors().size() > 0) {
-			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+			return Status.CANCEL_STATUS;
 		}
 		
 		EObject root = resource.getContents().get(0);
-		TreeIterator<EObject> eAllContents = root.eAllContents();
+		Iterator<EObject> eAllContents = root.eAllContents();
 		Collection<EmbeddedForm> embeddedFoms = FormsembeddedEObjectUtil.getObjectsByType(eAllContents, FormsembeddedPackage.eINSTANCE.getEmbeddedForm());
 		for (EmbeddedForm embeddedForm : embeddedFoms) {
 			// prepare URIs
@@ -102,9 +103,13 @@ public class FormsembeddedBuilder implements IFormsembeddedBuilder {
 				formResource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
 				e.printStackTrace();
-				return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+				return Status.CANCEL_STATUS;
 			}
 		}
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
