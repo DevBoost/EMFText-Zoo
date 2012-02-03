@@ -15,6 +15,7 @@
 package org.emftext.language.mecore.resource.mecore.mopp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -32,6 +34,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -51,6 +54,7 @@ import org.emftext.language.mecore.MParameter;
 import org.emftext.language.mecore.MSimpleMultiplicity;
 import org.emftext.language.mecore.MSimpleMultiplicityValue;
 import org.emftext.language.mecore.MType;
+import org.emftext.language.mecore.MTypeParameter;
 import org.emftext.language.mecore.MTypedElement;
 import org.emftext.language.mecore.resource.mecore.IMecoreCommand;
 
@@ -244,7 +248,7 @@ public class MecoreWrapper {
 			EClass existingEClass, final MType mType) {
 		// primitive type, create attribute
 		EAttribute eAttribute = findOrCreateEAttribute(mFeature, existingEClass);
-		setType(eAttribute, mType);
+		setType(eAttribute, mType, Collections.<MType>emptyList());
 		return eAttribute;
 	}
 
@@ -254,6 +258,7 @@ public class MecoreWrapper {
 			return;
 		}
 		final EOperation eOperation = findOrCreateEOperation(mOperation, existingEClass);
+		addTypeParameters(mOperation, eOperation);
 		// handle parameters
 		for (MParameter mParameter : mOperation.getParameters()) {
 			wrapMParameter(mParameter, eOperation);
@@ -262,7 +267,7 @@ public class MecoreWrapper {
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				setType(eOperation, mType);
+				setType(eOperation, mType, Collections.<MType>emptyList());
 				return true;
 			}
 		});
@@ -272,17 +277,46 @@ public class MecoreWrapper {
 		eOperation.setName(mOperation.getName());
 	}
 
+	private void addTypeParameters(MOperation mOperation, EOperation eOperation) {
+		List<MTypeParameter> typeParameters = mOperation.getTypeParameters();
+		for (MTypeParameter typeParameter : typeParameters) {
+			findOrCreateETypeParameter(eOperation, typeParameter);
+		}
+	}
+
+	private ETypeParameter findOrCreateETypeParameter(EOperation eOperation,
+			MTypeParameter typeParameter) {
+		String mName = typeParameter.getName();
+
+		List<ETypeParameter> eTypeParameters = eOperation.getETypeParameters();
+		for (ETypeParameter eTypeParameter : eTypeParameters) {
+			String eName = eTypeParameter.getName();
+			if (eName != null && eName.equals(mName)) {
+				mapping.put(typeParameter, eTypeParameter);
+				return eTypeParameter;
+			}
+		}
+		ETypeParameter newETypeParameter = EcoreFactory.eINSTANCE.createETypeParameter();
+		newETypeParameter.setName(mName);
+		eTypeParameters.add(newETypeParameter);
+		addAnnotation(newETypeParameter, COMMENT_VALUE);
+		// TODO this mapping must consider scoping of type parameters
+		mapping.put(typeParameter, newETypeParameter);
+		return newETypeParameter;
+	}
+
 	private void wrapMParameter(MParameter mParameter, EOperation existingOperation) {
 		final MType mType = mParameter.getType();
 		if (mType == null) {
 			return;
 		}
+		final List<MType> typeArguments = mParameter.getTypeArguments();
 		final EParameter eParameter = findOrCreateEParameter(mParameter, existingOperation);
 
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				setType(eParameter, mType);
+				setType(eParameter, mType, typeArguments);
 				return true;
 			}
 		});
@@ -298,7 +332,7 @@ public class MecoreWrapper {
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				setType(eReference, mType);
+				setType(eReference, mType, Collections.<MType>emptyList());
 				MFeature opposite = mFeature.getOpposite();
 				if (opposite != null) {
 					eReference.setEOpposite((EReference) mapping.get(opposite));
@@ -520,15 +554,49 @@ public class MecoreWrapper {
 		return mapping;
 	}
 
-	private void setType(ETypedElement eTypedElement, MType mType) {
+	private void setType(ETypedElement eTypedElement, MType mType, List<MType> mTypeArguments) {
+		EClassifier eType = null;
+		EGenericType eGenericType = null;
 		if (mType instanceof MEcoreType) {
 			MEcoreType mEcoreType = (MEcoreType) mType;
-			eTypedElement.setEType(mEcoreType.getEcoreType());
+			eType = mEcoreType.getEcoreType();
 		} else if (mType instanceof MDataType) {
 			MDataType mDataType = (MDataType) mType;
-			eTypedElement.setEType(mDataType.getEDataType());
+			eType = mDataType.getEDataType();
+		} else if (mType instanceof MTypeParameter) {
+			MTypeParameter mTypeParameter = (MTypeParameter) mType;
+			eGenericType = createEGenericType(mTypeParameter);
 		} else {
-			eTypedElement.setEType((EClass) mapping.get(mType));
+			EClass eClass = (EClass) mapping.get(mType);
+			eType = eClass;
 		}
+
+		if (mTypeArguments.isEmpty()) {
+			if (eType != null) {
+				eTypedElement.setEType(eType);
+			}
+			if (eGenericType != null) {
+				eTypedElement.setEGenericType(eGenericType);
+			}
+		} else {
+			if (eGenericType == null) {
+				eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
+			}
+			if (eType != null) {
+				eGenericType.setEClassifier(eType);
+			}
+			List<EGenericType> eTypeArguments = eGenericType.getETypeArguments();
+			for (MType mTypeArgument : mTypeArguments) {
+				eTypeArguments.add(createEGenericType(mTypeArgument));
+			}
+			eTypedElement.setEGenericType(eGenericType);
+		}
+	}
+
+	private EGenericType createEGenericType(MType mTypeParameter) {
+		EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
+		ETypeParameter eTypeParameter = (ETypeParameter) mapping.get(mTypeParameter);
+		genericType.setETypeParameter(eTypeParameter);
+		return genericType;
 	}
 }

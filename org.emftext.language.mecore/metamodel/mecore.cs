@@ -21,34 +21,45 @@ TOKENS {
 	DEFINE WHITESPACES $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAKS $('\r'|'\n')+$;
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
+	DEFINE URI $'<' $ + LOWER + $ '://' ('a'..'z'|'0'..'9'|'A'..'Z'|'.'|'/'|'_'|'%'|'-'|'?'|'&'|'='|'#')+'>'$;
 }
 
 TOKENSTYLES {
 	"UPPER" COLOR #000000, BOLD;
 	"abstract" COLOR #800040, BOLD;
 	"COMMENT" COLOR #404040;
-	"QUOTED_60_62", "<>" COLOR #0080C0, BOLD;
+	"URI", "<>" COLOR #0080C0, BOLD;
 } 
 
 RULES {
-	MPackage ::= (name[LOWER])? namespace['<','>'] (!0 imports)* (!0 contents)*;
-	MImport  ::= "import" importedPackage['<','>'] "as" prefix[LOWER];
+	MPackage ::= (name[LOWER])? namespace[URI] (!0 imports)* (!0 contents)*;
+	MImport  ::= "import" importedPackage[URI] "as" prefix[LOWER];
 
 	@SuppressWarnings(optionalKeyword)
 	MClass   ::= abstract["abstract" : ""] 
 				 interface["interface" : ""]
 	             name[UPPER]
 	             (":" supertypes[UPPER] ("," supertypes[UPPER])* )? 
+	             ("<" typeParameters ("," typeParameters)* ">")? 
 	             ("(" features* operations* ")")? ;
 	             
+	MTypeParameter ::= name[UPPER];
+	
 	@SuppressWarnings(featureWithoutSyntax, optionalKeyword)
 	MEnum    ::= "enum" name[UPPER] ("(" literals* ")")?;
 	MEnumLiteral ::= name[UPPER] literal['"','"']?;
 	
 	@SuppressWarnings(explicitSyntaxChoice)
 	MFeature ::= ncReference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity? ("<>" opposite[UPPER])?;
-	MOperation ::= name[LOWER] "(" (parameters ("," parameters)*)? ")" type[UPPER]  multiplicity?;
-	MParameter ::= name[LOWER] type[UPPER] multiplicity?;
+	
+	MOperation ::=  
+		("<" typeParameters ("," typeParameters)* ">")?
+		name[LOWER] 
+		"(" (parameters ("," parameters)*)? ")" type[UPPER]  multiplicity?;
+		
+	MParameter ::= name[LOWER] type[UPPER] 
+		("<" typeArguments[UPPER] ("," typeArguments[UPPER])* ">")? 
+		multiplicity?;
 	
 	MSimpleMultiplicity ::= value[star : "*", optional : "?", plus : "+"];
 	MComplexMultiplicity ::= "(" lowerBound[INTEGER] ".." upperBound[INTEGER] ")";

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  * 
  * All rights reserved. This program and the accompanying materials
@@ -14,18 +14,23 @@
 
 package org.emftext.language.mecore.resource.mecore.analysis;
 
-public class MecoreQUOTED_60_62TokenResolver implements org.emftext.language.mecore.resource.mecore.IMecoreTokenResolver {
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.language.mecore.resource.mecore.IMecoreTokenResolveResult;
+import org.emftext.language.mecore.resource.mecore.IMecoreTokenResolver;
+
+public class MecoreURITokenResolver implements IMecoreTokenResolver {
 	
-	private org.emftext.language.mecore.resource.mecore.analysis.MecoreDefaultTokenResolver defaultTokenResolver = new org.emftext.language.mecore.resource.mecore.analysis.MecoreDefaultTokenResolver();
+	private MecoreDefaultTokenResolver defaultTokenResolver = new MecoreDefaultTokenResolver(true);
 	
-	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = defaultTokenResolver.deResolve(value, feature, container);
 		result += ">";
 		result = "<" + result;
 		return result;
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.mecore.resource.mecore.IMecoreTokenResolveResult result) {
+	public void resolve(String lexem, EStructuralFeature feature, IMecoreTokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0, lexem.length() - 1);
 		defaultTokenResolver.resolve(lexem, feature, result);
@@ -34,5 +39,4 @@ public class MecoreQUOTED_60_62TokenResolver implements org.emftext.language.mec
 	public void setOptions(java.util.Map<?,?> options) {
 		defaultTokenResolver.setOptions(options);
 	}
-	
 }
