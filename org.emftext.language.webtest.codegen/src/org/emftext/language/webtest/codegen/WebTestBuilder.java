@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -15,24 +15,28 @@ package org.emftext.language.webtest.codegen;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.webtest.codegen.files.Generate;
 import org.emftext.language.webtest.resource.webtest.IWebtestBuilder;
+import org.emftext.language.webtest.resource.webtest.mopp.WebtestBuilderAdapter;
 import org.emftext.language.webtest.resource.webtest.mopp.WebtestResource;
 import org.emftext.language.webtest.resource.webtest.util.WebtestURIUtil;
 
 public class WebTestBuilder extends IncrementalProjectBuilder implements IWebtestBuilder {
 
-	public org.eclipse.core.resources.IProject[] build(int kind, java.util.Map<String, String> args, final org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
-		return new org.emftext.language.webtest.resource.webtest.mopp.WebtestBuilderAdapter() {
+	public IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
+		return new WebtestBuilderAdapter() {
 			public IWebtestBuilder getBuilder() {
 				return WebTestBuilder.this;
 			};
@@ -68,5 +72,9 @@ public class WebTestBuilder extends IncrementalProjectBuilder implements IWebtes
 		String platformString = targetURI.toPlatformString(true);
 		IResource member = root.findMember(platformString);
 		return member;
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
