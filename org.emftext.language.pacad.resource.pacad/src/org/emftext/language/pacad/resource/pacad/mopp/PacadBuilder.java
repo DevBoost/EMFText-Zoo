@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -13,16 +13,25 @@
  ******************************************************************************/
 package org.emftext.language.pacad.resource.pacad.mopp;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
+import org.emftext.language.pacad.resource.pacad.IPacadBuilder;
 import org.emftext.language.pacad.resource.pacad.PacadConstraintChecker;
 
-public class PacadBuilder implements org.emftext.language.pacad.resource.pacad.IPacadBuilder {
+public class PacadBuilder implements IPacadBuilder {
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		return true;
 	}
 	
-	public org.eclipse.core.runtime.IStatus build(org.emftext.language.pacad.resource.pacad.mopp.PacadResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	public IStatus build(PacadResource resource, IProgressMonitor monitor) {
 		new PacadConstraintChecker().check(resource);
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
