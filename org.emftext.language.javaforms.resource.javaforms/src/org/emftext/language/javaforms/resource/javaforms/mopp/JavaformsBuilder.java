@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -26,6 +26,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -43,13 +44,13 @@ public class JavaformsBuilder implements IJavaformsBuilder {
 
 	public IStatus build(JavaformsResource resource, IProgressMonitor monitor) {
 		if (resource.getErrors().size() > 0) {
-			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+			return Status.CANCEL_STATUS;
 		}
 		EcoreUtil.resolveAll(resource);
 		
 		URI model = resource.getURI();
 		if (isBinResource(model)) {
-			return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+			return Status.CANCEL_STATUS;
 		}
 		try {
 			List<Object> parameters = new ArrayList<Object>();
@@ -81,7 +82,7 @@ public class JavaformsBuilder implements IJavaformsBuilder {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
 	}
 
 	private boolean isBinResource(URI model) {
@@ -118,5 +119,9 @@ public class JavaformsBuilder implements IJavaformsBuilder {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource member = root.findMember(model.trimSegments(1).toPlatformString(true));
 		return member;
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
