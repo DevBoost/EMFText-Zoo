@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -18,6 +18,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
@@ -49,6 +52,7 @@ import org.emftext.language.java.sqljava.Query;
 import org.emftext.language.java.sqljava.RegisterDriver;
 import org.emftext.language.java.sqljava.SqlExpression;
 import org.emftext.language.java.sqljava.SqljavaPackage;
+import org.emftext.language.java.sqljava.resource.sqljava.ISqljavaBuilder;
 import org.emftext.language.java.sqljava.resource.sqljava.mopp.helper.ConvertSelectExpressionHelper;
 import org.emftext.language.java.sqljava.resource.sqljava.mopp.helper.ReferenceHelper;
 import org.emftext.language.java.sqljava.resource.sqljava.mopp.helper.ResolverHelper;
@@ -65,12 +69,12 @@ import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesFactory;
 
-public class SqljavaBuilder implements org.emftext.language.java.sqljava.resource.sqljava.ISqljavaBuilder {
+public class SqljavaBuilder implements ISqljavaBuilder {
 	
 	LocalVariable connection = null;
 	static SqljavaResource resource = null;
 	
-	public boolean isBuildingNeeded(org.eclipse.emf.common.util.URI uri) {
+	public boolean isBuildingNeeded(URI uri) {
 		// change this to return true to enable building of all resources
 		for(String segment : uri.segmentsList()){
 			if(segment.toLowerCase().equals("bin"))
@@ -79,10 +83,10 @@ public class SqljavaBuilder implements org.emftext.language.java.sqljava.resourc
 
 		return true;
 	}
-	public org.eclipse.core.runtime.IStatus build(
-			final org.emftext.language.java.sqljava.resource.sqljava.mopp.SqljavaResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+	
+	public IStatus build(final SqljavaResource resource, IProgressMonitor monitor) {
 		
-		Thread worker = new Thread(new Runnable(){
+		Thread worker = new Thread(new Runnable() {
 			public void run() {
 				convert(resource);
 			}
@@ -90,14 +94,14 @@ public class SqljavaBuilder implements org.emftext.language.java.sqljava.resourc
 		
 		worker.start();
 		
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
 	}
 
 	public static SqljavaResource getResource() {
 		return resource;
 	}
 
-	private void convert(SqljavaResource resource){
+	private void convert(SqljavaResource resource) {
 		
 		SqljavaBuilder.resource = resource;
 		
@@ -140,7 +144,7 @@ public class SqljavaBuilder implements org.emftext.language.java.sqljava.resourc
 	private void getResolvedImport(List<String> namespaces, String className, SqljavaResource resource){
 
 		CompilationUnit complationUnit = 
-			(CompilationUnit)SqljavaEObjectUtil.findRootContainer(resource.getContents().get(0));
+			(CompilationUnit) EcoreUtil.getRootContainer(resource.getContents().get(0));
 		
 		boolean found = false;
 		
@@ -472,5 +476,8 @@ public class SqljavaBuilder implements org.emftext.language.java.sqljava.resourc
 			catchMethodCall.setTarget(method);
 		}
 	}
-	
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
+	}
 }
