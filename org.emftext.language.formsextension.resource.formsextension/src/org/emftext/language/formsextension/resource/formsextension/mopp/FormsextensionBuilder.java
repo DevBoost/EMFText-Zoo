@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -18,6 +18,7 @@ import java.util.Collections;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -49,11 +50,11 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 	public IStatus build(FormsextensionResource resource, IProgressMonitor monitor) {
 		URI uri = resource.getURI();
 		if (isInBinFolder(uri)) {
-			return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
+			return Status.CANCEL_STATUS; 
 		}
 		
 		if (resource.getWarnings().size() + resource.getErrors().size() > 0) {
-			return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
+			return Status.CANCEL_STATUS; 
 		}
 		
 		EObject root = resource.getContents().get(0);
@@ -61,7 +62,7 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 			ExtendedForm eform = (ExtendedForm) root;
 			ClassMethod javaMethod = eform.getJavaMethod();
 			if (javaMethod == null || javaMethod.eIsProxy()) {
-				return org.eclipse.core.runtime.Status.CANCEL_STATUS; 
+				return Status.CANCEL_STATUS; 
 			}
 			fillMethodWithInterpreterCall(resource, javaMethod);
 			
@@ -69,11 +70,11 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 				javaMethod.eResource().save(Collections.EMPTY_MAP);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+				return Status.CANCEL_STATUS;
 			}
 		}
 		
-		return org.eclipse.core.runtime.Status.OK_STATUS;
+		return Status.OK_STATUS;
 	}
 
 	private boolean isInBinFolder(URI uri) {
@@ -112,5 +113,9 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		methodCall.getArguments().add(stringExpression);
 		
 		constructorCall.setNext(methodCall);
+	}
+
+	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
+		return Status.OK_STATUS;
 	}
 }
