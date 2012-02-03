@@ -126,6 +126,10 @@ public class MecoreBuilder implements IMecoreBuilder {
 	private void reloadGeneratorModel(Resource ecoreResource) {
 		URI genModelURI = ecoreResource.getURI().trimFileExtension().appendFileExtension("genmodel");
 		ResourceSet resourceSet = ecoreResource.getResourceSet();
+		// check if generator model exists
+		if (!resourceSet.getURIConverter().exists(genModelURI, null)) {
+			return;
+		}
 		Resource genModelResource = resourceSet.getResource(genModelURI, true);
 		if (genModelResource == null) {
 			return;
