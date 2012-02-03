@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.c.test;
+package org.emftext.language.simplec.test;
 
 import java.io.IOException;
 import java.io.InputStream;
