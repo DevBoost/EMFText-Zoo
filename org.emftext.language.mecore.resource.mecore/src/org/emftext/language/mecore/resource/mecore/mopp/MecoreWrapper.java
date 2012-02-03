@@ -306,7 +306,6 @@ public class MecoreWrapper {
 		ETypeParameter newETypeParameter = EcoreFactory.eINSTANCE.createETypeParameter();
 		newETypeParameter.setName(mName);
 		eTypeParameters.add(newETypeParameter);
-		addAnnotation(newETypeParameter, COMMENT_VALUE);
 		// TODO this mapping must consider scoping of type parameters
 		mapping.put(typeParameter, newETypeParameter);
 		return newETypeParameter;
