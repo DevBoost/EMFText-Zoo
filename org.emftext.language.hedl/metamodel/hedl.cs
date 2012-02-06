@@ -5,10 +5,13 @@ FOR <http://www.emftext.org/language/hedl>
 START EntityModel
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
+	overrideIgnoredWordsFilter = "false";
 	additionalDependencies = "org.eclipse.emf.workspace,org.emftext.language.hedl.codegen";
 }
 
