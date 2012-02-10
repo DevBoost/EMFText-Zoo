@@ -46,6 +46,11 @@ public class HedlBuilder implements IHedlBuilder {
 	}
 	
 	public IStatus build(HedlResource resource, IProgressMonitor monitor) {
+		// do not build resources that contain errors
+		if (!resource.getErrors().isEmpty()) {
+			return Status.CANCEL_STATUS;
+		}
+		
 		URI uri = resource.getURI();
 		String packageName = getPackageName(uri);
 		IFile modelFile = WorkspaceSynchronizer.getFile(resource);
