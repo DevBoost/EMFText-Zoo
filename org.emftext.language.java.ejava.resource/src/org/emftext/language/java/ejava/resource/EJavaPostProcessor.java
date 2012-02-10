@@ -43,6 +43,7 @@ import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMarkerHelper;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.ejava.util.EcoreWrapper;
 import org.emftext.language.java.members.Member;
+import org.osgi.framework.Bundle;
 
 /**
  * Post processor that wraps the Ecore model for the eJava specification.
@@ -63,12 +64,8 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 		if (!contents.isEmpty()) {
 			try {
 				JavaClasspath cp = JavaClasspath.get(resource);
-				File emfEcoreJarLocation  = FileLocator.getBundleFile(Platform.getBundle("org.eclipse.emf.ecore"));
-				File emfCommonJarLocation = FileLocator.getBundleFile(Platform.getBundle("org.eclipse.emf.common"));
-				URI emfEcoreJarURI  = URI.createFileURI(emfEcoreJarLocation.getCanonicalPath());
-				URI emfCommonJarURI = URI.createFileURI(emfCommonJarLocation.getCanonicalPath());
-				cp.registerClassifierJar(emfEcoreJarURI);
-				cp.registerClassifierJar(emfCommonJarURI);
+				registerBundleInClasspath(cp, "org.eclipse.emf.ecore");
+				registerBundleInClasspath(cp, "org.eclipse.emf.common");
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -76,6 +73,16 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 			EPackageWrapper ePackageWrapper = (EPackageWrapper) contents.get(0);
 			EcoreWrapper.wrap(ePackageWrapper);
 			validate(ePackageWrapper, eJavaResource);
+		}
+	}
+
+	private void registerBundleInClasspath(JavaClasspath cp, String bundleName)
+			throws IOException {
+		Bundle bundle = Platform.getBundle(bundleName);
+		if (bundle != null) {
+			File bundleJarLocation  = FileLocator.getBundleFile(bundle);
+			URI bundleJarURI  = URI.createFileURI(bundleJarLocation.getCanonicalPath());
+			cp.registerClassifierJar(bundleJarURI);
 		}
 	}
 
