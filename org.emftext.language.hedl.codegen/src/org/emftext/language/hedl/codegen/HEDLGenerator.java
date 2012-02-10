@@ -5048,6 +5048,16 @@ public class HEDLGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    {
+      String _comment = enumeration.getComment();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_comment, null);
+      if (_operator_notEquals) {
+        String _comment_1 = enumeration.getComment();
+        String _replace = _comment_1.replace("\t", "");
+        _builder.append(_replace, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("// this class is generated. any change will be overridden.");
     _builder.newLine();
     _builder.append("public enum ");
@@ -5061,13 +5071,13 @@ public class HEDLGenerator {
       EList<EnumLiteral> _literals = enumeration.getLiterals();
       for(final EnumLiteral literal : _literals) {
         {
-          String _comment = literal.getComment();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_comment, null);
-          if (_operator_notEquals) {
+          String _comment_2 = literal.getComment();
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_comment_2, null);
+          if (_operator_notEquals_1) {
             _builder.append("\t");
-            String _comment_1 = literal.getComment();
-            String _replace = _comment_1.replace("\t", "");
-            _builder.append(_replace, "	");
+            String _comment_3 = literal.getComment();
+            String _replace_1 = _comment_3.replace("\t", "");
+            _builder.append(_replace_1, "	");
             _builder.newLineIfNotEmpty();
           }
         }

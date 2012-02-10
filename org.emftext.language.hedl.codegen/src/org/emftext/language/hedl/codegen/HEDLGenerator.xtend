@@ -1093,6 +1093,9 @@ class HEDLGenerator {
 		return '''
 		package «packageName».«HEDLCodegenConstants::ENTITY_PACKAGE_NAME»;
 		
+		«IF enumeration.comment != null »
+		« enumeration.comment.replace("\t", "") »
+		«ENDIF»
 		// this class is generated. any change will be overridden.
 		public enum «enumeration.name» {
 			

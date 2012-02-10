@@ -53,7 +53,7 @@ RULES {
 		("<=" mappedBy[LOWER])?
 		";";
 		
-	Enum ::= "enum" name[UPPER] "{" literals* "}";
+	Enum ::= comment[ML_COMMENT]? "enum" name[UPPER] "{" literals* "}";
 	
 	EnumLiteral ::= comment[ML_COMMENT]? name[UPPER];
 	
