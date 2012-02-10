@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -20,6 +20,7 @@ import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
  * Extension of generate resource implementation that prints all operations into
  * the corresponding EAnnotation each time the model is loaded.
  */
+//TODO jjohannes: is this still needed?
 public class ExtendedEjavaResource extends EjavaResource {
 
 	public ExtendedEjavaResource(URI uri) {
