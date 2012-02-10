@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  * 
  * All rights reserved. This program and the accompanying materials
@@ -87,20 +87,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MTypedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MTypedElementItemProvider mTypedElementItemProvider;
+	protected MecoreItemProviderAdapter mTypedElementItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MTypedElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMTypedElementAdapter() {
 		if (mTypedElementItemProvider == null) {
-			mTypedElementItemProvider = new MTypedElementItemProvider(this);
+			mTypedElementItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mTypedElementItemProvider;
@@ -110,20 +110,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MPackage} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MPackageItemProvider mPackageItemProvider;
+	protected MecoreItemProviderAdapter mPackageItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MPackage}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMPackageAdapter() {
 		if (mPackageItemProvider == null) {
-			mPackageItemProvider = new MPackageItemProvider(this);
+			mPackageItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mPackageItemProvider;
@@ -133,20 +133,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MImport} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MImportItemProvider mImportItemProvider;
+	protected MecoreItemProviderAdapter mImportItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MImport}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMImportAdapter() {
 		if (mImportItemProvider == null) {
-			mImportItemProvider = new MImportItemProvider(this);
+			mImportItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mImportItemProvider;
@@ -156,20 +156,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MClass} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MClassItemProvider mClassItemProvider;
+	protected MecoreItemProviderAdapter mClassItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MClass}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMClassAdapter() {
 		if (mClassItemProvider == null) {
-			mClassItemProvider = new MClassItemProvider(this);
+			mClassItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mClassItemProvider;
@@ -179,20 +179,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MEnum} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MEnumItemProvider mEnumItemProvider;
+	protected MecoreItemProviderAdapter mEnumItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MEnum}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMEnumAdapter() {
 		if (mEnumItemProvider == null) {
-			mEnumItemProvider = new MEnumItemProvider(this);
+			mEnumItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mEnumItemProvider;
@@ -202,20 +202,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MEnumLiteral} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MEnumLiteralItemProvider mEnumLiteralItemProvider;
+	protected MecoreItemProviderAdapter mEnumLiteralItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MEnumLiteral}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMEnumLiteralAdapter() {
 		if (mEnumLiteralItemProvider == null) {
-			mEnumLiteralItemProvider = new MEnumLiteralItemProvider(this);
+			mEnumLiteralItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mEnumLiteralItemProvider;
@@ -225,20 +225,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MFeature} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MFeatureItemProvider mFeatureItemProvider;
+	protected MecoreItemProviderAdapter mFeatureItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MFeature}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMFeatureAdapter() {
 		if (mFeatureItemProvider == null) {
-			mFeatureItemProvider = new MFeatureItemProvider(this);
+			mFeatureItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mFeatureItemProvider;
@@ -248,20 +248,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MSimpleMultiplicity} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MSimpleMultiplicityItemProvider mSimpleMultiplicityItemProvider;
+	protected MecoreItemProviderAdapter mSimpleMultiplicityItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MSimpleMultiplicity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMSimpleMultiplicityAdapter() {
 		if (mSimpleMultiplicityItemProvider == null) {
-			mSimpleMultiplicityItemProvider = new MSimpleMultiplicityItemProvider(this);
+			mSimpleMultiplicityItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mSimpleMultiplicityItemProvider;
@@ -271,20 +271,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MComplexMultiplicity} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MComplexMultiplicityItemProvider mComplexMultiplicityItemProvider;
+	protected MecoreItemProviderAdapter mComplexMultiplicityItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MComplexMultiplicity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMComplexMultiplicityAdapter() {
 		if (mComplexMultiplicityItemProvider == null) {
-			mComplexMultiplicityItemProvider = new MComplexMultiplicityItemProvider(this);
+			mComplexMultiplicityItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mComplexMultiplicityItemProvider;
@@ -294,20 +294,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MDataType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MDataTypeItemProvider mDataTypeItemProvider;
+	protected MecoreItemProviderAdapter mDataTypeItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MDataType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMDataTypeAdapter() {
 		if (mDataTypeItemProvider == null) {
-			mDataTypeItemProvider = new MDataTypeItemProvider(this);
+			mDataTypeItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mDataTypeItemProvider;
@@ -317,20 +317,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MEcoreType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MEcoreTypeItemProvider mEcoreTypeItemProvider;
+	protected MecoreItemProviderAdapter mEcoreTypeItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MEcoreType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMEcoreTypeAdapter() {
 		if (mEcoreTypeItemProvider == null) {
-			mEcoreTypeItemProvider = new MEcoreTypeItemProvider(this);
+			mEcoreTypeItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mEcoreTypeItemProvider;
@@ -340,20 +340,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MOperation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MOperationItemProvider mOperationItemProvider;
+	protected MecoreItemProviderAdapter mOperationItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MOperation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMOperationAdapter() {
 		if (mOperationItemProvider == null) {
-			mOperationItemProvider = new MOperationItemProvider(this);
+			mOperationItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mOperationItemProvider;
@@ -363,20 +363,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MParameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MParameterItemProvider mParameterItemProvider;
+	protected MecoreItemProviderAdapter mParameterItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMParameterAdapter() {
 		if (mParameterItemProvider == null) {
-			mParameterItemProvider = new MParameterItemProvider(this);
+			mParameterItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mParameterItemProvider;
@@ -386,20 +386,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MTypeParameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MTypeParameterItemProvider mTypeParameterItemProvider;
+	protected MecoreItemProviderAdapter mTypeParameterItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MTypeParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMTypeParameterAdapter() {
 		if (mTypeParameterItemProvider == null) {
-			mTypeParameterItemProvider = new MTypeParameterItemProvider(this);
+			mTypeParameterItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mTypeParameterItemProvider;
@@ -409,20 +409,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MTypeParametrizable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MTypeParametrizableItemProvider mTypeParametrizableItemProvider;
+	protected MecoreItemProviderAdapter mTypeParametrizableItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MTypeParametrizable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMTypeParametrizableAdapter() {
 		if (mTypeParametrizableItemProvider == null) {
-			mTypeParametrizableItemProvider = new MTypeParametrizableItemProvider(this);
+			mTypeParametrizableItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mTypeParametrizableItemProvider;
@@ -432,20 +432,20 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MTypeArgumentable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected MTypeArgumentableItemProvider mTypeArgumentableItemProvider;
+	protected MecoreItemProviderAdapter mTypeArgumentableItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link org.emftext.language.mecore.MTypeArgumentable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Adapter createMTypeArgumentableAdapter() {
 		if (mTypeArgumentableItemProvider == null) {
-			mTypeArgumentableItemProvider = new MTypeArgumentableItemProvider(this);
+			mTypeArgumentableItemProvider = new MecoreItemProviderAdapter(this);
 		}
 
 		return mTypeArgumentableItemProvider;
