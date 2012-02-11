@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -72,18 +73,50 @@ import org.emftext.language.java.types.TypesPackage;
 import org.emftext.language.java.types.Void;
 
 /**
- * Wraps an Ecore model in an eJava model. This way, the Ecore types can be interpreted as
- * Java types by JaMoPP.
+ * Wraps an Ecore model in an eJava model. This way, the Ecore types can be 
+ * interpreted as Java types by JaMoPP.
  */
 public class EcoreWrapper {
 
 	public static void wrap(EPackageWrapper mainEPackageWrapper) {
-		EMap<EList<String>, GenPackage> ePackages = findGenPackagesInScope(mainEPackageWrapper);
+		EMap<EList<String>, GenPackage> genPackagesInScope = findGenPackagesInScope(mainEPackageWrapper);
 
-		for(EList<String> namespaces : ePackages.keySet()) {
-			wrapEPackage(ePackages.get(namespaces), namespaces, mainEPackageWrapper);
+		for(final EList<String> namespaces : genPackagesInScope.keySet()) {
+			GenPackage genPackage = genPackagesInScope.get(namespaces);
+			if (genPackage.eIsProxy() && genPackage.getEcorePackage().eIsProxy()) {
+				String message = "Can't find generator package for " + namespaces.toString();
+				addError(mainEPackageWrapper.eResource(), message);
+				continue;
+			}
+			wrapEPackage(genPackage, namespaces, mainEPackageWrapper);
 		}
 
+	}
+
+	private static void addError(Resource resource, final String message) {
+		resource.getErrors().add(new Diagnostic() {
+			
+			public String getMessage() {
+				return message;
+			}
+			
+			public String getLocation() {
+				return null;
+			}
+			
+			public int getLine() {
+				return 0;
+			}
+			
+			public int getColumn() {
+				return 0;
+			}
+			
+			@Override
+			public String toString() {
+				return message;
+			}
+		});
 	}
 
 	public static void wrapEPackage(GenPackage genPackage, EList<String> namespaces, EPackageWrapper mainEPackageWrapper) {
@@ -331,13 +364,23 @@ public class EcoreWrapper {
 			throw new RuntimeException(e);
 		}
 
-		for(Resource r : rs.getResources()) {
+		// we need to create a copy of the list of resource, because the resource
+		// set is expanded while iterating over the resources.
+		List<Resource> copy = new ArrayList<Resource>();
+		copy.addAll(rs.getResources());
+		for(Resource r : copy) {
 			if (!r.getContents().isEmpty() && r.getContents().get(0) instanceof GenModel) {
 				GenModel genModel = (GenModel)r.getContents().get(0);
 				for(GenPackage genPackage : genModel.getGenPackages()) {
 					collectGenPackages(genPackage, new BasicEList<String>(), result);
 				}
 				for(GenPackage genPackage : genModel.getUsedGenPackages()) {
+					if (genPackage.eIsProxy()) {
+						// TODO add error
+						String message = "Can't find used generator package for " + genPackage.toString();
+						addError(context.eResource(), message);
+						continue;
+					}
 					collectGenPackages(genPackage, new BasicEList<String>(), result);
 				}
 			}
@@ -362,21 +405,28 @@ public class EcoreWrapper {
 		}
 
 		String javaTypeName = null;
-		if (eClassifier instanceof EClass) {
-			javaTypeName = getFullPackageName(eClassifier.getEPackage()) + "." + eClassifier.getName();
-		}
-		else if (eClassifier instanceof EEnum) {
-			javaTypeName = getFullPackageName(eClassifier.getEPackage()) + "." + eClassifier.getName();
-		}
-		else /*if (eClassifier instanceof EDataType)*/ {
-			javaTypeName = ((EDataType)eClassifier).getInstanceTypeName();
-			if (!javaTypeName.contains(".")) {
-				//primitive type
-				return (Type) TypesFactory.eINSTANCE.create(
-						(EClass) TypesPackage.eINSTANCE.getEClassifier(
-								firstToUpperCase(javaTypeName)));
+		EPackage ePackage = eClassifier.getEPackage();
+		if (ePackage != null) {
+			if (eClassifier instanceof EClass) {
+				javaTypeName = getFullPackageName(ePackage) + "." + eClassifier.getName();
 			}
-
+			else if (eClassifier instanceof EEnum) {
+				javaTypeName = getFullPackageName(ePackage) + "." + eClassifier.getName();
+			}
+			else if (eClassifier instanceof EDataType) {
+				javaTypeName = ((EDataType) eClassifier).getInstanceTypeName();
+				if (!javaTypeName.contains(".")) {
+					//primitive type
+					return (Type) TypesFactory.eINSTANCE.create(
+							(EClass) TypesPackage.eINSTANCE.getEClassifier(
+									firstToUpperCase(javaTypeName)));
+				}
+			} else {
+				throw new RuntimeException("Unknown EClassifier type: " + eClassifier.getClass());
+			}
+		}
+		if (javaTypeName == null) {
+			return null;
 		}
 		JavaClasspath cp = JavaClasspath.get(eClassifier);
 		return (Type) cp.getClassifier(javaTypeName);
