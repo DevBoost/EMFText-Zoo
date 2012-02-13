@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -4413,7 +4414,18 @@ public class HEDLGenerator {
                 _builder.append("\"");
                 String _name_1 = property.getName();
                 _builder.append(_name_1, "");
-                _builder.append("\", ");
+                _builder.append("\"");
+                {
+                  EList<Property> _properties_1 = uniqueConstraint.getProperties();
+                  int _indexOf = _properties_1.indexOf(property);
+                  EList<Property> _properties_2 = uniqueConstraint.getProperties();
+                  int _size = _properties_2.size();
+                  int _operator_minus = IntegerExtensions.operator_minus(_size, 1);
+                  boolean _operator_lessThan = IntegerExtensions.operator_lessThan(_indexOf, _operator_minus);
+                  if (_operator_lessThan) {
+                    _builder.append(", ");
+                  }
+                }
               }
             }
             _builder.append("})");
@@ -4531,8 +4543,8 @@ public class HEDLGenerator {
       }
     }
     {
-      EList<Property> _properties_1 = entity.getProperties();
-      for(final Property property_1 : _properties_1) {
+      EList<Property> _properties_3 = entity.getProperties();
+      for(final Property property_1 : _properties_3) {
         {
           Type _type = property_1.getType();
           if ((_type instanceof JavaType)) {
@@ -4927,8 +4939,8 @@ public class HEDLGenerator {
       }
     }
     {
-      EList<Property> _properties_2 = entity.getProperties();
-      for(final Property property_4 : _properties_2) {
+      EList<Property> _properties_4 = entity.getProperties();
+      for(final Property property_4 : _properties_4) {
         _builder.append("\t");
         _builder.append("/**");
         _builder.newLine();

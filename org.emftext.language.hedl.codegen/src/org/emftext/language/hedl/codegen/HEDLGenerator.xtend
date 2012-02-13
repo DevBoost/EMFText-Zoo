@@ -961,7 +961,7 @@ class HEDLGenerator {
 		«FOR constraint : entity.constraints »
 		«IF constraint instanceof UniqueConstraint »
 		«var uniqueConstraint = constraint as UniqueConstraint »
-		, uniqueConstraints=@UniqueConstraint(columnNames={«FOR property : uniqueConstraint.properties»"«property.name»", «ENDFOR»})
+		, uniqueConstraints=@UniqueConstraint(columnNames={«FOR property : uniqueConstraint.properties»"«property.name»"«IF uniqueConstraint.properties.indexOf(property) < uniqueConstraint.properties.size - 1 », «ENDIF»«ENDFOR»})
 		«ENDIF»
 		«ENDFOR»)
 		«IF entity.comment != null »
