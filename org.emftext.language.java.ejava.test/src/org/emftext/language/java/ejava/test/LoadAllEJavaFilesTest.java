@@ -27,6 +27,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -71,6 +72,13 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		JavaClasspath javaClasspath = JavaClasspath.get(rs);
 		javaClasspath.registerClassifierJar(URI.createURI(getJarPath(EClass.class)));
 		javaClasspath.registerStdLib();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		// clear generator model locations
+		EcorePlugin.getEPackageNsURIToGenModelLocationMap().clear();
 	}
 
 	private String getJarPath(Class<?> clazz) {
