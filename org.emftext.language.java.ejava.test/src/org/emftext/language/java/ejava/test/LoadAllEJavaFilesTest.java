@@ -61,9 +61,12 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		ConcreteSyntaxTestHelper.registerEcoreGenModel();
 		ConcreteSyntaxTestHelper.registerGenModelGenModel();
 		// create and configure resource set
+		List<Object> options = new ArrayList<Object>();
+		options.add(new EJavaPostProcessor());
+		options.add(new org.emftext.language.java.ejava.resource.EJavaPostProcessor());
+		
 		rs = new ResourceSetImpl();
-		rs.getLoadOptions().put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new EJavaPostProcessor());
-		rs.getLoadOptions().put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new org.emftext.language.java.ejava.resource.EJavaPostProcessor());
+		rs.getLoadOptions().put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, options);
 		// configure URI map
 		Map<URI, URI> uriMap = rs.getURIConverter().getURIMap();
 		map(uriMap, ECORE_GENMODEL_URI, EClass.class);
