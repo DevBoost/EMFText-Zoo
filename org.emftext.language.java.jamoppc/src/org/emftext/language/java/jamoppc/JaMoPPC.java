@@ -18,11 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -153,18 +151,6 @@ public class JaMoPPC {
 			throws IOException {
 		Map<Object, Object> options = new HashMap<Object, Object>();
 		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-		// options.put(XMIResource.OPTION_PROCESS_DANGLING_HREF,
-		// XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
-		Set<EObject> danglingElements = new LinkedHashSet<EObject>();
-		for (Iterator<EObject> i = xmiResource.getAllContents(); i.hasNext();) {
-			for (EObject crossRefElement : i.next().eCrossReferences()) {
-				if ((crossRefElement.eContainer() == null)
-						&& (crossRefElement.eResource() == null)) {
-					danglingElements.add(crossRefElement);
-				}
-			}
-		}
-		xmiResource.getContents().addAll(danglingElements);
 		xmiResource.save(options);
 	}
 
