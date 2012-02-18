@@ -64,12 +64,9 @@ eclass AnnotableAndModifiable {
 		
 		ConcreteClassifier contextClassifier = context.getContainingConcreteClassifier(); 
 		if (!(eContainer() instanceof Commentable)) {
-			return false;
+			return true;
 		}
 		ConcreteClassifier myClassifier = ((Commentable) eContainer()).getParentConcreteClassifier();
-		if (myClassifier == null) {
-			return false;
-		}
 		//special case: self reference to outer instance
 		if(context instanceof Reference) {
 			if (((Reference)context).getPrevious() instanceof SelfReference) {
