@@ -36,6 +36,7 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.generics.TypeParametrizable;
 import org.emftext.language.java.generics.UnknownTypeArgument;
@@ -265,7 +266,7 @@ public class ClassFileModelLoader {
 			org.apache.bcel.generic.Type argType = method.getArgumentTypes()[i];
 			if (i == method.getArgumentTypes().length - 1 && withVaraibleLength) {
 				emfMethod.getParameters().add(
-						constructVariableLengthParameter(argType));
+						constructVariableLengthParameter(argType, i));
 			} else {
 				emfMethod.getParameters().add(
 						constructParameter(argType, i));
@@ -334,11 +335,12 @@ public class ClassFileModelLoader {
 		return emfParameter;
 	}
 
-	protected Parameter constructVariableLengthParameter(org.apache.bcel.generic.Type attrType) {
+	protected Parameter constructVariableLengthParameter(org.apache.bcel.generic.Type attrType, int attrNumber) {
 		Parameter emfParameter = parametersFactory.createVariableLengthParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
 		emfParameter.setTypeReference(emfTypeReference);
+		emfParameter.setName("arg" + attrNumber);
 
         int arrayDimension = getArrayDimension(signature) - 1;
         for(int i = 0; i < arrayDimension; i++) {
@@ -746,9 +748,15 @@ public class ClassFileModelLoader {
 								}
 
 
-								QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-								typeArgument.setTypeReference(argumentType);
+
 								if (typeRef != null) {
+									TypeArgument typeArgument = null;
+									if (argumentType == null) {
+										typeArgument = GenericsFactory.eINSTANCE.createUnknownTypeArgument();
+									} else {
+										typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
+										((QualifiedTypeArgument) typeArgument).setTypeReference(argumentType);
+									}
 									typeRef.getTypeArguments().add(typeArgument);
 								}
 
