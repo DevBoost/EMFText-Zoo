@@ -60,9 +60,18 @@ public class PackageDecider extends AbstractDecider {
 			EList<EObject> resultList = new BasicEList<EObject>();
 			PackageReference parentPackage = (PackageReference) container;
 
-			PackageReference p = ReferencesFactory.eINSTANCE.createPackageReference();
-			p.setName(identifier);
-			parentPackage.getSubpackages().add(p);
+			PackageReference p = null;
+			for (PackageReference sub : parentPackage.getSubpackages()) {
+				if (identifier.equals(sub.getName())) {
+					p = sub;
+					break;
+				}
+			}
+			if (p == null) {
+				p = ReferencesFactory.eINSTANCE.createPackageReference();
+				p.setName(identifier);
+				parentPackage.getSubpackages().add(p);
+			}
 			resultList.add(p);
 
 			return resultList;

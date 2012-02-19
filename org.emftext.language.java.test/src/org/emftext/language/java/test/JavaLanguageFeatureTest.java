@@ -989,27 +989,23 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertResolveAllProxies(clazz);
-		//there should be 3 package segments that were created during resolving by the ScopedTreeWalker
+		//there should be 2 package segments that were created during resolving by the ScopedTreeWalker
 		Resource r = clazz.eResource();
-		assertEquals(3 + 1, r.getContents().size());
+		assertEquals(2 + 1, r.getContents().size());
 		PackageReference p1 = 
 				(PackageReference) r.getContents().get(1);
 		PackageReference p2 = 
 				(PackageReference) r.getContents().get(2);
-		PackageReference p3 = 
-				(PackageReference) r.getContents().get(3);
 		assertEquals("java", p1.getName());
-		assertEquals("java", p2.getName());
-		assertEquals("org", p3.getName());
+		assertEquals("org", p2.getName());
 		assertEquals("lang", p1.getSubpackages().get(0).getName());
-		assertEquals("lang", p2.getSubpackages().get(0).getName());
-		assertEquals("xml", p3.getSubpackages().get(0).getName());
+		assertEquals(1, p1.getSubpackages().size());
+		assertEquals("xml", p2.getSubpackages().get(0).getName());
 		assertEquals("annotation", p1.getSubpackages().get(0).getSubpackages().get(0).getName());
-		assertEquals("instrument", p2.getSubpackages().get(0).getSubpackages().get(0).getName());
-		assertEquals("sax", p3.getSubpackages().get(0).getSubpackages().get(0).getName());
+		assertEquals("instrument", p1.getSubpackages().get(0).getSubpackages().get(1).getName());
+		assertEquals("sax", p2.getSubpackages().get(0).getSubpackages().get(0).getName());
 		assertEquals(0, p1.getSubpackages().get(0).getSubpackages().get(0).getSubpackages().size());
 		assertEquals(0, p2.getSubpackages().get(0).getSubpackages().get(0).getSubpackages().size());
-		assertEquals(0, p3.getSubpackages().get(0).getSubpackages().get(0).getSubpackages().size());
 		
 		parseAndReprint(filename);
 	}

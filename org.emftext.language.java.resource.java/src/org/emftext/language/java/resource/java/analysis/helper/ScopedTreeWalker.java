@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 
 /**
@@ -209,8 +210,22 @@ public class ScopedTreeWalker {
 								if (!currentBestResult.eIsProxy() && currentBestResult.eResource() == null) {
 									Resource containerResource = container.eResource();
 									if (containerResource != null) {
-										//add package elements created on demand to the current resource
-										containerResource.getContents().add(currentBestResult);
+										//for package references and the array length field: 
+										//check if there already is a suitable element in 
+										//the resource, or create one if not.
+										for (EObject content : container.eResource().getContents()) {
+											if (content.eClass().equals(currentBestResult.eClass())) {
+												if (content instanceof NamedElement) {
+													NamedElement cand = (NamedElement) content;
+													if (((NamedElement) content).getName().equals(((NamedElement)currentBestResult).getName())) {
+														currentBestResult = cand;
+													}
+												}
+											}
+										}
+										if (currentBestResult.eResource() == null) {
+											containerResource.getContents().add(currentBestResult);
+										}
 									}
 								}
 								finished = true;
@@ -222,7 +237,6 @@ public class ScopedTreeWalker {
 			}
 		}
 	}
-
 
 	private EList<EObject> getContentList(EObject container, EReference reference, EReference navOrigin, int posInNavOrigin) {
 		EList<EObject> contentList = new BasicEList<EObject>();
