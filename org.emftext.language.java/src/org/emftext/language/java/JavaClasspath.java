@@ -321,7 +321,7 @@ public class JavaClasspath extends AdapterImpl {
 
 			for (int idx = 0; idx < classpathEntries.length; idx++) {
 				String classpathEntry = classpathEntries[idx];
-				if (classpathEntry.endsWith("/classes.jar") || classpathEntry.endsWith("/rt.jar")) {
+				if (classpathEntry.endsWith(File.separator + "classes.jar") || classpathEntry.endsWith(File.separator + "rt.jar")) {
 					URI uri = URI.createFileURI(classpathEntries[idx]);
 					registerClassifierJar(uri);
 				}
