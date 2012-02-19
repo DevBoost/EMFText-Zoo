@@ -73,7 +73,7 @@ public class JaMoPPC {
 		// load all java files into resource set
 		loadAllFilesInResourceSet(srcFolder, ".java");
 
-		if (!resolveAllProxies()) {
+		if (!resolveAllProxies(0)) {
 			System.err.println("Resolution of some Proxies failed...");
 			Iterator<Notifier> it = rs.getAllContents();
 			while (it.hasNext()) {
@@ -220,7 +220,7 @@ public class JaMoPPC {
 		}
 	}
 
-	protected static boolean resolveAllProxies() {
+	protected static boolean resolveAllProxies(int resourcesProcessedBefore) {
 		boolean failure = false;
 		List<EObject> eobjects = new LinkedList<EObject>();
 		for (Iterator<Notifier> i = rs.getAllContents(); i.hasNext();) {
@@ -228,6 +228,10 @@ public class JaMoPPC {
 			if (next instanceof EObject) {
 				eobjects.add((EObject) next);
 			}
+		}
+		int resourcesProcessed = rs.getResources().size();
+		if (resourcesProcessed == resourcesProcessedBefore) {
+			return true;
 		}
 
 		System.out.println("Resolving cross-references of " + eobjects.size()
@@ -261,8 +265,10 @@ public class JaMoPPC {
 		System.out.println(eobjectCnt + "/" + eobjects.size()
 				+ " done: Resolved " + resolved + " crossrefs, " + notResolved
 				+ " crossrefs could not be resolved.");
-
-		return !failure;
+		
+		//call this method again, because the resolving might have triggered loading
+		//of additional resources that may also contain references that need to be resolved.
+		return !failure && resolveAllProxies(resourcesProcessed);
 	}
 
 	protected static void parseResource(File file) throws IOException {
