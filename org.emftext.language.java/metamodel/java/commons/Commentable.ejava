@@ -66,9 +66,6 @@ eclass Commentable {
 	 * @return the Class
 	 */
 	getLibClass() {
-		if (this.eResource() == null) {
-			throw new IllegalArgumentException("object context element must have a resource");
-		}
 		Class classClass = (Class) getConcreteClassifierProxy(
 				"java.lang." + name);
 		classClass = (Class) EcoreUtil.resolve(classClass, this);
@@ -128,9 +125,6 @@ eclass Commentable {
 	 * @return the Class
 	 */
 	getAnnotationInterface() {
-		if (this.eResource() == null) {
-			throw new IllegalArgumentException("object context element must have a resource");
-		}
 		Interface annotationClass = (Interface) EcoreUtil.resolve(
 				getConcreteClassifierProxy("java.lang.annotation.Annotation"), this);
 		return annotationClass;
