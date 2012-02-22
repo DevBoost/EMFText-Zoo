@@ -115,7 +115,7 @@ public class LoadAllEJavaFilesTest extends TestCase {
 	}
 
 	private String getClassFileLocation(Class<?> clazz) {
-		String path = clazz.getResource("").getFile();
+		String path = clazz.getResource(clazz.getSimpleName() + ".class").getFile();
 		path = path.replaceAll("!.*", "!/");
 		return path;
 	}
