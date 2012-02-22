@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,9 +54,13 @@ public class LoadAllEJavaFilesTest extends TestCase {
 	
 	private static final String EJAVA_NEW_FILE = "eJava.newfile.ejava";
 	
+	private Map<URI, URI> uriMap = new LinkedHashMap<URI, URI>();
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		map(ECORE_GENMODEL_URI, EClass.class);
+		map(GENMODEL_GENMODEL_URI, GenClass.class);
 		// register resource factories
 		ConcreteSyntaxTestHelper.registerResourceFactories();
 		// support text.ecore files
@@ -96,7 +101,7 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		return path;
 	}
 
-	private void map(Map<URI, URI> uriMap, String baseURI, Class<?> clazz) {
+	private void map(String baseURI, Class<?> clazz) {
 		URI from = URI.createURI(baseURI);
 		URI to = getURI(clazz);
 		uriMap.put(from, to);
@@ -154,9 +159,7 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		ResourceSetImpl rs = new ResourceSetImpl();
 		
 		// configure URI map
-		Map<URI, URI> uriMap = rs.getURIConverter().getURIMap();
-		map(uriMap, ECORE_GENMODEL_URI, EClass.class);
-		map(uriMap, GENMODEL_GENMODEL_URI, GenClass.class);
+		rs.getURIConverter().getURIMap().putAll(uriMap);
 		// create and configure resource set
 		List<Object> options = new ArrayList<Object>();
 		options.add(new EJavaPostProcessor());
