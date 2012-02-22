@@ -68,8 +68,11 @@ eclass Commentable {
 	getLibClass() {
 		Class classClass = (Class) getConcreteClassifierProxy(
 				"java.lang." + name);
-		classClass = (Class) EcoreUtil.resolve(classClass, this);
-		return classClass;
+		EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classClass, this);
+		if (resolved instanceof Class) {
+			return (Class) resolved;
+		}
+		return null;
 	}
 	
 	/**
@@ -80,12 +83,13 @@ eclass Commentable {
 	 * @return the Class
 	 */
 	getLibInterface() {
-		if (this.eResource() == null) {
-			throw new IllegalArgumentException("object context element  must have a resource");
-		}
-		ConcreteClassifier classClass = getConcreteClassifierProxy(
+		ConcreteClassifier interfaceClass = getConcreteClassifierProxy(
 				"java.lang." + name);
-		return (Interface) EcoreUtil.resolve(classClass, this);
+		EObject resolved = EcoreUtil.resolve(interfaceClass, this);
+		if (resolved instanceof Interface) {
+			return (Interface) resolved;
+		}
+		return null;
 	}
 	
 	/**
@@ -127,7 +131,11 @@ eclass Commentable {
 	getAnnotationInterface() {
 		Interface annotationClass = (Interface) EcoreUtil.resolve(
 				getConcreteClassifierProxy("java.lang.annotation.Annotation"), this);
-		return annotationClass;
+		EObject resolved = EcoreUtil.resolve(annotationClass, this);
+		if (resolved instanceof Interface) {
+			return (Interface) resolved;
+		}
+		return null;
 	}
 	
 	//===== Container look up =====
