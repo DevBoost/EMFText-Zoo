@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -37,6 +38,7 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaOptions;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation;
 import org.emftext.language.java.ejava.resource.util.EJavaPostProcessor;
+import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 
 /**
@@ -46,13 +48,15 @@ public class LoadAllEJavaFilesTest extends TestCase {
 	
 	private static final String GENMODEL_GENMODEL_URI = "platform:/plugin/org.eclipse.emf.codegen.ecore/";
 	private static final String ECORE_GENMODEL_URI = "platform:/plugin/org.eclipse.emf.ecore/";
-	private ResourceSet rs;
+	
+	private static final String EJAVA_NEW_FILE = "eJava.newfile.ejava";
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		// register resource factories
 		ConcreteSyntaxTestHelper.registerResourceFactories();
+		JaMoPPUtil.initialize();
 		new EjavaMetaInformation().registerResourceFactory();
 		// initialize packages
 		EcorePackage.eINSTANCE.getEClass();
@@ -60,21 +64,15 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		// register generator models
 		ConcreteSyntaxTestHelper.registerEcoreGenModel();
 		ConcreteSyntaxTestHelper.registerGenModelGenModel();
-		// create and configure resource set
-		List<Object> options = new ArrayList<Object>();
-		options.add(new EJavaPostProcessor());
-		options.add(new org.emftext.language.java.ejava.resource.EJavaPostProcessor());
-		
-		rs = new ResourceSetImpl();
-		rs.getLoadOptions().put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, options);
-		// configure URI map
-		Map<URI, URI> uriMap = rs.getURIConverter().getURIMap();
-		map(uriMap, ECORE_GENMODEL_URI, EClass.class);
-		map(uriMap, GENMODEL_GENMODEL_URI, GenClass.class);
+
 		// configure classpath
-		JavaClasspath javaClasspath = JavaClasspath.get(rs);
+		JavaClasspath javaClasspath = JavaClasspath.get();
+		// *** TODO ideally, this is extracted from the dependencies of the plugin in which the eJava file is located
 		javaClasspath.registerClassifierJar(URI.createURI(getJarPath(EClass.class)));
-		javaClasspath.registerStdLib();
+		javaClasspath.registerClassifierJar(URI.createURI(getJarPath(EList.class)));
+		javaClasspath.registerClassifierJar(URI.createURI(getJarPath(GenClass.class)));
+		javaClasspath.registerSourceOrClassFileFolder(URI.createFileURI("../org.emftext.language.java/src"));
+		// ***
 	}
 	
 	@Override
@@ -109,25 +107,6 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		return path;
 	}
 
-	public void testLoadAllEJavaFiles() throws IOException {
-		List<File> files = findEJavaFiles(new File("..").getAbsoluteFile());
-		System.out.println("Found files: " + files.size());
-		assertFalse("No EJava files found.", files.isEmpty());
-		
-		for (File file : files) {
-			URI uri = URI.createFileURI(file.getCanonicalPath());
-			
-			Resource resource = rs.getResource(uri, true);
-			EcoreUtil.resolveAll(resource);
-			List<Diagnostic> errors = resource.getErrors();
-			for (Diagnostic error : errors) {
-				System.out.println("Found error in " + uri.toString() + ": " + error);
-			}
-			// TODO enable this assertion!
-			//assertTrue("Resource must not have errors.", errors.isEmpty());
-		}
-	}
-
 	public void testURIMapping() {
 		testLoading(ECORE_GENMODEL_URI + "model/Ecore.ecore");
 		testLoading(ECORE_GENMODEL_URI + "model/Ecore.genmodel");
@@ -135,9 +114,54 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		testLoading(GENMODEL_GENMODEL_URI + "model/GenModel.genmodel");
 	}
 
+	public void testLoadAllEJavaFiles() throws IOException {
+		List<File> files = findEJavaFiles(new File("..").getAbsoluteFile());
+		System.out.println("Found files: " + files.size());
+		assertFalse("No EJava files found.", files.isEmpty());
+		
+		for (File file : files) {
+			if (file.getName().equals(EJAVA_NEW_FILE)) {
+				//exclude the new file prototype of eJava, which points at a non-existing ecore package
+				continue;
+			}
+			URI uri = URI.createFileURI(file.getCanonicalPath());
+			
+			//ATTENTION!
+			//each file needs to be loaded in a separate resource set, since 
+			//eJava creates "virtual" resource inside the set when wrapping 
+			//Ecore into Java types. If more that one eJava file is loaded,
+			//the real resources overlap with the virtual ones.
+			ResourceSet rs = createNewResourceSet();
+			Resource resource = rs.getResource(uri, true);
+			EcoreUtil.resolveAll(resource);
+			List<Diagnostic> errors = resource.getErrors();
+			for (Diagnostic error : errors) {
+				System.out.println("Found error in " + uri.toString() + ": " + error);
+			}
+			assertTrue("Resource must not have errors.", errors.isEmpty());
+		}
+	}
+
+	private ResourceSet createNewResourceSet() {
+		ResourceSetImpl rs = new ResourceSetImpl();
+		
+		// configure URI map
+		Map<URI, URI> uriMap = rs.getURIConverter().getURIMap();
+		map(uriMap, ECORE_GENMODEL_URI, EClass.class);
+		map(uriMap, GENMODEL_GENMODEL_URI, GenClass.class);
+		// create and configure resource set
+		List<Object> options = new ArrayList<Object>();
+		options.add(new EJavaPostProcessor());
+		options.add(new org.emftext.language.java.ejava.resource.EJavaPostProcessor());
+		
+		rs.getLoadOptions().put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, options);
+
+		return rs;
+	}
+
 	private void testLoading(String path) {
 		URI uri = URI.createURI(path);
-		Resource resource = rs.getResource(uri, true);
+		Resource resource = createNewResourceSet().getResource(uri, true);
 		System.out.println("testLoading() uri = " + resource.getURI());
 		System.out.println("testLoading() contents = " + resource.getContents());
 	}
@@ -162,9 +186,7 @@ public class LoadAllEJavaFilesTest extends TestCase {
 			@Override
 			public boolean accept(File file) {
 				return file.isDirectory() && 
-						!".".equals(file.getName()) &&
-						!"..".equals(file.getName()) &&
-						!".sven".equals(file.getName());
+						!file.getName().startsWith(".");
 			}
 		});
 		if (subDirs == null) {
