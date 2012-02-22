@@ -374,6 +374,32 @@ public class JavaClasspath extends AdapterImpl {
 		}
 	}
 
+	public void registerClassifierSourceFolder(URI sourceFolderURI) {
+		if (!sourceFolderURI.isFile()) {
+			return;
+		}
+		File sourceFolder = new File(sourceFolderURI.toFileString());
+		internalRegisterClassifierSourceFolder(sourceFolder, "");
+	}
+	
+	private void internalRegisterClassifierSourceFolder(File folder, String packageName) {
+		for (File child : folder.listFiles()) {
+			if (!child.getName().startsWith(".")) { //no hidden files
+				if (child.isDirectory()) {
+					internalRegisterClassifierSourceFolder(child, 
+							packageName + child.getName() + JavaUniquePathConstructor.PACKAGE_SEPARATOR);
+				} else {
+					if (child.getName().endsWith(JavaUniquePathConstructor.JAVA_FILE_EXTENSION)) {
+						String classifierName = child.getName().substring(0, 
+								child.getName().length() - JavaUniquePathConstructor.JAVA_FILE_EXTENSION.length());
+						URI uri = URI.createFileURI(child.getAbsolutePath());
+						registerClassifier(packageName, classifierName, uri );
+					}
+				}
+			}
+		}
+	}
+
 	/**
 	 * Registers all classes defined in the given compilation unit.
 	 *
