@@ -27,9 +27,9 @@ eclass Type {
 	equalsType() {
 		Type _this = this;
 		//comparison for type parameters
-		if (_this instanceof org.emftext.language.java.generics.TypeParameter) {
-			org.emftext.language.java.generics.TypeParameter typeParameter = (org.emftext.language.java.generics.TypeParameter) _this;
-			for (org.emftext.language.java.types.TypeReference referencedType : typeParameter.getExtendTypes()) {
+		if (_this instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) _this;
+			for (TypeReference referencedType : typeParameter.getExtendTypes()) {
 				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && referencedType.getTarget().equalsType(arrayDimension, otherType, otherArrayDimension)) {
 					return true;
 				}
@@ -40,9 +40,9 @@ eclass Type {
 				}
 			}
 		} 
-		if (otherType instanceof org.emftext.language.java.generics.TypeParameter) {
-			org.emftext.language.java.generics.TypeParameter typeParameter = (org.emftext.language.java.generics.TypeParameter) otherType;
-			for (org.emftext.language.java.types.TypeReference referencedType : typeParameter.getExtendTypes()) {
+		if (otherType instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) otherType;
+			for (TypeReference referencedType : typeParameter.getExtendTypes()) {
 				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && equalsType(arrayDimension, referencedType.getTarget(), otherArrayDimension)) {
 					return true;
 				}
