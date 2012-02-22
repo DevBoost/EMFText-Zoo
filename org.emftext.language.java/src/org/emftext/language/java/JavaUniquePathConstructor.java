@@ -66,6 +66,11 @@ public class JavaUniquePathConstructor {
 	public static final String JAVA_FILE_EXTENSION = ".java";
 
 	/**
+	 * Java's class file extension (.class).
+	 */
+	public static final String JAVA_CLASS_FILE_EXTENSION = ".class";
+	
+	/**
 	 * Constructs an URI from a fully qualified classifier name
 	 * pointing at the resource containing the classifier.
 	 *

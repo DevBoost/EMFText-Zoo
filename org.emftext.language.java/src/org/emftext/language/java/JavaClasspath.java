@@ -349,7 +349,8 @@ public class JavaClasspath extends AdapterImpl {
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 
-			if (entry.getName().endsWith(".class") && entry.getName().startsWith(prefix)) {
+			if (entry.getName().endsWith(JavaUniquePathConstructor.JAVA_CLASS_FILE_EXTENSION) 
+					&& entry.getName().startsWith(prefix)) {
 				String fullName = entry.getName();
 
 				String uri = "archive:" + jarURI.toString() + "!/" + fullName;
@@ -374,24 +375,24 @@ public class JavaClasspath extends AdapterImpl {
 		}
 	}
 
-	public void registerClassifierSourceFolder(URI sourceFolderURI) {
-		if (!sourceFolderURI.isFile()) {
+	public void registerSourceOrClassFileFolder(URI folderURI) {
+		if (!folderURI.isFile()) {
 			return;
 		}
-		File sourceFolder = new File(sourceFolderURI.toFileString());
-		internalRegisterClassifierSourceFolder(sourceFolder, "");
+		File sourceFolder = new File(folderURI.toFileString());
+		internalRegisterSourceOrClassFileFolder(sourceFolder, "");
 	}
 	
-	private void internalRegisterClassifierSourceFolder(File folder, String packageName) {
+	private void internalRegisterSourceOrClassFileFolder(File folder, String packageName) {
 		for (File child : folder.listFiles()) {
 			if (!child.getName().startsWith(".")) { //no hidden files
 				if (child.isDirectory()) {
-					internalRegisterClassifierSourceFolder(child, 
+					internalRegisterSourceOrClassFileFolder(child, 
 							packageName + child.getName() + JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 				} else {
-					if (child.getName().endsWith(JavaUniquePathConstructor.JAVA_FILE_EXTENSION)) {
-						String classifierName = child.getName().substring(0, 
-								child.getName().length() - JavaUniquePathConstructor.JAVA_FILE_EXTENSION.length());
+					if (child.getName().endsWith(JavaUniquePathConstructor.JAVA_FILE_EXTENSION)
+							|| child.getName().endsWith(JavaUniquePathConstructor.JAVA_CLASS_FILE_EXTENSION)) {
+						String classifierName = child.getName().substring(0, child.getName().lastIndexOf('.'));
 						URI uri = URI.createFileURI(child.getAbsolutePath());
 						registerClassifier(packageName, classifierName, uri );
 					}
