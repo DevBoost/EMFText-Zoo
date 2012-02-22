@@ -201,9 +201,9 @@ public class EcoreWrapper {
 					wrapEStructuralFeatureForSet(eStructuralFeature, wrapper);
 				}
 			}
-			EList<EOperation> eOperations = eClass.getEOperations();
+			List<EOperation> eOperations = eClass.getEOperations();
 			eOperations.addAll(getMissingOperations(eClass));
-			for(EOperation eOperation : eOperations) {
+			for(EOperation eOperation : new ArrayList<EOperation>(eOperations)) {
 				wrapEOperation(eOperation, wrapper);
 			}
 		}
