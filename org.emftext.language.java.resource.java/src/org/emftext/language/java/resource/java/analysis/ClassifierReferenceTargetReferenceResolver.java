@@ -184,7 +184,9 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			if (target.eIsProxy()) {
 				target = EcoreUtil.resolve(target, container);
 			}
-			result.addMapping(identifier, (Classifier) target);
+			if (!target.eIsProxy()) {
+				result.addMapping(identifier, (Classifier) target);
+			}
 		}
 	}
 

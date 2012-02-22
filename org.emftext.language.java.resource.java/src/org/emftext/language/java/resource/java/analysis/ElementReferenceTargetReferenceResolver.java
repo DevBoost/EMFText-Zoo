@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -156,7 +157,12 @@ public class ElementReferenceTargetReferenceResolver implements
 		}
 
 		if (target != null) {
-			result.addMapping(identifier, (ReferenceableElement) target);
+			if (target.eIsProxy()) {
+				target = EcoreUtil.resolve(target, container);
+			}
+			if (!target.eIsProxy()) {
+				result.addMapping(identifier, (ReferenceableElement) target);
+			}
 		}
 	}
 
