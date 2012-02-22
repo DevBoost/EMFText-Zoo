@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.ecore.resource.EcoreResourceFactoryDelegator;
+import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaOptions;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation;
@@ -56,6 +58,12 @@ public class LoadAllEJavaFilesTest extends TestCase {
 		super.setUp();
 		// register resource factories
 		ConcreteSyntaxTestHelper.registerResourceFactories();
+		// support text.ecore files
+		EcoreResourceFactoryDelegator ecoreResourceFactoryDelegator = new EcoreResourceFactoryDelegator();
+		ecoreResourceFactoryDelegator.getResourceFactoriesMap().put("text", new TextEcoreResourceFactory());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", ecoreResourceFactoryDelegator);
+		//initialize JaMoPP to load normal java files
 		JaMoPPUtil.initialize();
 		new EjavaMetaInformation().registerResourceFactory();
 		// initialize packages
