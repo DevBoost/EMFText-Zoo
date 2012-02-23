@@ -187,7 +187,7 @@ public class EcoreWrapper {
 			}
 
 			for(EClass extendedEClass : eClass.getESuperTypes()) {
-				superTypeList.add(createTypeReferenceForEClassifier(extendedEClass));
+				superTypeList.add(createTypeReferenceForEClassifier(extendedEClass, eClassifier.eResource().getResourceSet()));
 			}
 
 			JavaClasspath cp = JavaClasspath.get(eClassifier);
@@ -399,28 +399,29 @@ public class EcoreWrapper {
 
 	}
 
-	private static Type getType(EClassifier eClassifier)  {
+	private static Type getType(EClassifier eClassifier, ResourceSet resourceSet)  {
 		if (eClassifier == null) {
 			return TypesFactory.eINSTANCE.createVoid();
 		}
-
 		String javaTypeName = null;
 		EPackage ePackage = eClassifier.getEPackage();
 		if (ePackage != null) {
-			if (eClassifier instanceof EClass) {
-				javaTypeName = getFullPackageName(ePackage) + "." + eClassifier.getName();
-			}
-			else if (eClassifier instanceof EEnum) {
-				javaTypeName = getFullPackageName(ePackage) + "." + eClassifier.getName();
-			}
-			else if (eClassifier instanceof EDataType) {
+			if (eClassifier instanceof EDataType && !(eClassifier instanceof EEnum)) {
 				javaTypeName = ((EDataType) eClassifier).getInstanceTypeName();
-				if (!javaTypeName.contains(".")) {
+				if (javaTypeName != null && !javaTypeName.contains(".")) {
 					//primitive type
 					return (Type) TypesFactory.eINSTANCE.create(
 							(EClass) TypesPackage.eINSTANCE.getEClassifier(
 									firstToUpperCase(javaTypeName)));
 				}
+			} else if (isEClassifierFromEcorePackage(eClassifier)) {
+				javaTypeName = getEcoreImplementationTypeName(eClassifier);
+			}
+			else if (eClassifier instanceof EClass) {
+				javaTypeName = getFullPackageName(ePackage) + "." + eClassifier.getName();
+			}
+			else if (eClassifier instanceof EEnum) {
+				javaTypeName = getFullPackageName(ePackage) + "." + eClassifier.getName();
 			} else {
 				throw new RuntimeException("Unknown EClassifier type: " + eClassifier.getClass());
 			}
@@ -428,12 +429,20 @@ public class EcoreWrapper {
 		if (javaTypeName == null) {
 			return null;
 		}
-		JavaClasspath cp = JavaClasspath.get(eClassifier);
+		JavaClasspath cp = JavaClasspath.get(resourceSet);
 		return (Type) cp.getClassifier(javaTypeName);
 	}
 
-	private static TypeReference createTypeReferenceForEClassifier(EClassifier eClassifier) {
-		Type type = getType(eClassifier);
+	private static boolean isEClassifierFromEcorePackage(EClassifier eClassifier) {
+		return EcorePackage.eINSTANCE == eClassifier.getEPackage();
+	}
+
+	private static String getEcoreImplementationTypeName(EClassifier eClassifier) {
+		return eClassifier.getInstanceClassName();
+	}
+
+	private static TypeReference createTypeReferenceForEClassifier(EClassifier eClassifier, ResourceSet resourceSet) {
+		Type type = getType(eClassifier, resourceSet);
 		if (type instanceof TypeReference) {
 			return (TypeReference) type;
 		}
@@ -444,7 +453,7 @@ public class EcoreWrapper {
 
 	private static TypeReference createTypeReferenceForETypedElement(ETypedElement eTypedElement) {
 
-		TypeReference baseTypeRef = createTypeReferenceForEClassifier(eTypedElement.getEType());
+		TypeReference baseTypeRef = createTypeReferenceForEClassifier(eTypedElement.getEType(), eTypedElement.eResource().getResourceSet());
 		if (baseTypeRef instanceof Void) {
 			return baseTypeRef;
 		}

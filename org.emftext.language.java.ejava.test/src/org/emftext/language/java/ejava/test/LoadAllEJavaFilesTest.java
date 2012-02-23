@@ -137,10 +137,6 @@ public class LoadAllEJavaFilesTest extends TestCase {
 				//exclude the new file prototype of eJava, which points at a non-existing ecore package
 				continue;
 			}
-			//FIXME: remove this special case when fixed!
-			if (file.getName().equals("RefactoringSpecification.ejava")) {
-				continue;
-			}
 			URI uri = URI.createFileURI(file.getCanonicalPath());
 			
 			//ATTENTION!
