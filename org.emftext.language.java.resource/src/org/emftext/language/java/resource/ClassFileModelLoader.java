@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2011
+ * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  *
  * All rights reserved. This program and the accompanying materials
@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Utility;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -58,7 +60,6 @@ import org.emftext.language.java.types.TypesFactory;
 /**
  * This class constructs a Java EMF-model from a class file using the
  * Byte Code Engineering Library (BCEL).
- *
  */
 public class ClassFileModelLoader {
 
@@ -76,9 +77,8 @@ public class ClassFileModelLoader {
 
 	public CompilationUnit parse(InputStream inputStream, String classFileName) throws IOException {
 		try {
-			org.apache.bcel.classfile.ClassParser classParser = new org.apache.bcel.classfile.ClassParser(
-					inputStream, classFileName);
-			org.apache.bcel.classfile.JavaClass myClass = classParser.parse();
+			ClassParser classParser = new ClassParser(inputStream, classFileName);
+			JavaClass myClass = classParser.parse();
 			ConcreteClassifier classifier = constructClassifier(myClass);
 			CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 			cu.setName(classFileName);
@@ -95,12 +95,11 @@ public class ClassFileModelLoader {
 			cu.getClassifiers().add(classifier);
 			return cu;
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new IOException(e.getMessage(), e);
 		}
-		return null;
 	}
 
-	protected ConcreteClassifier constructClassifier(org.apache.bcel.classfile.JavaClass clazz) {
+	protected ConcreteClassifier constructClassifier(JavaClass clazz) {
 		ConcreteClassifier emfClassifier = null;
 		if (clazz.isEnum()) { //check first, because enum is also class
 			emfClassifier = qualifiersFactory.createEnumeration();
