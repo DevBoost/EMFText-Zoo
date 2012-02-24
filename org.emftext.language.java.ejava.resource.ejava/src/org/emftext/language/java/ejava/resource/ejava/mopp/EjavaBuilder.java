@@ -47,7 +47,7 @@ public class EjavaBuilder implements IEjavaBuilder {
 	}
 
 	public IStatus build(EjavaResource resource, IProgressMonitor monitor) {
-		EjavaMarkerHelper.unmark(resource, EjavaEProblemType.BUILDER_ERROR);
+		new EjavaMarkerHelper().unmark(resource, EjavaEProblemType.BUILDER_ERROR);
 
 		if (!resource.getContents().isEmpty()) {
 			createBodyAnnotations(resource);
