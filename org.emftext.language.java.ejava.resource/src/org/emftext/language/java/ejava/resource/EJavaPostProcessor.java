@@ -57,7 +57,7 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 	}
 
 	public void process(EjavaResource resource) {
-		EjavaMarkerHelper.unmark(resource, EjavaEProblemType.ANALYSIS_PROBLEM);
+		new EjavaMarkerHelper().unmark(resource, EjavaEProblemType.ANALYSIS_PROBLEM);
 
 		EjavaResource eJavaResource = (EjavaResource) resource;
 		EList<EObject> contents = resource.getContents();
