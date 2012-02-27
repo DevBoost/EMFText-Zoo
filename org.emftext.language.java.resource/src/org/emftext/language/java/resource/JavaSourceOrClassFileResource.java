@@ -169,7 +169,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				CompilationUnit cu =  (CompilationUnit) contents.get(0);
 				return cu.getClassifiers().get(0);
 			} else {
-				assert(false);
+				//if this happens, there was a problem during class file loading
+				return null;
 			}
 		}
 		else {
