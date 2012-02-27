@@ -315,19 +315,15 @@ public class JavaClasspath extends AdapterImpl {
 	 * <code>System.getProperty("sun.boot.class.path")</code>.
 	 */
 	public void registerStdLib() {
-		try {
 			String classpath = System.getProperty("sun.boot.class.path");
 			String[] classpathEntries = classpath.split(File.pathSeparator);
 
-			for (int idx = 0; idx < classpathEntries.length; idx++) {
-				String classpathEntry = classpathEntries[idx];
-				if (classpathEntry.endsWith(File.separator + "classes.jar") || classpathEntry.endsWith(File.separator + "rt.jar")) {
-					URI uri = URI.createFileURI(classpathEntries[idx]);
-					registerClassifierJar(uri);
-				}
+		for (int idx = 0; idx < classpathEntries.length; idx++) {
+			String classpathEntry = classpathEntries[idx];
+			if (classpathEntry.endsWith(File.separator + "classes.jar") || classpathEntry.endsWith(File.separator + "rt.jar")) {
+				URI uri = URI.createFileURI(classpathEntries[idx]);
+				registerClassifierJar(uri);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -336,15 +332,19 @@ public class JavaClasspath extends AdapterImpl {
 	 * at the given URI.
 	 *
 	 * @param jarURI
-	 * @throws IOException
 	 */
-	public void registerClassifierJar(URI jarURI) throws IOException {
+	public void registerClassifierJar(URI jarURI) {
 		registerClassifierJar(jarURI, "");
 	}
 
-	public void registerClassifierJar(URI jarURI, String prefix) throws IOException {
-		ZipFile zipFile = new ZipFile(jarURI.toFileString());
-
+	public void registerClassifierJar(URI jarURI, String prefix) {
+		ZipFile zipFile = null;
+		try {
+			zipFile = new ZipFile(jarURI.toFileString());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
@@ -405,7 +405,6 @@ public class JavaClasspath extends AdapterImpl {
 	 * Registers all classes defined in the given compilation unit.
 	 *
 	 * @param compilationUnit
-	 * @throws IOException
 	 */
 	public void registerClassifierSource(CompilationUnit compilationUnit, URI uri) {
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
