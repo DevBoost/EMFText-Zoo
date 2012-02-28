@@ -5,6 +5,7 @@ import java.members.Field;
 import java.members.Member;
 import java.members.MemberContainer;
 import java.members.Method;
+import java.types.ClassifierReference;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -116,5 +117,15 @@ eclass MemberContainer {
 			}
  		}
 		return found;
+	}
+	
+	createField() {
+		Field field = #Field;
+		field.setName(name);
+		ClassifierReference typeRef = #ClassifierReference;
+		typeRef.setTarget(getConcreteClassifier(qualifiedTypeName));
+		field.setTypeReference(typeRef);
+		getMembers().add(field);
+		return field;
 	}
 }

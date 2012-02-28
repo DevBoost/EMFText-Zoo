@@ -21,8 +21,45 @@ import java.references.SelfReference;
 import java.types.Type;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 
 eclass AnnotableAndModifiable {
+
+	makePrivate() {
+		removeAllModifiers();
+		getAnnotationsAndModifiers().add(#Private);
+	}
+	
+	makePublic() {
+		removeAllModifiers();
+		getAnnotationsAndModifiers().add(#Public);
+	}
+	
+	makeProtected() {
+		removeAllModifiers();
+		getAnnotationsAndModifiers().add(#Protected);
+	}
+	
+	removeAllModifiers() {
+		List<Modifier> modifiers = getModifiers();
+		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
+		elements.removeAll(modifiers);
+	}
+	
+	getModifiers() {
+		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
+		EList<Modifier> modifiers = new BasicEList<Modifier>(); 
+		for (AnnotationInstanceOrModifier next : elements) {
+			if (next instanceof Modifier) {
+				modifiers.add((Modifier) next);
+			}
+		}
+		return ECollections.unmodifiableEList(modifiers);
+	}
 
 	removeModifier() {
 		List<AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();
