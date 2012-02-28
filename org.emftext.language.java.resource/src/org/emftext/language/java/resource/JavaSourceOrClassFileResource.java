@@ -411,7 +411,10 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	protected void addPackageDeclaration(CompilationUnit cu) {
 		if (cu.getNamespaces().isEmpty() && !getURI().isFile() && !getURI().isPlatform()) {
 			//if there is no package and this is a logical URI, guess the package based on the URI
-			cu.getNamespaces().addAll(getURI().trimSegments(1).segmentsList());
+			String[] fullName = getURI().lastSegment().split("\\.");
+			for (int i = 0; i < fullName.length - 2; i++) { 
+				cu.getNamespaces().add(fullName[i]);
+			}
 		}
 	}
 
