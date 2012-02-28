@@ -151,14 +151,14 @@ classifiers.Class
 	    "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
-        "{" 
+        #1 "{" 
         	(!1 members)* !0
         "}"
 	;
 
 @SuppressWarnings(featureWithoutSyntax) //defaultMembers is filled by post processor
 classifiers.AnonymousClass
-	::= "{" 
+	::= #1 "{" 
 			(!1 members)* !0
 		"}"
 	;
@@ -168,7 +168,7 @@ classifiers.Interface
 	::=	annotationsAndModifiers*
 	    "interface" name[] ("<"  typeParameters ( "," typeParameters)*  ">")?
 		("extends" (extends ("," extends)*))? 
-	    "{"
+	    #1 "{"
         	(!1 members)* !0
 		"}"
 	;
@@ -179,7 +179,7 @@ classifiers.Enumeration
     ::= annotationsAndModifiers*
         "enum" name[] 
     	("implements" (implements ("," implements)*))? 
-    	"{" 
+    	#1 "{" 
     		(!1 constants ("," !1 constants)*)? (",")? 
     		(";" (!1 members)* !0)?
     	"}"
@@ -189,7 +189,7 @@ classifiers.Enumeration
 classifiers.Annotation
 	::=	annotationsAndModifiers*
 	    "@" "interface" name[]
-	    "{" 
+	    #1 "{" 
 	    	(!1 members)* !0
 	    "}"
 	;
@@ -209,7 +209,7 @@ annotations.AnnotationParameterList
 	;
 	
 annotations.AnnotationAttributeSetting
-	::= attribute[] "=" 
+	::= attribute[] #1 "=" #1 
 	    value:arrays.ArrayInitializer,expressions.ConditionalExpression
 	;
 
@@ -225,13 +225,13 @@ members.EnumConstant
 
 @SuppressWarnings(featureWithoutSyntax) //name is set by JavaModelCompletion.setBlockName()
 statements.Block
-	::=	modifiers* "{" (!1 statements)* !0 "}"
+	::=	modifiers* #1 "{" (!1 statements)* !0 "}"
 	;
 
 members.Constructor
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
-	("throws" exceptions ("," exceptions)*)? "{" (!1 statements)* !0 "}"
+	("throws" exceptions ("," exceptions)*)? #1 "{" (!1 statements)* !0 "}"
 	;
 
 members.InterfaceMethod
@@ -243,7 +243,7 @@ members.InterfaceMethod
 members.ClassMethod
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (typeReference arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? "{" (!1 statements)* !0 "}"
+	("throws" exceptions ("," exceptions)*)? #1 "{" (!1 statements)* !0 "}"
 	;
 	
 annotations.AnnotationAttribute
@@ -262,7 +262,7 @@ parameters.VariableLengthParameter
 	;
 
 variables.LocalVariable
-	::= annotationsAndModifiers* typeReference arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
+	::= annotationsAndModifiers* typeReference arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* (#1 "=" #1 initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
@@ -270,16 +270,16 @@ statements.LocalVariableStatement
 
 @SuppressWarnings(featureWithoutSyntax)
 variables.AdditionalLocalVariable
-	::= name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
+	::= name[] arrayDimensionsAfter* (#1 "=" #1 initialValue:expressions.AssignmentExpression)?
 	;
 
 members.Field
-	::= annotationsAndModifiers* typeReference arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
+	::= annotationsAndModifiers* typeReference arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* (#1 "=" #1 initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
 	;
 
 @SuppressWarnings(featureWithoutSyntax)
 members.AdditionalField
-	::= name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
+	::= name[] arrayDimensionsAfter* (#1 "=" #1 initialValue:expressions.AssignmentExpression)?
 	;
 
 @SuppressWarnings(featureWithoutSyntax) //name is set by JavaModelCompletion.setEmptyMemberName()
@@ -331,7 +331,7 @@ arrays.ArrayInstantiationBySize
 
 @SuppressWarnings(optionalKeyword)
 arrays.ArrayInitializer
-    ::= "{" (initialValues:expressions.AssignmentExpression,arrays.ArrayInitializer
+    ::= #1 "{" (initialValues:expressions.AssignmentExpression,arrays.ArrayInitializer
             ("," initialValues:expressions.AssignmentExpression,arrays.ArrayInitializer )*)? (",")? "}"    
     ;
 
@@ -431,19 +431,19 @@ statements.EmptyStatement
 	::= ";" ;
 	
 statements.SynchronizedBlock
-	::= "synchronized" "(" lockProvider:expressions.AssignmentExpression ")" "{" (!1 statements)* !0 "}" ;
+	::= "synchronized" "(" lockProvider:expressions.AssignmentExpression ")" #1 "{" (!1 statements)* !0 "}" ;
 	
 statements.TryBlock
-	::= "try" "{" (!1 statements)* !0 "}"
+	::= "try" #1 "{" (!1 statements)* !0 "}"
 		catcheBlocks* 
 		("finally" finallyBlock)?;
 
 statements.CatchBlock
-	::=	"catch" "(" parameter ")" "{" (!1 statements)* !0 "}"
+	::=	"catch" "(" parameter ")" #1 "{" (!1 statements)* !0 "}"
 	;
 
 statements.Switch
-	::= "switch" "(" variable:expressions.AssignmentExpression ")" "{" (cases*) "}";
+	::= "switch" "(" variable:expressions.AssignmentExpression ")" #1 "{" (cases*) "}";
 
 @SuppressWarnings(minOccurenceMismatch) //condition can be empty in other cases
 statements.NormalSwitchCase
@@ -478,7 +478,7 @@ expressions.ExpressionList
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match
 expressions.AssignmentExpression
-	::= child:expressions.ConditionalExpression (assignmentOperator value:expressions.AssignmentExpression)?
+	::= child:expressions.ConditionalExpression (#1 assignmentOperator #1 value:expressions.AssignmentExpression)?
     ;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match   	
@@ -508,7 +508,7 @@ expressions.AndExpression
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match
 expressions.EqualityExpression
-    ::= children:expressions.InstanceOfExpression ( equalityOperators children:expressions.InstanceOfExpression )*
+    ::= children:expressions.InstanceOfExpression ( #1 equalityOperators #1 children:expressions.InstanceOfExpression )*
     ;
 
 @SuppressWarnings(featureWithoutSyntax)
@@ -519,22 +519,22 @@ expressions.InstanceOfExpression
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match   
 expressions.RelationExpression
-	::= children:expressions.ShiftExpression ( relationOperators children:expressions.ShiftExpression)*
+	::= children:expressions.ShiftExpression ( #1 relationOperators #1 children:expressions.ShiftExpression)*
 	;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match	
 expressions.ShiftExpression
-	::= children:expressions.AdditiveExpression ( shiftOperators children:expressions.AdditiveExpression)*
+	::= children:expressions.AdditiveExpression ( #1 shiftOperators #1 children:expressions.AdditiveExpression)*
 	;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match
 expressions.AdditiveExpression
-    ::= children:expressions.MultiplicativeExpression ( additiveOperators children:expressions.MultiplicativeExpression )*
+    ::= children:expressions.MultiplicativeExpression ( #1 additiveOperators #1 children:expressions.MultiplicativeExpression )*
     ;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match
 expressions.MultiplicativeExpression
-    ::=	children:expressions.UnaryExpression ( multiplicativeOperators children:expressions.UnaryExpression )*
+    ::=	children:expressions.UnaryExpression ( #1 multiplicativeOperators #1 children:expressions.UnaryExpression )*
     ;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match 
