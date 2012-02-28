@@ -33,7 +33,11 @@ eclass AnnotableAndModifiable {
 	 * Sets the visibility of this element to <code>private</code>.
 	 */
 	makePrivate() {
-		removeAllModifiers();
+		if (isPrivate()) {
+			return;
+		}
+		removeModifier(Public.class);
+		removeModifier(Protected.class);
 		getAnnotationsAndModifiers().add(#Private);
 	}
 	
@@ -41,7 +45,11 @@ eclass AnnotableAndModifiable {
 	 * Sets the visibility of this element to <code>public</code>.
 	 */
 	makePublic() {
-		removeAllModifiers();
+		if (isPublic()) {
+			return;
+		}
+		removeModifier(Private.class);
+		removeModifier(Protected.class);
 		getAnnotationsAndModifiers().add(#Public);
 	}
 	
@@ -49,12 +57,16 @@ eclass AnnotableAndModifiable {
 	 * Sets the visibility of this element to <code>protected</code>.
 	 */
 	makeProtected() {
-		removeAllModifiers();
+		if (isProtected()) {
+			return;
+		}
+		removeModifier(Private.class);
+		removeModifier(Public.class);
 		getAnnotationsAndModifiers().add(#Protected);
 	}
 	
 	/**
-	 * Sets the visibility of this element to package protected (no modifier).
+	 * Removes all modifiers from this element.
 	 */
 	removeAllModifiers() {
 		List<Modifier> modifiers = getModifiers();
@@ -88,6 +100,31 @@ eclass AnnotableAndModifiable {
 			}
 		}
 		modifiers.removeAll(modifiersToRemove);
+	}
+	
+	isPublic() {
+		return hasModifier(Public.class);
+	}
+	
+	isPrivate() {
+		return hasModifier(Private.class);
+	}
+	
+	isProtected() {
+		return hasModifier(Protected.class);
+	}
+	
+	/**
+	 * Checks whether this element has an modifier of the given type.
+	 */
+	hasModifier() {
+		List<AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();
+		for (AnnotationInstanceOrModifier modifier : modifiers) {
+			if (type.isInstance(modifier)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

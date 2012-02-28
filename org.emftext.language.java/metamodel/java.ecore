@@ -967,19 +967,19 @@
       </eOperations>
       <eOperations name="makePublic">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="&#xA;&#x9;&#x9;removeAllModifiers();&#xD;&#xA;&#xA;&#x9;&#x9;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createPublic());&#xD;&#xA;"/>
+          <details key="body" value="&#xA;&#x9;&#x9;if (isPublic()) {&#xA;&#x9;&#x9;&#x9;return;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;removeModifier( org.emftext.language.java.modifiers.Private.class);&#xD;&#xA;&#xA;&#x9;&#x9;removeModifier( org.emftext.language.java.modifiers.Protected.class);&#xD;&#xA;&#xA;&#x9;&#x9;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createPublic());&#xD;&#xA;"/>
           <details key="documentation" value="&#xA; Sets the visibility of this element to &lt;code>public&lt;/code>.&#xA;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="makePrivate">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="&#xA;&#x9;&#x9;removeAllModifiers();&#xD;&#xA;&#xA;&#x9;&#x9;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createPrivate());&#xD;&#xA;"/>
+          <details key="body" value="&#xA;&#x9;&#x9;if (isPrivate()) {&#xA;&#x9;&#x9;&#x9;return;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;removeModifier( org.emftext.language.java.modifiers.Public.class);&#xD;&#xA;&#xA;&#x9;&#x9;removeModifier( org.emftext.language.java.modifiers.Protected.class);&#xD;&#xA;&#xA;&#x9;&#x9;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createPrivate());&#xD;&#xA;"/>
           <details key="documentation" value="&#xA; Sets the visibility of this element to &lt;code>private&lt;/code>.&#xA;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="makeProtected">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="&#xA;&#x9;&#x9;removeAllModifiers();&#xD;&#xA;&#xA;&#x9;&#x9;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createProtected());&#xD;&#xA;"/>
+          <details key="body" value="&#xA;&#x9;&#x9;if (isProtected()) {&#xA;&#x9;&#x9;&#x9;return;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;removeModifier( org.emftext.language.java.modifiers.Private.class);&#xD;&#xA;&#xA;&#x9;&#x9;removeModifier( org.emftext.language.java.modifiers.Public.class);&#xD;&#xA;&#xA;&#x9;&#x9;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createProtected());&#xD;&#xA;"/>
           <details key="documentation" value="&#xA; Sets the visibility of this element to &lt;code>protected&lt;/code>.&#xA;"/>
         </eAnnotations>
       </eOperations>
@@ -992,7 +992,36 @@
       <eOperations name="removeAllModifiers">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="&#xA;&#x9;&#x9; java.util.List&lt; org.emftext.language.java.modifiers.Modifier> modifiers = getModifiers();&#xD;&#xA;&#xA;&#x9;&#x9; org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();&#xD;&#xA;&#xA;&#x9;&#x9;elements.removeAll(modifiers);&#xD;&#xA;"/>
-          <details key="documentation" value="&#xA; Sets the visibility of this element to package protected (no modifier).&#xA;"/>
+          <details key="documentation" value="&#xA; Removes all modifiers from this element.&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="hasModifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9; java.util.List&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();&#xD;&#xA;&#xA;&#x9;&#x9;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : modifiers) {&#xA;&#x9;&#x9;&#x9;if (type.isInstance(modifier)) {&#xA;&#x9;&#x9;&#x9;&#x9;return true;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return false;&#xD;&#xA;"/>
+          <details key="documentation" value="&#xA; Checks whether this element has an modifier of the given type.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="type">
+          <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+            <eTypeArguments/>
+          </eGenericType>
+        </eParameters>
+      </eOperations>
+      <eOperations name="isPublic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9;return hasModifier( org.emftext.language.java.modifiers.Public.class);&#xD;&#xA;"/>
+          <details key="documentation" value=""/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isPrivate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9;return hasModifier( org.emftext.language.java.modifiers.Private.class);&#xD;&#xA;"/>
+          <details key="documentation" value=""/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isProtected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9;return hasModifier( org.emftext.language.java.modifiers.Protected.class);&#xD;&#xA;"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotationsAndModifiers"
