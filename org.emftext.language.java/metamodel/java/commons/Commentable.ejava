@@ -21,6 +21,21 @@ import java.annotations.AnnotationInstance;
 eclass Commentable {
 
 	/**
+	 * Walks up the containment hierarchy and returns the first parent with the
+	 * given type. If no such parent is found, null is returned.
+	 */
+	getParentByType() {
+		EObject container = this.eContainer();
+		while (container != null) {
+			if (type.isInstance(container)) {
+				return container;
+			}
+			container = container.eContainer();
+		}
+		return null;
+	}
+
+	/**
 	 * Finds the <code>org.emftext.language.java.classifiers.ConcreteClassifier</code>
 	 * representing the class with the given classified name.
 	 * 
