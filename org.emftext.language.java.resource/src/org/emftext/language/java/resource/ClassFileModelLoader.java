@@ -95,6 +95,7 @@ public class ClassFileModelLoader {
 			cu.getClassifiers().add(classifier);
 			return cu;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IOException(e.getMessage(), e);
 		}
 	}
