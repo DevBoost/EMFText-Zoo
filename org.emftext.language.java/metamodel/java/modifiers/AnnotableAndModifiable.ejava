@@ -29,27 +29,42 @@ import org.eclipse.emf.common.util.ECollections;
 
 eclass AnnotableAndModifiable {
 
+	/**
+	 * Sets the visibility of this element to <code>private</code>.
+	 */
 	makePrivate() {
 		removeAllModifiers();
 		getAnnotationsAndModifiers().add(#Private);
 	}
 	
+	/**
+	 * Sets the visibility of this element to <code>public</code>.
+	 */
 	makePublic() {
 		removeAllModifiers();
 		getAnnotationsAndModifiers().add(#Public);
 	}
 	
+	/**
+	 * Sets the visibility of this element to <code>protected</code>.
+	 */
 	makeProtected() {
 		removeAllModifiers();
 		getAnnotationsAndModifiers().add(#Protected);
 	}
 	
+	/**
+	 * Sets the visibility of this element to package protected (no modifier).
+	 */
 	removeAllModifiers() {
 		List<Modifier> modifiers = getModifiers();
 		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
 		elements.removeAll(modifiers);
 	}
 	
+	/**
+	 * Returns an unmodifiable list of the modifiers that apply to this element.
+	 */
 	getModifiers() {
 		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
 		EList<Modifier> modifiers = new BasicEList<Modifier>(); 
@@ -61,6 +76,9 @@ eclass AnnotableAndModifiable {
 		return ECollections.unmodifiableEList(modifiers);
 	}
 
+	/**
+	 * Removes the given type of modifier from this element.
+	 */
 	removeModifier() {
 		List<AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();
 		List<AnnotationInstanceOrModifier> modifiersToRemove = new ArrayList<AnnotationInstanceOrModifier>();
@@ -72,8 +90,12 @@ eclass AnnotableAndModifiable {
 		modifiers.removeAll(modifiersToRemove);
 	}
 	
+	/**
+	 * Returns true if this element is static (either by an explicit modifier <code>static</code>
+	 * or because this element is part of an interface).
+	 */
 	isStatic() {
-		//all members of an interface as static by default
+		//all members of an interface are static by default
 		if (this.eContainer() instanceof Interface) {
 			return true;
 		}
@@ -182,12 +204,5 @@ eclass AnnotableAndModifiable {
 
 		return true;
 	}
-	
-	
-
-
-
-	
-	
-
 }
+
