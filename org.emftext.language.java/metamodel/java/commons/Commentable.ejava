@@ -81,6 +81,36 @@ eclass Commentable {
 	}
 
 	/**
+	 * Returns all children of the given type.
+	 */
+	getChildrenByEType() {
+		EList<EObject> children = new BasicEList<EObject>();
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				children.add(next);
+			}
+		}
+		return children;
+	}
+
+	/**
+	 * Returns all children of the given type.
+	 */
+	getChildrenByType() {
+		EList<T> children = new BasicEList<T>();
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				children.add(type.cast(next));
+			}
+		}
+		return children;
+	}
+
+	/**
 	 * Finds the <code>org.emftext.language.java.classifiers.ConcreteClassifier</code>
 	 * representing the class with the given classified name.
 	 * 

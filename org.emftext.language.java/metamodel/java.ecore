@@ -345,6 +345,26 @@
           </eGenericType>
         </eParameters>
       </eOperations>
+      <eOperations name="getChildrenByEType" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9; org.eclipse.emf.common.util.EList&lt; org.eclipse.emf.ecore.EObject> children = new  org.eclipse.emf.common.util.BasicEList&lt; org.eclipse.emf.ecore.EObject>();&#xD;&#xA;&#xA;&#x9;&#x9; java.util.Iterator&lt; org.eclipse.emf.ecore.EObject> it = this.eAllContents();&#xD;&#xA;&#xA;&#x9;&#x9;while (it.hasNext()) {&#xA;&#x9;&#x9;&#x9; org.eclipse.emf.ecore.EObject next = it.next();&#xA;&#x9;&#x9;&#x9;if (type.isInstance(next)) {&#xA;&#x9;&#x9;&#x9;&#x9;children.add(next);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return children;&#xD;&#xA;"/>
+          <details key="documentation" value="&#xA; Returns all children of the given type.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </eOperations>
+      <eOperations name="getChildrenByType" upperBound="-1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9; org.eclipse.emf.common.util.EList&lt;T> children = new  org.eclipse.emf.common.util.BasicEList&lt;T>();&#xD;&#xA;&#xA;&#x9;&#x9; java.util.Iterator&lt; org.eclipse.emf.ecore.EObject> it = this.eAllContents();&#xD;&#xA;&#xA;&#x9;&#x9;while (it.hasNext()) {&#xA;&#x9;&#x9;&#x9; org.eclipse.emf.ecore.EObject next = it.next();&#xA;&#x9;&#x9;&#x9;if (type.isInstance(next)) {&#xA;&#x9;&#x9;&#x9;&#x9;children.add(type.cast(next));&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return children;&#xD;&#xA;"/>
+          <details key="documentation" value="&#xA; Returns all children of the given type.&#xA;"/>
+        </eAnnotations>
+        <eGenericType eTypeParameter="#//commons/Commentable/getChildrenByType/T"/>
+        <eTypeParameters name="T"/>
+        <eParameters name="type">
+          <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+            <eTypeArguments eTypeParameter="#//commons/Commentable/getChildrenByType/T"/>
+          </eGenericType>
+        </eParameters>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" unique="false"
           upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
