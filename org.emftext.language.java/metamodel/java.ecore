@@ -305,12 +305,45 @@
           <details key="documentation" value="&#xA; Finds the classifier that is the parent of this element. If &#xA; this element is an inner classifier the parent classifier does&#xA; not necessarily contain this element, since it can reside in &#xA; a different compilation unit when stored in byte code.&#xA; &#xA; @param value&#xA; @return containing classifier&#xA;"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="getParentByType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eOperations name="getParentByEType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="&#xA;&#x9;&#x9; org.eclipse.emf.ecore.EObject container = this.eContainer();&#xD;&#xA;&#xA;&#x9;&#x9;while (container != null) {&#xA;&#x9;&#x9;&#x9;if (type.isInstance(container)) {&#xA;&#x9;&#x9;&#x9;&#x9;return container;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;container = container.eContainer();&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return null;&#xD;&#xA;"/>
           <details key="documentation" value="&#xA; Walks up the containment hierarchy and returns the first parent with the&#xA; given type. If no such parent is found, null is returned.&#xA;"/>
         </eAnnotations>
         <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </eOperations>
+      <eOperations name="getFirstChildByEType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9; java.util.Iterator&lt; org.eclipse.emf.ecore.EObject> it = this.eAllContents();&#xD;&#xA;&#xA;&#x9;&#x9;while (it.hasNext()) {&#xA;&#x9;&#x9;&#x9; org.eclipse.emf.ecore.EObject next = it.next();&#xA;&#x9;&#x9;&#x9;if (type.isInstance(next)) {&#xA;&#x9;&#x9;&#x9;&#x9;return next;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return null;&#xD;&#xA;"/>
+          <details key="documentation" value="&#xA; Searches for the first child with the given type. If no such child is found, null is returned.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      </eOperations>
+      <eOperations name="getParentByType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9; org.eclipse.emf.ecore.EObject container = this.eContainer();&#xD;&#xA;&#xA;&#x9;&#x9;while (container != null) {&#xA;&#x9;&#x9;&#x9;if (type.isInstance(container)) {&#xA;&#x9;&#x9;&#x9;&#x9;return type.cast(container);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;container = container.eContainer();&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return null;&#xD;&#xA;"/>
+          <details key="documentation" value="&#xA; Walks up the containment hierarchy and returns the first parent with the&#xA; given type. If no such parent is found, null is returned.&#xA;"/>
+        </eAnnotations>
+        <eGenericType eTypeParameter="#//commons/Commentable/getParentByType/T"/>
+        <eTypeParameters name="T"/>
+        <eParameters name="type">
+          <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+            <eTypeArguments eTypeParameter="#//commons/Commentable/getParentByType/T"/>
+          </eGenericType>
+        </eParameters>
+      </eOperations>
+      <eOperations name="getFirstChildByType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#xA;&#x9;&#x9; java.util.Iterator&lt; org.eclipse.emf.ecore.EObject> it = this.eAllContents();&#xD;&#xA;&#xA;&#x9;&#x9;while (it.hasNext()) {&#xA;&#x9;&#x9;&#x9; org.eclipse.emf.ecore.EObject next = it.next();&#xA;&#x9;&#x9;&#x9;if (type.isInstance(next)) {&#xA;&#x9;&#x9;&#x9;&#x9;return type.cast(next);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xD;&#xA;&#xA;&#x9;&#x9;return null;&#xD;&#xA;"/>
+          <details key="documentation" value="&#xA; Searches for the first child with the given type. If no such child is found, null is returned.&#xA;"/>
+        </eAnnotations>
+        <eGenericType eTypeParameter="#//commons/Commentable/getFirstChildByType/T"/>
+        <eTypeParameters name="T"/>
+        <eParameters name="type">
+          <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+            <eTypeArguments eTypeParameter="#//commons/Commentable/getFirstChildByType/T"/>
+          </eGenericType>
+        </eParameters>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" unique="false"
           upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -8,6 +8,8 @@ import org.emftext.language.java.util.UniqueEList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.emftext.language.java.JavaClasspath;
 
+import java.util.Iterator;
+
 //ecore
 import java.classifiers.AnonymousClass;
 import java.classifiers.Class;
@@ -24,13 +26,56 @@ eclass Commentable {
 	 * Walks up the containment hierarchy and returns the first parent with the
 	 * given type. If no such parent is found, null is returned.
 	 */
-	getParentByType() {
+	getParentByEType() {
 		EObject container = this.eContainer();
 		while (container != null) {
 			if (type.isInstance(container)) {
 				return container;
 			}
 			container = container.eContainer();
+		}
+		return null;
+	}
+
+	/**
+	 * Walks up the containment hierarchy and returns the first parent with the
+	 * given type. If no such parent is found, null is returned.
+	 */
+	getParentByType() {
+		EObject container = this.eContainer();
+		while (container != null) {
+			if (type.isInstance(container)) {
+				return type.cast(container);
+			}
+			container = container.eContainer();
+		}
+		return null;
+	}
+
+	/**
+	 * Searches for the first child with the given type. If no such child is found, null is returned.
+	 */
+	getFirstChildByEType() {
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				return next;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Searches for the first child with the given type. If no such child is found, null is returned.
+	 */
+	getFirstChildByType() {
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				return type.cast(next);
+			}
 		}
 		return null;
 	}
