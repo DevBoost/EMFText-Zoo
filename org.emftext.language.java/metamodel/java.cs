@@ -39,7 +39,6 @@ IMPORTS {
 
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
-	tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
 	generateCodeFromGeneratorModel = "false";
 	memoize = "true";
@@ -108,13 +107,13 @@ RULES {
 @SuppressWarnings(optionalKeyword)
 @SuppressWarnings(featureWithoutSyntax) //name is set by JavaSourceOrClassFileResource.load()
 containers.EmptyModel 
-   ::= (imports #0 ";" !0 )* (";")*
+   ::= (imports  ";" !0 )* (";")*
    ;
 
 @SuppressWarnings(optionalKeyword)
 @SuppressWarnings(featureWithoutSyntax) //subpackages is filled by JavaSourceOrClassFileResource.load()
 containers.Package
-   ::=  annotations* "package" (namespaces[] #0 "." #0 )* name[] #0 ";" 
+   ::=  annotations* "package" (namespaces[]  "."  )* name[]  ";" 
         (";")? //TODO this is required to let T7312 of JacksTest pass... not sure if this is correct or if it should be * instead of ?
         !0 !0
         (imports !0 )* (";")*
@@ -123,7 +122,7 @@ containers.Package
 @SuppressWarnings(optionalKeyword)
 @SuppressWarnings(featureWithoutSyntax) //name is set by JavaSourceOrClassFileResource or ClassFileModelLoader 
 containers.CompilationUnit 
-   ::=	("package" namespaces[] (#0 "." #0 namespaces[])* #0 ";" )?
+   ::=	("package" namespaces[] ( "."  namespaces[])*  ";" )?
         !0 !0
         (imports !0 )*
         (";" !0)*
@@ -133,18 +132,18 @@ containers.CompilationUnit
 	;
 	
 imports.ClassifierImport
-	::= "import" (namespaces[] #0 "." #0 )* classifier[] #0 ";";
+	::= "import" (namespaces[]  "."  )* classifier[]  ";";
 
 @SuppressWarnings(minOccurenceMismatch) //the minimal occurence of namespaces[] is in other cases 0
 imports.PackageImport
-	::= "import" (namespaces[] #0 "." #0 )+ #0 "*" #0 ";";
+	::= "import" (namespaces[]  "."  )+  "*"  ";";
 
 imports.StaticMemberImport
-	::= "import" static (namespaces[] #0 "." #0 )* staticMembers[] #0 ";";
+	::= "import" static (namespaces[]  "."  )* staticMembers[]  ";";
 
 @SuppressWarnings(minOccurenceMismatch) //the minimal occurence of namespaces[] is in other cases 0
 imports.StaticClassifierImport
-	::= "import" static (namespaces[] #0 "." #0 )+ #0 "*" #0 ";";
+	::= "import" static (namespaces[]  "."  )+  "*"  ";";
 
 @SuppressWarnings(featureWithoutSyntax) //defaultExtends is filled by post processor
 classifiers.Class
@@ -167,7 +166,7 @@ classifiers.AnonymousClass
 @SuppressWarnings(featureWithoutSyntax) //fullName is set during reference resolving
 classifiers.Interface
 	::=	annotationsAndModifiers*
-	    "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
+	    "interface" name[] ("<"  typeParameters ( "," typeParameters)*  ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
         	(!1 members)* !0
@@ -197,7 +196,7 @@ classifiers.Annotation
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments
 annotations.AnnotationInstance
-	::=	"@" (namespaces[] #0 "." #0 )* annotation[]
+	::=	"@" (namespaces[]  "."  )* annotation[]
 		(parameter)? 
 	;
 
@@ -236,14 +235,14 @@ members.Constructor
 	;
 
 members.InterfaceMethod
-	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (typeReference arrayDimensionsBefore*) name[]  
-	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
+	::=	annotationsAndModifiers* ("<"  typeParameters ( "," typeParameters)*  ">")? (typeReference arrayDimensionsBefore*) name[]  
+	"("  (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? ";"
 	;
 
 members.ClassMethod
-	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (typeReference arrayDimensionsBefore*) name[]  
-	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
+	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (typeReference arrayDimensionsBefore*) name[]  
+	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? "{" (!1 statements)* !0 "}"
 	;
 	
@@ -299,27 +298,27 @@ instantiations.NewConstructorCall
 		("<" callTypeArguments ("," callTypeArguments)* ">")?
 		"(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
 		anonymousClass?
-		(#0 "." #0 next)? 
+		("." next)? 
      ;
 
 @SuppressWarnings(featureWithoutSyntax) //arraySelectors 
 instantiations.ExplicitConstructorCall 
 	::= ("<" typeArguments ("," typeArguments)* ">")?
 		callTarget "(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
-		(#0 "." #0 next)? 
+		("." next)? 
      ;
 
 @SuppressWarnings(featureWithoutSyntax) //arrayDimensionsAfter
 @SuppressWarnings(minOccurenceMismatch) //arrayDimensionsBefore required here
 arrays.ArrayInstantiationByValuesTyped
 	::= "new" typeReference arrayDimensionsBefore+ arrayInitializer
-		arraySelectors* (#0 "." #0 next)? 
+		arraySelectors* ("." next)? 
 	;
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments not applicable
 arrays.ArrayInstantiationByValuesUntyped
 	::= arrayInitializer
-		arraySelectors* (#0 "." #0 next)? 
+		arraySelectors* ("." next)? 
 	;
 
 @SuppressWarnings(featureWithoutSyntax)
@@ -327,7 +326,7 @@ arrays.ArrayInstantiationBySize
 	::= "new" typeReference 
 		("[" sizes:expressions.AssignmentExpression "]")+
 		arrayDimensionsBefore*
-		(#0 "." #0 next)?
+		("." next)?
 	;
 
 @SuppressWarnings(optionalKeyword)
@@ -341,7 +340,7 @@ arrays.ArraySelector
 	;
 	
 types.NamespaceClassifierReference
-	::= (namespaces[]  #0 "." #0)* (classifierReferences #0 "." #0)* classifierReferences
+	::= (namespaces[]  ".")* (classifierReferences ".")* classifierReferences
 	;
 	
 types.ClassifierReference
@@ -355,28 +354,28 @@ references.MethodCall
 	    target[]
 		("<" typeArguments ("," typeArguments)* ">")?
 		"(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
-		arraySelectors* (#0 "." #0 next)? 
+		arraySelectors* ("." next)? 
 	;
 	
 references.IdentifierReference
 	::= target[]
 		("<" typeArguments ("," typeArguments)* ">")?
-		arraySelectors* (#0 "." #0 next)? 
+		arraySelectors* ("." next)? 
 	;
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments	
 references.ReflectiveClassReference ::= "class"
-		(#0 "." #0 next)? 
+		("." next)? 
 	;
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments
 references.SelfReference ::= self
-		(#0 "." #0 next)? 
+		("." next)? 
 	;
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments
 references.PrimitiveTypeReference ::= primitiveType
-		arraySelectors* (#0 "." #0 next)? 
+		arraySelectors* ("." next)? 
 	;
 			
 literals.This ::= "this";
@@ -385,7 +384,7 @@ literals.Super ::= "super";
 @SuppressWarnings(featureWithoutSyntax) //typeArguments
 references.StringReference 
 	::= value[STRING_LITERAL]
-		(#0 "." #0 next)? 
+		("." next)? 
 	;
 
 @SuppressWarnings(featureWithoutSyntax)
@@ -540,18 +539,18 @@ expressions.MultiplicativeExpression
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match 
 expressions.UnaryExpression
-    ::= operators* #0 child:expressions.UnaryModificationExpression
+    ::= operators* child:expressions.UnaryModificationExpression
     // TODO why does UnaryExpression have multiple operators?
     ;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match 
 expressions.SuffixUnaryModificationExpression
-	::= child (#0 operator)?
+	::= child (operator)?
 	;
 
 @SuppressWarnings(minOccurenceMismatch) //the expression simplifier removes the cases where min occurrence does not match 	
 expressions.PrefixUnaryModificationExpression
-	::= (operator #0)? child
+	::= (operator)? child
 	;
 
 @SuppressWarnings(featureWithoutSyntax)
@@ -560,7 +559,7 @@ expressions.CastExpression
     ;
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments
-expressions.NestedExpression ::= "(" expression:expressions.AssignmentExpression ")"  arraySelectors* (#0 "." #0 next)? 
+expressions.NestedExpression ::= "(" expression:expressions.AssignmentExpression ")"  arraySelectors* ("." next)? 
     ;	
 
        
@@ -576,9 +575,9 @@ operators.AssignmentAnd                ::= "&=";
 operators.AssignmentOr                 ::= "|=";
 operators.AssignmentExclusiveOr        ::= "^=";
 operators.AssignmentModulo             ::= "%=";
-operators.AssignmentLeftShift          ::= "<" #0 "<" #0 "=";
-operators.AssignmentRightShift         ::= ">" #0 ">" #0 "=";
-operators.AssignmentUnsignedRightShift ::= ">" #0 ">" #0 ">" #0 "=";
+operators.AssignmentLeftShift          ::= "<" "<" "=";
+operators.AssignmentRightShift         ::= ">" ">" "=";
+operators.AssignmentUnsignedRightShift ::= ">" ">" ">" "=";
 
 operators.Addition              ::= "+";
 operators.Subtraction           ::= "-";
@@ -588,13 +587,13 @@ operators.Division              ::= "/" ;
 operators.Remainder             ::= "%" ;
 
 operators.LessThan 			    ::= "<";
-operators.LessThanOrEqual		::= "<" #0 "=";
+operators.LessThanOrEqual		::= "<" "=";
 operators.GreaterThan			::= ">";
-operators.GreaterThanOrEqual	::= ">" #0 "=";
+operators.GreaterThanOrEqual	::= ">" "=";
 
-operators.LeftShift 			::= "<" #0 "<" ;
-operators.RightShift 			::= ">" #0 ">" ;
-operators.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
+operators.LeftShift 			::= "<" "<" ;
+operators.RightShift 			::= ">" ">" ;
+operators.UnsignedRightShift	::= ">" ">" ">" ;
 
 operators.Equal		::= "==";	
 operators.NotEqual	::= "!=";
@@ -603,7 +602,7 @@ operators.MinusMinus 	::= "--" ;
 operators.Complement 	::= "~" ;
 operators.Negate 		::= "!" ;
 
-arrays.ArrayDimension ::= ("[" #0 "]");
+arrays.ArrayDimension ::= ("[" "]");
 
 literals.NullLiteral ::= "null";
 

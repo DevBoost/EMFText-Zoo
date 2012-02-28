@@ -39,7 +39,7 @@ OPTIONS {
 
 RULES {
 	EPackageWrapper
-	   ::=	("epackage" namespaces[] (#0 "." #0 namespaces[])* #0 ";" )?
+	   ::=	("epackage" namespaces[] ("." namespaces[])*  ";" )?
 	        !0 !0
 	        (imports !0 )*
 	        (";" !0)*
