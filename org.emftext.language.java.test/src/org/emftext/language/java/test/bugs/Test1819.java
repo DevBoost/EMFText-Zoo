@@ -67,9 +67,8 @@ public class Test1819 extends AbstractTestCase {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		r.save(os , null);
 		String result = new String(os.toByteArray()).trim();
-		System.out.println(result);
-		assertEquals("package " + packageName + ";\n\n\nclass " + className + " {\n}", result);
 		
+		assertEquals("package " + packageName + ";\n\n\nclass " + className + " {\n}", result);		
 	}
 
 }
