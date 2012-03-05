@@ -23,9 +23,17 @@ public class CsvPrinter2 implements org.emftext.language.csv.resource.csv.ICsvTe
 	
 	private java.io.OutputStream outputStream;
 
+	private String encoding = System.getProperty("file.encoding");
+
 	public CsvPrinter2(java.io.OutputStream outputStream, org.emftext.language.csv.resource.csv.ICsvTextResource resource) {
 		super();
 		this.outputStream = outputStream;
+	}
+	
+	public void setEncoding(String encoding) {
+		if (encoding != null) {
+			this.encoding = encoding;
+		}
 	}
 	
 	public void print(org.eclipse.emf.ecore.EObject element) throws java.io.IOException {
@@ -33,7 +41,7 @@ public class CsvPrinter2 implements org.emftext.language.csv.resource.csv.ICsvTe
 			ICsvTokenResolver tokenResolverQuoted   = new CsvQUOTED_34_34_929292TokenResolver();
 			ICsvTokenResolver tokenResolverUnquoted = new CsvUNQUOTED_VALUETokenResolver();
 			CSVDocument csvDoc = (CSVDocument) element;
-			java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.BufferedOutputStream(outputStream));
+			java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.BufferedOutputStream(outputStream), encoding));
 			for (Row row : csvDoc.getRows()) {
 				for (Iterator<Value> i = row.getValues().iterator(); i.hasNext();) {
 					Value value = i.next();
