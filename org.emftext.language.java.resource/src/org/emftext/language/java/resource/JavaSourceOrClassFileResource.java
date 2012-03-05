@@ -55,6 +55,7 @@ import org.emftext.language.java.resource.java.mopp.JavaContextDependentURIFragm
 import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
 import org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.java.resource.java.util.JavaLayoutUtil;
 import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
@@ -379,11 +380,19 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 					CompilationUnit cu = (CompilationUnit) getContentsInternal().get(0) ;
 					addPackageDeclaration(cu);
 				}
+				//super.doSave(outputStream, options);
 				IJavaTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 				IJavaReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
+				printer.setEncoding(getEncoding(options));
 				referenceResolverSwitch.setOptions(options);
-				printer.print(getContentsInternal().get(0)); //only print the single CU or Package
-				//super.doSave(outputStream, options);
+				EObject root = getContentsInternal().get(0); //only print the single CU or Package
+				if (isLayoutInformationRecordingEnabled()) {
+					JavaLayoutUtil.transferAllLayoutInformationFromModel(root);
+				}
+				printer.print(root);
+				if (isLayoutInformationRecordingEnabled()) {
+					JavaLayoutUtil.transferAllLayoutInformationToModel(root);
+				}
 			}
 		}
 	}
