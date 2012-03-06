@@ -72,6 +72,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		super(uri);
 	}
 
+	private JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
+	
 	protected boolean isClassFile() {
 		if (uri == null) {
 			return false;
@@ -387,11 +389,11 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				referenceResolverSwitch.setOptions(options);
 				EObject root = getContentsInternal().get(0); //only print the single CU or Package
 				if (isLayoutInformationRecordingEnabled()) {
-					JavaLayoutUtil.transferAllLayoutInformationFromModel(root);
+					layoutUtil.transferAllLayoutInformationFromModel(root);
 				}
 				printer.print(root);
 				if (isLayoutInformationRecordingEnabled()) {
-					JavaLayoutUtil.transferAllLayoutInformationToModel(root);
+					layoutUtil.transferAllLayoutInformationToModel(root);
 				}
 			}
 		}
