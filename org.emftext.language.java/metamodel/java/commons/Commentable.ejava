@@ -18,7 +18,10 @@ import java.classifiers.ConcreteClassifier;
 import java.classifiers.Interface;
 import java.containers.CompilationUnit;
 import java.annotations.AnnotationInstance;
+import java.modifiers.AnnotableAndModifiable;
+import java.modifiers.AnnotationInstanceOrModifier;
 
+import layout.LayoutInformation;
 
 eclass Commentable {
 
@@ -334,7 +337,19 @@ eclass Commentable {
 		return new BasicEList<String>(cu.getNamespaces().subList(0, idx));
 	}
 	
-
-	
-
+	getComments() {
+		EList<String> comments = new BasicEList<String>();
+		if (this instanceof AnnotableAndModifiable) {
+			for (AnnotationInstanceOrModifier aom : ((AnnotableAndModifiable) this).getAnnotationsAndModifiers()) {
+				comments.addAll(aom.getComments());
+			}
+		}
+		for (LayoutInformation layoutInformation : getLayoutInformations()) {
+			String text = layoutInformation.getHiddenTokenText();
+			if (text.contains("/*") || text.contains("//")) {
+				comments.add(layoutInformation.getHiddenTokenText().trim());
+			}
+		}
+		return comments;
+	}
 }
