@@ -22,9 +22,9 @@ import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.junit.Test;
 
-public class Test1264 extends AbstractTestCase {
+public class Bug1264Test extends AbstractTestCase {
 
-	public Test1264() {
+	public Bug1264Test() {
 		super();
 	}
 	

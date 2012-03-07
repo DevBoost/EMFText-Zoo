@@ -24,9 +24,9 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.junit.Test;
 
-public class Test1819 extends AbstractTestCase {
+public class Bug1819Test extends AbstractTestCase {
 
-	public Test1819() {
+	public Bug1819Test() {
 		super();
 	}
 	

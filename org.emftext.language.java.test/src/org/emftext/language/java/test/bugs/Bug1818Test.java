@@ -22,9 +22,9 @@ import org.emftext.language.java.statements.Return;
 import org.emftext.language.java.statements.StatementsFactory;
 import org.junit.Test;
 
-public class Test1818 extends AbstractTestCase {
+public class Bug1818Test extends AbstractTestCase {
 
-	public Test1818() {
+	public Bug1818Test() {
 		super();
 	}
 	

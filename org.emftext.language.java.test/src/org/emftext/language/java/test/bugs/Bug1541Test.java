@@ -26,7 +26,7 @@ import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersFactory;
 import org.junit.Test;
 
-public class Test1541 extends AbstractTestCase {
+public class Bug1541Test extends AbstractTestCase {
 
 	private static final String LB = System.getProperty("line.separator");
 
@@ -57,9 +57,9 @@ public class Test1541 extends AbstractTestCase {
 			LB +
 			LB +
 			"class ClassA {" + LB +
-			"\t" + "m1 () {" + LB +
+			"\t" + "m1() {" + LB +
 			"\t" + "}" + LB + // the tab at the beginning of this line was missing
-			"}", 
+			"}" + LB + LB + LB + LB, 
 			out.toString());
 	}
 }
