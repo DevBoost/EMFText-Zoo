@@ -36,7 +36,7 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 		"EscapedStrings.java", "UnicodeIdentifiers.java", "SpecialCharacters.java", 
 		"StaticImports.java", //because it depends on EscapedStrings
 		"MoreUnicodeCharacters.java", 
-		"ControlZ", "UnicodeSurrogateCharacters" //here the issue exists only in the layout information
+		"ControlZ.java", "UnicodeSurrogateCharacters.java" //here the issue exists only in the layout information
 	};
 	
 	public static Test suite() throws Exception {
