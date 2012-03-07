@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.commons.Commentable;
+import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 /**
@@ -136,7 +137,7 @@ public class ResolvingTest extends TestCase {
 				TreeIterator<EObject> contentIterator = resource.getAllContents();
 				while (contentIterator.hasNext()) {
 					EObject next = contentIterator.next();
-					if (next instanceof Commentable) {
+					if (next instanceof Commentable && !(next instanceof AnnotationInstanceOrModifier)) {
 						Commentable commentable = (Commentable) next;
 						List<String> commentList = commentable.getComments();
 						String comments = collapse(commentList);
@@ -144,8 +145,8 @@ public class ResolvingTest extends TestCase {
 							if (comments.contains("source:")) {
 								String[] parts = comments.split(":");
 								assertEquals("Expected three parts in comment separated by double colon (source:<id>:nameOfReference).", 3, parts.length);
-								String id = parts[1].trim();
-								String referenceName = parts[2].trim();
+								String id = parts[1].replace('\n', ' ').replace('\r', ' ').trim();
+								String referenceName = parts[2].replace('\n', ' ').replace('\r', ' ').trim();
 								Object target = getTarget(commentable, referenceName);
 								assertNotNull(target);
 								actualTargetsMap.put(id, target);
@@ -153,7 +154,7 @@ public class ResolvingTest extends TestCase {
 							if (comments.contains("target:")) {
 								String[] parts = comments.split(":");
 								assertEquals("Expected two parts in comment ("+comments+") separated by double colon (target:<id>).", 2, parts.length);
-								String id = parts[1].trim();
+								String id = parts[1].replace('\n', ' ').replace('\r', ' ').trim();
 								expectedTargetsMap.put(id, commentable);
 							}
 						}
@@ -182,6 +183,8 @@ public class ResolvingTest extends TestCase {
 			StringBuilder sb = new StringBuilder();
 			for (String comment : commentList) {
 				sb.append(comment);
+				//only the first comment
+				break;
 			}
 			return sb.toString();
 		}

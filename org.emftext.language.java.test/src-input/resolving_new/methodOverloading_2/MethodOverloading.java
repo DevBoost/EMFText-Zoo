@@ -3,13 +3,14 @@ import java.util.ArrayList;
 
 public class MethodOverloading {
 	
+	 // target:1
     public Object[] getAnnotations // target:1
     	(int lineNumber) {
         	return null;
     }
     
-    //2: returns list
-    private ArrayList<Object> getAnnotations // target:2
+    // target:2
+    private ArrayList<Object> getAnnotations  // 2 returns list (not array)
     	(Object lineAnnotations) {
         	return null;
     }
