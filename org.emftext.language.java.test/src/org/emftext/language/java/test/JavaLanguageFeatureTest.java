@@ -111,7 +111,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	protected Map<Object, Object> getLoadOptions() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put(IJavaOptions.DISABLE_LOCATION_MAP, Boolean.TRUE);
-		map.put(IJavaOptions.DISABLE_LAYOUT_INFORMATION_RECORDING, Boolean.TRUE);
+		//map.put(IJavaOptions.DISABLE_LAYOUT_INFORMATION_RECORDING, Boolean.TRUE);
 		return map;
 	}
 
@@ -645,7 +645,25 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 3);
-
+		
+		assertEquals("/**"
+				+ "\r\n * A multi-line javadoc comment."
+				+ "\r\n */"
+				+ "\r\n/*"
+				+ "\r\n * A multi-line class comment."
+				+ "\r\n */",
+				clazz.getComments().get(0));
+		
+		assertEquals("/** A single-line javadoc comment. */"
+				+ "\r\n\t/* A single-line method comment. */"
+				+ "\r\n\t// A real single line comment.",
+				clazz.getMembers().get(0).getComments().get(0));
+		
+		assertEquals("// another comment inside a method", 
+				clazz.getMembers().get(0).getComments().get(1));
+		
+		System.out.println(clazz.getComments());
+		
 		parseAndReprint(filename);
 	}
 
