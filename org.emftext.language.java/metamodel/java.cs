@@ -219,7 +219,7 @@ generics.TypeParameter
 
 @SuppressWarnings(optionalKeyword)
 members.EnumConstant
-    ::= annotations* name[] ("(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)*)? ")" )?
+    ::= annotations* name[] (#1 "(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)*)? ")" )?
     	(anonymousClass)?
     ;
 
@@ -413,25 +413,25 @@ statements.Assert
 
 @SuppressWarnings(minOccurenceMismatch) //condition can be empty in other cases
 statements.Condition 
-	::= "if" "(" condition:expressions.AssignmentExpression ")" statement ("else" elseStatement)? ;
+	::= "if" #1 "(" condition:expressions.AssignmentExpression ")" statement ("else" elseStatement)? ;
 	
 statements.ForLoop
-	::= "for" "(" init? ";" condition:expressions.AssignmentExpression? ";" (updates:expressions.AssignmentExpression ("," updates:expressions.AssignmentExpression)* )? ")" statement;
+	::= "for" #1 "(" init? ";" condition:expressions.AssignmentExpression? ";" (updates:expressions.AssignmentExpression ("," updates:expressions.AssignmentExpression)* )? ")" statement;
 
 statements.ForEachLoop
-	::= "for" "(" next ":" collection:expressions.AssignmentExpression ")" statement;
+	::= "for" #1 "(" next ":" collection:expressions.AssignmentExpression ")" statement;
 	
 statements.WhileLoop
-	::= "while" "(" condition:expressions.AssignmentExpression ")" statement;
+	::= "while" #1 "(" condition:expressions.AssignmentExpression ")" statement;
 	
 statements.DoWhileLoop	
-	::= "do" statement "while" "(" condition:expressions.AssignmentExpression ")" ";" ;
+	::= "do" statement "while" #1 "(" condition:expressions.AssignmentExpression ")" ";" ;
 	
 statements.EmptyStatement	
 	::= ";" ;
 	
 statements.SynchronizedBlock
-	::= "synchronized" "(" lockProvider:expressions.AssignmentExpression ")" #1 "{" (!1 statements)* !0 "}" ;
+	::= "synchronized" #1 "(" lockProvider:expressions.AssignmentExpression ")" #1 "{" (!1 statements)* !0 "}" ;
 	
 statements.TryBlock
 	::= "try" #1 "{" (!1 statements)* !0 "}"
@@ -439,11 +439,11 @@ statements.TryBlock
 		("finally" finallyBlock)?;
 
 statements.CatchBlock
-	::=	"catch" "(" parameter ")" #1 "{" (!1 statements)* !0 "}"
+	::=	"catch" #1 "(" parameter ")" #1 "{" (!1 statements)* !0 "}"
 	;
 
 statements.Switch
-	::= "switch" "(" variable:expressions.AssignmentExpression ")" #1 "{" (cases*) "}";
+	::= "switch" #1 "(" variable:expressions.AssignmentExpression ")" #1 "{" (cases*) "}";
 
 @SuppressWarnings(minOccurenceMismatch) //condition can be empty in other cases
 statements.NormalSwitchCase
@@ -555,7 +555,7 @@ expressions.PrefixUnaryModificationExpression
 
 @SuppressWarnings(featureWithoutSyntax)
 expressions.CastExpression
-    ::= "(" typeReference arrayDimensionsBefore* ")" child:expressions.UnaryExpression
+    ::= "(" typeReference arrayDimensionsBefore* ")" #1 child:expressions.UnaryExpression
     ;
 
 @SuppressWarnings(featureWithoutSyntax) //typeArguments
