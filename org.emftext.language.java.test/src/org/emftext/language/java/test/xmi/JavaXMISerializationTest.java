@@ -35,7 +35,8 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 	protected static final String[] filesWithInvalidCharacters = new String [] {
 		"EscapedStrings.java", "UnicodeIdentifiers.java", "SpecialCharacters.java", 
 		"StaticImports.java", //because it depends on EscapedStrings
-		"MoreUnicodeCharacters.java"
+		"MoreUnicodeCharacters.java", 
+		"ControlZ", "UnicodeSurrogateCharacters" //here the issue exists only in the layout information
 	};
 	
 	public static Test suite() throws Exception {
