@@ -192,12 +192,14 @@ public class CustomModelqueryResource extends ModelqueryResource {
 					String id = ResourceUtil.idString(row.getArtifactID());
 					Matcher m = pattern.matcher(id);
 					if (m.matches()) {
-						Resource foundResource = getResourceSet().getResource(
-								URI.createURI(row.getPhyURI()), true);
-						for(EObject copy : copier.copyAll(foundResource.getContents())) {
-							String relativeID = id.substring(baseString.length(), id.length());
-							result.put(copy, relativeID);
-						}
+						try {
+							Resource foundResource = getResourceSet().getResource(
+									URI.createURI(row.getPhyURI()), true);
+							for(EObject copy : copier.copyAll(foundResource.getContents())) {
+								String relativeID = id.substring(baseString.length(), id.length());
+								result.put(copy, relativeID);
+							}		
+						} catch (Exception e) { }
 					}
 				}
 			}
