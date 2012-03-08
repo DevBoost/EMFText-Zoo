@@ -19,7 +19,9 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 
 
 /**
- * TODO comment
+ * This adapter is used during reference resolving to cache the
+ * full qualified name of a {@link ConcreteClassifier} that 
+ * is determined based on the classpath during reference resolving.
  */
 public class TemporalFullNameHolder extends AdapterImpl {
 	private String fullName;

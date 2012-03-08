@@ -58,12 +58,48 @@ import org.emftext.language.java.members.MemberContainer;
  */
 public class JavaClasspath extends AdapterImpl {
 	
-	//TODO comment
+	/**
+	 * Initializers can be registered to initialize each newly created classpath.
+	 * An initializer may be used to connect JaMoPP with other Java tooling 
+	 * (e.g., the Eclipse JDT IDE) by reading the classpath from the other tool.
+	 * <p>
+	 * Initializers can be registered at the classpath via 
+	 * {@link JavaClasspath#getInitializers()}.
+	 * Inside Eclipse, the extension point
+	 * <i>org.emftext.language.java.java_classpath_initializer</i>
+	 * may also be used for this.
+	 */
 	public static interface Initializer {
+		
+		/**
+		 * Initializes the classpath. It is called as soon as the
+		 * first resource of the resource set with which the classpath 
+		 * is associated accesses the classpath.
+		 * 
+		 * @param resource One resource of the associated resource set
+		 * 	               that gives context for initializing the classpath
+		 *                 (e.g., the URI of the resource can be analyzed). 
+		 */
 		void initialize(Resource resource);
 		
+		/**
+		 * @return Should be <code>true</code>, if the classpath depends on the resource that
+		 *         is passed to the {@link Initializer#initialize(Resource)} method.
+		 *         If one of the registered initializers returns <code>true</code>, it
+		 *         enforces the usage an individual classpath for each resource set.
+		 *         The {@link JavaClasspath#OPTION_USE_LOCAL_CLASSPATH} option can still be
+		 *         used to override this.
+		 */
 		boolean requiresLocalClasspath();
 		
+		/**
+		 * @return <code>false</code>, if the standard lib is provided by the initializer itself 
+		 *         and should therefore not be registered based on the currently running JVM.
+		 *         If only one of the registered initializers returns <code>false</code>, 
+		 *         the JVM's standard lib is not registered.
+		 *         The {@link JavaClasspath#OPTION_REGISTER_STD_LIB} option can still be
+		 *         used to override this.
+		 */
 		boolean requiresStdLib();
 	}
 	
