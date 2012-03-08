@@ -64,7 +64,7 @@ public class Bug1415Test extends AbstractTestCase {
 		assertTrue(reference.getTarget().eIsProxy());
 		//TODO #1828: check if the Printer2 should be extended to extract correct names from these classifiers!
 		//assertEquals("List", str);
-		assertEquals(" //@classifiers[name='List']", str);
+		assertEquals("//@classifiers[name='List']", str);
 	}
 	
 	@Test
@@ -87,7 +87,7 @@ public class Bug1415Test extends AbstractTestCase {
 		assertFalse(reference.getTarget().eIsProxy());
 		//TODO #1828: check if the Printer2 should be extended to extract correct names from these classifiers!
 		//assertEquals("List", str);
-		assertEquals(" //@classifiers[name='List']", str);
+		assertEquals("//@classifiers[name='List']", str);
 	}
 	
 	@Test
@@ -110,7 +110,7 @@ public class Bug1415Test extends AbstractTestCase {
 		assertFalse(reference.getTarget().eIsProxy());
 		//TODO #1828: check if the Printer2 should be extended to extract correct names from these classifiers!
 		// assertEquals("java.util.List", str);
-		assertEquals(" //@classifiers[name='List']", str);
+		assertEquals("//@classifiers[name='List']", str);
 	}
 	
 	@Test
