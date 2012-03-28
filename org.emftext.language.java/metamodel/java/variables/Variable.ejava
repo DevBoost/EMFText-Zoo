@@ -27,9 +27,19 @@ eclass Variable {
 	createMethodCallStatement() {
 		
 		ExpressionStatement callStatement = #ExpressionStatement;
+		callStatement.setExpression(createMethodCall(methodName, arguments));
+		return callStatement;
+	}
+
+	/**
+	 * Creates an expression that calls the method with the given name on this
+	 * variable. If the variable's type does not offer such a method, null is
+	 * returned.
+	 */
+	createMethodCall() {
+		
 		IdentifierReference thisRef = #IdentifierReference;
 		thisRef.setTarget(this);
-		callStatement.setExpression(thisRef);
 		MethodCall methodCall = #MethodCall;
 		Type thisType = getTypeReference().getTarget();
 		if (thisType instanceof MemberContainer) {
@@ -42,7 +52,7 @@ eclass Variable {
 			// add arguments
 			methodCall.getArguments().addAll(arguments);
 			thisRef.setNext(methodCall);
-			return callStatement;
+			return thisRef;
 		} else {
 			return null;
 		}
