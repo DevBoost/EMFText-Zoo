@@ -378,7 +378,7 @@ public class JavaClasspath extends AdapterImpl {
 		try {
 			zipFile = new ZipFile(jarURI.toFileString());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error in opening zip file: " + jarURI.toFileString());
 			return;
 		}
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
