@@ -15,6 +15,7 @@ package org.emftext.language.java;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -693,4 +694,11 @@ public class JavaClasspath extends AdapterImpl {
 		return resultList;
 	}
 
+	public void registerClassifier(java.lang.Class<?> clazz) {
+		URL resource = clazz.getResource(clazz.getSimpleName() + ".class");
+		URI classURI = URI.createFileURI(resource.getFile());
+		String packageName = clazz.getPackage().getName();
+		String classifierName = clazz.getSimpleName();
+		registerClassifier(packageName, classifierName, classURI);
+	}
 }
