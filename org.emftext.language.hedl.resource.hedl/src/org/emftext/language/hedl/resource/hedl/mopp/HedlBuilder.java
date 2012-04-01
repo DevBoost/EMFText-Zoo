@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
+import org.emftext.language.hedl.codegen.HEDLCodeGenerator;
 import org.emftext.language.hedl.codegen.HEDLCodegenConstants;
-import org.emftext.language.hedl.codegen.HEDLGenerator;
 import org.emftext.language.hedl.codegen.ImportsOrganizer;
 import org.emftext.language.hedl.resource.hedl.IHedlBuilder;
 import org.emftext.language.hedl.resource.hedl.util.HedlStringUtil;
@@ -66,7 +66,7 @@ public class HedlBuilder implements IHedlBuilder {
 		String mainDAOBaseClassname = mainDAOClassname + "Base";
 
 		int loc = 0;
-		HEDLGenerator generator = new HEDLGenerator();
+		HEDLCodeGenerator newGenerator = new HEDLCodeGenerator();
 		// set option overrideBuilder to 'false' and then perform build here
 		TreeIterator<EObject> allContents = resource.getAllContents();
 		while (allContents.hasNext()) {
@@ -74,33 +74,33 @@ public class HedlBuilder implements IHedlBuilder {
 			if (next instanceof Entity) {
 				Entity entity = (Entity) next;
 				// generate entity base class
-				CharSequence result = generator.generateEntityBaseClass(packageName, entity);
+				CharSequence result = newGenerator.generateEntityBaseClass(packageName, entity);
 				loc += saveGeneratedClass(entitiesFolder, result, entity.getName());
 				// generate entity DAO class
-				result = generator.generateEntityDAO(packageName, entity);
+				result = newGenerator.generateEntityDAO(packageName, entity);
 				loc += saveGeneratedClass(daoFolder, result, entity.getName() + "DAO");
 			} else if (next instanceof org.emftext.language.hedl.Enum) {
 				org.emftext.language.hedl.Enum enumeration = (org.emftext.language.hedl.Enum) next;
 				// generate enum class
-				CharSequence result = generator.generateEnum(packageName, enumeration);
+				CharSequence result = newGenerator.generateEnum(packageName, enumeration);
 				loc += saveGeneratedClass(entitiesFolder, result, enumeration.getName());
 			} else if (next instanceof EntityModel) {
 				EntityModel entityModel = (EntityModel) next;
-				CharSequence result = generator.generateIDBOperationsBase(packageName, entityModel);
+				CharSequence result = newGenerator.generateIDBOperationsBase(packageName, entityModel);
 				loc += saveGeneratedClass(daoFolder, result, "IDBOperationsBase");
-				result = generator.generateIDBOperations(packageName);
+				result = newGenerator.generateIDBOperations(packageName);
 				loc += saveGeneratedClass(customFolder, result, "IDBOperations", false);
-				result = generator.generateICommand(packageName);
+				result = newGenerator.generateICommand(packageName);
 				loc += saveGeneratedClass(daoFolder, result, "ICommand");
-				result = generator.generateOperationProviderBase(packageName, entityModel);
+				result = newGenerator.generateOperationProviderBase(packageName, entityModel);
 				loc += saveGeneratedClass(daoFolder, result, "OperationProviderBase");
-				result = generator.generateOperationProvider(packageName);
+				result = newGenerator.generateOperationProvider(packageName);
 				loc += saveGeneratedClass(customFolder, result, "OperationProvider", false);
-				result = generator.generateMainDAO(packageName, mainDAOClassname);
+				result = newGenerator.generateMainDAO(packageName, mainDAOClassname);
 				loc += saveGeneratedClass(customFolder, result, mainDAOClassname, false);
-				result = generator.generateMainDAOBase(packageName, mainDAOBaseClassname, entityModel);
+				result = newGenerator.generateMainDAOBase(packageName, mainDAOBaseClassname, entityModel);
 				loc += saveGeneratedClass(daoFolder, result, mainDAOBaseClassname);
-				result = generator.generateOngoingShutdownException(packageName);
+				result = newGenerator.generateOngoingShutdownException(packageName);
 				loc += saveGeneratedClass(daoFolder, result, "OngoingShutdownException");
 			}
 		}
@@ -125,6 +125,8 @@ public class HedlBuilder implements IHedlBuilder {
 	
 	private int saveGeneratedClass(File modelFolderFile, CharSequence content,
 			String classname, boolean override) {
+		// TODO use parameter override
+		override = true;
 		int loc = 0;
 		File entityClassFile = new File(modelFolderFile, classname + ".java");
 		if (entityClassFile.exists() && !override) {
