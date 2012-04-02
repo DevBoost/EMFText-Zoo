@@ -125,8 +125,6 @@ public class HedlBuilder implements IHedlBuilder {
 	
 	private int saveGeneratedClass(File modelFolderFile, CharSequence content,
 			String classname, boolean override) {
-		// TODO use parameter override
-		override = true;
 		int loc = 0;
 		File entityClassFile = new File(modelFolderFile, classname + ".java");
 		if (entityClassFile.exists() && !override) {

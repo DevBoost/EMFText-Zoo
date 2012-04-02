@@ -16,12 +16,14 @@ import org.emftext.language.hedl.UniqueConstraint;
 import org.emftext.language.hedl.types.HedlBuiltinTypes;
 
 import de.devboost.commenttemplate.CommentTemplate;
+import de.devboost.commenttemplate.LineBreak;
 import de.devboost.commenttemplate.ReplacementRule;
 import de.devboost.commenttemplate.VariableAntiQuotation;
 
 @SuppressWarnings("unused")
 @ReplacementRule(pattern="#/", replacement="*/")
 @VariableAntiQuotation("#%s#")
+@LineBreak("\r\n")
 public class HEDLCodeGeneratorSource {
 
 	private String DAO_PACKAGE_NAME = HEDLCodegenConstants.DAO_PACKAGE_NAME;
@@ -105,7 +107,8 @@ public class HEDLCodeGeneratorSource {
 	private String getAllEntitityOperations(EntityModel entityModel) {
 		for (Entity entity : entityModel.getEntities()) {
 			String operations = getEntityOperations(entity);
-			/*#operations#*/
+			/*#operations#
+			*/
 		}
 		return "";
 	}
@@ -129,7 +132,7 @@ public class HEDLCodeGeneratorSource {
 			String propertyTypeClass = property.getType().getJavaClassname();
 			String propertyName = property.getName();
 			/*#propertyTypeClass# #propertyName#*/
-			if (getLast(constructorProperties) != property) {
+			if (!isLast(constructorProperties, property)) {
 				/*, */
 			}
 		}
@@ -146,7 +149,7 @@ public class HEDLCodeGeneratorSource {
 			String toFirstUpper = toFirstUpper(propertyName);
 			String typeClassname = property.getType().getJavaClassname();
 		/*	/**
-			 *  Returns the #entityName# with the given #propertyName#.
+			 * Returns the #entityName# with the given #propertyName#.
 			 #/
 			public #entityName# get#entityName#By#toFirstUpper#(#typeClassname# #propertyName#);
 			
@@ -179,11 +182,13 @@ public class HEDLCodeGeneratorSource {
 					String propertyName = property.getName();
 					String typeClassname = property.getType().getJavaClassname();
 					/*#typeClassname# #propertyName#*/
-					if (isLast(uniqueConstraint.getProperties(), property)) {
+					if (!isLast(uniqueConstraint.getProperties(), property)) {
 						/*, */
 					}
 				}
-				/*);*/
+				/*);
+				
+				*/
 			}
 		}
 		for (Property property : enumProperties) {
@@ -206,7 +211,13 @@ public class HEDLCodeGeneratorSource {
 			 #/
 			public List<#entityName#> get#entityName#sWith#firstUpper#Before(#typeClassname# _maxDate);
 			
-			/**
+			*/
+		}
+		for (Property property : dateProperties) {
+			String propertyName = property.getName();
+			String firstUpper = toFirstUpper(property.getName());
+			String typeClassname = property.getType().getJavaClassname();
+/*			/**
 			 * Returns all #entityName#s where #propertyName# is set to a value after '_minDate'.
 			 #/
 			public List<#entityName#> get#entityName#sWith#firstUpper#After(#typeClassname# _minDate);
@@ -228,7 +239,7 @@ public class HEDLCodeGeneratorSource {
 			String toOneReferenceName = property.getName();
 			String firstUpper = toFirstUpper(property.getName());
 			String typeClassname = property.getType().getJavaClassname();
-		/*/**
+/*			/**
 			 * Searches for entities of type #entityName#.
 			 #/
 			public List<#entityName#> search#entityName#With#firstUpper#(final #typeClassname# #toOneReferenceName#, String _searchString, int _maxResults);
@@ -245,7 +256,7 @@ public class HEDLCodeGeneratorSource {
 		 #/
 		public int count#entityName#s();
 		
-*/
+		*/
 		return "";
 	}
 
@@ -451,7 +462,8 @@ public class HEDLCodeGeneratorSource {
 	private String getEntityOperationsBodies(EntityModel entityModel) {
 		for (Entity entity : entityModel.getEntities()) {
 			String operationBodies = getEntityOperationsBodies(entity);
-			/*#operationBodies#*/
+			/*#operationBodies#
+			*/
 		}
 		return "";
 	}
@@ -539,7 +551,7 @@ public class HEDLCodeGeneratorSource {
 			String toFirstUpper = toFirstUpper(propertyName);
 			String typeClassname = property.getType().getJavaClassname();
 			/*/**
-			 * Returns the entityName#s with the given #propertyName#.
+			 * Returns the #entityName#s with the given #propertyName#.
 			 #/
 			public List<#entityName#> get#entityName#sBy#toFirstUpper#(final #typeClassname# #propertyName#) {
 				final List<#entityName#> entities = new ArrayList<#entityName#>();
@@ -610,7 +622,7 @@ public class HEDLCodeGeneratorSource {
 							for (Property property : uniqueConstraint.getProperties()) {
 								String propertyName = property.getName();
 								/*#propertyName#*/
-								if (isLast(uniqueConstraint.getProperties(), property)) {
+								if (!isLast(uniqueConstraint.getProperties(), property)) {
 									/*, */
 								}
 							}
@@ -642,7 +654,13 @@ public class HEDLCodeGeneratorSource {
 				return entities;
 			}
 			
-			/**
+			*/
+		}
+		for (Property property : dateProperties) {
+			String propertyName = property.getName();
+			String toFirstUpper = toFirstUpper(propertyName);
+			String typeClassname = property.getType().getJavaClassname();
+/*			/**
 			 * Returns all #entityName#s where #propertyName# is set to a value after '_minDate'.
 			 #/
 			public List<#entityName#> get#entityName#sWith#toFirstUpper#After(final #typeClassname# _minDate) {
@@ -732,6 +750,7 @@ public class HEDLCodeGeneratorSource {
 			});
 			return count[0];
 		}
+		
 		*/
 		return "";
 	}
@@ -774,19 +793,20 @@ public class HEDLCodeGeneratorSource {
 		import org.hibernate.metadata.ClassMetadata;
 		import org.hibernate.persister.entity.AbstractEntityPersister;
 		
-*/
+		*/
 		for (Entity otherEntity : entityModel.getEntities()) {
 			String otherEntityName = otherEntity.getName();
 /*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEntityName#;
-*/
+ 			*/
 		}
 		for (Enum otherEnum : entityModel.getEnums()) {
 			String otherEnumName = otherEnum.getName();
 /*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
-*/
+ 			*/
 		}
 		
-/*		/**
+/*		
+		/**
 		 * This class provides all default operations that are derived from the HEDL entity model.
 		 *
 		 * Note: This class is generated. Any change will be overridden.
@@ -809,7 +829,7 @@ public class HEDLCodeGeneratorSource {
 				return session;
 			}
 			
-*/
+			*/
 			for (Entity entity : entityModel.getEntities()) {
 				String entityName = entity.getName();
 				String entityNameToFirstLower = toFirstLower(entityName);
@@ -849,7 +869,7 @@ public class HEDLCodeGeneratorSource {
 					return entity;
 				}
 				
-*/
+ 				*/
 				for (Property property : uniqueProperties) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
@@ -859,7 +879,8 @@ public class HEDLCodeGeneratorSource {
 						#entityName# entity = #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
 						return entity;
 					}
-*/				}
+ 					*/
+				}
 				
 				for (Property property : toOneProperties) {
 					String propertyName = property.getName();
@@ -871,7 +892,8 @@ public class HEDLCodeGeneratorSource {
 						return entities;
 					}
 					
-*/				}
+ 					*/
+				}
 			
 				for (Property property : enumProperties) {
 					String propertyName = property.getName();
@@ -884,7 +906,8 @@ public class HEDLCodeGeneratorSource {
 						return #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
 					}
 					
-*/				}
+ 					*/
+				}
 				
 				for (Constraint constraint : entity.getConstraints()) {
 					if (constraint instanceof UniqueConstraint) {
@@ -924,7 +947,8 @@ public class HEDLCodeGeneratorSource {
 							return entity;
 						}
 						
-*/					}
+ 						*/
+					}
 				}
 			
 				for (Property property : dateProperties) {
@@ -939,7 +963,8 @@ public class HEDLCodeGeneratorSource {
 						return entities;
 					}
 					
-*/				}
+ 					*/
+				}
 				
 				for (Property property : dateProperties) {
 					String propertyName = property.getName();
@@ -953,7 +978,8 @@ public class HEDLCodeGeneratorSource {
 						return entities;
 					}
 					
-*/				}
+ 					*/
+				}
 /*				/**
 				 * Returns all entities of type #entityName#.
 				 #/
@@ -969,7 +995,7 @@ public class HEDLCodeGeneratorSource {
 					return #entityNameToFirstLower#DAO.search(session, _searchString, _maxResults);
 				}
 				
-*/			
+ 				*/
 				for (Property property : toOneReferences) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
@@ -981,7 +1007,8 @@ public class HEDLCodeGeneratorSource {
 						return #entityNameToFirstLower#DAO.searchWith#propertyNameToFirstUpper#(session, #propertyName#, _searchString, _maxResults);
 					}
 					
-*/				}
+ 					*/
+				}
 /*				/**
 				 * Deletes a #entityName#.
 				 #/
@@ -996,7 +1023,8 @@ public class HEDLCodeGeneratorSource {
 					return #entityNameToFirstLower#DAO.count(session);
 				}
 				
-*/			}
+ 				*/
+			}
 /*			/**
 			 * Returns the name of the table that contains entities of the given type.
 			 #/
@@ -1012,7 +1040,7 @@ public class HEDLCodeGeneratorSource {
 				return null;
 			}
 		}
-*/
+ 		*/
 		return "";
 	}
 
@@ -1153,7 +1181,7 @@ public class HEDLCodeGeneratorSource {
 					for (Property property : uniqueConstraint.getProperties()) {
 						String propertyName = property.getName();
 						String propertyTypeJavaClassname = property.getType().getJavaClassname();
-						/* #propertyTypeJavaClassname# #propertyName#*/
+						/*#propertyTypeJavaClassname# #propertyName#*/
 						if (!isLast(uniqueConstraint.getProperties(), property)) {
 							/*, */
 						}
@@ -1335,16 +1363,19 @@ public class HEDLCodeGeneratorSource {
 		import javax.persistence.TemporalType;
 		import javax.persistence.UniqueConstraint;
 		import javax.persistence.EnumType;
+		import javax.persistence.FetchType;
 		import javax.persistence.Enumerated;
 		import javax.persistence.CascadeType;
 		import javax.persistence.OneToMany;
+		import javax.persistence.ManyToMany;
 		import javax.persistence.Column;
 
 		import org.hibernate.annotations.GenericGenerator;
 		import org.hibernate.annotations.Parameter;
 		
 		@Entity
-		@Table(name = "#entityName#"*/
+		@Table(name = "#entityName#"
+		*/
 		for (Constraint constraint : entity.getConstraints()) {
 			if (constraint instanceof UniqueConstraint) {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
@@ -1356,10 +1387,9 @@ public class HEDLCodeGeneratorSource {
 						/*, */
 					}
 				}
-				/*}*/
+				/*})*/
 			}
-		}/*
-		)
+		}/*)
 */		if (entity.getComment() != null) {
 			String comment = entity.getComment().replace("\t", "");
 			/*#comment#
@@ -1548,6 +1578,22 @@ public class HEDLCodeGeneratorSource {
 					/*)
 					*/
 				}
+				if (property.isFromMultiplicity() && property.isToMultiplicity()) {
+					String target = property.getType().getJavaClassname();
+					String fetchType = property.isEager() ? "EAGER" : "LAZY";
+/*					@ManyToMany(targetEntity=#target#.class, fetch=FetchType.#fetchType#, cascade={*/
+					if (property.isPersist()) {
+						/*CascadeType.PERSIST, */
+					}
+					if (property.isRefresh()) {
+						/*CascadeType.REFRESH*/
+					}
+					if (!property.isPersist() && !property.isRefresh()) {
+						/*CascadeType.ALL*/
+					}
+					/*})
+					*/
+				}
 			}
 			if (property.getType() == HedlBuiltinTypes.LONGSTRING) {
 /*				@Column(length=100000)
@@ -1559,7 +1605,8 @@ public class HEDLCodeGeneratorSource {
 			}
 /*			private #propertyTypeClassname# #propertyName#;
 			
-*/		}
+ 		*/
+		}
 		return "";
 	}
 
@@ -1575,15 +1622,16 @@ public class HEDLCodeGeneratorSource {
 		}
 /*		// this class is generated. any change will be overridden.
 		public enum #enumerationName# {
-			
-*/			for (EnumLiteral literal : enumeration.getLiterals()) {
+		*/
+			for (EnumLiteral literal : enumeration.getLiterals()) {
 				String literalName = literal.getName();
 				if (literal.getComment() != null) {
 					String comment = literal.getComment().replace("\t", "");
-					/* comment */
+					/*#comment#
+					*/
 				}
 /*				#literalName#,
-*/
+ 				*/
 			}
 /*		}
 		*/

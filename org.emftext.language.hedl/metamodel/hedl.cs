@@ -46,6 +46,7 @@ RULES {
 		unique["unique" : ""] 
 		persist["persist" : ""] 
 		refresh["refresh" : ""] 
+		eager["eager" : ""] 
 		type[UPPER]
 		fromMultiplicity["*" : ""]
 		name[LOWER] 

@@ -14,12 +14,14 @@ import org.emftext.language.hedl.Property;
 import org.emftext.language.hedl.Type;
 import org.emftext.language.hedl.UniqueConstraint;
 import org.emftext.language.hedl.types.HedlBuiltinTypes;
+import de.devboost.commenttemplate.LineBreak;
 import de.devboost.commenttemplate.ReplacementRule;
 import de.devboost.commenttemplate.VariableAntiQuotation;
 
 @SuppressWarnings("unused")
 @ReplacementRule(pattern="#/", replacement="*/")
 @VariableAntiQuotation("#%s#")
+@LineBreak("\r\n")
 public class HEDLCodeGenerator {
 
 	private String DAO_PACKAGE_NAME = HEDLCodegenConstants.DAO_PACKAGE_NAME;
@@ -28,15 +30,15 @@ public class HEDLCodeGenerator {
 	public String generateICommand(String packageName) {
 	StringBuilder __content = new StringBuilder();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME);
+	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".IDBOperations;\r\n");
 	__content.append("\r\n");
 	__content.append("// this class is generated. any change will be overridden.\r\n");
@@ -49,9 +51,9 @@ public class HEDLCodeGenerator {
 	public String generateOngoingShutdownException(String packageName) {
 	StringBuilder __content = new StringBuilder();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("// this class is generated. any change will be overridden.\r\n");
@@ -64,15 +66,15 @@ public class HEDLCodeGenerator {
 	public String generateIDBOperations(String packageName) {
 	StringBuilder __content = new StringBuilder();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME);
+	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".IDBOperationsBase;\r\n");
 	__content.append("\r\n");
 	__content.append("// this class is only generated once. it can be customized and all changes\r\n");
@@ -86,9 +88,9 @@ public class HEDLCodeGenerator {
 	StringBuilder __content = new StringBuilder();
 		String entityOperations = getAllEntitityOperations(entityModel);
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import java.util.List;\r\n");
@@ -96,22 +98,22 @@ public class HEDLCodeGenerator {
 	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
 			String name = otherEntity.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(name);
+	__content.append(name.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 		
 		for (org.emftext.language.hedl.Enum otherEnum : entityModel.getEnums()) {
 			String name = otherEnum.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(name);
+	__content.append(name.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 	__content.append("\r\n");
@@ -119,7 +121,7 @@ public class HEDLCodeGenerator {
 	__content.append("public interface IDBOperationsBase {\r\n");
 	__content.append("\t\r\n");
 	__content.append("\t");
-	__content.append(entityOperations.replace("\r\n","\r\n\t"));
+	__content.append(entityOperations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\r\n");
 	__content.append("}\r\n");
 	__content.append("");return __content.toString();
@@ -129,7 +131,8 @@ public class HEDLCodeGenerator {
 		for (Entity entity : entityModel.getEntities()) {
 			String operations = getEntityOperations(entity);
 	__content.append("");
-	__content.append(operations);
+	__content.append(operations.replaceAll("\\r\\n\\z",""));
+	__content.append("\r\n");
 	__content.append("");}
 		return __content.toString();
 	}
@@ -145,34 +148,34 @@ public class HEDLCodeGenerator {
 		String entityName = entity.getName();
 	__content.append("/**\r\n");
 	__content.append(" * Creates a new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" using all read-only and all non-null properties.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" create");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(");for (Property property :constructorProperties) {
 			String propertyTypeClass = property.getType().getJavaClassname();
 			String propertyName = property.getName();
 	__content.append("");
-	__content.append(propertyTypeClass);
+	__content.append(propertyTypeClass.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
-	__content.append("");if (getLast(constructorProperties) != property) {
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append("");if (!isLast(constructorProperties, property)) {
 	__content.append(", ");}
 		}
 	__content.append(");\r\n");
 	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * Returns the ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" with the given id.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(int id);\r\n");
 	__content.append("\t\r\n");
 	__content.append("");for (Property property :uniqueProperties) {
@@ -180,22 +183,22 @@ public class HEDLCodeGenerator {
 			String toFirstUpper = toFirstUpper(propertyName);
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
-	__content.append(" *  Returns the ");
-	__content.append(entityName);
+	__content.append(" * Returns the ");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("By");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\r\n");
 	__content.append("");}
@@ -205,21 +208,21 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns the ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sBy");
-	__content.append(firstUpper);
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\r\n");
 	__content.append("");}
@@ -228,29 +231,31 @@ public class HEDLCodeGenerator {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
 	__content.append("/**\r\n");
 	__content.append(" * Returns the ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" with the given properties.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
 					String firstUpper = toFirstUpper(property.getName());
 	__content.append("");
-	__content.append(firstUpper);
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
 					String propertyName = property.getName();
 					String typeClassname = property.getType().getJavaClassname();
 	__content.append("");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
-	__content.append("");if (isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 				}
-	__content.append(");");}
+	__content.append(");\r\n");
+	__content.append("\r\n");
+	__content.append("");}
 		}
 		for (Property property :enumProperties) {
 			String propertyName = property.getName();
@@ -258,21 +263,21 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns all ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sBy");
-	__content.append(firstUpper);
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\r\n");
 	__content.append("");}
@@ -282,59 +287,64 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns all ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value before \'_maxDate\'.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sWith");
-	__content.append(firstUpper);
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("Before(");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _maxDate);\r\n");
 	__content.append("\r\n");
+	__content.append("");}
+		for (Property property :dateProperties) {
+			String propertyName = property.getName();
+			String firstUpper = toFirstUpper(property.getName());
+			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns all ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value after \'_minDate\'.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sWith");
-	__content.append(firstUpper);
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("After(");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _minDate);\r\n");
 	__content.append("\r\n");
 	__content.append("");}
 	__content.append("/**\r\n");
 	__content.append(" * Returns all entities of type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> getAll");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s();\r\n");
 	__content.append("\t\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * Searches for entities of type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> search");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s(String _searchString, int _maxResults);\r\n");
 	__content.append("\r\n");
 	__content.append("");for (Property property :toOneReferences) {
@@ -343,38 +353,38 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Searches for entities of type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> search");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("With");
-	__content.append(firstUpper);
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(toOneReferenceName);
+	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z",""));
 	__content.append(", String _searchString, int _maxResults);\r\n");
 	__content.append("\r\n");
 	__content.append("");}
 	__content.append("/**\r\n");
 	__content.append(" * Deletes a ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public void delete(");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" entity);\r\n");
 	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * Counts the number of ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" entities.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public int count");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s();\r\n");
 	__content.append("\r\n");
 	__content.append("");return __content.toString();
@@ -432,25 +442,25 @@ public class HEDLCodeGenerator {
 	public String generateMainDAO(String packageName, String className) {
 	StringBuilder __content = new StringBuilder();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME);
+	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(className);
+	__content.append(className.replaceAll("\\r\\n\\z",""));
 	__content.append("Base;\r\n");
 	__content.append("\r\n");
 	__content.append("// this class is only generated once. it can be customized and all changes\r\n");
 	__content.append("// will be preserved.\r\n");
 	__content.append("public class ");
-	__content.append(className);
+	__content.append(className.replaceAll("\\r\\n\\z",""));
 	__content.append(" extends ");
-	__content.append(className);
+	__content.append(className.replaceAll("\\r\\n\\z",""));
 	__content.append("Base {\r\n");
 	__content.append("\t\r\n");
 	__content.append("\tpublic void handleException(Exception e, boolean retry) {\r\n");
@@ -464,9 +474,9 @@ public class HEDLCodeGenerator {
 	StringBuilder __content = new StringBuilder();
 		String entityMethods = getEntityOperationsBodies(entityModel);
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import java.util.ArrayList;\r\n");
@@ -486,47 +496,47 @@ public class HEDLCodeGenerator {
 	__content.append("import org.hibernate.tool.hbm2ddl.SchemaUpdate;\r\n");
 	__content.append("\r\n");
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME);
+	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".OperationProvider;\r\n");
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME);
+	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".IDBOperations;\r\n");
 	__content.append("\r\n");
 	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
 			String otherEntityName = otherEntity.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(otherEntityName);
+	__content.append(otherEntityName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 
 		for (Enum otherEnum : entityModel.getEnums()) {
 			String otherEnumName = otherEnum.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(otherEnumName);
+	__content.append(otherEnumName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 	__content.append("\r\n");
 	__content.append("// this class is generated. any change will be overridden.\r\n");
 	__content.append("public abstract class ");
-	__content.append(className);
+	__content.append(className.replaceAll("\\r\\n\\z",""));
 	__content.append(" implements IDBOperationsBase {\r\n");
 	__content.append("\t\r\n");
 	__content.append("\tprivate SessionFactory sessionFactory;\r\n");
 	__content.append("\r\n");
 	__content.append("\tpublic ");
-	__content.append(className.replace("\r\n","\r\n\t"));
+	__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("() {\r\n");
 	__content.append("\t\tconfigure();\r\n");
 	__content.append("\t}\r\n");
@@ -542,7 +552,7 @@ public class HEDLCodeGenerator {
 	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
 					String otherEntityName = otherEntity.getName();
 	__content.append("\t\tconfiguration = configuration.addAnnotatedClass(");
-	__content.append(otherEntityName.replace("\r\n","\r\n\t\t"));
+	__content.append(otherEntityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("");}
 	__content.append("\t\treturn configuration;\r\n");
@@ -609,7 +619,7 @@ public class HEDLCodeGenerator {
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
 	__content.append("\t");
-	__content.append(entityMethods.replace("\r\n","\r\n\t"));
+	__content.append(entityMethods.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\r\n");
 	__content.append("}\r\n");
 	__content.append("");return __content.toString();
@@ -619,7 +629,8 @@ public class HEDLCodeGenerator {
 		for (Entity entity : entityModel.getEntities()) {
 			String operationBodies = getEntityOperationsBodies(entity);
 	__content.append("");
-	__content.append(operationBodies);
+	__content.append(operationBodies.replaceAll("\\r\\n\\z",""));
+	__content.append("\r\n");
 	__content.append("");}
 		return __content.toString();
 	}
@@ -635,38 +646,38 @@ public class HEDLCodeGenerator {
 		List<Property> toOneReferences = getToOneReferences(entity);
 	__content.append("/**\r\n");
 	__content.append(" * Creates a new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" using all read-only and all non-null properties.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" create");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(");for (Property property :constructorProperties) {
 				String typeClassname = property.getType().getJavaClassname();
 				String toFirstLower = toFirstLower(property.getName());
 	__content.append("final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(toFirstLower);
+	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(constructorProperties, property)) {
 	__content.append(", ");}
 			}
 	__content.append(") {\r\n");
 	__content.append("\tfinal ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("[] entity = new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("[1];\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentity[0] = operations.create");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("(");for (Property property :constructorProperties) {
 						String toFirstLower = toFirstLower(property.getName());
 	__content.append("");
-	__content.append(toFirstLower);
+	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(constructorProperties, property)) {
 	__content.append(", ");}
 					}
@@ -678,24 +689,24 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * Returns the ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" with the given id.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(final int id) {\r\n");
 	__content.append("\tfinal ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("[] entity = new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("[1];\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentity[0] = operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("(id);\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -708,36 +719,36 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns the ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("By");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\tfinal ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("[] entity = new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("[1];\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentity[0] = operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("By");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -751,35 +762,37 @@ public class HEDLCodeGenerator {
 			String toFirstUpper = toFirstUpper(propertyName);
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
-	__content.append(" * Returns the entityName#s with the given ");
-	__content.append(propertyName);
+	__content.append(" * Returns the ");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("s with the given ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sBy");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("sBy");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("));\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -793,36 +806,36 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns all ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sBy");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("sBy");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("));\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -836,50 +849,50 @@ public class HEDLCodeGenerator {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
 	__content.append("/**\r\n");
 	__content.append(" * Returns the ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" with the given properties.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
 					String toFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
 					String propertyName = property.getName();
 					String toFirstUpper = toFirstUpper(propertyName);
 					String typeClassname = property.getType().getJavaClassname();
 	__content.append("final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 				}
 	__content.append(") {\r\n");
 	__content.append("\tfinal ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("[] entity = new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("[1];\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentity[0] = operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
 								String toFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
 								String propertyName = property.getName();
 	__content.append("");
-	__content.append(propertyName);
-	__content.append("");if (isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 							}
 	__content.append(");\r\n");
@@ -897,66 +910,71 @@ public class HEDLCodeGenerator {
 			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns all ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value before \'_maxDate\'.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sWith");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("Before(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _maxDate) {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("sWith");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("Before(_maxDate));\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
+	__content.append("");}
+		for (Property property :dateProperties) {
+			String propertyName = property.getName();
+			String toFirstUpper = toFirstUpper(propertyName);
+			String typeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Returns all ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value after \'_minDate\'.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sWith");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("After(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _minDate) {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.get");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("sWith");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("After(_minDate));\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -966,24 +984,24 @@ public class HEDLCodeGenerator {
 	__content.append("");}
 	__content.append("/**\r\n");
 	__content.append(" * Returns all entities of type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> getAll");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s() {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.getAll");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("s());\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -992,24 +1010,24 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * Searches for entities of type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> search");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s(final String _searchString, final int _maxResults) {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.search");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("s(_searchString, _maxResults));\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -1022,34 +1040,34 @@ public class HEDLCodeGenerator {
 			String typeClassname = toOneReference.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append(" * Searches for entities of type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("> search");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("With");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(final ");
-	__content.append(typeClassname);
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(toOneReferenceName);
+	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z",""));
 	__content.append(", final String _searchString, final int _maxResults) {\r\n");
 	__content.append("\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> entities = new ArrayList<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">();\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentities.addAll(operations.search");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("With");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(toOneReferenceName);
+	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z",""));
 	__content.append(", _searchString, _maxResults));\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
@@ -1059,11 +1077,11 @@ public class HEDLCodeGenerator {
 	__content.append("");}
 	__content.append("/**\r\n");
 	__content.append(" * Deletes a ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" */\r\n");
 	__content.append("public void delete(final ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" entity) {\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
@@ -1075,38 +1093,39 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * Counts the number of ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" entities.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public int count");
-	__content.append(entityNameToFirstUpper);
+	__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("s() {\r\n");
 	__content.append("\tfinal int[] count = new int[1];\r\n");
 	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
 	__content.append("\t\t\r\n");
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tcount[0] = operations.count");
-	__content.append(entityNameToFirstUpper.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append("s();\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t});\r\n");
 	__content.append("\treturn count[0];\r\n");
 	__content.append("}\r\n");
+	__content.append("\r\n");
 	__content.append("");return __content.toString();
 	}
 	public String generateOperationProvider(String packageName) {
 	StringBuilder __content = new StringBuilder();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME);
+	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import org.hibernate.classic.Session;\r\n");
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".OperationProviderBase;\r\n");
 	__content.append("\r\n");
 	__content.append("// this class is only generated once. it can be customized and all changes\r\n");
@@ -1123,9 +1142,9 @@ public class HEDLCodeGenerator {
 	public String generateOperationProviderBase(String packageName, EntityModel entityModel) {
 	StringBuilder __content = new StringBuilder();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import java.util.List;\r\n");
@@ -1145,23 +1164,24 @@ public class HEDLCodeGenerator {
 	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
 			String otherEntityName = otherEntity.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(otherEntityName);
+	__content.append(otherEntityName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 		for (Enum otherEnum : entityModel.getEnums()) {
 			String otherEnumName = otherEnum.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(otherEnumName);
+	__content.append(otherEnumName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
+	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * This class provides all default operations that are derived from the HEDL entity model.\r\n");
 	__content.append(" *\r\n");
@@ -1175,11 +1195,11 @@ public class HEDLCodeGenerator {
 				String entityName = entity.getName();
 				String toFirstLower = toFirstLower(entityName);
 	__content.append("\tprivate ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("DAO ");
-	__content.append(toFirstLower);
+	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO = new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO();\r\n");
 	__content.append("");}
 	__content.append("\r\n");
@@ -1191,7 +1211,7 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn session;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Entity entity : entityModel.getEntities()) {
+	__content.append("\t");for (Entity entity : entityModel.getEntities()) {
 				String entityName = entity.getName();
 				String entityNameToFirstLower = toFirstLower(entityName);
 				String entityNameToFirstUpper = toFirstUpper(entityName);
@@ -1203,118 +1223,118 @@ public class HEDLCodeGenerator {
 				List<Property> toOneReferences = getToOneReferences(entity);
 	__content.append("\t/** \r\n");
 	__content.append("\t * Creates an instance of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" using all read-only and all non-null properties.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" create");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(");for (Property property :constructorProperties) {
 						String propertyType = property.getType().getJavaClassname();
 						String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append("");
-	__content.append(propertyType);
+	__content.append(propertyType.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyToFirstLower);
+	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(constructorProperties, property)) {
 	__content.append(", ");}
 					}
 	__content.append(") {\r\n");
 	__content.append("\t\treturn ");
-	__content.append(entityNameToFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("DAO.create(session");for (Property property :constructorProperties) {
 						String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append(", ");
-	__content.append(propertyToFirstLower);
+	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append(");\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" with the given id.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(int id) {\r\n");
 	__content.append("\t\t");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" entity = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.get(session, id);\r\n");
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Property property :uniqueProperties) {
+	__content.append("\t");for (Property property :uniqueProperties) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
 					String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("\t/** Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(". */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("By");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\t\t");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" entity = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.getBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(session, ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
-	__content.append("");}
+	__content.append("\t");}
 				
 				for (Property property :toOneProperties) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
 					String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("\t/** Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(". */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.getBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(session, ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 			
 				for (Property property :enumProperties) {
 					String propertyName = property.getName();
@@ -1322,74 +1342,74 @@ public class HEDLCodeGenerator {
 					String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\t\treturn ");
-	__content.append(entityNameToFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("DAO.getBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(session, ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 				
 				for (Constraint constraint : entity.getConstraints()) {
 					if (constraint instanceof UniqueConstraint) {
 						UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" with the given properties.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
 							String propertyNameToFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
 							String propertyName = property.getName();
 							String propertyTypeClassname = property.getTypeClassname();
 	__content.append("");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 						}
 	__content.append(") {\r\n");
 	__content.append("\t\t");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" entity = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.getBy");for (Property property : uniqueConstraint.getProperties()) {
 								String propertyNameToFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append("(session, ");for (Property property : uniqueConstraint.getProperties()) {
 								String propertyName = property.getName();
 	__content.append("");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 							}
@@ -1397,7 +1417,7 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 				}
 			
 				for (Property property :dateProperties) {
@@ -1406,31 +1426,31 @@ public class HEDLCodeGenerator {
 					String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("/**\r\n");
 	__content.append("\t * Returns all ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value before \'_maxDate\'.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sWith");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("Before(");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _maxDate) {\r\n");
 	__content.append("\t\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.get");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("Before(session, _maxDate);\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 				
 				for (Property property :dateProperties) {
 					String propertyName = property.getName();
@@ -1438,121 +1458,121 @@ public class HEDLCodeGenerator {
 					String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value after \'_minDate\'.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> get");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("sWith");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("After(");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _minDate) {\r\n");
 	__content.append("\t\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.get");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("After(session, _minDate);\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all entities of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> getAll");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s() {\r\n");
 	__content.append("\t\tfinal List<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = ");
-	__content.append(entityNameToFirstLower);
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO.getAll(session);\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Searches for entities of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> search");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s(String _searchString, int _maxResults) {\r\n");
 	__content.append("\t\treturn ");
-	__content.append(entityNameToFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("DAO.search(session, _searchString, _maxResults);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Property property :toOneReferences) {
+	__content.append("\t");for (Property property :toOneReferences) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
 					String propertyTypeClassname = property.getTypeClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Searches for entities of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> search");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("With");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(", String _searchString, int _maxResults) {\r\n");
 	__content.append("\t\treturn ");
-	__content.append(entityNameToFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("DAO.searchWith");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(session, ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(", _searchString, _maxResults);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Deletes a ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic void delete(");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" entity) {\r\n");
 	__content.append("\t\t");
-	__content.append(entityNameToFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("DAO.delete(session, entity);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Counts the number of ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" entities.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic int count");
-	__content.append(entityNameToFirstUpper.replace("\r\n","\r\n\t"));
+	__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s() {\r\n");
 	__content.append("\t\treturn ");
-	__content.append(entityNameToFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("DAO.count(session);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("\t");}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the name of the table that contains entities of the given type.\r\n");
 	__content.append("\t */\r\n");
@@ -1581,9 +1601,9 @@ public class HEDLCodeGenerator {
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		List<Property> toOneReferences = getToOneReferences(entity);
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME);
+	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import java.util.List;\r\n");
@@ -1598,22 +1618,22 @@ public class HEDLCodeGenerator {
 	__content.append("");for (Entity otherEntity : entity.getEntityModel().getEntities()) {
 			String otherEntityName = otherEntity.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(otherEntityName);
+	__content.append(otherEntityName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 		
 		for (Enum otherEnum : entity.getEntityModel().getEnums()) {
 			String otherEnumName = otherEnum.getName();
 	__content.append("import ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(otherEnumName);
+	__content.append(otherEnumName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 	__content.append("\r\n");
@@ -1622,56 +1642,56 @@ public class HEDLCodeGenerator {
 	__content.append("/**\r\n");
 	__content.append(" * This class provides all default operations that are derived from the HEDL entity model\r\n");
 	__content.append(" * for type ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append(" *\r\n");
 	__content.append(" * Note: This class is generated. Any change will be overridden.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public class ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO {\r\n");
 	__content.append("\t\r\n");
 	__content.append("");if (entity.getSuperType() == null) {
 	__content.append("\tpublic final static String FIELD__ID = getField(");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".class, \"id\");\r\n");
 	__content.append("");}
 			for (Property property : entity.getProperties()) {
 				String propertyName = property.getName();
 				String toUpperCase = propertyName.toUpperCase();
 	__content.append("\tpublic final static String FIELD__");
-	__content.append(toUpperCase.replace("\r\n","\r\n\t"));
+	__content.append(toUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" = getField(");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".class, \"");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("\");\r\n");
 	__content.append("");}
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Creates a ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" using all read-only and all non-null properties.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" create(Session session");for (Property property :constructorProperties) {
 					String propertyTypeClassname = property.getType().getJavaClassname();
 					String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append(", ");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyToFirstLower);
+	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append(") {\r\n");
 	__content.append("\t\t");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" newEntity = new ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(");for (Property property :constructorProperties) {
 					String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append("");
-	__content.append(propertyToFirstLower);
+	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(constructorProperties, property)) {
 	__content.append(", ");}
 				}
@@ -1682,18 +1702,18 @@ public class HEDLCodeGenerator {
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" with the given id.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" get(Session session, int id) {\r\n");
 	__content.append("\t\t");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" entity = (");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(") session.get(");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(".class, id);\r\n");
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
@@ -1705,32 +1725,32 @@ public class HEDLCodeGenerator {
 				String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" getBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(Session session, ");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tcriteria = criteria.add(Restrictions.eq(FIELD__");
-	__content.append(propertyNameToUpperCase.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", ");
-	__content.append(propertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
 	__content.append("\t\tList<?> list = criteria.list();\r\n");
 	__content.append("\t\tif (list != null && !list.isEmpty()) {\r\n");
 	__content.append("\t\t\treturn (");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append(") list.get(0);\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t\treturn null;\r\n");
@@ -1744,33 +1764,33 @@ public class HEDLCodeGenerator {
 				String propertyTypeClassname = property.getType().getJavaClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> getBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(Session session, ");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tcriteria = criteria.add(Restrictions.eq(FIELD__");
-	__content.append(propertyNameToUpperCase.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", ");
-	__content.append(propertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> list = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) criteria.list();\r\n");
 	__content.append("\t\treturn list;\r\n");
 	__content.append("\t}\r\n");
@@ -1781,43 +1801,43 @@ public class HEDLCodeGenerator {
 					UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" with the given properties.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" getBy");for (Property property : uniqueConstraint.getProperties()) {
 						String propertyNameToFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("");}
 	__content.append("(Session session, ");for (Property property : uniqueConstraint.getProperties()) {
 						String propertyName = property.getName();
 						String propertyTypeJavaClassname = property.getType().getJavaClassname();
+	__content.append("");
+	__content.append(propertyTypeJavaClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyTypeJavaClassname);
-	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 					}
 	__content.append(") {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("");for (Property property : uniqueConstraint.getProperties()) {
 							String propertyName = property.getName();
 							String upperCasePropertyName = propertyName.toUpperCase();
 	__content.append("\t\tcriteria = criteria.add(Restrictions.eq(FIELD__");
-	__content.append(upperCasePropertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(upperCasePropertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", ");
-	__content.append(propertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
 	__content.append("");}
 	__content.append("\t\tList<?> list = criteria.list();\r\n");
 	__content.append("\t\tif (list != null && !list.isEmpty()) {\r\n");
 	__content.append("\t\t\treturn (");
-	__content.append(entityName.replace("\r\n","\r\n\t\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
 	__content.append(") list.get(0);\r\n");
 	__content.append("\t\t}\r\n");
 	__content.append("\t\treturn null;\r\n");
@@ -1833,34 +1853,34 @@ public class HEDLCodeGenerator {
 				String propertyNameToFirstUpper = toFirstUpper(propertyName);
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s with the given ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> getBy");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(Session session, ");
-	__content.append(typeJavaClassname);
+	__content.append(typeJavaClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(") {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tcriteria = criteria.add(Restrictions.eq(FIELD__");
-	__content.append(upperCasePropertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(upperCasePropertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", ");
-	__content.append(propertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
 	__content.append("\t\tList<?> list = criteria.list();\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) list;\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
@@ -1873,30 +1893,30 @@ public class HEDLCodeGenerator {
 				String propertyNameToFirstUpper = toFirstUpper(propertyName);
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value before \'_maxDate\'.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> get");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("Before(Session session, ");
-	__content.append(typeJavaClassname);
+	__content.append(typeJavaClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _maxDate) {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tcriteria = criteria.add(Restrictions.le(FIELD__");
-	__content.append(upperCasePropertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(upperCasePropertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", _maxDate));\r\n");
 	__content.append("\t\tList<?> list = criteria.list();\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) list;\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
@@ -1909,30 +1929,30 @@ public class HEDLCodeGenerator {
 				String propertyNameToFirstUpper = toFirstUpper(propertyName);
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s where ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(" is set to a value after \'_minDate\'.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> get");
-	__content.append(propertyNameToFirstUpper);
+	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("After(Session session, ");
-	__content.append(typeJavaClassname);
+	__content.append(typeJavaClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _minDate) {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tcriteria = criteria.add(Restrictions.ge(FIELD__");
-	__content.append(upperCasePropertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(upperCasePropertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", _minDate));\r\n");
 	__content.append("\t\tList<?> list = criteria.list();\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) list;\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
@@ -1940,41 +1960,41 @@ public class HEDLCodeGenerator {
 	__content.append("");}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all entities of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> getAll(Session session) {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) criteria.list();\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Searches for entities of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> search(Session _session, String _searchString, int _maxResults) {\r\n");
 	__content.append("\t\tCriteria criteria = _session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tDisjunction disjunction = Restrictions.disjunction();\r\n");
 	__content.append("");for (Property property : entity.getProperties()) {
 					if (property.getType().getJavaClassname().equals(String.class.getName())) {
 						String propertyNameToUpperCase = property.getName().toUpperCase();
 	__content.append("\t\tdisjunction.add(Restrictions.like(FIELD__");
-	__content.append(propertyNameToUpperCase.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", _searchString.trim(), MatchMode.ANYWHERE));\r\n");
 	__content.append("");}
 				}
@@ -1982,9 +2002,9 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tcriteria = criteria.setMaxResults(_maxResults);\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) criteria.list();\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
@@ -1996,33 +2016,33 @@ public class HEDLCodeGenerator {
 				String toOneReferenceTypeClassname = toOneReference.getType().getJavaClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Searches for entities of type ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic List<");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("> searchWith");
-	__content.append(toOneReferenceNameToFirstUpper);
+	__content.append(toOneReferenceNameToFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("(Session _session, ");
-	__content.append(toOneReferenceTypeClassname);
+	__content.append(toOneReferenceTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(toOneReferenceName);
+	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z",""));
 	__content.append(", String _searchString, int _maxResults) {\r\n");
 	__content.append("\t\tCriteria criteria = _session.createCriteria(");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\t// restrict by the value of the unique property\r\n");
 	__content.append("\t\tcriteria = criteria.add(Restrictions.eq(FIELD__");
-	__content.append(toOneReferenceNameToUpperCase.replace("\r\n","\r\n\t\t"));
+	__content.append(toOneReferenceNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", ");
-	__content.append(toOneReferenceName.replace("\r\n","\r\n\t\t"));
+	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
 	__content.append("\t\tDisjunction disjunction = Restrictions.disjunction();\r\n");
 	__content.append("");for (Property property : entity.getProperties()) {
 						String propertyNameToUpperCase = property.getName().toUpperCase();
 						if (property.getType().getJavaClassname().equals(String.class.getName())) {
 	__content.append("\t\tdisjunction.add(Restrictions.like(FIELD__");
-	__content.append(propertyNameToUpperCase.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", _searchString.trim(), MatchMode.ANYWHERE));\r\n");
 	__content.append("");}
 					}
@@ -2030,9 +2050,9 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tcriteria = criteria.setMaxResults(_maxResults);\r\n");
 	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
 	__content.append("\t\tList<");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("> entities = (List<");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(">) criteria.list();\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
@@ -2040,23 +2060,23 @@ public class HEDLCodeGenerator {
 	__content.append("");}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Deletes a ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic void delete(Session session, ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" entity) {\r\n");
 	__content.append("\t\tsession.delete(entity);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Counts the number of ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" entities.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic int count(Session session) {\r\n");
 	__content.append("\t\treturn ((Long) session.createQuery(\"select count(*) from ");
-	__content.append(entityName.replace("\r\n","\r\n\t\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("\").uniqueResult()).intValue();\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\t\r\n");
@@ -2078,9 +2098,9 @@ public class HEDLCodeGenerator {
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		String propertyDeclarations = getPropertyDeclarations(entity);
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("import java.util.List;\r\n");
@@ -2097,9 +2117,11 @@ public class HEDLCodeGenerator {
 	__content.append("import javax.persistence.TemporalType;\r\n");
 	__content.append("import javax.persistence.UniqueConstraint;\r\n");
 	__content.append("import javax.persistence.EnumType;\r\n");
+	__content.append("import javax.persistence.FetchType;\r\n");
 	__content.append("import javax.persistence.Enumerated;\r\n");
 	__content.append("import javax.persistence.CascadeType;\r\n");
 	__content.append("import javax.persistence.OneToMany;\r\n");
+	__content.append("import javax.persistence.ManyToMany;\r\n");
 	__content.append("import javax.persistence.Column;\r\n");
 	__content.append("\r\n");
 	__content.append("import org.hibernate.annotations.GenericGenerator;\r\n");
@@ -2107,35 +2129,35 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("@Entity\r\n");
 	__content.append("@Table(name = \"");
-	__content.append(entityName);
-	__content.append("\"");for (Constraint constraint : entity.getConstraints()) {
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("\"\r\n");
+	__content.append("");for (Constraint constraint : entity.getConstraints()) {
 			if (constraint instanceof UniqueConstraint) {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
 	__content.append(", uniqueConstraints=@UniqueConstraint(columnNames={");for (Property property : uniqueConstraint.getProperties()) {
 					String propertyName = property.getName();
 	__content.append("\"");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("\"");if (!isLast(uniqueConstraint.getProperties(), property)) {
 	__content.append(", ");}
 				}
-	__content.append("}");}
+	__content.append("})");}
 		}
-	__content.append("\r\n");
 	__content.append(")\r\n");
 	__content.append("");if (entity.getComment() != null) {
 			String comment = entity.getComment().replace("\t", "");
 	__content.append("");
-	__content.append(comment);
+	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
 	__content.append("");}
 	__content.append("/*\r\n");
 	__content.append(" * This class is generated from the entity \'");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("\' defined in the HEDL model.\r\n");
 	__content.append(" * Note: Any change made to this class will be overridden.\r\n");
 	__content.append(" */\r\n");
 	__content.append("public class ");
-	__content.append(entityName);
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");if (entity.getSuperType() != null) {
 			String superTypeName = entity.getSuperType().getName();
 	__content.append("extends # superTypeName # ");}
@@ -2143,13 +2165,13 @@ public class HEDLCodeGenerator {
 	__content.append("\t\r\n");
 	__content.append("");if (entity.getSuperType() == null) {
 	__content.append("\t@GenericGenerator(name=\"");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("IdGenerator\", strategy=\"org.hibernate.id.MultipleHiLoPerTableGenerator\",\r\n");
 	__content.append("\t  parameters = {\r\n");
 	__content.append("\t    @Parameter(name=\"table\", value=\"IdentityGenerator\"),\r\n");
 	__content.append("\t    @Parameter(name=\"primary_key_column\", value=\"sequence_name\"),\r\n");
 	__content.append("\t    @Parameter(name=\"primary_key_value\", value=\"");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\"),\r\n");
 	__content.append("\t    @Parameter(name=\"value_column\", value=\"next_hi_value\"),\r\n");
 	__content.append("\t    @Parameter(name=\"primary_key_length\", value=\"100\"),\r\n");
@@ -2158,19 +2180,19 @@ public class HEDLCodeGenerator {
 	__content.append("\t)\r\n");
 	__content.append("\t@Id \r\n");
 	__content.append("\t@GeneratedValue(strategy=GenerationType.TABLE, generator=\"");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("IdGenerator\")\r\n");
 	__content.append("\tprivate int id;\r\n");
 	__content.append("\r\n");
 	__content.append("");}
 	__content.append("\t");
-	__content.append(propertyDeclarations.replace("\r\n","\r\n\t"));
+	__content.append(propertyDeclarations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Default constructor. Only used by Hibernate.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("() {\r\n");
 	__content.append("\t\tsuper();\r\n");
 	__content.append("\t}\r\n");
@@ -2180,14 +2202,14 @@ public class HEDLCodeGenerator {
 	__content.append("\t * Constructor using all read-only and all non-nullable properties.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(entityName.replace("\r\n","\r\n\t"));
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("(");for (Property property :constructorProperties) {
 						String typeClassName = property.getType().getJavaClassname();
 						String toFirstLower = toFirstLower(property.getName());
 	__content.append("");
-	__content.append(typeClassName);
+	__content.append(typeClassName.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(toFirstLower);
+	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append("");if (!isLast(constructorProperties, property)) {
 	__content.append(", ");}
 					}
@@ -2196,9 +2218,9 @@ public class HEDLCodeGenerator {
 	__content.append("");for (Property property :constructorProperties) {
 						String toFirstLower = toFirstLower(property.getName());
 	__content.append("\t\tthis.");
-	__content.append(toFirstLower.replace("\r\n","\r\n\t\t"));
+	__content.append(toFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" = ");
-	__content.append(toFirstLower);
+	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("");}
 	__content.append("\t}\r\n");
@@ -2229,23 +2251,23 @@ public class HEDLCodeGenerator {
 				String typeClassName = property.getTypeClassname();
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the value of property \'");
-	__content.append(propertyName.replace("\r\n","\r\n\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\'.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
-	__content.append(typeClassName.replace("\r\n","\r\n\t"));
+	__content.append(typeClassName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" get");
-	__content.append(toFirstUpper);
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
 	__content.append("() {\r\n");
 	__content.append("\t\treturn ");
-	__content.append(propertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(";\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("");if (property.isReadonly()) {
 	__content.append("\t/**\r\n");
 	__content.append("\t * The property \'");
-	__content.append(propertyName.replace("\r\n","\r\n\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\' is read-only. \r\n");
 	__content.append("\t * This setter is only provided for Hibernate. \r\n");
 	__content.append("\t * It must not be used directly.\r\n");
@@ -2254,17 +2276,17 @@ public class HEDLCodeGenerator {
 	__content.append("");} else {
 	__content.append("\t/**\r\n");
 	__content.append("\t * Sets the value of property \'");
-	__content.append(propertyName.replace("\r\n","\r\n\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\'.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("");}
 	__content.append("\tpublic void set");
-	__content.append(toFirstUpper.replace("\r\n","\r\n\t"));
+	__content.append(toFirstUpper.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("(");
-	__content.append(typeClassName.replace("\r\n","\r\n\t"));
+	__content.append(typeClassName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" newValue) {\r\n");
 	__content.append("\t\tthis.");
-	__content.append(propertyName.replace("\r\n","\r\n\t\t"));
+	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" = newValue;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
@@ -2297,11 +2319,11 @@ public class HEDLCodeGenerator {
 	__content.append("CascadeType.ALL");}
 	__content.append("})\r\n");
 	__content.append("@JoinColumn(name=\"");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("\"");if (property.isReadonly()) {
 	__content.append(", updatable=false");}
 	__content.append(", nullable=");
-	__content.append(nullable);
+	__content.append(nullable.replaceAll("\\r\\n\\z",""));
 	__content.append(")\r\n");
 	__content.append("");}
 				if (property.isFromMultiplicity() && !property.isToMultiplicity()) {
@@ -2313,11 +2335,11 @@ public class HEDLCodeGenerator {
 	__content.append("CascadeType.ALL");}
 	__content.append("})\r\n");
 	__content.append("@JoinColumn(name=\"");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("\"");if (property.isReadonly()) {
 	__content.append(", updatable=false");}
 	__content.append(", nullable=");
-	__content.append(nullable);
+	__content.append(nullable.replaceAll("\\r\\n\\z",""));
 	__content.append(")\r\n");
 	__content.append("");}
 				if (!property.isFromMultiplicity() && property.isToMultiplicity()) {
@@ -2330,9 +2352,24 @@ public class HEDLCodeGenerator {
 	__content.append("}");if (property.getMappedBy() != null) {
 						String mappedByName = property.getMappedBy().getName();
 	__content.append(", mappedBy=\"");
-	__content.append(mappedByName);
+	__content.append(mappedByName.replaceAll("\\r\\n\\z",""));
 	__content.append("\"");}
 	__content.append(")\r\n");
+	__content.append("");}
+				if (property.isFromMultiplicity() && property.isToMultiplicity()) {
+					String target = property.getType().getJavaClassname();
+					String fetchType = property.isEager() ? "EAGER" : "LAZY";
+	__content.append("@ManyToMany(targetEntity=");
+	__content.append(target.replaceAll("\\r\\n\\z",""));
+	__content.append(".class, fetch=FetchType.");
+	__content.append(fetchType.replaceAll("\\r\\n\\z",""));
+	__content.append(", cascade={");if (property.isPersist()) {
+	__content.append("CascadeType.PERSIST, ");}
+					if (property.isRefresh()) {
+	__content.append("CascadeType.REFRESH");}
+					if (!property.isPersist() && !property.isRefresh()) {
+	__content.append("CascadeType.ALL");}
+	__content.append("})\r\n");
 	__content.append("");}
 			}
 			if (property.getType() == HedlBuiltinTypes.LONGSTRING) {
@@ -2341,13 +2378,13 @@ public class HEDLCodeGenerator {
 			if (property.getComment() != null) {
 				String comment = property.getComment().replace("\t", "");
 	__content.append("");
-	__content.append(comment);
+	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
 	__content.append("");}
 	__content.append("private ");
-	__content.append(propertyTypeClassname);
+	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
-	__content.append(propertyName);
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("");}
@@ -2357,31 +2394,33 @@ public class HEDLCodeGenerator {
 	StringBuilder __content = new StringBuilder();
 		String enumerationName = enumeration.getName();
 	__content.append("package ");
-	__content.append(packageName);
+	__content.append(packageName.replaceAll("\\r\\n\\z",""));
 	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME);
+	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
 	__content.append("");if (enumeration.getComment() != null) {
 			String comment = enumeration.getComment().replace("\t", "");
 	__content.append("");
-	__content.append(comment);
+	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
 	__content.append("");}
 	__content.append("// this class is generated. any change will be overridden.\r\n");
 	__content.append("public enum ");
-	__content.append(enumerationName);
+	__content.append(enumerationName.replaceAll("\\r\\n\\z",""));
 	__content.append(" {\r\n");
-	__content.append("\t\r\n");
 	__content.append("");for (EnumLiteral literal : enumeration.getLiterals()) {
 				String literalName = literal.getName();
 				if (literal.getComment() != null) {
 					String comment = literal.getComment().replace("\t", "");
-	__content.append("\t comment ");}
 	__content.append("\t");
-	__content.append(literalName.replace("\r\n","\r\n\t"));
+	__content.append(comment.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+	__content.append("\r\n");
+	__content.append("\t");}
+	__content.append("\t");
+	__content.append(literalName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(",\r\n");
-	__content.append("");}
+	__content.append("\t");}
 	__content.append("}\r\n");
 	__content.append("");return __content.toString();
 	}
