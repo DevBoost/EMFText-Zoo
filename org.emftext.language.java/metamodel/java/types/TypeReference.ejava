@@ -6,6 +6,7 @@ import java.references.MethodCall;
 import java.references.ElementReference;
 import java.generics.TypeParameter;
 import java.arrays.ArrayTypeable;
+import java.references.ReferenceableElement;
 
 import org.emftext.language.java.util.UniqueEList;
 import org.eclipse.emf.common.util.EList;
@@ -46,7 +47,8 @@ eclass TypeReference {
 			if (reference instanceof MethodCall) {
 				MethodCall potentialCloneCall = (MethodCall) reference;
 				//clone returns the type of the cloned in the case of arrays
-				if ("clone".equals(potentialCloneCall.getTarget().getName()))  {
+				ReferenceableElement potentialCloneCallTarget = potentialCloneCall.getTarget();
+				if (potentialCloneCallTarget != null && "clone".equals(potentialCloneCallTarget.getName()))  {
 					if (potentialCloneCall.getPrevious() instanceof ElementReference) {
 						ElementReference prevRef = (ElementReference) potentialCloneCall.getPrevious();
 						if (prevRef.getTarget() instanceof ArrayTypeable && 
