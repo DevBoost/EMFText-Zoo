@@ -417,7 +417,9 @@ public class JavaClasspath extends AdapterImpl {
 			return;
 		}
 		File sourceFolder = new File(folderURI.toFileString());
-		internalRegisterSourceOrClassFileFolder(sourceFolder, "");
+		if (sourceFolder.exists()) {
+			internalRegisterSourceOrClassFileFolder(sourceFolder, "");			
+		}
 	}
 	
 	private void internalRegisterSourceOrClassFileFolder(File folder, String packageName) {
