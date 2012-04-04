@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.hedl.Constraint;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
 import org.emftext.language.hedl.Enum;
 import org.emftext.language.hedl.EnumLiteral;
 import org.emftext.language.hedl.JavaType;
+import org.emftext.language.hedl.NamedElement;
+import org.emftext.language.hedl.Option;
+import org.emftext.language.hedl.OptionType;
 import org.emftext.language.hedl.Property;
 import org.emftext.language.hedl.Type;
 import org.emftext.language.hedl.UniqueConstraint;
@@ -46,7 +50,18 @@ public class HEDLCodeGenerator {
 	__content.append("\t\r\n");
 	__content.append("\tpublic void execute(IDBOperations operations);\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+		/*package #packageName#.#DAO_PACKAGE_NAME#;
+		
+		import #packageName#.#CUSTOM_PACKAGE_NAME#.IDBOperations;
+
+		// this class is generated. any change will be overridden.
+		public interface ICommand {
+			
+			public void execute(IDBOperations operations);
+		}
+		*/
+		return __content.toString();
 	}
 	public String generateOngoingShutdownException(String packageName) {
 	StringBuilder __content = new StringBuilder();
@@ -61,7 +76,16 @@ public class HEDLCodeGenerator {
 	__content.append("\t\r\n");
 	__content.append("\tprivate static final long serialVersionUID = 997906627613716196L;\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+		/*package #packageName#.#DAO_PACKAGE_NAME#;
+
+		// this class is generated. any change will be overridden.
+		public class OngoingShutdownException extends RuntimeException {
+			
+			private static final long serialVersionUID = 997906627613716196L;
+		}
+		*/
+		return __content.toString();
 	}
 	public String generateIDBOperations(String packageName) {
 	StringBuilder __content = new StringBuilder();
@@ -82,7 +106,18 @@ public class HEDLCodeGenerator {
 	__content.append("public interface IDBOperations extends IDBOperationsBase {\r\n");
 	__content.append("\t\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+		/*package #packageName#.#CUSTOM_PACKAGE_NAME#;
+		
+		import #packageName#.#DAO_PACKAGE_NAME#.IDBOperationsBase;
+
+		// this class is only generated once. it can be customized and all changes
+		// will be preserved.
+		public interface IDBOperations extends IDBOperationsBase {
+			
+		}
+		*/
+		return __content.toString();
 	}
 	public String generateIDBOperationsBase(String packageName, EntityModel entityModel) {
 	StringBuilder __content = new StringBuilder();
@@ -95,7 +130,13 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("import java.util.List;\r\n");
 	__content.append("\r\n");
-	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
+	__content.append("");
+		/*package #packageName#.#DAO_PACKAGE_NAME#;
+
+		import java.util.List;
+		
+		*/
+		for (Entity otherEntity : entityModel.getEntities()) {
 			String name = otherEntity.getName();
 	__content.append("import ");
 	__content.append(packageName.replaceAll("\\r\\n\\z",""));
@@ -104,7 +145,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(name.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	import #packageName#.#ENTITY_PACKAGE_NAME#.#name#;
+			*/
+		}
 		
 		for (org.emftext.language.hedl.Enum otherEnum : entityModel.getEnums()) {
 			String name = otherEnum.getName();
@@ -115,7 +159,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(name.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	import #packageName#.#ENTITY_PACKAGE_NAME#.#name#;
+			*/
+		}
 	__content.append("\r\n");
 	__content.append("// this class is generated. any change will be overridden.\r\n");
 	__content.append("public interface IDBOperationsBase {\r\n");
@@ -124,7 +171,16 @@ public class HEDLCodeGenerator {
 	__content.append(entityOperations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+
+		/*
+		// this class is generated. any change will be overridden.
+		public interface IDBOperationsBase {
+			
+			#entityOperations#
+		}
+		*/
+		return __content.toString();
 	}
 	private String getAllEntitityOperations(EntityModel entityModel) {
 	StringBuilder __content = new StringBuilder();
@@ -133,7 +189,10 @@ public class HEDLCodeGenerator {
 	__content.append("");
 	__content.append(operations.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*#operations#
+			*/
+		}
 		return __content.toString();
 	}
 	private String getEntityOperations(Entity entity) {
@@ -155,15 +214,25 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" create");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");for (Property property :constructorProperties) {
+	__content.append("(");
+
+		/*/**
+		 * Creates a new #entityName# using all read-only and all non-null properties.
+		 #/
+		public #entityName# create#entityName#(*/
+		for (Property property :constructorProperties) {
 			String propertyTypeClass = property.getType().getJavaClassname();
 			String propertyName = property.getName();
 	__content.append("");
 	__content.append(propertyTypeClass.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(constructorProperties, property)) {
-	__content.append(", ");}
+	__content.append("");
+			/*#propertyTypeClass# #propertyName#*/
+			if (!isLast(constructorProperties, property)) {
+	__content.append(", ");
+				/*, */
+			}
 		}
 	__content.append(");\r\n");
 	__content.append("\r\n");
@@ -178,7 +247,16 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("(int id);\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Property property :uniqueProperties) {
+	__content.append("");
+		/*);
+		
+		/**
+		 * Returns the #entityName# with the given id.
+		 #/
+		public #entityName# get#entityName#(int id);
+			
+		*/
+		for (Property property :uniqueProperties) {
 			String propertyName = property.getName();
 			String toFirstUpper = toFirstUpper(propertyName);
 			String typeClassname = property.getType().getJavaClassname();
@@ -201,7 +279,14 @@ public class HEDLCodeGenerator {
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	/**
+			 * Returns the #entityName# with the given #propertyName#.
+			 #/
+			public #entityName# get#entityName#By#toFirstUpper#(#typeClassname# #propertyName#);
+			
+			*/
+		}
 		for (Property property :toOneProperties) {
 			String propertyName = property.getName();
 			String firstUpper = toFirstUpper(property.getName());
@@ -225,7 +310,14 @@ public class HEDLCodeGenerator {
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	/**
+			 * Returns the #entityName#s with the given #propertyName#.
+			 #/
+			public List<#entityName#> get#entityName#sBy#firstUpper#(#typeClassname# #propertyName#);
+			
+			*/
+		}
 		for (Constraint constraint : entity.getConstraints()) {
 			if (constraint instanceof UniqueConstraint) {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
@@ -238,24 +330,41 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("By");
+		/*		/**
+				 * Returns the #entityName# with the given properties.
+				 #/
+				public #entityName# get#entityName#By*/
+				for (Property property : uniqueConstraint.getProperties()) {
 					String firstUpper = toFirstUpper(property.getName());
 	__content.append("");
 	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
-	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+					/*#firstUpper#*/
+				}
+	__content.append("(");
+				/*(*/
+				for (Property property : uniqueConstraint.getProperties()) {
 					String propertyName = property.getName();
 					String typeClassname = property.getType().getJavaClassname();
 	__content.append("");
 	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append("");
+					/*#typeClassname# #propertyName#*/
+					if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+						/*, */
+					}
 				}
 	__content.append(");\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+				/*);
+				
+				*/
+			}
 		}
 		for (Property property :enumProperties) {
 			String propertyName = property.getName();
@@ -280,7 +389,14 @@ public class HEDLCodeGenerator {
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(");\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	/**
+			 * Returns all #entityName#s with the given #propertyName#.
+			 #/
+			public List<#entityName#> get#entityName#sBy#firstUpper#(#typeClassname# #propertyName#);
+			
+			*/
+		}
 		for (Property property :dateProperties) {
 			String propertyName = property.getName();
 			String firstUpper = toFirstUpper(property.getName());
@@ -302,7 +418,14 @@ public class HEDLCodeGenerator {
 	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _maxDate);\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	/**
+			 * Returns all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+			 #/
+			public List<#entityName#> get#entityName#sWith#firstUpper#Before(#typeClassname# _maxDate);
+			
+			*/
+		}
 		for (Property property :dateProperties) {
 			String propertyName = property.getName();
 			String firstUpper = toFirstUpper(property.getName());
@@ -324,7 +447,14 @@ public class HEDLCodeGenerator {
 	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" _minDate);\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+/*			/**
+			 * Returns all #entityName#s where #propertyName# is set to a value after '_minDate'.
+			 #/
+			public List<#entityName#> get#entityName#sWith#firstUpper#After(#typeClassname# _minDate);
+			
+			*/
+		}
 	__content.append("/**\r\n");
 	__content.append(" * Returns all entities of type ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
@@ -347,7 +477,19 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s(String _searchString, int _maxResults);\r\n");
 	__content.append("\r\n");
-	__content.append("");for (Property property :toOneReferences) {
+	__content.append("");
+		/*/**
+		 * Returns all entities of type #entityName#.
+		 #/
+		public List<#entityName#> getAll#entityName#s();
+			
+		/**
+		 * Searches for entities of type #entityName#.
+		 #/
+		public List<#entityName#> search#entityName#s(String _searchString, int _maxResults);
+		
+		*/
+		for (Property property :toOneReferences) {
 			String toOneReferenceName = property.getName();
 			String firstUpper = toFirstUpper(property.getName());
 			String typeClassname = property.getType().getJavaClassname();
@@ -368,7 +510,14 @@ public class HEDLCodeGenerator {
 	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z",""));
 	__content.append(", String _searchString, int _maxResults);\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+/*			/**
+			 * Searches for entities of type #entityName#.
+			 #/
+			public List<#entityName#> search#entityName#With#firstUpper#(final #typeClassname# #toOneReferenceName#, String _searchString, int _maxResults);
+			
+			*/
+		}
 	__content.append("/**\r\n");
 	__content.append(" * Deletes a ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
@@ -387,7 +536,19 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("s();\r\n");
 	__content.append("\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+		/*/**
+		 * Deletes a #entityName#.
+		 #/
+		public void delete(#entityName# entity);
+		
+		/**
+		 * Counts the number of #entityName# entities.
+		 #/
+		public int count#entityName#s();
+		
+		*/
+		return __content.toString();
 	}
 
 	private List<Property> getToOneReferences(Entity entity) {
@@ -467,7 +628,20 @@ public class HEDLCodeGenerator {
 	__content.append("\t\te.printStackTrace();\r\n");
 	__content.append("\t}\r\n");
 	__content.append("}\r\n");
-	__content.append("");;
+	__content.append("");
+		/*package #packageName#.#CUSTOM_PACKAGE_NAME#;
+		
+		import #packageName#.#DAO_PACKAGE_NAME#.#className#Base;
+		
+		// this class is only generated once. it can be customized and all changes
+		// will be preserved.
+		public class #className# extends #className#Base {
+			
+			public void handleException(Exception e, boolean retry) {
+				e.printStackTrace();
+			}
+		}
+		*/;
 		return __content.toString();
 	}
 	public String generateMainDAOBase(String packageName, String className, EntityModel entityModel) {
@@ -506,7 +680,30 @@ public class HEDLCodeGenerator {
 	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(".IDBOperations;\r\n");
 	__content.append("\r\n");
-	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
+	__content.append("");
+		/*package #packageName#.#DAO_PACKAGE_NAME#;
+
+		import java.util.ArrayList;
+		import java.util.List;
+		
+		import java.util.logging.Level;
+		import java.util.logging.Logger;
+
+		import org.hibernate.TransactionException;
+		import org.hibernate.HibernateException;
+		import org.hibernate.SessionFactory;
+		import org.hibernate.Transaction;
+		import org.hibernate.cfg.Configuration;
+		import org.hibernate.classic.Session;
+
+		import org.hibernate.tool.hbm2ddl.SchemaExport;
+		import org.hibernate.tool.hbm2ddl.SchemaUpdate;
+
+		import #packageName#.#CUSTOM_PACKAGE_NAME#.OperationProvider;
+		import #packageName#.#CUSTOM_PACKAGE_NAME#.IDBOperations;
+		
+		*/
+		for (Entity otherEntity : entityModel.getEntities()) {
 			String otherEntityName = otherEntity.getName();
 	__content.append("import ");
 	__content.append(packageName.replaceAll("\\r\\n\\z",""));
@@ -515,7 +712,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(otherEntityName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEntityName#;
+		*/
+		}
 
 		for (Enum otherEnum : entityModel.getEnums()) {
 			String otherEnumName = otherEnum.getName();
@@ -526,7 +726,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(otherEnumName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
+		*/
+		}
 	__content.append("\r\n");
 	__content.append("// this class is generated. any change will be overridden.\r\n");
 	__content.append("public abstract class ");
@@ -549,12 +752,36 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("\tprivate Configuration getConfiguration() {\r\n");
 	__content.append("\t\tConfiguration configuration = new Configuration();\r\n");
-	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
+	__content.append("");
+
+		/*
+		// this class is generated. any change will be overridden.
+		public abstract class #className# implements IDBOperationsBase {
+			
+			private SessionFactory sessionFactory;
+		
+			public #className#() {
+				configure();
+			}
+
+			private void configure() throws HibernateException {
+				Configuration configuration = getConfiguration();
+				//configuration.setProperty("hibernate.show_sql", "true");
+				this.sessionFactory = configuration.buildSessionFactory();
+			}
+
+			private Configuration getConfiguration() {
+				Configuration configuration = new Configuration();
+*/
+				for (Entity otherEntity : entityModel.getEntities()) {
 					String otherEntityName = otherEntity.getName();
 	__content.append("\t\tconfiguration = configuration.addAnnotatedClass(");
 	__content.append(otherEntityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
-	__content.append("");}
+	__content.append("");
+/*					configuration = configuration.addAnnotatedClass(#otherEntityName#.class);
+*/
+				}
 	__content.append("\t\treturn configuration;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
@@ -622,7 +849,74 @@ public class HEDLCodeGenerator {
 	__content.append(entityMethods.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+/*				return configuration;
+			}
+			
+			public void createSchema() throws HibernateException {
+				SchemaExport schemaExport = new SchemaExport(getConfiguration());
+				schemaExport.setFormat(true);
+				schemaExport.create(false, false);
+			}
+		
+			public void updateSchema() {
+				SchemaUpdate update = new SchemaUpdate(getConfiguration());
+				update.execute(true, true);
+				List<?> exceptions = update.getExceptions();
+				for (Object object : exceptions) {
+					System.err.println("Exception while updating schema " + object);
+				}
+			}
+			
+			public void executeInTransaction(ICommand command) {
+				executeInTransaction(command, true);
+			}
+			
+			private void executeInTransaction(ICommand command, boolean retry) {
+				boolean successful = false;
+				boolean closed = false;
+				
+				Session session = sessionFactory.openSession();
+				Transaction tx = null;
+				try {
+					tx = session.beginTransaction();
+					command.execute(new OperationProvider(session));
+					tx.commit();
+					successful = true;
+				} catch (Exception e) {
+					handleException(e, retry);
+					if (tx != null) {
+						try {
+							tx.rollback();
+						} catch (TransactionException te) {
+							handleException(te, retry);
+						}
+					}
+				} finally {
+					try {
+						session.close();
+						closed = true;
+					} catch (HibernateException he) {
+						handleException(he, retry);
+					}
+				}
+				
+				if ((!successful || !closed) && retry) {
+					// retry once
+					executeInTransaction(command, false);
+				}
+			}
+			
+			public abstract void handleException(Exception e, boolean retry);
+			
+			public void tearDown() {
+				sessionFactory.close();
+			}
+		
+			#entityMethods#
+		}
+		*/
+		return __content.toString();
 	}
 	private String getEntityOperationsBodies(EntityModel entityModel) {
 	StringBuilder __content = new StringBuilder();
@@ -631,7 +925,10 @@ public class HEDLCodeGenerator {
 	__content.append("");
 	__content.append(operationBodies.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*#operationBodies#
+			*/
+		}
 		return __content.toString();
 	}
 	private String getEntityOperationsBodies(Entity entity) {
@@ -653,15 +950,25 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" create");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");for (Property property :constructorProperties) {
+	__content.append("(");
+		
+		/*/**
+		 * Creates a new #entityName# using all read-only and all non-null properties.
+		 #/
+		public #entityName# create#entityName#(*/
+			for (Property property :constructorProperties) {
 				String typeClassname = property.getType().getJavaClassname();
 				String toFirstLower = toFirstLower(property.getName());
 	__content.append("final ");
 	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(constructorProperties, property)) {
-	__content.append(", ");}
+	__content.append("");
+				/*final #typeClassname# #toFirstLower#*/
+				if (!isLast(constructorProperties, property)) {
+	__content.append(", ");
+					/*, */
+				}
 			}
 	__content.append(") {\r\n");
 	__content.append("\tfinal ");
@@ -674,12 +981,23 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentity[0] = operations.create");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("(");for (Property property :constructorProperties) {
+	__content.append("(");
+		/*) {
+			final #entityName#[] entity = new #entityName#[1];
+			executeInTransaction(new ICommand() {
+				
+				public void execute(IDBOperations operations) {
+					entity[0] = operations.create#entityName#(*/
+					for (Property property :constructorProperties) {
 						String toFirstLower = toFirstLower(property.getName());
 	__content.append("");
 	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(constructorProperties, property)) {
-	__content.append(", ");}
+	__content.append("");
+						/*#toFirstLower#*/
+						if (!isLast(constructorProperties, property)) {
+	__content.append(", ");
+							/*, */
+						}
 					}
 	__content.append(");\r\n");
 	__content.append("\t\t}\r\n");
@@ -713,7 +1031,29 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entity[0];\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");for (Property property :uniqueProperties) {
+	__content.append("");
+				/*);
+				}
+			});
+			return entity[0];
+		}
+		
+		/**
+		 * Returns the #entityName# with the given id.
+		 #/
+		public #entityName# get#entityName#(final int id) {
+			final #entityName#[] entity = new #entityName#[1];
+			executeInTransaction(new ICommand() {
+				
+				public void execute(IDBOperations operations) {
+					entity[0] = operations.get#entityName#(id);
+				}
+			});
+			return entity[0];
+		}
+		
+		*/
+		for (Property property :uniqueProperties) {
 			String propertyName = property.getName();
 			String toFirstUpper = toFirstUpper(propertyName);
 			String typeClassname = property.getType().getJavaClassname();
@@ -755,7 +1095,23 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entity[0];\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+		/*	/**
+			 * Returns the #entityName# with the given #propertyName#.
+			 #/
+			public #entityName# get#entityName#By#toFirstUpper#(final #typeClassname# #propertyName#) {
+				final #entityName#[] entity = new #entityName#[1];
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entity[0] = operations.get#entityName#By#toFirstUpper#(#propertyName#);
+					}
+				});
+				return entity[0];
+			}
+			
+			*/
+		}
 
 		for (Property property :toOneProperties) {
 			String propertyName = property.getName();
@@ -799,7 +1155,23 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*/**
+			 * Returns the #entityName#s with the given #propertyName#.
+			 #/
+			public List<#entityName#> get#entityName#sBy#toFirstUpper#(final #typeClassname# #propertyName#) {
+				final List<#entityName#> entities = new ArrayList<#entityName#>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get#entityName#sBy#toFirstUpper#(#propertyName#));
+					}
+				});
+				return entities;
+			}
+			
+		*/
+		}
 		for (Property property :enumProperties) {
 			String propertyName = property.getName();
 			String toFirstUpper = toFirstUpper(propertyName);
@@ -842,7 +1214,23 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*/**
+			 * Returns all #entityName#s with the given #propertyName#.
+			 #/
+			public List<#entityName#> get#entityName#sBy#toFirstUpper#(final #typeClassname# #propertyName#) {
+				final List<#entityName#> entities = new ArrayList<#entityName#>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get#entityName#sBy#toFirstUpper#(#propertyName#));
+					}
+				});
+				return entities;
+			}
+			
+			*/
+		}
 			
 		for (Constraint constraint : entity.getConstraints()) {
 			if (constraint instanceof UniqueConstraint) {
@@ -856,12 +1244,21 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append(" get");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("By");
+				/*/**
+				 * Returns the #entityName# with the given properties.
+				 #/
+				public #entityName# get#entityName#By*/
+				for (Property property : uniqueConstraint.getProperties()) {
 					String toFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
 	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
-	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+					/*#toFirstUpper#*/
+				}
+	__content.append("(");
+				/*(*/
+				for (Property property : uniqueConstraint.getProperties()) {
 					String propertyName = property.getName();
 					String toFirstUpper = toFirstUpper(propertyName);
 					String typeClassname = property.getType().getJavaClassname();
@@ -869,8 +1266,12 @@ public class HEDLCodeGenerator {
 	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append("");
+					/*final #typeClassname# #propertyName#*/
+					if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+						/*, */
+					}
 				}
 	__content.append(") {\r\n");
 	__content.append("\tfinal ");
@@ -883,17 +1284,32 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
 	__content.append("\t\t\tentity[0] = operations.get");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("By");
+				/*) {
+					final #entityName#[] entity = new #entityName#[1];
+					executeInTransaction(new ICommand() {
+						
+						public void execute(IDBOperations operations) {
+							entity[0] = operations.get#entityName#By*/
+							for (Property property : uniqueConstraint.getProperties()) {
 								String toFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
 	__content.append(toFirstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
-	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+								/*#toFirstUpper#*/
+							}
+	__content.append("(");
+							/*(*/
+							for (Property property : uniqueConstraint.getProperties()) {
 								String propertyName = property.getName();
 	__content.append("");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append("");
+								/*#propertyName#*/
+								if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+									/*, */
+								}
 							}
 	__content.append(");\r\n");
 	__content.append("\t\t}\r\n");
@@ -901,7 +1317,15 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entity[0];\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+						/*);
+						}
+					});
+					return entity[0];
+				}
+		
+				*/
+			}
 		}
 		
 		for (Property property :dateProperties) {
@@ -942,7 +1366,23 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*/**
+			 * Returns all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+			 #/
+			public List<#entityName#> get#entityName#sWith#toFirstUpper#Before(final #typeClassname# _maxDate) {
+				final List<#entityName#> entities = new ArrayList<#entityName#>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get#entityName#sWith#toFirstUpper#Before(_maxDate));
+					}
+				});
+				return entities;
+			}
+			
+			*/
+		}
 		for (Property property :dateProperties) {
 			String propertyName = property.getName();
 			String toFirstUpper = toFirstUpper(propertyName);
@@ -981,7 +1421,23 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+/*			/**
+			 * Returns all #entityName#s where #propertyName# is set to a value after '_minDate'.
+			 #/
+			public List<#entityName#> get#entityName#sWith#toFirstUpper#After(final #typeClassname# _minDate) {
+				final List<#entityName#> entities = new ArrayList<#entityName#>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.get#entityName#sWith#toFirstUpper#After(_minDate));
+					}
+				});
+				return entities;
+			}
+			
+			*/
+		}
 	__content.append("/**\r\n");
 	__content.append(" * Returns all entities of type ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
@@ -1034,7 +1490,37 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");for (Property toOneReference :toOneReferences) {
+	__content.append("");
+		/*/**
+		 * Returns all entities of type #entityName#.
+		 #/
+		public List<#entityName#> getAll#entityName#s() {
+			final List<#entityName#> entities = new ArrayList<#entityName#>();
+			executeInTransaction(new ICommand() {
+				
+				public void execute(IDBOperations operations) {
+					entities.addAll(operations.getAll#entityName#s());
+				}
+			});
+			return entities;
+		}
+		
+		/**
+		 * Searches for entities of type #entityName#.
+		 #/
+		public List<#entityName#> search#entityName#s(final String _searchString, final int _maxResults) {
+			final List<#entityName#> entities = new ArrayList<#entityName#>();
+			executeInTransaction(new ICommand() {
+				
+				public void execute(IDBOperations operations) {
+					entities.addAll(operations.search#entityName#s(_searchString, _maxResults));
+				}
+			});
+			return entities;
+		}
+		
+		*/
+		for (Property toOneReference :toOneReferences) {
 			String toOneReferenceName = toOneReference.getName();
 			String toFirstUpper = toFirstUpper(toOneReferenceName);
 			String typeClassname = toOneReference.getType().getJavaClassname();
@@ -1074,7 +1560,23 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn entities;\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*/**
+			 * Searches for entities of type #entityName#.
+			 #/
+			public List<#entityName#> search#entityName#With#toFirstUpper#(final #typeClassname# #toOneReferenceName#, final String _searchString, final int _maxResults) {
+				final List<#entityName#> entities = new ArrayList<#entityName#>();
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						entities.addAll(operations.search#entityName#With#toFirstUpper#(#toOneReferenceName#, _searchString, _maxResults));
+					}
+				});
+				return entities;
+			}
+			
+			*/
+		}
 	__content.append("/**\r\n");
 	__content.append(" * Deletes a ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
@@ -1111,7 +1613,35 @@ public class HEDLCodeGenerator {
 	__content.append("\treturn count[0];\r\n");
 	__content.append("}\r\n");
 	__content.append("\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+		/*/**
+		 * Deletes a #entityName#.
+		 #/
+		public void delete(final #entityName# entity) {
+			executeInTransaction(new ICommand() {
+				
+				public void execute(IDBOperations operations) {
+					operations.delete(entity);
+				}
+			});
+		}
+		
+		/**
+		 * Counts the number of #entityName# entities.
+		 #/
+		public int count#entityNameToFirstUpper#s() {
+			final int[] count = new int[1];
+			executeInTransaction(new ICommand() {
+				
+				public void execute(IDBOperations operations) {
+					count[0] = operations.count#entityNameToFirstUpper#s();
+				}
+			});
+			return count[0];
+		}
+		
+		*/
+		return __content.toString();
 	}
 	public String generateOperationProvider(String packageName) {
 	StringBuilder __content = new StringBuilder();
@@ -1137,7 +1667,23 @@ public class HEDLCodeGenerator {
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+		/*package #packageName#.#CUSTOM_PACKAGE_NAME#;
+
+		import org.hibernate.classic.Session;
+		import #packageName#.#DAO_PACKAGE_NAME#.OperationProviderBase;
+
+		// this class is only generated once. it can be customized and all changes
+		// will be preserved.
+		public class OperationProvider extends OperationProviderBase implements IDBOperations {
+
+			public OperationProvider(Session session) {
+				super(session);
+			}
+
+		}
+		*/
+		return __content.toString();
 	}
 	public String generateOperationProviderBase(String packageName, EntityModel entityModel) {
 	StringBuilder __content = new StringBuilder();
@@ -1161,7 +1707,25 @@ public class HEDLCodeGenerator {
 	__content.append("import org.hibernate.metadata.ClassMetadata;\r\n");
 	__content.append("import org.hibernate.persister.entity.AbstractEntityPersister;\r\n");
 	__content.append("\r\n");
-	__content.append("");for (Entity otherEntity : entityModel.getEntities()) {
+	__content.append("");
+		/*package #packageName#.#DAO_PACKAGE_NAME#;
+
+		import java.util.List;
+
+		import org.hibernate.Criteria;
+		import org.hibernate.HibernateException;
+		import org.hibernate.SessionFactory;
+		import org.hibernate.Transaction;
+		import org.hibernate.cfg.Configuration;
+		import org.hibernate.classic.Session;
+		import org.hibernate.criterion.MatchMode;
+		import org.hibernate.criterion.Order;
+		import org.hibernate.criterion.Restrictions;
+		import org.hibernate.metadata.ClassMetadata;
+		import org.hibernate.persister.entity.AbstractEntityPersister;
+		
+		*/
+		for (Entity otherEntity : entityModel.getEntities()) {
 			String otherEntityName = otherEntity.getName();
 	__content.append("import ");
 	__content.append(packageName.replaceAll("\\r\\n\\z",""));
@@ -1170,7 +1734,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(otherEntityName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+/*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEntityName#;
+*/
+		}
 		for (Enum otherEnum : entityModel.getEnums()) {
 			String otherEnumName = otherEnum.getName();
 	__content.append("import ");
@@ -1180,7 +1747,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(otherEnumName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+/*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
+*/
+		}
 	__content.append("\r\n");
 	__content.append("/**\r\n");
 	__content.append(" * This class provides all default operations that are derived from the HEDL entity model.\r\n");
@@ -1191,7 +1761,19 @@ public class HEDLCodeGenerator {
 	__content.append("\t\t\r\n");
 	__content.append("\tprivate Session session;\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Entity entity : entityModel.getEntities()) {
+	__content.append("");
+		
+/*		
+		/**
+		 * This class provides all default operations that are derived from the HEDL entity model.
+		 *
+		 * Note: This class is generated. Any change will be overridden.
+		 #/
+		public abstract class OperationProviderBase implements IDBOperationsBase {
+				
+			private Session session;
+			
+*/			for (Entity entity : entityModel.getEntities()) {
 				String entityName = entity.getName();
 				String toFirstLower = toFirstLower(entityName);
 	__content.append("\tprivate ");
@@ -1201,7 +1783,9 @@ public class HEDLCodeGenerator {
 	__content.append("DAO = new ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO();\r\n");
-	__content.append("");}
+	__content.append("");
+/*				private #entityName#DAO #toFirstLower#DAO = new #entityName#DAO();
+*/			}
 	__content.append("\r\n");
 	__content.append("\tpublic OperationProviderBase(Session session) {\r\n");
 	__content.append("\t\tthis.session = session;\r\n");
@@ -1211,7 +1795,18 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn session;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");for (Entity entity : entityModel.getEntities()) {
+	__content.append("");
+/*		
+			public OperationProviderBase(Session session) {
+				this.session = session;
+			}
+			
+			public Session getSession() {
+				return session;
+			}
+			
+*/
+			for (Entity entity : entityModel.getEntities()) {
 				String entityName = entity.getName();
 				String entityNameToFirstLower = toFirstLower(entityName);
 				String entityNameToFirstUpper = toFirstUpper(entityName);
@@ -1230,24 +1825,38 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" create");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");for (Property property :constructorProperties) {
+	__content.append("(");
+/*				/** 
+				 * Creates an instance of type #entityName# using all read-only and all non-null properties.
+				 #/
+				public #entityName# create#entityName#(*/
+					for (Property property :constructorProperties) {
 						String propertyType = property.getType().getJavaClassname();
 						String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append("");
 	__content.append(propertyType.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(constructorProperties, property)) {
-	__content.append(", ");}
+	__content.append("");
+						/*#propertyType# #propertyToFirstLower#*/
+						if (!isLast(constructorProperties, property)) {
+	__content.append(", ");
+							/*, */
+						}
 					}
 	__content.append(") {\r\n");
 	__content.append("\t\treturn ");
 	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append("DAO.create(session");for (Property property :constructorProperties) {
+	__content.append("DAO.create(session");
+/*				) {
+					return #entityNameToFirstLower#DAO.create(session*/
+					for (Property property :constructorProperties) {
 						String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append(", ");
 	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
+	__content.append("");
+						/*, #propertyToFirstLower#*/
+					}
 	__content.append(");\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
@@ -1269,7 +1878,20 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");for (Property property :uniqueProperties) {
+	__content.append("");
+/*					);
+				}
+				
+				/**
+				 * Returns the #entityName# with the given id.
+				 #/
+				public #entityName# get#entityName#(int id) {
+					#entityName# entity = #entityNameToFirstLower#DAO.get(session, id);
+					return entity;
+				}
+				
+*/
+				for (Property property :uniqueProperties) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
 					String propertyTypeClassname = property.getType().getJavaClassname();
@@ -1300,7 +1922,16 @@ public class HEDLCodeGenerator {
 	__content.append(");\r\n");
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
-	__content.append("\t");}
+	__content.append("\t\t\r\n");
+	__content.append("");
+/*					/** Returns the #entityName# with the given #propertyName#. #/
+					public #entityName# get#entityName#By#propertyNameToFirstUpper#(#propertyTypeClassname# #propertyName#) {
+						#entityName# entity = #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
+						return entity;
+					}
+						
+*/
+				}
 				
 				for (Property property :toOneProperties) {
 					String propertyName = property.getName();
@@ -1333,8 +1964,16 @@ public class HEDLCodeGenerator {
 	__content.append(");\r\n");
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("\t\t\r\n");
+	__content.append("");
+/*					/** Returns the #entityName#s with the given #propertyName#. #/
+					public List<#entityName#> get#entityName#sBy#propertyNameToFirstUpper#(#propertyTypeClassname# #propertyName#) {
+						List<#entityName#> entities = #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
+						return entities;
+					}
+						
+*/
+				}
 			
 				for (Property property :enumProperties) {
 					String propertyName = property.getName();
@@ -1367,7 +2006,16 @@ public class HEDLCodeGenerator {
 	__content.append(");\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("");
+/*					/**
+					 * Returns all #entityName#s with the given #propertyName#.
+					 #/
+					public List<#entityName#> get#entityName#sBy#propertyNameToFirstUpper#(#propertyTypeClassname# #propertyName#) {
+						return #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
+					}
+					
+*/
+				}
 				
 				for (Constraint constraint : entity.getConstraints()) {
 					if (constraint instanceof UniqueConstraint) {
@@ -1381,50 +2029,80 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" get");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("By");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("By");
+/*						/**
+						 * Returns the #entityName# with the given properties.
+						 #/
+						public #entityName# get#entityName#By*/
+						for (Property property : uniqueConstraint.getProperties()) {
 							String propertyNameToFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
 	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
-	__content.append("(");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+							/*#propertyNameToFirstUpper#*/
+						}
+	__content.append("(");
+/*						(*/
+						for (Property property : uniqueConstraint.getProperties()) {
 							String propertyName = property.getName();
 							String propertyTypeClassname = property.getTypeClassname();
 	__content.append("");
 	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append("");
+							/*#propertyTypeClassname# #propertyName#*/
+							if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+								/*, */
+							}
 						}
 	__content.append(") {\r\n");
 	__content.append("\t\t");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" entity = ");
 	__content.append(entityNameToFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("DAO.getBy");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("DAO.getBy");
+/*						) {
+							#entityName# entity = #entityNameToFirstLower#DAO.getBy*/
+							for (Property property : uniqueConstraint.getProperties()) {
 								String propertyNameToFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
 	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
-	__content.append("(session, ");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+								/*#propertyNameToFirstUpper#*/
+							}
+	__content.append("(session, ");
+/*							(session, */
+							for (Property property : uniqueConstraint.getProperties()) {
 								String propertyName = property.getName();
 	__content.append("");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append("");
+								/*#propertyName#*/
+								if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+									/*, */
+								}
 							}
-	__content.append("\t\t);\r\n");
+	__content.append(");\r\n");
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("");
+							/*);
+							return entity;
+						}
+						
+*/
+					}
 				}
 			
 				for (Property property :dateProperties) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
 					String propertyTypeClassname = property.getType().getJavaClassname();
-	__content.append("/**\r\n");
+	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("s where ");
@@ -1450,7 +2128,17 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("");
+/*					/**
+					 * Returns all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+					 #/
+					public List<#entityName#> get#entityName#sWith#propertyNameToFirstUpper#Before(#propertyTypeClassname# _maxDate) {
+						final List<#entityName#> entities = #entityNameToFirstLower#DAO.get#propertyNameToFirstUpper#Before(session, _maxDate);
+						return entities;
+					}
+					
+*/
+				}
 				
 				for (Property property :dateProperties) {
 					String propertyName = property.getName();
@@ -1482,7 +2170,17 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("");
+/*					/**
+					 * Returns all #entityName#s where #propertyName# is set to a value after '_minDate'.
+					 #/
+					public List<#entityName#> get#entityName#sWith#propertyNameToFirstUpper#After(#propertyTypeClassname# _minDate) {
+						final List<#entityName#> entities = #entityNameToFirstLower#DAO.get#propertyNameToFirstUpper#After(session, _minDate);
+						return entities;
+					}
+					
+*/
+				}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all entities of type ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
@@ -1516,7 +2214,24 @@ public class HEDLCodeGenerator {
 	__content.append("DAO.search(session, _searchString, _maxResults);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");for (Property property :toOneReferences) {
+	__content.append("");
+/*				/**
+				 * Returns all entities of type #entityName#.
+				 #/
+				public List<#entityName#> getAll#entityName#s() {
+					final List<#entityName#> entities = #entityNameToFirstLower#DAO.getAll(session);
+					return entities;
+				}
+				
+				/**
+				 * Searches for entities of type #entityName#.
+				 #/
+				public List<#entityName#> search#entityName#s(String _searchString, int _maxResults) {
+					return #entityNameToFirstLower#DAO.search(session, _searchString, _maxResults);
+				}
+				
+*/
+				for (Property property :toOneReferences) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
 					String propertyTypeClassname = property.getTypeClassname();
@@ -1545,7 +2260,16 @@ public class HEDLCodeGenerator {
 	__content.append(", _searchString, _maxResults);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("");
+/*					/**
+					 * Searches for entities of type #entityName#.
+					 #/
+					public List<#entityName#> search#entityName#With#propertyNameToFirstUpper#(#propertyTypeClassname# #propertyName#, String _searchString, int _maxResults) {
+						return #entityNameToFirstLower#DAO.searchWith#propertyNameToFirstUpper#(session, #propertyName#, _searchString, _maxResults);
+					}
+					
+*/
+				}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Deletes a ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
@@ -1572,7 +2296,23 @@ public class HEDLCodeGenerator {
 	__content.append("DAO.count(session);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("\t");}
+	__content.append("");
+/*				/**
+				 * Deletes a #entityName#.
+				 #/
+				public void delete(#entityName# entity) {
+					#entityNameToFirstLower#DAO.delete(session, entity);
+				}
+				
+				/**
+				 * Counts the number of #entityName# entities.
+				 #/
+				public int count#entityNameToFirstUpper#s() {
+					return #entityNameToFirstLower#DAO.count(session);
+				}
+				
+*/
+			}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the name of the table that contains entities of the given type.\r\n");
 	__content.append("\t */\r\n");
@@ -1588,7 +2328,24 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn null;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+/*			/**
+			 * Returns the name of the table that contains entities of the given type.
+			 #/
+			public String getTableName(Class<?> clazz) {
+				ClassMetadata hibernateMetadata = getSession().getSessionFactory().getClassMetadata(clazz);
+				if (hibernateMetadata == null) {
+				    return null;
+				}
+				if (hibernateMetadata instanceof AbstractEntityPersister) {
+				     AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetadata;
+				     return persister.getTableName();
+				}
+				return null;
+			}
+		}
+*/
+		return __content.toString();
 	}
 	public String generateEntityDAO(String packageName, Entity entity) {
 	StringBuilder __content = new StringBuilder();
@@ -1615,7 +2372,22 @@ public class HEDLCodeGenerator {
 	__content.append("import org.hibernate.criterion.MatchMode;\r\n");
 	__content.append("import org.hibernate.criterion.Order;\r\n");
 	__content.append("import org.hibernate.criterion.Restrictions;\r\n");
-	__content.append("");for (Entity otherEntity : entity.getEntityModel().getEntities()) {
+	__content.append("\r\n");
+	__content.append("");
+
+		/*package #packageName#.#DAO_PACKAGE_NAME#;
+		
+		import java.util.List;
+		
+		import org.hibernate.classic.Session;
+		import org.hibernate.Criteria;
+		import org.hibernate.HibernateException;
+		import org.hibernate.criterion.Disjunction;
+		import org.hibernate.criterion.MatchMode;
+		import org.hibernate.criterion.Order;
+		import org.hibernate.criterion.Restrictions;
+
+*/		for (Entity otherEntity : entity.getEntityModel().getEntities()) {
 			String otherEntityName = otherEntity.getName();
 	__content.append("import ");
 	__content.append(packageName.replaceAll("\\r\\n\\z",""));
@@ -1624,7 +2396,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(otherEntityName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+/*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEntityName#;
+*/
+		}
 		
 		for (Enum otherEnum : entity.getEntityModel().getEnums()) {
 			String otherEnumName = otherEnum.getName();
@@ -1635,7 +2410,10 @@ public class HEDLCodeGenerator {
 	__content.append(".");
 	__content.append(otherEnumName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+/*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
+*/
+		}
 	__content.append("\r\n");
 	__content.append("import java.util.List;\r\n");
 	__content.append("\r\n");
@@ -1651,11 +2429,25 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
 	__content.append("DAO {\r\n");
 	__content.append("\t\r\n");
-	__content.append("");if (entity.getSuperType() == null) {
+	__content.append("");
+/*		
+		import java.util.List;
+
+		/**
+		 * This class provides all default operations that are derived from the HEDL entity model
+		 * for type #entityName#.
+		 *
+		 * Note: This class is generated. Any change will be overridden.
+		 #/
+		public class #entityName#DAO {
+			
+*/			if (entity.getSuperType() == null) {
 	__content.append("\tpublic final static String FIELD__ID = getField(");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".class, \"id\");\r\n");
-	__content.append("");}
+	__content.append("");
+/*				public final static String FIELD__ID = getField(#entityName#.class, "id");
+*/			}
 			for (Property property : entity.getProperties()) {
 				String propertyName = property.getName();
 				String toUpperCase = propertyName.toUpperCase();
@@ -1666,7 +2458,9 @@ public class HEDLCodeGenerator {
 	__content.append(".class, \"");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("\");\r\n");
-	__content.append("");}
+	__content.append("");
+/*				public final static String FIELD__#toUpperCase# = getField(#entityName#.class, "#propertyName#");
+*/			}
 	__content.append("\t\r\n");
 	__content.append("\t/**\r\n");
 	__content.append("\t * Creates a ");
@@ -1675,25 +2469,41 @@ public class HEDLCodeGenerator {
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" create(Session session");for (Property property :constructorProperties) {
+	__content.append(" create(Session session");
+			
+/*			
+			/**
+ 			 * Creates a #entityName# using all read-only and all non-null properties.
+			 #/
+			public #entityName# create(Session session*/
+				for (Property property :constructorProperties) {
 					String propertyTypeClassname = property.getType().getJavaClassname();
 					String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append(", ");
 	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
+	__content.append("");
+					/*, #propertyTypeClassname# #propertyToFirstLower#*/
+				}
 	__content.append(") {\r\n");
 	__content.append("\t\t");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" newEntity = new ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");for (Property property :constructorProperties) {
+	__content.append("(");
+				/*) {
+				#entityName# newEntity = new #entityName#(*/
+				for (Property property :constructorProperties) {
 					String propertyToFirstLower = toFirstLower(property.getName());
 	__content.append("");
 	__content.append(propertyToFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(constructorProperties, property)) {
-	__content.append(", ");}
+	__content.append("");
+					/*#propertyToFirstLower#*/
+					if (!isLast(constructorProperties, property)) {
+	__content.append(", ");
+						/*, */
+					}
 				}
 	__content.append(");\r\n");
 	__content.append("\t\tsession.save(newEntity);\r\n");
@@ -1718,7 +2528,21 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entity;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Property property :uniqueProperties) {
+	__content.append("");
+/*				);
+				session.save(newEntity);
+				return newEntity;
+			}
+			
+			/**
+			 * Returns the #entityName# with the given id.
+			 #/
+			public #entityName# get(Session session, int id) {
+				#entityName# entity = (#entityName#) session.get(#entityName#.class, id);
+				return entity;
+			}
+			
+*/			for (Property property :uniqueProperties) {
 				String propertyName = property.getName();
 				String propertyNameToUpperCase = propertyName.toUpperCase();
 				String propertyNameToFirstUpper = toFirstUpper(propertyName);
@@ -1756,7 +2580,21 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn null;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				/**
+				 * Returns the #entityName# with the given #propertyName#.
+				 #/
+				public #entityName# getBy#propertyNameToFirstUpper#(Session session, #propertyTypeClassname# #propertyName#) {
+					Criteria criteria = session.createCriteria(#entityName#.class);
+					criteria = criteria.add(Restrictions.eq(FIELD__#propertyNameToUpperCase#, #propertyName#));
+					List<?> list = criteria.list();
+					if (list != null && !list.isEmpty()) {
+						return (#entityName#) list.get(0);
+					}
+					return null;
+				}
+				
+*/			}
 			for (Property property :toOneProperties) {
 				String propertyName = property.getName();
 				String propertyNameToUpperCase = propertyName.toUpperCase();
@@ -1795,7 +2633,19 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn list;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				/**
+				 * Returns the #entityName#s with the given #propertyName#.
+				 #/
+				public List<#entityName#> getBy#propertyNameToFirstUpper#(Session session, #propertyTypeClassname# #propertyName#) {
+					Criteria criteria = session.createCriteria(#entityName#.class);
+					criteria = criteria.add(Restrictions.eq(FIELD__#propertyNameToUpperCase#, #propertyName#));
+					@SuppressWarnings("unchecked")
+					List<#entityName#> list = (List<#entityName#>) criteria.list();
+					return list;
+				}
+				
+*/			}
 			for (Constraint constraint : entity.getConstraints()) {
 				if (constraint instanceof UniqueConstraint) {
 					UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
@@ -1806,26 +2656,42 @@ public class HEDLCodeGenerator {
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" getBy");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append(" getBy");
+/*					/**
+					 * Returns the #entityName# with the given properties.
+					 #/
+					public #entityName# getBy*/
+					for (Property property : uniqueConstraint.getProperties()) {
 						String propertyNameToFirstUpper = toFirstUpper(property.getName());
 	__content.append("");
 	__content.append(propertyNameToFirstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("");}
-	__content.append("(Session session, ");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+						/*#propertyNameToFirstUpper#*/
+					}
+	__content.append("(Session session, ");
+					/*(Session session, */
+					for (Property property : uniqueConstraint.getProperties()) {
 						String propertyName = property.getName();
 						String propertyTypeJavaClassname = property.getType().getJavaClassname();
 	__content.append("");
 	__content.append(propertyTypeJavaClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append("");
+						/*#propertyTypeJavaClassname# #propertyName#*/
+						if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+							/*, */
+						}
 					}
 	__content.append(") {\r\n");
 	__content.append("\t\tCriteria criteria = session.createCriteria(");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
-	__content.append("");for (Property property : uniqueConstraint.getProperties()) {
+	__content.append("");
+/*					) {
+						Criteria criteria = session.createCriteria(#entityName#.class);
+*/						for (Property property : uniqueConstraint.getProperties()) {
 							String propertyName = property.getName();
 							String upperCasePropertyName = propertyName.toUpperCase();
 	__content.append("\t\tcriteria = criteria.add(Restrictions.eq(FIELD__");
@@ -1833,7 +2699,9 @@ public class HEDLCodeGenerator {
 	__content.append(", ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
-	__content.append("");}
+	__content.append("");
+/*							criteria = criteria.add(Restrictions.eq(FIELD__#upperCasePropertyName#, #propertyName#));
+*/						}
 	__content.append("\t\tList<?> list = criteria.list();\r\n");
 	__content.append("\t\tif (list != null && !list.isEmpty()) {\r\n");
 	__content.append("\t\t\treturn (");
@@ -1843,7 +2711,15 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn null;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*						List<?> list = criteria.list();
+						if (list != null && !list.isEmpty()) {
+							return (#entityName#) list.get(0);
+						}
+						return null;
+					}
+					
+*/				}
 			}
 			
 			for (Property property :enumProperties) {
@@ -1885,7 +2761,20 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				/**
+				 * Returns all #entityName#s with the given #propertyName#.
+				 #/
+				public List<#entityName#> getBy#propertyNameToFirstUpper#(Session session, #typeJavaClassname# #propertyName#) {
+					Criteria criteria = session.createCriteria(#entityName#.class);
+					criteria = criteria.add(Restrictions.eq(FIELD__#upperCasePropertyName#, #propertyName#));
+					List<?> list = criteria.list();
+					@SuppressWarnings("unchecked")
+					List<#entityName#> entities = (List<#entityName#>) list;
+					return entities;
+				}
+				
+*/			}
 			for (Property property :dateProperties) {
 				String typeJavaClassname = property.getType().getJavaClassname();
 				String propertyName = property.getName();
@@ -1921,7 +2810,20 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				/**
+				 * Returns all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+				 #/
+				public List<#entityName#> get#propertyNameToFirstUpper#Before(Session session, #typeJavaClassname# _maxDate) {
+					Criteria criteria = session.createCriteria(#entityName#.class);
+					criteria = criteria.add(Restrictions.le(FIELD__#upperCasePropertyName#, _maxDate));
+					List<?> list = criteria.list();
+					@SuppressWarnings("unchecked")
+					List<#entityName#> entities = (List<#entityName#>) list;
+					return entities;
+				}
+				
+*/			}
 			for (Property property :dateProperties) {
 				String typeJavaClassname = property.getType().getJavaClassname();
 				String propertyName = property.getName();
@@ -1957,7 +2859,20 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				/**
+				 * Returns all #entityName#s where #propertyName# is set to a value after '_minDate'.
+				 #/
+				public List<#entityName#> get#propertyNameToFirstUpper#After(Session session, #typeJavaClassname# _minDate) {
+					Criteria criteria = session.createCriteria(#entityName#.class);
+					criteria = criteria.add(Restrictions.ge(FIELD__#upperCasePropertyName#, _minDate));
+					List<?> list = criteria.list();
+					@SuppressWarnings("unchecked")
+					List<#entityName#> entities = (List<#entityName#>) list;
+					return entities;
+				}
+				
+*/			}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns all entities of type ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
@@ -1990,13 +2905,32 @@ public class HEDLCodeGenerator {
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(".class);\r\n");
 	__content.append("\t\tDisjunction disjunction = Restrictions.disjunction();\r\n");
-	__content.append("");for (Property property : entity.getProperties()) {
+	__content.append("");
+/*			/**
+			 * Returns all entities of type #entityName#.
+			 #/
+			public List<#entityName#> getAll(Session session) {
+				Criteria criteria = session.createCriteria(#entityName#.class);
+				@SuppressWarnings("unchecked")
+				List<#entityName#> entities = (List<#entityName#>) criteria.list();
+				return entities;
+			}
+			
+			/**
+			 * Searches for entities of type #entityName#.
+			 #/
+			public List<#entityName#> search(Session _session, String _searchString, int _maxResults) {
+				Criteria criteria = _session.createCriteria(#entityName#.class);
+				Disjunction disjunction = Restrictions.disjunction();
+*/				for (Property property : entity.getProperties()) {
 					if (property.getType().getJavaClassname().equals(String.class.getName())) {
 						String propertyNameToUpperCase = property.getName().toUpperCase();
 	__content.append("\t\tdisjunction.add(Restrictions.like(FIELD__");
 	__content.append(propertyNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", _searchString.trim(), MatchMode.ANYWHERE));\r\n");
-	__content.append("");}
+	__content.append("");
+/*						disjunction.add(Restrictions.like(FIELD__#propertyNameToUpperCase#, _searchString.trim(), MatchMode.ANYWHERE));
+*/					}
 				}
 	__content.append("\t\tcriteria = criteria.add(disjunction);\r\n");
 	__content.append("\t\tcriteria = criteria.setMaxResults(_maxResults);\r\n");
@@ -2009,7 +2943,15 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");for (Property toOneReference :toOneReferences) {
+	__content.append("");
+/*				criteria = criteria.add(disjunction);
+				criteria = criteria.setMaxResults(_maxResults);
+				@SuppressWarnings("unchecked")
+				List<#entityName#> entities = (List<#entityName#>) criteria.list();
+				return entities;
+			}
+			
+*/			for (Property toOneReference :toOneReferences) {
 				String toOneReferenceName = toOneReference.getName();
 				String toOneReferenceNameToFirstUpper = toFirstUpper(toOneReferenceName);
 				String toOneReferenceNameToUpperCase = toOneReferenceName.toUpperCase();
@@ -2038,13 +2980,24 @@ public class HEDLCodeGenerator {
 	__content.append(toOneReferenceName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append("));\r\n");
 	__content.append("\t\tDisjunction disjunction = Restrictions.disjunction();\r\n");
-	__content.append("");for (Property property : entity.getProperties()) {
+	__content.append("");
+/*				/**
+				 * Searches for entities of type #entityName#.
+				 #/
+				public List<#entityName#> searchWith#toOneReferenceNameToFirstUpper#(Session _session, #toOneReferenceTypeClassname# #toOneReferenceName#, String _searchString, int _maxResults) {
+					Criteria criteria = _session.createCriteria(#entityName#.class);
+					// restrict by the value of the unique property
+					criteria = criteria.add(Restrictions.eq(FIELD__#toOneReferenceNameToUpperCase#, #toOneReferenceName#));
+					Disjunction disjunction = Restrictions.disjunction();
+*/					for (Property property : entity.getProperties()) {
 						String propertyNameToUpperCase = property.getName().toUpperCase();
 						if (property.getType().getJavaClassname().equals(String.class.getName())) {
 	__content.append("\t\tdisjunction.add(Restrictions.like(FIELD__");
 	__content.append(propertyNameToUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(", _searchString.trim(), MatchMode.ANYWHERE));\r\n");
-	__content.append("");}
+	__content.append("");
+/*							disjunction.add(Restrictions.like(FIELD__#propertyNameToUpperCase#, _searchString.trim(), MatchMode.ANYWHERE));
+*/						}
 					}
 	__content.append("\t\tcriteria = criteria.add(disjunction);\r\n");
 	__content.append("\t\tcriteria = criteria.setMaxResults(_maxResults);\r\n");
@@ -2057,7 +3010,15 @@ public class HEDLCodeGenerator {
 	__content.append("\t\treturn entities;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*					criteria = criteria.add(disjunction);
+					criteria = criteria.setMaxResults(_maxResults);
+					@SuppressWarnings("unchecked")
+					List<#entityName#> entities = (List<#entityName#>) criteria.list();
+					return entities;
+				}
+				
+*/			}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Deletes a ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
@@ -2090,11 +3051,38 @@ public class HEDLCodeGenerator {
 	__content.append("\t\t}\r\n");
 	__content.append("\t}\r\n");
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+/*			/**
+			 * Deletes a #entityName#.
+			 #/
+			public void delete(Session session, #entityName# entity) {
+				session.delete(entity);
+			}
+			
+			/**
+			 * Counts the number of #entityName# entities.
+			 #/
+			public int count(Session session) {
+				return ((Long) session.createQuery("select count(*) from #entityName#").uniqueResult()).intValue();
+			}
+				
+			private static String getField(Class<?> clazz, String fieldName) {
+				try {
+					return clazz.getDeclaredField(fieldName).getName();
+				} catch (SecurityException e) {
+					throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.getMessage());
+				} catch (NoSuchFieldException e) {
+					throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.getMessage());
+				}
+			}
+		}
+*/
+		return __content.toString();
 	}
 	public String generateEntityBaseClass(String packageName, Entity entity) {
 	StringBuilder __content = new StringBuilder();
 		String entityName = entity.getName();
+		String tableName = getTableName(entity);
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		String propertyDeclarations = getPropertyDeclarations(entity);
 	__content.append("package ");
@@ -2129,27 +3117,72 @@ public class HEDLCodeGenerator {
 	__content.append("\r\n");
 	__content.append("@Entity\r\n");
 	__content.append("@Table(name = \"");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append(tableName.replaceAll("\\r\\n\\z",""));
 	__content.append("\"\r\n");
-	__content.append("");for (Constraint constraint : entity.getConstraints()) {
+	__content.append("");
+
+		/*package #packageName#.#ENTITY_PACKAGE_NAME#;
+		
+		import java.util.List;
+		
+		import javax.persistence.Entity;
+		import javax.persistence.GeneratedValue;
+		import javax.persistence.GenerationType;
+		import javax.persistence.Id;
+		import javax.persistence.JoinColumn;
+		import javax.persistence.ManyToOne;
+		import javax.persistence.OneToOne;
+		import javax.persistence.Table;
+		import javax.persistence.Temporal;
+		import javax.persistence.TemporalType;
+		import javax.persistence.UniqueConstraint;
+		import javax.persistence.EnumType;
+		import javax.persistence.FetchType;
+		import javax.persistence.Enumerated;
+		import javax.persistence.CascadeType;
+		import javax.persistence.OneToMany;
+		import javax.persistence.ManyToMany;
+		import javax.persistence.Column;
+
+		import org.hibernate.annotations.GenericGenerator;
+		import org.hibernate.annotations.Parameter;
+		
+		@Entity
+		@Table(name = "#tableName#"
+		*/
+		for (Constraint constraint : entity.getConstraints()) {
 			if (constraint instanceof UniqueConstraint) {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
-	__content.append(", uniqueConstraints=@UniqueConstraint(columnNames={");for (Property property : uniqueConstraint.getProperties()) {
-					String propertyName = property.getName();
+	__content.append(", uniqueConstraints=@UniqueConstraint(columnNames={");
+				/*, uniqueConstraints=@UniqueConstraint(columnNames={*/
+				for (Property property : uniqueConstraint.getProperties()) {
+					String columnName = getColumnName(property);
 	__content.append("\"");
-	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("\"");if (!isLast(uniqueConstraint.getProperties(), property)) {
-	__content.append(", ");}
+	__content.append(columnName.replaceAll("\\r\\n\\z",""));
+	__content.append("\"");
+					/*"#columnName#"*/
+					if (!isLast(uniqueConstraint.getProperties(), property)) {
+	__content.append(", ");
+						/*, */
+					}
 				}
-	__content.append("})");}
+	__content.append("})\r\n");
+	__content.append("");
+				/*})
+*/
+			}
 		}
 	__content.append(")\r\n");
-	__content.append("");if (entity.getComment() != null) {
+	__content.append("");/*)
+*/		if (entity.getComment() != null) {
 			String comment = entity.getComment().replace("\t", "");
 	__content.append("");
 	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*#comment#
+			*/
+		}
 	__content.append("/*\r\n");
 	__content.append(" * This class is generated from the entity \'");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
@@ -2158,12 +3191,22 @@ public class HEDLCodeGenerator {
 	__content.append(" */\r\n");
 	__content.append("public class ");
 	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" ");if (entity.getSuperType() != null) {
+	__content.append(" ");
+/*		/*
+		 * This class is generated from the entity '#entityName#' defined in the HEDL model.
+		 * Note: Any change made to this class will be overridden.
+		 #/
+		public class #entityName# */
+		if (entity.getSuperType() != null) {
 			String superTypeName = entity.getSuperType().getName();
-	__content.append("extends # superTypeName # ");}
+	__content.append("extends # superTypeName # ");
+			/*extends # superTypeName # */
+		}
 	__content.append("{\r\n");
 	__content.append("\t\r\n");
-	__content.append("");if (entity.getSuperType() == null) {
+	__content.append("");/*{
+			
+*/			if (entity.getSuperType() == null) {
 	__content.append("\t@GenericGenerator(name=\"");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("IdGenerator\", strategy=\"org.hibernate.id.MultipleHiLoPerTableGenerator\",\r\n");
@@ -2184,7 +3227,22 @@ public class HEDLCodeGenerator {
 	__content.append("IdGenerator\")\r\n");
 	__content.append("\tprivate int id;\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+/*				@GenericGenerator(name="#entityName#IdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
+				  parameters = {
+				    @Parameter(name="table", value="IdentityGenerator"),
+				    @Parameter(name="primary_key_column", value="sequence_name"),
+				    @Parameter(name="primary_key_value", value="#entityName#"),
+				    @Parameter(name="value_column", value="next_hi_value"),
+				    @Parameter(name="primary_key_length", value="100"),
+				    @Parameter(name="max_lo", value="1000")
+				  }
+				)
+				@Id 
+				@GeneratedValue(strategy=GenerationType.TABLE, generator="#entityName#IdGenerator")
+				private int id;
+			
+*/			}
 	__content.append("\t");
 	__content.append(propertyDeclarations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\r\n");
@@ -2197,35 +3255,62 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tsuper();\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
-	__content.append("");if (!constructorProperties.isEmpty()) {
+	__content.append("");
+/*			#propertyDeclarations#
+			/**
+			 * Default constructor. Only used by Hibernate.
+			 #/
+			public #entityName#() {
+				super();
+			}
+		
+*/			if (!constructorProperties.isEmpty()) {
 	__content.append("\t/**\r\n");
 	__content.append("\t * Constructor using all read-only and all non-nullable properties.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\tpublic ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("(");for (Property property :constructorProperties) {
+	__content.append("(");
+/*				/**
+				 * Constructor using all read-only and all non-nullable properties.
+				 #/
+				public #entityName#(*/
+					for (Property property :constructorProperties) {
 						String typeClassName = property.getType().getJavaClassname();
 						String toFirstLower = toFirstLower(property.getName());
 	__content.append("");
 	__content.append(typeClassName.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
-	__content.append("");if (!isLast(constructorProperties, property)) {
-	__content.append(", ");}
+	__content.append("");
+						/*#typeClassName# #toFirstLower#*/
+						if (!isLast(constructorProperties, property)) {
+	__content.append(", ");
+							/*, */
+						}
 					}
 	__content.append(") {\r\n");
 	__content.append("\t\tsuper();\r\n");
-	__content.append("");for (Property property :constructorProperties) {
+	__content.append("");
+				/*) {
+					super();
+*/
+					for (Property property :constructorProperties) {
 						String toFirstLower = toFirstLower(property.getName());
 	__content.append("\t\tthis.");
 	__content.append(toFirstLower.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 	__content.append(" = ");
 	__content.append(toFirstLower.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
-	__content.append("");}
+	__content.append("");
+/*						this.#toFirstLower# = #toFirstLower#;
+*/					}
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				}
+				
+*/			}
 			if (entity.getSuperType() == null) {
 	__content.append("\t/**\r\n");
 	__content.append("\t * Returns the automatically generated id that identifies this entity object.\r\n");
@@ -2244,7 +3329,25 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tthis.id = id;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+/*				/**
+				 * Returns the automatically generated id that identifies this entity object.
+				 #/
+				public int getId() {
+					return id;
+				}
+			
+				/**
+				 * The property 'id' is read-only. 
+				 * This setter is only provided for Hibernate. 
+				 * It must not be used directly.
+				 #/
+				@Deprecated
+				public void setId(int id) {
+					this.id = id;
+				}
+			
+*/			}
 			for (Property property : entity.getProperties()) {
 				String propertyName = property.getName();
 				String toFirstUpper = toFirstUpper(propertyName);
@@ -2264,7 +3367,15 @@ public class HEDLCodeGenerator {
 	__content.append(";\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");if (property.isReadonly()) {
+	__content.append("");
+/*				/**
+				 * Returns the value of property '#propertyName#'.
+				 #/
+				public #typeClassName# get#toFirstUpper#() {
+					return #propertyName#;
+				}
+				
+*/				if (property.isReadonly()) {
 	__content.append("\t/**\r\n");
 	__content.append("\t * The property \'");
 	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
@@ -2273,13 +3384,24 @@ public class HEDLCodeGenerator {
 	__content.append("\t * It must not be used directly.\r\n");
 	__content.append("\t */\r\n");
 	__content.append("\t@Deprecated\r\n");
-	__content.append("");} else {
+	__content.append("");
+/*					/**
+					 * The property '#propertyName#' is read-only. 
+					 * This setter is only provided for Hibernate. 
+					 * It must not be used directly.
+					 #/
+					@Deprecated
+*/				} else {
 	__content.append("\t/**\r\n");
 	__content.append("\t * Sets the value of property \'");
 	__content.append(propertyName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("\'.\r\n");
 	__content.append("\t */\r\n");
-	__content.append("");}
+	__content.append("");
+/*					/**
+					 * Sets the value of property '#propertyName#'.
+					 #/
+*/				}
 	__content.append("\tpublic void set");
 	__content.append(toFirstUpper.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append("(");
@@ -2290,72 +3412,177 @@ public class HEDLCodeGenerator {
 	__content.append(" = newValue;\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
-	__content.append("");}
+	__content.append("");
+/*				public void set#toFirstUpper#(#typeClassName# newValue) {
+					this.#propertyName# = newValue;
+				}
+				
+*/			}
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+/*		}
+*/
+		return __content.toString();
+	}
+
+	private String getTableName(Entity element) {
+		OptionType optionType = OptionType.PRESERVE_TABLE_NAMES;
+		return getName(element, optionType, false);
+	}
+
+	private String getColumnName(Property element) {
+		OptionType optionType = OptionType.PRESERVE_COLUMN_NAMES;
+		return getName(element, optionType, false);
+	}
+
+	private String getName(NamedElement element, OptionType optionType, boolean defaultValue) {
+		EntityModel model = null;
+		EObject next = element;
+		while (true) {
+			if (next instanceof EntityModel) {
+				model = (EntityModel) next;
+				break;
+			}
+			next = next.eContainer();
+		}
+		List<Option> options = model.getOptions();
+		boolean preserveTableNames = isTrue(optionType, options, defaultValue);
+		String name = element.getName();
+		if (preserveTableNames) {
+			return name;
+		} else {
+			return name.toLowerCase();
+		}
+	}
+
+	private boolean isTrue(OptionType type, List<Option> options, boolean defaultValue) {
+		for (Option option :options) {
+			if (option.getKey() == type) {
+				String value = option.getValue();
+				if ("true".equals(value)) {
+					return true;
+				}
+			}
+		}
+		return defaultValue;
 	}
 	private String getPropertyDeclarations(Entity entity) {
 	StringBuilder __content = new StringBuilder();
-	__content.append("");for (Property property : entity.getProperties()) {
+	__content.append("");
+		/**/
+		for (Property property : entity.getProperties()) {
 			String propertyName = property.getName();
+			String columnName = getColumnName(property);
 			String propertyTypeClassname = property.getTypeClassname();
 			String nullable = Boolean.toString(property.isNullable());
 			if (property.getType() instanceof JavaType) {
 				JavaType javaType = (JavaType) property.getType();
 				if (javaType.getJavaClass().equals(java.util.Date.class)) {
 	__content.append("@Temporal(TemporalType.TIMESTAMP)\r\n");
-	__content.append("");}
+	__content.append("");
+/*					@Temporal(TemporalType.TIMESTAMP)
+*/				}
 			}
 			if (property.getType() instanceof org.emftext.language.hedl.Enum) {
 	__content.append("@Enumerated(EnumType.STRING)\r\n");
-	__content.append("");}
+	__content.append("");
+/*				@Enumerated(EnumType.STRING)
+*/			}
 			if (property.getType() instanceof Entity) {
 				if (!property.isFromMultiplicity() && !property.isToMultiplicity()) {
-	__content.append("@OneToOne(cascade={");if (property.isPersist()) {
-	__content.append("CascadeType.PERSIST, ");}
+	__content.append("@OneToOne(cascade={");
+/*					@OneToOne(cascade={*/
+					if (property.isPersist()) {
+	__content.append("CascadeType.PERSIST, ");
+						/*CascadeType.PERSIST, */
+					}
 					if (property.isRefresh()) {
-	__content.append("CascadeType.REFRESH");}
+	__content.append("CascadeType.REFRESH");
+						/*CascadeType.REFRESH*/
+					}
 					if (!property.isPersist() && !property.isRefresh()) {
-	__content.append("CascadeType.ALL");}
+	__content.append("CascadeType.ALL");
+						/*CascadeType.ALL*/
+					}
 	__content.append("})\r\n");
 	__content.append("@JoinColumn(name=\"");
-	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("\"");if (property.isReadonly()) {
-	__content.append(", updatable=false");}
+	__content.append(columnName.replaceAll("\\r\\n\\z",""));
+	__content.append("\"");
+					/*})
+					@JoinColumn(name="#columnName#"*/
+					if (property.isReadonly()) {
+	__content.append(", updatable=false");
+						/*, updatable=false*/
+					}
 	__content.append(", nullable=");
 	__content.append(nullable.replaceAll("\\r\\n\\z",""));
 	__content.append(")\r\n");
-	__content.append("");}
+	__content.append("");
+					/*, nullable=#nullable#)
+					*/
+				}
 				if (property.isFromMultiplicity() && !property.isToMultiplicity()) {
-	__content.append("@ManyToOne(cascade={");if (property.isPersist()) {
-	__content.append("CascadeType.PERSIST, ");}
+	__content.append("@ManyToOne(cascade={");
+/*					@ManyToOne(cascade={*/
+					if (property.isPersist()) {
+	__content.append("CascadeType.PERSIST, ");
+						/*CascadeType.PERSIST, */
+					}
 					if (property.isRefresh()) {
-	__content.append("CascadeType.REFRESH");}
+	__content.append("CascadeType.REFRESH");
+						/*CascadeType.REFRESH*/
+					}
 					if (!property.isPersist() && !property.isRefresh()) {
-	__content.append("CascadeType.ALL");}
+	__content.append("CascadeType.ALL");
+						/*CascadeType.ALL*/
+					}
 	__content.append("})\r\n");
 	__content.append("@JoinColumn(name=\"");
-	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
-	__content.append("\"");if (property.isReadonly()) {
-	__content.append(", updatable=false");}
+	__content.append(columnName.replaceAll("\\r\\n\\z",""));
+	__content.append("\"");
+					/*})
+					@JoinColumn(name="#columnName#"*/
+					if (property.isReadonly()) {
+	__content.append(", updatable=false");
+						/*, updatable=false*/
+					}
 	__content.append(", nullable=");
 	__content.append(nullable.replaceAll("\\r\\n\\z",""));
 	__content.append(")\r\n");
-	__content.append("");}
+	__content.append("");
+					/*, nullable=#nullable#)
+					*/
+				}
 				if (!property.isFromMultiplicity() && property.isToMultiplicity()) {
-	__content.append("@OneToMany(cascade={");if (property.isPersist()) {
-	__content.append("CascadeType.PERSIST, ");}
+	__content.append("@OneToMany(cascade={");
+/*					@OneToMany(cascade={*/
+					if (property.isPersist()) {
+	__content.append("CascadeType.PERSIST, ");
+						/*CascadeType.PERSIST, */
+					}
 					if (property.isRefresh()) {
-	__content.append("CascadeType.REFRESH");}
+	__content.append("CascadeType.REFRESH");
+						/*CascadeType.REFRESH*/
+					}
 					if (!property.isPersist() && !property.isRefresh()) {
-	__content.append("CascadeType.ALL");}
-	__content.append("}");if (property.getMappedBy() != null) {
+	__content.append("CascadeType.ALL");
+						/*CascadeType.ALL*/
+					}
+	__content.append("}");
+					/*}*/
+					if (property.getMappedBy() != null) {
+						// TODO is this correct?
 						String mappedByName = property.getMappedBy().getName();
 	__content.append(", mappedBy=\"");
 	__content.append(mappedByName.replaceAll("\\r\\n\\z",""));
-	__content.append("\"");}
+	__content.append("\"");
+						/*, mappedBy="#mappedByName#"*/
+					}
 	__content.append(")\r\n");
-	__content.append("");}
+	__content.append("");
+					/*)
+					*/
+				}
 				if (property.isFromMultiplicity() && property.isToMultiplicity()) {
 					String target = property.getType().getJavaClassname();
 					String fetchType = property.isEager() ? "EAGER" : "LAZY";
@@ -2363,31 +3590,62 @@ public class HEDLCodeGenerator {
 	__content.append(target.replaceAll("\\r\\n\\z",""));
 	__content.append(".class, fetch=FetchType.");
 	__content.append(fetchType.replaceAll("\\r\\n\\z",""));
-	__content.append(", cascade={");if (property.isPersist()) {
-	__content.append("CascadeType.PERSIST, ");}
+	__content.append(", cascade={");
+					// TODO do we need to set the name for the join table?
+/*					@ManyToMany(targetEntity=#target#.class, fetch=FetchType.#fetchType#, cascade={*/
+					if (property.isPersist()) {
+	__content.append("CascadeType.PERSIST, ");
+						/*CascadeType.PERSIST, */
+					}
 					if (property.isRefresh()) {
-	__content.append("CascadeType.REFRESH");}
+	__content.append("CascadeType.REFRESH");
+						/*CascadeType.REFRESH*/
+					}
 					if (!property.isPersist() && !property.isRefresh()) {
-	__content.append("CascadeType.ALL");}
+	__content.append("CascadeType.ALL");
+						/*CascadeType.ALL*/
+					}
 	__content.append("})\r\n");
-	__content.append("");}
+	__content.append("");
+					/*})
+					*/
+				}
 			}
-			if (property.getType() == HedlBuiltinTypes.LONGSTRING) {
-	__content.append("@Column(length=100000)\r\n");
-	__content.append("");}
 			if (property.getComment() != null) {
 				String comment = property.getComment().replace("\t", "");
 	__content.append("");
 	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+				/*#comment#
+				*/
+			}
+			if (!(property.getType() instanceof Entity)) {
+	__content.append("@Column(name=\"");
+	__content.append(columnName.replaceAll("\\r\\n\\z",""));
+	__content.append("\"");
+				// add annotation to specify column name
+/*				@Column(name="#columnName#"*/
+				if (property.getType() == HedlBuiltinTypes.LONGSTRING) {
+	__content.append(", length=100000");
+					/*, length=100000*/
+				}
+	__content.append(")\r\n");
+	__content.append("");
+				/*)
+*/			
+			}
 	__content.append("private ");
 	__content.append(propertyTypeClassname.replaceAll("\\r\\n\\z",""));
 	__content.append(" ");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+/*			private #propertyTypeClassname# #propertyName#;
+			
+		*/
+		}
 		return __content.toString();
 	}
 	public String generateEnum(String packageName, org.emftext.language.hedl.Enum enumeration) {
@@ -2399,30 +3657,53 @@ public class HEDLCodeGenerator {
 	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
 	__content.append(";\r\n");
 	__content.append("\r\n");
-	__content.append("");if (enumeration.getComment() != null) {
+	__content.append("");
+		/*package #packageName#.#ENTITY_PACKAGE_NAME#;
+		
+*/		if (enumeration.getComment() != null) {
 			String comment = enumeration.getComment().replace("\t", "");
 	__content.append("");
 	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
-	__content.append("");}
+	__content.append("");
+			/*#comment#
+			*/
+		}
 	__content.append("// this class is generated. any change will be overridden.\r\n");
 	__content.append("public enum ");
 	__content.append(enumerationName.replaceAll("\\r\\n\\z",""));
 	__content.append(" {\r\n");
-	__content.append("");for (EnumLiteral literal : enumeration.getLiterals()) {
+	__content.append("\t\r\n");
+	__content.append("");
+/*		// this class is generated. any change will be overridden.
+		public enum #enumerationName# {
+ 			
+*/
+			for (EnumLiteral literal : enumeration.getLiterals()) {
+	__content.append("\t");
+/*				*/
 				String literalName = literal.getName();
 				if (literal.getComment() != null) {
 					String comment = literal.getComment().replace("\t", "");
-	__content.append("\t");
-	__content.append(comment.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+	__content.append("");
+	__content.append(comment.replaceAll("\\r\\n\\z",""));
 	__content.append("\r\n");
-	__content.append("\t");}
 	__content.append("\t");
-	__content.append(literalName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+					/*#comment#
+					*/
+				}
+	__content.append("");
+	__content.append(literalName.replaceAll("\\r\\n\\z",""));
 	__content.append(",\r\n");
-	__content.append("\t");}
+	__content.append("");
+			/*#literalName#,
+*/
+			}
 	__content.append("}\r\n");
-	__content.append("");return __content.toString();
+	__content.append("");
+/*		}
+		*/
+		return __content.toString();
 	}
 
 	private String toFirstUpper(String name) {

@@ -32,7 +32,12 @@ TOKENSTYLES {
 }
 
 RULES {
-	EntityModel ::= (entities | enums)*;
+	EntityModel ::= options* (entities | enums)*;
+	
+	Option ::= key[
+				PreserveTableNames : "preserveTableNames" ,
+				PreserveColumnNames : "preserveColumnNames"] 
+				"=" value[LOWER];
 	
 	Entity ::= 
 		comment[ML_COMMENT]? 

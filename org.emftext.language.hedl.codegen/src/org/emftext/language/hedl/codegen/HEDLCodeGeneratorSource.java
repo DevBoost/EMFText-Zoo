@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.hedl.Constraint;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
 import org.emftext.language.hedl.Enum;
 import org.emftext.language.hedl.EnumLiteral;
 import org.emftext.language.hedl.JavaType;
+import org.emftext.language.hedl.NamedElement;
+import org.emftext.language.hedl.Option;
+import org.emftext.language.hedl.OptionType;
 import org.emftext.language.hedl.Property;
 import org.emftext.language.hedl.Type;
 import org.emftext.language.hedl.UniqueConstraint;
@@ -797,12 +801,12 @@ public class HEDLCodeGeneratorSource {
 		for (Entity otherEntity : entityModel.getEntities()) {
 			String otherEntityName = otherEntity.getName();
 /*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEntityName#;
- 			*/
+*/
 		}
 		for (Enum otherEnum : entityModel.getEnums()) {
 			String otherEnumName = otherEnum.getName();
 /*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
- 			*/
+*/
 		}
 		
 /*		
@@ -820,7 +824,7 @@ public class HEDLCodeGeneratorSource {
 				String toFirstLower = toFirstLower(entityName);
 /*				private #entityName#DAO #toFirstLower#DAO = new #entityName#DAO();
 */			}
-/*	
+/*		
 			public OperationProviderBase(Session session) {
 				this.session = session;
 			}
@@ -829,7 +833,7 @@ public class HEDLCodeGeneratorSource {
 				return session;
 			}
 			
-			*/
+*/
 			for (Entity entity : entityModel.getEntities()) {
 				String entityName = entity.getName();
 				String entityNameToFirstLower = toFirstLower(entityName);
@@ -869,7 +873,7 @@ public class HEDLCodeGeneratorSource {
 					return entity;
 				}
 				
- 				*/
+*/
 				for (Property property : uniqueProperties) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
@@ -879,7 +883,8 @@ public class HEDLCodeGeneratorSource {
 						#entityName# entity = #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
 						return entity;
 					}
- 					*/
+						
+*/
 				}
 				
 				for (Property property : toOneProperties) {
@@ -891,8 +896,8 @@ public class HEDLCodeGeneratorSource {
 						List<#entityName#> entities = #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
 						return entities;
 					}
-					
- 					*/
+						
+*/
 				}
 			
 				for (Property property : enumProperties) {
@@ -906,7 +911,7 @@ public class HEDLCodeGeneratorSource {
 						return #entityNameToFirstLower#DAO.getBy#propertyNameToFirstUpper#(session, #propertyName#);
 					}
 					
- 					*/
+*/
 				}
 				
 				for (Constraint constraint : entity.getConstraints()) {
@@ -943,11 +948,11 @@ public class HEDLCodeGeneratorSource {
 									/*, */
 								}
 							}
-/*							);
+							/*);
 							return entity;
 						}
 						
- 						*/
+*/
 					}
 				}
 			
@@ -963,7 +968,7 @@ public class HEDLCodeGeneratorSource {
 						return entities;
 					}
 					
- 					*/
+*/
 				}
 				
 				for (Property property : dateProperties) {
@@ -978,7 +983,7 @@ public class HEDLCodeGeneratorSource {
 						return entities;
 					}
 					
- 					*/
+*/
 				}
 /*				/**
 				 * Returns all entities of type #entityName#.
@@ -995,7 +1000,7 @@ public class HEDLCodeGeneratorSource {
 					return #entityNameToFirstLower#DAO.search(session, _searchString, _maxResults);
 				}
 				
- 				*/
+*/
 				for (Property property : toOneReferences) {
 					String propertyName = property.getName();
 					String propertyNameToFirstUpper = toFirstUpper(propertyName);
@@ -1007,7 +1012,7 @@ public class HEDLCodeGeneratorSource {
 						return #entityNameToFirstLower#DAO.searchWith#propertyNameToFirstUpper#(session, #propertyName#, _searchString, _maxResults);
 					}
 					
- 					*/
+*/
 				}
 /*				/**
 				 * Deletes a #entityName#.
@@ -1023,7 +1028,7 @@ public class HEDLCodeGeneratorSource {
 					return #entityNameToFirstLower#DAO.count(session);
 				}
 				
- 				*/
+*/
 			}
 /*			/**
 			 * Returns the name of the table that contains entities of the given type.
@@ -1040,7 +1045,7 @@ public class HEDLCodeGeneratorSource {
 				return null;
 			}
 		}
- 		*/
+*/
 		return "";
 	}
 
@@ -1344,6 +1349,7 @@ public class HEDLCodeGeneratorSource {
 	@CommentTemplate
 	public String generateEntityBaseClass(String packageName, Entity entity) {
 		String entityName = entity.getName();
+		String tableName = getTableName(entity);
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		String propertyDeclarations = getPropertyDeclarations(entity);
 
@@ -1374,20 +1380,21 @@ public class HEDLCodeGeneratorSource {
 		import org.hibernate.annotations.Parameter;
 		
 		@Entity
-		@Table(name = "#entityName#"
+		@Table(name = "#tableName#"
 		*/
 		for (Constraint constraint : entity.getConstraints()) {
 			if (constraint instanceof UniqueConstraint) {
 				UniqueConstraint uniqueConstraint = (UniqueConstraint) constraint;
 				/*, uniqueConstraints=@UniqueConstraint(columnNames={*/
 				for (Property property : uniqueConstraint.getProperties()) {
-					String propertyName = property.getName();
-					/*"#propertyName#"*/
+					String columnName = getColumnName(property);
+					/*"#columnName#"*/
 					if (!isLast(uniqueConstraint.getProperties(), property)) {
 						/*, */
 					}
 				}
-				/*})*/
+				/*})
+*/
 			}
 		}/*)
 */		if (entity.getComment() != null) {
@@ -1504,11 +1511,54 @@ public class HEDLCodeGeneratorSource {
 		return "";
 	}
 
+	private String getTableName(Entity element) {
+		OptionType optionType = OptionType.PRESERVE_TABLE_NAMES;
+		return getName(element, optionType, false);
+	}
+
+	private String getColumnName(Property element) {
+		OptionType optionType = OptionType.PRESERVE_COLUMN_NAMES;
+		return getName(element, optionType, false);
+	}
+
+	private String getName(NamedElement element, OptionType optionType, boolean defaultValue) {
+		EntityModel model = null;
+		EObject next = element;
+		while (true) {
+			if (next instanceof EntityModel) {
+				model = (EntityModel) next;
+				break;
+			}
+			next = next.eContainer();
+		}
+		List<Option> options = model.getOptions();
+		boolean preserveTableNames = isTrue(optionType, options, defaultValue);
+		String name = element.getName();
+		if (preserveTableNames) {
+			return name;
+		} else {
+			return name.toLowerCase();
+		}
+	}
+
+	private boolean isTrue(OptionType type, List<Option> options, boolean defaultValue) {
+		for (Option option : options) {
+			if (option.getKey() == type) {
+				String value = option.getValue();
+				if ("true".equals(value)) {
+					return true;
+				}
+			}
+		}
+		return defaultValue;
+	}
+
 	@CommentTemplate
 	private String getPropertyDeclarations(Entity entity) {
 		/**/
 		for (Property property : entity.getProperties()) {
 			String propertyName = property.getName();
+			String columnName = getColumnName(property);
 			String propertyTypeClassname = property.getTypeClassname();
 			String nullable = Boolean.toString(property.isNullable());
 			if (property.getType() instanceof JavaType) {
@@ -1533,7 +1583,7 @@ public class HEDLCodeGeneratorSource {
 						/*CascadeType.ALL*/
 					}
 					/*})
-					@JoinColumn(name="#propertyName#"*/
+					@JoinColumn(name="#columnName#"*/
 					if (property.isReadonly()) {
 						/*, updatable=false*/
 					}
@@ -1552,7 +1602,7 @@ public class HEDLCodeGeneratorSource {
 						/*CascadeType.ALL*/
 					}
 					/*})
-					@JoinColumn(name="#propertyName#"*/
+					@JoinColumn(name="#columnName#"*/
 					if (property.isReadonly()) {
 						/*, updatable=false*/
 					}
@@ -1572,6 +1622,7 @@ public class HEDLCodeGeneratorSource {
 					}
 					/*}*/
 					if (property.getMappedBy() != null) {
+						// TODO is this correct?
 						String mappedByName = property.getMappedBy().getName();
 						/*, mappedBy="#mappedByName#"*/
 					}
@@ -1581,6 +1632,7 @@ public class HEDLCodeGeneratorSource {
 				if (property.isFromMultiplicity() && property.isToMultiplicity()) {
 					String target = property.getType().getJavaClassname();
 					String fetchType = property.isEager() ? "EAGER" : "LAZY";
+					// TODO do we need to set the name for the join table?
 /*					@ManyToMany(targetEntity=#target#.class, fetch=FetchType.#fetchType#, cascade={*/
 					if (property.isPersist()) {
 						/*CascadeType.PERSIST, */
@@ -1595,17 +1647,23 @@ public class HEDLCodeGeneratorSource {
 					*/
 				}
 			}
-			if (property.getType() == HedlBuiltinTypes.LONGSTRING) {
-/*				@Column(length=100000)
-*/			}
 			if (property.getComment() != null) {
 				String comment = property.getComment().replace("\t", "");
 				/*#comment#
 				*/
 			}
+			if (!(property.getType() instanceof Entity)) {
+				// add annotation to specify column name
+/*				@Column(name="#columnName#"*/
+				if (property.getType() == HedlBuiltinTypes.LONGSTRING) {
+					/*, length=100000*/
+				}
+				/*)
+*/			
+			}
 /*			private #propertyTypeClassname# #propertyName#;
 			
- 		*/
+		*/
 		}
 		return "";
 	}
@@ -1622,16 +1680,18 @@ public class HEDLCodeGeneratorSource {
 		}
 /*		// this class is generated. any change will be overridden.
 		public enum #enumerationName# {
-		*/
+ 			
+*/
 			for (EnumLiteral literal : enumeration.getLiterals()) {
+/*				*/
 				String literalName = literal.getName();
 				if (literal.getComment() != null) {
 					String comment = literal.getComment().replace("\t", "");
 					/*#comment#
 					*/
 				}
-/*				#literalName#,
- 				*/
+			/*#literalName#,
+*/
 			}
 /*		}
 		*/

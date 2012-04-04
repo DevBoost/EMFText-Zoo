@@ -7,9 +7,21 @@
   <foreignModel>hedl.ecore</foreignModel>
   <genPackages prefix="Hedl" basePackage="org.emftext.language" disposableProviderFactory="true"
       ecorePackage="hedl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="hedl.ecore#//OptionType">
+      <genEnumLiterals ecoreEnumLiteral="hedl.ecore#//OptionType/PreserveTableNames"/>
+      <genEnumLiterals ecoreEnumLiteral="hedl.ecore#//OptionType/PreserveColumnNames"/>
+    </genEnums>
     <genClasses ecoreClass="hedl.ecore#//EntityModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//EntityModel/entities"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//EntityModel/enums"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//EntityModel/options"/>
+    </genClasses>
+    <genClasses ecoreClass="hedl.ecore#//Option">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Option/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Option/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="hedl.ecore#//Commentable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Commentable/comment"/>
     </genClasses>
     <genClasses image="false" ecoreClass="hedl.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//NamedElement/name"/>
@@ -18,39 +30,36 @@
       <genOperations ecoreOperation="hedl.ecore#//Type/getJavaClassname"/>
     </genClasses>
     <genClasses ecoreClass="hedl.ecore#//Entity">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//Entity/properties"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference hedl.ecore#//Entity/entityModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//Entity/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//Entity/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//Entity/superType"/>
       <genOperations ecoreOperation="hedl.ecore#//Entity/getConstructorProperties"/>
     </genClasses>
-    <genClasses ecoreClass="hedl.ecore#//Property">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/readonly"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hedl.ecore#//Property/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/nullable"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/fromMultiplicity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/toMultiplicity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/persist"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/refresh"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hedl.ecore#//Property/mappedBy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/unique"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/eager"/>
-      <genOperations ecoreOperation="hedl.ecore#//Property/getTypeClassname"/>
-      <genOperations ecoreOperation="hedl.ecore#//Property/isToOneReference"/>
-    </genClasses>
-    <genClasses ecoreClass="hedl.ecore#//JavaType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//JavaType/javaClass"/>
+    <genClasses image="false" ecoreClass="hedl.ecore#//Constraint"/>
+    <genClasses ecoreClass="hedl.ecore#//UniqueConstraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hedl.ecore#//UniqueConstraint/properties"/>
     </genClasses>
     <genClasses ecoreClass="hedl.ecore#//Enum">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference hedl.ecore#//Enum/literals"/>
     </genClasses>
     <genClasses ecoreClass="hedl.ecore#//EnumLiteral"/>
-    <genClasses image="false" ecoreClass="hedl.ecore#//Commentable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Commentable/comment"/>
+    <genClasses ecoreClass="hedl.ecore#//JavaType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//JavaType/javaClass"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="hedl.ecore#//Constraint"/>
-    <genClasses ecoreClass="hedl.ecore#//UniqueConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hedl.ecore#//UniqueConstraint/properties"/>
+    <genClasses ecoreClass="hedl.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/readonly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/unique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/nullable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/persist"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/refresh"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/eager"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hedl.ecore#//Property/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/fromMultiplicity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute hedl.ecore#//Property/toMultiplicity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference hedl.ecore#//Property/mappedBy"/>
+      <genOperations ecoreOperation="hedl.ecore#//Property/getTypeClassname"/>
+      <genOperations ecoreOperation="hedl.ecore#//Property/isToOneReference"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
