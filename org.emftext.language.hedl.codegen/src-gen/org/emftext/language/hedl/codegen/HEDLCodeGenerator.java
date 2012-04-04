@@ -3199,8 +3199,10 @@ public class HEDLCodeGenerator {
 		public class #entityName# */
 		if (entity.getSuperType() != null) {
 			String superTypeName = entity.getSuperType().getName();
-	__content.append("extends # superTypeName # ");
-			/*extends # superTypeName # */
+	__content.append("extends ");
+	__content.append(superTypeName.replaceAll("\\r\\n\\z",""));
+	__content.append(" ");
+			/*extends #superTypeName# */
 		}
 	__content.append("{\r\n");
 	__content.append("\t\r\n");

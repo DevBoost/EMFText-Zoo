@@ -1409,7 +1409,7 @@ public class HEDLCodeGeneratorSource {
 		public class #entityName# */
 		if (entity.getSuperType() != null) {
 			String superTypeName = entity.getSuperType().getName();
-			/*extends # superTypeName # */
+			/*extends #superTypeName# */
 		}/*{
 			
 */			if (entity.getSuperType() == null) {
