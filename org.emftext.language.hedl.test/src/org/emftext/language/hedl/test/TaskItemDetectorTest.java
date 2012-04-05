@@ -23,7 +23,7 @@ public class TaskItemDetectorTest extends TestCase {
 		List<HedlTaskItem> taskItems = detector.findTaskItems(text, line, charStart);
 		assertEquals(1, taskItems.size());
 		HedlTaskItem firstItem = taskItems.get(0);
-		assertEquals("TODO item one */", firstItem.getMessage());
+		assertEquals("TODO item one", firstItem.getMessage());
 	}
 
 	public void testDetection2() {
