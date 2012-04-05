@@ -71,6 +71,6 @@ public class PlainJavaEjavaPrinter extends EjavaPrinter2 {
 		out.append(".eINSTANCE.create");
 		out.append(classifierWrapper.getEClassifier().getName());
 		out.append("()");
-		tokenOutputStream.add(new PrintToken(out.toString(), "<UNKNOWN>"));
+		tokenOutputStream.add(new PrintToken(out.toString(), "<UNKNOWN>", element));
 	}
 }
