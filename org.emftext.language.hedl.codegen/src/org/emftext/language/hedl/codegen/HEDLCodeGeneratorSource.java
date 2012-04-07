@@ -3,8 +3,8 @@ package org.emftext.language.hedl.codegen;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.commons.jdt.JDTJavaClassifier;
 import org.emftext.language.hedl.Constraint;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
@@ -1410,7 +1410,18 @@ public class HEDLCodeGeneratorSource {
 		if (entity.getSuperType() != null) {
 			String superTypeName = entity.getSuperType().getName();
 			/*extends #superTypeName# */
-		}/*{
+		}
+		for (JDTJavaClassifier javaInterface : entity.getImplementedInterfaces()) {
+			if (isFirst(entity.getImplementedInterfaces(), javaInterface)) {
+				/*implements */
+			}
+			String interfaceName = javaInterface.getQualifiedName();
+			/*#interfaceName# */
+			if (!isLast(entity.getImplementedInterfaces(), javaInterface)) {
+				/*, */
+			}
+		}
+		/*{
 			
 */			if (entity.getSuperType() == null) {
 /*				@GenericGenerator(name="#entityName#IdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
@@ -1704,6 +1715,13 @@ public class HEDLCodeGeneratorSource {
 
 	private String toFirstLower(String name) {
 		return name.substring(0, 1).toLowerCase() + name.substring(1);
+	}
+
+	private <T> boolean isFirst(List<T> list, T element) {
+		if (list == null || list.isEmpty()) {
+			return false;
+		}
+		return list.get(0) == element;
 	}
 
 	private <T> boolean isLast(List<T> list, T element) {

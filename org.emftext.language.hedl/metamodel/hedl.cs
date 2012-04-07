@@ -12,12 +12,13 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	overrideBuilder = "false";
 	overrideIgnoredWordsFilter = "false";
+	overrideDynamicTokenStyler = "false";
 	additionalDependencies = "org.eclipse.emf.workspace,org.emftext.language.hedl.codegen";
 }
 
 TOKENS {
-	DEFINE UPPER $('A'..'Z')('A'..'Z'|'a'..'z'|'0'..'9'|'_')*$;
-	DEFINE LOWER $('a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'_')*$;
+	DEFINE UPPER $('A'..'Z')('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'.')*$;
+	DEFINE LOWER $('a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'.')*$;
 	
 	DEFINE WHITESPACE $(' '|'\t'|'\f')+$;
 	DEFINE LINEBREAK  $('\r'|'\n')+$;
@@ -41,7 +42,9 @@ RULES {
 	
 	Entity ::= 
 		comment[ML_COMMENT]? 
-		name[UPPER] ("extends" superType[UPPER])? 
+		name[UPPER] 
+		("extends" superType[UPPER])? 
+		("implements" implementedInterfaces[LOWER] ("," implementedInterfaces[LOWER])*)? 
 		"{" properties* constraints* "}";
 	
 	Property ::=

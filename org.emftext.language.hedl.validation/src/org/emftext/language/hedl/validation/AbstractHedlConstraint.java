@@ -154,8 +154,15 @@ public abstract class AbstractHedlConstraint extends AbstractModelConstraint imp
 			String name = namedElement.getName();
 			Set<String> forbiddenNames = getForbiddenNames();
 			forbiddenNames.addAll(additionalForbiddenNames);
+			String errorMessage = "Invalid name for " + namedElement.eClass().getName() + ".";
 			if (forbiddenNames.contains(name)) {
-				return new ConstraintStatus(this, target, "Invalid name for property.", Collections.singleton(namedElement));
+				return new ConstraintStatus(this, target, errorMessage, Collections.singleton(namedElement));
+			}
+			// dots are not allowed in names, but the token UPPER allows dots
+			// to be able to reference Java interfaces by their fully qualified
+			// name
+			if (name.contains(".")) {
+				return new ConstraintStatus(this, target, errorMessage, Collections.singleton(namedElement));
 			}
 		}
 		return Status.OK_STATUS;

@@ -3,8 +3,8 @@ package org.emftext.language.hedl.codegen;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.commons.jdt.JDTJavaClassifier;
 import org.emftext.language.hedl.Constraint;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
@@ -18,6 +18,7 @@ import org.emftext.language.hedl.Property;
 import org.emftext.language.hedl.Type;
 import org.emftext.language.hedl.UniqueConstraint;
 import org.emftext.language.hedl.types.HedlBuiltinTypes;
+
 import de.devboost.commenttemplate.LineBreak;
 import de.devboost.commenttemplate.ReplacementRule;
 import de.devboost.commenttemplate.VariableAntiQuotation;
@@ -3204,9 +3205,25 @@ public class HEDLCodeGenerator {
 	__content.append(" ");
 			/*extends #superTypeName# */
 		}
+		for (JDTJavaClassifier javaInterface : entity.getImplementedInterfaces()) {
+			if (isFirst(entity.getImplementedInterfaces(), javaInterface)) {
+	__content.append("implements ");
+				/*implements */
+			}
+			String interfaceName = javaInterface.getQualifiedName();
+	__content.append("");
+	__content.append(interfaceName.replaceAll("\\r\\n\\z",""));
+	__content.append(" ");
+			/*#interfaceName# */
+			if (!isLast(entity.getImplementedInterfaces(), javaInterface)) {
+	__content.append(", ");
+				/*, */
+			}
+		}
 	__content.append("{\r\n");
 	__content.append("\t\r\n");
-	__content.append("");/*{
+	__content.append("");
+		/*{
 			
 */			if (entity.getSuperType() == null) {
 	__content.append("\t@GenericGenerator(name=\"");
@@ -3714,6 +3731,13 @@ public class HEDLCodeGenerator {
 
 	private String toFirstLower(String name) {
 		return name.substring(0,1).toLowerCase() + name.substring(1);
+	}
+
+	private <T> boolean isFirst(List<T> list, T element) {
+		if (list == null || list.isEmpty()) {
+			return false;
+		}
+		return list.get(0) == element;
 	}
 
 	private <T> boolean isLast(List<T> list, T element) {
