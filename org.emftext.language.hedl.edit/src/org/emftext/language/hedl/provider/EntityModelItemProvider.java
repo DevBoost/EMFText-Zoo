@@ -83,6 +83,7 @@ public class EntityModelItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(HedlPackage.Literals.ENTITY_MODEL__ENTITIES);
 			childrenFeatures.add(HedlPackage.Literals.ENTITY_MODEL__ENUMS);
+			childrenFeatures.add(HedlPackage.Literals.ENTITY_MODEL__OPTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -136,6 +137,7 @@ public class EntityModelItemProvider
 		switch (notification.getFeatureID(EntityModel.class)) {
 			case HedlPackage.ENTITY_MODEL__ENTITIES:
 			case HedlPackage.ENTITY_MODEL__ENUMS:
+			case HedlPackage.ENTITY_MODEL__OPTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -162,6 +164,11 @@ public class EntityModelItemProvider
 			(createChildParameter
 				(HedlPackage.Literals.ENTITY_MODEL__ENUMS,
 				 HedlFactory.eINSTANCE.createEnum()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(HedlPackage.Literals.ENTITY_MODEL__OPTIONS,
+				 HedlFactory.eINSTANCE.createOption()));
 	}
 
 	/**

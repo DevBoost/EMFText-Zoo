@@ -64,14 +64,15 @@ public class PropertyItemProvider
 
 			addCommentPropertyDescriptor(object);
 			addReadonlyPropertyDescriptor(object);
-			addTypePropertyDescriptor(object);
+			addUniquePropertyDescriptor(object);
 			addNullablePropertyDescriptor(object);
-			addFromMultiplicityPropertyDescriptor(object);
-			addToMultiplicityPropertyDescriptor(object);
 			addPersistPropertyDescriptor(object);
 			addRefreshPropertyDescriptor(object);
+			addEagerPropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
+			addFromMultiplicityPropertyDescriptor(object);
+			addToMultiplicityPropertyDescriptor(object);
 			addMappedByPropertyDescriptor(object);
-			addUniquePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -253,6 +254,28 @@ public class PropertyItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Eager feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEagerPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_eager_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_eager_feature", "_UI_Property_type"),
+				 HedlPackage.Literals.PROPERTY__EAGER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Mapped By feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -337,12 +360,13 @@ public class PropertyItemProvider
 		switch (notification.getFeatureID(Property.class)) {
 			case HedlPackage.PROPERTY__COMMENT:
 			case HedlPackage.PROPERTY__READONLY:
+			case HedlPackage.PROPERTY__UNIQUE:
 			case HedlPackage.PROPERTY__NULLABLE:
-			case HedlPackage.PROPERTY__FROM_MULTIPLICITY:
-			case HedlPackage.PROPERTY__TO_MULTIPLICITY:
 			case HedlPackage.PROPERTY__PERSIST:
 			case HedlPackage.PROPERTY__REFRESH:
-			case HedlPackage.PROPERTY__UNIQUE:
+			case HedlPackage.PROPERTY__EAGER:
+			case HedlPackage.PROPERTY__FROM_MULTIPLICITY:
+			case HedlPackage.PROPERTY__TO_MULTIPLICITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

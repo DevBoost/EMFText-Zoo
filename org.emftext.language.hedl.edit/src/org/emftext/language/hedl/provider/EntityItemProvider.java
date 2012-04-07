@@ -65,6 +65,7 @@ public class EntityItemProvider
 			super.getPropertyDescriptors(object);
 
 			addCommentPropertyDescriptor(object);
+			addImplementedInterfacesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -92,6 +93,28 @@ public class EntityItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Implemented Interfaces feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addImplementedInterfacesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Entity_implementedInterfaces_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Entity_implementedInterfaces_feature", "_UI_Entity_type"),
+				 HedlPackage.Literals.ENTITY__IMPLEMENTED_INTERFACES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -105,6 +128,7 @@ public class EntityItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(HedlPackage.Literals.ENTITY__PROPERTIES);
 			childrenFeatures.add(HedlPackage.Literals.ENTITY__CONSTRAINTS);
+			childrenFeatures.add(HedlPackage.Literals.ENTITY__SUPER_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -162,6 +186,7 @@ public class EntityItemProvider
 				return;
 			case HedlPackage.ENTITY__PROPERTIES:
 			case HedlPackage.ENTITY__CONSTRAINTS:
+			case HedlPackage.ENTITY__SUPER_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -188,6 +213,11 @@ public class EntityItemProvider
 			(createChildParameter
 				(HedlPackage.Literals.ENTITY__CONSTRAINTS,
 				 HedlFactory.eINSTANCE.createUniqueConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(HedlPackage.Literals.ENTITY__SUPER_TYPE,
+				 HedlFactory.eINSTANCE.createEntity()));
 	}
 
 }

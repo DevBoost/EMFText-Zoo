@@ -9,6 +9,7 @@ package org.emftext.language.hedl.provider;
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.emftext.commons.jdt.provider.JdtEditPlugin;
 
 /**
  * This is the central singleton for the hedl edit plugin.
@@ -42,6 +43,7 @@ public final class hedlEditPlugin extends EMFPlugin {
 	public hedlEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     JdtEditPlugin.INSTANCE,
 		   });
 	}
 
