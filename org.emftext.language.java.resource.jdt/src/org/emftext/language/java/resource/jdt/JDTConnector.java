@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
-import org.emftext.commons.jdt.JDTJavaClass;
+import org.emftext.commons.jdt.JDTJavaClassifier;
 import org.emftext.commons.jdt.resolve.JDTClassifierResolver;
 import org.emftext.language.java.JavaClasspath;
 
@@ -54,21 +54,21 @@ public class JDTConnector implements JavaClasspath.Initializer {
 		if (resourceURI != null) {
 			JDTClassifierResolver jdtClassResolver = new JDTClassifierResolver();
 			IJavaProject javaProject = jdtClassResolver.getJavaProject(resourceURI);
-			List<JDTJavaClass> classifiersInClassPath = jdtClassResolver.getAllClassifiersInClassPath(javaProject);
+			List<JDTJavaClassifier> classifiersInClassPath = jdtClassResolver.getAllClassifiersInClassPath(javaProject);
 			registerJavaProjectInClassPath(resourceSet, classifiersInClassPath);
 		}
 	}
 
 	private void registerJavaProjectInClassPath(ResourceSet resourceSet,
-			List<JDTJavaClass> classifiersInClassPath) {
+			List<JDTJavaClassifier> classifiersInClassPath) {
 
 		JavaClasspath javaClasspath = JavaClasspath.get(resourceSet);
-		for (JDTJavaClass jdtClassifier : classifiersInClassPath) {
+		for (JDTJavaClassifier jdtClassifier : classifiersInClassPath) {
 			registerClassifier(javaClasspath, jdtClassifier);
 		}
 	}
 
-	private void registerClassifier(JavaClasspath javaClasspath, JDTJavaClass jdtClass) {
+	private void registerClassifier(JavaClasspath javaClasspath, JDTJavaClassifier jdtClass) {
 		String path = jdtClass.getPath();
 		String filePath = null;
 		String inArchivePath = null;
