@@ -1,4 +1,4 @@
-@SuppressWarnings(tokenOverlapping,noRuleForMetaClass,minOccurenceMismatch)
+@SuppressWarnings(tokenOverlapping,noRuleForMetaClass,minOccurenceMismatch,explicitSyntaxChoice)
 SYNTAXDEF mecore
 FOR <http://www.emftext.org/language/mecore> <mecore.genmodel>
 START MPackage
@@ -50,15 +50,14 @@ RULES {
 	MEnum    ::= "enum" name[UPPER] ("(" literals* ")")?;
 	MEnumLiteral ::= name[UPPER] literal['"','"']?;
 	
-	@SuppressWarnings(explicitSyntaxChoice)
 	MFeature ::= ncReference["~" : ""] name[LOWER] (type[UPPER]|type[LOWER]) multiplicity? ("<>" opposite[UPPER])?;
 	
 	MOperation ::=  
 		("<" typeParameters ("," typeParameters)* ">")?
 		name[LOWER] 
-		"(" (parameters ("," parameters)*)? ")" type[UPPER]  multiplicity?;
+		"(" (parameters ("," parameters)*)? ")" (type[UPPER]|type[LOWER]) multiplicity?;
 		
-	MParameter ::= name[LOWER] type[UPPER] 
+	MParameter ::= name[LOWER] (type[UPPER]|type[LOWER])
 		("<" typeArguments[UPPER] ("," typeArguments[UPPER])* ">")? 
 		multiplicity?;
 	
