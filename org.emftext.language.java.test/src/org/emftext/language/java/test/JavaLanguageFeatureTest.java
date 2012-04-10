@@ -648,7 +648,22 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 3);
 		
-		assertEquals("/**"
+		assertEquals("/*******************************************************************************"
+				+ "\r\n * Copyright (c) 2006-2012"
+				+ "\r\n * Software Technology Group, Dresden University of Technology"
+				+ "\r\n * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026"
+				+ "\r\n * "
+				+ "\r\n * All rights reserved. This program and the accompanying materials"
+				+ "\r\n * are made available under the terms of the Eclipse Public License v1.0"
+				+ "\r\n * which accompanies this distribution, and is available at"
+				+ "\r\n * http://www.eclipse.org/legal/epl-v10.html"
+				+ "\r\n * " 
+				+ "\r\n * Contributors:"
+				+ "\r\n *   Software Technology Group - TU Dresden, Germany;"
+				+ "\r\n *   DevBoost GmbH - Berlin, Germany"
+				+ "\r\n *      - initial API and implementation"
+				+ "\r\n ******************************************************************************/"
+				+ "\r\n/**"
 				+ "\r\n * A multi-line javadoc comment."
 				+ "\r\n */"
 				+ "\r\n/*"
