@@ -17,7 +17,8 @@ FOR <http://reuseware.org/coconut/office2>
 START OfficeModel
 
 OPTIONS {
-	licenceHeader ="licence.txt";
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	generateCodeFromGeneratorModel = "true";
 	overrideBuilder = "false";
 }
