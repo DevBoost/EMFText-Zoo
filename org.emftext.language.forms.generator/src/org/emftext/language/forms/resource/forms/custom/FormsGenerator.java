@@ -15,11 +15,8 @@
  ******************************************************************************/
 package org.emftext.language.forms.resource.forms.custom;
 
-import generator.html.HTMLFormGenerator;
 import generator.html.IPhoneFormGenerator;
-import generator.html.IPhoneIndexGenerator;
 import generator.xml.FOFormGenerator;
-import generator.xml.XMLFormGenerator;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -51,6 +48,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.forms.Form;
+import org.emftext.language.forms.generator.HTMLFormGenerator;
+import org.emftext.language.forms.generator.IPhoneIndexGenerator;
+import org.emftext.language.forms.generator.XMLFormGenerator;
 import org.emftext.language.forms.resource.forms.FormsGeneratorPlugin;
 
 /**
