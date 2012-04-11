@@ -101,7 +101,7 @@ public class EjavaNewFileWizard extends org.eclipse.jface.wizard.Wizard implemen
 		// create a sample file
 		monitor.beginTask("Creating " + file.getName(), 2);
 		try {
-			java.io.InputStream stream = openContentStream(metamodel, genmodel, metaclass);
+			java.io.InputStream stream = openContentStream(metaclass.getEPackage(), genmodel, metaclass);
 			if (file.exists()) {
 				file.setContents(stream, true, true, monitor);
 			} else {

@@ -172,6 +172,9 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 					metaclasses.add((EClass) classifier); 
 				}
 			}
+			for (EPackage subPackage : selectedMetamodel.getESubpackages()) {
+				metaclasses.addAll(getMetaclassesFromPackage(subPackage));
+			}
 		}
 		return metaclasses;
 	}
@@ -360,7 +363,15 @@ public class EjavaNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage 
 			container = getContainerForEPackage(ePackage);
 		}
 		if(selectedMetaclass != null){
-			ejavaFile = container.getFile(new Path(selectedMetaclass.getName() + "." + fileExtension));
+			EPackage currentPackage = selectedMetaclass.getEPackage();
+			EPackage eSuperPackage = currentPackage.getESuperPackage();
+			String packagePath = "";
+			while (eSuperPackage != null) {
+				packagePath += currentPackage.getName() + "/";
+				currentPackage = eSuperPackage;
+				eSuperPackage = eSuperPackage.getESuperPackage();
+			}
+			ejavaFile = container.getFile(new Path(packagePath + selectedMetaclass.getName() + "." + fileExtension));
 		}
 
 		if (getContainerName().length() == 0) {
