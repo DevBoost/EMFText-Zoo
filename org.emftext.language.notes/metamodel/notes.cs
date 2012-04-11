@@ -3,6 +3,8 @@ FOR <http://org.emftext/notes>
 START NoteDocument
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+
 	reloadGeneratorModel = "true";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
