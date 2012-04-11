@@ -3,6 +3,8 @@ FOR <http://org.emftext/text.text.ecore>
 START Document
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	usePredefinedTokens = "false";
 	defaultTokenName = "TEXT";
 }
