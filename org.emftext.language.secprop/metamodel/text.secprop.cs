@@ -3,6 +3,8 @@ FOR <http://www.emftext.org/language/SecProp> <secprop.text.genmodel>
 START SecPropModel
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+
 	baseResourcePlugin="org.emftext.language.secprop.resource";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
