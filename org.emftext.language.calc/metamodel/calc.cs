@@ -4,6 +4,8 @@ FOR <http://www.emftext.org/language/calc>
 START Calculation
 
 OPTIONS {
+	licenceHeader ="../../org.dropsbox/licence.txt";
+	
 	usePredefinedTokens = "false";
 }
 
