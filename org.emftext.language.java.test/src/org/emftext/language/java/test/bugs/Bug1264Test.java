@@ -32,7 +32,7 @@ public class Bug1264Test extends AbstractTestCase {
 	
 	@Test
 	public void testGetConcreteClassifierProxy() {
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Commentable commentable = ContainersFactory.eINSTANCE.createCompilationUnit();
 		Resource r = rs.createResource(URI.createURI("test.java"));
 		r.getContents().add(commentable);
@@ -43,7 +43,7 @@ public class Bug1264Test extends AbstractTestCase {
 	
 	@Test
 	public void testGetConcreteClassifierProxies() {
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Commentable commentable = ContainersFactory.eINSTANCE.createCompilationUnit();
 		Resource r = rs.createResource(URI.createURI("test.java"));
 		r.getContents().add(commentable);
@@ -56,7 +56,7 @@ public class Bug1264Test extends AbstractTestCase {
 	
 	@Test
 	public void testGetConcreteClassifier() {
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Commentable commentable = ContainersFactory.eINSTANCE.createCompilationUnit();
 		Resource r = rs.createResource(URI.createURI("test.java"));
 		r.getContents().add(commentable);
@@ -69,7 +69,7 @@ public class Bug1264Test extends AbstractTestCase {
 	
 	@Test
 	public void testGetConcreteClassifiers() {
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Commentable commentable = ContainersFactory.eINSTANCE.createCompilationUnit();
 		Resource r = rs.createResource(URI.createURI("test.java"));
 		r.getContents().add(commentable);

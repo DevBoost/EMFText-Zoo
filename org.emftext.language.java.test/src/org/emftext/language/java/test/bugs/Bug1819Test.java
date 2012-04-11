@@ -36,7 +36,7 @@ public class Bug1819Test extends AbstractTestCase {
 	public void testDefaultPackage() throws IOException {
 		String className = "TestName";
 		
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Resource r = rs.createResource(JavaUniquePathConstructor.getJavaFileResourceURI(className));
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 		org.emftext.language.java.classifiers.Class clazz = ClassifiersFactory.eINSTANCE.createClass();
@@ -57,7 +57,7 @@ public class Bug1819Test extends AbstractTestCase {
 		String className = "TestName";
 		String packageName = "a.b.c";
 		
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Resource r = rs.createResource(JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className));
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 		org.emftext.language.java.classifiers.Class clazz = ClassifiersFactory.eINSTANCE.createClass();

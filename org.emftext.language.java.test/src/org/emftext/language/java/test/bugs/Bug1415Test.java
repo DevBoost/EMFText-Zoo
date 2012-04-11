@@ -76,7 +76,7 @@ public class Bug1415Test extends AbstractTestCase {
 		ClassifierReference reference = TypesFactory.eINSTANCE.createClassifierReference();
 		reference.setTarget(classifier);
 		
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Resource r = rs.createResource(URI.createFileURI(OUT_FOLDER + "/test1415-2.java"));
 		
 		r.getContents().add(reference);
@@ -99,7 +99,7 @@ public class Bug1415Test extends AbstractTestCase {
 		ClassifierReference reference = TypesFactory.eINSTANCE.createClassifierReference();
 		reference.setTarget(classifier);
 		
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Resource r = rs.createResource(URI.createFileURI(OUT_FOLDER + "/test1415-3.java"));
 		rs.getLoadOptions().put(JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES, true);
 		r.getContents().add(reference);
@@ -136,7 +136,7 @@ public class Bug1415Test extends AbstractTestCase {
 		
 		String src_folder_name = "test1415-src-folder-1";
 		
-		ResourceSet rs = getResourceSet();
+		ResourceSet rs = createResourceSet();
 		Resource r = rs.createResource(URI.createFileURI(OUT_FOLDER + "/" + src_folder_name + ".java"));
 		r.getContents().add(cu1);
 		r.getContents().add(cu2);

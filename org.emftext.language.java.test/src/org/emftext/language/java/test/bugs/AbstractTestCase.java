@@ -38,7 +38,7 @@ public abstract class AbstractTestCase extends TestCase {
 		return map;
 	}
 
-	protected ResourceSet getResourceSet() {
+	protected ResourceSet createResourceSet() {
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getLoadOptions().putAll(getLoadOptions());
 		return rs;

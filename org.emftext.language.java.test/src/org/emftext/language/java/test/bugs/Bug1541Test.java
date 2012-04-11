@@ -47,7 +47,7 @@ public class Bug1541Test extends AbstractTestCase {
 		m1.setName("m1");
 		classA.getMembers().add(m1);
 		
-		Resource r = getResourceSet().createResource(URI.createURI("ClassA.java"));
+		Resource r = createResourceSet().createResource(URI.createURI("ClassA.java"));
 		
 		r.getContents().add(cu);
 		
