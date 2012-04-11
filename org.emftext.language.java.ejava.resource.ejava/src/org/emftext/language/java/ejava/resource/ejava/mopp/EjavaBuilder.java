@@ -24,23 +24,30 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.commons.layout.LayoutInformation;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.resource.ejava.EjavaEProblemType;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaBuilder;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaTextPrinter;
+import org.emftext.language.java.ejava.resource.ejava.util.EjavaLayoutUtil;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.Statement;
 
 public class EjavaBuilder implements IEjavaBuilder {
+
+	private final EjavaLayoutUtil layoutUtil = new EjavaLayoutUtil();
 
 	public boolean isBuildingNeeded(URI uri) {
 		// return true to enable building of all resources
@@ -143,20 +150,51 @@ public class EjavaBuilder implements IEjavaBuilder {
 	}
 
 	private String printBody(EOperationWrapper wrapper, EjavaResource resource) {
-		byte[] lineBreak = System.getProperty("line.separator").getBytes();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		// we use a custom printer, because object instantiations need to be printed
 		// differently from what is defined in ejava.cs
 		IEjavaTextPrinter printer = new PlainJavaEjavaPrinter(outputStream, resource);
 		for (Statement statement : wrapper.getStatements()) {
 			try {
+				removeLeadingTabs(statement);
+				layoutUtil.transferAllLayoutInformationFromModel(statement);
 				printer.print(statement);
-				outputStream.write(lineBreak);
 			} catch (IOException e) {
 				EjavaPlugin.logError("Error while printing eJava method body.", e);
 			}
 		}
-		return outputStream.toString();
+		return trimNewLines(outputStream.toString());
+	}
+
+	private String trimNewLines(String s) {
+		s = s.trim();
+		if (s.startsWith("\n")) {
+			s = s.substring(1);
+		}
+		if (s.endsWith("\n")) {
+			s = s.substring(0, s.length() - 2);
+		}
+		return s;
+	}
+
+	private void removeLeadingTabs(Commentable element) {
+		EList<LayoutInformation> layoutInformations = element.getLayoutInformations();
+		for (LayoutInformation layoutInformation : layoutInformations) {
+			String hiddenTokenText = layoutInformation.getHiddenTokenText();
+			if (hiddenTokenText.startsWith("\r\n\t\t")) {
+				hiddenTokenText = "\n" + hiddenTokenText.substring(4);
+			} else if (hiddenTokenText.startsWith("\n\t\t")) {
+				hiddenTokenText = "\n" + hiddenTokenText.substring(3);
+			} else if (hiddenTokenText.startsWith("\t\t")) {
+				hiddenTokenText = hiddenTokenText.substring(2);
+			}
+			layoutInformation.setHiddenTokenText(hiddenTokenText);
+		}
+		for (EObject contained : element.eContents()) {
+			if (contained instanceof Commentable) {
+				removeLeadingTabs((Commentable) contained);
+			}
+		}
 	}
 
 	public IStatus handleDeletion(URI uri, IProgressMonitor monitor) {
