@@ -26,6 +26,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	
 	overrideBuilder = "false";
+	overrideBuilderAdapter = "false";
 	resolveProxyElementsAfterParsing = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";

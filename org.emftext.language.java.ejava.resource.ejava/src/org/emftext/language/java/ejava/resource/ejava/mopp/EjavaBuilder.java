@@ -181,10 +181,10 @@ public class EjavaBuilder implements IEjavaBuilder {
 		EList<LayoutInformation> layoutInformations = element.getLayoutInformations();
 		for (LayoutInformation layoutInformation : layoutInformations) {
 			String hiddenTokenText = layoutInformation.getHiddenTokenText();
-			if (hiddenTokenText.startsWith("\r\n\t\t")) {
-				hiddenTokenText = "\n" + hiddenTokenText.substring(4);
-			} else if (hiddenTokenText.startsWith("\n\t\t")) {
-				hiddenTokenText = "\n" + hiddenTokenText.substring(3);
+			if (hiddenTokenText.contains("\r\n\t\t")) {
+				hiddenTokenText = hiddenTokenText.replaceAll("\r\n\t\t", "\n");
+			} else if (hiddenTokenText.contains("\n\t\t")) {
+				hiddenTokenText = hiddenTokenText.replaceAll("\n\t\t", "\n");
 			} else if (hiddenTokenText.startsWith("\t\t")) {
 				hiddenTokenText = hiddenTokenText.substring(2);
 			}
