@@ -17,13 +17,16 @@ package org.emftext.language.pl0extended.resource.pl0extended.analysis;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.pl0.Program;
+import org.emftext.language.pl0extended.Import;
+import org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolveResult;
 
 public class ImportProgramReferenceReferenceResolver implements org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolver<org.emftext.language.pl0extended.Import, org.emftext.language.pl0.Program> {
 
-	public void resolve(java.lang.String identifier, org.emftext.language.pl0extended.Import container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolveResult<org.emftext.language.pl0.Program> result) {
+	public void resolve(String identifier, Import container, EReference reference, int position, boolean resolveFuzzy, final IPl0extendedReferenceResolveResult<Program> result) {
 		try{
 			ResourceSet rs = container.eResource().getResourceSet();
 			URI uri = URI.createURI(identifier);
@@ -37,8 +40,10 @@ public class ImportProgramReferenceReferenceResolver implements org.emftext.lang
 		}
 	}
 
-	public java.lang.String deResolve(org.emftext.language.pl0.Program element, org.emftext.language.pl0extended.Import container, org.eclipse.emf.ecore.EReference reference) {
-		return element.eResource().getURI().toPlatformString(true);
+	public String deResolve(Program element, Import container, EReference reference) {
+		Resource resource = element.eResource();
+		URI uri = resource.getURI();
+		return uri.toString();
 	}
 
 	public void setOptions(java.util.Map<?,?> options) {
