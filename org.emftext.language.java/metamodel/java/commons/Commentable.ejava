@@ -20,10 +20,63 @@ import java.containers.CompilationUnit;
 import java.annotations.AnnotationInstance;
 import java.modifiers.AnnotableAndModifiable;
 import java.modifiers.AnnotationInstanceOrModifier;
+import java.statements.Statement;
+import java.statements.StatementListContainer;
 
 import layout.LayoutInformation;
 
 eclass Commentable {
+
+	/**
+	 * Adds the given statement before the statement that contains this element.
+	 */
+	/* void */ addBeforeContainingStatement(/* Statement statementToAdd */) {
+		EObject container = this.eContainer();
+		EObject statement = this;
+		while (container != null) {
+			if (container instanceof StatementListContainer) {
+				break;
+			}
+			container = container.eContainer();
+			statement = statement.eContainer();
+		}
+		if (container == null) {
+			throw new IllegalArgumentException("Element " + this + " is not contained in a StatementListContainer.");
+		}
+		StatementListContainer statementListContainer = (StatementListContainer) container;
+		EList<Statement> statements = statementListContainer.getStatements();
+		int index = statements.indexOf(statement);
+		
+		statements.add(index, statementToAdd);
+	}
+
+	/**
+	 * Adds the given statement after the statement that contains this element.
+	 */
+	/* void */ addAfterContainingStatement(/* Statement statementToAdd */) {
+		EObject container = this.eContainer();
+		EObject statement = this;
+		while (container != null) {
+			if (container instanceof StatementListContainer) {
+				break;
+			}
+			container = container.eContainer();
+			statement = statement.eContainer();
+		}
+		if (container == null) {
+			throw new IllegalArgumentException("Element " + this + " is not contained in a StatementListContainer.");
+		}
+		StatementListContainer statementListContainer = (StatementListContainer) container;
+		EList<Statement> statements = statementListContainer.getStatements();
+		int index = statements.indexOf(statement);
+		
+		if (index == statements.size() - 1) {
+			// statement is the last one
+			statements.add(statementToAdd);
+		} else {
+			statements.add(index + 1, statementToAdd);
+		}
+	}
 
 	/**
 	 * Walks up the containment hierarchy and returns the first parent with the
