@@ -41,5 +41,5 @@ RULES {
 
 	Row ::= (values)+ _[LINEBREAK]?;
 	
-	Value ::= ( _[COMMA] (text['"','"','\\\\\\'] | text[UNQUOTED_VALUE])) | (text['"','"','\\\\\\'] | text[UNQUOTED_VALUE]) | text[COMMA];
+	Value ::= ( _[COMMA] (text['"','"','\\'] | text[UNQUOTED_VALUE])) | (text['"','"','\\'] | text[UNQUOTED_VALUE]) | text[COMMA];
 }
