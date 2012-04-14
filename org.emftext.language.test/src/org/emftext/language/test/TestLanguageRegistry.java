@@ -117,6 +117,7 @@ import org.emftext.test.noeclipse.resource.noeclipse.mopp.NoeclipseMetaInformati
 import org.emftext.test.printing.resource.printing.mopp.PrintingMetaInformation;
 import org.emftext.test.printing.modellayout.resource.modellayout.mopp.ModellayoutMetaInformation;
 import org.emftext.test.resolving.resource.resolving.mopp.ResolvingMetaInformation;
+import org.emftext.test.multicharsuffix.resource.multicharsuffix.mopp.MulticharsuffixMetaInformation;
 import org.reuseware.coconut.fracol.resource.fracol.mopp.FracolMetaInformation;
 import org.reuseware.coconut.reuseextension.resource.rex.mopp.RexMetaInformation;
 import org.reuseware.coconut.reuseextensionactivator.resource.rexactivator.mopp.Rex_activatorMetaInformation;
@@ -251,6 +252,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(new TaMetaInformation());
 		// TODO move this to getMetaInformationsForLanguageOnUpdateSite() once the automaton regex DSL is on the update site
 		metaInformations.add(new Regexp_automatonMetaInformation());
+		metaInformations.add(new MulticharsuffixMetaInformation());
 		return metaInformations;
 	}
 }
