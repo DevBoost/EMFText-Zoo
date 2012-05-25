@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
+ * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany;
+ *   DevBoost GmbH - Berlin, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
 package org.emftext.language.functions.generators;
 
 import java.util.ArrayList;
@@ -168,7 +183,7 @@ public class LatexGeneratorSource {
 		List<Function> relatedFunctions = function.getRelatedFunctions();
 		String linksToRelatedFunctions = "";
 		for (Function relatedFunction : relatedFunctions) {
-			linksToRelatedFunctions = linksToRelatedFunctions + relatedFunction.getReadableName() + "~(\\ref{func:" + relatedFunction.getName().replace("_", ":") + "})";
+			linksToRelatedFunctions = linksToRelatedFunctions + relatedFunction.getReadableName() + "~(\\ref{func:" + getLabel(relatedFunction) + "})";
 			if (relatedFunctions.indexOf(relatedFunction) < relatedFunctions.size() - 1) {
 				linksToRelatedFunctions = linksToRelatedFunctions + ", ";
 			}
@@ -178,8 +193,7 @@ public class LatexGeneratorSource {
 			addLineBreak = true;
 		}
 		String readableName = function.getReadableName();
-		String name = function.getName();
-		String label = name.replace("_", ":").replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE").replace("ß", "ss");
+		String label = getLabel(function);
 		/*
 			\#section#{#readableName#}
 			\label{func:#label#}
@@ -221,6 +235,12 @@ public class LatexGeneratorSource {
 			/*#subText#*/
 		}
 		return null;
+	}
+
+	private String getLabel(Function function) {
+		String name = function.getName();
+		String label = name.replace("_", ":").replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE").replace("ß", "ss");
+		return label;
 	}
 
 	private List<Function> getValidChildFunctions(Function function) {
