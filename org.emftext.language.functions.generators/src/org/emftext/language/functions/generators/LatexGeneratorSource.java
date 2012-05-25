@@ -29,6 +29,7 @@ public class LatexGeneratorSource {
 		\newcommand{\tableheaderfunction}[0]{Function}
 		\newcommand{\tableheadereffort}[0]{Costs in \timeunit}
 		\newcommand{\tablefootertotaleffort}[0]{Total costs}
+		\newcommand{\costtablecaption}[0]{Cost per function}
 		
 		\makeatletter
 		\newcounter{subsubsubsection}[subsubsection]
@@ -78,22 +79,17 @@ public class LatexGeneratorSource {
 		/*%
 		% Attention: This file is generated and will be overridden.
 		%
-		%\begin{table}
-			%\centering
-				\begin{longtable}{|p{9.15cm}|p{2.25cm}|}
-					\hline
-					\tableheaderfunction & 
-					\tableheadereffort \\
-					\hline
-					\hline
-					#functionCosts#
-					\rowcolor[gray]{.85}\textbf{\tablefootertotaleffort} &
-					\textbf{#totalCosts#} \\
-					\hline
-				\end{longtable}
-			%\caption{Aufwandsabschätzung gegliedert nach Unterfunktionen.}
-			%\label{tab:aufwand}
-		%\end{table}
+		\begin{longtable}{|l|p{2.25cm}|}
+			\hline
+			\tableheaderfunction & 
+			\tableheadereffort \\
+			\hline
+			\hline
+			#functionCosts#
+			\textbf{\tablefootertotaleffort} &
+			\textbf{#totalCosts#} \\
+			\hline
+		\end{longtable}
 		*/
 		return null;
 	}
@@ -104,8 +100,7 @@ public class LatexGeneratorSource {
 		String readableName = functionSet.getReadableName();
 		/**/
 		if (functionSet.eContainer() != null) {
-/*			\rowcolor[gray]{.9}
-			\textbf{#readableName#} & \textbf{#totalCosts#} (Summe) \\
+/*			\textbf{#readableName#} & \textbf{#totalCosts#} (Summe) \\
 			\hline
 */
 		}
@@ -133,7 +128,7 @@ public class LatexGeneratorSource {
 		/*
 		#prefix# */
 		if (hasChildren) {
-			/*\rowcolor[gray]{.95}\textbf{*/
+			/*\textbf{*/
 		}
 		/* #readableName# */
 		if (hasChildren) {

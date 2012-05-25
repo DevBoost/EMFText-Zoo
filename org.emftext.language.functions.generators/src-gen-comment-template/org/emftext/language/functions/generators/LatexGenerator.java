@@ -26,6 +26,7 @@ public class LatexGenerator {
 	__content.append("\\newcommand{\\tableheaderfunction}[0]{Function}\n");
 	__content.append("\\newcommand{\\tableheadereffort}[0]{Costs in \\timeunit}\n");
 	__content.append("\\newcommand{\\tablefootertotaleffort}[0]{Total costs}\n");
+	__content.append("\\newcommand{\\costtablecaption}[0]{Cost per function}\n");
 	__content.append("\n");
 	__content.append("\\makeatletter\n");
 	__content.append("\\newcounter{subsubsubsection}[subsubsection]\n");
@@ -62,6 +63,7 @@ public class LatexGenerator {
 		\newcommand{\tableheaderfunction}[0]{Function}
 		\newcommand{\tableheadereffort}[0]{Costs in \timeunit}
 		\newcommand{\tablefootertotaleffort}[0]{Total costs}
+		\newcommand{\costtablecaption}[0]{Cost per function}
 		
 		\makeatletter
 		\newcounter{subsubsubsection}[subsubsection]
@@ -116,46 +118,36 @@ public class LatexGenerator {
 	__content.append("%\n");
 	__content.append("% Attention: This file is generated and will be overridden.\n");
 	__content.append("%\n");
-	__content.append("%\\begin{table}\n");
-	__content.append("\t%\\centering\n");
-	__content.append("\t\t\\begin{longtable}{|p{9.15cm}|p{2.25cm}|}\n");
-	__content.append("\t\t\t\\hline\n");
-	__content.append("\t\t\t\\tableheaderfunction & \n");
-	__content.append("\t\t\t\\tableheadereffort \\\\\n");
-	__content.append("\t\t\t\\hline\n");
-	__content.append("\t\t\t\\hline\n");
-	__content.append("\t\t\t");
-	__content.append(functionCosts.replaceAll("\\n\\z","").replace("\n","\n\t\t\t"));
+	__content.append("\\begin{longtable}{|l|p{2.25cm}|}\n");
+	__content.append("\t\\hline\n");
+	__content.append("\t\\tableheaderfunction & \n");
+	__content.append("\t\\tableheadereffort \\\\\n");
+	__content.append("\t\\hline\n");
+	__content.append("\t\\hline\n");
+	__content.append("\t");
+	__content.append(functionCosts.replaceAll("\\n\\z","").replace("\n","\n\t"));
 	__content.append("\n");
-	__content.append("\t\t\t\\rowcolor[gray]{.85}\\textbf{\\tablefootertotaleffort} &\n");
-	__content.append("\t\t\t\\textbf{");
-	__content.append(totalCosts.replaceAll("\\n\\z","").replace("\n","\n\t\t\t"));
+	__content.append("\t\\textbf{\\tablefootertotaleffort} &\n");
+	__content.append("\t\\textbf{");
+	__content.append(totalCosts.replaceAll("\\n\\z","").replace("\n","\n\t"));
 	__content.append("} \\\\\n");
-	__content.append("\t\t\t\\hline\n");
-	__content.append("\t\t\\end{longtable}\n");
-	__content.append("\t%\\caption{Aufwandsabschätzung gegliedert nach Unterfunktionen.}\n");
-	__content.append("\t%\\label{tab:aufwand}\n");
-	__content.append("%\\end{table}\n");
+	__content.append("\t\\hline\n");
+	__content.append("\\end{longtable}\n");
 	__content.append("");
 		/*%
 		% Attention: This file is generated and will be overridden.
 		%
-		%\begin{table}
-			%\centering
-				\begin{longtable}{|p{9.15cm}|p{2.25cm}|}
-					\hline
-					\tableheaderfunction & 
-					\tableheadereffort \\
-					\hline
-					\hline
-					#functionCosts#
-					\rowcolor[gray]{.85}\textbf{\tablefootertotaleffort} &
-					\textbf{#totalCosts#} \\
-					\hline
-				\end{longtable}
-			%\caption{Aufwandsabschätzung gegliedert nach Unterfunktionen.}
-			%\label{tab:aufwand}
-		%\end{table}
+		\begin{longtable}{|l|p{2.25cm}|}
+			\hline
+			\tableheaderfunction & 
+			\tableheadereffort \\
+			\hline
+			\hline
+			#functionCosts#
+			\textbf{\tablefootertotaleffort} &
+			\textbf{#totalCosts#} \\
+			\hline
+		\end{longtable}
 		*/
 		return __content.toString();
 	}
@@ -166,7 +158,6 @@ public class LatexGenerator {
 	__content.append("");
 		/**/
 		if (functionSet.eContainer() != null) {
-	__content.append("\\rowcolor[gray]{.9}\n");
 	__content.append("\\textbf{");
 	__content.append(readableName.replaceAll("\\n\\z",""));
 	__content.append("} & \\textbf{");
@@ -174,8 +165,7 @@ public class LatexGenerator {
 	__content.append("} (Summe) \\\\\n");
 	__content.append("\\hline\n");
 	__content.append("");
-/*			\rowcolor[gray]{.9}
-			\textbf{#readableName#} & \textbf{#totalCosts#} (Summe) \\
+/*			\textbf{#readableName#} & \textbf{#totalCosts#} (Summe) \\
 			\hline
 */
 		}
@@ -216,8 +206,8 @@ public class LatexGenerator {
 		/*
 		#prefix# */
 		if (hasChildren) {
-	__content.append("\\rowcolor[gray]{.95}\\textbf{");
-			/*\rowcolor[gray]{.95}\textbf{*/
+	__content.append("\\textbf{");
+			/*\textbf{*/
 		}
 	__content.append(" ");
 	__content.append(readableName.replaceAll("\\n\\z",""));
