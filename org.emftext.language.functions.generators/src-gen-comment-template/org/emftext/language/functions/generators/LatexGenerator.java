@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.emftext.language.functions.Function;
 import org.emftext.language.functions.FunctionSet;
+import org.emftext.language.functions.TargetVersion;
 import de.devboost.commenttemplate.ReplacementRule;
 import de.devboost.commenttemplate.VariableAntiQuotation;
 
@@ -27,6 +28,7 @@ public class LatexGenerator {
 	__content.append("\\newcommand{\\tableheadereffort}[0]{Costs in \\timeunit}\n");
 	__content.append("\\newcommand{\\tablefootertotaleffort}[0]{Total costs}\n");
 	__content.append("\\newcommand{\\costtablecaption}[0]{Cost per function}\n");
+	__content.append("\\newcommand{\\targetversion}[0]{Target version: }\n");
 	__content.append("\n");
 	__content.append("\\makeatletter\n");
 	__content.append("\\newcounter{subsubsubsection}[subsubsection]\n");
@@ -44,10 +46,14 @@ public class LatexGenerator {
 	__content.append("\\clearpage\n");
 	__content.append("\n");
 	__content.append("\\section{Functions}\n");
-	__content.append("\\input{«filename»_function_descriptions}\n");
+	__content.append("\\input{");
+	__content.append(filename.replaceAll("\\n\\z",""));
+	__content.append("_function_descriptions}\n");
 	__content.append("\n");
 	__content.append("\\section{Costs}\n");
-	__content.append("\\input{«filename»_function_costs}\n");
+	__content.append("\\input{");
+	__content.append(filename.replaceAll("\\n\\z",""));
+	__content.append("_function_costs}\n");
 	__content.append("\n");
 	__content.append("\\end{document}\n");
 	__content.append("");
@@ -64,6 +70,7 @@ public class LatexGenerator {
 		\newcommand{\tableheadereffort}[0]{Costs in \timeunit}
 		\newcommand{\tablefootertotaleffort}[0]{Total costs}
 		\newcommand{\costtablecaption}[0]{Cost per function}
+		\newcommand{\targetversion}[0]{Target version: }
 		
 		\makeatletter
 		\newcounter{subsubsubsection}[subsubsection]
@@ -81,10 +88,10 @@ public class LatexGenerator {
 		\clearpage
 		
 		\section{Functions}
-		\input{«filename»_function_descriptions}
+		\input{#filename#_function_descriptions}
 		
 		\section{Costs}
-		\input{«filename»_function_costs}
+		\input{#filename#_function_costs}
 		
 		\end{document}
 		*/
@@ -128,7 +135,7 @@ public class LatexGenerator {
 	__content.append(functionCosts.replaceAll("\\n\\z","").replace("\n","\n\t"));
 	__content.append("\n");
 	__content.append("\t\\textbf{\\tablefootertotaleffort} &\n");
-	__content.append("\t\\textbf{");
+	__content.append("\t\\textbf{$\\sum$ ");
 	__content.append(totalCosts.replaceAll("\\n\\z","").replace("\n","\n\t"));
 	__content.append("} \\\\\n");
 	__content.append("\t\\hline\n");
@@ -145,7 +152,7 @@ public class LatexGenerator {
 			\hline
 			#functionCosts#
 			\textbf{\tablefootertotaleffort} &
-			\textbf{#totalCosts#} \\
+			\textbf{$\sum$ #totalCosts#} \\
 			\hline
 		\end{longtable}
 		*/
@@ -171,12 +178,12 @@ public class LatexGenerator {
 		}
 		List<Function> rootFunctions = getFunctions(functionSet, false);
 		for (Function rootFunction :rootFunctions) {
-			String column = generateColumnForFunction(rootFunction, "\\xspace\\xspace");
+			String row = generateRowForFunction(rootFunction, "\\xspace\\xspace");
 	__content.append("");
-	__content.append(column.replaceAll("\\n\\z",""));
+	__content.append(row.replaceAll("\\n\\z",""));
 	__content.append("\n");
 	__content.append("");
-/*			#column#
+/*			#row#
 */
 		}
 		for (FunctionSet subset : functionSet.getSubsets()) {
@@ -194,56 +201,59 @@ public class LatexGenerator {
 		*/
 		return __content.toString();
 	}
-	public String generateColumnForFunction(Function function, String prefix) {
+	public String generateRowForFunction(Function function, String prefix) {
 	StringBuilder __content = new StringBuilder();
 		boolean hasChildren = !function.getChildren().isEmpty();
+		boolean isIgnored = function.getTargetVersion() != null && function.getTargetVersion().isIgnored(); 
 		String readableName = function.getReadableName();
 		String totalCosts = Integer.toString(function.getTotalCosts());
+		if (!isIgnored) {
 	__content.append("\n");
 	__content.append("");
 	__content.append(prefix.replaceAll("\\n\\z",""));
 	__content.append(" ");
-		/*
-		#prefix# */
-		if (hasChildren) {
+			/*
+			#prefix# */
+			if (hasChildren) {
 	__content.append("\\textbf{");
-			/*\textbf{*/
-		}
+				/*\textbf{*/
+			}
 	__content.append(" ");
 	__content.append(readableName.replaceAll("\\n\\z",""));
 	__content.append(" ");
-		/* #readableName# */
-		if (hasChildren) {
+			/* #readableName# */
+			if (hasChildren) {
 	__content.append("}");
-			/*}*/
-		}
+				/*}*/
+			}
 	__content.append("&");
-		/*&*/
-		if (hasChildren) {
+			/*&*/
+			if (hasChildren) {
 	__content.append("\\textbf{");
-			/*\textbf{*/
-		}
+				/*\textbf{*/
+			}
+			if (hasChildren) {
+	__content.append("$\\sum$ ");
+				/*$\sum$ */
+			}
 	__content.append("");
 	__content.append(totalCosts.replaceAll("\\n\\z",""));
 	__content.append("");
-		/*#totalCosts#*/
-		if (hasChildren) {
+			/*#totalCosts#*/
+			if (hasChildren) {
 	__content.append("}");
-			/*}*/
-		}
-		if (hasChildren) {
-	__content.append(" ($\\sum$)");
-			/* ($\sum$)*/
-		}
+				/*}*/
+			}
 	__content.append("\\\\\n");
 	__content.append("\\hline\n");
 	__content.append("");
-		/*\\
-		\hline
-		*/
+			/*\\
+			\hline
+			*/
+		}
 		List<Function> validChildren = getValidChildFunctions(function);
 		for (Function childFunction :validChildren) {
-			String column = generateColumnForFunction(childFunction, "\\xspace\\xspace" + prefix);
+			String column = generateRowForFunction(childFunction, "\\xspace\\xspace" + prefix);
 	__content.append("");
 	__content.append(column.replaceAll("\\n\\z",""));
 	__content.append("");
@@ -301,16 +311,41 @@ public class LatexGenerator {
 		String description = readableDescription == null ? "" : readableDescription.replaceAll("'(.*)'", "\\\\inquotes{\\1}");
 	__content.append(" ");
 	__content.append(description.replaceAll("\\n\\z",""));
-	__content.append(" ");
-		/* #description# */
+	__content.append("\n");
+	__content.append("");
+		/* #description#
+		*/
 		
 		if (!relatedFunctions.isEmpty()) {
-	__content.append("\\vspace{0.2cm}\\noindent{\\footnotesize Verwandte Funktionen: ");
+	__content.append("\n");
+	__content.append("\\vspace{0.2cm}\n");
+	__content.append("\n");
+	__content.append("\\noindent{\\footnotesize Verwandte Funktionen: ");
 	__content.append(linksToRelatedFunctions.replaceAll("\\n\\z",""));
-	__content.append("}");
-			/*\vspace{0.2cm}\noindent{\footnotesize Verwandte Funktionen: #linksToRelatedFunctions#}*/
-		}
+	__content.append("}\n");
+	__content.append("");
+			/*
+			\vspace{0.2cm}
 			
+			\noindent{\footnotesize Verwandte Funktionen: #linksToRelatedFunctions#}
+			*/
+		}
+		if (function.getChildren().isEmpty()) {
+			TargetVersion targetVersion = function.getTargetVersion();
+			String targetName = "n/a";
+			if (targetVersion != null) {
+				targetName = targetVersion.getReadableName();
+			}
+	__content.append("\n");
+	__content.append("\\noindent{\\footnotesize \\targetversion ");
+	__content.append(targetName.replaceAll("\\n\\z",""));
+	__content.append("}\n");
+	__content.append("");
+			/*
+			\noindent{\footnotesize \targetversion #targetName#}
+			*/
+		}
+
 		List<Function> validChildren = getValidChildFunctions(function);
 		for (Function childFunction :validChildren) {
 			String subText = generateLatexForFunction(childFunction, ("sub" + prefix));

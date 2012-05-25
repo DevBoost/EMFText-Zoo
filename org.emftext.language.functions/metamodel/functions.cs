@@ -29,7 +29,10 @@ RULES {
 		ignored["ignored" : ""] 
 		"function" name[] (":" parent[])? (costs[])?
 		("->" relatedTo[]*)?
+		("@" targetVersion[])?
 		(description['"','"'])?;
+		
+	TargetVersion ::= ignored["ignored" : ""] "version" name[];
 		
 	Property ::= "property" name[] multiple["*" : ""] (":" datatype[])? (description['"','"'])?;
 	Datatype ::= 

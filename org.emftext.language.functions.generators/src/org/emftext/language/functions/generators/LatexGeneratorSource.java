@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.emftext.language.functions.Function;
 import org.emftext.language.functions.FunctionSet;
+import org.emftext.language.functions.TargetVersion;
 
 import de.devboost.commenttemplate.CommentTemplate;
 import de.devboost.commenttemplate.ReplacementRule;
@@ -30,6 +31,7 @@ public class LatexGeneratorSource {
 		\newcommand{\tableheadereffort}[0]{Costs in \timeunit}
 		\newcommand{\tablefootertotaleffort}[0]{Total costs}
 		\newcommand{\costtablecaption}[0]{Cost per function}
+		\newcommand{\targetversion}[0]{Target version: }
 		
 		\makeatletter
 		\newcounter{subsubsubsection}[subsubsection]
@@ -47,10 +49,10 @@ public class LatexGeneratorSource {
 		\clearpage
 		
 		\section{Functions}
-		\input{«filename»_function_descriptions}
+		\input{#filename#_function_descriptions}
 		
 		\section{Costs}
-		\input{«filename»_function_costs}
+		\input{#filename#_function_costs}
 		
 		\end{document}
 		*/
@@ -87,7 +89,7 @@ public class LatexGeneratorSource {
 			\hline
 			#functionCosts#
 			\textbf{\tablefootertotaleffort} &
-			\textbf{#totalCosts#} \\
+			\textbf{$\sum$ #totalCosts#} \\
 			\hline
 		\end{longtable}
 		*/
@@ -106,8 +108,8 @@ public class LatexGeneratorSource {
 		}
 		List<Function> rootFunctions = getFunctions(functionSet, false);
 		for (Function rootFunction : rootFunctions) {
-			String column = generateColumnForFunction(rootFunction, "\\xspace\\xspace");
-/*			#column#
+			String row = generateRowForFunction(rootFunction, "\\xspace\\xspace");
+/*			#row#
 */
 		}
 		for (FunctionSet subset : functionSet.getSubsets()) {
@@ -121,36 +123,39 @@ public class LatexGeneratorSource {
 	}
 	
 	@CommentTemplate
-	public String generateColumnForFunction(Function function, String prefix) {
+	public String generateRowForFunction(Function function, String prefix) {
 		boolean hasChildren = !function.getChildren().isEmpty();
+		boolean isIgnored = function.getTargetVersion() != null && function.getTargetVersion().isIgnored(); 
 		String readableName = function.getReadableName();
 		String totalCosts = Integer.toString(function.getTotalCosts());
-		/*
-		#prefix# */
-		if (hasChildren) {
-			/*\textbf{*/
+		if (!isIgnored) {
+			/*
+			#prefix# */
+			if (hasChildren) {
+				/*\textbf{*/
+			}
+			/* #readableName# */
+			if (hasChildren) {
+				/*}*/
+			}
+			/*&*/
+			if (hasChildren) {
+				/*\textbf{*/
+			}
+			if (hasChildren) {
+				/*$\sum$ */
+			}
+			/*#totalCosts#*/
+			if (hasChildren) {
+				/*}*/
+			}
+			/*\\
+			\hline
+			*/
 		}
-		/* #readableName# */
-		if (hasChildren) {
-			/*}*/
-		}
-		/*&*/
-		if (hasChildren) {
-			/*\textbf{*/
-		}
-		/*#totalCosts#*/
-		if (hasChildren) {
-			/*}*/
-		}
-		if (hasChildren) {
-			/* ($\sum$)*/
-		}
-		/*\\
-		\hline
-		*/
 		List<Function> validChildren = getValidChildFunctions(function);
 		for (Function childFunction : validChildren) {
-			String column = generateColumnForFunction(childFunction, "\\xspace\\xspace" + prefix);
+			String column = generateRowForFunction(childFunction, "\\xspace\\xspace" + prefix);
 			/*#column#*/
 		}
 		return null;
@@ -189,12 +194,27 @@ public class LatexGeneratorSource {
 		}
 		String readableDescription = function.getReadableDescription();
 		String description = readableDescription == null ? "" : readableDescription.replaceAll("'(.*)'", "\\\\inquotes{\\1}");
-		/* #description# */
+		/* #description#
+		*/
 		
 		if (!relatedFunctions.isEmpty()) {
-			/*\vspace{0.2cm}\noindent{\footnotesize Verwandte Funktionen: #linksToRelatedFunctions#}*/
-		}
+			/*
+			\vspace{0.2cm}
 			
+			\noindent{\footnotesize Verwandte Funktionen: #linksToRelatedFunctions#}
+			*/
+		}
+		if (function.getChildren().isEmpty()) {
+			TargetVersion targetVersion = function.getTargetVersion();
+			String targetName = "n/a";
+			if (targetVersion != null) {
+				targetName = targetVersion.getReadableName();
+			}
+			/*
+			\noindent{\footnotesize \targetversion #targetName#}
+			*/
+		}
+
 		List<Function> validChildren = getValidChildFunctions(function);
 		for (Function childFunction : validChildren) {
 			String subText = generateLatexForFunction(childFunction, ("sub" + prefix));
