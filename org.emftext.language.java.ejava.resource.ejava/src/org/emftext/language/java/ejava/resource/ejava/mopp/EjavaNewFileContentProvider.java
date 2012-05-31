@@ -33,6 +33,7 @@ import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.ejava.resource.ejava.IEjavaTextPrinter;
+import org.emftext.language.java.ejava.resource.ejava.util.EjavaLayoutUtil;
 import org.emftext.language.java.ejava.resource.ejava.util.EjavaRuntimeUtil;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.ImportsFactory;
@@ -97,7 +98,15 @@ public class EjavaNewFileContentProvider {
 		}
 		packageWrapper.getClassifiers().add(classWrapper);
 		ClassifierImport classifierImport = ImportsFactory.eINSTANCE.createClassifierImport();
-		classifierImport.getComments().add("//Plain Java imports");
+		
+		/*
+		KeywordLayoutInformation layoutInformation = LayoutFactory.eINSTANCE.createKeywordLayoutInformation();
+		layoutInformation.setHiddenTokenText("// Plain Java imports");
+		layoutInformation.setVisibleTokenText("import");
+		layoutInformation.setSyntaxElementID("JAVA_3_0_0_0");
+		classifierImport.getLayoutInformations().add(layoutInformation);
+		*/
+		
 		EClassifierClassWrapper eobjectImport = factory.createEClassifierClassWrapper();
 		eobjectImport.setName(EObject.class.getName());
 		eobjectImport.setEClassifier(EcorePackage.Literals.EOBJECT);
@@ -118,6 +127,7 @@ public class EjavaNewFileContentProvider {
 		java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
 		org.emftext.language.java.ejava.resource.ejava.IEjavaTextPrinter printer = getPrinter(buffer);
 		try {
+			new EjavaLayoutUtil().transferAllLayoutInformationFromModel(root);
 			printer.print(root);
 		} catch (java.io.IOException e) {
 			new org.emftext.language.java.ejava.resource.ejava.util.EjavaRuntimeUtil().logError("Exception while generating example content.", e);
