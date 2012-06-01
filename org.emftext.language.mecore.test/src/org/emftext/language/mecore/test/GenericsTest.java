@@ -15,8 +15,17 @@
  ******************************************************************************/
 package org.emftext.language.mecore.test;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.mecore.MPackage;
 import org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper;
 import org.emftext.language.mecore.resource.mecore.util.MecoreResourceUtil;
@@ -24,11 +33,53 @@ import org.emftext.language.mecore.resource.mecore.util.MecoreResourceUtil;
 public class GenericsTest extends TestCase {
 
 	public void testBuildingGenerics() {
+		// create test model in memory
 		String exampleModel = 
 			"test <http://www.test.org/>\n" +
 			"ElementProperty<T> (value T)\n"+
-			"IntegerProperty : ElementProperty<EInt>";
+			"IntegerProperty : ElementProperty<EIntegerObject>";
 		MPackage mPackage = MecoreResourceUtil.getResourceContent(exampleModel);
-		new MecoreWrapper().wrapMPackage(mPackage, null);
+		EcoreUtil.resolveAll(mPackage);
+		
+		List<Diagnostic> errors = mPackage.eResource().getErrors();
+		for (Diagnostic error : errors) {
+			System.out.println("GenericsTest.testBuildingGenerics() " + error);
+		}
+		assertEquals("Test resource must not contain errors.", 0, errors.size());
+		
+		// check result
+		EPackage ePackage = new MecoreWrapper().wrapMPackage(mPackage, null);
+		assertNotNull(ePackage);
+		
+		EClassifier elementPropertyClassifier = ePackage.getEClassifier("ElementProperty");
+		assertNotNull(elementPropertyClassifier);
+		
+		List<ETypeParameter> typeParameters = elementPropertyClassifier.getETypeParameters();
+		assertNotNull(typeParameters);
+		assertEquals("ElementProperty must have a type parameter.", 1, typeParameters.size());
+
+		EClassifier integerPropertyClassifier = ePackage.getEClassifier("IntegerProperty");
+		assertNotNull(integerPropertyClassifier);
+		
+		assertTrue(integerPropertyClassifier instanceof EClass);
+		EClass integerPropertyClass = (EClass) integerPropertyClassifier;
+		
+		typeParameters = integerPropertyClassifier.getETypeParameters();
+		assertNotNull(typeParameters);
+		assertEquals("IntegerProperty must not have type parameters.", 0, typeParameters.size());
+		
+		List<EGenericType> genericSuperTypes = integerPropertyClass.getEGenericSuperTypes();
+		assertEquals("IntegerProperty must have one generic super type.", 1, genericSuperTypes.size());
+		
+		EGenericType genericSuperType = genericSuperTypes.get(0);
+		assertSame("Generic super type must be correct.", genericSuperType.getEClassifier(), elementPropertyClassifier);
+
+		List<EGenericType> superTypeArguments = genericSuperType.getETypeArguments();
+		assertEquals("Generic super type must have one type argument.", 1, superTypeArguments.size());
+		
+		assertEquals("Generic super type argument must be correct.", superTypeArguments.get(0).getEClassifier().getName(), "EIntegerObject");
+		
+		List<EGenericType> typeArguments = superTypeArguments;
+		assertEquals("Super type of IntegerProperty must have one type argument.", 1, typeArguments.size());
 	}
 }

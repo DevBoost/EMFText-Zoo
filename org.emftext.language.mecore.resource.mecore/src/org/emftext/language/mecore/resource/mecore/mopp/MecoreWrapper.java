@@ -54,6 +54,7 @@ import org.emftext.language.mecore.MPackage;
 import org.emftext.language.mecore.MParameter;
 import org.emftext.language.mecore.MSimpleMultiplicity;
 import org.emftext.language.mecore.MSimpleMultiplicityValue;
+import org.emftext.language.mecore.MSuperTypeReference;
 import org.emftext.language.mecore.MType;
 import org.emftext.language.mecore.MTypeParameter;
 import org.emftext.language.mecore.MTypedElement;
@@ -199,27 +200,38 @@ public class MecoreWrapper {
 			wrapMOperation(mOperation, eClass);
 		}
 		
+		// handle type parameters
+		addTypeParameters(mClass, eClass);
+		
 		// handle super types
+		wrapMSuperTypeReferences(mClass, eClass);
+	}
+
+	private void wrapMSuperTypeReferences(final MClass mClass,
+			final EClass eClass) {
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				List<EClass> eSuperTypes = eClass.getESuperTypes();
-				for (MClass supertype : mClass.getSupertypes()) {
-					EClass eSuperType = (EClass) mapping.get(supertype);
-					if (eSuperType == null) {
-						continue;
-					}
-					eSuperTypes.add(eSuperType);
+				// add local super types
+				for (MSuperTypeReference supertypeRef : mClass.getSuperTypeReferences()) {
+					wrapMSuperTypeReference(eClass, supertypeRef);
 				}
-				// add imported super types
-				for (EClass eSuperType : mClass.getESupertypes()) {
-					if (!eSuperTypes.contains(eSuperType)) {
-						eSuperTypes.add(eSuperType);
-					}
-				}
+				
 				return true;
 			}
 		});
+	}
+
+	private EClass getSuperType(MSuperTypeReference supertypeRef) {
+		MClass mSupertype = supertypeRef.getSupertype();
+		if (mSupertype != null) {
+			return (EClass) mapping.get(mSupertype);
+		}
+		EClass eSuperType = supertypeRef.getESupertype();
+		if (eSuperType != null) {
+			return eSuperType;
+		}
+		return null;
 	}
 
 	private void wrapMFeature(MFeature mFeature, EClass existingEClass) {
@@ -243,6 +255,8 @@ public class MecoreWrapper {
 			});
 			eFeature = eAttribute;
 		} else if (mType instanceof MEcoreType) {
+			eFeature = createReference(mFeature, mType, existingEClass);
+		} else if (mType instanceof MTypeParameter) {
 			eFeature = createReference(mFeature, mType, existingEClass);
 		} else {
 			throw new RuntimeException("Found unknown subtype of MType: " + mType.eClass().getName());
@@ -292,11 +306,31 @@ public class MecoreWrapper {
 		}
 	}
 
+	private void addTypeParameters(MClass mClass, EClass eClass) {
+		List<MTypeParameter> typeParameters = mClass.getTypeParameters();
+		for (MTypeParameter typeParameter : typeParameters) {
+			findOrCreateETypeParameter(eClass, typeParameter);
+		}
+	}
+
 	private ETypeParameter findOrCreateETypeParameter(EOperation eOperation,
 			MTypeParameter typeParameter) {
+		
+		List<ETypeParameter> eTypeParameters = eOperation.getETypeParameters();
+		return findOrCreateTypeParameter(typeParameter, eTypeParameters);
+	}
+
+	private ETypeParameter findOrCreateETypeParameter(EClass eClass,
+			MTypeParameter typeParameter) {
+		
+		List<ETypeParameter> eTypeParameters = eClass.getETypeParameters();
+		return findOrCreateTypeParameter(typeParameter, eTypeParameters);
+	}
+
+	private ETypeParameter findOrCreateTypeParameter(
+			MTypeParameter typeParameter, List<ETypeParameter> eTypeParameters) {
 		String mName = typeParameter.getName();
 
-		List<ETypeParameter> eTypeParameters = eOperation.getETypeParameters();
 		for (ETypeParameter eTypeParameter : eTypeParameters) {
 			String eName = eTypeParameter.getName();
 			if (eName != null && eName.equals(mName)) {
@@ -560,10 +594,9 @@ public class MecoreWrapper {
 	public Map<MModelElement, EModelElement> getMapping() {
 		return mapping;
 	}
-
-	private void setType(ETypedElement eTypedElement, MType mType, List<MType> mTypeArguments) {
+	
+	private EClassifier getEType(MType mType) {
 		EClassifier eType = null;
-		EGenericType eGenericType = null;
 		if (mType instanceof MEcoreType) {
 			MEcoreType mEcoreType = (MEcoreType) mType;
 			eType = mEcoreType.getEcoreType();
@@ -571,12 +604,28 @@ public class MecoreWrapper {
 			MDataType mDataType = (MDataType) mType;
 			eType = mDataType.getEDataType();
 		} else if (mType instanceof MTypeParameter) {
-			MTypeParameter mTypeParameter = (MTypeParameter) mType;
-			eGenericType = createEGenericType(mTypeParameter);
+			// requires a generic type
 		} else {
 			EClass eClass = (EClass) mapping.get(mType);
 			eType = eClass;
 		}
+		return eType;
+	}
+
+	private EGenericType getGenericEType(MType mType) {
+		if (mType instanceof MTypeParameter) {
+			MTypeParameter mTypeParameter = (MTypeParameter) mType;
+			EGenericType eGenericType = createEGenericTypeParameter(mTypeParameter);
+			return eGenericType;
+		} else {
+			// requires a normal type
+			return null;
+		}
+	}
+
+	private void setType(ETypedElement eTypedElement, MType mType, List<MType> mTypeArguments) {
+		EClassifier eType = getEType(mType);
+		EGenericType eGenericType = getGenericEType(mType);
 
 		if (mTypeArguments.isEmpty()) {
 			if (eType != null) {
@@ -594,16 +643,44 @@ public class MecoreWrapper {
 			}
 			List<EGenericType> eTypeArguments = eGenericType.getETypeArguments();
 			for (MType mTypeArgument : mTypeArguments) {
-				eTypeArguments.add(createEGenericType(mTypeArgument));
+				eTypeArguments.add(createEGenericTypeParameter(mTypeArgument));
 			}
 			eTypedElement.setEGenericType(eGenericType);
 		}
 	}
 
-	private EGenericType createEGenericType(MType mTypeParameter) {
+	private EGenericType createEGenericTypeParameter(MType mType) {
 		EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
-		ETypeParameter eTypeParameter = (ETypeParameter) mapping.get(mTypeParameter);
+		ETypeParameter eTypeParameter = (ETypeParameter) mapping.get(mType);
 		genericType.setETypeParameter(eTypeParameter);
 		return genericType;
+	}
+
+	private void wrapMSuperTypeReference(final EClass eClass, MSuperTypeReference supertypeRef) {
+		List<EClass> eSuperTypes = eClass.getESuperTypes();
+		List<EGenericType> eGenericSuperTypes = eClass.getEGenericSuperTypes();
+
+		EClass eSuperType = getSuperType(supertypeRef);
+		if (eSuperType == null) {
+			return;
+		}
+		List<MType> mTypeArguments = supertypeRef.getTypeArguments();
+		if (mTypeArguments.isEmpty()) {
+			// this is a non-generic super type
+			if (!eSuperTypes.contains(eSuperType)) {
+				eSuperTypes.add(eSuperType);
+			}
+		} else {
+			EGenericType eGenericSuperType = EcoreFactory.eINSTANCE.createEGenericType();
+			eGenericSuperType.setEClassifier(eSuperType);
+			eGenericSuperTypes.add(eGenericSuperType);
+			
+			for (MType mTypeArgument : mTypeArguments) {
+				EGenericType eTypeArgument = EcoreFactory.eINSTANCE.createEGenericType();
+				EClassifier eType = getEType(mTypeArgument);
+				eTypeArgument.setEClassifier(eType);
+				eGenericSuperType.getETypeArguments().add(eTypeArgument);
+			}
+		}
 	}
 }

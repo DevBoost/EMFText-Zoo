@@ -15,21 +15,36 @@
  ******************************************************************************/
 package org.emftext.language.mecore.resource.mecore.analysis;
 
-public class MTypeArgumentableTypeArgumentsReferenceResolver implements org.emftext.language.mecore.resource.mecore.IMecoreReferenceResolver<org.emftext.language.mecore.MTypeArgumentable, org.emftext.language.mecore.MType> {
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.mecore.MFeature;
+import org.emftext.language.mecore.MType;
+import org.emftext.language.mecore.MTypeArgumentable;
+import org.emftext.language.mecore.resource.mecore.IMecoreReferenceResolveResult;
+import org.emftext.language.mecore.resource.mecore.IMecoreReferenceResolver;
+import org.emftext.language.mecore.resource.mecore.analysis.types.TypeResolver;
+
+public class MTypeArgumentableTypeArgumentsReferenceResolver implements IMecoreReferenceResolver<MTypeArgumentable, MType> {
 	
-	private org.emftext.language.mecore.resource.mecore.analysis.MecoreDefaultResolverDelegate<org.emftext.language.mecore.MTypeArgumentable, org.emftext.language.mecore.MType> delegate = new org.emftext.language.mecore.resource.mecore.analysis.MecoreDefaultResolverDelegate<org.emftext.language.mecore.MTypeArgumentable, org.emftext.language.mecore.MType>();
+	private MecoreDefaultResolverDelegate<MFeature, MType> delegate1 = new MecoreDefaultResolverDelegate<MFeature, MType>();
+	private TypeResolver delegate2 = new TypeResolver();
 	
-	public void resolve(String identifier, org.emftext.language.mecore.MTypeArgumentable container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.mecore.resource.mecore.IMecoreReferenceResolveResult<org.emftext.language.mecore.MType> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(String identifier, MTypeArgumentable container, EReference reference, int position, boolean resolveFuzzy, final IMecoreReferenceResolveResult<MType> result) {
+		EObject root = EcoreUtil.getRootContainer(container);
+		delegate1.tryToResolveIdentifierInObjectTree(identifier, container, root, reference, position, resolveFuzzy, result, true);
+		if (!result.wasResolved() || resolveFuzzy) {
+			delegate2.resolve(identifier, container, resolveFuzzy, result);
+		}
 	}
 	
-	public String deResolve(org.emftext.language.mecore.MType element, org.emftext.language.mecore.MTypeArgumentable container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	public String deResolve(MType element, MTypeArgumentable container, EReference reference) {
+		return delegate2.deResolve(element);
 	}
 	
-	public void setOptions(java.util.Map<?,?> options) {
-		// save options in a field or leave method empty if this resolver does not depend
-		// on any option
+	public void setOptions(Map<?,?> options) {
+		// not needed
 	}
-	
 }

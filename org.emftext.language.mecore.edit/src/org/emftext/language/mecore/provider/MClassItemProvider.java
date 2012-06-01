@@ -87,34 +87,10 @@ public class MClassItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSupertypesPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addInterfacePropertyDescriptor(object);
-			addESupertypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Supertypes feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSupertypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_MClass_supertypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MClass_supertypes_feature", "_UI_MClass_type"),
-				 MecorePackage.Literals.MCLASS__SUPERTYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -162,28 +138,6 @@ public class MClassItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the ESupertypes feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addESupertypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_MClass_eSupertypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MClass_eSupertypes_feature", "_UI_MClass_type"),
-				 MecorePackage.Literals.MCLASS__ESUPERTYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -198,6 +152,7 @@ public class MClassItemProvider
 			childrenFeatures.add(MecorePackage.Literals.MCLASSIFIER__OPERATIONS);
 			childrenFeatures.add(MecorePackage.Literals.MTYPE_PARAMETRIZABLE__TYPE_PARAMETERS);
 			childrenFeatures.add(MecorePackage.Literals.MCLASS__FEATURES);
+			childrenFeatures.add(MecorePackage.Literals.MCLASS__SUPER_TYPE_REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -248,6 +203,7 @@ public class MClassItemProvider
 			case MecorePackage.MCLASS__OPERATIONS:
 			case MecorePackage.MCLASS__TYPE_PARAMETERS:
 			case MecorePackage.MCLASS__FEATURES:
+			case MecorePackage.MCLASS__SUPER_TYPE_REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -279,6 +235,11 @@ public class MClassItemProvider
 			(createChildParameter
 				(MecorePackage.Literals.MCLASS__FEATURES,
 				 MecoreFactory.eINSTANCE.createMFeature()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(MecorePackage.Literals.MCLASS__SUPER_TYPE_REFERENCES,
+				 MecoreFactory.eINSTANCE.createMSuperTypeReference()));
 	}
 
 }

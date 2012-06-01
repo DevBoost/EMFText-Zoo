@@ -467,6 +467,29 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.emftext.language.mecore.MSuperTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected MecoreItemProviderAdapter mSuperTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.emftext.language.mecore.MSuperTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public Adapter createMSuperTypeReferenceAdapter() {
+		if (mSuperTypeReferenceItemProvider == null) {
+			mSuperTypeReferenceItemProvider = new MecoreItemProviderAdapter(this);
+		}
+
+		return mSuperTypeReferenceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -581,6 +604,7 @@ public class MecoreItemProviderAdapterFactory extends MecoreAdapterFactory imple
 		if (mTypeParameterItemProvider != null) mTypeParameterItemProvider.dispose();
 		if (mTypeParametrizableItemProvider != null) mTypeParametrizableItemProvider.dispose();
 		if (mTypeArgumentableItemProvider != null) mTypeArgumentableItemProvider.dispose();
+		if (mSuperTypeReferenceItemProvider != null) mSuperTypeReferenceItemProvider.dispose();
 	}
 
 }

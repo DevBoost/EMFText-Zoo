@@ -40,10 +40,14 @@ RULES {
 	MClass   ::= abstract["abstract" : ""] 
 				 interface["interface" : ""]
 	             name[UPPER]
-	             (":" (supertypes[UPPER]|eSupertypes[LOWER]) ("," (supertypes[UPPER]|eSupertypes[LOWER]))* )? 
 	             ("<" typeParameters ("," typeParameters)* ">")? 
+	             (":" superTypeReferences ("," superTypeReferences)* )? 
 	             ("(" features* operations* ")")? ;
-	             
+
+	MSuperTypeReference ::= 
+				(supertype[UPPER] | eSupertype[LOWER]) 
+				("<" typeArguments[UPPER] ("," typeArguments[UPPER])* ">")?;
+				
 	MTypeParameter ::= name[UPPER];
 	
 	@SuppressWarnings(featureWithoutSyntax, optionalKeyword)
