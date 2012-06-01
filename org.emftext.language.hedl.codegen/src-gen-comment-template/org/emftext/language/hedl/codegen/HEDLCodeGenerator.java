@@ -680,6 +680,7 @@ public class HEDLCodeGenerator {
 	__content.append("import org.hibernate.Transaction;\r\n");
 	__content.append("import org.hibernate.cfg.Configuration;\r\n");
 	__content.append("import org.hibernate.classic.Session;\r\n");
+	__content.append("import org.hibernate.stat.Statistics;\r\n");
 	__content.append("\r\n");
 	__content.append("import org.hibernate.tool.hbm2ddl.SchemaExport;\r\n");
 	__content.append("import org.hibernate.tool.hbm2ddl.SchemaUpdate;\r\n");
@@ -710,6 +711,7 @@ public class HEDLCodeGenerator {
 		import org.hibernate.Transaction;
 		import org.hibernate.cfg.Configuration;
 		import org.hibernate.classic.Session;
+		import org.hibernate.stat.Statistics;
 
 		import org.hibernate.tool.hbm2ddl.SchemaExport;
 		import org.hibernate.tool.hbm2ddl.SchemaUpdate;
@@ -856,6 +858,11 @@ public class HEDLCodeGenerator {
 	__content.append("\t\r\n");
 	__content.append("\tpublic abstract void handleException(Exception e, boolean retry);\r\n");
 	__content.append("\t\r\n");
+	__content.append("\tpublic Statistics getStatistics() {\r\n");
+	__content.append("\t\tStatistics statistics = sessionFactory.getStatistics();\r\n");
+	__content.append("\t\treturn statistics;\r\n");
+	__content.append("\t}\r\n");
+	__content.append("\t\r\n");
 	__content.append("\tpublic void tearDown() {\r\n");
 	__content.append("\t\tsessionFactory.close();\r\n");
 	__content.append("\t}\r\n");
@@ -923,6 +930,11 @@ public class HEDLCodeGenerator {
 			}
 			
 			public abstract void handleException(Exception e, boolean retry);
+			
+			public Statistics getStatistics() {
+				Statistics statistics = sessionFactory.getStatistics();
+				return statistics;
+			}
 			
 			public void tearDown() {
 				sessionFactory.close();

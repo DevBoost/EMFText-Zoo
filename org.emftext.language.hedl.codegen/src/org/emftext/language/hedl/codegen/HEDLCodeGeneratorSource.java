@@ -364,6 +364,7 @@ public class HEDLCodeGeneratorSource {
 		import org.hibernate.Transaction;
 		import org.hibernate.cfg.Configuration;
 		import org.hibernate.classic.Session;
+		import org.hibernate.stat.Statistics;
 
 		import org.hibernate.tool.hbm2ddl.SchemaExport;
 		import org.hibernate.tool.hbm2ddl.SchemaUpdate;
@@ -466,6 +467,11 @@ public class HEDLCodeGeneratorSource {
 			}
 			
 			public abstract void handleException(Exception e, boolean retry);
+			
+			public Statistics getStatistics() {
+				Statistics statistics = sessionFactory.getStatistics();
+				return statistics;
+			}
 			
 			public void tearDown() {
 				sessionFactory.close();
