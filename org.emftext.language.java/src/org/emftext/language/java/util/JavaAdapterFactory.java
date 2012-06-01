@@ -17,12 +17,9 @@ package org.emftext.language.java.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.emftext.language.java.*;
+import org.emftext.language.java.JavaPackage;
 
 /**
  * <!-- begin-user-doc -->

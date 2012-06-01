@@ -16,8 +16,8 @@
 package org.emftext.language.java.util;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.emftext.language.java.generics.TypeArgument;
 
 

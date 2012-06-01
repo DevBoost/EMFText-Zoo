@@ -15,8 +15,8 @@
  ******************************************************************************/
 package org.emftext.language.java.util;
 
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.classifiers.Classifier;
