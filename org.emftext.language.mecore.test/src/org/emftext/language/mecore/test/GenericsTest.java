@@ -32,24 +32,14 @@ import org.emftext.language.mecore.resource.mecore.util.MecoreResourceUtil;
 
 public class GenericsTest extends TestCase {
 
-	public void testBuildingGenerics() {
+	public void testBuildingGenerics1() {
 		// create test model in memory
 		String exampleModel = 
 			"test <http://www.test.org/>\n" +
 			"ElementProperty<T> (value T)\n"+
 			"IntegerProperty : ElementProperty<EIntegerObject>";
-		MPackage mPackage = MecoreResourceUtil.getResourceContent(exampleModel);
-		EcoreUtil.resolveAll(mPackage);
-		
-		List<Diagnostic> errors = mPackage.eResource().getErrors();
-		for (Diagnostic error : errors) {
-			System.out.println("GenericsTest.testBuildingGenerics() " + error);
-		}
-		assertEquals("Test resource must not contain errors.", 0, errors.size());
-		
-		// check result
-		EPackage ePackage = new MecoreWrapper().wrapMPackage(mPackage, null);
-		assertNotNull(ePackage);
+
+		EPackage ePackage = createAndWrapModel(exampleModel);
 		
 		EClassifier elementPropertyClassifier = ePackage.getEClassifier("ElementProperty");
 		assertNotNull(elementPropertyClassifier);
@@ -81,5 +71,54 @@ public class GenericsTest extends TestCase {
 		
 		List<EGenericType> typeArguments = superTypeArguments;
 		assertEquals("Super type of IntegerProperty must have one type argument.", 1, typeArguments.size());
+	}
+	
+	public void testBuildingGenerics2() {
+		
+		String exampleModel = 
+				"test <http://www.test.org/>\n" +
+				"NamedElement\n" +
+				"ClassA<T : NamedElement>";
+
+		EPackage ePackage = createAndWrapModel(exampleModel);
+		
+		EClassifier classifierA = ePackage.getEClassifier("ClassA");
+		assertNotNull(classifierA);
+
+		EClassifier namedElementClassifier = ePackage.getEClassifier("NamedElement");
+		assertNotNull(namedElementClassifier);
+		
+		assertTrue(classifierA instanceof EClass);
+		EClass classA = (EClass) classifierA;
+		
+		List<ETypeParameter> typeParameters = classA.getETypeParameters();
+		assertNotNull(typeParameters);
+		assertEquals("Class A must have one type parameter.", 1, typeParameters.size());
+		ETypeParameter typeParameter = typeParameters.get(0);
+		assertEquals("T", typeParameter.getName());
+		
+		List<EGenericType> bounds = typeParameter.getEBounds();
+		assertEquals("Type parameter T must have one bound.", 1, bounds.size());
+		
+		EGenericType bound = bounds.get(0);
+		EClassifier lowerBound = bound.getEClassifier();
+		assertNotNull(lowerBound);
+		assertEquals(lowerBound, namedElementClassifier);
+	}
+
+	private EPackage createAndWrapModel(String exampleModel) {
+		MPackage mPackage = MecoreResourceUtil.getResourceContent(exampleModel);
+		EcoreUtil.resolveAll(mPackage);
+		
+		List<Diagnostic> errors = mPackage.eResource().getErrors();
+		for (Diagnostic error : errors) {
+			System.out.println("GenericsTest.testBuildingGenerics() " + error);
+		}
+		assertEquals("Test resource must not contain errors.", 0, errors.size());
+		
+		// check result
+		EPackage ePackage = new MecoreWrapper().wrapMPackage(mPackage, null);
+		assertNotNull(ePackage);
+		return ePackage;
 	}
 }

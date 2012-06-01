@@ -61,34 +61,40 @@ import org.emftext.language.mecore.MTypedElement;
 import org.emftext.language.mecore.resource.mecore.IMecoreCommand;
 
 /**
- * Converts Mecore models to Ecore models. The wrapper tries to keep the 
+ * Converts Mecore models to Ecore models. The wrapper tries to keep the
  * contents of the previous Ecore model to the extent possible.
  */
 public class MecoreWrapper {
-	
-	private static final String ANNOTATION_SOURCE = MecoreWrapper.class.getName();
+
+	private static final String ANNOTATION_SOURCE = MecoreWrapper.class
+			.getName();
 	private static final String COMMENT_KEY = "WARNING";
 	private static final String COMMENT_VALUE = "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.";
-	
-	private Map<MModelElement, EModelElement> mapping = new LinkedHashMap<MModelElement, EModelElement>();
-	
+
+	private Map<MModelElement, EObject> primaryMapping = new LinkedHashMap<MModelElement, EObject>();
+	// this mappings to used to trace validation errors that are detected in the
+	// Ecore model back to
+	// the Mecore model
+	private Map<EObject, MModelElement> reverseMapping = new LinkedHashMap<EObject, MModelElement>();
+
 	/**
-	 * Some steps in the creation of the Ecore model need to be postponed (e.g., the creation
-	 * of super type references). We collect these steps in this list of commands and execute
-	 * them after the structure of the Ecore model was created completely.
+	 * Some steps in the creation of the Ecore model need to be postponed (e.g.,
+	 * the creation of super type references). We collect these steps in this
+	 * list of commands and execute them after the structure of the Ecore model
+	 * was created completely.
 	 */
 	private List<IMecoreCommand<Object>> commands = new ArrayList<IMecoreCommand<Object>>();
 
 	public EPackage wrapMPackage(MPackage mPackage, EPackage existingEPackage) {
 		if (existingEPackage != null) {
-			mapping.put(mPackage, existingEPackage);
+			primaryMapping.put(mPackage, existingEPackage);
 		}
 		EPackage superPackage = null;
 		if (existingEPackage != null) {
 			existingEPackage.getESuperPackage();
 		}
 		EPackage ePackage = findOrCreateEPackage(mPackage, superPackage);
-		
+
 		// set package properties
 		String packageName = mPackage.getName();
 		if (packageName == null) {
@@ -98,17 +104,17 @@ public class MecoreWrapper {
 		}
 		ePackage.setNsURI(mPackage.getNamespace());
 		ePackage.setNsPrefix(mPackage.getName());
-		
+
 		// process package contents
 		for (MClassifier mClassifier : mPackage.getContents()) {
 			wrapMClassifier(mClassifier, ePackage);
 		}
-		
+
 		// execute deferred commands
 		for (IMecoreCommand<Object> command : commands) {
 			command.execute(null);
 		}
-		
+
 		removeObsoleteElements(ePackage);
 		return ePackage;
 	}
@@ -121,11 +127,13 @@ public class MecoreWrapper {
 		}
 	}
 
-	private void removeObsoleteElements(EObject eObject, List<EObject> obsoleteElements) {
-		// remove elements that have an MEcore annotation, but that are not present
+	private void removeObsoleteElements(EObject eObject,
+			List<EObject> obsoleteElements) {
+		// remove elements that have an MEcore annotation, but that are not
+		// present
 		// in the .mecore file anymore
 		for (EObject child : eObject.eContents()) {
-			boolean wasMapped = mapping.values().contains(child);
+			boolean wasMapped = primaryMapping.values().contains(child);
 			boolean isAnnotation = child instanceof EAnnotation;
 			if (hasAnnotation(child) && !wasMapped && !isAnnotation) {
 				obsoleteElements.add(child);
@@ -138,6 +146,7 @@ public class MecoreWrapper {
 
 	private void addAnnotation(EModelElement element, String comment) {
 		EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+		// TODO add reverse mapping
 		eAnnotation.setSource(ANNOTATION_SOURCE);
 		eAnnotation.getDetails().put(COMMENT_KEY, comment);
 		element.getEAnnotations().add(eAnnotation);
@@ -168,20 +177,22 @@ public class MecoreWrapper {
 		for (MEnumLiteral literal : mEnum.getLiterals()) {
 			wrapMEnumLiteral(literal, eEnum, count++);
 		}
-		mapping.put(mEnum, eEnum);
+		primaryMapping.put(mEnum, eEnum);
 	}
 
-	private void wrapMEnumLiteral(MEnumLiteral literal, EEnum existingEEnum, int count) {
-		EEnumLiteral eEnumLiteral = findOrCreateEEnumLiteral(literal, existingEEnum);
+	private void wrapMEnumLiteral(MEnumLiteral literal, EEnum existingEEnum,
+			int count) {
+		EEnumLiteral eEnumLiteral = findOrCreateEEnumLiteral(literal,
+				existingEEnum);
 		eEnumLiteral.setName(literal.getName());
 		eEnumLiteral.setLiteral(literal.getLiteral());
 		eEnumLiteral.setValue(count);
-		mapping.put(literal, eEnumLiteral);
+		primaryMapping.put(literal, eEnumLiteral);
 	}
 
 	private void wrapMClass(final MClass mClass, EPackage ePackage) {
 		final EClass eClass = findOrCreateEClass(mClass, ePackage);
-		mapping.put(mClass, eClass);
+		primaryMapping.put(mClass, eClass);
 		eClass.getESuperTypes().clear();
 		eClass.setName(mClass.getName());
 
@@ -189,20 +200,20 @@ public class MecoreWrapper {
 		// interfaces must be abstract
 		eClass.setAbstract(isInterface || mClass.isAbstract());
 		eClass.setInterface(isInterface);
-		
+
 		// handle features
 		for (MFeature mFeature : mClass.getFeatures()) {
 			wrapMFeature(mFeature, eClass);
 		}
-		
+
 		// handle operations
 		for (MOperation mOperation : mClass.getOperations()) {
 			wrapMOperation(mOperation, eClass);
 		}
-		
+
 		// handle type parameters
 		addTypeParameters(mClass, eClass);
-		
+
 		// handle super types
 		wrapMSuperTypeReferences(mClass, eClass);
 	}
@@ -213,10 +224,11 @@ public class MecoreWrapper {
 
 			public boolean execute(Object context) {
 				// add local super types
-				for (MSuperTypeReference supertypeRef : mClass.getSuperTypeReferences()) {
+				for (MSuperTypeReference supertypeRef : mClass
+						.getSuperTypeReferences()) {
 					wrapMSuperTypeReference(eClass, supertypeRef);
 				}
-				
+
 				return true;
 			}
 		});
@@ -225,7 +237,7 @@ public class MecoreWrapper {
 	private EClass getSuperType(MSuperTypeReference supertypeRef) {
 		MClass mSupertype = supertypeRef.getSupertype();
 		if (mSupertype != null) {
-			return (EClass) mapping.get(mSupertype);
+			return (EClass) primaryMapping.get(mSupertype);
 		}
 		EClass eSuperType = supertypeRef.getESupertype();
 		if (eSuperType != null) {
@@ -245,11 +257,12 @@ public class MecoreWrapper {
 		} else if (mType instanceof MDataType) {
 			eFeature = createAttribute(mFeature, existingEClass, mType);
 		} else if (mType instanceof MEnum) {
-			final EAttribute eAttribute = findOrCreateEAttribute(mFeature, existingEClass);
+			final EAttribute eAttribute = findOrCreateEAttribute(mFeature,
+					existingEClass);
 			commands.add(new IMecoreCommand<Object>() {
 
 				public boolean execute(Object context) {
-					eAttribute.setEType((EEnum) mapping.get(mType));
+					eAttribute.setEType((EEnum) primaryMapping.get(mType));
 					return true;
 				}
 			});
@@ -259,10 +272,11 @@ public class MecoreWrapper {
 		} else if (mType instanceof MTypeParameter) {
 			eFeature = createReference(mFeature, mType, existingEClass);
 		} else {
-			throw new RuntimeException("Found unknown subtype of MType: " + mType.eClass().getName());
+			throw new RuntimeException("Found unknown subtype of MType: "
+					+ mType.eClass().getName());
 		}
 		setMulitplicity(mFeature, eFeature);
-		mapping.put(mFeature, eFeature);
+		primaryMapping.put(mFeature, eFeature);
 		eFeature.setName(mFeature.getName());
 	}
 
@@ -270,7 +284,7 @@ public class MecoreWrapper {
 			EClass existingEClass, final MType mType) {
 		// primitive type, create attribute
 		EAttribute eAttribute = findOrCreateEAttribute(mFeature, existingEClass);
-		setType(eAttribute, mType, Collections.<MType>emptyList());
+		setType(eAttribute, mType, Collections.<MType> emptyList());
 		return eAttribute;
 	}
 
@@ -279,7 +293,8 @@ public class MecoreWrapper {
 		if (mType == null) {
 			return;
 		}
-		final EOperation eOperation = findOrCreateEOperation(mOperation, existingEClass);
+		final EOperation eOperation = findOrCreateEOperation(mOperation,
+				existingEClass);
 		addTypeParameters(mOperation, eOperation);
 		// handle parameters
 		for (MParameter mParameter : mOperation.getParameters()) {
@@ -289,13 +304,13 @@ public class MecoreWrapper {
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				setType(eOperation, mType, Collections.<MType>emptyList());
+				setType(eOperation, mType, Collections.<MType> emptyList());
 				return true;
 			}
 		});
 
 		setMulitplicity(mOperation, eOperation);
-		mapping.put(mOperation, eOperation);
+		primaryMapping.put(mOperation, eOperation);
 		eOperation.setName(mOperation.getName());
 	}
 
@@ -315,44 +330,72 @@ public class MecoreWrapper {
 
 	private ETypeParameter findOrCreateETypeParameter(EOperation eOperation,
 			MTypeParameter typeParameter) {
-		
+
 		List<ETypeParameter> eTypeParameters = eOperation.getETypeParameters();
 		return findOrCreateTypeParameter(typeParameter, eTypeParameters);
 	}
 
 	private ETypeParameter findOrCreateETypeParameter(EClass eClass,
 			MTypeParameter typeParameter) {
-		
+
 		List<ETypeParameter> eTypeParameters = eClass.getETypeParameters();
 		return findOrCreateTypeParameter(typeParameter, eTypeParameters);
 	}
 
 	private ETypeParameter findOrCreateTypeParameter(
-			MTypeParameter typeParameter, List<ETypeParameter> eTypeParameters) {
+			final MTypeParameter typeParameter,
+			List<ETypeParameter> eTypeParameters) {
 		String mName = typeParameter.getName();
 
 		for (ETypeParameter eTypeParameter : eTypeParameters) {
 			String eName = eTypeParameter.getName();
 			if (eName != null && eName.equals(mName)) {
-				mapping.put(typeParameter, eTypeParameter);
+				primaryMapping.put(typeParameter, eTypeParameter);
 				return eTypeParameter;
 			}
 		}
-		ETypeParameter newETypeParameter = EcoreFactory.eINSTANCE.createETypeParameter();
+		final ETypeParameter newETypeParameter = EcoreFactory.eINSTANCE
+				.createETypeParameter();
+		reverseMapping.put(newETypeParameter, typeParameter);
 		newETypeParameter.setName(mName);
+
+		// set type bounds
+		commands.add(new IMecoreCommand<Object>() {
+
+			@Override
+			public boolean execute(Object context) {
+				setTypeBound(typeParameter, newETypeParameter);
+				return true;
+			}
+		});
+
 		eTypeParameters.add(newETypeParameter);
 		// TODO this mapping must consider scoping of type parameters
-		mapping.put(typeParameter, newETypeParameter);
+		primaryMapping.put(typeParameter, newETypeParameter);
 		return newETypeParameter;
 	}
 
-	private void wrapMParameter(MParameter mParameter, EOperation existingOperation) {
+	private void setTypeBound(MTypeParameter mTypeParameter,
+			ETypeParameter eTypeParameter) {
+		MType lowerBound = mTypeParameter.getLowerBound();
+		if (lowerBound != null) {
+			EGenericType eLowerBound = EcoreFactory.eINSTANCE
+					.createEGenericType();
+			reverseMapping.put(eLowerBound, mTypeParameter);
+			eLowerBound.setEClassifier(getEType(lowerBound));
+			eTypeParameter.getEBounds().add(eLowerBound);
+		}
+	}
+
+	private void wrapMParameter(MParameter mParameter,
+			EOperation existingOperation) {
 		final MType mType = mParameter.getType();
 		if (mType == null) {
 			return;
 		}
 		final List<MType> typeArguments = mParameter.getTypeArguments();
-		final EParameter eParameter = findOrCreateEParameter(mParameter, existingOperation);
+		final EParameter eParameter = findOrCreateEParameter(mParameter,
+				existingOperation);
 
 		commands.add(new IMecoreCommand<Object>() {
 
@@ -363,20 +406,22 @@ public class MecoreWrapper {
 		});
 
 		setMulitplicity(mParameter, eParameter);
-		mapping.put(mParameter, eParameter);
+		primaryMapping.put(mParameter, eParameter);
 		eParameter.setName(mParameter.getName());
 	}
 
-	private EStructuralFeature createReference(final MFeature mFeature, final MType mType, EClass eClass) {
+	private EStructuralFeature createReference(final MFeature mFeature,
+			final MType mType, EClass eClass) {
 		// complex type, create reference
 		final EReference eReference = findOrCreateEReference(mFeature, eClass);
 		commands.add(new IMecoreCommand<Object>() {
 
 			public boolean execute(Object context) {
-				setType(eReference, mType, Collections.<MType>emptyList());
+				setType(eReference, mType, Collections.<MType> emptyList());
 				MFeature opposite = mFeature.getOpposite();
 				if (opposite != null) {
-					eReference.setEOpposite((EReference) mapping.get(opposite));
+					eReference.setEOpposite((EReference) primaryMapping
+							.get(opposite));
 				} else {
 					eReference.setEOpposite(null);
 				}
@@ -415,16 +460,18 @@ public class MecoreWrapper {
 		element.setUpperBound(upper);
 	}
 
-	private EPackage findOrCreateEPackage(MPackage mPackage, EPackage existingSuperPackage) {
-		if (mapping.containsKey(mPackage)) {
-			return (EPackage) mapping.get(mPackage);
+	private EPackage findOrCreateEPackage(MPackage mPackage,
+			EPackage existingSuperPackage) {
+		if (primaryMapping.containsKey(mPackage)) {
+			return (EPackage) primaryMapping.get(mPackage);
 		}
 
 		if (existingSuperPackage != null) {
-			List<EPackage> existingSubPackages = existingSuperPackage.getESubpackages();
+			List<EPackage> existingSubPackages = existingSuperPackage
+					.getESubpackages();
 			for (EPackage existingSubPackage : existingSubPackages) {
 				if (mPackage.getName().equals(existingSubPackage.getName())) {
-					mapping.put(mPackage, existingSubPackage);
+					primaryMapping.put(mPackage, existingSubPackage);
 					return (EPackage) existingSubPackage;
 				}
 			}
@@ -432,112 +479,133 @@ public class MecoreWrapper {
 
 		// if we can't find an existing EPackage, we need to create a fresh one
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		reverseMapping.put(ePackage, mPackage);
+		
 		addAnnotation(ePackage, COMMENT_VALUE);
 		if (existingSuperPackage != null) {
 			existingSuperPackage.getESubpackages().add(ePackage);
 		}
-		mapping.put(mPackage, ePackage);
+		primaryMapping.put(mPackage, ePackage);
 		return ePackage;
 	}
 
 	private EClass findOrCreateEClass(MClass mClass, EPackage ePackage) {
-		if (mapping.containsKey(mClass)) {
-			return (EClass) mapping.get(mClass);
+		if (primaryMapping.containsKey(mClass)) {
+			return (EClass) primaryMapping.get(mClass);
 		}
-		
-		EClassifier existingEClassifier = ePackage.getEClassifier(mClass.getName());
-		if (existingEClassifier != null && existingEClassifier instanceof EClass) {
-			mapping.put(mClass, existingEClassifier);
+
+		EClassifier existingEClassifier = ePackage.getEClassifier(mClass
+				.getName());
+		if (existingEClassifier != null
+				&& existingEClassifier instanceof EClass) {
+			primaryMapping.put(mClass, existingEClassifier);
 			return (EClass) existingEClassifier;
 		}
-		
+
 		// if we can't find an existing EClass, we need to create a fresh one
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		reverseMapping.put(eClass, mClass);
 		addAnnotation(eClass, COMMENT_VALUE);
 		ePackage.getEClassifiers().add(eClass);
-		mapping.put(mClass, eClass);
+		primaryMapping.put(mClass, eClass);
 		return eClass;
 	}
 
 	private EEnum findOrCreateEEnum(MEnum mEnum, EPackage ePackage) {
-		if (mapping.containsKey(mEnum)) {
-			return (EEnum) mapping.get(mEnum);
+		if (primaryMapping.containsKey(mEnum)) {
+			return (EEnum) primaryMapping.get(mEnum);
 		}
-		
-		EClassifier existingEClassifier = ePackage.getEClassifier(mEnum.getName());
+
+		EClassifier existingEClassifier = ePackage.getEClassifier(mEnum
+				.getName());
 		if (existingEClassifier != null && existingEClassifier instanceof EEnum) {
-			mapping.put(mEnum, existingEClassifier);
+			primaryMapping.put(mEnum, existingEClassifier);
 			return (EEnum) existingEClassifier;
 		}
-		
+
 		// if we can't find an existing EEnum, we need to create a fresh one
 		EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
+		reverseMapping.put(eEnum, mEnum);
 		addAnnotation(eEnum, COMMENT_VALUE);
 		ePackage.getEClassifiers().add(eEnum);
-		mapping.put(mEnum, eEnum);
+		primaryMapping.put(mEnum, eEnum);
 		return eEnum;
 	}
 
-	private EEnumLiteral findOrCreateEEnumLiteral(MEnumLiteral mEnumLiteral, EEnum existingEnum) {
-		if (mapping.containsKey(mEnumLiteral)) {
-			return (EEnumLiteral) mapping.get(mEnumLiteral);
+	private EEnumLiteral findOrCreateEEnumLiteral(MEnumLiteral mEnumLiteral,
+			EEnum existingEnum) {
+		if (primaryMapping.containsKey(mEnumLiteral)) {
+			return (EEnumLiteral) primaryMapping.get(mEnumLiteral);
 		}
 
-		EEnumLiteral existingEEnumLiteral = existingEnum.getEEnumLiteral(mEnumLiteral.getName());
+		EEnumLiteral existingEEnumLiteral = existingEnum
+				.getEEnumLiteral(mEnumLiteral.getName());
 		if (existingEEnumLiteral != null) {
-			mapping.put(mEnumLiteral, existingEEnumLiteral);
+			primaryMapping.put(mEnumLiteral, existingEEnumLiteral);
 			return existingEEnumLiteral;
 		}
-		
-		// if we can't find an existing EEnumLiteral, we need to create a fresh one
+
+		// if we can't find an existing EEnumLiteral, we need to create a fresh
+		// one
 		EEnumLiteral eEnumLiteral = EcoreFactory.eINSTANCE.createEEnumLiteral();
+		reverseMapping.put(eEnumLiteral, mEnumLiteral);
 		addAnnotation(eEnumLiteral, COMMENT_VALUE);
 		existingEnum.getELiterals().add(eEnumLiteral);
-		mapping.put(mEnumLiteral, eEnumLiteral);
+		primaryMapping.put(mEnumLiteral, eEnumLiteral);
 		return eEnumLiteral;
 	}
 
-	private EAttribute findOrCreateEAttribute(MFeature mFeature, EClass existingEClass) {
-		if (mapping.containsKey(mFeature)) {
-			return (EAttribute) mapping.get(mFeature);
+	private EAttribute findOrCreateEAttribute(MFeature mFeature,
+			EClass existingEClass) {
+		if (primaryMapping.containsKey(mFeature)) {
+			return (EAttribute) primaryMapping.get(mFeature);
 		}
 
-		EStructuralFeature existingFeature = existingEClass.getEStructuralFeature(mFeature.getName());
+		EStructuralFeature existingFeature = existingEClass
+				.getEStructuralFeature(mFeature.getName());
 		if (existingFeature != null && existingFeature instanceof EAttribute) {
-			mapping.put(mFeature, existingFeature);
+			primaryMapping.put(mFeature, existingFeature);
 			return (EAttribute) existingFeature;
 		}
-		
-		// if we can't find an existing EAttribute, we need to create a fresh one
+
+		// if we can't find an existing EAttribute, we need to create a fresh
+		// one
 		EAttribute eAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+		reverseMapping.put(eAttribute, mFeature);
 		addAnnotation(eAttribute, COMMENT_VALUE);
 		existingEClass.getEStructuralFeatures().add(eAttribute);
-		mapping.put(mFeature, eAttribute);
+		primaryMapping.put(mFeature, eAttribute);
 		return eAttribute;
 	}
 
-	private EReference findOrCreateEReference(MFeature mFeature, EClass existingEClass) {
-		if (mapping.containsKey(mFeature)) {
-			return (EReference) mapping.get(mFeature);
+	private EReference findOrCreateEReference(MFeature mFeature,
+			EClass existingEClass) {
+		if (primaryMapping.containsKey(mFeature)) {
+			return (EReference) primaryMapping.get(mFeature);
 		}
 
-		EStructuralFeature existingFeature = existingEClass.getEStructuralFeature(mFeature.getName());
+		EStructuralFeature existingFeature = existingEClass
+				.getEStructuralFeature(mFeature.getName());
 		if (existingFeature != null && existingFeature instanceof EReference) {
-			mapping.put(mFeature, existingFeature);
+			primaryMapping.put(mFeature, existingFeature);
 			return (EReference) existingFeature;
 		}
-		
-		// if we can't find an existing EReference, we need to create a fresh one
+
+		// if we can't find an existing EReference, we need to create a fresh
+		// one
 		EReference eReference = EcoreFactory.eINSTANCE.createEReference();
+		reverseMapping.put(eReference, mFeature);
+		
 		addAnnotation(eReference, COMMENT_VALUE);
 		existingEClass.getEStructuralFeatures().add(eReference);
-		mapping.put(mFeature, eReference);
+		primaryMapping.put(mFeature, eReference);
 		return eReference;
 	}
 
-	private EOperation findOrCreateEOperation(MOperation mOperation, EClass existingEClass) {
-		if (mapping.containsKey(mOperation)) {
-			return (EOperation) mapping.get(mOperation);
+	private EOperation findOrCreateEOperation(MOperation mOperation,
+			EClass existingEClass) {
+		if (primaryMapping.containsKey(mOperation)) {
+			return (EOperation) primaryMapping.get(mOperation);
 		}
 
 		EOperation existingOperation = null;
@@ -549,23 +617,28 @@ public class MecoreWrapper {
 				break;
 			}
 		}
-		
-		if (existingOperation != null && existingOperation instanceof EOperation) {
-			mapping.put(mOperation, existingOperation);
+
+		if (existingOperation != null
+				&& existingOperation instanceof EOperation) {
+			primaryMapping.put(mOperation, existingOperation);
 			return (EOperation) existingOperation;
 		}
-		
-		// if we can't find an existing EOperation, we need to create a fresh one
+
+		// if we can't find an existing EOperation, we need to create a fresh
+		// one
 		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
+		reverseMapping.put(eOperation, mOperation);
+		
 		addAnnotation(eOperation, COMMENT_VALUE);
 		existingEClass.getEOperations().add(eOperation);
-		mapping.put(mOperation, eOperation);
+		primaryMapping.put(mOperation, eOperation);
 		return eOperation;
 	}
 
-	private EParameter findOrCreateEParameter(MParameter mParameter, EOperation existingEOperation) {
-		if (mapping.containsKey(mParameter)) {
-			return (EParameter) mapping.get(mParameter);
+	private EParameter findOrCreateEParameter(MParameter mParameter,
+			EOperation existingEOperation) {
+		if (primaryMapping.containsKey(mParameter)) {
+			return (EParameter) primaryMapping.get(mParameter);
 		}
 
 		EParameter existingParameter = null;
@@ -577,24 +650,28 @@ public class MecoreWrapper {
 				break;
 			}
 		}
-		
-		if (existingParameter != null && existingParameter instanceof EParameter) {
-			mapping.put(mParameter, existingParameter);
+
+		if (existingParameter != null
+				&& existingParameter instanceof EParameter) {
+			primaryMapping.put(mParameter, existingParameter);
 			return (EParameter) existingParameter;
 		}
-		
-		// if we can't find an existing EParameter, we need to create a fresh one
+
+		// if we can't find an existing EParameter, we need to create a fresh
+		// one
 		EParameter eParameter = EcoreFactory.eINSTANCE.createEParameter();
+		reverseMapping.put(eParameter, mParameter);
+		
 		addAnnotation(eParameter, COMMENT_VALUE);
 		existingEOperation.getEParameters().add(eParameter);
-		mapping.put(mParameter, eParameter);
+		primaryMapping.put(mParameter, eParameter);
 		return eParameter;
 	}
 
-	public Map<MModelElement, EModelElement> getMapping() {
-		return mapping;
+	public Map<EObject, MModelElement> getReverseMapping() {
+		return reverseMapping;
 	}
-	
+
 	private EClassifier getEType(MType mType) {
 		EClassifier eType = null;
 		if (mType instanceof MEcoreType) {
@@ -606,7 +683,7 @@ public class MecoreWrapper {
 		} else if (mType instanceof MTypeParameter) {
 			// requires a generic type
 		} else {
-			EClass eClass = (EClass) mapping.get(mType);
+			EClass eClass = (EClass) primaryMapping.get(mType);
 			eType = eClass;
 		}
 		return eType;
@@ -623,7 +700,8 @@ public class MecoreWrapper {
 		}
 	}
 
-	private void setType(ETypedElement eTypedElement, MType mType, List<MType> mTypeArguments) {
+	private void setType(ETypedElement eTypedElement, MType mType,
+			List<MType> mTypeArguments) {
 		EClassifier eType = getEType(mType);
 		EGenericType eGenericType = getGenericEType(mType);
 
@@ -637,11 +715,13 @@ public class MecoreWrapper {
 		} else {
 			if (eGenericType == null) {
 				eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
+				reverseMapping.put(eGenericType, mType);
 			}
 			if (eType != null) {
 				eGenericType.setEClassifier(eType);
 			}
-			List<EGenericType> eTypeArguments = eGenericType.getETypeArguments();
+			List<EGenericType> eTypeArguments = eGenericType
+					.getETypeArguments();
 			for (MType mTypeArgument : mTypeArguments) {
 				eTypeArguments.add(createEGenericTypeParameter(mTypeArgument));
 			}
@@ -651,12 +731,15 @@ public class MecoreWrapper {
 
 	private EGenericType createEGenericTypeParameter(MType mType) {
 		EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
-		ETypeParameter eTypeParameter = (ETypeParameter) mapping.get(mType);
+		reverseMapping.put(genericType, mType);
+		ETypeParameter eTypeParameter = (ETypeParameter) primaryMapping
+				.get(mType);
 		genericType.setETypeParameter(eTypeParameter);
 		return genericType;
 	}
 
-	private void wrapMSuperTypeReference(final EClass eClass, MSuperTypeReference supertypeRef) {
+	private void wrapMSuperTypeReference(final EClass eClass,
+			MSuperTypeReference supertypeRef) {
 		List<EClass> eSuperTypes = eClass.getESuperTypes();
 		List<EGenericType> eGenericSuperTypes = eClass.getEGenericSuperTypes();
 
@@ -671,12 +754,18 @@ public class MecoreWrapper {
 				eSuperTypes.add(eSuperType);
 			}
 		} else {
-			EGenericType eGenericSuperType = EcoreFactory.eINSTANCE.createEGenericType();
+			EGenericType eGenericSuperType = EcoreFactory.eINSTANCE
+					.createEGenericType();
+			reverseMapping.put(eGenericSuperType, supertypeRef);
+
 			eGenericSuperType.setEClassifier(eSuperType);
 			eGenericSuperTypes.add(eGenericSuperType);
-			
+
 			for (MType mTypeArgument : mTypeArguments) {
-				EGenericType eTypeArgument = EcoreFactory.eINSTANCE.createEGenericType();
+				EGenericType eTypeArgument = EcoreFactory.eINSTANCE
+						.createEGenericType();
+				reverseMapping.put(eTypeArgument, supertypeRef);
+
 				EClassifier eType = getEType(mTypeArgument);
 				eTypeArgument.setEClassifier(eType);
 				eGenericSuperType.getETypeArguments().add(eTypeArgument);

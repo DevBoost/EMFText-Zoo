@@ -7,7 +7,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="MNamedElement" abstract="true" eSuperTypes="#//MModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MType" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MType" abstract="true" eSuperTypes="#//MModelElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="MTypedElement" eSuperTypes="#//MTypeArgumentable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//MType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//MMultiplicity"
@@ -77,7 +77,9 @@
         eType="#//MParameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MParameter" eSuperTypes="#//MNamedElement #//MTypedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MTypeParameter" eSuperTypes="#//MType #//MNamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MTypeParameter" eSuperTypes="#//MType #//MNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lowerBound" eType="#//MType"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MTypeParametrizable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
         eType="#//MTypeParameter" containment="true"/>
@@ -86,7 +88,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="#//MType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MSuperTypeReference" eSuperTypes="#//MTypeArgumentable">
+  <eClassifiers xsi:type="ecore:EClass" name="MSuperTypeReference" eSuperTypes="#//MTypeArgumentable #//MModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//MClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSupertype" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
   </eClassifiers>

@@ -34,16 +34,15 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreValidator;
-import org.emftext.language.mecore.MModelElement;
 import org.emftext.language.mecore.MPackage;
 import org.emftext.language.mecore.resource.mecore.IMecoreBuilder;
 import org.emftext.language.mecore.resource.mecore.MecoreEProblemType;
@@ -155,13 +154,15 @@ public class MecoreBuilder implements IMecoreBuilder {
 				if (object instanceof EObject) {
 					// find element in .mecore file that caused the problem
 					EObject causingEObject = (EObject) object;
-					EObject causingMObject = findKey(wrapper.getMapping(), causingEObject);
-					if (causingMObject != null) {
-						// attach a problem marker
-						if (diagnostics.getSeverity() == Diagnostic.ERROR) {
-							resource.addError(message, MecoreEProblemType.BUILDER_ERROR, causingMObject);
-						} else if (diagnostics.getSeverity() == Diagnostic.WARNING) {
-							resource.addWarning(message, MecoreEProblemType.BUILDER_ERROR, causingMObject);
+					EObject causingMObject = wrapper.getReverseMapping().get(causingEObject);
+					if (causingMObject != null && causingMObject.eResource() != null) {
+						attachProblemMarker(resource, diagnostics, message, causingMObject);
+					} else {
+						// attach problem to root object
+						EList<EObject> contents = resource.getContents();
+						if (contents.size() > 0) {
+							EObject root = contents.get(0);
+							attachProblemMarker(resource, diagnostics, message, root);
 						}
 					}
 				}
@@ -172,14 +173,14 @@ public class MecoreBuilder implements IMecoreBuilder {
 		}
 	}
 
-	private EObject findKey(Map<MModelElement, EModelElement> mapping, EObject value) {
-		for (MModelElement mElement : mapping.keySet()) {
-			EModelElement eElement = mapping.get(mElement);
-			if (value == eElement) {
-				return mElement;
-			}
+	private void attachProblemMarker(MecoreResource resource,
+			Diagnostic diagnostics, String message, EObject causingMObject) {
+		// attach a problem marker
+		if (diagnostics.getSeverity() == Diagnostic.ERROR) {
+			resource.addError(message, MecoreEProblemType.BUILDER_ERROR, causingMObject);
+		} else if (diagnostics.getSeverity() == Diagnostic.WARNING) {
+			resource.addWarning(message, MecoreEProblemType.BUILDER_ERROR, causingMObject);
 		}
-		return null;
 	}
 
 	private GenModel reloadGeneratorModel(GenModel genModel, ResourceSet rs) {

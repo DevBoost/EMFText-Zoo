@@ -48,7 +48,7 @@ RULES {
 				(supertype[UPPER] | eSupertype[LOWER]) 
 				("<" typeArguments[UPPER] ("," typeArguments[UPPER])* ">")?;
 				
-	MTypeParameter ::= name[UPPER];
+	MTypeParameter ::= name[UPPER] (":" lowerBound[UPPER])?;
 	
 	@SuppressWarnings(featureWithoutSyntax, optionalKeyword)
 	MEnum    ::= "enum" name[UPPER] ("(" literals* ")")?;
