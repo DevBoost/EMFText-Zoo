@@ -17,6 +17,7 @@ package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -264,14 +265,22 @@ public class ClassFileModelLoader {
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 
+        List<String> parameterNames = extractParameterNames(method);
+        
 		for(int i = 0; i < method.getArgumentTypes().length; i++) {
 			org.apache.bcel.generic.Type argType = method.getArgumentTypes()[i];
+			String paramName;
+			if (parameterNames.size() > i) {
+				paramName = parameterNames.get(i);
+			} else {
+				paramName = "arg" + i;
+			}
 			if (i == method.getArgumentTypes().length - 1 && withVaraibleLength) {
 				emfMethod.getParameters().add(
-						constructVariableLengthParameter(argType, i));
+						constructVariableLengthParameter(argType, paramName));
 			} else {
 				emfMethod.getParameters().add(
-						constructParameter(argType, i));
+						constructParameter(argType, paramName));
 			}
 		}
 
@@ -321,12 +330,12 @@ public class ClassFileModelLoader {
 		return (Member) emfMethod;
 	}
 
-	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType, int attrNumber) {
+	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType, String paramName) {
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
 		emfParameter.setTypeReference(emfTypeReference);
-		emfParameter.setName("arg" + attrNumber);
+		emfParameter.setName(paramName);
 
         int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
@@ -337,12 +346,12 @@ public class ClassFileModelLoader {
 		return emfParameter;
 	}
 
-	protected Parameter constructVariableLengthParameter(org.apache.bcel.generic.Type attrType, int attrNumber) {
+	protected Parameter constructVariableLengthParameter(org.apache.bcel.generic.Type attrType, String paramName) {
 		Parameter emfParameter = parametersFactory.createVariableLengthParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
 		emfParameter.setTypeReference(emfTypeReference);
-		emfParameter.setName("arg" + attrNumber);
+		emfParameter.setName(paramName);
 
         int arrayDimension = getArrayDimension(signature) - 1;
         for(int i = 0; i < arrayDimension; i++) {
@@ -460,7 +469,6 @@ public class ClassFileModelLoader {
 			}
 		}
 		//TODO #767: implement here
-
 
 		if(typeParameter == null) {
 			return null;
@@ -797,6 +805,22 @@ public class ClassFileModelLoader {
 			arrayDimension++;
 		}
 		return arrayDimension;
+	}
+	
+	protected List<String> extractParameterNames(final org.apache.bcel.classfile.Method method) {
+	   final List<String> names = new ArrayList<String>();
+	   if (method.getLocalVariableTable() != null) {
+	       final int start = method.isStatic() ? 0 : 1;
+	       final int stop = method.isStatic() ? method.getArgumentTypes().length : method.getArgumentTypes().length + 1;
+	       final org.apache.bcel.classfile.LocalVariable[] variables = 
+	    		   method.getLocalVariableTable().getLocalVariableTable();
+	       if (variables != null && variables.length != 0) {
+	           for (int i = start; i < stop; i++) {
+	               names.add(variables[i].getName());
+	           }
+	       }
+	   }
+	   return names;
 	}
 
 }
