@@ -753,21 +753,19 @@ public class HEDLCodeGenerator {
 	__content.append(className.replaceAll("\\r\\n\\z",""));
 	__content.append(" implements IDBOperationsBase {\r\n");
 	__content.append("\t\r\n");
-	__content.append("\tprivate SessionFactory sessionFactory;\r\n");
+	__content.append("\tprivate static SessionFactory sessionFactory;\r\n");
 	__content.append("\r\n");
-	__content.append("\tpublic ");
-	__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("() {\r\n");
+	__content.append("\tstatic {\r\n");
 	__content.append("\t\tconfigure();\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
-	__content.append("\tprivate void configure() throws HibernateException {\r\n");
+	__content.append("\tprivate static void configure() throws HibernateException {\r\n");
 	__content.append("\t\tConfiguration configuration = getConfiguration();\r\n");
 	__content.append("\t\t//configuration.setProperty(\"hibernate.show_sql\", \"true\");\r\n");
 	__content.append("\t\tthis.sessionFactory = configuration.buildSessionFactory();\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
-	__content.append("\tprivate Configuration getConfiguration() {\r\n");
+	__content.append("\tprivate static Configuration getConfiguration() {\r\n");
 	__content.append("\t\tConfiguration configuration = new Configuration();\r\n");
 	__content.append("");
 
@@ -775,19 +773,19 @@ public class HEDLCodeGenerator {
 		// this class is generated. any change will be overridden.
 		public abstract class #className# implements IDBOperationsBase {
 			
-			private SessionFactory sessionFactory;
+			private static SessionFactory sessionFactory;
 		
-			public #className#() {
+			static {
 				configure();
 			}
 
-			private void configure() throws HibernateException {
+			private static void configure() throws HibernateException {
 				Configuration configuration = getConfiguration();
 				//configuration.setProperty("hibernate.show_sql", "true");
 				this.sessionFactory = configuration.buildSessionFactory();
 			}
 
-			private Configuration getConfiguration() {
+			private static Configuration getConfiguration() {
 				Configuration configuration = new Configuration();
 */
 				for (Entity otherEntity : entityModel.getEntities()) {

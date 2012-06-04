@@ -389,19 +389,19 @@ public class HEDLCodeGeneratorSource {
 		// this class is generated. any change will be overridden.
 		public abstract class #className# implements IDBOperationsBase {
 			
-			private SessionFactory sessionFactory;
+			private static SessionFactory sessionFactory;
 		
-			public #className#() {
+			static {
 				configure();
 			}
 
-			private void configure() throws HibernateException {
+			private static void configure() throws HibernateException {
 				Configuration configuration = getConfiguration();
 				//configuration.setProperty("hibernate.show_sql", "true");
 				this.sessionFactory = configuration.buildSessionFactory();
 			}
 
-			private Configuration getConfiguration() {
+			private static Configuration getConfiguration() {
 				Configuration configuration = new Configuration();
 */
 				for (Entity otherEntity : entityModel.getEntities()) {
