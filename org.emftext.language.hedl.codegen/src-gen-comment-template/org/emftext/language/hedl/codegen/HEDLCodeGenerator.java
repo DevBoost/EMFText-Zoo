@@ -762,7 +762,7 @@ public class HEDLCodeGenerator {
 	__content.append("\tprivate static void configure() throws HibernateException {\r\n");
 	__content.append("\t\tConfiguration configuration = getConfiguration();\r\n");
 	__content.append("\t\t//configuration.setProperty(\"hibernate.show_sql\", \"true\");\r\n");
-	__content.append("\t\tthis.sessionFactory = configuration.buildSessionFactory();\r\n");
+	__content.append("\t\tsessionFactory = configuration.buildSessionFactory();\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
 	__content.append("\tprivate static Configuration getConfiguration() {\r\n");
@@ -782,7 +782,7 @@ public class HEDLCodeGenerator {
 			private static void configure() throws HibernateException {
 				Configuration configuration = getConfiguration();
 				//configuration.setProperty("hibernate.show_sql", "true");
-				this.sessionFactory = configuration.buildSessionFactory();
+				sessionFactory = configuration.buildSessionFactory();
 			}
 
 			private static Configuration getConfiguration() {
@@ -798,6 +798,17 @@ public class HEDLCodeGenerator {
 */
 				}
 	__content.append("\t\treturn configuration;\r\n");
+	__content.append("\t}\r\n");
+	__content.append("\t\r\n");
+	__content.append("\tprotected static SessionFactory getSessionFactory() {\r\n");
+	__content.append("\t\tsynchronized (");
+	__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+	__content.append(".class) {\r\n");
+	__content.append("\t\t\tif (sessionFactory == null) {\r\n");
+	__content.append("\t\t\t\tconfigure();\r\n");
+	__content.append("\t\t\t}\r\n");
+	__content.append("\t\t\treturn sessionFactory;\r\n");
+	__content.append("\t\t}\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\tpublic void createSchema() throws HibernateException {\r\n");
@@ -823,7 +834,7 @@ public class HEDLCodeGenerator {
 	__content.append("\t\tboolean successful = false;\r\n");
 	__content.append("\t\tboolean closed = false;\r\n");
 	__content.append("\t\t\r\n");
-	__content.append("\t\tSession session = sessionFactory.openSession();\r\n");
+	__content.append("\t\tSession session = getSessionFactory().openSession();\r\n");
 	__content.append("\t\tTransaction tx = null;\r\n");
 	__content.append("\t\ttry {\r\n");
 	__content.append("\t\t\ttx = session.beginTransaction();\r\n");
@@ -862,7 +873,14 @@ public class HEDLCodeGenerator {
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("\tpublic void tearDown() {\r\n");
-	__content.append("\t\tsessionFactory.close();\r\n");
+	__content.append("\t\tsynchronized (");
+	__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+	__content.append(".class) {\r\n");
+	__content.append("\t\t\tif (sessionFactory != null) {\r\n");
+	__content.append("\t\t\t\tsessionFactory.close();\r\n");
+	__content.append("\t\t\t\tsessionFactory = null;\r\n");
+	__content.append("\t\t\t}\r\n");
+	__content.append("\t\t}\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\r\n");
 	__content.append("\t");
@@ -871,6 +889,15 @@ public class HEDLCodeGenerator {
 	__content.append("}\r\n");
 	__content.append("");
 /*				return configuration;
+			}
+			
+			protected static SessionFactory getSessionFactory() {
+				synchronized (#className#.class) {
+					if (sessionFactory == null) {
+						configure();
+					}
+					return sessionFactory;
+				}
 			}
 			
 			public void createSchema() throws HibernateException {
@@ -896,7 +923,7 @@ public class HEDLCodeGenerator {
 				boolean successful = false;
 				boolean closed = false;
 				
-				Session session = sessionFactory.openSession();
+				Session session = getSessionFactory().openSession();
 				Transaction tx = null;
 				try {
 					tx = session.beginTransaction();
@@ -935,7 +962,12 @@ public class HEDLCodeGenerator {
 			}
 			
 			public void tearDown() {
-				sessionFactory.close();
+				synchronized (#className#.class) {
+					if (sessionFactory != null) {
+						sessionFactory.close();
+						sessionFactory = null;
+					}
+				}
 			}
 		
 			#entityMethods#

@@ -398,7 +398,7 @@ public class HEDLCodeGeneratorSource {
 			private static void configure() throws HibernateException {
 				Configuration configuration = getConfiguration();
 				//configuration.setProperty("hibernate.show_sql", "true");
-				this.sessionFactory = configuration.buildSessionFactory();
+				sessionFactory = configuration.buildSessionFactory();
 			}
 
 			private static Configuration getConfiguration() {
@@ -410,6 +410,15 @@ public class HEDLCodeGeneratorSource {
 */
 				}
 /*				return configuration;
+			}
+			
+			protected static SessionFactory getSessionFactory() {
+				synchronized (#className#.class) {
+					if (sessionFactory == null) {
+						configure();
+					}
+					return sessionFactory;
+				}
 			}
 			
 			public void createSchema() throws HibernateException {
@@ -435,7 +444,7 @@ public class HEDLCodeGeneratorSource {
 				boolean successful = false;
 				boolean closed = false;
 				
-				Session session = sessionFactory.openSession();
+				Session session = getSessionFactory().openSession();
 				Transaction tx = null;
 				try {
 					tx = session.beginTransaction();
@@ -474,7 +483,12 @@ public class HEDLCodeGeneratorSource {
 			}
 			
 			public void tearDown() {
-				sessionFactory.close();
+				synchronized (#className#.class) {
+					if (sessionFactory != null) {
+						sessionFactory.close();
+						sessionFactory = null;
+					}
+				}
 			}
 		
 			#entityMethods#
