@@ -808,19 +808,20 @@ public class ClassFileModelLoader {
 	}
 	
 	protected List<String> extractParameterNames(final org.apache.bcel.classfile.Method method) {
-	   final List<String> names = new ArrayList<String>();
-	   if (method.getLocalVariableTable() != null) {
-	       final int start = method.isStatic() ? 0 : 1;
-	       final int stop = method.isStatic() ? method.getArgumentTypes().length : method.getArgumentTypes().length + 1;
-	       final org.apache.bcel.classfile.LocalVariable[] variables = 
-	    		   method.getLocalVariableTable().getLocalVariableTable();
-	       if (variables != null) {
+		final List<String> names = new ArrayList<String>();
+		if (method.getLocalVariableTable() != null) {
+			final int start = method.isStatic() ? 0 : 1;
+			final int stop = method.isStatic() ? method.getArgumentTypes().length
+					: method.getArgumentTypes().length + 1;
+			final org.apache.bcel.classfile.LocalVariable[] variables = method
+					.getLocalVariableTable().getLocalVariableTable();
+			if (variables != null) {
 				for (int i = start; i < stop && i < variables.length; i++) {
 					names.add(variables[i].getName());
 				}
-	       }
-	   }
-	   return names;
+			}
+		}
+		return names;
 	}
 
 }
