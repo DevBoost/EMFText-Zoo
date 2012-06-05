@@ -814,10 +814,10 @@ public class ClassFileModelLoader {
 	       final int stop = method.isStatic() ? method.getArgumentTypes().length : method.getArgumentTypes().length + 1;
 	       final org.apache.bcel.classfile.LocalVariable[] variables = 
 	    		   method.getLocalVariableTable().getLocalVariableTable();
-	       if (variables != null && variables.length != 0) {
-	           for (int i = start; i < stop; i++) {
-	               names.add(variables[i].getName());
-	           }
+	       if (variables != null) {
+				for (int i = start; i < stop && i < variables.length; i++) {
+					names.add(variables[i].getName());
+				}
 	       }
 	   }
 	   return names;
