@@ -130,10 +130,23 @@ public class EjavaBuilder implements IEjavaBuilder {
 
 		final Resource ecoreResource = ePackageWrapper.getEPackage().eResource();
 		try {
-			ecoreResource.save(ecoreResource.getResourceSet().getLoadOptions());
+			saveResource(ecoreResource);
 		} catch (IOException e) {
 			EjavaPlugin.logError("Error saving Ecore model: " + ecoreResource.getURI(), e);
 		}
+	}
+
+	/**
+	 * Saves the given resource, but temporarily modifies the system line
+	 * separator to Unix style to avoid irrelevant changes when using eJava on
+	 * machines with a different OS.
+	 */
+	private void saveResource(Resource resource) throws IOException {
+		String key = "line.separator";
+		String currentLineBreak = System.getProperty(key);
+		System.setProperty(key, "\n");
+		resource.save(resource.getResourceSet().getLoadOptions());
+		System.setProperty(key, currentLineBreak);
 	}
 
 	private void setToRealJavaPackage(EPackageWrapper wrapper) {
