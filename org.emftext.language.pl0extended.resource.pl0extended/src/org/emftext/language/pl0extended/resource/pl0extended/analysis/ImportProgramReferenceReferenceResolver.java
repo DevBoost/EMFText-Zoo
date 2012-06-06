@@ -26,6 +26,9 @@ import org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferen
 
 public class ImportProgramReferenceReferenceResolver implements org.emftext.language.pl0extended.resource.pl0extended.IPl0extendedReferenceResolver<org.emftext.language.pl0extended.Import, org.emftext.language.pl0.Program> {
 
+	private Pl0extendedDefaultResolverDelegate<Import, Program> delegate = new Pl0extendedDefaultResolverDelegate<Import, Program>();
+	
+	
 	public void resolve(String identifier, Import container, EReference reference, int position, boolean resolveFuzzy, final IPl0extendedReferenceResolveResult<Program> result) {
 		try{
 			ResourceSet rs = container.eResource().getResourceSet();
@@ -42,8 +45,11 @@ public class ImportProgramReferenceReferenceResolver implements org.emftext.lang
 
 	public String deResolve(Program element, Import container, EReference reference) {
 		Resource resource = element.eResource();
-		URI uri = resource.getURI();
-		return uri.toString();
+		if(resource != null){
+			URI uri = resource.getURI();
+			return uri.toString();
+		}
+		return delegate.deResolve(element, container, reference);
 	}
 
 	public void setOptions(java.util.Map<?,?> options) {
