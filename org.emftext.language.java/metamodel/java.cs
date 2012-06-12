@@ -243,7 +243,7 @@ members.InterfaceMethod
 members.ClassMethod
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (typeReference arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? #1 "{" (!1 statements)* !0 "}"
+	("throws" exceptions ("," exceptions)*)? #1 "{" (!2 statements)* !1 "}"
 	;
 	
 annotations.AnnotationAttribute
