@@ -47,25 +47,25 @@ public class HEDLCodeGenerator {
 	private String CUSTOM_PACKAGE_NAME = HEDLCodegenConstants.CUSTOM_PACKAGE_NAME;
 	private String ENTITY_PACKAGE_NAME = HEDLCodegenConstants.ENTITY_PACKAGE_NAME;
 	public String generateICommand(String packageName) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(".IDBOperations;\r\n");
-	__content.append("\r\n");
-	__content.append("// this class is generated. any change will be overridden.\r\n");
-	__content.append("public interface ICommand {\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic void execute(IDBOperations operations);\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(".IDBOperations;\r\n");
+		__content.append("\r\n");
+		__content.append("// this class is generated. any change will be overridden.\r\n");
+		__content.append("public interface ICommand {\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic void execute(IDBOperations operations);\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 		/*package #packageName#.#DAO_PACKAGE_NAME#;
 		
 		import #packageName#.#CUSTOM_PACKAGE_NAME#.IDBOperations;
@@ -79,19 +79,19 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateOngoingShutdownException(String packageName) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("// this class is generated. any change will be overridden.\r\n");
-	__content.append("public class OngoingShutdownException extends RuntimeException {\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tprivate static final long serialVersionUID = 997906627613716196L;\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("// this class is generated. any change will be overridden.\r\n");
+		__content.append("public class OngoingShutdownException extends RuntimeException {\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tprivate static final long serialVersionUID = 997906627613716196L;\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 		/*package #packageName#.#DAO_PACKAGE_NAME#;
 
 		// this class is generated. any change will be overridden.
@@ -103,25 +103,25 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateIDBOperations(String packageName) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(".IDBOperationsBase;\r\n");
-	__content.append("\r\n");
-	__content.append("// this class is only generated once. it can be customized and all changes\r\n");
-	__content.append("// will be preserved.\r\n");
-	__content.append("public interface IDBOperations extends IDBOperationsBase {\r\n");
-	__content.append("\t\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(".IDBOperationsBase;\r\n");
+		__content.append("\r\n");
+		__content.append("// this class is only generated once. it can be customized and all changes\r\n");
+		__content.append("// will be preserved.\r\n");
+		__content.append("public interface IDBOperations extends IDBOperationsBase {\r\n");
+		__content.append("\t\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 		/*package #packageName#.#CUSTOM_PACKAGE_NAME#;
 		
 		import #packageName#.#DAO_PACKAGE_NAME#.IDBOperationsBase;
@@ -135,17 +135,17 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateIDBOperationsBase(String packageName, EntityModel entityModel) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		String entityOperations = getAllEntitityOperations(entityModel);
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import java.util.List;\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import java.util.List;\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*package #packageName#.#DAO_PACKAGE_NAME#;
 
 		import java.util.List;
@@ -178,15 +178,15 @@ public class HEDLCodeGenerator {
 		/*	import #packageName#.#ENTITY_PACKAGE_NAME#.#name#;
 			*/
 		}
-	__content.append("\r\n");
-	__content.append("// this class is generated. any change will be overridden.\r\n");
-	__content.append("public interface IDBOperationsBase {\r\n");
-	__content.append("\t\r\n");
-	__content.append("\t");
-	__content.append(entityOperations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		__content.append("\r\n");
+		__content.append("// this class is generated. any change will be overridden.\r\n");
+		__content.append("public interface IDBOperationsBase {\r\n");
+		__content.append("\t\r\n");
+		__content.append("\t");
+		__content.append(entityOperations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 
 		/*
 		// this class is generated. any change will be overridden.
@@ -198,7 +198,7 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	private String getAllEntitityOperations(EntityModel entityModel) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		for (Entity entity : entityModel.getEntities()) {
 			String operations = getEntityOperations(entity);
 	__content.append("");
@@ -211,7 +211,7 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	private String getEntityOperations(Entity entity) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		List<Property> uniqueProperties = getUniqueProperties(entity);
 		List<Property> enumProperties = getEnumProperties(entity);
 		List<Property> toOneProperties = getToOneProperties(entity);
@@ -220,16 +220,16 @@ public class HEDLCodeGenerator {
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		
 		String entityName = entity.getName();
-	__content.append("/**\r\n");
-	__content.append(" * Creates a new ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" using all read-only and all non-null properties.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" create");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");
+		__content.append("/**\r\n");
+		__content.append(" * Creates a new ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" using all read-only and all non-null properties.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" create");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("(");
 
 		/*/**
 		 * Creates a new #entityName# using all read-only and all non-null properties.
@@ -249,20 +249,20 @@ public class HEDLCodeGenerator {
 				/*, */
 			}
 		}
-	__content.append(");\r\n");
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * Returns the ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" with the given id.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" get");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(int id);\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append(");\r\n");
+		__content.append("\r\n");
+		__content.append("/**\r\n");
+		__content.append(" * Returns the ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" with the given id.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" get");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("(int id);\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 		/*);
 		
 		/**
@@ -470,29 +470,29 @@ public class HEDLCodeGenerator {
 			
 			*/
 		}
-	__content.append("/**\r\n");
-	__content.append(" * Returns all entities of type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" */\r\n");
-	__content.append("public List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("> getAll");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("s();\r\n");
-	__content.append("\t\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * Searches for entities of type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" */\r\n");
-	__content.append("public List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("> search");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("s(String _searchString, int _maxResults);\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("/**\r\n");
+		__content.append(" * Returns all entities of type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" */\r\n");
+		__content.append("public List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("> getAll");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("s();\r\n");
+		__content.append("\t\r\n");
+		__content.append("/**\r\n");
+		__content.append(" * Searches for entities of type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" */\r\n");
+		__content.append("public List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("> search");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("s(String _searchString, int _maxResults);\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*/**
 		 * Returns all entities of type #entityName#.
 		 #/
@@ -533,31 +533,82 @@ public class HEDLCodeGenerator {
 			
 			*/
 		}
-	__content.append("/**\r\n");
-	__content.append(" * Deletes a ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" */\r\n");
-	__content.append("public void delete(");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" entity);\r\n");
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * Counts the number of ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" entities.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public int count");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("s();\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("/**\r\n");
+		__content.append(" * Deletes a ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" */\r\n");
+		__content.append("public void delete(");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" entity);\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*/**
 		 * Deletes a #entityName#.
 		 #/
 		public void delete(#entityName# entity);
 		
-		/**
+		*/
+		
+		for (Property property :dateProperties) {
+			String propertyName = property.getName();
+			String firstUpper = toFirstUpper(property.getName());
+			String typeClassname = property.getType().getJavaClassname();
+	__content.append("/**\r\n");
+	__content.append(" * Deletes all ");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("s where ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append(" is set to a value before \'_maxDate\'.\r\n");
+	__content.append(" */\r\n");
+	__content.append("public void delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("Before(");
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
+	__content.append(" _maxDate);\r\n");
+	__content.append("\r\n");
+	__content.append("/**\r\n");
+	__content.append(" * Deletes all ");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("s where ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append(" is set to a value after \'_minDate\'.\r\n");
+	__content.append(" */\r\n");
+	__content.append("public void delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("After(");
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
+	__content.append(" _minDate);\r\n");
+	__content.append("\r\n");
+	__content.append("");
+/*			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#Before(#typeClassname# _maxDate);
+			
+			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value after '_minDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#After(#typeClassname# _minDate);
+			
+			*/
+		}
+		__content.append("/**\r\n");
+		__content.append(" * Counts the number of ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" entities.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public int count");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("s();\r\n");
+		__content.append("\r\n");
+		__content.append("");
+		
+		/*/**
 		 * Counts the number of #entityName# entities.
 		 #/
 		public int count#entityName#s();
@@ -616,34 +667,34 @@ public class HEDLCodeGenerator {
 		});
 	}
 	public String generateMainDAO(String packageName, String className) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(className.replaceAll("\\r\\n\\z",""));
-	__content.append("Base;\r\n");
-	__content.append("\r\n");
-	__content.append("// this class is only generated once. it can be customized and all changes\r\n");
-	__content.append("// will be preserved.\r\n");
-	__content.append("public class ");
-	__content.append(className.replaceAll("\\r\\n\\z",""));
-	__content.append(" extends ");
-	__content.append(className.replaceAll("\\r\\n\\z",""));
-	__content.append("Base {\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic void handleException(Exception e, boolean retry) {\r\n");
-	__content.append("\t\te.printStackTrace();\r\n");
-	__content.append("\t}\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(className.replaceAll("\\r\\n\\z",""));
+		__content.append("Base;\r\n");
+		__content.append("\r\n");
+		__content.append("// this class is only generated once. it can be customized and all changes\r\n");
+		__content.append("// will be preserved.\r\n");
+		__content.append("public class ");
+		__content.append(className.replaceAll("\\r\\n\\z",""));
+		__content.append(" extends ");
+		__content.append(className.replaceAll("\\r\\n\\z",""));
+		__content.append("Base {\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic void handleException(Exception e, boolean retry) {\r\n");
+		__content.append("\t\te.printStackTrace();\r\n");
+		__content.append("\t}\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 		/*package #packageName#.#CUSTOM_PACKAGE_NAME#;
 		
 		import #packageName#.#DAO_PACKAGE_NAME#.#className#Base;
@@ -660,43 +711,43 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateMainDAOBase(String packageName, String className, EntityModel entityModel) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		String entityMethods = getEntityOperationsBodies(entityModel);
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import java.util.ArrayList;\r\n");
-	__content.append("import java.util.List;\r\n");
-	__content.append("\r\n");
-	__content.append("import java.util.logging.Level;\r\n");
-	__content.append("import java.util.logging.Logger;\r\n");
-	__content.append("\r\n");
-	__content.append("import org.hibernate.TransactionException;\r\n");
-	__content.append("import org.hibernate.HibernateException;\r\n");
-	__content.append("import org.hibernate.SessionFactory;\r\n");
-	__content.append("import org.hibernate.Transaction;\r\n");
-	__content.append("import org.hibernate.cfg.Configuration;\r\n");
-	__content.append("import org.hibernate.classic.Session;\r\n");
-	__content.append("import org.hibernate.stat.Statistics;\r\n");
-	__content.append("\r\n");
-	__content.append("import org.hibernate.tool.hbm2ddl.SchemaExport;\r\n");
-	__content.append("import org.hibernate.tool.hbm2ddl.SchemaUpdate;\r\n");
-	__content.append("\r\n");
-	__content.append("import ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(".OperationProvider;\r\n");
-	__content.append("import ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(".IDBOperations;\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import java.util.ArrayList;\r\n");
+		__content.append("import java.util.List;\r\n");
+		__content.append("\r\n");
+		__content.append("import java.util.logging.Level;\r\n");
+		__content.append("import java.util.logging.Logger;\r\n");
+		__content.append("\r\n");
+		__content.append("import org.hibernate.TransactionException;\r\n");
+		__content.append("import org.hibernate.HibernateException;\r\n");
+		__content.append("import org.hibernate.SessionFactory;\r\n");
+		__content.append("import org.hibernate.Transaction;\r\n");
+		__content.append("import org.hibernate.cfg.Configuration;\r\n");
+		__content.append("import org.hibernate.classic.Session;\r\n");
+		__content.append("import org.hibernate.stat.Statistics;\r\n");
+		__content.append("\r\n");
+		__content.append("import org.hibernate.tool.hbm2ddl.SchemaExport;\r\n");
+		__content.append("import org.hibernate.tool.hbm2ddl.SchemaUpdate;\r\n");
+		__content.append("\r\n");
+		__content.append("import ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(".OperationProvider;\r\n");
+		__content.append("import ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(".IDBOperations;\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*package #packageName#.#DAO_PACKAGE_NAME#;
 
 		import java.util.ArrayList;
@@ -747,27 +798,27 @@ public class HEDLCodeGenerator {
 		/*	import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
 		*/
 		}
-	__content.append("\r\n");
-	__content.append("// this class is generated. any change will be overridden.\r\n");
-	__content.append("public abstract class ");
-	__content.append(className.replaceAll("\\r\\n\\z",""));
-	__content.append(" implements IDBOperationsBase {\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tprivate static SessionFactory sessionFactory;\r\n");
-	__content.append("\r\n");
-	__content.append("\tstatic {\r\n");
-	__content.append("\t\tconfigure();\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\r\n");
-	__content.append("\tprivate static void configure() throws HibernateException {\r\n");
-	__content.append("\t\tConfiguration configuration = getConfiguration();\r\n");
-	__content.append("\t\t//configuration.setProperty(\"hibernate.show_sql\", \"true\");\r\n");
-	__content.append("\t\tsessionFactory = configuration.buildSessionFactory();\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\r\n");
-	__content.append("\tprivate static Configuration getConfiguration() {\r\n");
-	__content.append("\t\tConfiguration configuration = new Configuration();\r\n");
-	__content.append("");
+		__content.append("\r\n");
+		__content.append("// this class is generated. any change will be overridden.\r\n");
+		__content.append("public abstract class ");
+		__content.append(className.replaceAll("\\r\\n\\z",""));
+		__content.append(" implements IDBOperationsBase {\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tprivate static SessionFactory sessionFactory;\r\n");
+		__content.append("\r\n");
+		__content.append("\tstatic {\r\n");
+		__content.append("\t\tconfigure();\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\r\n");
+		__content.append("\tprivate static void configure() throws HibernateException {\r\n");
+		__content.append("\t\tConfiguration configuration = getConfiguration();\r\n");
+		__content.append("\t\t//configuration.setProperty(\"hibernate.show_sql\", \"true\");\r\n");
+		__content.append("\t\tsessionFactory = configuration.buildSessionFactory();\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\r\n");
+		__content.append("\tprivate static Configuration getConfiguration() {\r\n");
+		__content.append("\t\tConfiguration configuration = new Configuration();\r\n");
+		__content.append("");
 
 		/*
 		// this class is generated. any change will be overridden.
@@ -797,97 +848,97 @@ public class HEDLCodeGenerator {
 /*					configuration = configuration.addAnnotatedClass(#otherEntityName#.class);
 */
 				}
-	__content.append("\t\treturn configuration;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tprotected static SessionFactory getSessionFactory() {\r\n");
-	__content.append("\t\tsynchronized (");
-	__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append(".class) {\r\n");
-	__content.append("\t\t\tif (sessionFactory == null) {\r\n");
-	__content.append("\t\t\t\tconfigure();\r\n");
-	__content.append("\t\t\t}\r\n");
-	__content.append("\t\t\treturn sessionFactory;\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic void createSchema() throws HibernateException {\r\n");
-	__content.append("\t\tSchemaExport schemaExport = new SchemaExport(getConfiguration());\r\n");
-	__content.append("\t\tschemaExport.setFormat(true);\r\n");
-	__content.append("\t\tschemaExport.create(false, false);\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\r\n");
-	__content.append("\tpublic void updateSchema() {\r\n");
-	__content.append("\t\tSchemaUpdate update = new SchemaUpdate(getConfiguration());\r\n");
-	__content.append("\t\tupdate.execute(true, true);\r\n");
-	__content.append("\t\tList<?> exceptions = update.getExceptions();\r\n");
-	__content.append("\t\tfor (Object object : exceptions) {\r\n");
-	__content.append("\t\t\tSystem.err.println(\"Exception while updating schema \" + object);\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic void executeInTransaction(ICommand command) {\r\n");
-	__content.append("\t\texecuteInTransaction(command, true);\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tprivate void executeInTransaction(ICommand command, boolean retry) {\r\n");
-	__content.append("\t\tboolean successful = false;\r\n");
-	__content.append("\t\tboolean closed = false;\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tSession session = getSessionFactory().openSession();\r\n");
-	__content.append("\t\tTransaction tx = null;\r\n");
-	__content.append("\t\ttry {\r\n");
-	__content.append("\t\t\ttx = session.beginTransaction();\r\n");
-	__content.append("\t\t\tcommand.execute(new OperationProvider(session));\r\n");
-	__content.append("\t\t\ttx.commit();\r\n");
-	__content.append("\t\t\tsuccessful = true;\r\n");
-	__content.append("\t\t} catch (Exception e) {\r\n");
-	__content.append("\t\t\thandleException(e, retry);\r\n");
-	__content.append("\t\t\tif (tx != null) {\r\n");
-	__content.append("\t\t\t\ttry {\r\n");
-	__content.append("\t\t\t\t\ttx.rollback();\r\n");
-	__content.append("\t\t\t\t} catch (TransactionException te) {\r\n");
-	__content.append("\t\t\t\t\thandleException(te, retry);\r\n");
-	__content.append("\t\t\t\t}\r\n");
-	__content.append("\t\t\t}\r\n");
-	__content.append("\t\t} finally {\r\n");
-	__content.append("\t\t\ttry {\r\n");
-	__content.append("\t\t\t\tsession.close();\r\n");
-	__content.append("\t\t\t\tclosed = true;\r\n");
-	__content.append("\t\t\t} catch (HibernateException he) {\r\n");
-	__content.append("\t\t\t\thandleException(he, retry);\r\n");
-	__content.append("\t\t\t}\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tif ((!successful || !closed) && retry) {\r\n");
-	__content.append("\t\t\t// retry once\r\n");
-	__content.append("\t\t\texecuteInTransaction(command, false);\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic abstract void handleException(Exception e, boolean retry);\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic Statistics getStatistics() {\r\n");
-	__content.append("\t\tStatistics statistics = sessionFactory.getStatistics();\r\n");
-	__content.append("\t\treturn statistics;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic void tearDown() {\r\n");
-	__content.append("\t\tsynchronized (");
-	__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append(".class) {\r\n");
-	__content.append("\t\t\tif (sessionFactory != null) {\r\n");
-	__content.append("\t\t\t\tsessionFactory.close();\r\n");
-	__content.append("\t\t\t\tsessionFactory = null;\r\n");
-	__content.append("\t\t\t}\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\r\n");
-	__content.append("\t");
-	__content.append(entityMethods.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		__content.append("\t\treturn configuration;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tprotected static SessionFactory getSessionFactory() {\r\n");
+		__content.append("\t\tsynchronized (");
+		__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append(".class) {\r\n");
+		__content.append("\t\t\tif (sessionFactory == null) {\r\n");
+		__content.append("\t\t\t\tconfigure();\r\n");
+		__content.append("\t\t\t}\r\n");
+		__content.append("\t\t\treturn sessionFactory;\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic void createSchema() throws HibernateException {\r\n");
+		__content.append("\t\tSchemaExport schemaExport = new SchemaExport(getConfiguration());\r\n");
+		__content.append("\t\tschemaExport.setFormat(true);\r\n");
+		__content.append("\t\tschemaExport.create(false, false);\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\r\n");
+		__content.append("\tpublic void updateSchema() {\r\n");
+		__content.append("\t\tSchemaUpdate update = new SchemaUpdate(getConfiguration());\r\n");
+		__content.append("\t\tupdate.execute(true, true);\r\n");
+		__content.append("\t\tList<?> exceptions = update.getExceptions();\r\n");
+		__content.append("\t\tfor (Object object : exceptions) {\r\n");
+		__content.append("\t\t\tSystem.err.println(\"Exception while updating schema \" + object);\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic void executeInTransaction(ICommand command) {\r\n");
+		__content.append("\t\texecuteInTransaction(command, true);\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tprivate void executeInTransaction(ICommand command, boolean retry) {\r\n");
+		__content.append("\t\tboolean successful = false;\r\n");
+		__content.append("\t\tboolean closed = false;\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tSession session = getSessionFactory().openSession();\r\n");
+		__content.append("\t\tTransaction tx = null;\r\n");
+		__content.append("\t\ttry {\r\n");
+		__content.append("\t\t\ttx = session.beginTransaction();\r\n");
+		__content.append("\t\t\tcommand.execute(new OperationProvider(session));\r\n");
+		__content.append("\t\t\ttx.commit();\r\n");
+		__content.append("\t\t\tsuccessful = true;\r\n");
+		__content.append("\t\t} catch (Exception e) {\r\n");
+		__content.append("\t\t\thandleException(e, retry);\r\n");
+		__content.append("\t\t\tif (tx != null) {\r\n");
+		__content.append("\t\t\t\ttry {\r\n");
+		__content.append("\t\t\t\t\ttx.rollback();\r\n");
+		__content.append("\t\t\t\t} catch (TransactionException te) {\r\n");
+		__content.append("\t\t\t\t\thandleException(te, retry);\r\n");
+		__content.append("\t\t\t\t}\r\n");
+		__content.append("\t\t\t}\r\n");
+		__content.append("\t\t} finally {\r\n");
+		__content.append("\t\t\ttry {\r\n");
+		__content.append("\t\t\t\tsession.close();\r\n");
+		__content.append("\t\t\t\tclosed = true;\r\n");
+		__content.append("\t\t\t} catch (HibernateException he) {\r\n");
+		__content.append("\t\t\t\thandleException(he, retry);\r\n");
+		__content.append("\t\t\t}\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tif ((!successful || !closed) && retry) {\r\n");
+		__content.append("\t\t\t// retry once\r\n");
+		__content.append("\t\t\texecuteInTransaction(command, false);\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic abstract void handleException(Exception e, boolean retry);\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic Statistics getStatistics() {\r\n");
+		__content.append("\t\tStatistics statistics = sessionFactory.getStatistics();\r\n");
+		__content.append("\t\treturn statistics;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic void tearDown() {\r\n");
+		__content.append("\t\tsynchronized (");
+		__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append(".class) {\r\n");
+		__content.append("\t\t\tif (sessionFactory != null) {\r\n");
+		__content.append("\t\t\t\tsessionFactory.close();\r\n");
+		__content.append("\t\t\t\tsessionFactory = null;\r\n");
+		__content.append("\t\t\t}\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\r\n");
+		__content.append("\t");
+		__content.append(entityMethods.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 /*				return configuration;
 			}
 			
@@ -976,7 +1027,7 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	private String getEntityOperationsBodies(EntityModel entityModel) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		for (Entity entity : entityModel.getEntities()) {
 			String operationBodies = getEntityOperationsBodies(entity);
 	__content.append("");
@@ -989,7 +1040,7 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	private String getEntityOperationsBodies(Entity entity) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		String entityName = entity.getName();
 		String entityNameToFirstUpper = toFirstUpper(entityName);
 		List<Property> uniqueProperties = getUniqueProperties(entity);
@@ -998,16 +1049,16 @@ public class HEDLCodeGenerator {
 		List<Property> dateProperties = getDateProperties(entity);
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		List<Property> toOneReferences = getToOneReferences(entity);
-	__content.append("/**\r\n");
-	__content.append(" * Creates a new ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" using all read-only and all non-null properties.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" create");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");
+		__content.append("/**\r\n");
+		__content.append(" * Creates a new ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" using all read-only and all non-null properties.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" create");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("(");
 		
 		/*/**
 		 * Creates a new #entityName# using all read-only and all non-null properties.
@@ -1027,18 +1078,18 @@ public class HEDLCodeGenerator {
 					/*, */
 				}
 			}
-	__content.append(") {\r\n");
-	__content.append("\tfinal ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("[] entity = new ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("[1];\r\n");
-	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
-	__content.append("\t\t\tentity[0] = operations.create");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("(");
+		__content.append(") {\r\n");
+		__content.append("\tfinal ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("[] entity = new ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("[1];\r\n");
+		__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+		__content.append("\t\t\tentity[0] = operations.create");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+		__content.append("(");
 		/*) {
 			final #entityName#[] entity = new #entityName#[1];
 			executeInTransaction(new ICommand() {
@@ -1056,39 +1107,39 @@ public class HEDLCodeGenerator {
 							/*, */
 						}
 					}
-	__content.append(");\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t});\r\n");
-	__content.append("\treturn entity[0];\r\n");
-	__content.append("}\r\n");
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * Returns the ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" with the given id.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" get");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(final int id) {\r\n");
-	__content.append("\tfinal ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("[] entity = new ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("[1];\r\n");
-	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
-	__content.append("\t\t\tentity[0] = operations.get");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("(id);\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t});\r\n");
-	__content.append("\treturn entity[0];\r\n");
-	__content.append("}\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append(");\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t});\r\n");
+		__content.append("\treturn entity[0];\r\n");
+		__content.append("}\r\n");
+		__content.append("\r\n");
+		__content.append("/**\r\n");
+		__content.append(" * Returns the ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" with the given id.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" get");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("(final int id) {\r\n");
+		__content.append("\tfinal ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("[] entity = new ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("[1];\r\n");
+		__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+		__content.append("\t\t\tentity[0] = operations.get");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+		__content.append("(id);\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t});\r\n");
+		__content.append("\treturn entity[0];\r\n");
+		__content.append("}\r\n");
+		__content.append("\r\n");
+		__content.append("");
 				/*);
 				}
 			});
@@ -1495,59 +1546,59 @@ public class HEDLCodeGenerator {
 			
 			*/
 		}
-	__content.append("/**\r\n");
-	__content.append(" * Returns all entities of type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" */\r\n");
-	__content.append("public List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("> getAll");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("s() {\r\n");
-	__content.append("\tfinal List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("> entities = new ArrayList<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(">();\r\n");
-	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
-	__content.append("\t\t\tentities.addAll(operations.getAll");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("s());\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t});\r\n");
-	__content.append("\treturn entities;\r\n");
-	__content.append("}\r\n");
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * Searches for entities of type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" */\r\n");
-	__content.append("public List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("> search");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("s(final String _searchString, final int _maxResults) {\r\n");
-	__content.append("\tfinal List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("> entities = new ArrayList<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(">();\r\n");
-	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
-	__content.append("\t\t\tentities.addAll(operations.search");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("s(_searchString, _maxResults));\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t});\r\n");
-	__content.append("\treturn entities;\r\n");
-	__content.append("}\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("/**\r\n");
+		__content.append(" * Returns all entities of type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" */\r\n");
+		__content.append("public List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("> getAll");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("s() {\r\n");
+		__content.append("\tfinal List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("> entities = new ArrayList<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(">();\r\n");
+		__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+		__content.append("\t\t\tentities.addAll(operations.getAll");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+		__content.append("s());\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t});\r\n");
+		__content.append("\treturn entities;\r\n");
+		__content.append("}\r\n");
+		__content.append("\r\n");
+		__content.append("/**\r\n");
+		__content.append(" * Searches for entities of type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" */\r\n");
+		__content.append("public List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("> search");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("s(final String _searchString, final int _maxResults) {\r\n");
+		__content.append("\tfinal List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("> entities = new ArrayList<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(">();\r\n");
+		__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+		__content.append("\t\t\tentities.addAll(operations.search");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+		__content.append("s(_searchString, _maxResults));\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t});\r\n");
+		__content.append("\treturn entities;\r\n");
+		__content.append("}\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*/**
 		 * Returns all entities of type #entityName#.
 		 #/
@@ -1634,43 +1685,23 @@ public class HEDLCodeGenerator {
 			
 			*/
 		}
-	__content.append("/**\r\n");
-	__content.append(" * Deletes a ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" */\r\n");
-	__content.append("public void delete(final ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" entity) {\r\n");
-	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
-	__content.append("\t\t\toperations.delete(entity);\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t});\r\n");
-	__content.append("}\r\n");
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * Counts the number of ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" entities.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public int count");
-	__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z",""));
-	__content.append("s() {\r\n");
-	__content.append("\tfinal int[] count = new int[1];\r\n");
-	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
-	__content.append("\t\t\tcount[0] = operations.count");
-	__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
-	__content.append("s();\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t});\r\n");
-	__content.append("\treturn count[0];\r\n");
-	__content.append("}\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("/**\r\n");
+		__content.append(" * Deletes a ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" */\r\n");
+		__content.append("public void delete(final ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" entity) {\r\n");
+		__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+		__content.append("\t\t\toperations.delete(entity);\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t});\r\n");
+		__content.append("}\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*/**
 		 * Deletes a #entityName#.
 		 #/
@@ -1683,7 +1714,114 @@ public class HEDLCodeGenerator {
 			});
 		}
 		
-		/**
+		*/
+		for (Property property :dateProperties) {
+			String propertyName = property.getName();
+			String firstUpper = toFirstUpper(property.getName());
+			String typeClassname = property.getType().getJavaClassname();
+			String fieldName = getFieldName(property);
+	__content.append("/**\r\n");
+	__content.append(" * Deletes all ");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("s where ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append(" is set to a value before \'_maxDate\'.\r\n");
+	__content.append(" */\r\n");
+	__content.append("public void delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("Before(final ");
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
+	__content.append(" _maxDate) {\r\n");
+	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+	__content.append("\t\t\r\n");
+	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+	__content.append("\t\t\toperations.delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("Before(_maxDate);\r\n");
+	__content.append("\t\t}\r\n");
+	__content.append("\t});\r\n");
+	__content.append("}\r\n");
+	__content.append("\r\n");
+	__content.append("/**\r\n");
+	__content.append(" * Deletes all ");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("s where ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append(" is set to a value after \'_minDate\'.\r\n");
+	__content.append(" */\r\n");
+	__content.append("public void delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z",""));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("After(final ");
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
+	__content.append(" _minDate) {\r\n");
+	__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+	__content.append("\t\t\r\n");
+	__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+	__content.append("\t\t\toperations.delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("Before(_minDate);\r\n");
+	__content.append("\t\t}\r\n");
+	__content.append("\t});\r\n");
+	__content.append("}\r\n");
+	__content.append("\r\n");
+	__content.append("");
+/*			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#Before(final #typeClassname# _maxDate) {
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						operations.delete#entityName#sWith#firstUpper#Before(_maxDate);
+					}
+				});
+			}
+			
+			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value after '_minDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#After(final #typeClassname# _minDate) {
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						operations.delete#entityName#sWith#firstUpper#Before(_minDate);
+					}
+				});
+			}
+			
+			*/
+		}
+		__content.append("/**\r\n");
+		__content.append(" * Counts the number of ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" entities.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public int count");
+		__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z",""));
+		__content.append("s() {\r\n");
+		__content.append("\tfinal int[] count = new int[1];\r\n");
+		__content.append("\texecuteInTransaction(new ICommand() {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\t\tpublic void execute(IDBOperations operations) {\r\n");
+		__content.append("\t\t\tcount[0] = operations.count");
+		__content.append(entityNameToFirstUpper.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+		__content.append("s();\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t});\r\n");
+		__content.append("\treturn count[0];\r\n");
+		__content.append("}\r\n");
+		__content.append("\r\n");
+		__content.append("");
+
+/*		/**
 		 * Counts the number of #entityName# entities.
 		 #/
 		public int count#entityNameToFirstUpper#s() {
@@ -1701,30 +1839,30 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateOperationProvider(String packageName) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import org.hibernate.classic.Session;\r\n");
-	__content.append("import ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(".OperationProviderBase;\r\n");
-	__content.append("\r\n");
-	__content.append("// this class is only generated once. it can be customized and all changes\r\n");
-	__content.append("// will be preserved.\r\n");
-	__content.append("public class OperationProvider extends OperationProviderBase implements IDBOperations {\r\n");
-	__content.append("\r\n");
-	__content.append("\tpublic OperationProvider(Session session) {\r\n");
-	__content.append("\t\tsuper(session);\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(CUSTOM_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import org.hibernate.classic.Session;\r\n");
+		__content.append("import ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(".OperationProviderBase;\r\n");
+		__content.append("\r\n");
+		__content.append("// this class is only generated once. it can be customized and all changes\r\n");
+		__content.append("// will be preserved.\r\n");
+		__content.append("public class OperationProvider extends OperationProviderBase implements IDBOperations {\r\n");
+		__content.append("\r\n");
+		__content.append("\tpublic OperationProvider(Session session) {\r\n");
+		__content.append("\t\tsuper(session);\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 		/*package #packageName#.#CUSTOM_PACKAGE_NAME#;
 
 		import org.hibernate.classic.Session;
@@ -1743,28 +1881,29 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateOperationProviderBase(String packageName, EntityModel entityModel) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import java.util.List;\r\n");
-	__content.append("\r\n");
-	__content.append("import org.hibernate.Criteria;\r\n");
-	__content.append("import org.hibernate.HibernateException;\r\n");
-	__content.append("import org.hibernate.SessionFactory;\r\n");
-	__content.append("import org.hibernate.Transaction;\r\n");
-	__content.append("import org.hibernate.cfg.Configuration;\r\n");
-	__content.append("import org.hibernate.classic.Session;\r\n");
-	__content.append("import org.hibernate.criterion.MatchMode;\r\n");
-	__content.append("import org.hibernate.criterion.Order;\r\n");
-	__content.append("import org.hibernate.criterion.Restrictions;\r\n");
-	__content.append("import org.hibernate.metadata.ClassMetadata;\r\n");
-	__content.append("import org.hibernate.persister.entity.AbstractEntityPersister;\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import java.util.List;\r\n");
+		__content.append("\r\n");
+		__content.append("import org.hibernate.Criteria;\r\n");
+		__content.append("import org.hibernate.HibernateException;\r\n");
+		__content.append("import org.hibernate.SessionFactory;\r\n");
+		__content.append("import org.hibernate.Transaction;\r\n");
+		__content.append("import org.hibernate.Query;\r\n");
+		__content.append("import org.hibernate.cfg.Configuration;\r\n");
+		__content.append("import org.hibernate.classic.Session;\r\n");
+		__content.append("import org.hibernate.criterion.MatchMode;\r\n");
+		__content.append("import org.hibernate.criterion.Order;\r\n");
+		__content.append("import org.hibernate.criterion.Restrictions;\r\n");
+		__content.append("import org.hibernate.metadata.ClassMetadata;\r\n");
+		__content.append("import org.hibernate.persister.entity.AbstractEntityPersister;\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*package #packageName#.#DAO_PACKAGE_NAME#;
 
 		import java.util.List;
@@ -1773,6 +1912,7 @@ public class HEDLCodeGenerator {
 		import org.hibernate.HibernateException;
 		import org.hibernate.SessionFactory;
 		import org.hibernate.Transaction;
+		import org.hibernate.Query;
 		import org.hibernate.cfg.Configuration;
 		import org.hibernate.classic.Session;
 		import org.hibernate.criterion.MatchMode;
@@ -1808,17 +1948,17 @@ public class HEDLCodeGenerator {
 /*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
 */
 		}
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * This class provides all default operations that are derived from the HEDL entity model.\r\n");
-	__content.append(" *\r\n");
-	__content.append(" * Note: This class is generated. Any change will be overridden.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public abstract class OperationProviderBase implements IDBOperationsBase {\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\tprivate Session session;\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append("\r\n");
+		__content.append("/**\r\n");
+		__content.append(" * This class provides all default operations that are derived from the HEDL entity model.\r\n");
+		__content.append(" *\r\n");
+		__content.append(" * Note: This class is generated. Any change will be overridden.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public abstract class OperationProviderBase implements IDBOperationsBase {\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\tprivate Session session;\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 		
 /*		
 		/**
@@ -1843,16 +1983,16 @@ public class HEDLCodeGenerator {
 	__content.append("");
 /*				private #entityName#DAO #toFirstLower#DAO = new #entityName#DAO();
 */			}
-	__content.append("\r\n");
-	__content.append("\tpublic OperationProviderBase(Session session) {\r\n");
-	__content.append("\t\tthis.session = session;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\tpublic Session getSession() {\r\n");
-	__content.append("\t\treturn session;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append("\r\n");
+		__content.append("\tpublic OperationProviderBase(Session session) {\r\n");
+		__content.append("\t\tthis.session = session;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tpublic Session getSession() {\r\n");
+		__content.append("\t\treturn session;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 /*		
 			public OperationProviderBase(Session session) {
 				this.session = session;
@@ -2340,6 +2480,104 @@ public class HEDLCodeGenerator {
 	__content.append("DAO.delete(session, entity);\r\n");
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
+	__content.append("\t");
+/*				/**
+				 * Deletes a #entityName#.
+				 #/
+				public void delete(#entityName# entity) {
+					#entityNameToFirstLower#DAO.delete(session, entity);
+				}
+				
+				*/
+				
+				for (Property property :dateProperties) {
+					String propertyName = property.getName();
+					String firstUpper = toFirstUpper(property.getName());
+					String typeClassname = property.getType().getJavaClassname();
+					String fieldName = getFieldName(property);
+	__content.append("\t/**\r\n");
+	__content.append("\t * Deletes all ");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+	__content.append("s where ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append(" is set to a value before \'_maxDate\'.\r\n");
+	__content.append("\t */\r\n");
+	__content.append("\tpublic void delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("Before(");
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
+	__content.append(" _maxDate) {\r\n");
+	__content.append("\t\tQuery query = getSession().createQuery(\r\n");
+	__content.append("\t\t\t\"DELETE FROM \" + ");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+	__content.append(".class.getName() + \" \" +\r\n");
+	__content.append("\t\t\t\"WHERE \" + ");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+	__content.append("DAO.");
+	__content.append(fieldName.replaceAll("\\r\\n\\z",""));
+	__content.append(" + \" < ?\"\r\n");
+	__content.append("\t\t);\r\n");
+	__content.append("\t\tquery.setParameter(0, _maxDate);\r\n");
+	__content.append("\t\tquery.executeUpdate();\r\n");
+	__content.append("\t}\r\n");
+	__content.append("\t\r\n");
+	__content.append("\t/**\r\n");
+	__content.append("\t * Deletes all ");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+	__content.append("s where ");
+	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
+	__content.append(" is set to a value after \'_minDate\'.\r\n");
+	__content.append("\t */\r\n");
+	__content.append("\tpublic void delete");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+	__content.append("sWith");
+	__content.append(firstUpper.replaceAll("\\r\\n\\z",""));
+	__content.append("After(");
+	__content.append(typeClassname.replaceAll("\\r\\n\\z",""));
+	__content.append(" _minDate) {\r\n");
+	__content.append("\t\tQuery query = getSession().createQuery(\r\n");
+	__content.append("\t\t\t\"DELETE FROM \" + ");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+	__content.append(".class.getName() + \" \" +\r\n");
+	__content.append("\t\t\t\"WHERE \" + ");
+	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t\t"));
+	__content.append("DAO.");
+	__content.append(fieldName.replaceAll("\\r\\n\\z",""));
+	__content.append(" + \" > ?\"\r\n");
+	__content.append("\t\t);\r\n");
+	__content.append("\t\tquery.setParameter(0, _minDate);\r\n");
+	__content.append("\t\tquery.executeUpdate();\r\n");
+	__content.append("\t}\r\n");
+	__content.append("\t\r\n");
+	__content.append("\t");
+/*					/**
+					 * Deletes all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+					 #/
+					public void delete#entityName#sWith#firstUpper#Before(#typeClassname# _maxDate) {
+						Query query = getSession().createQuery(
+							"DELETE FROM " + #entityName#.class.getName() + " " +
+							"WHERE " + #entityName#DAO.#fieldName# + " < ?"
+						);
+						query.setParameter(0, _maxDate);
+						query.executeUpdate();
+					}
+					
+					/**
+					 * Deletes all #entityName#s where #propertyName# is set to a value after '_minDate'.
+					 #/
+					public void delete#entityName#sWith#firstUpper#After(#typeClassname# _minDate) {
+						Query query = getSession().createQuery(
+							"DELETE FROM " + #entityName#.class.getName() + " " +
+							"WHERE " + #entityName#DAO.#fieldName# + " > ?"
+						);
+						query.setParameter(0, _minDate);
+						query.executeUpdate();
+					}
+					
+					*/
+				}
 	__content.append("\t/**\r\n");
 	__content.append("\t * Counts the number of ");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
@@ -2354,14 +2592,8 @@ public class HEDLCodeGenerator {
 	__content.append("\t}\r\n");
 	__content.append("\t\r\n");
 	__content.append("");
-/*				/**
-				 * Deletes a #entityName#.
-				 #/
-				public void delete(#entityName# entity) {
-					#entityNameToFirstLower#DAO.delete(session, entity);
-				}
 				
-				/**
+/*				/**
 				 * Counts the number of #entityName# entities.
 				 #/
 				public int count#entityNameToFirstUpper#s() {
@@ -2370,22 +2602,22 @@ public class HEDLCodeGenerator {
 				
 */
 			}
-	__content.append("\t/**\r\n");
-	__content.append("\t * Returns the name of the table that contains entities of the given type.\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic String getTableName(Class<?> clazz) {\r\n");
-	__content.append("\t\tClassMetadata hibernateMetadata = getSession().getSessionFactory().getClassMetadata(clazz);\r\n");
-	__content.append("\t\tif (hibernateMetadata == null) {\r\n");
-	__content.append("\t\t    return null;\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t\tif (hibernateMetadata instanceof AbstractEntityPersister) {\r\n");
-	__content.append("\t\t     AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetadata;\r\n");
-	__content.append("\t\t     return persister.getTableName();\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t\treturn null;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Returns the name of the table that contains entities of the given type.\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic String getTableName(Class<?> clazz) {\r\n");
+		__content.append("\t\tClassMetadata hibernateMetadata = getSession().getSessionFactory().getClassMetadata(clazz);\r\n");
+		__content.append("\t\tif (hibernateMetadata == null) {\r\n");
+		__content.append("\t\t    return null;\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t\tif (hibernateMetadata instanceof AbstractEntityPersister) {\r\n");
+		__content.append("\t\t     AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetadata;\r\n");
+		__content.append("\t\t     return persister.getTableName();\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t\treturn null;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 /*			/**
 			 * Returns the name of the table that contains entities of the given type.
 			 #/
@@ -2405,7 +2637,7 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateEntityDAO(String packageName, Entity entity) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		String entityName = entity.getName();
 		
 		List<Property> uniqueProperties = getUniqueProperties(entity);
@@ -2414,23 +2646,23 @@ public class HEDLCodeGenerator {
 		List<Property> dateProperties = getDateProperties(entity);
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		List<Property> toOneReferences = getToOneReferences(entity);
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import java.util.List;\r\n");
-	__content.append("\r\n");
-	__content.append("import org.hibernate.classic.Session;\r\n");
-	__content.append("import org.hibernate.Criteria;\r\n");
-	__content.append("import org.hibernate.HibernateException;\r\n");
-	__content.append("import org.hibernate.criterion.Disjunction;\r\n");
-	__content.append("import org.hibernate.criterion.MatchMode;\r\n");
-	__content.append("import org.hibernate.criterion.Order;\r\n");
-	__content.append("import org.hibernate.criterion.Restrictions;\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(DAO_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import java.util.List;\r\n");
+		__content.append("\r\n");
+		__content.append("import org.hibernate.classic.Session;\r\n");
+		__content.append("import org.hibernate.Criteria;\r\n");
+		__content.append("import org.hibernate.HibernateException;\r\n");
+		__content.append("import org.hibernate.criterion.Disjunction;\r\n");
+		__content.append("import org.hibernate.criterion.MatchMode;\r\n");
+		__content.append("import org.hibernate.criterion.Order;\r\n");
+		__content.append("import org.hibernate.criterion.Restrictions;\r\n");
+		__content.append("\r\n");
+		__content.append("");
 
 		/*package #packageName#.#DAO_PACKAGE_NAME#;
 		
@@ -2471,22 +2703,22 @@ public class HEDLCodeGenerator {
 /*			import #packageName#.#ENTITY_PACKAGE_NAME#.#otherEnumName#;
 */
 		}
-	__content.append("\r\n");
-	__content.append("import java.util.List;\r\n");
-	__content.append("\r\n");
-	__content.append("/**\r\n");
-	__content.append(" * This class provides all default operations that are derived from the HEDL entity model\r\n");
-	__content.append(" * for type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".\r\n");
-	__content.append(" *\r\n");
-	__content.append(" * Note: This class is generated. Any change will be overridden.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public class ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("DAO {\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append("\r\n");
+		__content.append("import java.util.List;\r\n");
+		__content.append("\r\n");
+		__content.append("/**\r\n");
+		__content.append(" * This class provides all default operations that are derived from the HEDL entity model\r\n");
+		__content.append(" * for type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".\r\n");
+		__content.append(" *\r\n");
+		__content.append(" * Note: This class is generated. Any change will be overridden.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public class ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("DAO {\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 /*		
 		import java.util.List;
 
@@ -2507,26 +2739,26 @@ public class HEDLCodeGenerator {
 */			}
 			for (Property property : entity.getProperties()) {
 				String propertyName = property.getName();
-				String toUpperCase = propertyName.toUpperCase();
-	__content.append("\tpublic final static String FIELD__");
-	__content.append(toUpperCase.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+				String fieldName = getFieldName(property);
+	__content.append("\tpublic final static String ");
+	__content.append(fieldName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(" = getField(");
 	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
 	__content.append(".class, \"");
 	__content.append(propertyName.replaceAll("\\r\\n\\z",""));
 	__content.append("\");\r\n");
 	__content.append("");
-/*				public final static String FIELD__#toUpperCase# = getField(#entityName#.class, "#propertyName#");
+/*				public final static String #fieldName# = getField(#entityName#.class, "#propertyName#");
 */			}
-	__content.append("\t\r\n");
-	__content.append("\t/**\r\n");
-	__content.append("\t * Creates a ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" using all read-only and all non-null properties.\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" create(Session session");
+		__content.append("\t\r\n");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Creates a ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(" using all read-only and all non-null properties.\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(" create(Session session");
 			
 /*			
 			/**
@@ -2543,12 +2775,12 @@ public class HEDLCodeGenerator {
 	__content.append("");
 					/*, #propertyTypeClassname# #propertyToFirstLower#*/
 				}
-	__content.append(") {\r\n");
-	__content.append("\t\t");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append(" newEntity = new ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("(");
+		__content.append(") {\r\n");
+		__content.append("\t\t");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append(" newEntity = new ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("(");
 				/*) {
 				#entityName# newEntity = new #entityName#(*/
 				for (Property property :constructorProperties) {
@@ -2562,30 +2794,30 @@ public class HEDLCodeGenerator {
 						/*, */
 					}
 				}
-	__content.append(");\r\n");
-	__content.append("\t\tsession.save(newEntity);\r\n");
-	__content.append("\t\treturn newEntity;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\t/**\r\n");
-	__content.append("\t * Returns the ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" with the given id.\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" get(Session session, int id) {\r\n");
-	__content.append("\t\t");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append(" entity = (");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(") session.get(");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(".class, id);\r\n");
-	__content.append("\t\treturn entity;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append(");\r\n");
+		__content.append("\t\tsession.save(newEntity);\r\n");
+		__content.append("\t\treturn newEntity;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Returns the ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(" with the given id.\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(" get(Session session, int id) {\r\n");
+		__content.append("\t\t");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append(" entity = (");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(") session.get(");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(".class, id);\r\n");
+		__content.append("\t\treturn entity;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 /*				);
 				session.save(newEntity);
 				return newEntity;
@@ -2930,39 +3162,39 @@ public class HEDLCodeGenerator {
 				}
 				
 */			}
-	__content.append("\t/**\r\n");
-	__content.append("\t * Returns all entities of type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(".\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("> getAll(Session session) {\r\n");
-	__content.append("\t\tCriteria criteria = session.createCriteria(");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append(".class);\r\n");
-	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
-	__content.append("\t\tList<");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append("> entities = (List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(">) criteria.list();\r\n");
-	__content.append("\t\treturn entities;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\t/**\r\n");
-	__content.append("\t * Searches for entities of type ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(".\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("> search(Session _session, String _searchString, int _maxResults) {\r\n");
-	__content.append("\t\tCriteria criteria = _session.createCriteria(");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append(".class);\r\n");
-	__content.append("\t\tDisjunction disjunction = Restrictions.disjunction();\r\n");
-	__content.append("");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Returns all entities of type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(".\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("> getAll(Session session) {\r\n");
+		__content.append("\t\tCriteria criteria = session.createCriteria(");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append(".class);\r\n");
+		__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
+		__content.append("\t\tList<");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append("> entities = (List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(">) criteria.list();\r\n");
+		__content.append("\t\treturn entities;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Searches for entities of type ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(".\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("> search(Session _session, String _searchString, int _maxResults) {\r\n");
+		__content.append("\t\tCriteria criteria = _session.createCriteria(");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append(".class);\r\n");
+		__content.append("\t\tDisjunction disjunction = Restrictions.disjunction();\r\n");
+		__content.append("");
 /*			/**
 			 * Returns all entities of type #entityName#.
 			 #/
@@ -2989,18 +3221,18 @@ public class HEDLCodeGenerator {
 /*						disjunction.add(Restrictions.like(FIELD__#propertyNameToUpperCase#, _searchString.trim(), MatchMode.ANYWHERE));
 */					}
 				}
-	__content.append("\t\tcriteria = criteria.add(disjunction);\r\n");
-	__content.append("\t\tcriteria = criteria.setMaxResults(_maxResults);\r\n");
-	__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
-	__content.append("\t\tList<");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append("> entities = (List<");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(">) criteria.list();\r\n");
-	__content.append("\t\treturn entities;\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append("\t\tcriteria = criteria.add(disjunction);\r\n");
+		__content.append("\t\tcriteria = criteria.setMaxResults(_maxResults);\r\n");
+		__content.append("\t\t@SuppressWarnings(\"unchecked\")\r\n");
+		__content.append("\t\tList<");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append("> entities = (List<");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(">) criteria.list();\r\n");
+		__content.append("\t\treturn entities;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 /*				criteria = criteria.add(disjunction);
 				criteria = criteria.setMaxResults(_maxResults);
 				@SuppressWarnings("unchecked")
@@ -3076,39 +3308,39 @@ public class HEDLCodeGenerator {
 				}
 				
 */			}
-	__content.append("\t/**\r\n");
-	__content.append("\t * Deletes a ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(".\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic void delete(Session session, ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" entity) {\r\n");
-	__content.append("\t\tsession.delete(entity);\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\r\n");
-	__content.append("\t/**\r\n");
-	__content.append("\t * Counts the number of ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append(" entities.\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic int count(Session session) {\r\n");
-	__content.append("\t\treturn ((Long) session.createQuery(\"select count(*) from ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
-	__content.append("\").uniqueResult()).intValue();\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\t\t\r\n");
-	__content.append("\tprivate static String getField(Class<?> clazz, String fieldName) {\r\n");
-	__content.append("\t\ttry {\r\n");
-	__content.append("\t\t\treturn clazz.getDeclaredField(fieldName).getName();\r\n");
-	__content.append("\t\t} catch (SecurityException e) {\r\n");
-	__content.append("\t\t\tthrow new RuntimeException(e.getClass().getSimpleName() + \": \" + e.getMessage());\r\n");
-	__content.append("\t\t} catch (NoSuchFieldException e) {\r\n");
-	__content.append("\t\t\tthrow new RuntimeException(e.getClass().getSimpleName() + \": \" + e.getMessage());\r\n");
-	__content.append("\t\t}\r\n");
-	__content.append("\t}\r\n");
-	__content.append("}\r\n");
-	__content.append("");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Deletes a ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(".\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic void delete(Session session, ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(" entity) {\r\n");
+		__content.append("\t\tsession.delete(entity);\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Counts the number of ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append(" entities.\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic int count(Session session) {\r\n");
+		__content.append("\t\treturn ((Long) session.createQuery(\"select count(*) from ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
+		__content.append("\").uniqueResult()).intValue();\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\t\r\n");
+		__content.append("\tprivate static String getField(Class<?> clazz, String fieldName) {\r\n");
+		__content.append("\t\ttry {\r\n");
+		__content.append("\t\t\treturn clazz.getDeclaredField(fieldName).getName();\r\n");
+		__content.append("\t\t} catch (SecurityException e) {\r\n");
+		__content.append("\t\t\tthrow new RuntimeException(e.getClass().getSimpleName() + \": \" + e.getMessage());\r\n");
+		__content.append("\t\t} catch (NoSuchFieldException e) {\r\n");
+		__content.append("\t\t\tthrow new RuntimeException(e.getClass().getSimpleName() + \": \" + e.getMessage());\r\n");
+		__content.append("\t\t}\r\n");
+		__content.append("\t}\r\n");
+		__content.append("}\r\n");
+		__content.append("");
 /*			/**
 			 * Deletes a #entityName#.
 			 #/
@@ -3136,47 +3368,51 @@ public class HEDLCodeGenerator {
 */
 		return __content.toString();
 	}
+
+	private String getFieldName(Property property) {
+		return "FIELD__" + property.getName().toUpperCase();
+	}
 	public String generateEntityBaseClass(String packageName, Entity entity) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		String entityName = entity.getName();
 		String tableName = getTableName(entity);
 		List<Property> constructorProperties = entity.getConstructorProperties();
 		String propertyDeclarations = getPropertyDeclarations(entity);
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("import java.util.List;\r\n");
-	__content.append("\r\n");
-	__content.append("import javax.persistence.Entity;\r\n");
-	__content.append("import javax.persistence.GeneratedValue;\r\n");
-	__content.append("import javax.persistence.GenerationType;\r\n");
-	__content.append("import javax.persistence.Id;\r\n");
-	__content.append("import javax.persistence.JoinColumn;\r\n");
-	__content.append("import javax.persistence.ManyToOne;\r\n");
-	__content.append("import javax.persistence.OneToOne;\r\n");
-	__content.append("import javax.persistence.Table;\r\n");
-	__content.append("import javax.persistence.Temporal;\r\n");
-	__content.append("import javax.persistence.TemporalType;\r\n");
-	__content.append("import javax.persistence.UniqueConstraint;\r\n");
-	__content.append("import javax.persistence.EnumType;\r\n");
-	__content.append("import javax.persistence.FetchType;\r\n");
-	__content.append("import javax.persistence.Enumerated;\r\n");
-	__content.append("import javax.persistence.CascadeType;\r\n");
-	__content.append("import javax.persistence.OneToMany;\r\n");
-	__content.append("import javax.persistence.ManyToMany;\r\n");
-	__content.append("import javax.persistence.Column;\r\n");
-	__content.append("\r\n");
-	__content.append("import org.hibernate.annotations.GenericGenerator;\r\n");
-	__content.append("import org.hibernate.annotations.Parameter;\r\n");
-	__content.append("\r\n");
-	__content.append("@Entity\r\n");
-	__content.append("@Table(name = \"");
-	__content.append(tableName.replaceAll("\\r\\n\\z",""));
-	__content.append("\"\r\n");
-	__content.append("");
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("import java.util.List;\r\n");
+		__content.append("\r\n");
+		__content.append("import javax.persistence.Entity;\r\n");
+		__content.append("import javax.persistence.GeneratedValue;\r\n");
+		__content.append("import javax.persistence.GenerationType;\r\n");
+		__content.append("import javax.persistence.Id;\r\n");
+		__content.append("import javax.persistence.JoinColumn;\r\n");
+		__content.append("import javax.persistence.ManyToOne;\r\n");
+		__content.append("import javax.persistence.OneToOne;\r\n");
+		__content.append("import javax.persistence.Table;\r\n");
+		__content.append("import javax.persistence.Temporal;\r\n");
+		__content.append("import javax.persistence.TemporalType;\r\n");
+		__content.append("import javax.persistence.UniqueConstraint;\r\n");
+		__content.append("import javax.persistence.EnumType;\r\n");
+		__content.append("import javax.persistence.FetchType;\r\n");
+		__content.append("import javax.persistence.Enumerated;\r\n");
+		__content.append("import javax.persistence.CascadeType;\r\n");
+		__content.append("import javax.persistence.OneToMany;\r\n");
+		__content.append("import javax.persistence.ManyToMany;\r\n");
+		__content.append("import javax.persistence.Column;\r\n");
+		__content.append("\r\n");
+		__content.append("import org.hibernate.annotations.GenericGenerator;\r\n");
+		__content.append("import org.hibernate.annotations.Parameter;\r\n");
+		__content.append("\r\n");
+		__content.append("@Entity\r\n");
+		__content.append("@Table(name = \"");
+		__content.append(tableName.replaceAll("\\r\\n\\z",""));
+		__content.append("\"\r\n");
+		__content.append("");
 
 		/*package #packageName#.#ENTITY_PACKAGE_NAME#;
 		
@@ -3229,8 +3465,8 @@ public class HEDLCodeGenerator {
 */
 			}
 		}
-	__content.append(")\r\n");
-	__content.append("");/*)
+		__content.append(")\r\n");
+		__content.append("");/*)
 */		if (entity.getComment() != null) {
 			String comment = entity.getComment().replace("\t", "");
 	__content.append("");
@@ -3240,15 +3476,15 @@ public class HEDLCodeGenerator {
 			/*#comment#
 			*/
 		}
-	__content.append("/*\r\n");
-	__content.append(" * This class is generated from the entity \'");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append("\' defined in the HEDL model.\r\n");
-	__content.append(" * Note: Any change made to this class will be overridden.\r\n");
-	__content.append(" */\r\n");
-	__content.append("public class ");
-	__content.append(entityName.replaceAll("\\r\\n\\z",""));
-	__content.append(" ");
+		__content.append("/*\r\n");
+		__content.append(" * This class is generated from the entity \'");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append("\' defined in the HEDL model.\r\n");
+		__content.append(" * Note: Any change made to this class will be overridden.\r\n");
+		__content.append(" */\r\n");
+		__content.append("public class ");
+		__content.append(entityName.replaceAll("\\r\\n\\z",""));
+		__content.append(" ");
 /*		/*
 		 * This class is generated from the entity '#entityName#' defined in the HEDL model.
 		 * Note: Any change made to this class will be overridden.
@@ -3276,9 +3512,9 @@ public class HEDLCodeGenerator {
 				/*, */
 			}
 		}
-	__content.append("{\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append("{\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 		/*{
 			
 */			if (entity.getSuperType() == null) {
@@ -3318,19 +3554,19 @@ public class HEDLCodeGenerator {
 				private int id;
 			
 */			}
-	__content.append("\t");
-	__content.append(propertyDeclarations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("\r\n");
-	__content.append("\t/**\r\n");
-	__content.append("\t * Default constructor. Only used by Hibernate.\r\n");
-	__content.append("\t */\r\n");
-	__content.append("\tpublic ");
-	__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
-	__content.append("() {\r\n");
-	__content.append("\t\tsuper();\r\n");
-	__content.append("\t}\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("\t");
+		__content.append(propertyDeclarations.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("\r\n");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Default constructor. Only used by Hibernate.\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic ");
+		__content.append(entityName.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("() {\r\n");
+		__content.append("\t\tsuper();\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\r\n");
+		__content.append("");
 /*			#propertyDeclarations#
 			/**
 			 * Default constructor. Only used by Hibernate.
@@ -3493,8 +3729,8 @@ public class HEDLCodeGenerator {
 				}
 				
 */			}
-	__content.append("}\r\n");
-	__content.append("");
+		__content.append("}\r\n");
+		__content.append("");
 /*		}
 */
 		return __content.toString();
@@ -3542,8 +3778,8 @@ public class HEDLCodeGenerator {
 		return defaultValue;
 	}
 	private String getPropertyDeclarations(Entity entity) {
-	StringBuilder __content = new StringBuilder();
-	__content.append("");
+		StringBuilder __content = new StringBuilder();
+		__content.append("");
 		/**/
 		for (Property property : entity.getProperties()) {
 			String propertyName = property.getName();
@@ -3724,15 +3960,15 @@ public class HEDLCodeGenerator {
 		return __content.toString();
 	}
 	public String generateEnum(String packageName, org.emftext.language.hedl.Enum enumeration) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		String enumerationName = enumeration.getName();
-	__content.append("package ");
-	__content.append(packageName.replaceAll("\\r\\n\\z",""));
-	__content.append(".");
-	__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
-	__content.append(";\r\n");
-	__content.append("\r\n");
-	__content.append("");
+		__content.append("package ");
+		__content.append(packageName.replaceAll("\\r\\n\\z",""));
+		__content.append(".");
+		__content.append(ENTITY_PACKAGE_NAME.replaceAll("\\r\\n\\z",""));
+		__content.append(";\r\n");
+		__content.append("\r\n");
+		__content.append("");
 		/*package #packageName#.#ENTITY_PACKAGE_NAME#;
 		
 */		if (enumeration.getComment() != null) {
@@ -3744,12 +3980,12 @@ public class HEDLCodeGenerator {
 			/*#comment#
 			*/
 		}
-	__content.append("// this class is generated. any change will be overridden.\r\n");
-	__content.append("public enum ");
-	__content.append(enumerationName.replaceAll("\\r\\n\\z",""));
-	__content.append(" {\r\n");
-	__content.append("\t\r\n");
-	__content.append("");
+		__content.append("// this class is generated. any change will be overridden.\r\n");
+		__content.append("public enum ");
+		__content.append(enumerationName.replaceAll("\\r\\n\\z",""));
+		__content.append(" {\r\n");
+		__content.append("\t\r\n");
+		__content.append("");
 /*		// this class is generated. any change will be overridden.
 		public enum #enumerationName# {
  			
@@ -3774,8 +4010,8 @@ public class HEDLCodeGenerator {
 			/*#literalName#,
 */
 			}
-	__content.append("}\r\n");
-	__content.append("");
+		__content.append("}\r\n");
+		__content.append("");
 /*		}
 		*/
 		return __content.toString();

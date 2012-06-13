@@ -270,7 +270,26 @@ public class HEDLCodeGeneratorSource {
 		 #/
 		public void delete(#entityName# entity);
 		
-		/**
+		*/
+		
+		for (Property property : dateProperties) {
+			String propertyName = property.getName();
+			String firstUpper = toFirstUpper(property.getName());
+			String typeClassname = property.getType().getJavaClassname();
+/*			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#Before(#typeClassname# _maxDate);
+			
+			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value after '_minDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#After(#typeClassname# _minDate);
+			
+			*/
+		}
+		
+		/*/**
 		 * Counts the number of #entityName# entities.
 		 #/
 		public int count#entityName#s();
@@ -776,7 +795,40 @@ public class HEDLCodeGeneratorSource {
 			});
 		}
 		
-		/**
+		*/
+		for (Property property : dateProperties) {
+			String propertyName = property.getName();
+			String firstUpper = toFirstUpper(property.getName());
+			String typeClassname = property.getType().getJavaClassname();
+			String fieldName = getFieldName(property);
+/*			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#Before(final #typeClassname# _maxDate) {
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						operations.delete#entityName#sWith#firstUpper#Before(_maxDate);
+					}
+				});
+			}
+			
+			/**
+			 * Deletes all #entityName#s where #propertyName# is set to a value after '_minDate'.
+			 #/
+			public void delete#entityName#sWith#firstUpper#After(final #typeClassname# _minDate) {
+				executeInTransaction(new ICommand() {
+					
+					public void execute(IDBOperations operations) {
+						operations.delete#entityName#sWith#firstUpper#Before(_minDate);
+					}
+				});
+			}
+			
+			*/
+		}
+
+/*		/**
 		 * Counts the number of #entityName# entities.
 		 #/
 		public int count#entityNameToFirstUpper#s() {
@@ -824,6 +876,7 @@ public class HEDLCodeGeneratorSource {
 		import org.hibernate.HibernateException;
 		import org.hibernate.SessionFactory;
 		import org.hibernate.Transaction;
+		import org.hibernate.Query;
 		import org.hibernate.cfg.Configuration;
 		import org.hibernate.classic.Session;
 		import org.hibernate.criterion.MatchMode;
@@ -1056,7 +1109,41 @@ public class HEDLCodeGeneratorSource {
 					#entityNameToFirstLower#DAO.delete(session, entity);
 				}
 				
-				/**
+				*/
+				
+				for (Property property : dateProperties) {
+					String propertyName = property.getName();
+					String firstUpper = toFirstUpper(property.getName());
+					String typeClassname = property.getType().getJavaClassname();
+					String fieldName = getFieldName(property);
+/*					/**
+					 * Deletes all #entityName#s where #propertyName# is set to a value before '_maxDate'.
+					 #/
+					public void delete#entityName#sWith#firstUpper#Before(#typeClassname# _maxDate) {
+						Query query = getSession().createQuery(
+							"DELETE FROM " + #entityName#.class.getName() + " " +
+							"WHERE " + #entityName#DAO.#fieldName# + " < ?"
+						);
+						query.setParameter(0, _maxDate);
+						query.executeUpdate();
+					}
+					
+					/**
+					 * Deletes all #entityName#s where #propertyName# is set to a value after '_minDate'.
+					 #/
+					public void delete#entityName#sWith#firstUpper#After(#typeClassname# _minDate) {
+						Query query = getSession().createQuery(
+							"DELETE FROM " + #entityName#.class.getName() + " " +
+							"WHERE " + #entityName#DAO.#fieldName# + " > ?"
+						);
+						query.setParameter(0, _minDate);
+						query.executeUpdate();
+					}
+					
+					*/
+				}
+				
+/*				/**
 				 * Counts the number of #entityName# entities.
 				 #/
 				public int count#entityNameToFirstUpper#s() {
@@ -1134,8 +1221,8 @@ public class HEDLCodeGeneratorSource {
 */			}
 			for (Property property : entity.getProperties()) {
 				String propertyName = property.getName();
-				String toUpperCase = propertyName.toUpperCase();
-/*				public final static String FIELD__#toUpperCase# = getField(#entityName#.class, "#propertyName#");
+				String fieldName = getFieldName(property);
+/*				public final static String #fieldName# = getField(#entityName#.class, "#propertyName#");
 */			}
 			
 /*			
@@ -1379,6 +1466,10 @@ public class HEDLCodeGeneratorSource {
 		}
 */
 		return "";
+	}
+
+	private String getFieldName(Property property) {
+		return "FIELD__" + property.getName().toUpperCase();
 	}
 
 	@CommentTemplate
