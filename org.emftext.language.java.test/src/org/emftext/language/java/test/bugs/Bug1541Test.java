@@ -26,6 +26,9 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersFactory;
+import org.emftext.language.java.statements.Return;
+import org.emftext.language.java.statements.StatementsFactory;
+import org.emftext.language.java.types.TypesFactory;
 import org.junit.Test;
 
 public class Bug1541Test extends AbstractTestCase {
@@ -45,7 +48,12 @@ public class Bug1541Test extends AbstractTestCase {
 		
 		ClassMethod m1 = MembersFactory.eINSTANCE.createClassMethod();
 		m1.setName("m1");
+		m1.setTypeReference(TypesFactory.eINSTANCE.createVoid());
+		m1.makePublic();
 		classA.getMembers().add(m1);
+		
+		Return returnStatement = StatementsFactory.eINSTANCE.createReturn();
+		m1.getStatements().add(returnStatement);
 		
 		Resource r = createResourceSet().createResource(URI.createURI("ClassA.java"));
 		
@@ -59,7 +67,8 @@ public class Bug1541Test extends AbstractTestCase {
 			LB +
 			LB +
 			"class ClassA {" + LB +
-			"\t" + "m1() {" + LB +
+			"\t" + "public void m1() {" + LB +
+			"\t\t" + "return;" + LB +
 			"\t" + "}" + LB + // the tab at the beginning of this line was missing
 			"}" + LB + LB + LB + LB, 
 			out.toString());
