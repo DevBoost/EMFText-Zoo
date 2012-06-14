@@ -231,7 +231,7 @@ statements.Block
 members.Constructor
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
-	("throws" exceptions ("," exceptions)*)? #1 "{" (!1 statements)* !0 "}"
+	("throws" exceptions ("," exceptions)*)? #1 "{" (!2 statements)* !1 "}"
 	;
 
 members.InterfaceMethod
