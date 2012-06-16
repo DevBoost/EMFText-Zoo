@@ -34,7 +34,7 @@ import org.emftext.language.calc.Calculation;
 import org.emftext.language.calc.resource.calc.mopp.CalcMetaInformation;
 import org.emftext.language.calc.resource.calc.util.CalcResourceUtil;
 
-public class AbstractCalcTestCase extends TestCase {
+public abstract class AbstractCalcTestCase extends TestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
