@@ -357,6 +357,10 @@ public class HEDLCodeGeneratorSource {
 		// this class is only generated once. it can be customized and all changes
 		// will be preserved.
 		public class #className# extends #className#Base {
+		
+			public #className#(Class<?> contextClass) {
+				super(contextClass);
+			}
 			
 			public void handleException(Exception e, boolean retry) {
 				e.printStackTrace();
@@ -373,6 +377,8 @@ public class HEDLCodeGeneratorSource {
 
 		import java.util.ArrayList;
 		import java.util.List;
+		import java.util.Properties;
+		import java.io.IOException;
 		
 		import java.util.logging.Level;
 		import java.util.logging.Logger;
@@ -409,18 +415,29 @@ public class HEDLCodeGeneratorSource {
 		public abstract class #className# implements IDBOperationsBase {
 			
 			private static SessionFactory sessionFactory;
+			
+			private Class<?> contextClass;
 		
-			static {
-				configure();
+			public #className#() {
+				this(null);
 			}
-
-			private static void configure() throws HibernateException {
+			
+			/**
+			 * Creates a new DAO that uses the given context class to load the
+			 * Hibernate configuration 'hibernate.properties' using 
+			 * Class.getResourceAsStream().
+			 #/
+			public #className#(Class<?> contextClass) {
+				this.contextClass = contextClass;
+			}
+			
+			private void configure() throws HibernateException {
 				Configuration configuration = getConfiguration();
 				//configuration.setProperty("hibernate.show_sql", "true");
 				sessionFactory = configuration.buildSessionFactory();
 			}
 
-			private static Configuration getConfiguration() {
+			private Configuration getConfiguration() {
 				Configuration configuration = new Configuration();
 */
 				for (Entity otherEntity : entityModel.getEntities()) {
@@ -428,10 +445,19 @@ public class HEDLCodeGeneratorSource {
 /*					configuration = configuration.addAnnotatedClass(#otherEntityName#.class);
 */
 				}
-/*				return configuration;
+/*				if (contextClass != null) {
+					Properties properties = new Properties();
+					try {
+						properties.load(contextClass.getResourceAsStream("hibernate.properties"));
+					} catch(IOException ioe) {
+						throw new RuntimeException("Can't find hibernate.properties next to context class.");
+					}
+					configuration.setProperties(properties);
+				}
+				return configuration;
 			}
 			
-			protected static SessionFactory getSessionFactory() {
+			protected SessionFactory getSessionFactory() {
 				synchronized (#className#.class) {
 					if (sessionFactory == null) {
 						configure();

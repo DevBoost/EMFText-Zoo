@@ -689,6 +689,12 @@ public class HEDLCodeGenerator {
 		__content.append(" extends ");
 		__content.append(className.replaceAll("\\r\\n\\z",""));
 		__content.append("Base {\r\n");
+		__content.append("\r\n");
+		__content.append("\tpublic ");
+		__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("(Class<?> contextClass) {\r\n");
+		__content.append("\t\tsuper(contextClass);\r\n");
+		__content.append("\t}\r\n");
 		__content.append("\t\r\n");
 		__content.append("\tpublic void handleException(Exception e, boolean retry) {\r\n");
 		__content.append("\t\te.printStackTrace();\r\n");
@@ -702,6 +708,10 @@ public class HEDLCodeGenerator {
 		// this class is only generated once. it can be customized and all changes
 		// will be preserved.
 		public class #className# extends #className#Base {
+		
+			public #className#(Class<?> contextClass) {
+				super(contextClass);
+			}
 			
 			public void handleException(Exception e, boolean retry) {
 				e.printStackTrace();
@@ -721,6 +731,8 @@ public class HEDLCodeGenerator {
 		__content.append("\r\n");
 		__content.append("import java.util.ArrayList;\r\n");
 		__content.append("import java.util.List;\r\n");
+		__content.append("import java.util.Properties;\r\n");
+		__content.append("import java.io.IOException;\r\n");
 		__content.append("\r\n");
 		__content.append("import java.util.logging.Level;\r\n");
 		__content.append("import java.util.logging.Logger;\r\n");
@@ -752,6 +764,8 @@ public class HEDLCodeGenerator {
 
 		import java.util.ArrayList;
 		import java.util.List;
+		import java.util.Properties;
+		import java.io.IOException;
 		
 		import java.util.logging.Level;
 		import java.util.logging.Logger;
@@ -805,18 +819,33 @@ public class HEDLCodeGenerator {
 		__content.append(" implements IDBOperationsBase {\r\n");
 		__content.append("\t\r\n");
 		__content.append("\tprivate static SessionFactory sessionFactory;\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tprivate Class<?> contextClass;\r\n");
 		__content.append("\r\n");
-		__content.append("\tstatic {\r\n");
-		__content.append("\t\tconfigure();\r\n");
+		__content.append("\tpublic ");
+		__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("() {\r\n");
+		__content.append("\t\tthis(null);\r\n");
 		__content.append("\t}\r\n");
-		__content.append("\r\n");
-		__content.append("\tprivate static void configure() throws HibernateException {\r\n");
+		__content.append("\t\r\n");
+		__content.append("\t/**\r\n");
+		__content.append("\t * Creates a new DAO that uses the given context class to load the\r\n");
+		__content.append("\t * Hibernate configuration \'hibernate.properties\' using \r\n");
+		__content.append("\t * Class.getResourceAsStream().\r\n");
+		__content.append("\t */\r\n");
+		__content.append("\tpublic ");
+		__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t"));
+		__content.append("(Class<?> contextClass) {\r\n");
+		__content.append("\t\tthis.contextClass = contextClass;\r\n");
+		__content.append("\t}\r\n");
+		__content.append("\t\r\n");
+		__content.append("\tprivate void configure() throws HibernateException {\r\n");
 		__content.append("\t\tConfiguration configuration = getConfiguration();\r\n");
 		__content.append("\t\t//configuration.setProperty(\"hibernate.show_sql\", \"true\");\r\n");
 		__content.append("\t\tsessionFactory = configuration.buildSessionFactory();\r\n");
 		__content.append("\t}\r\n");
 		__content.append("\r\n");
-		__content.append("\tprivate static Configuration getConfiguration() {\r\n");
+		__content.append("\tprivate Configuration getConfiguration() {\r\n");
 		__content.append("\t\tConfiguration configuration = new Configuration();\r\n");
 		__content.append("");
 
@@ -825,18 +854,29 @@ public class HEDLCodeGenerator {
 		public abstract class #className# implements IDBOperationsBase {
 			
 			private static SessionFactory sessionFactory;
+			
+			private Class<?> contextClass;
 		
-			static {
-				configure();
+			public #className#() {
+				this(null);
 			}
-
-			private static void configure() throws HibernateException {
+			
+			/**
+			 * Creates a new DAO that uses the given context class to load the
+			 * Hibernate configuration 'hibernate.properties' using 
+			 * Class.getResourceAsStream().
+			 #/
+			public #className#(Class<?> contextClass) {
+				this.contextClass = contextClass;
+			}
+			
+			private void configure() throws HibernateException {
 				Configuration configuration = getConfiguration();
 				//configuration.setProperty("hibernate.show_sql", "true");
 				sessionFactory = configuration.buildSessionFactory();
 			}
 
-			private static Configuration getConfiguration() {
+			private Configuration getConfiguration() {
 				Configuration configuration = new Configuration();
 */
 				for (Entity otherEntity : entityModel.getEntities()) {
@@ -848,10 +888,19 @@ public class HEDLCodeGenerator {
 /*					configuration = configuration.addAnnotatedClass(#otherEntityName#.class);
 */
 				}
+		__content.append("\t\tif (contextClass != null) {\r\n");
+		__content.append("\t\t\tProperties properties = new Properties();\r\n");
+		__content.append("\t\t\ttry {\r\n");
+		__content.append("\t\t\t\tproperties.load(contextClass.getResourceAsStream(\"hibernate.properties\"));\r\n");
+		__content.append("\t\t\t} catch(IOException ioe) {\r\n");
+		__content.append("\t\t\t\tthrow new RuntimeException(\"Can\'t find hibernate.properties next to context class.\");\r\n");
+		__content.append("\t\t\t}\r\n");
+		__content.append("\t\t\tconfiguration.setProperties(properties);\r\n");
+		__content.append("\t\t}\r\n");
 		__content.append("\t\treturn configuration;\r\n");
 		__content.append("\t}\r\n");
 		__content.append("\t\r\n");
-		__content.append("\tprotected static SessionFactory getSessionFactory() {\r\n");
+		__content.append("\tprotected SessionFactory getSessionFactory() {\r\n");
 		__content.append("\t\tsynchronized (");
 		__content.append(className.replaceAll("\\r\\n\\z","").replace("\r\n","\r\n\t\t"));
 		__content.append(".class) {\r\n");
@@ -939,10 +988,19 @@ public class HEDLCodeGenerator {
 		__content.append("\r\n");
 		__content.append("}\r\n");
 		__content.append("");
-/*				return configuration;
+/*				if (contextClass != null) {
+					Properties properties = new Properties();
+					try {
+						properties.load(contextClass.getResourceAsStream("hibernate.properties"));
+					} catch(IOException ioe) {
+						throw new RuntimeException("Can't find hibernate.properties next to context class.");
+					}
+					configuration.setProperties(properties);
+				}
+				return configuration;
 			}
 			
-			protected static SessionFactory getSessionFactory() {
+			protected SessionFactory getSessionFactory() {
 				synchronized (#className#.class) {
 					if (sessionFactory == null) {
 						configure();
