@@ -224,7 +224,7 @@ public class ClassFileModelLoader {
 		return emfClassifier;
 	}
 
-	protected Member constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
+	protected Member constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVariableLength) {
 		Method emfMethod = null;
 		if(emfClassifier instanceof Annotation) {
 			emfMethod = annotationsFactory.createAnnotationAttribute();
@@ -275,7 +275,7 @@ public class ClassFileModelLoader {
 			} else {
 				paramName = "arg" + i;
 			}
-			if (i == method.getArgumentTypes().length - 1 && withVaraibleLength) {
+			if (i == method.getArgumentTypes().length - 1 && withVariableLength) {
 				emfMethod.getParameters().add(
 						constructVariableLengthParameter(argType, paramName));
 			} else {
