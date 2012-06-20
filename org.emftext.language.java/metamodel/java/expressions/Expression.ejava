@@ -156,7 +156,11 @@ eclass Expression {
 			return ((ConditionalExpression)this).getExpressionIf().getArrayDimension();
 		}
 		if (this instanceof AssignmentExpression) {
-			return ((AssignmentExpression) this).getValue().getArrayDimension();
+			Expression value = ((AssignmentExpression) this).getValue();
+			if (value == null) {
+				return 0;
+			}
+			return value.getArrayDimension();
 		}
 		if (this instanceof InstanceOfExpression) {
 			return 0;
