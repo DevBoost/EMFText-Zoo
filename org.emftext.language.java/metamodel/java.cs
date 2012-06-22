@@ -163,7 +163,7 @@ classifiers.AnonymousClass
 		"}"
 	;
 
-@SuppressWarnings(featureWithoutSyntax) //fullName is set during reference resolving
+@SuppressWarnings(featureWithoutSyntax) //defaultMembers is set during reference resolving
 classifiers.Interface
 	::=	annotationsAndModifiers*
 	    "interface" name[] ("<"  typeParameters ( "," typeParameters)*  ">")?
@@ -173,7 +173,7 @@ classifiers.Interface
 		"}"
 	;
 
-@SuppressWarnings(featureWithoutSyntax) //fullName is set during reference resolving
+@SuppressWarnings(featureWithoutSyntax) //defaultMembers is set during reference resolving
 @SuppressWarnings(optionalKeyword)
 classifiers.Enumeration
     ::= annotationsAndModifiers*
@@ -185,7 +185,7 @@ classifiers.Enumeration
     	"}"
     ;
 
-@SuppressWarnings(featureWithoutSyntax) //fullName is set during reference resolving
+@SuppressWarnings(featureWithoutSyntax) //defaultMembers is set during reference resolving
 classifiers.Annotation
 	::=	annotationsAndModifiers*
 	    "@" "interface" name[]
