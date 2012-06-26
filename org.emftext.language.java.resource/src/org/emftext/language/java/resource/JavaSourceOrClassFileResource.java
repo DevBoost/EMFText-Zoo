@@ -48,6 +48,7 @@ import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
+import org.emftext.language.java.resource.java.IJavaContextDependentURIFragmentFactory;
 import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider;
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaReferenceResolverSwitch;
@@ -163,9 +164,29 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 	}
 
+	/**
+	 * We override this method to enhance the created proxy objects by setting
+	 * the 'name' attribute. This is needed to ask proxy objects for their name
+	 * without resolving them.
+	 */
+	public <ContainerType extends EObject, ReferenceType extends EObject> void registerContextDependentProxy(IJavaContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, EReference reference, String id, EObject proxyElement, int position) {
+		super.registerContextDependentProxy(factory, container, reference, id, proxyElement, position);
+		if (proxyElement instanceof NamedElement) {
+			NamedElement namedElement = (NamedElement) proxyElement;
+			namedElement.setName(id);
+		}
+	}
+
 	@Override
 	public EObject getEObject(String id) {
 		EObject result = null;
+		
+		// check whether proxy resolving is turned off
+		Object disableProxyResolvingValue = getResourceSet().getLoadOptions().get(IExtendedJavaOptions.DISABLE_ON_DEMAND_PROXY_RESOLVING);
+		if (Boolean.TRUE.equals(disableProxyResolvingValue)) {
+			return null;
+		}
+		
 		if ((isClassFile() || isPackage()) &&
 				id.startsWith("//" + JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
 			if (!getContentsInternal().isEmpty()) {
