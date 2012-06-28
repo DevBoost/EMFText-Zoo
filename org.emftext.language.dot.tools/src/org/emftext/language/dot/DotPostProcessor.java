@@ -40,7 +40,7 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 	public void process(DotResource resource) {
 		if (!testDOT()) {
 			String path = System.getenv("PATH"); //$NON-NLS-1$
-			resource.addError("Cannot run DOT execuatble. Please make sure that it is contained in your PATH variable (" + path +").", DotEProblemType.ANALYSIS_PROBLEM, null); //$NON-NLS-1$
+			resource.addError("Cannot run DOT executable. Please make sure that it is contained in your PATH variable (" + path +").", DotEProblemType.ANALYSIS_PROBLEM, null); //$NON-NLS-1$
 			return;
 		}
 

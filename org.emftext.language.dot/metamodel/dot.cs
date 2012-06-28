@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2012 
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -20,10 +20,10 @@ START Graph
 
 OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
-        reloadGeneratorModel = "true";
-        generateCodeFromGeneratorModel = "true";
-        usePredefinedTokens = "false";
-        tokenspace = "1";
+	reloadGeneratorModel = "true";
+	generateCodeFromGeneratorModel = "true";
+	usePredefinedTokens = "false";
+	tokenspace = "1";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 }
@@ -80,7 +80,7 @@ RULES{
 		
 		NodeStatement ::=  node_id (attributes)? ;
 		
-		EdgeStatement ::= source target (attributes)? ;
+		EdgeStatement ::= source[ID] target (attributes)? ;
 		
 		AttributeStatement ::= context[CONTEXT] attributes;
 		
@@ -88,7 +88,7 @@ RULES{
 		
 		Subgraph ::= ( type[SUBGRAPHTYPE] (id[ID])? )? "{" (statements)? "}" ;
 		
-		Target ::= operation[EDGEOP] target (next_target)? ;  
+		Target ::= operation[EDGEOP] target[ID] (next_target)? ;  
 		
 		NodeID ::= id[ID] (port)? ;
 		
