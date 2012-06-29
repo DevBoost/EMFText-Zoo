@@ -33,7 +33,6 @@ import org.emftext.language.csv.CsvFactory;
 import org.emftext.language.csv.Row;
 import org.emftext.language.csv.Value;
 import org.emftext.language.csv.resource.csv.mopp.CsvMetaInformation;
-import org.emftext.language.csv.resource.csv.mopp.CsvResourceFactory;
 
 public class CSVTest extends TestCase {
 
@@ -42,9 +41,7 @@ public class CSVTest extends TestCase {
 	private static final CsvFactory FACTORY = CsvFactory.eINSTANCE;
 
 	public void setUp() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				FILE_EXTENSION,
-				new CsvResourceFactory());
+		new CsvMetaInformation().registerResourceFactory();
 	}
 	
 	public void testBug1408() {
