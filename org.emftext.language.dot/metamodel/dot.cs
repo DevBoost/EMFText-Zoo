@@ -38,8 +38,7 @@ TOKENS {
 		
 		DEFINE EDGEOP $ '->' | '--' $;
 		
-		DEFINE CONTEXT $ (('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) |
-		                 (('n'|'N') ('o'|'O') ('d'|'D') ('e'|'E')) |
+		DEFINE CONTEXT $ (('n'|'N') ('o'|'O') ('d'|'D') ('e'|'E')) |
 		                 (('e'|'E') ('d'|'D') ('g'|'G') ('e'|'E')) $;
 	
 	    DEFINE ID $ (('a'..'z'|'A'..'Z'|'_'|'\u0080'..'\u00ff')  ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'\u0080'..'\u00ff')*) |
@@ -82,7 +81,7 @@ RULES{
 		
 		EdgeStatement ::= source[ID] target (attributes)? ;
 		
-		AttributeStatement ::= context[CONTEXT] attributes;
+		AttributeStatement ::= (context[CONTEXT] | context[GRAPHTYPE]) attributes;
 		
 		AssignmentStatement ::= left[ID] "=" right[ID];
 		
