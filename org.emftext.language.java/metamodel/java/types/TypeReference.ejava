@@ -48,7 +48,9 @@ eclass TypeReference {
 				MethodCall potentialCloneCall = (MethodCall) reference;
 				//clone returns the type of the cloned in the case of arrays
 				ReferenceableElement potentialCloneCallTarget = potentialCloneCall.getTarget();
-				if (potentialCloneCallTarget != null && "clone".equals(potentialCloneCallTarget.getName()))  {
+				if (potentialCloneCallTarget != null && 
+						!potentialCloneCallTarget.eIsProxy() && 
+						"clone".equals(potentialCloneCallTarget.getName()))  {
 					if (potentialCloneCall.getPrevious() instanceof ElementReference) {
 						ElementReference prevRef = (ElementReference) potentialCloneCall.getPrevious();
 						if (prevRef.getTarget() instanceof ArrayTypeable && 
