@@ -67,6 +67,7 @@ public class Bug1415Test extends AbstractTestCase {
 		//TODO #1828: check if the Printer2 should be extended to extract correct names from these classifiers!
 		//assertEquals("List", str);
 		assertEquals("//@classifiers[name='List']", str);
+		in.close();
 	}
 	
 	@Test
@@ -90,6 +91,7 @@ public class Bug1415Test extends AbstractTestCase {
 		//TODO #1828: check if the Printer2 should be extended to extract correct names from these classifiers!
 		//assertEquals("List", str);
 		assertEquals("//@classifiers[name='List']", str);
+		in.close();
 	}
 	
 	@Test
@@ -113,6 +115,7 @@ public class Bug1415Test extends AbstractTestCase {
 		//TODO #1828: check if the Printer2 should be extended to extract correct names from these classifiers!
 		// assertEquals("java.util.List", str);
 		assertEquals("//@classifiers[name='List']", str);
+		in.close();
 	}
 	
 	@Test
