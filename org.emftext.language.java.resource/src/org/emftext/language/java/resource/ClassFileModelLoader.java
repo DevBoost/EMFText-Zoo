@@ -119,6 +119,7 @@ public class ClassFileModelLoader {
 		}
 		else {
 			assert(false);
+			return null;
 		}
 
 		String className = clazz.getClassName();
