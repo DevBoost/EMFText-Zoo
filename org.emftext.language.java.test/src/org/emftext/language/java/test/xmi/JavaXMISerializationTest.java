@@ -218,6 +218,7 @@ public class JavaXMISerializationTest extends AbstractJavaParserTestCase {
 			reloadedResource = reloadeSet.getResource(xmiFileURI, true);
 		} catch (Exception e) {
 			fail(e.getClass() +  ": " + e.getMessage());
+			return;
 		}
 		assertResolveAllProxies(reloadedResource);
 		for (Diagnostic d : reloadedResource.getErrors()) {
