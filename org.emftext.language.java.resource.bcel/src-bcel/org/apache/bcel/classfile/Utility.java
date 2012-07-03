@@ -1162,6 +1162,7 @@ public abstract class Utility {
             int in = bytes[i] & 0x000000ff; // Normalize to unsigned
             jw.write(in);
         }
+        jw.close();
         return caw.toString();
     }
 
