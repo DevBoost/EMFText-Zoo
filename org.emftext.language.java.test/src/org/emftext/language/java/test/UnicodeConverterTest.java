@@ -70,6 +70,7 @@ public class UnicodeConverterTest {
 			usedBytes[i] = bytes[i];
 		}
 		assertArrayEquals(expectedOutput.getBytes("UTF-8"), usedBytes);
+		converter.close();
 	}
 
 
