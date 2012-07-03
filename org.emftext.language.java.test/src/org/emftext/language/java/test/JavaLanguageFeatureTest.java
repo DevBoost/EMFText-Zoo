@@ -1419,6 +1419,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		parseAndReprint(filename);
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	public void testMultiplications() throws Exception {
 		String typename = "Multiplications";
@@ -1445,7 +1446,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertNotNull("no second IntegerLiteral found", literal2);
 		assertEquals(BigInteger.valueOf(3), literal1.getDecimalValue());
 		assertEquals(BigInteger.valueOf(4), literal2.getDecimalValue());
-
 
 		parseAndReprint(filename);
 	}
