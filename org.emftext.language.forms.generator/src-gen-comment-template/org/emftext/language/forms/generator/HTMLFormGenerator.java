@@ -32,20 +32,20 @@ public class HTMLFormGenerator extends AbstractGenerator {
 
 	@SuppressWarnings("unused")
 	public String generateString(Object argument) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		Form form = (Form) argument;
 		String formCaption = form.getCaption();
-	__content.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n");
-	__content.append("<html> \n");
-	__content.append("<head><title>");
-	__content.append(formCaption.replaceAll("\\n\\z",""));
-	__content.append("</title></head>\n");
-	__content.append("\n");
-	__content.append("<body>\n");
-	__content.append("\t<h1>Form: ");
-	__content.append(formCaption.replaceAll("\\n\\z","").replace("\n","\n\t"));
-	__content.append("</h1>\n");
-	__content.append("");
+		__content.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n");
+		__content.append("<html> \n");
+		__content.append("<head><title>");
+		__content.append(formCaption.replaceAll("\\n\\z",""));
+		__content.append("</title></head>\n");
+		__content.append("\n");
+		__content.append("<body>\n");
+		__content.append("\t<h1>Form: ");
+		__content.append(formCaption.replaceAll("\\n\\z","").replace("\n","\n\t"));
+		__content.append("</h1>\n");
+		__content.append("");
 		/*<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 		<html> 
 		<head><title>formCaption</title></head>
@@ -202,10 +202,10 @@ public class HTMLFormGenerator extends AbstractGenerator {
 	__content.append("</fieldset>");
 /*			</fieldset>*/
 		}
-	__content.append("\n");
-	__content.append("</body>\n");
-	__content.append("</html>\n");
-	__content.append("");
+		__content.append("\n");
+		__content.append("</body>\n");
+		__content.append("</html>\n");
+		__content.append("");
 /*
 		</body>
 		</html>

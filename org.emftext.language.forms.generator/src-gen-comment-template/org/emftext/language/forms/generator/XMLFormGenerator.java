@@ -30,18 +30,18 @@ public class XMLFormGenerator extends AbstractGenerator {
 
 	@SuppressWarnings("unused")
 	public String generateString(Object argument) {
-	StringBuilder __content = new StringBuilder();
+		StringBuilder __content = new StringBuilder();
 		Form form = (Form) argument;
 		String formCaption = form.getCaption() == null ? "My Form" : form.getCaption();
-	__content.append("<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"no\"?>\n");
-	__content.append("\n");
-	__content.append("<form titel=\"");
-	__content.append(formCaption.replaceAll("\\n\\z",""));
-	__content.append("\"\n");
-	__content.append("\txmlns=\"http://org.emftext.language.forms/metamodel/FormMM.xsd\" \n");
-	__content.append("\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n");
-	__content.append("\txsi:schemaLocation=\"http://org.emftext.language.forms/metamodel/FormMM.xsd schema/FormMM.xsd\">\n");
-	__content.append("");
+		__content.append("<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"no\"?>\n");
+		__content.append("\n");
+		__content.append("<form titel=\"");
+		__content.append(formCaption.replaceAll("\\n\\z",""));
+		__content.append("\"\n");
+		__content.append("\txmlns=\"http://org.emftext.language.forms/metamodel/FormMM.xsd\" \n");
+		__content.append("\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n");
+		__content.append("\txsi:schemaLocation=\"http://org.emftext.language.forms/metamodel/FormMM.xsd schema/FormMM.xsd\">\n");
+		__content.append("");
 		/*<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 
 		<form titel="formCaption"
@@ -159,8 +159,8 @@ public class XMLFormGenerator extends AbstractGenerator {
 	__content.append("");
 /*			</gruppe>
 */		}
-	__content.append("</form>\n");
-	__content.append("");
+		__content.append("</form>\n");
+		__content.append("");
 /*		</form>
 */
 		return __content.toString();
