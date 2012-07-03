@@ -94,7 +94,7 @@ public class ElementReferenceTargetReferenceResolver implements
 		EObject target = null;
 		Reference parentReference = null;
 
-		if(container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+		if (container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			//a follow up reference: different scope
 			parentReference = (Reference) container.eContainer();
 			if (parentReference instanceof IdentifierReference &&
@@ -138,22 +138,21 @@ public class ElementReferenceTargetReferenceResolver implements
 			startingPoint = container;
 		}
 
-		if(target == null) {
-			if(startingPoint instanceof TemporalCompositeClassifier) {
-				for(EObject superType : ((TemporalCompositeClassifier)startingPoint).getSuperTypes()) {
-					target = searchFromStartingPoint(identifier, container, reference,
-							superType);
-					if (target != null) {
-						break;
-					}
+		if (startingPoint instanceof TemporalCompositeClassifier) {
+			for(EObject superType : ((TemporalCompositeClassifier)startingPoint).getSuperTypes()) {
+				target = searchFromStartingPoint(identifier, container, reference,
+						superType);
+				if (target != null) {
+					break;
 				}
 			}
-			else {
-				target = searchFromStartingPoint(identifier, container, reference,
-						startingPoint);
-			}
 		}
-		if(target == null && alternativeStartingPoint != null && !alternativeStartingPoint.equals(startingPoint)) {
+		else {
+			target = searchFromStartingPoint(identifier, container, reference,
+					startingPoint);
+		}
+		
+		if (target == null && alternativeStartingPoint != null && !alternativeStartingPoint.equals(startingPoint)) {
 			target = searchFromStartingPoint(identifier, container, reference,
 					alternativeStartingPoint);
 		}
