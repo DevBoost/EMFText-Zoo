@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.ecore.resource.facade.FacadeEcoreEProblemSeverity;
 import org.emftext.language.ecore.resource.facade.FacadeEcoreEProblemType;
@@ -70,7 +69,7 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 			return;
 		}
 		
-		ResourceSet rs = new ResourceSetImpl();
+		ResourceSet rs = resource.getResourceSet();
 		Resource annotatedResource = null;
 		try {	
 			annotatedResource = rs.getResource(uri, true);
