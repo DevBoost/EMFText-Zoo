@@ -112,6 +112,7 @@ import org.emftext.test.cct2.resource.cct2.mopp.Cct2MetaInformation;
 import org.emftext.test.cct3.resource.cct3.mopp.Cct3MetaInformation;
 import org.emftext.test.cct4.resource.cct4.mopp.Cct4MetaInformation;
 import org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation;
+import org.emftext.test.generics.resource.generics.mopp.GenericsMetaInformation;
 import org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation;
 import org.emftext.test.noeclipse.resource.noeclipse.mopp.NoeclipseMetaInformation;
 import org.emftext.test.printing.resource.printing.mopp.PrintingMetaInformation;
@@ -253,6 +254,7 @@ public class TestLanguageRegistry {
 		// TODO move this to getMetaInformationsForLanguageOnUpdateSite() once the automaton regex DSL is on the update site
 		metaInformations.add(new Regexp_automatonMetaInformation());
 		metaInformations.add(new MulticharsuffixMetaInformation());
+		metaInformations.add(new GenericsMetaInformation());
 		return metaInformations;
 	}
 }
