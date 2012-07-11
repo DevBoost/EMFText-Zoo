@@ -504,9 +504,9 @@ public class JavaClasspath extends AdapterImpl {
 			URI logicalUri =
 				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 
-			URI existinMapping = getURIMap().get(logicalUri);
+			URI existingMapping = getURIMap().get(logicalUri);
 
-			if (existinMapping != null && !uri.equals(existinMapping)) {
+			if (existingMapping != null && !uri.equals(existingMapping)) {
 				//do nothing: silently replace old with new version
 			}
 
