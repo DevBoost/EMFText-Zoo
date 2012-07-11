@@ -159,6 +159,12 @@ public final class ClassParser {
             //  	System.err.println(bytes + " extra bytes: " + Utility.toHexString(buf));
             //        }
             //      }
+        } catch (IOException ioe) {
+        	// this is just temporary to find the cause for the strange
+        	// ClassFormatException that is raised randomly during the JaMoPP
+        	// bulk tests
+        	ioe.printStackTrace();
+        	throw ioe;
         } finally {
             // Read everything of interest, so close the file
             if (fileOwned) {
