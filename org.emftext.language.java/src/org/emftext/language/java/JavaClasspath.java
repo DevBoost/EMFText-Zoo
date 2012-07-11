@@ -493,43 +493,41 @@ public class JavaClasspath extends AdapterImpl {
 		synchronized (this) {
 			registerPackage(qualifiedName, innerName);
 
-			if (uri != null) {
-				String fullName = null;
-				if (".".equals(packageName)) {
-					fullName = classifierName;
+			String fullName = null;
+			if (".".equals(packageName)) {
+				fullName = classifierName;
+			}
+			else {
+				fullName = packageName + classifierName;
+			}
+
+			URI logicalUri =
+				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
+
+			URI existinMapping = getURIMap().get(logicalUri);
+
+			if (existinMapping != null && !uri.equals(existinMapping)) {
+				//do nothing: silently replace old with new version
+			}
+
+			getURIMap().put(logicalUri, uri);
+
+			String outerPackage = qualifiedName;
+			while(outerPackage.endsWith("$")) {
+				//make sure outer classes are registered;
+				//This is required when class names contain $ symbols
+				outerPackage = outerPackage.substring(0, outerPackage.length() - 1);
+				idx = outerPackage.lastIndexOf("$");
+				if (idx == -1) {
+					idx = outerPackage.lastIndexOf(".");
 				}
-				else {
-					fullName = packageName + classifierName;
+				String outerClassifier = outerPackage.substring(idx + 1);
+				outerPackage = outerPackage.substring(0, idx + 1);
+				if ("".equals(outerPackage)) {
+					outerPackage = ".";
 				}
 
-				URI logicalUri =
-					JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
-
-				URI existinMapping = getURIMap().get(logicalUri);
-
-				if (existinMapping != null && !uri.equals(existinMapping)) {
-					//do nothing: silently replace old with new version
-				}
-
-				getURIMap().put(logicalUri, uri);
-
-				String outerPackage = qualifiedName;
-				while(outerPackage.endsWith("$")) {
-					//make sure outer classes are registered;
-					//This is required when class names contain $ symbols
-					outerPackage = outerPackage.substring(0, outerPackage.length() - 1);
-					idx = outerPackage.lastIndexOf("$");
-					if (idx == -1) {
-						idx = outerPackage.lastIndexOf(".");
-					}
-					String outerClassifier = outerPackage.substring(idx + 1);
-					outerPackage = outerPackage.substring(0, idx + 1);
-					if ("".equals(outerPackage)) {
-						outerPackage = ".";
-					}
-
-					registerPackage(outerPackage, outerClassifier);
-				}
+				registerPackage(outerPackage, outerClassifier);
 			}
 		}
 	}
