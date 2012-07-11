@@ -158,7 +158,7 @@ public final class Signature extends Attribute {
     }
 
 
-    private static final void matchIdent( MyByteArrayInputStream in, StringBuffer buf ) {
+    private static final void matchIdent( MyByteArrayInputStream in, StringBuilder buf ) {
         int ch;
         if ((ch = in.read()) == -1) {
             throw new RuntimeException("Illegal signature: " + in.getData()
@@ -166,7 +166,7 @@ public final class Signature extends Attribute {
         }
         //System.out.println("return from ident:" + (char)ch);
         if (!identStart(ch)) {
-            StringBuffer buf2 = new StringBuffer();
+        	StringBuilder buf2 = new StringBuilder();
             int count = 1;
             while (Character.isJavaIdentifierPart((char) ch)) {
                 buf2.append((char) ch);
@@ -186,7 +186,7 @@ public final class Signature extends Attribute {
             }
             return;
         }
-        StringBuffer buf2 = new StringBuffer();
+        StringBuilder buf2 = new StringBuilder();
         ch = in.read();
         do {
             buf2.append((char) ch);
@@ -201,7 +201,7 @@ public final class Signature extends Attribute {
     }
 
 
-    private static final void matchGJIdent( MyByteArrayInputStream in, StringBuffer buf ) {
+    private static final void matchGJIdent( MyByteArrayInputStream in, StringBuilder buf ) {
         int ch;
         matchIdent(in, buf);
         ch = in.read();
@@ -239,7 +239,7 @@ public final class Signature extends Attribute {
 
     public static String translate( String s ) {
         //System.out.println("Sig:" + s);
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         matchGJIdent(new MyByteArrayInputStream(s), buf);
         return buf.toString();
     }

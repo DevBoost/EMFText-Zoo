@@ -109,7 +109,7 @@ public final class StackMap extends Attribute implements Node {
      * @return String representation.
      */
     public final String toString() {
-        StringBuffer buf = new StringBuffer("StackMap(");
+    	StringBuilder buf = new StringBuilder("StackMap(");
         for (int i = 0; i < map_length; i++) {
             buf.append(map[i].toString());
             if (i < map_length - 1) {

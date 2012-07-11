@@ -146,7 +146,7 @@ public class ClassPath implements Serializable {
                 }
             }
         }
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (Iterator e = list.iterator(); e.hasNext();) {
             buf.append((String) e.next());
             if (e.hasNext()) {

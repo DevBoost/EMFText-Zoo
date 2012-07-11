@@ -695,7 +695,7 @@ public class ConstantPoolGen implements java.io.Serializable {
      * @return String representation.
      */
     public String toString() {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         for (int i = 1; i < index; i++) {
             buf.append(i).append(")").append(constants[i]).append("\n");
         }

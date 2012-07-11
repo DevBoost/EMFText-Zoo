@@ -1023,7 +1023,7 @@ public class MethodGen extends FieldGenOrMethodGen {
         String signature = Type.getMethodSignature(type, arg_types);
         signature = Utility.methodSignatureToString(signature, name, access, true,
                 getLocalVariableTable(cp));
-        StringBuffer buf = new StringBuffer(signature);
+        StringBuilder buf = new StringBuilder(signature);
         if (throws_vec.size() > 0) {
             for (Iterator e = throws_vec.iterator(); e.hasNext();) {
                 buf.append("\n\t\tthrows ").append(e.next());

@@ -15,6 +15,8 @@
  ******************************************************************************/
 package org.emftext.language.java;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.java.commons.NamespaceAwareElement;
@@ -73,6 +75,11 @@ public class JavaUniquePathConstructor {
 	public static final String JAVA_CLASS_FILE_EXTENSION = ".class";
 	
 	/**
+	 * We cache this regular expression because it is used very frequently.
+	 */
+	private static final Pattern CLASSIFIER_SEPARATOR_REGEX_PATTERN = Pattern.compile("\\" + CLASSIFIER_SEPARATOR);
+
+	/**
 	 * Constructs an URI from a fully qualified classifier name
 	 * pointing at the resource containing the classifier.
 	 *
@@ -80,10 +87,11 @@ public class JavaUniquePathConstructor {
 	 * @return the logical URI for the classifier
 	 */
 	public static URI getJavaFileResourceURI(String fullQualifiedName) {
-		String logicalUriString = JAVA_CLASSIFIER_PATHMAP;
-		logicalUriString = logicalUriString + fullQualifiedName + JAVA_FILE_EXTENSION;
+		StringBuilder logicalUriString = new StringBuilder(JAVA_CLASSIFIER_PATHMAP);
+		logicalUriString.append(fullQualifiedName);
+		logicalUriString.append(JAVA_FILE_EXTENSION);
 
-		return URI.createURI(logicalUriString);
+		return URI.createURI(logicalUriString.toString());
 	}
 
 	/**
@@ -102,20 +110,23 @@ public class JavaUniquePathConstructor {
 		if (idx >= 0) {
 			classesPart = classesPart.substring(idx + 1);
 		}
-		String[] classNames = classesPart.split("\\" + CLASSIFIER_SEPARATOR, -1);
 
-		String uriFragment = "";
+		String[] classNames = CLASSIFIER_SEPARATOR_REGEX_PATTERN.split(classesPart, -1);
+
+		StringBuilder uriFragment = new StringBuilder();
 		for(int i = 0; i < classNames.length; i++) {
 			if (i == 0) {
-				uriFragment = uriFragment + "//" + CLASSIFIERS_ROOT_PATH_PREFIX;
+				uriFragment.append("//");
+				uriFragment.append(CLASSIFIERS_ROOT_PATH_PREFIX);
 			}
 			else {
-				uriFragment = uriFragment + "/" + CLASSIFIERS_SUB_PATH_PREFIX;
+				uriFragment.append("/");
+				uriFragment.append(CLASSIFIERS_SUB_PATH_PREFIX);
 			}
-			uriFragment = uriFragment + classNames[i] + CLASSIFIERS_PATH_SUFIX;
+			uriFragment.append(classNames[i]);
+			uriFragment.append(CLASSIFIERS_PATH_SUFIX);
 		}
-		logicalUri = logicalUri.appendFragment(
-				uriFragment);
+		logicalUri = logicalUri.appendFragment(uriFragment.toString());
 		return logicalUri;
 	}
 

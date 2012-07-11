@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Signature;
 import org.apache.bcel.classfile.Utility;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -242,8 +243,9 @@ public class ClassFileModelLoader {
 		String plainSignature = "";
 
 		for(Attribute a : method.getAttributes()){
-			String s = a.toString();
-			if(s.startsWith("Signature(")) {
+			if (a instanceof Signature) {
+				String s = a.toString();
+				// TODO can we replace this with replace("[", "")?
 				s = s.replaceAll("\\[", "");
 				plainSignature = s;
 				break;

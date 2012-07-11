@@ -132,7 +132,7 @@ public abstract class Type implements java.io.Serializable {
      * @return method signature for given type(s).
      */
     public static String getMethodSignature( Type return_type, Type[] arg_types ) {
-        StringBuffer buf = new StringBuffer("(");
+    	StringBuilder buf = new StringBuilder("(");
         int length = (arg_types == null) ? 0 : arg_types.length;
         for (int i = 0; i < length; i++) {
             buf.append(arg_types[i].getSignature());
@@ -298,7 +298,7 @@ public abstract class Type implements java.io.Serializable {
 
 
     public static String getSignature( java.lang.reflect.Method meth ) {
-        StringBuffer sb = new StringBuffer("(");
+    	StringBuilder sb = new StringBuilder("(");
         Class[] params = meth.getParameterTypes(); // avoid clone
         for (int j = 0; j < params.length; j++) {
             sb.append(getType(params[j]).getSignature());
