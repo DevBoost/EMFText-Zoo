@@ -52,12 +52,10 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 
-
 /**
- * This class is responsible for managing an retrieving Java resources to
+ * This class is responsible for managing and retrieving Java resources to
  * establish inter-model references between different Java classes represented
  * as EMF-models.
- *
  */
 public class JavaClasspath extends AdapterImpl {
 	
