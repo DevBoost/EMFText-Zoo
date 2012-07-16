@@ -24,6 +24,7 @@ import java.util.List;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -33,6 +34,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaCore;
 import org.emftext.language.hedl.Entity;
 import org.emftext.language.hedl.EntityModel;
 import org.emftext.language.hedl.codegen.HEDLCodeGenerator;
@@ -53,9 +57,8 @@ public class HedlBuilder implements IHedlBuilder {
 			return Status.CANCEL_STATUS;
 		}
 		
-		URI uri = resource.getURI();
-		String packageName = getPackageName(uri);
 		IFile modelFile = WorkspaceSynchronizer.getFile(resource);
+		String packageName = getPackageName(modelFile);
 		IContainer modelFolder = modelFile.getParent();
 		File modelFolderFile = modelFolder.getRawLocation().toFile();
 		File daoFolder = new File(modelFolderFile, HEDLCodegenConstants.DAO_PACKAGE_NAME);
@@ -144,23 +147,29 @@ public class HedlBuilder implements IHedlBuilder {
 		return loc;
 	}
 
-	private String getPackageName(URI uri) {
+	private String getPackageName(IFile modelFile) {
 		String packageName = new String();
-		String[] segments = uri.trimFileExtension().trimSegments(1).segments();
+		IContainer parent = modelFile.getParent();
 		List<String> packages = new ArrayList<String>();
-		for (int i = segments.length - 1; i >= 0; i--) {
-			String segment = segments[i];
-			if (isSourceFolder(segment)) {
-				break;
-			}
-			packages.add(0, segment);
+		while (!isSourceFolder(parent)) {
+			packages.add(0, parent.getName());
+			parent = parent.getParent();
 		}
 		packageName = HedlStringUtil.explode(packages, ".");
 		return packageName;
 	}
 
-	private boolean isSourceFolder(String segment) {
-		return segment.startsWith("src");
+	private boolean isSourceFolder(IContainer element) {
+		IJavaElement javaElement = JavaCore.create(element);
+		if (javaElement instanceof IPackageFragmentRoot) {
+			return true;
+		}
+		if (element.getParent() instanceof IProject) {
+			//if no source was found so far, assume that the upper most
+			//folder is (intended to be) a source folder.
+			return true;
+		}
+		return false;
 	}
 
 	private void logInfo(String message) {
