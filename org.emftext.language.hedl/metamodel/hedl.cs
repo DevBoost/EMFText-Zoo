@@ -33,7 +33,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	EntityModel ::= options* (entities | enums)*;
+	EntityModel ::= (options !0)* !0 ((entities | enums) !0 !0)*;
 	
 	Option ::= key[
 				PreserveTableNames : "preserveTableNames" ,
@@ -45,7 +45,7 @@ RULES {
 		name[UPPER] 
 		("extends" superType[UPPER])? 
 		("implements" implementedInterfaces[LOWER] ("," implementedInterfaces[LOWER])*)? 
-		"{" properties* constraints* "}";
+		"{" (!1 properties)* (!1 constraints)* !0 "}";
 	
 	Property ::=
 		comment[ML_COMMENT]?  
