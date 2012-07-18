@@ -33,14 +33,8 @@ import org.emftext.language.hedl.Property;
 import org.emftext.language.hedl.Type;
 import org.emftext.language.hedl.UniqueConstraint;
 import org.emftext.language.hedl.types.HedlBuiltinTypes;
-import de.devboost.commenttemplate.LineBreak;
-import de.devboost.commenttemplate.ReplacementRule;
-import de.devboost.commenttemplate.VariableAntiQuotation;
 
 @SuppressWarnings("unused")
-@ReplacementRule(pattern="#/", replacement="*/")
-@VariableAntiQuotation("#%s#")
-@LineBreak("\r\n")
 public class HEDLCodeGenerator {
 
 	private String DAO_PACKAGE_NAME = HEDLCodegenConstants.DAO_PACKAGE_NAME;
