@@ -1,5 +1,5 @@
 //*******************************************************************************
-// Copyright (c) 2006-2010 
+// Copyright (c) 2006-2012 
 // Software Technology Group, Dresden University of Technology
 // 
 // All rights reserved. This program and the accompanying materials
@@ -13,7 +13,7 @@
 // ******************************************************************************/
 
 SYNTAXDEF quml 
-FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+FOR <http://www.eclipse.org/uml2/4.0.0/UML>
 START Model
  
 OPTIONS {	
