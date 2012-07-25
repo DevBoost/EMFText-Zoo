@@ -12,7 +12,7 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
-SYNTAXDEF statemachine FOR <http://www.eclipse.org/uml2/3.0.0/UML> START StateMachine
+SYNTAXDEF statemachine FOR <http://www.eclipse.org/uml2/4.0.0/UML> START StateMachine
 
 OPTIONS {	
 	licenceHeader ="../../org.dropsbox/licence.txt";
