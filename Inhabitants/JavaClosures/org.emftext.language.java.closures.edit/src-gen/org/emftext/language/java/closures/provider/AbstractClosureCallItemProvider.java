@@ -215,7 +215,12 @@ public class AbstractClosureCallItemProvider
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-         ArraysFactory.eINSTANCE.createArrayInstantiationByValues()));
+         ArraysFactory.eINSTANCE.createArrayInstantiationByValuesUntyped()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
+         ArraysFactory.eINSTANCE.createArrayInstantiationByValuesTyped()));
 
     newChildDescriptors.add
       (createChildParameter

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.emftext.commons.layout.provider.LayoutEditPlugin;
 import org.emftext.language.java.annotations.provider.JavaEditPlugin;
 
 /**
@@ -55,6 +56,7 @@ public final class ClosuresEditPlugin extends EMFPlugin {
       (new ResourceLocator [] 
        {
          JavaEditPlugin.INSTANCE,
+         LayoutEditPlugin.INSTANCE,
        });
   }
 

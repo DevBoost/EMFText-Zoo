@@ -58,140 +58,143 @@ public class NestedItemProvider
 		IItemLabelProvider,
 		IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NestedItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+    super(adapterFactory);
+  }
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    if (itemPropertyDescriptors == null)
+    {
+      super.getPropertyDescriptors(object);
 
-		}
-		return itemPropertyDescriptors;
-	}
+    }
+    return itemPropertyDescriptors;
+  }
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ThreevaluedlogicPackage.Literals.NESTED__BODY);
-		}
-		return childrenFeatures;
-	}
+    if (childrenFeatures == null)
+    {
+      super.getChildrenFeatures(object);
+      childrenFeatures.add(ThreevaluedlogicPackage.Literals.NESTED__BODY);
+    }
+    return childrenFeatures;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
+    // Check the type of the specified child object and return the proper feature to use for
+    // adding (see {@link AddCommand}) it as a child.
 
-		return super.getChildFeature(object, child);
-	}
+    return super.getChildFeature(object, child);
+  }
 
 	/**
-	 * This returns Nested.gif.
-	 * <!-- begin-user-doc -->
+   * This returns Nested.gif.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Nested"));
-	}
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/Nested"));
+  }
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
+   * This returns the label text for the adapted class.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String getText(Object object) {
-		Constants labelValue = ((Nested)object).getComputedValue();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Nested_type") :
-			getString("_UI_Nested_type") + " " + label;
-	}
+    Constants labelValue = ((Nested)object).getComputedValue();
+    String label = labelValue == null ? null : labelValue.toString();
+    return label == null || label.length() == 0 ?
+      getString("_UI_Nested_type") :
+      getString("_UI_Nested_type") + " " + label;
+  }
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
+   * This handles model notifications by calling {@link #updateChildren} to update any cached
+   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
+    updateChildren(notification);
 
-		switch (notification.getFeatureID(Nested.class)) {
-			case ThreevaluedlogicPackage.NESTED__BODY:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
-		super.notifyChanged(notification);
-	}
+    switch (notification.getFeatureID(Nested.class))
+    {
+      case ThreevaluedlogicPackage.NESTED__BODY:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+        return;
+    }
+    super.notifyChanged(notification);
+  }
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ThreevaluedlogicPackage.Literals.NESTED__BODY,
-				 ThreevaluedlogicFactory.eINSTANCE.createAnd()));
+    newChildDescriptors.add
+      (createChildParameter
+        (ThreevaluedlogicPackage.Literals.NESTED__BODY,
+         ThreevaluedlogicFactory.eINSTANCE.createAnd()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ThreevaluedlogicPackage.Literals.NESTED__BODY,
-				 ThreevaluedlogicFactory.eINSTANCE.createOr()));
+    newChildDescriptors.add
+      (createChildParameter
+        (ThreevaluedlogicPackage.Literals.NESTED__BODY,
+         ThreevaluedlogicFactory.eINSTANCE.createOr()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ThreevaluedlogicPackage.Literals.NESTED__BODY,
-				 ThreevaluedlogicFactory.eINSTANCE.createNegation()));
+    newChildDescriptors.add
+      (createChildParameter
+        (ThreevaluedlogicPackage.Literals.NESTED__BODY,
+         ThreevaluedlogicFactory.eINSTANCE.createNegation()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ThreevaluedlogicPackage.Literals.NESTED__BODY,
-				 ThreevaluedlogicFactory.eINSTANCE.createConstant()));
+    newChildDescriptors.add
+      (createChildParameter
+        (ThreevaluedlogicPackage.Literals.NESTED__BODY,
+         ThreevaluedlogicFactory.eINSTANCE.createConstant()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ThreevaluedlogicPackage.Literals.NESTED__BODY,
-				 ThreevaluedlogicFactory.eINSTANCE.createNested()));
-	}
+    newChildDescriptors.add
+      (createChildParameter
+        (ThreevaluedlogicPackage.Literals.NESTED__BODY,
+         ThreevaluedlogicFactory.eINSTANCE.createNested()));
+  }
 
 }

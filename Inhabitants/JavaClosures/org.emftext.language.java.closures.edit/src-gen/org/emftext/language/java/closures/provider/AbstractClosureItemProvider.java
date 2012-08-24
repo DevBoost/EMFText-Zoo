@@ -318,11 +318,6 @@ public class AbstractClosureItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS,
-         ClosuresFactory.eINSTANCE.createClosure()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS,
          ClassifiersFactory.eINSTANCE.createClass()));
 
     newChildDescriptors.add
@@ -463,7 +458,12 @@ public class AbstractClosureItemProvider
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.REFERENCE__NEXT,
-         ArraysFactory.eINSTANCE.createArrayInstantiationByValues()));
+         ArraysFactory.eINSTANCE.createArrayInstantiationByValuesUntyped()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (ReferencesPackage.Literals.REFERENCE__NEXT,
+         ArraysFactory.eINSTANCE.createArrayInstantiationByValuesTyped()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -650,7 +650,6 @@ public class AbstractClosureItemProvider
       childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_BEFORE ||
       childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_AFTER ||
       childFeature == ClosuresPackage.Literals.ABSTRACT_CLOSURE__VALUE_TYPE_ARRAY_DIMENSION ||
-      childFeature == StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS ||
       childFeature == ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS ||
       childFeature == ReferencesPackage.Literals.REFERENCE__NEXT;
 

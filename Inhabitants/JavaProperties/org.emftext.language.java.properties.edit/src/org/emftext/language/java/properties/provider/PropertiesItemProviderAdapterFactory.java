@@ -215,7 +215,7 @@ public class PropertiesItemProviderAdapterFactory extends PropertiesAdapterFacto
   }
 
   /**
-   * This disposes all of the item providers created by this factory.
+   * This disposes all of the item providers created by this factory. 
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.emftext.commons.layout.provider.LayoutEditPlugin;
 import org.emftext.language.java.annotations.provider.JavaEditPlugin;
 
 /**
@@ -54,9 +55,10 @@ public final class PropertiesEditPlugin extends EMFPlugin
   public PropertiesEditPlugin()
   {
     super
-      (new ResourceLocator []
+      (new ResourceLocator [] 
        {
          JavaEditPlugin.INSTANCE,
+         LayoutEditPlugin.INSTANCE,
        });
   }
 

@@ -53,262 +53,270 @@ import org.emftext.language.threevaluedlogic.util.ThreevaluedlogicAdapterFactory
  */
 public class ThreevaluedlogicItemProviderAdapterFactory extends ThreevaluedlogicAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the root adapter factory that delegates to this adapter factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
+   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
+   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ThreevaluedlogicItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    supportedTypes.add(IEditingDomainItemProvider.class);
+    supportedTypes.add(IStructuredItemContentProvider.class);
+    supportedTypes.add(ITreeItemContentProvider.class);
+    supportedTypes.add(IItemLabelProvider.class);
+    supportedTypes.add(IItemPropertySource.class);
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.And} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.And} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected AndItemProvider andItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.And}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.And}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createAndAdapter() {
-		if (andItemProvider == null) {
-			andItemProvider = new AndItemProvider(this);
-		}
+    if (andItemProvider == null)
+    {
+      andItemProvider = new AndItemProvider(this);
+    }
 
-		return andItemProvider;
-	}
+    return andItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Or} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Or} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OrItemProvider orItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Or}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Or}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createOrAdapter() {
-		if (orItemProvider == null) {
-			orItemProvider = new OrItemProvider(this);
-		}
+    if (orItemProvider == null)
+    {
+      orItemProvider = new OrItemProvider(this);
+    }
 
-		return orItemProvider;
-	}
+    return orItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Negation} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Negation} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected NegationItemProvider negationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Negation}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Negation}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createNegationAdapter() {
-		if (negationItemProvider == null) {
-			negationItemProvider = new NegationItemProvider(this);
-		}
+    if (negationItemProvider == null)
+    {
+      negationItemProvider = new NegationItemProvider(this);
+    }
 
-		return negationItemProvider;
-	}
+    return negationItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Constant} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Constant} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ConstantItemProvider constantItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Constant}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Constant}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createConstantAdapter() {
-		if (constantItemProvider == null) {
-			constantItemProvider = new ConstantItemProvider(this);
-		}
+    if (constantItemProvider == null)
+    {
+      constantItemProvider = new ConstantItemProvider(this);
+    }
 
-		return constantItemProvider;
-	}
+    return constantItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Nested} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.threevaluedlogic.Nested} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected NestedItemProvider nestedItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Nested}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.threevaluedlogic.Nested}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createNestedAdapter() {
-		if (nestedItemProvider == null) {
-			nestedItemProvider = new NestedItemProvider(this);
-		}
+    if (nestedItemProvider == null)
+    {
+      nestedItemProvider = new NestedItemProvider(this);
+    }
 
-		return nestedItemProvider;
-	}
+    return nestedItemProvider;
+  }
 
 	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This returns the root adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+  }
 
 	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This sets the composed adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    this.parentAdapterFactory = parentAdapterFactory;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    return supportedTypes.contains(type) || super.isFactoryForType(type);
+  }
 
 	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
+   * This implementation substitutes the factory itself as the key for the adapter.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    return super.adapt(notifier, this);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    if (isFactoryForType(type))
+    {
+      Object adapter = super.adapt(object, type);
+      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+      {
+        return adapter;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
+   * This adds a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    changeNotifier.addListener(notifyChangedListener);
+  }
 
 	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
+   * This removes a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    changeNotifier.removeListener(notifyChangedListener);
+  }
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
+   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+    if (parentAdapterFactory != null)
+    {
+      parentAdapterFactory.fireNotifyChanged(notification);
+    }
+  }
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
+   * This disposes all of the item providers created by this factory. 
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void dispose() {
-		if (andItemProvider != null) andItemProvider.dispose();
-		if (orItemProvider != null) orItemProvider.dispose();
-		if (negationItemProvider != null) negationItemProvider.dispose();
-		if (constantItemProvider != null) constantItemProvider.dispose();
-		if (nestedItemProvider != null) nestedItemProvider.dispose();
-	}
+    if (andItemProvider != null) andItemProvider.dispose();
+    if (orItemProvider != null) orItemProvider.dispose();
+    if (negationItemProvider != null) negationItemProvider.dispose();
+    if (constantItemProvider != null) constantItemProvider.dispose();
+    if (nestedItemProvider != null) nestedItemProvider.dispose();
+  }
 
 }
