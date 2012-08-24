@@ -41,6 +41,7 @@ import java.util.zip.ZipFile;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -49,7 +50,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.formular.Formular;
 import org.emftext.language.formular.resource.formular.FormularGeneratorPlugin;
 
@@ -66,8 +66,8 @@ public class FormsGenerator {
 		for (EObject eobject : distinctObjects) {
 			if (eobject instanceof Formular) {
 				final Formular form = (Formular) eobject;
-				final IProject project = WorkspaceSynchronizer.getFile(
-						form.eResource()).getProject();
+				final IProject project = ResourcesPlugin.getWorkspace().getRoot(
+						).getProject(form.eResource().getURI().segment(1));
 				Job creationJob = new Job("Generating Formular") {
 
 					@Override

@@ -17,9 +17,10 @@ package org.emftext.language.dot;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.core.runtime.Path;
 import org.emftext.language.dot.resource.dot.DotEProblemType;
 import org.emftext.language.dot.resource.dot.IDotResourcePostProcessor;
 import org.emftext.language.dot.resource.dot.mopp.DotResource;
@@ -36,7 +37,8 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 			return;
 		}
 
-		IFile file = WorkspaceSynchronizer.getFile(resource);
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+				new Path(resource.getURI().toPlatformString(true)));
 		String filePath = file.getProjectRelativePath().toOSString();
 		String projectPath = file.getProject().getLocation().toOSString();
 		String message = dotRunner.convertDotToPDF(filePath, projectPath);

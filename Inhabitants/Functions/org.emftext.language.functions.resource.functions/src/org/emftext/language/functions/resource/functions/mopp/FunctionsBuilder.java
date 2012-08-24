@@ -23,15 +23,16 @@ import java.io.InputStream;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -52,7 +53,8 @@ public class FunctionsBuilder implements IFunctionsBuilder {
 	}
 	
 	public IStatus build(FunctionsResource resource, IProgressMonitor monitor) {
-		IFile modelFile = WorkspaceSynchronizer.getFile(resource);
+		IFile modelFile = ResourcesPlugin.getWorkspace().getRoot().getFile(
+				new Path(resource.getURI().toPlatformString(true)));
 		IContainer modelFolder = modelFile.getParent();
 		File modelFolderFile = modelFolder.getLocation().toFile();
 		

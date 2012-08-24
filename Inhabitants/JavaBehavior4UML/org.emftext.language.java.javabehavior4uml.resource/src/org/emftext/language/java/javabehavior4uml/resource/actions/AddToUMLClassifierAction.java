@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,7 +29,6 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -146,7 +147,8 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 					behaviorResource = newBehaviorResource;
 				}
 
-				IFile file = (IFile) WorkspaceSynchronizer.getFile(behaviorResource);
+				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+						new Path(behaviorResource.getURI().toPlatformString(true)));
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
 				IEditorDescriptor editorDescriptor = editorRegistry.getDefaultEditor(file.getName());

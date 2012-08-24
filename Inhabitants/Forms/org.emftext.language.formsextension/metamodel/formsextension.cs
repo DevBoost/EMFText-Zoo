@@ -13,7 +13,7 @@ OPTIONS {
 	overrideBuilder = "false";
 	usePredefinedTokens ="false";
 	resolveProxyElementsAfterParsing = "false";
-	additionalDependencies = "org.eclipse.emf.workspace,org.emftext.language.java.resource";
+	additionalDependencies = "org.emftext.language.java.resource";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 }

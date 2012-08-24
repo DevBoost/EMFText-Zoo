@@ -6,7 +6,7 @@ OPTIONS {
 	licenceHeader ="../../org.dropsbox/licence.txt";
 	
 	usePredefinedTokens = "false";
-	additionalDependencies = "org.eclipse.emf.workspace,org.eclipse.ui.console,org.eclipse.jface,org.emftext.language.functions.generators";
+	additionalDependencies = "org.eclipse.ui.console,org.eclipse.jface,org.emftext.language.functions.generators";
 	
 	overrideBuilder = "false";
 }

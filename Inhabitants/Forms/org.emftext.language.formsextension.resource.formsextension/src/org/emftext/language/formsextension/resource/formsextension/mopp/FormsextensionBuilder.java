@@ -18,13 +18,14 @@ package org.emftext.language.formsextension.resource.formsextension.mopp;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.formsextension.ExtendedForm;
 import org.emftext.language.formsextension.resource.formsextension.IFormsextensionBuilder;
 import org.emftext.language.java.classifiers.Class;
@@ -109,7 +110,8 @@ public class FormsextensionBuilder implements IFormsextensionBuilder {
 		callMethod.setName("interprete");
 		methodCall.setTarget(callMethod);
 		StringReference stringExpression = ReferencesFactory.eINSTANCE.createStringReference();
-		IFile file = WorkspaceSynchronizer.getFile(resource);
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+				new Path(resource.getURI().toPlatformString(true)));
 		String uri = file.getProjectRelativePath().toString();
 		stringExpression.setValue(uri);
 		methodCall.getArguments().add(stringExpression);

@@ -6,7 +6,7 @@ START PointAndClickAdventure
 OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
-	additionalDependencies = "org.eclipse.emf.workspace,org.emftext.language.pacad.util";
+	additionalDependencies = "org.emftext.language.pacad.util";
 	overrideDefaultResolverDelegate = "false";
 	overrideBuilder = "false";
 	// TODO enable launch support and run interpreter

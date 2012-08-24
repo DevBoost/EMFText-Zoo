@@ -21,9 +21,10 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.bibtex.Bibliography;
 import org.emftext.language.bibtex.BibtexKeyField;
 import org.emftext.language.bibtex.Entry;
@@ -45,7 +46,8 @@ public class BibtexOptionProvider implements IBibOptionProvider,
 	public void process(BibResource resource) {
 //		try {
 			if (resource.getContents().size() == 1) {
-				IFile file = WorkspaceSynchronizer.getFile(resource);
+				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+						new Path(resource.getURI().toPlatformString(true)));
 				IProject project = file.getProject();
 				File root = project.getLocation().toFile();
 				// get the root element which is the bibliography containing all

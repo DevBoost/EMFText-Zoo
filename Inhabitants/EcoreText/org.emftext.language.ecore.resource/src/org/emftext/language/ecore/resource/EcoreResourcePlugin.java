@@ -15,8 +15,10 @@
  ******************************************************************************/
 package org.emftext.language.ecore.resource;
 
+import org.eclipse.core.runtime.Plugin;
+
 // A singleton class for the text resource plug-in.
-public class EcoreResourcePlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
+public class EcoreResourcePlugin extends Plugin {
 	
 	public static final String PLUGIN_ID = "org.emftext.language.ecore.resource";
 	public static final String EP_ADDITIONAL_EXTENSION_PARSER_ID = PLUGIN_ID + ".additional_extension_parser";

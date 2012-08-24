@@ -28,7 +28,6 @@ OPTIONS {
 	
 	usePredefinedTokens = "false";
 	saveChangedResourcesOnly = "true";
-	overrideManifest = "false";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 }

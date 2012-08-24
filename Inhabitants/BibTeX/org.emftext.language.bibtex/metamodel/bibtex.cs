@@ -23,7 +23,6 @@ OPTIONS {
 	//disableTokenSorting = "true";
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
-	additionalDependencies = "org.eclipse.emf.workspace";
 }
 
 TOKENS {

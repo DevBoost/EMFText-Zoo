@@ -24,10 +24,11 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.pacad.Command;
 import org.emftext.language.pacad.CommandType;
 import org.emftext.language.pacad.InternalObject;
@@ -49,7 +50,8 @@ public class PacadConstraintChecker {
 
 	public void check(PacadResource resource) {
 		if (resource.getContents().size() == 1) {
-			IFile file = WorkspaceSynchronizer.getFile(resource);
+			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+					new Path(resource.getURI().toPlatformString(true)));
 			IProject project = file.getProject();
 			File root = project.getLocation().toFile();
 			PointAndClickAdventure adventure = (PointAndClickAdventure) resource
