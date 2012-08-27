@@ -37,7 +37,6 @@ import org.emftext.language.dot.resource.dot.mopp.DotMetaInformation;
 import org.emftext.language.dynamicui.resource.dynamicui.mopp.DynamicuiMetaInformation;
 import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreMetaInformation;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreMetaInformation;
-import org.emftext.language.efactory.resource.efactory.mopp.EfactoryMetaInformation;
 import org.emftext.language.featherweightjava.resource.fj.mopp.FjMetaInformation;
 import org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation;
 import org.emftext.language.filesystem.resource.fs.mopp.FsMetaInformation;
@@ -138,7 +137,6 @@ public class TestLanguageRegistry {
 		metaInformations.add(new DynamicuiMetaInformation());
 		metaInformations.add(new FacadeEcoreMetaInformation());
 		metaInformations.add(new TextEcoreMetaInformation());
-		metaInformations.add(new EfactoryMetaInformation());
 		metaInformations.add(new FjMetaInformation());
 		metaInformations.add(new FeatureMetaInformation());
 		metaInformations.add(new FormularMetaInformation());
@@ -195,6 +193,7 @@ public class TestLanguageRegistry {
 		// metaInformations.add(new EmfdocMetaInformation());
 		// metaInformations.add(new HedlMetaInformation());
 		// metaInformations.add(new MecoreMetaInformation());
+		// metaInformations.add(new EfactoryMetaInformation());
 		
 		// OnToMoPP
 		// metaInformations.add(new RqMetaInformation());
