@@ -7,12 +7,20 @@ Document (
 
 Sentence (
 	words Word*
+	dependencies Dependency*
+)
+
+Dependency (
+	~governor Word <> Word.dependents
+	~dependent Word <> Word.governors
 )
 
 Word (
 	begin EInt
 	end EInt
 	text EString
+	~governors Dependency* <> Dependency.dependent
+	~dependents Dependency* <> Dependency.governor
 )
 
 CC : Word

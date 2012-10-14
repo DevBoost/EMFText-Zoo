@@ -1,7 +1,14 @@
 package org.devboost.stanford.test;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.StringReader;
+import java.util.Collection;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
+
+import org.devboost.stanford.models.DummyClass;
 
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
@@ -22,101 +29,123 @@ import edu.stanford.nlp.trees.TypedDependency;
 
 class ParserDemo {
 
-  public static void main(String[] args) {
-    LexicalizedParser lp = LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
-    if (args.length > 0) {
-      demoDP(lp, args[0]);
-    } else {
-      demoAPI(lp);
-    }
-  }
+	public static void main(String[] args) {
+		try {
+			InputStream resource = DummyClass.class.getResourceAsStream("englishPCFG.ser.gz");
+			ObjectInputStream ois;
+			ois = new ObjectInputStream(new GZIPInputStream(resource));
+			LexicalizedParser lp = LexicalizedParser.loadModel(ois);
 
-  public static void demoDP(LexicalizedParser lp, String filename) {
-    // This option shows loading and sentence-segment and tokenizing
-    // a file using DocumentPreprocessor
-    TreebankLanguagePack tlp = new PennTreebankLanguagePack();
-    GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
-    // You could also create a tokenier here (as below) and pass it
-    // to DocumentPreprocessor
-    for (List<HasWord> sentence : new DocumentPreprocessor(filename)) {
-      Tree parse = lp.apply(sentence);
-      
-      printTree(parse);
-//      parse.pennPrint();
-      System.out.println();
-      
-//      GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-//      Collection tdl = gs.typedDependenciesCCprocessed(true);
-//      System.out.println(tdl);
-      System.out.println();
-    }
-  }
-
-  /**
- * @param parse
- */
-  private static void printTree(Tree tree) {
-	  printTree(tree, 0);
-  }
-private static void printTree(Tree tree, int indent) {
-	//System.out.println(tree.getClass().getSimpleName() + ": " + tree.nodeString() + " --> " + tree.value() + ";");
-	Label label = tree.label();
-	//System.out.println(label.getClass());
-	if (label instanceof CoreLabel) {
-		CoreLabel coreLabel = (CoreLabel) label;
-		int beginPosition = coreLabel.beginPosition();
-		int endPosition = coreLabel.endPosition();
-		String category = coreLabel.category();
-		String originalText = coreLabel.word();//originalText();
-		System.out.println(getSpaces(indent) + "At " + beginPosition + ":" + endPosition + " " + originalText + " [" + category + "]");
+			if (args.length > 0) {
+				demoDP(lp, args[0]);
+			} else {
+				demoAPI(lp);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	List<Tree> children = tree.getChildrenAsList();
-	for (Tree child : children) {
-		printTree(child, indent + 1);
+
+	public static void demoDP(LexicalizedParser lp, String filename) {
+		// This option shows loading and sentence-segment and tokenizing
+		// a file using DocumentPreprocessor
+		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+		GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
+		// You could also create a tokenier here (as below) and pass it
+		// to DocumentPreprocessor
+		for (List<HasWord> sentence : new DocumentPreprocessor(filename)) {
+			Tree parse = lp.apply(sentence);
+
+			printTree(parse);
+			      parse.pennPrint();
+			System.out.println();
+
+			GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
+			Collection tdl = gs.typedDependenciesCCprocessed(true);
+			System.out.println(tdl);
+			List<TypedDependency> typedDependenciesCCprocessed = gs.typedDependenciesCCprocessed();
+			System.out.println(typedDependenciesCCprocessed);
+			Collection<TypedDependency> allTypedDependencies = gs.allTypedDependencies();
+			System.out.println(allTypedDependencies);
+			Collection<TypedDependency> typedDependencies = gs.typedDependencies();
+			System.out.println(typedDependencies);
+			List<TypedDependency> typedDependencies2 = gs.typedDependencies(true);
+			System.out.println(typedDependencies2);
+			Collection<TypedDependency> typedDependenciesCollapsed = gs.typedDependenciesCollapsed();
+			System.out.println(typedDependenciesCollapsed);
+			List<TypedDependency> typedDependenciesCollapsed2 = gs.typedDependenciesCollapsed(true);
+			System.out.println(typedDependenciesCollapsed2);
+			Collection<TypedDependency> typedDependenciesCollapsedTree = gs.typedDependenciesCollapsedTree();
+			System.out.println(typedDependenciesCollapsedTree);
+			System.out.println();
+		}
 	}
-}
 
-/**
- * @param indent
- * @return
- */
-private static String getSpaces(int indent) {
-	StringBuffer sb = new StringBuffer();
-	for (int i = 0; i < indent; i++) {
-		sb.append(" ");
+	/**
+	 * @param parse
+	 */
+	private static void printTree(Tree tree) {
+		printTree(tree, 0);
 	}
-	return sb.toString();
-}
+	private static void printTree(Tree tree, int indent) {
+		//System.out.println(tree.getClass().getSimpleName() + ": " + tree.nodeString() + " --> " + tree.value() + ";");
+		Label label = tree.label();
+		//System.out.println(label.getClass());
+		if (label instanceof CoreLabel) {
+			CoreLabel coreLabel = (CoreLabel) label;
+			int beginPosition = coreLabel.beginPosition();
+			int endPosition = coreLabel.endPosition();
+			String category = coreLabel.category();
+			String originalText = coreLabel.word();//originalText();
+			System.out.println(getSpaces(indent) + "At " + beginPosition + ":" + endPosition + " " + originalText + " [" + category + "]");
+		}
 
-public static void demoAPI(LexicalizedParser lp) {
-    // This option shows parsing a list of correctly tokenized words
-    String[] sent = { "This", "is", "an", "easy", "sentence", "." };
-    List<CoreLabel> rawWords = Sentence.toCoreLabelList(sent);
-    Tree parse = lp.apply(rawWords);
-    parse.pennPrint();
-    System.out.println();
+		List<Tree> children = tree.getChildrenAsList();
+		for (Tree child : children) {
+			printTree(child, indent + 1);
+		}
+	}
+
+	/**
+	 * @param indent
+	 * @return
+	 */
+	private static String getSpaces(int indent) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < indent; i++) {
+			sb.append(" ");
+		}
+		return sb.toString();
+	}
+
+	public static void demoAPI(LexicalizedParser lp) {
+		// This option shows parsing a list of correctly tokenized words
+		String[] sent = { "This", "is", "an", "easy", "sentence", "." };
+		List<CoreLabel> rawWords = Sentence.toCoreLabelList(sent);
+		Tree parse = lp.apply(rawWords);
+		parse.pennPrint();
+		System.out.println();
 
 
-    // This option shows loading and using an explicit tokenizer
-    String sent2 = "This is another sentence.";
-    TokenizerFactory<CoreLabel> tokenizerFactory = 
-      PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
-    List<CoreLabel> rawWords2 = 
-      tokenizerFactory.getTokenizer(new StringReader(sent2)).tokenize();
-    parse = lp.apply(rawWords2);
+		// This option shows loading and using an explicit tokenizer
+		String sent2 = "This is another sentence.";
+		TokenizerFactory<CoreLabel> tokenizerFactory = 
+				PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
+		List<CoreLabel> rawWords2 = 
+				tokenizerFactory.getTokenizer(new StringReader(sent2)).tokenize();
+		parse = lp.apply(rawWords2);
 
-    TreebankLanguagePack tlp = new PennTreebankLanguagePack();
-    GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
-    GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-    List<TypedDependency> tdl = gs.typedDependenciesCCprocessed();
-    System.out.println(tdl);
-    System.out.println();
+		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+		GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
+		GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
+		List<TypedDependency> tdl = gs.typedDependenciesCCprocessed();
+		System.out.println(tdl);
+		System.out.println();
 
-    TreePrint tp = new TreePrint("penn,typedDependenciesCollapsed");
-    tp.printTree(parse);
-  }
+		TreePrint tp = new TreePrint("penn,typedDependenciesCollapsed");
+		tp.printTree(parse);
+	}
 
-  private ParserDemo() {} // static methods only
+	private ParserDemo() {} // static methods only
 
 }
