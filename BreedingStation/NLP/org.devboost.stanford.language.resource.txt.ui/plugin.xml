@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.devboost.stanford.language.resource.txt.ui.TxtUIMetaInformation" id="org.devboost.stanford.language.resource.txt.ui.TxtUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.devboost.stanford.language.resource.txt.ui.TxtEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="txt" icon="icons/editor_icon.gif" id="org.devboost.stanford.language.resource.txt.ui.TxtEditor" name="EMFText txt Editor">
+			<contentTypeBinding contentTypeId="org.devboost.stanford.language.resource.txt">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.devboost.stanford.language.resource.txt.ui.TxtPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Txt Text Editor" id="org.devboost.stanford.language.resource.txt.ui.TxtPreferencePage" class="org.devboost.stanford.language.resource.txt.ui.TxtPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.devboost.stanford.language.resource.txt.ui.TxtSyntaxColoringPreferencePage" class="org.devboost.stanford.language.resource.txt.ui.TxtSyntaxColoringPreferencePage" category="org.devboost.stanford.language.resource.txt.ui.TxtPreferencePage">
+		</page>
+		<page name="Brackets" id="org.devboost.stanford.language.resource.txt.ui.TxtBracketPreferencePage" class="org.devboost.stanford.language.resource.txt.ui.TxtBracketPreferencePage" category="org.devboost.stanford.language.resource.txt.ui.TxtPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.devboost.stanford.language.resource.txt.ui.TxtNewFileWizard" id="org.devboost.stanford.language.resource.txt.ui.TxtNewFileWizard" name="EMFText .txt file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.devboost.stanford.language.resource.txt.ui.TxtNewProjectWizard" id="org.devboost.stanford.language.resource.txt.ui.TxtNewProjectWizard" name="EMFText txt project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.devboost.stanford.language.resource.txt.ui.TxtMarkerResolutionGenerator" markerType="org.devboost.stanford.language.resource.txt.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.devboost.stanford.language.resource.txt.ui.TxtAnnotationModelFactory" extensions="txt">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.devboost.stanford.language.resource.txt" name=".txt File" base-type="org.eclipse.core.runtime.text" file-extensions="txt">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="txt" id="org.devboost.stanford.language.resource.txt.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.devboost.stanford.language.resource.txt.ui.occurences">
+		</type>
+		<type name="org.devboost.stanford.language.resource.txt.ui.occurences.declaration" super="org.devboost.stanford.language.resource.txt.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.devboost.stanford.language.resource.txt.ui.occurences" label="Occurrences (in .txt files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="txt.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="txt.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="txt.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="txt.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="txt.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="txt.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="txt.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="txt.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="txt.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.devboost.stanford.language.resource.txt.ui.occurences.declaration" label="Declarations (in .txt files)" textPreferenceKey="txt.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="txt.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="txt.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="txt.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="txt.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="txt.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.devboost.stanford.language.resource.txt.ui.launchConfigurationType" id="org.devboost.stanford.txt.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.devboost.stanford.language.resource.txt.ui.launchConfigurationType" class="org.devboost.stanford.language.resource.txt.ui.launch.TxtLaunchConfigurationTabGroup" id="org.devboost.stanford.txt.launchConfigurationTabGroup" helpContextId="org.devboost.stanford.txt.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug txt model.">
+			</launchMode>
+			<launchMode mode="run" description="Run txt model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="txt Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.devboost.stanford.txt.launch" modes="run,debug" class="org.devboost.stanford.language.resource.txt.ui.launch.TxtLaunchShortcut" description="Launch a txt model" id="org.devboost.stanford.txt.launchShortcut">
+			<description description="Run txt model" mode="run">
+			</description>
+			<description description="Debug txt model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.devboost.stanford.txt.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.devboost.stanford.language.resource.txt.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.devboost.stanford.txt.PropertyTester" type="java.lang.Object" namespace="org.devboost.stanford.txt" properties="isLaunchable" class="org.devboost.stanford.language.resource.txt.ui.TxtPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.devboost.stanford.language.resource.txt.ui.debug.lineBreakpoint" markerType="org.devboost.stanford.language.resource.txt.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.devboost.stanford.language.resource.txt.ui.debug.lineBreakpoint" label="Breakpoints (in .txt files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.devboost.stanford.language.resource.txt.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.devboost.stanford.language.resource.txt.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.devboost.stanford.language.resource.txt.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.devboost.stanford.language.resource.txt.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.devboost.stanford.language.resource.txt.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.devboost.stanford.language.resource.txt.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.devboost.stanford.language.resource.txt.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.devboost.stanford.language.resource.txt.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.devboost.stanford.language.resource.txt.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.devboost.stanford.language.resource.txt.ui.TxtEditor" class="org.devboost.stanford.language.resource.txt.ui.debug.TxtAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.devboost.stanford.language.resource.txt.debug.TxtDebugVariable" class="org.devboost.stanford.language.resource.txt.ui.debug.TxtAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.devboost.stanford.language.resource.txt.debug.TxtDebugVariable" class="org.devboost.stanford.language.resource.txt.ui.debug.TxtAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.devboost.stanford.language.resource.txt.ui.RulerPopupActions" targetID="org.devboost.stanford.language.resource.txt.EditorRuler">
+			<action id="org.devboost.stanford.language.resource.txt.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.devboost.stanford.language.resource.txt.ui.TxtEditor" id="org.devboost.stanford.language.resource.txt.ui.BreakpointRulerActions">
+			<action id="org.devboost.stanford.language.resource.txt.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.devboost.stanford.language.resource.txt.debugModel" class="org.devboost.stanford.language.resource.txt.ui.debug.TxtDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>
