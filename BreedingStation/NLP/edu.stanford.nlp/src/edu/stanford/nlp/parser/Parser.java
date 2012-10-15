@@ -1,7 +1,8 @@
 /*******************************************************************************
  * Copyright (C) 2012
- * Jan Reimann (TU Dresden, Software Technology Group)
- * Mirko Seifert (DevBoost GmbH)
+ * The Stanford Natural Language Processing Group 
+ * http://nlp.stanford.edu/
+ * This Eclipse plugin matches the Stanford CoreNLP version 1.3.3
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
