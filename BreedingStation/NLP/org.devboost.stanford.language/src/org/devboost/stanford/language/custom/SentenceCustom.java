@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.devboost.stanford.language.Word;
 import org.devboost.stanford.language.impl.SentenceImpl;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 
 
 public class SentenceCustom extends SentenceImpl {
@@ -39,5 +41,26 @@ public class SentenceCustom extends SentenceImpl {
 		return words.get(words.size() - 1).getEnd();
 	}
 	
+	@Override
+	public Word getWord(int begin, int end){
+		List<Word> words = getWords();
+		for (Word word : words) {
+			if(word.getBegin() == begin && word.getEnd() == end){
+				return word;
+			}
+		}
+		return null;
+	}
+	
+	public EList<Word> findWords(String wordText){
+		EList<Word> foundWords = new BasicEList<Word>();
+		List<Word> words = getWords();
+		for (Word word : words) {
+			if(word.getText().equals(wordText)){
+				foundWords.add(word);
+			}
+		}
+		return foundWords;
+	}
 	
 }
