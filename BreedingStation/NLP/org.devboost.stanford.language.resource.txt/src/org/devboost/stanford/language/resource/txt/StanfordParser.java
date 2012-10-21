@@ -54,7 +54,12 @@ public class StanfordParser implements ITxtTextParser {
 	@Override
 	public ITxtParseResult parse() {
 		try {
-			Document document = languageCreator.parse(new InputStreamReader(inputStream, encoding));
+			Document document = null;
+			if(encoding == null){
+				document = languageCreator.parse(new InputStreamReader(inputStream));
+			} else {
+				document = languageCreator.parse(new InputStreamReader(inputStream, encoding));
+			}
 			TxtParseResult result = new TxtParseResult();
 			result.setRoot(document);
 			return result;
