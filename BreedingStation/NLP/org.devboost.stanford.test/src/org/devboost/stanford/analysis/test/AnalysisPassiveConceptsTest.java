@@ -18,7 +18,9 @@ package org.devboost.stanford.analysis.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +47,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -54,19 +57,23 @@ import org.junit.Test;
  */
 public class AnalysisPassiveConceptsTest {
 
-	private static final String TEXT	= "input/roleModel.txt";
+	private static final String INPUT_TEXT_FILE		= "input/roleModel.txt";
+	private static final String OUTPUT_TEXT_FILE	= "output/metamodel.text.ecore";
 	private static List<String> CHILD_TERMS;
 	private static List<String> PARENT_PREPOSITION_TERMS;
 	private static List<String> ENUMERATION_TERMS;
 	
 	private static Resource resource;
+	private static Resource outputResource;
 	private static Document document;
+	private static EPackage ePackage;
 	
 	@BeforeClass
 	public static void init(){
 		initAnalysisTerms();
 		initRegistry();
-		File input = new File(TEXT);
+		// input
+		File input = new File(INPUT_TEXT_FILE);
 		assertTrue("file must exist", input.exists());
 		ResourceSet rs = new ResourceSetImpl();
 		URI uri = URI.createFileURI(input.getAbsolutePath());
@@ -74,6 +81,15 @@ public class AnalysisPassiveConceptsTest {
 		assertNotNull("resource must not be null", resource);
 		document = (Document) resource.getContents().get(0);
 		assertNotNull("document must not be null", document);
+		// output
+		File output = new File(OUTPUT_TEXT_FILE);
+		if(output.exists()){
+			output.delete();
+		}
+		assertFalse(OUTPUT_TEXT_FILE + "must not exist", output.exists());
+		uri = URI.createFileURI(output.getAbsolutePath());
+		outputResource = rs.createResource(uri);
+		assertNotNull("output resource must not be null", outputResource);
 	}
 
 	private static void initAnalysisTerms() {
@@ -103,6 +119,7 @@ public class AnalysisPassiveConceptsTest {
 	private static void initRegistry() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("txt", new TxtResourceFactory());
 		EPackage.Registry.INSTANCE.put(LanguagePackage.eNS_URI, LanguagePackage.eINSTANCE);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new TextEcoreResourceFactory());
 	}
 	
 	@Test
@@ -110,6 +127,12 @@ public class AnalysisPassiveConceptsTest {
 		List<Sentence> sentences = document.getSentences();
 		for (Sentence sentence : sentences) {
 			analyseSentence(sentence);
+		}
+		outputResource.getContents().add(ePackage);
+		try {
+			outputResource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -126,6 +149,15 @@ public class AnalysisPassiveConceptsTest {
 					createEnumeration(metamodel, governor, dependent);
 				}
 			}
+		}
+		if(ePackage == null){
+			ePackage = EcoreFactory.eINSTANCE.createEPackage();
+			ePackage.setName("test");
+			ePackage.setNsPrefix("test");
+			ePackage.setNsURI("http://test.org");
+		}
+		for (EClassifier classifier : metamodel.values()) {
+			ePackage.getEClassifiers().add(classifier);
 		}
 	}
 
