@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.devboost.stanford.models.DummyClass;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 
