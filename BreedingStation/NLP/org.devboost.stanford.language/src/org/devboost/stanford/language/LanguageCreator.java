@@ -54,6 +54,12 @@ import edu.stanford.nlp.trees.TypedDependency;
  */
 public class LanguageCreator {
 
+	/**
+	 * Is used for correcting the offset of a word. Offsets calculated by the Stanford parser are one sign too long.
+	 * For the outline and synchronised selection of a word in the editor it's better to decrease it by 1.
+	 */
+	private static final int OFFSET_CORRECTION = 1;
+	
 	private static final String DEPENDENCY_PREFIX	= "D";
 
 	private LexicalizedParser lp;
@@ -162,7 +168,7 @@ public class LanguageCreator {
 	private Word getWordInSentence(Sentence sentence, TreeGraphNode node) {
 		CyclicCoreLabel label = node.label();
 		int begin = label.get(CharacterOffsetBeginAnnotation.class);
-		int end = label.get(CharacterOffsetEndAnnotation.class);
+		int end = label.get(CharacterOffsetEndAnnotation.class) - OFFSET_CORRECTION;
 		Word word = sentence.getWord(begin, end);
 		return word;
 	}
@@ -173,7 +179,7 @@ public class LanguageCreator {
 		if (label instanceof CoreLabel) {
 			CoreLabel coreLabel = (CoreLabel) label;
 			int beginPosition = coreLabel.beginPosition();
-			int endPosition = coreLabel.endPosition();
+			int endPosition = coreLabel.endPosition() - OFFSET_CORRECTION;
 			String originalText = coreLabel.word();
 			if(originalText != null){
 				Tree parent = tree.ancestor(1, root);
