@@ -1,0 +1,122 @@
+package xwpf // this is the package name 
+        xwpf // this is the namespace prefix
+        "http://www.itu.dk/sdg/language/xwpf" // the namespace URI 
+	{
+
+	@"import"("language"="platform:/resource/org.devboost.stanford.language/metamodel/language.ecore")
+	class Content {
+		attribute EString text;
+		containment reference language::NLPParagraph nlpContent;
+	}
+
+	class Document {
+	
+		containment reference BodyElement 	bodyElements 	(0..-1);
+        containment reference Comment 		comments		(0..-1); 
+		containment reference Footnote		endnotes 		(0..-1);
+		containment reference Footer		footers 		(0..-1);
+		containment reference Footnote		footnotes 		(0..-1);
+		containment reference Header		headers 		(0..-1);
+		containment reference Hyperlink		hyperlinks 		(0..-1);
+		containment reference Numbering		numbering 		(0..-1);
+		containment reference PictureData	packagePictures (0..-1);
+        containment reference Paragraph		paragraphs		(0..-1);
+        containment reference PictureData	pictures 		(0..-1);
+        transient attribute Style			styles 			(0..-1);
+		containment reference Table			tables 			(0..-1);
+	}
+	
+	class BodyElement {
+	
+	}
+
+	
+	class Comment extends Content {
+		attribute			EString 		author;
+		attribute 			EString 		identifier;
+	}
+
+	class Footnote extends Content {
+	
+	}
+	
+	class Footer extends Content {
+	
+	}
+	
+	class Header extends Content {
+	
+	}
+	
+	class Hyperlink {
+		attribute			EString 		identifier;
+		attribute			EString 		url;
+	}
+	
+	class Numbering {
+	
+	}
+	
+	class PictureData {
+	
+	}
+	
+	class Paragraph extends Content {
+		containment reference Run 		runs	 		(0..-1);
+        containment reference Part 		part			(0..1); 
+		containment reference Body		body 			(0..1);
+		
+		attribute			EInt 			alignment;
+		attribute			EInt	 		borderBottom;
+		attribute			EInt	 		borderTop;
+		attribute			EInt	 		borderBetween;
+		attribute			EInt	 		borderLeft;
+		attribute			EInt	 		borderRight;
+		attribute			EInt	 		verticalAlignment;
+		attribute			EString 		footnoteText;
+		attribute			EInt	 		indentFstLine;
+		attribute			EInt	 		indentHanging;
+		attribute			EInt	 		indentLeft;
+		attribute			EInt	 		indentRight;
+		attribute			EInt	 		spacingAfter;
+		attribute			EInt	 		spacingAfterLines;
+		attribute			EInt	 		spacingBefore;
+		attribute			EInt	 		spacingBeforeLines;
+		attribute			EInt	 		spacingLineRule;
+		transient attribute	Style 			style;
+	}
+
+	class Table {
+	
+	}
+	
+	class Run extends Content {
+		attribute			EString 		fontFamily;
+		attribute			EInt	 		fontSize;
+		attribute			EBoolean 		isBold;
+		attribute			EBoolean 		isItalic;
+		attribute			EBoolean 		isStrike;
+		attribute			EString 		color;
+		attribute 			EInt			textPosition;
+	}
+	
+	class Part {}
+	
+	class Body {}
+	
+	enum Style {
+		0 : unrecognized = "unrecognized";
+		1 : heading1 = "Heading1";
+		2 : heading2 = "Heading2";
+		3 : heading3 = "Heading3";
+		4 : heading4 = "Heading4";
+		5 : bodyText = "BodyText";
+		6 : bodyTextWithList = "BodyTextwithList";
+		7 : listParagraph = "ListParagraph";
+		8 : listBullet1 = "ListBullet1";
+		9 : listBullet2 = "ListBullet2";
+		10 : listBullet3 = "ListBullet3";
+		11 : normal = "null";
+		//TODO: extend this list with more styles
+	}
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="dk.itu.sdg.language.xwpf.resource.xwpf.mopp.XwpfMetaInformation" id="dk.itu.sdg.language.xwpf.resource.xwpf.mopp.XwpfMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.xwpf.resource.xwpf.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.xwpf.resource.xwpf.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.xwpf.resource.xwpf.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.xwpf.resource.xwpf.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="dk.itu.sdg.language.xwpf.resource.xwpf.problem">
+		</super>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.nature" name="xwpf nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="dk.itu.sdg.language.xwpf.resource.xwpf.mopp.XwpfNature">
+			</run>
+		</runtime>
+		<builder id="dk.itu.sdg.language.xwpf.resource.xwpf.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="dk.itu.sdg.language.xwpf.resource.xwpf.builder" name="xwpf Builder">
+		<builder hasNature="true">
+			<run class="dk.itu.sdg.language.xwpf.resource.xwpf.mopp.XwpfBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="dk.itu.sdg.language.xwpf.resource.xwpf.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="dk.itu.sdg.language.xwpf.resource.xwpf.mopp.XwpfResourceFactoryDelegator" type="xwpf">
+		</parser>
+	</extension>
+	
+	<extension-point id="dk.itu.sdg.language.xwpf.resource.xwpf.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="dk.itu.sdg.language.xwpf.resource.xwpf.debug.XwpfLineBreakpoint" id="dk.itu.sdg.language.xwpf.resource.xwpf.debug.breakpoint" markerType="dk.itu.sdg.language.xwpf.resource.xwpf.debug.lineBreakpoint.marker" name="xwpf Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="dk.itu.sdg.language.xwpf.resource.xwpf.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.launchConfigurationType" delegate="dk.itu.sdg.language.xwpf.resource.xwpf.launch.XwpfLaunchConfigurationDelegate" modes="run,debug" name="xwpf Application" sourceLocatorId="dk.itu.sdg.language.xwpf.resource.xwpf.ui.sourceLocator" sourcePathComputerId="dk.itu.sdg.language.xwpf.resource.xwpf.ui.sourcePathComputer" delegateName="xwpf Launch Tooling" delegateDescription="This will run or debug .xwpf files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="dk.itu.sdg.language.xwpf.resource.xwpf.debug.XwpfSourcePathComputerDelegate" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.sourceLocator" class="dk.itu.sdg.language.xwpf.resource.xwpf.debug.XwpfSourceLocator" name="xwpf Source Locator">
+		</sourceLocator>
+	</extension>
+	
+</plugin>
