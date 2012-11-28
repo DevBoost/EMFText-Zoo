@@ -26,8 +26,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.devboost.stanford.language.Document;
 import org.devboost.stanford.language.LanguageCreator;
+import org.devboost.stanford.language.NLPParagraph;
 import org.devboost.stanford.language.resource.txt.mopp.TxtExpectedTerminal;
 import org.devboost.stanford.language.resource.txt.mopp.TxtParseResult;
 import org.eclipse.emf.ecore.EClass;
@@ -54,14 +54,14 @@ public class StanfordParser implements ITxtTextParser {
 	@Override
 	public ITxtParseResult parse() {
 		try {
-			Document document = null;
+			NLPParagraph paragraph = null;
 			if(encoding == null){
-				document = languageCreator.parse(new InputStreamReader(inputStream));
+				paragraph = languageCreator.parse(new InputStreamReader(inputStream));
 			} else {
-				document = languageCreator.parse(new InputStreamReader(inputStream, encoding));
+				paragraph = languageCreator.parse(new InputStreamReader(inputStream, encoding));
 			}
 			TxtParseResult result = new TxtParseResult();
-			result.setRoot(document);
+			result.setRoot(paragraph);
 			return result;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

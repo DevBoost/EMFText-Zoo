@@ -90,18 +90,18 @@ IItemPropertySource {
 	 */
 	protected void addCollapsedWordPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
-		(createItemPropertyDescriptor
+			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_Collapse_collapsedWord_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Collapse_collapsedWord_feature", "_UI_Collapse_type"),
-						LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						false,
-						false,
-						true,
-						null,
-						null,
-						null));
+				 getResourceLocator(),
+				 getString("_UI_Collapse_collapsedWord_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Collapse_collapsedWord_feature", "_UI_Collapse_type"),
+				 LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
+				 false,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -112,18 +112,18 @@ IItemPropertySource {
 	 */
 	protected void addCollapsedWordStringPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
-		(createItemPropertyDescriptor
+			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_Collapse_collapsedWordString_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Collapse_collapsedWordString_feature", "_UI_Collapse_type"),
-						LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD_STRING,
-						false,
-						false,
-						false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-						null,
-						null));
+				 getResourceLocator(),
+				 getString("_UI_Collapse_collapsedWordString_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Collapse_collapsedWordString_feature", "_UI_Collapse_type"),
+				 LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD_STRING,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -200,12 +200,12 @@ IItemPropertySource {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Collapse.class)) {
-		case LanguagePackage.COLLAPSE__COLLAPSED_WORD_STRING:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-			return;
-		case LanguagePackage.COLLAPSE__COLLAPSED_WORD:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-			return;
+			case LanguagePackage.COLLAPSE__COLLAPSED_WORD_STRING:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case LanguagePackage.COLLAPSE__COLLAPSED_WORD:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -222,189 +222,189 @@ IItemPropertySource {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createWord()));
+				 LanguageFactory.eINSTANCE.createWord()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createCC()));
+				 LanguageFactory.eINSTANCE.createCC()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createCD()));
+				 LanguageFactory.eINSTANCE.createCD()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createDT()));
+				 LanguageFactory.eINSTANCE.createDT()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createEX()));
+				 LanguageFactory.eINSTANCE.createEX()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createFW()));
+				 LanguageFactory.eINSTANCE.createFW()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createIN()));
+				 LanguageFactory.eINSTANCE.createIN()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createJJ()));
+				 LanguageFactory.eINSTANCE.createJJ()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createJJR()));
+				 LanguageFactory.eINSTANCE.createJJR()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createJJS()));
+				 LanguageFactory.eINSTANCE.createJJS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createLS()));
+				 LanguageFactory.eINSTANCE.createLS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createMD()));
+				 LanguageFactory.eINSTANCE.createMD()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createNN()));
+				 LanguageFactory.eINSTANCE.createNN()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createNNS()));
+				 LanguageFactory.eINSTANCE.createNNS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createNNP()));
+				 LanguageFactory.eINSTANCE.createNNP()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createNNPS()));
+				 LanguageFactory.eINSTANCE.createNNPS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createPDT()));
+				 LanguageFactory.eINSTANCE.createPDT()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createPOS()));
+				 LanguageFactory.eINSTANCE.createPOS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createPRP()));
+				 LanguageFactory.eINSTANCE.createPRP()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createPRPS()));
+				 LanguageFactory.eINSTANCE.createPRPS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createRB()));
+				 LanguageFactory.eINSTANCE.createRB()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createRBR()));
+				 LanguageFactory.eINSTANCE.createRBR()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createRBS()));
+				 LanguageFactory.eINSTANCE.createRBS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createRP()));
+				 LanguageFactory.eINSTANCE.createRP()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createSYM()));
+				 LanguageFactory.eINSTANCE.createSYM()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createTO()));
+				 LanguageFactory.eINSTANCE.createTO()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createUH()));
+				 LanguageFactory.eINSTANCE.createUH()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createVB()));
+				 LanguageFactory.eINSTANCE.createVB()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createVBD()));
+				 LanguageFactory.eINSTANCE.createVBD()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createVBG()));
+				 LanguageFactory.eINSTANCE.createVBG()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createVBN()));
+				 LanguageFactory.eINSTANCE.createVBN()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createVBP()));
+				 LanguageFactory.eINSTANCE.createVBP()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createVBZ()));
+				 LanguageFactory.eINSTANCE.createVBZ()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createWDT()));
+				 LanguageFactory.eINSTANCE.createWDT()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createWP()));
+				 LanguageFactory.eINSTANCE.createWP()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createWPS()));
+				 LanguageFactory.eINSTANCE.createWPS()));
 
 		newChildDescriptors.add
-		(createChildParameter
+			(createChildParameter
 				(LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD,
-						LanguageFactory.eINSTANCE.createWRB()));
+				 LanguageFactory.eINSTANCE.createWRB()));
 	}
 
 	/**
@@ -419,14 +419,14 @@ IItemPropertySource {
 		Object childObject = child;
 
 		boolean qualify =
-				childFeature == LanguagePackage.Literals.DEPENDENCY__GOVERNOR ||
-				childFeature == LanguagePackage.Literals.DEPENDENCY__DEPENDENT ||
-				childFeature == LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD;
+			childFeature == LanguagePackage.Literals.DEPENDENCY__GOVERNOR ||
+			childFeature == LanguagePackage.Literals.DEPENDENCY__DEPENDENT ||
+			childFeature == LanguagePackage.Literals.COLLAPSE__COLLAPSED_WORD;
 
 		if (qualify) {
 			return getString
-					("_UI_CreateChild_text2",
-							new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

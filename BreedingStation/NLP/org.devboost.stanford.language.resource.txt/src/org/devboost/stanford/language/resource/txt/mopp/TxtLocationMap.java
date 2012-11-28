@@ -22,7 +22,7 @@ package org.devboost.stanford.language.resource.txt.mopp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.devboost.stanford.language.Document;
+import org.devboost.stanford.language.NLPParagraph;
 import org.devboost.stanford.language.Sentence;
 import org.devboost.stanford.language.Word;
 import org.eclipse.emf.ecore.EObject;
@@ -87,8 +87,8 @@ public class TxtLocationMap implements org.devboost.stanford.language.resource.t
 			return ((Word) element).getBegin(); 
 		} else if (element instanceof Sentence){
 			return ((Sentence) element).getBegin();
-		} else if (element instanceof Document){
-			return ((Document) element).getBegin();
+		} else if (element instanceof NLPParagraph){
+			return ((NLPParagraph) element).getBegin();
 		}
 		return getMapValue(charStartMap, element);
 	}
@@ -102,8 +102,8 @@ public class TxtLocationMap implements org.devboost.stanford.language.resource.t
 			return ((Word) element).getEnd(); 
 		} else if (element instanceof Sentence){
 			return ((Sentence) element).getEnd();
-		} else if(element instanceof Document){
-			return ((Document) element).getEnd();
+		} else if(element instanceof NLPParagraph){
+			return ((NLPParagraph) element).getEnd();
 		}
 		return getMapValue(charEndMap, element);
 	}
@@ -136,8 +136,8 @@ public class TxtLocationMap implements org.devboost.stanford.language.resource.t
 	
 	public java.util.List<org.eclipse.emf.ecore.EObject> getElementsAt(final int documentOffset) {
 		if(txtResource != null){
-			Document document = (Document) txtResource.getContents().get(0);
-			List<Sentence> sentences = document.getSentences();
+			NLPParagraph paragraph = (NLPParagraph) txtResource.getContents().get(0);
+			List<Sentence> sentences = paragraph.getSentences();
 			for (Sentence sentence : sentences) {
 				if(sentence.getBegin() <= documentOffset && documentOffset <= sentence.getEnd()){
 					List<Word> words = sentence.getWords();

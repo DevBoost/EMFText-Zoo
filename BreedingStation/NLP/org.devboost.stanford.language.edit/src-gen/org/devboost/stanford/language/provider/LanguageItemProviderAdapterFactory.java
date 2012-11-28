@@ -93,29 +93,6 @@ public class LanguageItemProviderAdapterFactory extends LanguageAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.devboost.stanford.language.Document} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DocumentItemProvider documentItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.devboost.stanford.language.Document}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDocumentAdapter() {
-		if (documentItemProvider == null) {
-			documentItemProvider = new DocumentItemProvider(this);
-		}
-
-		return documentItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.devboost.stanford.language.Sentence} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2278,6 +2255,29 @@ public class LanguageItemProviderAdapterFactory extends LanguageAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.devboost.stanford.language.NLPParagraph} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NLPParagraphItemProvider nlpParagraphItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.devboost.stanford.language.NLPParagraph}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNLPParagraphAdapter() {
+		if (nlpParagraphItemProvider == null) {
+			nlpParagraphItemProvider = new NLPParagraphItemProvider(this);
+		}
+
+		return nlpParagraphItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2376,7 +2376,6 @@ public class LanguageItemProviderAdapterFactory extends LanguageAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
-		if (documentItemProvider != null) documentItemProvider.dispose();
 		if (sentenceItemProvider != null) sentenceItemProvider.dispose();
 		if (wordItemProvider != null) wordItemProvider.dispose();
 		if (ccItemProvider != null) ccItemProvider.dispose();
@@ -2471,6 +2470,7 @@ public class LanguageItemProviderAdapterFactory extends LanguageAdapterFactory i
 		if (dxsubjItemProvider != null) dxsubjItemProvider.dispose();
 		if (drootItemProvider != null) drootItemProvider.dispose();
 		if (collapseItemProvider != null) collapseItemProvider.dispose();
+		if (nlpParagraphItemProvider != null) nlpParagraphItemProvider.dispose();
 	}
 
 }
