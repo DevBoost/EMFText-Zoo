@@ -1,23 +1,24 @@
-/*******************************************************************************
- * Copyright (c) 2006-2012
- * Software Technology Group, Dresden University of Technology
- * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
+/**
+ * Copyright (C) 2012
+ * Jan Reimann (TU Dresden, Software Technology Group)
+ * Mirko Seifert (DevBoost GmbH)
+ * Rolf-Helge Pfeiffer (IT University Copenhagen)
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
  * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany;
- *   DevBoost GmbH - Berlin, Germany
- *      - initial API and implementation
- ******************************************************************************/
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 package org.devboost.stanford.analysis.test;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,11 +59,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- * @author jreimann
- *
- */
 public class AnalysisPassiveConceptsTest {
 
 	private static final String INPUT_TEXT_FILE		= "input/roleModel.txt";

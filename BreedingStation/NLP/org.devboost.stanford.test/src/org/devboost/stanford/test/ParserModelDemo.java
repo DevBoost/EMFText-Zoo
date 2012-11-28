@@ -1,18 +1,23 @@
-/*******************************************************************************
- * Copyright (c) 2006-2012
- * Software Technology Group, Dresden University of Technology
- * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
+/**
+ * Copyright (C) 2012
+ * Jan Reimann (TU Dresden, Software Technology Group)
+ * Mirko Seifert (DevBoost GmbH)
+ * Rolf-Helge Pfeiffer (IT University Copenhagen)
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
  * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany;
- *   DevBoost GmbH - Berlin, Germany
- *      - initial API and implementation
- ******************************************************************************/
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 package org.devboost.stanford.test;
 
 import java.io.File;
@@ -25,10 +30,6 @@ import org.devboost.stanford.language.NLPParagraph;
 import org.devboost.stanford.language.Sentence;
 import org.devboost.stanford.language.Word;
 
-/**
- * @author jreimann
- *
- */
 public class ParserModelDemo {
 
 	public static void main(String[] args) {
