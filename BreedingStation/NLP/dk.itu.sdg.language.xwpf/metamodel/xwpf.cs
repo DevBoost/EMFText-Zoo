@@ -120,19 +120,19 @@ TOKENSTYLES {
 
 
 RULES {
-	Content ::= "Content" "{" (text['"','"'])* "}";
-	Document ::= "Document" "{" ("bodyElements" ":" bodyElements | "comments" ":" comments | "endnotes" ":" endnotes | "footers" ":" footers | "footnotes" ":" footnotes | "headers" ":" headers | "hyperlinks" ":" hyperlinks | "numbering" ":" numbering | "packagePictures" ":" packagePictures | "paragraphs" ":" paragraphs | "pictures" ":" pictures | styles[unrecognized:"unrecognized", heading1:"Heading1", heading2:"Heading2", listParagraph:"ListParagraph", normal:"null"] | "tables" ":" tables)* "}";
+	Content ::= "Content" "{" !1 (text['"','"'])* !0 "}";
+	Document ::= "Document" "{" !1 ( !0 "bodyElements" ":" bodyElements | !0 "comments" ":" comments | !0 "endnotes" ":" endnotes | !0 "footers" ":" footers | !0 "footnotes" ":" footnotes | !0 "headers" ":" headers | !0 "hyperlinks" ":" hyperlinks | !0 "numbering" ":" numbering | !0 "packagePictures" ":" packagePictures | !0 "paragraphs" ":" paragraphs | !0 "pictures" ":" pictures | !0 styles[unrecognized:"unrecognized", heading1:"Heading1", heading2:"Heading2", listParagraph:"ListParagraph", normal:"null"] | !0 "tables" ":" tables)* !0 "}";
 	BodyElement ::= "BodyElement" ";";
-	Comment ::= "Comment" "{" (text['"','"'] | author['"','"'] | identifier['"','"'])* "}";
-	Footnote ::= "Footnote" "{" (text['"','"'])* "}";
-	Footer ::= "Footer" "{" (text['"','"'])* "}";
-	Header ::= "Header" "{" (text['"','"'])* "}";
-	Hyperlink ::= "Hyperlink" (identifier['"','"'] | url['"','"'])* ";";
-	Numbering ::= "Numbering" ";";
-	PictureData ::= "PictureData" ";";
-	Paragraph ::= "Paragraph" "{" (text['"','"'] | "runs" ":" runs | "part" ":" part | "body" ":" body | alignment[] | borderBottom[] | borderTop[] | borderBetween[] | borderLeft[] | borderRight[] | verticalAlignment[] | footnoteText['"','"'] | indentFstLine[] | indentHanging[] | indentLeft[] | indentRight[] | spacingAfter[] | spacingAfterLines[] | spacingBefore[] | spacingBeforeLines[] | spacingLineRule[] | style[unrecognized:"unrecognized", heading1:"Heading1", heading2:"Heading2", listParagraph:"ListParagraph", normal:"null"])* "}";
-	Table ::= "Table" ";";
+	Comment ::= !0 "Comment" "{" (text['"','"'] | author['"','"'] | identifier['"','"'])* "}";
+	Footnote ::= !0 "Footnote" "{" (text['"','"'])* "}";
+	Footer ::= !0 "Footer" "{" (text['"','"'])* "}";
+	Header ::= !0 "Header" "{" (text['"','"'])* "}";
+	Hyperlink ::= !0 "Hyperlink" (identifier['"','"'] | url['"','"'])* ";";
+	Numbering ::= !0 "Numbering" ";";
+	PictureData ::= !0 "PictureData" ";";
+	Paragraph ::= !0 "Paragraph" "{" !1 (!0 text['"','"'] | !0 "runs" ":" runs | !0 "part" ":" part | !0 "body" ":" body | !0 alignment[] | !0 borderBottom[] | !0 borderTop[] | !0 borderBetween[] | !0 borderLeft[] | !0 borderRight[] | !0 verticalAlignment[] | !0 footnoteText['"','"'] | !0 indentFstLine[] | !0 indentHanging[] | !0 indentLeft[] | !0 indentRight[] | !0 spacingAfter[] | !0 spacingAfterLines[] | !0 spacingBefore[] | !0 spacingBeforeLines[] | !0 spacingLineRule[] | !0 style[unrecognized:"unrecognized", heading1:"Heading1", heading2:"Heading2", listParagraph:"ListParagraph", normal:"null"])* !0 "}";
+	Table ::= !0 "Table" ";";
 	Run ::= isBold["isBold" : ""] isItalic["isItalic" : ""] isStrike["isStrike" : ""] "Run" "{" (text['"','"'] | fontFamily['"','"'] | fontSize[] | color['"','"'] | textPosition[])* "}";
-	Part ::= "Part" ";";
-	Body ::= "Body" ";";
+	Part ::= !0 "Part" ";";
+	Body ::= !0 "Body" ";";
 }

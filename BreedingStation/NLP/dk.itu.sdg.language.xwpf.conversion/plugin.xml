@@ -6,29 +6,43 @@
 		<menuContribution locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
 			<menu label="DocxReader">
 	            <command 
-	            	  commandId="dk.itu.sdg.language.xwpf.convertCommand"
-	                  label="Convert"
+	            	  commandId="dk.itu.sdg.language.xwpf.convertXMICommand"
+	                  label="Convert to XMI"
 	                  style="push">
 	            </command>
+             <command
+                   commandId="dk.itu.sdg.language.xwpf.convertModelCommand"
+                   label="Convert to Model"
+                   style="push">
+             </command>
 			</menu>
 		</menuContribution>
 	
 		<menuContribution locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
 	        <menu label="DocxReader">
 		        <command 
-		        	commandId="dk.itu.sdg.language.xwpf.convertCommand"
-		            id="xwpf"
-		            label="Convert"
+		        	commandId="dk.itu.sdg.language.xwpf.convertXMICommand"
+		            label="Convert to XMI"
 		            style="push">
 		        </command>
+          <command
+                commandId="dk.itu.sdg.language.xwpf.convertModelCommand"
+                label="Convert to Model"
+                style="push">
+          </command>
 	        </menu>
     	</menuContribution>
+	
    </extension>
    
 	<extension point="org.eclipse.ui.commands">
-		<command id="dk.itu.sdg.language.xwpf.convertCommand" 
-			name="convert">
+		<command id="dk.itu.sdg.language.xwpf.convertXMICommand" 
+			name="Convert to XMI">
 		</command>
+  <command
+        id="dk.itu.sdg.language.xwpf.convertModelCommand"
+        name="Convert to Model">
+  </command>
 	</extension>
    
 	<extension
@@ -36,9 +50,13 @@
          name="XWPF Operations"
          point="org.eclipse.ui.handlers">
 		<handler
-			class="dk.itu.sdg.language.xwpf.Convert"
-            commandId="dk.itu.sdg.language.xwpf.convertCommand">
+			class="dk.itu.sdg.language.xwpf.XMIConvert"
+            commandId="dk.itu.sdg.language.xwpf.convertXMICommand">
 		</handler>
+  <handler
+        class="dk.itu.sdg.language.xwpf.ModelConvert"
+        commandId="dk.itu.sdg.language.xwpf.convertModelCommand">
+  </handler>
 	</extension>
 
 </plugin>

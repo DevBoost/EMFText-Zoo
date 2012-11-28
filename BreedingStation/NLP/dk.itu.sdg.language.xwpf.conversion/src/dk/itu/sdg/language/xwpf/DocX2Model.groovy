@@ -79,7 +79,7 @@ class DocX2Model {
 	}
 	
 	/**
-	 * Convert headers to model
+	 * XMIConvert headers to model
 	 * @param header
 	 * @param factory
 	 * @param modelDocument
@@ -95,7 +95,7 @@ class DocX2Model {
 	}
 	
 	/**
-	 * Convert footer to model
+	 * XMIConvert footer to model
 	 * @param footer
 	 * @param factory
 	 * @param modelDocument
@@ -111,7 +111,7 @@ class DocX2Model {
 	}
 
 	/**
-	 * Convert paragraph
+	 * XMIConvert paragraph
 	 * @param paragraph
 	 * @param factory
 	 * @param modelDocument
@@ -296,7 +296,7 @@ class DocX2Model {
 		return modelDocument
 	}
 	
-	public void saveModel(Document modelDocument) {
+	public void saveModel(Document modelDocument, IFile file) {
 		
 		
 		Resource.Factory.Registry resourceRegistry = Resource.Factory.Registry.INSTANCE
@@ -305,13 +305,13 @@ class DocX2Model {
 	
 		ResourceSet resourceSet = new ResourceSetImpl()
 		
-		def location = "/" + file.getProjectRelativePath().removeFileExtension().addFileExtension(XWPF).toString()
-		def project = file.getProject().toString().replace("P","")
-		
-		
-		URI newUri = URI.createURI(project + location)
-		Resource resource = resourceSet.createResource(newUri)
-		resource.getContents().add(modelDocument)
+//		def location = "/" + file.getProjectRelativePath().removeFileExtension().addFileExtension(XWPF).toString()
+//		def project = file.getProject().toString().replace("P","")
+//		
+//		
+//		URI newUri = URI.createURI(project + location)
+//		Resource resource = resourceSet.createResource(newUri)
+//		resource.getContents().add(modelDocument)
 	
 		try {
 			def test = file.getFullPath().removeFileExtension().addFileExtension(XWPF).toString()
@@ -320,7 +320,7 @@ class DocX2Model {
 			r2.getContents().add(modelDocument)
 			r2.save(null)
 					
-			resource.save(null)
+//			resource.save(null)
 		} catch (IOException e) {
 			e.printStackTrace()
 		}
@@ -334,15 +334,21 @@ class DocX2Model {
 		m.put(XMI, new XMIResourceFactoryImpl())
 	
 		ResourceSet resourceSet = new ResourceSetImpl()
-		def location = "/" + file.getProjectRelativePath().toString().replace(DOCX, XMI)
-		def project = file.getProject().toString().replace("P","")
-		
-		URI newUri = URI.createURI(project + location)
-		Resource resource = resourceSet.createResource(newUri)
-		resource.getContents().add(modelDocument)
+//		def location = "/" + file.getProjectRelativePath().toString().replace(DOCX, XMI)
+//		def project = file.getProject().toString().replace("P","")
+//		
+//		URI newUri = URI.createURI(project + location)
+//		Resource resource = resourceSet.createResource(newUri)
+//		resource.getContents().add(modelDocument)
 	
 		try {
-			resource.save(null)
+			def test = file.getFullPath().removeFileExtension().addFileExtension(XMI).toString()
+			URI testUri = URI.createPlatformResourceURI(test, true)
+			Resource r2 = resourceSet.createResource(testUri)
+			r2.getContents().add(modelDocument)
+			r2.save(null)
+			
+//			resource.save(null)
 		} catch (IOException e) {
 			e.printStackTrace()
 		}
