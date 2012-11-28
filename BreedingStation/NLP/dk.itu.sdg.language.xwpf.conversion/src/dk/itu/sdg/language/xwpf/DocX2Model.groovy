@@ -2,7 +2,6 @@ package dk.itu.sdg.language.xwpf
 
 
 import org.apache.poi.POIXMLDocumentPart;
-import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.xwpf.usermodel.IBody
 import org.apache.poi.xwpf.usermodel.XWPFComment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument
@@ -11,14 +10,12 @@ import org.apache.poi.xwpf.usermodel.XWPFHeader
 import org.apache.poi.xwpf.usermodel.XWPFHyperlink;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun
-import org.eclipse.core.internal.resources.File;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 
 import dk.itu.sdg.language.xwpf.Comment
-import dk.itu.sdg.language.xwpf.Paragraph
 import dk.itu.sdg.language.xwpf.Document
 import dk.itu.sdg.language.xwpf.Footer
 import dk.itu.sdg.language.xwpf.Header
@@ -29,12 +26,12 @@ import dk.itu.sdg.language.xwpf.resource.xwpf.mopp.XwpfResourceFactory
 import org.eclipse.emf.common.util.URI
 import org.devboost.stanford.language.LanguageCreator
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import org.eclipse.core.internal.resources.File
+import org.eclipse.core.resources.IFile
 
 class DocX2Model {
 	
 	def uri
-	def File file
+	def IFile file
 	def static private LanguageCreator languageCreator = new LanguageCreator()
 
 	static final String XMI = "xmi"
@@ -43,7 +40,7 @@ class DocX2Model {
 	static final String DOCX = "docx"
 	
 	
-	public DocX2Model(File file) {
+	public DocX2Model(IFile file) {
 		this.file = file
 	}
 	
@@ -308,21 +305,28 @@ class DocX2Model {
 	
 		ResourceSet resourceSet = new ResourceSetImpl()
 		
-		def location = "/" + file.getProjectRelativePath().toString().replace(DOCX, XWPF)
+		def location = "/" + file.getProjectRelativePath().removeFileExtension().addFileExtension(XWPF).toString()
 		def project = file.getProject().toString().replace("P","")
+		
 		
 		URI newUri = URI.createURI(project + location)
 		Resource resource = resourceSet.createResource(newUri)
 		resource.getContents().add(modelDocument)
 	
 		try {
+			def test = file.getFullPath().removeFileExtension().addFileExtension(XWPF).toString()
+			URI testUri = URI.createPlatformResourceURI(test, true)
+			Resource r2 = resourceSet.createResource(testUri)
+			r2.getContents().add(modelDocument)
+			r2.save(null)
+					
 			resource.save(null)
 		} catch (IOException e) {
 			e.printStackTrace()
 		}
 	}
 
-	public void saveXMI(Document modelDocument, File file) {
+	public void saveXMI(Document modelDocument, IFile file) {
 		
 		
 		Resource.Factory.Registry resourceRegistry = Resource.Factory.Registry.INSTANCE

@@ -24,11 +24,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.devboost.stanford.models.DummyClass;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 
@@ -93,15 +96,19 @@ public class LanguageCreator {
 	public NLPParagraph parse(InputStreamReader reader) {
 		NLPParagraph nlpParagraph = LanguageFactory.eINSTANCE.createNLPParagraph();
 		for (List<HasWord> processedSentence : new DocumentPreprocessor(reader)) {
-			Tree parse = lp.apply(processedSentence);
-			Sentence sentence = LanguageFactory.eINSTANCE.createSentence();
-			List<Word> words = createWords(parse, parse);
-			sentence.getWords().addAll(words);
-			GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-			createDependencies(gs, sentence);
-			nlpParagraph.getSentences().add(sentence);
+			processParsing(nlpParagraph, processedSentence);
 		}
 		return nlpParagraph;
+	}
+
+	private void processParsing(NLPParagraph nlpParagraph, List<HasWord> processedSentence) {
+		Tree parse = lp.apply(processedSentence);
+		Sentence sentence = LanguageFactory.eINSTANCE.createSentence();
+		List<Word> words = createWords(parse, parse);
+		sentence.getWords().addAll(words);
+		GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
+		createDependencies(gs, sentence);
+		nlpParagraph.getSentences().add(sentence);
 	}
 	
 	/**
@@ -114,13 +121,10 @@ public class LanguageCreator {
 		
 		//the string must contain some words otherwise an exception will be thrown
 		if(content.trim().length() > 0) {
-			Tree parse = lp.apply(content);
-			Sentence sentence = LanguageFactory.eINSTANCE.createSentence();
-			List<Word> words = createWords(parse, parse);
-			sentence.getWords().addAll(words);
-			GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-			createDependencies(gs, sentence);
-			nlpParagraph.getSentences().add(sentence);
+			Reader reader = new StringReader(content);
+			for (List<HasWord> processedSentence : new DocumentPreprocessor(reader)) {
+				processParsing(nlpParagraph, processedSentence);
+			}
 			
 			return nlpParagraph;
 		} else {

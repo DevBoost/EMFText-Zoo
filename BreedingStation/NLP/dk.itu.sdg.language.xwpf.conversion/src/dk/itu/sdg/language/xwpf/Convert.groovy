@@ -5,7 +5,7 @@ import org.eclipse.core.commands.ExecutionEvent
 import org.eclipse.core.commands.ExecutionException
 import org.eclipse.jface.viewers.IStructuredSelection
 import org.eclipse.ui.handlers.HandlerUtil
-import org.eclipse.core.internal.resources.File
+import org.eclipse.core.resources.IFile
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -22,8 +22,8 @@ class Convert extends AbstractHandler {
 			Object[]  selections = selection.toArray()
 			Object fstSelection = selections[0]
 			
-			if (fstSelection instanceof File) {
-				def final File file = (File) fstSelection;
+			if (fstSelection instanceof IFile) {
+				def final IFile file = (IFile) fstSelection;
 
 				Job convertToModelJob = new Job("Converting Word File...") {
 					
