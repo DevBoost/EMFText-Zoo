@@ -83,8 +83,8 @@ public class LanguageCreator {
 	 * @param lp
 	 * @return
 	 */
-	public Document parse(InputStreamReader reader) {
-		Document document = LanguageFactory.eINSTANCE.createDocument();
+	public NLPParagraph parse(InputStreamReader reader) {
+		NLPParagraph nlpParagraph = LanguageFactory.eINSTANCE.createNLPParagraph();
 		for (List<HasWord> processedSentence : new DocumentPreprocessor(reader)) {
 			Tree parse = lp.apply(processedSentence);
 			Sentence sentence = LanguageFactory.eINSTANCE.createSentence();
@@ -92,9 +92,33 @@ public class LanguageCreator {
 			sentence.getWords().addAll(words);
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
 			createDependencies(gs, sentence);
-			document.getSentences().add(sentence);
+			nlpParagraph.getSentences().add(sentence);
 		}
-		return document;
+		return nlpParagraph;
+	}
+	
+	/**
+	 * @param content
+	 * @param lp
+	 * @return
+	 */
+	public NLPParagraph parse(String content) {
+		NLPParagraph nlpParagraph = LanguageFactory.eINSTANCE.createNLPParagraph();
+		
+		//the string must contain some words otherwise an exception will be thrown
+		if(content.trim().length() > 0) {
+			Tree parse = lp.apply(content);
+			Sentence sentence = LanguageFactory.eINSTANCE.createSentence();
+			List<Word> words = createWords(parse, parse);
+			sentence.getWords().addAll(words);
+			GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
+			createDependencies(gs, sentence);
+			nlpParagraph.getSentences().add(sentence);
+			
+			return nlpParagraph;
+		} else {
+			return null;			
+		}
 	}
 
 	private List<Dependency> createDependencies(GrammaticalStructure gs, Sentence sentence) {
