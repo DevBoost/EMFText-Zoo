@@ -15,7 +15,9 @@
  ******************************************************************************/
 package org.devboost.stanford.analysis.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,9 +33,9 @@ import org.devboost.stanford.language.Dconj;
 import org.devboost.stanford.language.Dependency;
 import org.devboost.stanford.language.Dnn;
 import org.devboost.stanford.language.Dnsubjpass;
-import org.devboost.stanford.language.Document;
 import org.devboost.stanford.language.Dprep;
 import org.devboost.stanford.language.LanguagePackage;
+import org.devboost.stanford.language.NLPParagraph;
 import org.devboost.stanford.language.NNPS;
 import org.devboost.stanford.language.NNS;
 import org.devboost.stanford.language.Sentence;
@@ -71,7 +73,7 @@ public class AnalysisPassiveConceptsTest {
 	
 	private static Resource resource;
 	private static Resource outputResource;
-	private static Document document;
+	private static NLPParagraph document;
 	private static EPackage ePackage;
 	
 	@BeforeClass
@@ -85,7 +87,7 @@ public class AnalysisPassiveConceptsTest {
 		URI uri = URI.createFileURI(input.getAbsolutePath());
 		resource = rs.getResource(uri, true);
 		assertNotNull("resource must not be null", resource);
-		document = (Document) resource.getContents().get(0);
+		document = (NLPParagraph) resource.getContents().get(0);
 		assertNotNull("document must not be null", document);
 		// output
 		File output = new File(OUTPUT_TEXT_FILE);

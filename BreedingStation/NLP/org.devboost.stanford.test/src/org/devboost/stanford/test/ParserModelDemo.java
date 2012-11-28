@@ -20,8 +20,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
-import org.devboost.stanford.language.Document;
 import org.devboost.stanford.language.LanguageCreator;
+import org.devboost.stanford.language.NLPParagraph;
 import org.devboost.stanford.language.Sentence;
 import org.devboost.stanford.language.Word;
 
@@ -32,7 +32,7 @@ import org.devboost.stanford.language.Word;
 public class ParserModelDemo {
 
 	public static void main(String[] args) {
-		Document document;
+		NLPParagraph document;
 		try {
 			LanguageCreator creator = new LanguageCreator();
 			document = creator.parse(new FileReader(new File(args[0])));
@@ -42,7 +42,7 @@ public class ParserModelDemo {
 		}
 	}
 
-	private static void printDocument(Document document) {
+	private static void printDocument(NLPParagraph document) {
 		List<Sentence> sentences = document.getSentences();
 		for (Sentence sentence : sentences) {
 			System.out.println(printSentence(sentence) + "\n");
