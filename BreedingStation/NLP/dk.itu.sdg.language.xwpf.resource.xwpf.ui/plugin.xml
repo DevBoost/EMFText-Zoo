@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfUIMetaInformation" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="xwpf" icon="icons/editor_icon.gif" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfEditor" name="EMFText xwpf Editor">
+			<contentTypeBinding contentTypeId="dk.itu.sdg.language.xwpf.resource.xwpf">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Xwpf Text Editor" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfPreferencePage" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfSyntaxColoringPreferencePage" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfSyntaxColoringPreferencePage" category="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfPreferencePage">
+		</page>
+		<page name="Brackets" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfBracketPreferencePage" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfBracketPreferencePage" category="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfNewFileWizard" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfNewFileWizard" name="EMFText .xwpf file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfNewProjectWizard" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfNewProjectWizard" name="EMFText xwpf project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfMarkerResolutionGenerator" markerType="dk.itu.sdg.language.xwpf.resource.xwpf.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfAnnotationModelFactory" extensions="xwpf">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="dk.itu.sdg.language.xwpf.resource.xwpf" name=".xwpf File" base-type="org.eclipse.core.runtime.text" file-extensions="xwpf">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="xwpf" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="dk.itu.sdg.language.xwpf.resource.xwpf.ui.occurences">
+		</type>
+		<type name="dk.itu.sdg.language.xwpf.resource.xwpf.ui.occurences.declaration" super="dk.itu.sdg.language.xwpf.resource.xwpf.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="dk.itu.sdg.language.xwpf.resource.xwpf.ui.occurences" label="Occurrences (in .xwpf files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="xwpf.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="xwpf.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="xwpf.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="xwpf.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="xwpf.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="xwpf.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="xwpf.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="xwpf.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="xwpf.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="dk.itu.sdg.language.xwpf.resource.xwpf.ui.occurences.declaration" label="Declarations (in .xwpf files)" textPreferenceKey="xwpf.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="xwpf.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="xwpf.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="xwpf.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="xwpf.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="xwpf.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="dk.itu.sdg.language.xwpf.resource.xwpf.ui.launchConfigurationType" id="dk.itu.sdg.language.xwpf.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="dk.itu.sdg.language.xwpf.resource.xwpf.ui.launchConfigurationType" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.launch.XwpfLaunchConfigurationTabGroup" id="dk.itu.sdg.language.xwpf.launchConfigurationTabGroup" helpContextId="dk.itu.sdg.language.xwpf.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug xwpf model.">
+			</launchMode>
+			<launchMode mode="run" description="Run xwpf model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="xwpf Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="dk.itu.sdg.language.xwpf.launch" modes="run,debug" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.launch.XwpfLaunchShortcut" description="Launch a xwpf model" id="dk.itu.sdg.language.xwpf.launchShortcut">
+			<description description="Run xwpf model" mode="run">
+			</description>
+			<description description="Debug xwpf model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="dk.itu.sdg.language.xwpf.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="dk.itu.sdg.language.xwpf.PropertyTester" type="java.lang.Object" namespace="dk.itu.sdg.language.xwpf" properties="isLaunchable" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.lineBreakpoint" markerType="dk.itu.sdg.language.xwpf.resource.xwpf.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.lineBreakpoint" label="Breakpoints (in .xwpf files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="dk.itu.sdg.language.xwpf.resource.xwpf.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfEditor" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.XwpfAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="dk.itu.sdg.language.xwpf.resource.xwpf.debug.XwpfDebugVariable" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.XwpfAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="dk.itu.sdg.language.xwpf.resource.xwpf.debug.XwpfDebugVariable" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.XwpfAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.RulerPopupActions" targetID="dk.itu.sdg.language.xwpf.resource.xwpf.EditorRuler">
+			<action id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="dk.itu.sdg.language.xwpf.resource.xwpf.ui.XwpfEditor" id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.BreakpointRulerActions">
+			<action id="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="dk.itu.sdg.language.xwpf.resource.xwpf.debugModel" class="dk.itu.sdg.language.xwpf.resource.xwpf.ui.debug.XwpfDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>
