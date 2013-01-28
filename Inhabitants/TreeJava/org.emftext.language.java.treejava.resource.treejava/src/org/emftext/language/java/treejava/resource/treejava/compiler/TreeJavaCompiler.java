@@ -22,12 +22,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.instantiations.InstantiationsFactory;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.treejava.Node;
 import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaResource;
+import org.emftext.language.java.types.ClassifierReference;
+import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.TypesFactory;
 
 public class TreeJavaCompiler {
 
@@ -59,7 +63,13 @@ public class TreeJavaCompiler {
 
 	private NewConstructorCall convertTreeToNewConstructorCallChain(Node rootNode) {
 		NewConstructorCall ncc = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
-		ncc.setTypeReference(rootNode.getTypeReference());
+		TypeReference typeReference = rootNode.getTypeReference();
+		// create a new reference to throw away the layout that is associated
+		// with the existing type reference
+		ClassifierReference newReference = TypesFactory.eINSTANCE.createClassifierReference();
+		newReference.setTarget((Classifier) typeReference.getTarget());
+		ncc.setTypeReference(newReference);
+		
 		if (rootNode.getName() != null) {
 			StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
 			stringReference.setValue(rootNode.getName());
