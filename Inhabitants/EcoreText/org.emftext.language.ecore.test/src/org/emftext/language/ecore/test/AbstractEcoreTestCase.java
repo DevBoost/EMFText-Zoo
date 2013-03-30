@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.ecore.resource.text.util.TextEcoreResourceUtil;
 
-public class AbstractEcoreTestCase extends TestCase {
+public abstract class AbstractEcoreTestCase extends TestCase {
 
 	protected EPackage loadResource(String path,
 			String fileIdentifier) throws IOException {

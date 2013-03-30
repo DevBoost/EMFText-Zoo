@@ -36,6 +36,8 @@ import org.emftext.language.ecore.resource.text.util.TextEcoreStreamUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.devboost.testutils.PluginTestHelper;
+
 public class EcoreTest extends AbstractEcoreTestCase {
 
 	@Before
@@ -135,7 +137,8 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	}
 
 	private String getPath(String fileName) {
-		return "input" + File.separator + fileName;
+		String pluginPath = new PluginTestHelper().getPluginRootPath(getClass());
+		return pluginPath + File.separator + "input" + File.separator + fileName;
 	}
 
 	private String print(EObject object) {
