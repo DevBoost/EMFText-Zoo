@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -15,6 +15,10 @@
  ******************************************************************************/
 package org.emftext.language.manifest.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,19 +26,15 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.manifest.Manifest;
-import org.emftext.language.manifest.ManifestPackage;
-import org.emftext.language.manifest.resource.manifest.mopp.MFResourceFactory;
+import org.emftext.language.manifest.resource.manifest.mopp.MFMetaInformation;
 import org.emftext.language.manifest.resource.manifest.util.MFStreamUtil;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -44,23 +44,17 @@ import org.junit.Test;
  * as String will be compared. 
  * 
  * @author jreimann
- *
  */
-public class ManifestTest extends TestCase {
+public class ManifestTest {
 
 	private static final String INPUT_FOLDER = "input";
 
 	private File inputFolder;
 
+	@Before
 	public void setUp() {
 		initInputFolder();
-		registerPackages();
-	}
-
-	private void registerPackages() {
-		EPackage.Registry.INSTANCE.put(ManifestPackage.eNS_URI, ManifestPackage.eINSTANCE);
-		Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-		extensionToFactoryMap.put("MF", new MFResourceFactory());
+		new MFMetaInformation().registerResourceFactory();
 	}
 
 	private void initInputFolder() {
@@ -82,8 +76,10 @@ public class ManifestTest extends TestCase {
 			URI uri = URI.createFileURI(file.getAbsolutePath());
 			Resource resource = rs.getResource(uri, true);
 			assertNotNull("Resource could not be loaded", resource);
+			
 			Manifest manifest = (Manifest) resource.getContents().get(0);
 			assertNotNull("Resource must contain a Manifest model", manifest);
+			
 			OutputStream os = new ByteArrayOutputStream();
 			try {
 				resource.save(os, null);
@@ -91,6 +87,7 @@ public class ManifestTest extends TestCase {
 			} catch (IOException e) {
 				fail("Error while saving model");
 			}
+			
 			String printResult = normalizeLineBreaks(os.toString());
 			try {
 				String original = MFStreamUtil.getContent(new FileInputStream(file));
